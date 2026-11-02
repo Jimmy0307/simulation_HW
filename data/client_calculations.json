@@ -1,0 +1,1422 @@
+{
+  "format_version": 1,
+  "provenance": "VERIFIED_CLIENT_CODE",
+  "calculations": [
+    {
+      "name": "quarterlyCapacity",
+      "expression": "s*this.maxDays",
+      "inputs": [
+        "s",
+        "this.maxDays"
+      ],
+      "classification": "EXACT_CLIENT_FORMULA",
+      "confidence": 1.0,
+      "notes": "Function body contains one pure arithmetic return over declared parameters or an instance property; exact client code does not establish server usage.",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:744663",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "name": "quarterlyCapacity",
+      "expression": "s*this.maxDays",
+      "inputs": [
+        "s",
+        "this.maxDays"
+      ],
+      "classification": "EXACT_CLIENT_FORMULA",
+      "confidence": 1.0,
+      "notes": "Function body contains one pure arithmetic return over declared parameters or an instance property; exact client code does not establish server usage.",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:759862",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    }
+  ],
+  "review_candidates": [
+    {
+      "name": "index",
+      "inputs": [
+        "t"
+      ],
+      "expression": null,
+      "source_file": "client_asset_001.js",
+      "source_location": "line:207,column:24586",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "calcRect",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_001.js",
+      "source_location": "line:217,column:69851",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "setCalculate",
+      "inputs": [
+        "u"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:1,column:184453",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:1,column:186045",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "calculate",
+      "inputs": [
+        "u"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:1,column:192271",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "setCalculateData",
+      "inputs": [
+        "u"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:1,column:192553",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "calculateHnd",
+      "inputs": [
+        "u",
+        "g"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:1,column:192754",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "onTimerCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:1,column:192941",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "bindCalculate",
+      "inputs": [
+        "u",
+        "g",
+        "m"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:1,column:193020",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:34959",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:39247",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "onChangePrice",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:149723",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:157274",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "calcShippingCPU",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:181339",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "calcTotal",
+      "inputs": [
+        "a",
+        "i"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:181986",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "getEstimateDemandTable",
+      "inputs": [
+        "a"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:208924",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:212926",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "fixDemand",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:219108",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:220591",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:225395",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:230163",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "fixDemand",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:237341",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:238636",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:243576",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:269093",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "getWellPoorIndex",
+      "inputs": [
+        "a",
+        "i"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:271080",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:306805",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "getDemandMultiplier",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:322325",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:342683",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "getProjectedDemandTable",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:350256",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "getProductivityTable",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:351059",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "getDemandMultiplier",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:353285",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "getFormattedDemandProjection",
+      "inputs": [
+        "a"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:355115",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "getFormattedEffectiveOperatingCapacity",
+      "inputs": [
+        "a"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:355243",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:362611",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:380229",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:391118",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:401426",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "setCosts",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:406314",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:407114",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "getCapacityIterator",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:429399",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:430150",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "showCapacityPerUnit",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:430441",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "getCapacityTable",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:430591",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "updateCapacityTable",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:431774",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "calculate",
+      "inputs": [
+        "a"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:433460",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:435632",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:459281",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:466448",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:478263",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:482200",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:487066",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:491393",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:533105",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:543570",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:550421",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:555727",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:560256",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "recalculateComponentCost",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:677441",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "recalculateComponentCost",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:721739",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:736931",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:740811",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "dailyCapacity",
+      "inputs": [
+        "s"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:744716",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "effectiveCapacity",
+      "inputs": [
+        "s",
+        "e"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:744776",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:744880",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "getProductivityTable",
+      "inputs": [
+        "s"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:745489",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:750301",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "dailyCapacity",
+      "inputs": [
+        "s"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:759915",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "effectiveCapacity",
+      "inputs": [
+        "s",
+        "e"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:760019",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "getFormattedDemandProjection",
+      "inputs": [
+        "s"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:760123",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "getFormattedEffectiveOperatingCapacity",
+      "inputs": [
+        "s"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:760271",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "updateFixedCapacity",
+      "inputs": [
+        "s",
+        "e",
+        "t"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:760460",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:760692",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "getCapacityOptions",
+      "inputs": [
+        "s",
+        "e",
+        "t"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:762020",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "getProductivityTable",
+      "inputs": [
+        "s",
+        "e",
+        "t"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:764161",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "adjustAllocateCapacityCombobox",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:766427",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:769091",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:779911",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:784490",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:789374",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:792417",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:820389",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:825536",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:831980",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "getDemandMultiplier",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:832382",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:839044",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:847061",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:852157",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:893108",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "getProductivityTable",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:894466",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:898723",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:906326",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:911055",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:927312",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:933096",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:934481",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:939727",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:942430",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:947547",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:966744",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "onChangeProductivity",
+      "inputs": [
+        "a",
+        "i",
+        "l",
+        "o",
+        "s"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:972022",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:973828",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "onChangeProductivity",
+      "inputs": [
+        "t",
+        "r",
+        "n",
+        "d",
+        "c"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:984569",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:985360",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:989767",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "getSalesForceTable",
+      "inputs": [
+        "s",
+        "e"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:990208",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1022776",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1043698",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1073445",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1079127",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "onChangeProductivity",
+      "inputs": [
+        "s",
+        "e",
+        "t",
+        "r"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1083670",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "writeCalculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1085213",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "calculate",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1100923",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "getChannelIndex",
+      "inputs": [
+        "_"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1124842",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "getShareWindowLink",
+      "inputs": [
+        "y",
+        "I"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1186796",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "showShareWindow",
+      "inputs": [
+        "y",
+        "I"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1187049",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "drawMicrosimScore",
+      "inputs": [
+        "_",
+        "y"
+      ],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1198083",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    },
+    {
+      "name": "getBodyWidthRatio",
+      "inputs": [],
+      "expression": null,
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1225052",
+      "classification": "UNKNOWN",
+      "provenance": "VERIFIED_CLIENT_CODE",
+      "confidence": 0.25,
+      "notes": "The function name matches a calculation-related term. This lexical candidate is not verified as a calculation or client transformation; inspect its body and dependencies before classification."
+    }
+  ]
+}

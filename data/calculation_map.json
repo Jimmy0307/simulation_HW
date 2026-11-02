@@ -1,0 +1,119 @@
+{
+  "format_version": 1,
+  "provenance": "VERIFIED_NETWORK_TRACE",
+  "metrics": [
+    {
+      "metric": "averageProductivity",
+      "classification": "SERVER_OPAQUE",
+      "provenance": "VERIFIED_NETWORK_TRACE",
+      "formula": null,
+      "inputs": [],
+      "outputs": [
+        "result.dynamicData.averageProductivity"
+      ],
+      "client_evidence": [],
+      "rpc_evidence": [
+        "capture_001:entry_77"
+      ],
+      "confidence": 0.85,
+      "notes": "The response field is observable; captured request fields contain no identified business decision variable, and the server-side calculation is not present in client evidence."
+    },
+    {
+      "metric": "cash",
+      "classification": "SERVER_OPAQUE",
+      "provenance": "VERIFIED_NETWORK_TRACE",
+      "formula": null,
+      "inputs": [],
+      "outputs": [
+        "result.staticData.cash"
+      ],
+      "client_evidence": [],
+      "rpc_evidence": [
+        "capture_001:entry_33",
+        "capture_001:entry_96"
+      ],
+      "confidence": 0.85,
+      "notes": "The response field is observable; captured request fields contain no identified business decision variable, and the server-side calculation is not present in client evidence."
+    },
+    {
+      "metric": "projectDemandNextQuarter",
+      "classification": "SERVER_OPAQUE",
+      "provenance": "VERIFIED_NETWORK_TRACE",
+      "formula": null,
+      "inputs": [],
+      "outputs": [
+        "result.dynamicData.projectDemandNextQuarter"
+      ],
+      "client_evidence": [],
+      "rpc_evidence": [
+        "capture_001:entry_77"
+      ],
+      "confidence": 0.85,
+      "notes": "The response field is observable; captured request fields contain no identified business decision variable, and the server-side calculation is not present in client evidence."
+    },
+    {
+      "metric": "projectedCash",
+      "classification": "SERVER_OPAQUE",
+      "provenance": "VERIFIED_NETWORK_TRACE",
+      "formula": null,
+      "inputs": [],
+      "outputs": [
+        "result.dynamicData.projectedCash"
+      ],
+      "client_evidence": [],
+      "rpc_evidence": [
+        "capture_001:entry_96"
+      ],
+      "confidence": 0.85,
+      "notes": "The response field is observable; captured request fields contain no identified business decision variable, and the server-side calculation is not present in client evidence."
+    },
+    {
+      "metric": "totalCash",
+      "classification": "SERVER_OPAQUE",
+      "provenance": "VERIFIED_NETWORK_TRACE",
+      "formula": null,
+      "inputs": [],
+      "outputs": [
+        "result.staticData.totalCash"
+      ],
+      "client_evidence": [],
+      "rpc_evidence": [
+        "capture_001:entry_33"
+      ],
+      "confidence": 0.85,
+      "notes": "The response field is observable; captured request fields contain no identified business decision variable, and the server-side calculation is not present in client evidence."
+    },
+    {
+      "metric": "warnMaxPrice",
+      "classification": "SERVER_OPAQUE",
+      "provenance": "VERIFIED_NETWORK_TRACE",
+      "formula": null,
+      "inputs": [],
+      "outputs": [
+        "result.staticData.warnMaxPrice"
+      ],
+      "client_evidence": [],
+      "rpc_evidence": [
+        "capture_001:entry_94"
+      ],
+      "confidence": 0.85,
+      "notes": "The response field is observable; captured request fields contain no identified business decision variable, and the server-side calculation is not present in client evidence."
+    },
+    {
+      "metric": "warnMinPrice",
+      "classification": "SERVER_OPAQUE",
+      "provenance": "VERIFIED_NETWORK_TRACE",
+      "formula": null,
+      "inputs": [],
+      "outputs": [
+        "result.staticData.warnMinPrice"
+      ],
+      "client_evidence": [],
+      "rpc_evidence": [
+        "capture_001:entry_94"
+      ],
+      "confidence": 0.85,
+      "notes": "The response field is observable; captured request fields contain no identified business decision variable, and the server-side calculation is not present in client evidence."
+    }
+  ]
+}

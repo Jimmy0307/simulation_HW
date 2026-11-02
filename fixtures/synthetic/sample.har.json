@@ -1,0 +1,17 @@
+{
+  "log": {
+    "pages": [{"id": "synthetic-page", "title": "Quarter 2"}],
+    "entries": [
+      {
+        "pageref": "synthetic-page",
+        "request": {
+          "method": "POST",
+          "url": "https://marketplace.example/mpl/web7/backend-json.php?MarketSize",
+          "postData": {"text": "{\"method\":\"view\",\"parameters\":[{\"segment\":\"segment_1\"}]}"}
+        },
+        "response": {"content": {"text": "{\"marketSize\":12500}"}},
+        "_initiator": {"type": "script", "stack": {"callFrames": [{"url": "https://marketplace.example/core.js", "lineNumber": 3, "columnNumber": 4}]}}
+      }
+    ]
+  }
+}

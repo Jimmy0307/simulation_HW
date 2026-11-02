@@ -1,0 +1,1070 @@
+{
+  "format_version": 1,
+  "edges": [
+    {
+      "caller": "initializeJumpMenu",
+      "callee": "hideJumpMenu",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:1,column:289",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "initializeJumpMenu",
+      "callee": "showJumpMenu",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:1,column:289",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "jumpMenuNavigate",
+      "callee": "focusMainMenu",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:1,column:1525",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "updateContent",
+      "callee": "update",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:1,column:55198",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "updateContent",
+      "callee": "update",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:1,column:59836",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "updateContent",
+      "callee": "update",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:1,column:62848",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "updateContent",
+      "callee": "update",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:1,column:66017",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "scrollCurrentIntoView",
+      "callee": "scrollIntoView",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:1,column:66713",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "view",
+      "callee": "view",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:1,column:87974",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "mostViewedItems",
+      "callee": "getViews",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:1,column:88180",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "savePrefs",
+      "callee": "fetch",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:1,column:107175",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "savePrefs",
+      "callee": "reloadPage",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:1,column:107175",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "saveImage",
+      "callee": "saveCallBack",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:1,column:125236",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "fetch",
+      "callee": "ajax",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:5,column:7390",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "sendBeacon",
+      "callee": "fetch",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:5,column:8148",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "fetch",
+      "callee": "fetch",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:5,column:8657",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "sendBeacon",
+      "callee": "sendBeacon",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:5,column:8699",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "fetch",
+      "callee": "fetch",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:5,column:9021",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "fetch",
+      "callee": "getService",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:5,column:9021",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "sendBeacon",
+      "callee": "getService",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:5,column:9073",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "sendBeacon",
+      "callee": "sendBeacon",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:5,column:9073",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "preload",
+      "callee": "ajax",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:5,column:17523",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "update",
+      "callee": "updateEntries",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:5,column:30688",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "updateRegions",
+      "callee": "updateRegion",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:11,column:471",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "updateRegion",
+      "callee": "updateCity",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:11,column:574",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "updateCity",
+      "callee": "update",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:11,column:657",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "update",
+      "callee": "updateRegions",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:11,column:761",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "_updateLabel",
+      "callee": "contents",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:156,column:3696",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "ajax",
+      "callee": "ajaxSetup",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:210,column:2566",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "ajax",
+      "callee": "send",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:210,column:2566",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "ajax",
+      "callee": "setRequestHeader",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:210,column:2566",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "send",
+      "callee": "send",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:210,column:7988",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "send",
+      "callee": "setRequestHeader",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:210,column:7988",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "load",
+      "callee": "ajax",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:210,column:11081",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "imageServerUrl",
+      "callee": "serverUrl",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:217,column:62974",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "createSaveButton",
+      "callee": "imageServerUrl",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:217,column:119824",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "createSaveButton",
+      "callee": "saveChart",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:217,column:119824",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "saveChart",
+      "callee": "postChartToServer",
+      "source_file": "client_asset_001.js",
+      "source_location": "line:217,column:126040",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "load",
+      "callee": "doLoad",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:1,column:188186",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "doLoad",
+      "callee": "fetch",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:1,column:188339",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "doLoad",
+      "callee": "serviceName",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:1,column:188339",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "view",
+      "callee": "fetch",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:1,column:188510",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "view",
+      "callee": "serviceName",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:1,column:188510",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "save",
+      "callee": "decisionSaved",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:1,column:193163",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "save",
+      "callee": "fetch",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:1,column:193163",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "save",
+      "callee": "onSaveScene",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:1,column:193163",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "save",
+      "callee": "serviceName",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:1,column:193163",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "save",
+      "callee": "view",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:1,column:193163",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "save",
+      "callee": "viewMode",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:1,column:193163",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "saveDecision",
+      "callee": "save",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:1,column:199520",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "resizeContent",
+      "callee": "resizeContent",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:33",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "fetch",
+      "callee": "fetch",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:449",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "preview",
+      "callee": "showImageUpload",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:54609",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "save",
+      "callee": "updateCompanyName",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:55424",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "viewSummary",
+      "callee": "resizeContent",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:271479",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "updateSW",
+      "callee": "contents",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:275269",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "preview",
+      "callee": "showImageUpload",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:295853",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "getUpdatedText",
+      "callee": "getResource",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:416046",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "doLoad",
+      "callee": "fetch",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:595927",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "view",
+      "callee": "fetch",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:596853",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "doLoad",
+      "callee": "fetch",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:614795",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "updateList",
+      "callee": "updateListHeight",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:657856",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "updateList",
+      "callee": "updateListItem",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:657856",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "doLoad",
+      "callee": "fetch",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:660548",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "view",
+      "callee": "fetch",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:661098",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "drawAllPreviewCmp",
+      "callee": "drawOnePreviewCmp",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:704479",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "drawPreview",
+      "callee": "drawAllPreviewCmp",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:705133",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "drawPreview",
+      "callee": "initPreview",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:705133",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "drawPreview",
+      "callee": "load",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:705133",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "doLoad",
+      "callee": "loadCategory",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1004573",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "loadCategory",
+      "callee": "fetch",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1004908",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "loadCategory",
+      "callee": "serviceName",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1004908",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "onServiceSuccess",
+      "callee": "resizeContent",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1017603",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "onServiceSuccess",
+      "callee": "resizeContent",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1020092",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "getUpdatedText",
+      "callee": "getResource",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1092153",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "onDrawContent",
+      "callee": "getService",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1109557",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "onDrawContent",
+      "callee": "getService",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1112015",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "onDrawContent",
+      "callee": "getService",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1115444",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "onDrawContent",
+      "callee": "getService",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1121566",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "sendMessage",
+      "callee": "fetch",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1125401",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "sendMessage",
+      "callee": "getNewestLoadedMessageID",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1125401",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "fetchHistoryMessages",
+      "callee": "fetch",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1125790",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "fetchHistoryMessages",
+      "callee": "getOldestLoadedMessageID",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1125790",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "onDrawContent",
+      "callee": "getService",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1130002",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "sendMessage",
+      "callee": "sendMessage",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1141124",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "loadMoreMessages",
+      "callee": "fetchHistoryMessages",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1141852",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "onDrawContent",
+      "callee": "getService",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1148579",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "onDrawContent",
+      "callee": "getService",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1157994",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "reloadPage",
+      "callee": "canReload",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1167978",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "updateCompanyName",
+      "callee": "getResource",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1172243",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "updateWelcome",
+      "callee": "fetch",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1176921",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "updateWelcome",
+      "callee": "updateStatuses",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1176921",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "saveSettings",
+      "callee": "fetch",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1177780",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "updateBasicInfo",
+      "callee": "update",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1179820",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "updateBasicInfo",
+      "callee": "updateCompanyName",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1179820",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "createMenuLinks",
+      "callee": "createMenuLinks",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1180844",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "createResourceLinks",
+      "callee": "addResourceList",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1181100",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "getResource",
+      "callee": "findResource",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1181314",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "menuClickCallback",
+      "callee": "addResource",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1182258",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "menuClickCallback",
+      "callee": "changeResource",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1182258",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "menuClickCallback",
+      "callee": "expandResource",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1182258",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "menuClickCallback",
+      "callee": "fetch",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1182258",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "menuClickCallback",
+      "callee": "findResource",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1182258",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "addResource",
+      "callee": "addResourceList",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1182634",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "addResource",
+      "callee": "changeResource",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1182634",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "changeResource",
+      "callee": "changeResource",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1182783",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "changeResource",
+      "callee": "view",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1182783",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "nextResource",
+      "callee": "getResourceList",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1183526",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "previousResource",
+      "callee": "getResourceList",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1184462",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "saveAddonsVisited",
+      "callee": "saveSettings",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1196722",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "saveAddonsVisited",
+      "callee": "updateWelcome",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1196722",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "update",
+      "callee": "updateDisables",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1207185",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "update",
+      "callee": "updateExtension",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1207185",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "update",
+      "callee": "updateVisibles",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1207185",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "getViewer",
+      "callee": "getViewer",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1212458",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "changeResource",
+      "callee": "getResourceList",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1215107",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "changeResource",
+      "callee": "getResources",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1215107",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "changeResource",
+      "callee": "play",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1215107",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "changeResource",
+      "callee": "storyViewer",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1215107",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "play",
+      "callee": "setContent",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1217270",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "getViewer",
+      "callee": "getViewer",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1218123",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "getContent",
+      "callee": "getViewer",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1218303",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "setContent",
+      "callee": "cleanUpContent",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1219457",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "setContent",
+      "callee": "getContent",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1219457",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "setContent",
+      "callee": "load",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1219457",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "setContent",
+      "callee": "resizeContent",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1219457",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "setContent",
+      "callee": "setContentElement",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1219457",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "setContent",
+      "callee": "setContentTitle",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1219457",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "setContent",
+      "callee": "setEngine",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1219457",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "setContent",
+      "callee": "setResourceList",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1219457",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "setContent",
+      "callee": "viewMode",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:4,column:1219457",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "updateMessage",
+      "callee": "getMessageContent",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:68,column:3373",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "updateResponse",
+      "callee": "conversationUpdated",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:68,column:5112",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "updateResponse",
+      "callee": "updateMessage",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:68,column:5112",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "updateResponse",
+      "callee": "updateLabel",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:68,column:7694",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "updateResponse",
+      "callee": "updateResponse",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:68,column:7694",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "drawContent",
+      "callee": "fetch",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:68,column:27293",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "findResource",
+      "callee": "findResource",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:68,column:31551",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "findResource",
+      "callee": "findResource",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:68,column:37700",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "expandResource",
+      "callee": "findResource",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:68,column:37924",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "findNavigationResource",
+      "callee": "findResource",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:68,column:40471",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "menuClick",
+      "callee": "findResource",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:68,column:41129",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "load",
+      "callee": "getViewer",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:68,column:43054",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "getResourceDataID",
+      "callee": "getResourceDataID",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:68,column:43397",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "load",
+      "callee": "fetch",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:68,column:44994",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "load",
+      "callee": "getService",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:68,column:44994",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "load",
+      "callee": "load",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:68,column:44994",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "getViewer",
+      "callee": "LiveService",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:68,column:47376",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "getViewer",
+      "callee": "load",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:68,column:47376",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "getViewer",
+      "callee": "setEngine",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:68,column:47376",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "observeContentVisibility",
+      "callee": "hasContent",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:68,column:50784",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    },
+    {
+      "caller": "getViewer",
+      "callee": "storyViewer",
+      "source_file": "client_asset_002.js",
+      "source_location": "line:68,column:51772",
+      "provenance": "VERIFIED_CLIENT_CODE"
+    }
+  ],
+  "provenance": "VERIFIED_CLIENT_CODE"
+}

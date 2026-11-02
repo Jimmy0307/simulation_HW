@@ -1,0 +1,30 @@
+# Private browser evidence and raw Marketplace material
+evidence/private/
+marketplace-assets/
+_marketplace_assets/
+*_files/
+**/*_files/
+
+# Captures and runtime-only session material
+*.har
+*.HAR
+*.devtools
+*.session
+*cookies*
+*cookie*
+*token*
+
+# Python build/test artifacts and runtime-only configuration
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+build/
+dist/
+*.egg-info/
+.coverage
+.env
+.env.*
+!.env.example
