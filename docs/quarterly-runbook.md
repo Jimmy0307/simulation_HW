@@ -24,7 +24,10 @@ but its main value is decision support.
 * Appends whatever competitor/market data is available to the **private demand panel**. After 2 quarters it assesses
   identifiability; after 3 it fits a demand model, validates it on a held-out quarter, and only then promotes demand from
   `placeholder` to `estimated`.
-* Diffs this quarter's parameters against last quarter's and flags any change that may require re-verifying a module.
+* Rebuilds the private pack with `mpsim build-pack --out evidence/private/model --quarter-label Q<N>`, which snapshots it,
+  diffs it against the previous quarter (value-free summary on screen, full diff in `evidence/private/model/diffs/`)
+  and raises red flags for verified modules whose parameters changed. Those modules are re-verified before their
+  `[V]` lines are trusted again.
 * Updates the private save to the real state and writes a private brief for the quarter.
 
 ## How to read the report
@@ -36,6 +39,7 @@ but its main value is decision support.
 | DEMAND_PANEL | Quarters of market/competitor data collected so far |
 | MODEL_STATUS | Source level of each engine module (verified / derived / estimated / placeholder) |
 | EXPERIMENTS | What-if experiments: status, relation found, evidence strength |
+| PARAM_DIFF | Parameter changes vs last quarter (count, red flags, verified modules to re-verify; no values) |
 | BLOCKED_REQUESTS | Anything the guard blocked (expected: self-test only) |
 
 Use `mpsim compare` on the private save to compare candidate plans, and always read the source-level marks: only `[V]`

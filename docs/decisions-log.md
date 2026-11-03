@@ -31,3 +31,15 @@ Started 2026-11-03 17:39 (+08:00). Every judgement made without operator input i
 | 20 | `examples/` and `.yaml` were not in the gate allowlist. | Added `examples/` (`.json/.yaml/.md` only), covered by the stricter example checks. | Required by the task. Every example file is value-checked. |
 | 21 | `.claude/commands/quarter.md` holds operational rules and is not in the gate allowlist. | `.claude/` is git-ignored (local agent configuration). The command is checked by a dry-run script instead. | Avoids widening the public surface. |
 | 22 | The component field "quarterToAppear" was 4/5 for required parts. | The brief states that its meaning is unverified, instead of reading it as availability. | Required parts must be available in Q1. |
+
+## Round: control plane (2026-11-03 night)
+
+| # | Situation | Choice | Reason |
+|---|---|---|---|
+| 23 | Events need to change rival prices and usable capacity, which are not pack parameters. | Added an `Adjustments` hook to `engine.advance` (capacity factor, rival price factors, event labels). Every other event edits a per-quarter copy of the pack. | Keeps the engine generic; events stay data. Without events the engine output is unchanged (existing tests). |
+| 24 | Should a shocked verified rule keep its `[V]` mark? | Yes. Levels describe the **rule**; the scenario's assumptions are listed as events on the quarter. | A verified formula fed a hypothetical input is still exact for that input. Placeholder lines stay `[P]`. |
+| 25 | The gate flagged the template event key `quarter` (a real-data field of the same name holds small ordinals that coincide with the template quarters) and the tokens `utf-8` + `[:16]` in `spec.py` (they form a real number run). | Content changed, gate unchanged: events use `from_quarter` (consistent with overrides; `quarter` stays a parser alias), and the fingerprint length became a named constant with a default `.encode()`. | Rule: when the gate blocks, change the content. Both hits were coincidences of quarter ordinals and code literals. |
+| 26 | Real-data results must not reach `outputs/`. | The CLI refuses to write non-synthetic results outside a `private` directory; the MCP layer routes them to `evidence/private/outputs/`; `params diff --values` with real packs is private only. | Reports built from real data stay private. |
+| 27 | Sweeps over plan choice need policy file paths; absolute paths would make fingerprints machine-specific. | Policy references in sweeps are rewritten relative to the base scenario. | Fingerprints stay reproducible across checkouts. |
+| 28 | The per-quarter flow needs an automatic diff against the previous quarter. | `mpsim build-pack --quarter-label QN` snapshots the private pack to `history/QN`, diffs it against the previous snapshot, writes the full diff privately and prints value-free red flags. Q1 was snapshotted as the baseline. | One command in the quarterly routine; values never leave `evidence/private`. |
+
