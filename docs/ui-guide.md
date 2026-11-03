@@ -94,11 +94,13 @@ cd frontend; npm run dev:api                                           # 開 htt
 ## 8. 發布到 GitHub Pages（目前不要做）
 
 > [!CAUTION]
-> 這個 repo 目前是公開的，而且 git 歷史中仍有真實數值（見 `docs/history-cleanup-plan.md`）。**歷史清除完成並驗證之前，不要發布 Pages**，以免吸引注意。
+> git 歷史中仍有真實數值（見 `docs/history-cleanup-plan.md` 與置頂待辦 `docs/TODO-history-cleanup.md`）。**歷史清除完成並驗證之前，不要發布 Pages，repo 也不要改回 public。**
 
 完成清除之後的發布方式：
 1. 在 GitHub 的 Settings → Pages，把 Source 設為 **GitHub Actions**。
 2. 在本機執行 `python scripts\build_demo.py --base /simulation_HW/`，確認 gate 通過，再提交最新的 `frontend/public/demo`。
 3. 在 GitHub 的 Actions 頁面手動執行 **demo-pages** workflow，並輸入確認文字 `PUBLISH-SYNTHETIC-DEMO`。
+
+`docs/TODO-history-cleanup.md` 標示為 `CLEANED` 之前，這個 workflow 的第一步（`scripts/history_guard.py --action pages --strict`）會讓它直接失敗；本機的 `build_demo.py` 也會響鈴提醒，但不會擋住建置。
 
 這個 workflow 只會建置已提交的原始碼與 synthetic 匯出，而且只能手動觸發（CI 上沒有私有資料可比對，所以真實值的檢查要在本機做）。

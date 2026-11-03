@@ -5,6 +5,10 @@
 > **歷史清除完成前，不要讓任何人注意到這個 repo；UI 不要上 GitHub Pages。**
 > 不要在任何地方張貼 repo 連結，也不要開 issue、PR 或 release。
 
+> [!NOTE]
+> **2026-11-04 更新：** 決定**暫不清除**，改為先留存、之後一次清除。外洩內容已完整匯出到 `evidence/private/leak-archive/`（不進 repo）。
+> 置頂待辦、三條硬約束與自動提醒見 [`TODO-history-cleanup.md`](TODO-history-cleanup.md)。依使用者指示，repo 應維持 private（2026-11-04 這一輪未連網重新確認）。
+
 > [!IMPORTANT]
 > 本文件只是**調查報告與草稿**。所有改寫歷史的指令（filter-repo、force push）都**待使用者在場時執行**。
 > 本輪沒有改寫歷史、沒有 force push，也沒有刪除任何 commit、分支、tag 或檔案。

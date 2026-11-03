@@ -68,7 +68,8 @@ cd frontend; npm run dev:api                         # ... and the UI talking to
 The UI never computes numbers. It renders what the Python engine returns, every number shows its source level, and
 anything with a literature or placeholder input carries an "uncalibrated · not a forecast" mark with a hover source
 chain. See [docs/ui-guide.md](docs/ui-guide.md) (Chinese). The GitHub Pages workflow is manual and must not be run
-before the history cleanup ([docs/history-cleanup-plan.md](docs/history-cleanup-plan.md)).
+before the history cleanup ([docs/history-cleanup-plan.md](docs/history-cleanup-plan.md), open TODO:
+[docs/TODO-history-cleanup.md](docs/TODO-history-cleanup.md); the workflow refuses to run until it is marked cleaned).
 
 ## Load your own data (private)
 
@@ -115,6 +116,8 @@ inputs. Today:
 | [docs/agent-harness.md](docs/agent-harness.md) | Sweeps, worst cases, sensitivity, JSON formats, optional local MCP |
 | [docs/ui-guide.md](docs/ui-guide.md) | Web UI：兩種模式、切換參數包、來源等級標記（中文） |
 | [docs/history-cleanup-plan.md](docs/history-cleanup-plan.md) | Git history leak investigation and cleanup plan (Chinese) |
+| [docs/TODO-history-cleanup.md](docs/TODO-history-cleanup.md) | **Open TODO**: history not cleaned yet; hard rules and the automatic reminder (Chinese) |
+| [docs/dev-diary.md](docs/dev-diary.md) | Development diary: how the project evolved (Chinese) |
 | [docs/demand-literature.md](docs/demand-literature.md) | Public literature on demand forms, parameter ranges and fit grades |
 | [docs/demand-model-spec.md](docs/demand-model-spec.md) | Literature-level demand chain, coefficients, mapped vs placeholder, upgrade path |
 | [docs/quarterly-runbook.md](docs/quarterly-runbook.md) | What happens each quarter, what the operator does, how to read the report |
