@@ -6,6 +6,8 @@ Treat the observable system as `Y = f(X, S, C)`, where `X` is a controlled decis
 
 There are no decision/result pairs from a controlled change in this evidence set. The framework supports OFAT proposals, local finite differences, evidenced pair candidates, and optional held-out surrogate fits. It does not apply changes or advance the simulation. Global flags remain `DRY_RUN=true`, `READ_ONLY=true`, `ALLOW_WRITE=false`, and `ALLOW_FINAL_SUBMIT=false`.
 
+**Update (REA pass):** the static analysis found a no-save what-if channel (`<Service>.calculate` while the `modify` lock is held) on 48 screens. Step 1 below is now concrete: [experiment-runbook.md](experiment-runbook.md) EXP-01. Item classes per (decision, output) are in [identifiability-matrix.md](identifiability-matrix.md).
+
 ## Highest information gain sequence
 
 1. From the legitimate UI, capture one screen with editable decisions and inspect its delivered validation, save, preview, and recalculate behavior. Record an edit only if the UI indicates it is reversible and does not finalize or advance the quarter. This identifies feasible experimental inputs and output metrics.

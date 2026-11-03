@@ -1,22 +1,76 @@
-# Module and resource map
+# Module map (v2)
 
-Six rendered pages were observed, all associated with Quarter 1 in the capture. Safe page titles include `Use Pattern`, `Market Potential-1`, `Market Potential`, and `Price Willing to Pay`; the remaining page title was not emitted because it did not pass the public-label allowlist. The module artifact uses aliases `page_001` through `page_006` and retains page-level quarter, title, tabs, decision-control presence, safe navigation labels, and referenced script names.
+v1 is in `legacy/docs/module-map-v1.md`.
 
-Navigation labels observed across the HTML include Marketing Research, Strategic Planning, Marketing / Marketing Strategy, Human Resources, Sales Channel / Sales Channel Strategy, Manufacturing / Manufacturing Strategy, Accounting, Finance / Finance Strategy, and Production. The rendered list nesting supports Marketing Research → Customer Needs / Use Pattern / Price Willing to Pay / Market Potential; Strategic Planning → Financial Resources / Summary of Strategy; and Accounting → Income Statement. Other nested links include Marketing Strategy, Sales Channel Strategy, Manufacturing Strategy, and Finance Strategy under their matching top-level sections.
+Two sources, kept separate:
 
-The page-level `parent` stays unknown. Individual navigation elements include `parent_element` only when nesting is visible in the HTML; unlinked labels such as Production do not get an inferred parent.
+1. **Rendered Q1 task list.** This is the left-menu tree in the six saved Quarter 1 pages (private HTML, 62 items).
+   The server supplies the menu per quarter (`LeftMenu.leftMenuItems([user@quarter])`,
+   `Resource.resourceList`), so later quarters can differ.
+2. **Client class registry.** These are all screens the delivered client can render (`window.X = ….extend`,
+   310 registrations in REA-verified modules). Whether a registered screen appears in a given quarter or
+   course configuration is decided by the server and is **unknown** for quarters not captured.
 
-```mermaid
-flowchart TD
-    MR[Marketing Research]
-    SP[Strategic Planning]
-    M[Marketing] --> MS[Marketing Strategy]
-    HR[Human Resources]
-    SC[Sales Channel] --> SCS[Sales Channel Strategy]
-    MF[Manufacturing] --> MFS[Manufacturing Strategy]
-    AC[Accounting]
-    FI[Finance] --> FIS[Finance Strategy]
-    MR -. pages observed .-> P[6 Quarter 1 rendered pages]
+## 1. Rendered Q1 tree (✎ = marked "decision screen" by the UI)
+
+```
+Welcome to Marketplace · Virtual Business World · Overview of Activities · Getting Started
+Company Name ✎ (CompanyName)
+Marketing Research
+  Customer Needs (CustomerNeeds) · Use Pattern (UsePattern) · Price Willing to Pay (PriceWillingToPay) · Market Potential (MarketSize)
+Strategic Planning
+  Mission ✎ · Culture ✎ · Problem ✎ · Corporate Objectives ✎ · Financial Resources ✎
+  Basis for Competitive Advantage ✎ (BasesCompetitiveAdvantage) · Corporate Strategic Thrusts ✎ · Summary of Strategy
+Marketing
+  Marketing Strategy: Strategic Thrusts ✎ (StrategicThrustsMarketing) · Target Segments ✎
+  Brand Management: Design Brand ✎ (ModifyBrand)
+  Tactic-Strategy Links ✎ (TacticStrategyLinksMarketing)
+Human Resources
+  Human Resource Strategy: Strategic Thrusts ✎
+  Executive Team: Responsibilities ✎ · Team Norms ✎ · Personal Goals ✎
+  Industry Sales Force Compensation (InitialSalesForceCompensation) · Industry Production Worker Compensation (InitialWorkersCompensation)
+  Tactic-Strategy Links ✎
+Sales Channel
+  Sales Channel Strategy: Strategic Thrusts ✎
+  Stores: Open Stores ✎ (OpenSalesOffice) · Web Sales Center: Open Web Sales Center ✎ (OpenWebcenter)
+  Tactic-Strategy Links ✎
+Manufacturing
+  Manufacturing Strategy: Strategic Thrusts ✎ · Fixed Capacity ✎ (FixedCapacity) · Tactic-Strategy Links ✎
+Accounting
+  Cash Flow (ProFormaCashFlow) · Income Statement (ProFormaIncomeStatement) · Balance Sheet (ProFormaBalanceSheet)
+Finance
+  Finance Strategy: Strategic Thrusts ✎ · Closely Held Stock (Stock) · Certificate of Deposit ✎ (CD) · Tactic-Strategy Links ✎
+Summary of Decisions (SummaryOfDecisions)
+Final Check (FinalCheck)
+Submit  (WrapUp)   ⛔ FINALIZATION, never click during analysis
 ```
 
-The artifact is at `data/module_graph.json`. Its `decision_screen` flag means the exported HTML contained a form/input or an allowlisted control; it does not prove the screen writes to the server or can be safely edited.
+## 2. Registered screens beyond the Q1 tree
+
+**Decision screens not seen in Q1 (95), by area:**
+
+* Marketing: `Pricing`, `Promotions`, `LocalMedia`, `RegionalMedia`, `SocialMedia`, `SearchEngineMarketing`,
+  `SimpleInternetMarketing`, `DesignWebPage`, `WebTraffic`, `WebProductivity`, `ModifyAd`, `ModifyBrandSimple`,
+  `BuyMarketResearch`, `BuyInitialMarketResearch`, `FollowUpStudy`, `SourceStudy`, `VarianceStudy`, `CompetitorAnalysis`, `PartnerAnalysis`
+* Sales force & HR: `HireSalesPeople`, `HireWebSalesPeople`, `SalesForceCompensation`, `SpecialPrograms`, `WorkersCompensation(Regional)`,
+  `ExecutiveCompensation`, `EmployeeInvolvement`, `HRSurvey`, `Goals*`, `StrategicThrustsSales`, `StrategicThrustsPurchasing`
+* Manufacturing & supply chain: `OperatingCapacity(Regional)`, `Overtime(Regional)`, `FactoryLocation(Regional)`, `FactoryEfficiency`,
+  `FactorySimulation(Regional)`, `ExtFactorySimulation(Regional)`, `ProductionRules`, `ProductionControlSystem`, `InventoryControl`,
+  `TargetReplenishPoint`, `SellUnwantedInventory`, `InspectQuality`, `ImproveChangeover`, `ImprovementActions`, `CorrectiveActions`,
+  `ComponentRework`, `InvestInActions`, `FeatureRD`, `ConfirmRD`, `ConfirmRFP`, `ConfirmLongRFP`, `PaymentToPartners`,
+  `SupplyChainStrategy`, `SupplyChainInformationSystem`, `WarehouseLocation(Regional)`, `EnvironmentalConcerns`, `GoodNeighbor`
+* Finance: `ShortTermLoan`, `LongTermLoan`, `Dividends`, `CurrencyFunds`, `ProFormaDivisionProfitability`
+* Planning: `DemandProjection(Regional)`, `DemandProjectionNextQuarter(Regional)`, `TacticalPlan`, `TacticStrategyLinks`, `SWOTAnalysis`,
+  `Risk*` (14 risk screens), `RiskManagementReview`, `RiskRegistryAll`, `Feedback`
+
+**Reports (128):** results (`Sales`, `MarketShare*`, `ChannelDemand`, `DetailedBrandDemandReport`, `DemandImpactFactors`,
+`BrandProfitability`, `RegionalProfitability`, `DivisionProfitability`, `CostOfProduction(Regional)`, `ManufacturingResults(Regional)`,
+`QualityCosts*`, `WarrantyCosts`, `Fulfillment`, `WarehousingResults`, `OutsourcedBrandResults`, `ResultsOfContracts`), finance
+(`IncomeStatement`, `BalanceSheet`, `CashFlow`, `SimpleCashFlow`, `WealthCreation`, `FinancialPosition`, `FinancialRatios`,
+`ProForma*`, `Stock`), scorecards (`BalancedScorecard`, `CumulativeBalancedScorecard`, `DrillDownBSC`, `PlayersStanding`,
+`CumulativePlayersStanding`, `CCScorecard`, `Grades`, `TrophyRoom`, `Certification`, `CompetencyReport`), competitor
+intelligence (`Competitors*` 10 screens, `AdJudgment`, `BrandJudgment`, `PriceJudgment`, `ReliabilityJudgment`, `CompareAds/Brands/Designs`),
+market research (`CustomerNeeds`, `UsePattern`, `PriceWillingToPay`, `MarketSize`, `MediaPreference`, `EconomicIndexes`,
+`ExchangeRates`, `CostTrends`, `NewsSources`, `Newsletter`, `Reputation`, `IllWill*`), summaries (`Summary*`, `ControlCharts*`, `FinalCheck`, `ResultCheck`).
+
+Full field-level detail: `docs/decision-catalog.md`; outputs: `docs/metric-catalog.md`.

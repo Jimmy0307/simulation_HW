@@ -1,49 +1,105 @@
-# Reconstruction report
+# Reconstruction report (v2, REA-based)
+
+Branch `rea/full-reconstruction`. Round one is preserved as [`reconstruction-report-v1-python.md`](reconstruction-report-v1-python.md).
+Tools: REA `rea-agents@6.8.0` on Node 24.22.2 (see [rea-pivot.md](rea-pivot.md)). All raw inputs and REA
+Evidence stay in ignored `evidence/private/`.
+
+> ## ⭐ What-if channel: **PRESENT (strong static evidence; not yet runtime-verified)**
+>
+> Every decision screen inherits `calculate(user, draftDecisions, 0)` from the shared `Decision` base class
+> (`sstudent.js:1:192346`, REA module `8939`). It sends the **unsaved** decisions currently on screen and
+> returns `{checkResult{ok, errors}, calculateResult}`. The client renders `calculateResult` with
+> `writeCalculate()` and server validation with `writeAllErrors()`. **No `save` is involved.**
+>
+> * **Trigger:** typing in a bound input (`bindCalculate(id, "keyup"|"click"|"change")` → 500 ms debounce →
+>   `onTimerCalculate` → `calculate(true)`, `:1:192874`/`:1:192940`), or the **Calculate** button on planner
+>   screens (`FactorySimulation*`, `ExtFactorySimulation*`, `ProFormaDivisionProfitability`). 48 screens.
+> * **Precondition:** the screen must be in modify mode. `onTimerCalculate` checks `inModifyMode`, which
+>   requires `modify(user, 0)`, which **acquires a server-side edit lock** that teammates see. The lock is
+>   released by `cancel(user, 0, lockToken)`.
+> * **Not proven:** that `calculate` has no server-side side effects, and that `modify`'s only effect is the lock.
+>   Runbook **EXP-01** verifies both with REA passive capture plus a DevTools HAR, then Cancel.
+> * **Not draft-sensitive:** ProForma Income Statement / Balance Sheet / Cash Flow `view`, and `GameInfo.liveProForma([user])`,
+>   send no decisions, so they can only reflect **saved** state (INFERRED). `projectDemandNextQuarter` is a
+>   read-only `FixedCapacity.dynamicData` value, and `projectedCash` a read-only `CD.dynamicData` value, in the capture.
 
 ## A. Architecture
 
-**Verified:** Six rendered HTML pages reference `core.js`, `sstudent.js`, `sstudent-en-us.js`, and `cdn-check.js`; two unique JavaScript bundle contents were locally available. Client code exposes UI/resource controller and transport symbols. A captured session shows JSON request/response shapes.
+Verified in client code: `engine.php` shell → `sstudent.js` UI engine → `core.js` transport → `POST
+backend-json.php?<Service>` JSON-RPC (`core.js:5:7918`). Screens are classes on `window`.
+`DecisionFactory.getDecision(name)` instantiates `window[name]` and sets `service=name`. Menu and resource
+lists come from the server (`LeftMenu.leftMenuItems`, `Resource.resourceList`) per quarter.
 
-**Inferred:** `engine.php` serves as the application shell/resource route entry. Client-generated routes and page markup support this interpretation. `backend-json.php?<Service>` dispatches JSON-RPC-like requests to service handlers based on the repeated observed endpoint and envelope pattern.
+## B. Modules (Phase 2b)
 
-**Unknown:** PHP implementation, server state transitions, simulation formulas, unobserved routes, and whether any particular captured read endpoint has side effects beyond the returned read data.
+310 class registrations in REA-verified webpack modules: **123 decision screens, 1 finalization screen
+(`WrapUp`, labelled "Submit"), 128 reports, 58 helpers** (animations/editors). The Q1 rendered tree has 62
+items, 27 marked as decision screens. See [module-map.md](module-map.md).
 
-## B. `engine.php`
+## C. RPC contracts (Phase 2a)
 
-No PHP source was present or requested. From the rendered shell, client route strings, resource names, and `changeResource`/`play`/`setContent` flow, it appears to render the application and route resource/tab/quarter views. This is an inference from multiple client observations, not a claim about its server implementation.
+Statically referenced: 252 screen services, 11 infrastructure services, 8 base methods, 30 REA-discovered
+literal methods and 5 class-scoped methods. Observed: 31 pairs. Write candidates (never called): every
+screen's `save`, the lock methods, `WrapUp` finalization, `Settings.saveQuarterScreenSettings`,
+`StudentInit.runFinish`/`runInit`, chat/email/assistant writes, instructor/overlay settings. See [rpc-contract.md](rpc-contract.md).
 
-## C. `backend-json.php`
+## D. Decision fields (Phase 2c)
 
-The capture verifies POST requests whose path is `/mpl/web7/backend-json.php` with a service name in the query. Their JSON bodies use a `method` and `parameters` shape. It appears to be the RPC/service dispatcher. Request and response values are not published.
+Decision fields come from each screen's `read()` (`<obj>.<field> = this.value("<control>")`), with control types from
+`this.com(type, id, …)`. Value types: integer (`iedit`), float (`fedit`), boolean (`checkbox`), enum
+(`combobox`/`radio`), text (`memo`/`edit`). **No numeric client-side bounds exist.** Bounds, required
+fields, warnings and notes are server-side, returned as `checkResult.errors` by `calculate` and `save`.
+That makes them probeable without saving. `warnMinPrice/warnMaxPrice` are Stock issue-price fields, unused
+by the client. See [decision-catalog.md](decision-catalog.md).
 
-## D. RPC
+## E. Client calculations (Phase 2d)
 
-There are 102 captured network entries: 70 recognized service observations and 32 requests without a recognized service/method. The normalized registry has 31 service/method contracts. Twenty-nine are classified `READ`; two remain `UNKNOWN` (`GameInfo.studentsOnline`, `ServiceStatus.gs`). No `WRITE`, validation, calculation-trigger, or finalization contract was verified in the available capture. See `docs/rpc-contract.md` and `data/service_registry.json`.
+14 business-relevant exact client formulas, all display-level: 65-day quarter, effective capacity =
+OC × productivity / 100, capacity cost per unit, market/channel/regional share %, utilisation %, web
+commission cost. See [calculation-map.md](calculation-map.md). Everything material (demand, costs,
+P&L) is server-computed. 48 screens expose server computation of draft decisions through `calculate`.
 
-## E. Client calculations
+## F. Outputs (metrics)
 
-Two exact formula records identify the same client method at two source positions: `quarterlyCapacity(s) = s * this.maxDays` in `client_asset_002.js`, line 4, columns 744663 and 759862. This is an exact browser-side arithmetic expression. It does not prove that the server uses the same expression for production or financial outputs. A name-only heuristic adds 118 unresolved candidate records (38 unique names) to the inventory; no full client transformation of server metrics was verified. See `docs/calculation-map.md`.
+Unit sales (`Sales`), revenue/COGS/operating profit (`IncomeStatement`, `ProFormaIncomeStatement` rows),
+market share (`MarketShare`, client %), scorecard (`BalancedScorecard*`, `PlayersStanding`), production
+cost (`FactorySimulation` calculate). See [metric-catalog.md](metric-catalog.md).
 
-## F. Server calculations
+## G. Identifiability (Phase 4)
 
-Seven numeric response fields remain server opaque: `averageProductivity`, `cash`, `projectDemandNextQuarter`, `projectedCash`, `totalCash`, `warnMaxPrice`, and `warnMinPrice`. No server formula was inferred. Revenue, unit sales, market share, COGS, operating profit, and scorecard numeric outputs were not present in these six captured research pages, so they remain unknown for this evidence set. Other visible calculations that rely on lookups, conditions, or calls were not marked exact.
+[identifiability-matrix.md](identifiability-matrix.md) classifies each (field, output group) as F/W/P/Q/X.
+Across 124 screens: W = 87, F = 24, P = 197, Q = 201, X = 57 cells. Cost structure is mostly **W**
+(what-if). Demand response is **Q** (next quarter, confounded).
 
-## G. Decision model
+## H. Live observation (Phase 3)
 
-The decision graph records observed request/response dataflow fields to service methods, plus exact client formula edges. It contains 1,095 nodes and 1,062 edges from captured schemas. No verified editable-decision contract or controlled before/after pair exists, so there are no causal decision-to-outcome edges. The HTML navigation labels include Marketing Research, Strategic Planning, Marketing, Human Resources, Sales Channel, Manufacturing, Accounting, Finance, and related strategy/report screens. The parent tree is partial and is not filled by inference.
+**Skipped.** `rea list-browser-targets http://127.0.0.1:9222` → `endpoint_unreachable` (no CDP browser
+running). No navigation, clicks or requests were made against Marketplace in this pass.
 
-## H. System identification
+## I. REA offline environment (Phase 5)
 
-The highest-value next observation is a legitimate UI screen with a clearly reversible decision and a preview/recalculation output. Capture its schema and validation first. Then hold state and competitors constant and collect baseline, small minus, and small plus observations for one variable. Only after a reversible preview is established should the operator test an evidenced pair such as price × advertising or capacity × demand. These are proposals, not current results; the toolkit does not execute them. Fit a simple held-out surrogate only after enough controlled observations exist.
+Built `evidence/private/rea-env` (`marketplace-replay`). It has one projected tool (all RPCs share one path),
+replays the 70 recorded exchanges, served 0 tools from state, and withheld the write (`no-state-target`). It was
+not run: `agent-env` is not installed. It contains recorded `x-xsrf-token` header values, so it is private only.
 
-## I. MCP status
+## J. Coverage (Phase 6)
 
-The local MCP server exposes 22 read/intelligence tools: `list_modules`, `get_module`, `list_services`, `get_service`, `get_rpc_method`, `get_decision_graph`, `trace_decision`, `list_metrics`, `explain_metric`, `list_exact_client_formulas`, `get_formula`, `list_server_opaque_metrics`, `get_customer_needs`, `get_market_segments`, `get_market_potential`, `get_price_willing_to_pay`, `list_experiments`, `propose_experiment`, `get_sensitivity`, `get_interactions`, `get_surrogate_model`, and `explain_provenance`. They read sanitized local artifacts and do not expose credentials. `propose_experiment` emits a dry-run design only.
+REA `evaluate_reconstruction_coverage`, capture-backed surfaces: `rpc-contracts` **unknown** (31 claims),
+`decision-catalog` **unknown** (18), `output-catalog` **unknown** (30). Every claim is `verifier-missing`, plus
+`package-proof-unknown`. REA's fail-closed model expects runtime verifiers, which do not exist yet.
 
-## J. Security and publication
+Hand-written coverage table (static denominator = client registry):
 
-Both input ZIPs and extracted content are under ignored `evidence/private/`. Public artifacts were generated into an ignored staging directory and scanned before being copied. The publication gate enforces an allowlist of public roots and extensions, verifies required ignore patterns, rejects private evidence/raw capture/static media paths, and scans both working and staged JSON/fixture payloads. At report generation, the gate found no forbidden paths or sensitive-pattern matches. Raw HAR, HTML dumps, downloaded Marketplace bundles/assets, session data, account IDs, and private Marketplace response values are excluded.
+| Boundary | Static (client) | Observed (Q1 capture) | Runtime-verified |
+|---|---|---|---|
+| Screen services | 252 | 29 | 0 |
+| Decision screens with parsed fields | 124 | 18 with decision shapes | 0 |
+| What-if screens | 48 | 5 returned `calculate` data on `view` (CD, FixedCapacity, OpenSalesOffice, OpenWebcenter, ProFormaCashFlow); the `Stock` report does too | 0 |
+| Client formulas | 14 business-relevant (219 expressions) | n/a | 0 |
+| Q1 menu items | 62 | 62 | n/a |
 
-## Limits and tool reference
+## Limits
 
-The analysis workflow was informed by [morluto/rea](https://github.com/morluto/rea); no REA implementation or Marketplace asset is redistributed. The REA CLI was not run because the installed Node v24.18.0 is below REA's current v24.22.1 minimum for the Node 24 line. Its repository served as a methodology reference only. The MCP server uses the official [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk).
+Static analysis never observed execution. The server implementation is unavailable and was not sought.
+Class registrations, fields and formulas come from REA-located, digest-verified module text, using literal
+patterns documented in `rea_ingest.py`. Dynamic constructs can hide additional fields (`possibly_triggers_…` flags).

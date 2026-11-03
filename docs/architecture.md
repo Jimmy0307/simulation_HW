@@ -26,4 +26,4 @@ The diagram distinguishes what the browser shows from what is inferred about the
 
 ## Analysis workflow reference
 
-The local evidence-first approach was informed by [REA](https://github.com/morluto/rea): keep coverage visible, preserve provenance, and record unknowns. Its CLI was not run here because installed Node v24.18.0 is below REA's current v24.22.1 minimum for the Node 24 line. This project uses its own Python parsers on local evidence.
+Since `rea/full-reconstruction`, the analysis runs on [REA](https://github.com/morluto/rea) 6.8.0 (Node 24.22.2). Transport and dispatch claims above are now located in code: `core.js:5:7918` (JSON envelope), `core.js:5:8575` (`backend-json.php?` + service), and `sstudent.js:1:182053`/`:1:188141` (service = screen class name). The round-one Python parsers are in `legacy/`. See `docs/rea-pivot.md` and `docs/reconstruction-report.md`.
