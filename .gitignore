@@ -31,3 +31,9 @@ dist/
 
 # Local operator tooling (CDP network guard, login poller); kept out of the public repo
 tools/
+
+# Generated simulator saves (regenerable; may contain coincidental state counters)
+examples/**/*-save.json
+*.mpsim-save.json
+# Local agent configuration (per-quarter command with operational rules)
+.claude/

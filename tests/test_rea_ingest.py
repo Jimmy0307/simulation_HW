@@ -139,13 +139,13 @@ def test_scenario_value_rows_join_rea_events_by_transaction() -> None:
              "body": content({"method": "calculate", "parameters": [{"studentID": 1}, {"deposit": "10000"}, 0]})},
             {"kind": "network-content", "transaction_id": "t1", "sequence": 4, "step_index": 1, "phase": "response",
              "body": content({"error": 0, "result": {"checkResult": {"ok": True, "errors": {"inputErrors": 0}},
-                                                     "calculateResult": {"interest": 150}}})},
+                                                     "calculateResult": {"interest": 77}}})},
             {"kind": "request", "transaction_id": "t2", "sequence": 5, "step_index": 1,
              "url": {"url": "https://example.test/a.png"}},
         ]}}}
     rows = scenario_value_rows(record)
     assert rows == [{"step": "shift", "service": "Widget", "method": "calculate", "status": 200,
-                     "decisions_sent": {"deposit": 10000.0}, "calculate_result": {"interest": 150.0},
+                     "decisions_sent": {"deposit": 10000.0}, "calculate_result": {"interest": 77.0},
                      "check_ok": True, "check_errors": {"inputErrors": 0.0}, "lock_duration_s": None,
                      "save_result": None}]
 

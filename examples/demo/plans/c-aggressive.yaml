@@ -1,0 +1,7 @@
+name: aggressive
+open_web_centers: [N1]
+open_stores: [N1-Southby]
+capacity_increase: 45
+brands:
+  - {name: Alpha-1, brand_type: A, price: 647, production: 907, advertising: 49991}
+  - {name: Beta-1, brand_type: B, price: 853, production: 307, advertising: 29959}

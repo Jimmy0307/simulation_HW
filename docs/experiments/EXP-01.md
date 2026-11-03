@@ -16,7 +16,7 @@ results for draft deposits, and after `Cancel` the stored decision was unchanged
 | Modify | `CD.modify` | `modifyResult=true`, lock held by us, `lockDuration` = 3600 s |
 | fill B → Shift | `CD.calculate` | ok, outputs at baseline |
 | fill B − S → Shift | `CD.calculate` | `checkResult.ok=false`, 1 input error on `deposit` (negative not allowed), no result |
-| fill B + S → Shift | `CD.calculate` | ok, Δcd = +S, Δinterest = +0.015·S |
+| fill B + S → Shift | `CD.calculate` | ok, Δcd = +S, Δinterest = +S × (displayed quarterly rate) |
 | fill B → Shift | `CD.calculate` | ok, back to the baseline outputs |
 | Cancel | `CD.cancel` | edit mode left; Modify enabled; Save/Cancel/inputs disabled |
 | re-navigate (Stock → CD) | `Stock.view`, `CD.view` | stored deposit = B (restored); no lock text |
@@ -31,7 +31,7 @@ guard blocked 0 requests during the experiment.
    within 1.5 s. The `keyup` binding fires it: one Shift press led to `calculate` within the 500 ms debounce. A
    real user typing triggers it on every key release.
 2. **Interest is linear in the deposit, at the displayed quarterly rate:** observed `Δcd = Δdeposit` and
-   `Δinterest = Δdeposit × rate_annual / 4 / 100`. The observed slope Δinterest/Δdeposit = 0.015 exactly equals the displayed `rate/4` (%).
+   `Δinterest = Δdeposit × rate_annual / 4 / 100`. The observed slope Δinterest/Δdeposit exactly equals the displayed `rate/4` (%) (value kept private).
    Working hypothesis (only the deposit term was tested; `cd_prior` and `withdraw` were 0):
    `cd = cd_prior + deposit − withdraw`, `interest = cd × rate_annual / 4 / 100`.
    **Evidence strength: moderate.** Two valid points (Δ = 0, Δ = +S) and an exact match to the client-displayed

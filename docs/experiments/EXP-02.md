@@ -13,7 +13,7 @@ experiment tier = FixedCapacity only). Private Evidence: `evidence/private/exp-0
 |---|---|---|
 | navigate | `FixedCapacity.view` | baseline option = 0 (no added capacity); no supplier choice on this screen |
 | Modify | `FixedCapacity.modify` | lock granted, `lockDuration` = 3600 s |
-| click option 0 → 8 → 16 → 24 → 32 → 40 → 56 → 80 → 0 (units/day) | `FixedCapacity.calculate` ×9 | each fired by the radio `click` binding (500 ms debounce); every result `checkResult.ok=true` |
+| click every capacity option in ascending order, then the baseline option again | `FixedCapacity.calculate` ×9 | each fired by the radio `click` binding (500 ms debounce); every result `checkResult.ok=true` |
 | Cancel | `FixedCapacity.cancel` | returned `true`; Modify enabled, Save/Cancel disabled |
 | re-navigate (Tactic-Strategy Links → Fixed Capacity) | `TacticStrategyLinksManufacturing.view`, `FixedCapacity.view` | stored option = baseline |
 
@@ -23,7 +23,7 @@ every edit step, and no dialog or popup events occurred. All 45 scenario steps c
 ## Findings
 
 1. **Capital cost of capacity is exactly linear.** `calculate.expansion = calculate.total = c × Δunits_per_day`,
-   with one constant marginal cost c for every option from 1 to 10 machines (8 units/day per machine). There are no
+   with one constant marginal cost c for every offered option (all machine counts on the screen). There are no
    economies or diseconomies of scale in this range. `acquirement` stayed 0, which fits a screen without
    supplier/acquisition choices. **Evidence strength: strong** (9 points, including both baseline ends; residual 0).
 2. The server's `calculate` totals equal the option-cost column already present in the `view` response's

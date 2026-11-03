@@ -8,6 +8,7 @@ import sys
 from pathlib import Path
 
 from marketplace_sysid.security.evidence_scan import PATTERNS, scan_evidence
+from marketplace_sysid.security.value_leak import load_real_values, scan_paths
 
 ROOT = Path(__file__).resolve().parents[1]
 FORBIDDEN_SUFFIXES = {
@@ -16,9 +17,11 @@ FORBIDDEN_SUFFIXES = {
 }
 ALLOWED_ROOTS = {
     ".gitignore", "CONTRIBUTING.md", "LICENSE", "README.md", "SECURITY.md",
-    "data", "docs", "fixtures", "legacy", "pyproject.toml", "scripts", "src", "tests",
+    "data", "docs", "examples", "fixtures", "legacy", "pyproject.toml", "scripts", "src", "tests",
 }
-ALLOWED_SUFFIXES = {".md", ".py", ".json", ".html", ".toml", ""}
+ALLOWED_SUFFIXES = {".md", ".py", ".json", ".html", ".toml", ".yaml", ""}
+REAL_VALUES = ROOT / "evidence" / "private" / "parameters" / "values.json"
+PRIVATE_PACK = ROOT / "evidence" / "private" / "model" / "pack.json"
 PUBLIC_SCAN_ROOTS = (
     ROOT / "data",
     ROOT / "legacy" / "data",
@@ -52,6 +55,10 @@ def _path_is_allowed(relative: str) -> bool:
         return path.suffix.casefold() == ".py"
     if normalized.startswith("legacy/"):
         return path.suffix.casefold() in {".py", ".md", ".json"}
+    if normalized.startswith("examples/"):
+        return path.suffix.casefold() in {".json", ".yaml", ".md"}
+    if path.suffix.casefold() == ".yaml":
+        return False
     return len(path.parts) == 1 and relative in ALLOWED_ROOTS
 
 
@@ -110,15 +117,21 @@ def check_publication() -> dict[str, object]:
         counts = {name: len(pattern.findall(payload)) for name, pattern in PATTERNS.items()}
         if any(counts.values()):
             staged_payload_counts[relative] = counts
+    real = load_real_values(REAL_VALUES, PRIVATE_PACK)
+    candidates = [p for p in paths if not p.replace("\\", "/").startswith("evidence/")]
+    leaks = [finding.__dict__ for finding in scan_paths(ROOT, candidates, real)]
     return {
         "private_evidence_ignored": ignored,
+        "real_value_reference_loaded": not real.empty,
+        "value_leak_findings": leaks,
         "ignore_probe_results": ignore_results,
         "forbidden_paths": sorted(set(forbidden)),
         "public_payload_scans": scans,
         "sensitive_findings": findings,
         "staged_payload_findings": staged_payload_counts,
         "staged_invalid_json": staged_invalid_json,
-        "pass": ignored and not forbidden and not findings and not staged_payload_counts and not staged_invalid_json,
+        "pass": (ignored and not forbidden and not findings and not staged_payload_counts and not staged_invalid_json
+                 and not leaks),
     }
 
 

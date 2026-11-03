@@ -1,0 +1,6 @@
+# Quarter 2: produce and sell the first brand, add a second brand for segment Gamma.
+name: q2-launch
+open_web_centers: [N1]
+brands:
+  - {name: Alpha-1, brand_type: A, price: 697, production: 613, advertising: 24991}
+  - {name: Gamma-1, brand_type: C, price: 1193, production: 257, advertising: 15173}

@@ -1,0 +1,7 @@
+# Quarter 3: expand capacity, keep prices, withdraw the CD.
+name: q3-grow
+capacity_increase: 27
+cd: {deposit: 0, withdraw: 99173}
+brands:
+  - {name: Alpha-1, brand_type: A, price: 697, production: 709, advertising: 29989}
+  - {name: Gamma-1, brand_type: C, price: 1147, production: 211, advertising: 19963}

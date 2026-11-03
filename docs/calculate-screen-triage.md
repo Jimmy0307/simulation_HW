@@ -52,8 +52,8 @@ These screens are registered in the client but not offered in Quarter 1. "Expect
 | 3 | OperatingCapacity / ...Regional | operatingCapacity, projectedWorkersProductivity | directLaborCPU, overheadCPU, costToChangeOperatingCapacity | B | Cost per unit vs capacity utilisation |
 | 4 | ProFormaDivisionProfitability | estimatedDemand, estimatedPrice (Calculate button) | division P&L items | B | Accounting from price × volume to profit |
 | 5 | HireSalesPeople / HireWebSalesPeople | sf, support | hire, employ and layoff cost | B or A | Sales-force cost |
-| 6 | LocalMedia / RegionalMedia | inserts | adsCost, mediaCost, regionCost | A likely (rate cards) | Advertising cost |
-| 7 | ShortTermLoan / LongTermLoan | borrow, repay | interest, quarterlyRate, annualRate | B (rate may depend on amount; `slRateMin/Max` in ProForma) | Financing cost |
+| 6 | LocalMedia / RegionalMedia | inserts | adsCost, mediaCost, regionCost | A likely (published price lists) | Advertising cost |
+| 7 | ShortTermLoan / LongTermLoan | borrow, repay | interest and the applied loan charges | B (charge may depend on amount; ProForma view lists short-loan bounds) | Financing cost |
 | 8 | SpecialPrograms | contest, demoKit, training | budgets, sales force totals | A likely | Sales promotion cost |
 | 9 | Overtime / ...Regional | hours | overtime cost and capacity | B | Short-run capacity cost |
 | 10 | SearchEngineMarketing / SimpleInternetMarketing / DesignWebPage | budget, maxBid, keywords | totalBudget, adsCost | B (auction) | Internet marketing cost |

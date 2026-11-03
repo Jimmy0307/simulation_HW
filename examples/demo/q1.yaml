@@ -1,0 +1,9 @@
+# Quarter 1 (synthetic demo): raise equity, buy capacity, open two outlets, design one brand.
+name: q1-setup
+stock_issue:
+  - {shares: 48611, price: 31}
+capacity_increase: 18
+open_stores: [N1-Northwick, N1-Eastmere]
+cd: {deposit: 99173, withdraw: 0}
+brands:
+  - {name: Alpha-1, brand_type: A, price: 0, production: 0}

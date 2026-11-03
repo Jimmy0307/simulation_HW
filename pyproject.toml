@@ -9,15 +9,16 @@ description = "Publication gate, REA Evidence ingestion and system-identificatio
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
-dependencies = []
+dependencies = ["pyyaml>=6"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.11"]
+dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.11", "types-PyYAML"]
 surrogate = ["scikit-learn>=1.5"]
 
 [project.scripts]
 marketplace-scan-evidence = "marketplace_sysid.security.evidence_scan:main"
 marketplace-rea-ingest = "marketplace_sysid.rea_ingest:main"
+mpsim = "marketplace_sim.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
