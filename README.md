@@ -12,6 +12,9 @@
 src/marketplace_sim/        open, generic planning engine (mpsim CLI); data enters only through a parameter pack
 examples/synthetic/         invented parameter pack (same schema as a real pack)
 examples/demo/              3-quarter demo plans + alternative plans for `mpsim compare`
+src/marketplace_sim/control/ control plane: scenarios, events, competitors, sweeps, param diff, HTML, optional MCP
+examples/scenarios/         synthetic scenario templates (baseline, cost rise, demand decline, price war, combined)
+examples/demo-control/      reproducible control-plane demo (scenario -> sweep -> worst cases -> param diff)
 src/marketplace_sysid/      evidence tooling: REA Evidence ingest, parameter extraction, verified cost rules, gate
 evidence/private/           YOUR data (git-ignored): REA Evidence, real pack (model/pack.json), saves, briefs
 ```
@@ -32,6 +35,24 @@ python -m venv .venv
 .\.venv\Scripts\mpsim.exe compare demo-save.json "examples/demo/plans/*.yaml"
 .\.venv\Scripts\mpsim.exe explain cd_interest
 ```
+
+## Control plane: game master and agent interfaces
+
+```powershell
+.\.venv\Scripts\mpsim.exe scenario run examples/scenarios/combined-shock.yaml --out outputs/scenarios   # + offline HTML
+.\.venv\Scripts\mpsim.exe sweep run examples/demo-control/sweep.yaml --out outputs/sweeps
+.\.venv\Scripts\mpsim.exe sweep worst outputs/sweeps/demo-stress.sweep.json --top 10
+.\.venv\Scripts\mpsim.exe params diff examples/synthetic examples/demo-control/pack-v2
+```
+
+* Scenarios set parameter overrides per quarter, composable events and competitor behaviour (baseline, random, private
+  replay). Runs are deterministic (same spec + seed => same result and fingerprint).
+* Game master guide (Chinese): [docs/gamemaster-guide.md](docs/gamemaster-guide.md).
+* Agent harness: [docs/agent-harness.md](docs/agent-harness.md).
+* `outputs/` is git-ignored. Results built from a private pack must be written under `evidence/private/`.
+* **Optional MCP layer** (`python -m marketplace_sim.control.mcp_server`): wraps only this local engine (run_scenario,
+  run_sweep, list_scenarios, explain_result). It is **unrelated to the REA MCP server** used for reverse engineering and
+  never contacts the game or any online service.
 
 ## Load your own data (private)
 
@@ -68,6 +89,8 @@ and interest are verified; stock raise is derived; production cost, demand, reve
 | Document | Content |
 |---|---|
 | [docs/private-play-guide.md](docs/private-play-guide.md) | Build a private save, play, compare plans |
+| [docs/gamemaster-guide.md](docs/gamemaster-guide.md) | 主持端：情境、事件、對手、what-if、HTML 報告（中文） |
+| [docs/agent-harness.md](docs/agent-harness.md) | Sweeps, worst cases, sensitivity, JSON formats, optional local MCP |
 | [docs/quarterly-runbook.md](docs/quarterly-runbook.md) | What happens each quarter, what the operator does, how to read the report |
 | [docs/reconstruction-report.md](docs/reconstruction-report.md) | Reconstruction findings (REA-based) |
 | [docs/cost-model.md](docs/cost-model.md) | Verified cost rules and what is not covered |
