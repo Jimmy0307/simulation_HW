@@ -192,3 +192,78 @@ export interface LevelsDoc {
   levels: { label: LevelLabel; mark: string; rank: number; uncalibrated: boolean; meaning: string }[];
   metrics: { metric: string; level: LevelLabel; formula: string; evidence: string; note: string; inputs: string[] }[];
 }
+
+// --- game mode (GET /api/game-mode/setup, POST /api/game-mode/start; demo: public/demo/gamemode.json) -------------
+
+export interface GameStateView {
+  state: CompanyState | null;
+  capacity_units_per_quarter: Line;
+}
+
+export interface GameOpponent {
+  name: string;
+  difficulty: string;
+  label: string;
+  strategy?: string;
+  params?: Record<string, unknown>;
+}
+
+export interface GameMeta {
+  opponents: GameOpponent[];
+  replay: boolean;
+  objective: string;
+  preset?: string | null;
+}
+
+export interface GameCity {
+  key: string;
+  name: string;
+  store: { open: boolean; setup_cost: Line; lease_cost: Line } | null;
+  segments: { id: string; name: string; size_12m: Line; wtp: Line }[];
+}
+
+export interface GameRegion {
+  id: string;
+  web_center: { key: string; name: string; open: boolean; setup_cost: Line; lease_cost: Line } | null;
+  cities: GameCity[];
+}
+
+export interface GameSetupDoc extends PackInfo, GameStateView {
+  theme: { product: string; unit: string; icon: string };
+  max_opponents: number;
+  difficulties: { id: string; label: string; strategy: string; params: Record<string, unknown>; description: string }[];
+  replay: { available: boolean; reason: string; quarters?: number[] };
+  objectives: { id: string; text: string; metric: string }[];
+  game: GameMeta | null;
+  brand_types: { code: string; name: string; segment_id: string | null; segment_name: string; components: string[];
+    default_components: string[] }[];
+  component_groups: { id: string; name: string; required: boolean; multi: boolean }[];
+  components: { id: string; group: string; name: string; available_quarter: number | null }[];
+  segments: { id: string; name: string; needs: string[] }[];
+  regions: GameRegion[];
+  capacity_options: { units: number; machines: number | null; cost: Line }[];
+  presets: { id: string; plan: PlanDoc }[];
+}
+
+export interface GameStartConfig {
+  source: "synthetic" | "private";
+  opponents: { difficulty: string }[];
+  replay?: boolean;
+  objective: string;
+  preset?: string | null;
+}
+
+export interface GameScriptStep {
+  quarter: number;
+  plan: PlanDoc;
+  before: GameStateView;
+  preview: Report;
+  report: Report;
+}
+
+export interface GameScript {
+  config: { source: "synthetic"; objective: string; opponents: { difficulty: string }[] };
+  start: GameSetupDoc;
+  steps: GameScriptStep[];
+  final: GameStateView;
+}

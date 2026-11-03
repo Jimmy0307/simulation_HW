@@ -1,6 +1,6 @@
 import type {
-  CompareDoc, DiffDoc, EventType, GameDoc, LevelsDoc, PackInfo, PlanDoc, PlansDoc, Report, ScenarioRun,
-  ScenarioSpecDoc, SweepResult,
+  CompareDoc, DiffDoc, EventType, GameDoc, GameScript, GameSetupDoc, GameStartConfig, LevelsDoc, PackInfo, PlanDoc,
+  PlansDoc, Report, ScenarioRun, ScenarioSpecDoc, SweepResult,
 } from "../types";
 import type { DataProvider } from "./provider";
 
@@ -95,5 +95,25 @@ export class ApiProvider implements DataProvider {
 
   diff(oldId: string, newId: string): Promise<DiffDoc> {
     return this.call<DiffDoc>("/diff", { old: this.packPaths.get(oldId) ?? oldId, new: this.packPaths.get(newId) ?? newId });
+  }
+
+  gameSetup(): Promise<GameSetupDoc> {
+    return this.call<GameSetupDoc>("/game-mode/setup");
+  }
+
+  gameStart(config: GameStartConfig): Promise<GameSetupDoc> {
+    return this.call<GameSetupDoc>("/game-mode/start", config);
+  }
+
+  async gamePreview(plan: PlanDoc): Promise<Report> {
+    return (await this.call<{ report: Report }>("/game/preview", plan)).report;
+  }
+
+  async gamePlay(plan: PlanDoc): Promise<Report> {
+    return (await this.call<{ report: Report }>("/game/play", plan)).report;
+  }
+
+  async gameScript(): Promise<GameScript | null> {
+    return null;
   }
 }

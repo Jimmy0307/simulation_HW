@@ -1,6 +1,6 @@
 import type {
-  CompareDoc, DiffDoc, EventType, GameDoc, LevelsDoc, PackInfo, PlanDoc, PlansDoc, Report, ScenarioRun,
-  ScenarioSpecDoc, SweepResult,
+  CompareDoc, DiffDoc, EventType, GameDoc, GameScript, GameSetupDoc, GameStartConfig, LevelsDoc, PackInfo, PlanDoc,
+  PlansDoc, Report, ScenarioRun, ScenarioSpecDoc, SweepResult,
 } from "../types";
 import { ApiProvider } from "./apiProvider";
 import { StaticProvider } from "./staticProvider";
@@ -28,6 +28,13 @@ export interface DataProvider {
   runSweep(sweep: Record<string, unknown>, id?: string): Promise<SweepResult>;
   packs(): Promise<{ id: string; path?: string }[]>;
   diff(oldId: string, newId: string): Promise<DiffDoc>;
+  // game mode: one quarter = one turn. Calculate/play go to the same engine calls as the decision editor.
+  gameSetup(): Promise<GameSetupDoc>;
+  gameStart(config: GameStartConfig): Promise<GameSetupDoc>;
+  gamePreview(plan: PlanDoc): Promise<Report>;
+  gamePlay(plan: PlanDoc): Promise<Report>;
+  /** The pre-recorded demo game (static provider only); null when the engine is live. */
+  gameScript(): Promise<GameScript | null>;
 }
 
 export { ReadOnlyError } from "./errors";

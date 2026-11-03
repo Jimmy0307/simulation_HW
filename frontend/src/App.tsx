@@ -4,6 +4,7 @@ import type { PackInfo } from "./types";
 import { Compare } from "./screens/Compare";
 import { Decisions } from "./screens/Decisions";
 import { Diff } from "./screens/Diff";
+import { GameMode } from "./screens/GameMode";
 import { Levels } from "./screens/Levels";
 import { Overview } from "./screens/Overview";
 import { Scenario } from "./screens/Scenario";
@@ -19,6 +20,7 @@ export const ROUTES = [
   { id: "stress", title: "壓力測試" },
   { id: "diff", title: "參數 diff" },
   { id: "levels", title: "來源等級說明" },
+  { id: "game", title: "遊戲模式" },
 ] as const;
 type RouteId = (typeof ROUTES)[number]["id"];
 
@@ -78,6 +80,7 @@ export function App({ provider }: { provider: DataProvider }) {
       case "stress": return <Stress key={key} provider={provider} />;
       case "diff": return <Diff key={key} provider={provider} />;
       case "levels": return <Levels key={key} provider={provider} />;
+      case "game": return <GameMode key={key} provider={provider} onPack={setPack} />;
       default: return <Overview key={key} provider={provider} />;
     }
   }, [route, epoch, provider]);

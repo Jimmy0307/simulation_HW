@@ -1,6 +1,6 @@
 import type {
-  CompareDoc, DiffDoc, EventType, GameDoc, LevelsDoc, PackInfo, PlanDoc, PlansDoc, Report, ScenarioResult, ScenarioRun,
-  ScenarioSpecDoc, SweepResult,
+  CompareDoc, DiffDoc, EventType, GameDoc, GameScript, GameSetupDoc, GameStartConfig, LevelsDoc, PackInfo, PlanDoc,
+  PlansDoc, Report, ScenarioResult, ScenarioRun, ScenarioSpecDoc, SweepResult,
 } from "../types";
 import { ReadOnlyError } from "./errors";
 import type { DataProvider } from "./provider";
@@ -109,5 +109,47 @@ export class StaticProvider implements DataProvider {
   async diff(oldId: string, newId: string): Promise<DiffDoc> {
     if (oldId !== "synthetic" || newId !== "synthetic-v2") throw new ReadOnlyError("比較其他參數包");
     return (await this.load<{ result: DiffDoc }>("diff")).result;
+  }
+
+  // --- game mode: replays the pre-recorded synthetic game (gamemode.json) one quarter at a time -----------------
+  private gameStep = 0;
+  private gameStarted = false;
+
+  gameScript(): Promise<GameScript | null> {
+    return this.load<GameScript>("gamemode");
+  }
+
+  async gameSetup(): Promise<GameSetupDoc> {
+    const script = (await this.gameScript()) as GameScript;
+    if (!this.gameStarted) return { ...script.start, game: null };
+    const view = script.steps[this.gameStep]?.before ?? script.final;
+    return { ...script.start, ...view };
+  }
+
+  async gameStart(config: GameStartConfig): Promise<GameSetupDoc> {
+    const script = (await this.gameScript()) as GameScript;
+    if (config.source !== "synthetic" || config.replay || !same(config.opponents, script.config.opponents)) {
+      throw new ReadOnlyError("用其他資料源或對手設定開局");
+    }
+    this.gameStep = 0;
+    this.gameStarted = true;
+    return this.gameSetup();
+  }
+
+  private async scriptStep(plan: PlanDoc, what: string) {
+    const script = (await this.gameScript()) as GameScript;
+    const step = script.steps[this.gameStep];
+    if (!this.gameStarted || !step || !same(step.plan, plan)) throw new ReadOnlyError(what);
+    return step;
+  }
+
+  async gamePreview(plan: PlanDoc): Promise<Report> {
+    return (await this.scriptStep(plan, "試算預錄劇本以外的決策")).preview;
+  }
+
+  async gamePlay(plan: PlanDoc): Promise<Report> {
+    const step = await this.scriptStep(plan, "用預錄劇本以外的決策推進");
+    this.gameStep += 1;
+    return step.report;
   }
 }
