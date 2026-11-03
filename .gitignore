@@ -40,3 +40,14 @@ examples/**/*-save.json
 
 # Generated scenario/sweep reports (regenerable; reports built from real data stay in evidence/private/)
 outputs/
+
+# Any directory named "private" anywhere (CLI/API treat such directories as private output locations)
+**/private/
+# Fitted demand models and demand panels are game data
+**/fitted_demand.json
+**/demand_panel/
+# Frontend build output and dependencies (the build is published by CI from committed sources only)
+frontend/node_modules/
+frontend/dist/
+# git-filter-repo working files
+.git-rewrite/

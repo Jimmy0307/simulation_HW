@@ -75,3 +75,44 @@ def test_no_reference_data_means_no_findings(tmp_path: Path) -> None:
     real = load_real_values(tmp_path / "absent.json", tmp_path / "absent-pack.json")
     (tmp_path / "f.md").write_text("52341 104682 157023", encoding="utf-8")
     assert real.empty and scan_paths(tmp_path, ["f.md"], real) == []
+
+
+def test_derived_rate_on_a_rate_line_is_blocked(tmp_path: Path) -> None:
+    # planted taxRate 37 -> 37/400 = 0.0925 leaks the rate without naming it
+    hits = _scan(tmp_path, {"docs/slope.md": "The observed slope d(interest)/d(deposit) = 0.0925 exactly.\n",
+                            "docs/other.md": "a coefficient of 0.0925 elsewhere\n",
+                            "docs/round.md": "quarterly rate 9.25\n"})
+    assert ("docs/slope.md", "derived-rate") in hits
+    assert not any(path in {"docs/other.md", "docs/round.md"} and rule == "derived-rate" for path, rule in hits)
+
+
+def test_gate_scans_every_commit_not_just_the_final_tree(tmp_path: Path) -> None:
+    import importlib.util
+    import subprocess
+
+    spec = importlib.util.spec_from_file_location("gate", Path(__file__).parents[1] / "scripts" / "publication_gate.py")
+    assert spec and spec.loader
+    gate = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(gate)
+    values, pack = _fake_private(tmp_path)
+    real = load_real_values(values, pack)
+    repo = tmp_path / "git"
+    (repo / "docs").mkdir(parents=True)
+
+    def git(*args: str) -> str:
+        return subprocess.run(["git", "-c", "user.name=t", "-c", "user.email=t@example.test", *args], cwd=repo,
+                              check=True, stdout=subprocess.PIPE).stdout.decode()
+
+    git("init", "-q")
+    (repo / "docs" / "a.md").write_text("costs 52341 104682 157023\n", encoding="utf-8")
+    git("add", "."), git("commit", "-q", "-m", "leak")
+    (repo / "docs" / "a.md").write_text("costs (kept private)\n", encoding="utf-8")
+    git("add", "."), git("commit", "-q", "-m", "scrub")
+    (repo / "private").mkdir()
+    (repo / "private" / "x.md").write_text("hello\n", encoding="utf-8")
+    git("add", "-f", "."), git("commit", "-q", "-m", "private dir")
+    revs = git("rev-list", "HEAD").split()
+    findings = gate.scan_commits(revs, real, repo)
+    rules = {(f["path"], f["rule"]) for f in findings}
+    assert ("docs/a.md", "sequence") in rules  # the leak is found although the final tree is clean
+    assert ("private/x.md", "forbidden-path") in rules

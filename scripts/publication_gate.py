@@ -1,4 +1,13 @@
-"""Fail closed on private evidence paths and sensitive public JSON fixtures."""
+"""Fail closed on private evidence paths and sensitive public JSON fixtures.
+
+Modes:
+  python scripts/publication_gate.py                       working tree (staged + untracked, not ignored)
+  python scripts/publication_gate.py --commits A..B        additionally scan every commit in a revision range
+  python scripts/publication_gate.py --pre-push            git pre-push hook: scan every commit about to be pushed
+                                                           (refs read from stdin); install with
+                                                           scripts/install_git_hooks.py
+Scanning commits matters because a leak that is scrubbed by a later commit still lives in history.
+"""
 
 from __future__ import annotations
 
@@ -8,7 +17,12 @@ import sys
 from pathlib import Path
 
 from marketplace_sysid.security.evidence_scan import PATTERNS, scan_evidence
-from marketplace_sysid.security.value_leak import load_real_values, scan_paths
+from marketplace_sysid.security.value_leak import (
+    RealValues,
+    load_real_values,
+    scan_file_text,
+    scan_paths,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 FORBIDDEN_SUFFIXES = {
@@ -71,6 +85,8 @@ def check_publication() -> dict[str, object]:
         if not _path_is_allowed(relative):
             forbidden.append(relative)
         if "evidence/private/" in lowered or any(part.casefold().endswith("_files") for part in path.parts):
+            forbidden.append(relative)
+        if any(part.casefold() == "private" for part in path.parts):  # any directory named private, anywhere
             forbidden.append(relative)
         if path.suffix.casefold() in FORBIDDEN_SUFFIXES:
             forbidden.append(relative)
@@ -135,8 +151,59 @@ def check_publication() -> dict[str, object]:
     }
 
 
+ZERO_SHA = "0" * 40
+
+
+def _git(repo: Path, *args: str) -> str:
+    return subprocess.run(["git", *args], cwd=repo, check=True, stdout=subprocess.PIPE).stdout.decode("utf-8", "replace")
+
+
+def scan_commits(revs: list[str], real: RealValues, repo: Path = ROOT) -> list[dict[str, str]]:
+    """Scan the files each commit adds or modifies, at that commit, with the same detectors as the working tree."""
+    findings: list[dict[str, str]] = []
+    for commit in revs:
+        changed = _git(repo, "diff-tree", "-r", "--root", "--no-commit-id", "--name-only", "--diff-filter=AMR", commit)
+        for relative in changed.splitlines():
+            if not relative:
+                continue
+            short = commit[:7]
+            if not _path_is_allowed(relative) or any(p.casefold() == "private" for p in Path(relative).parts):
+                findings.append({"commit": short, "path": relative, "rule": "forbidden-path", "detail": ""})
+                continue
+            text = subprocess.run(["git", "show", f"{commit}:{relative}"], cwd=repo, check=False,
+                                  stdout=subprocess.PIPE).stdout.decode("utf-8", "replace")
+            for finding in scan_file_text(relative, text, real):
+                findings.append({"commit": short, "path": relative, "rule": finding.rule, "detail": finding.detail})
+    return findings
+
+
+def _pre_push_revs(lines: list[str], repo: Path = ROOT) -> list[str]:
+    revs: list[str] = []
+    for line in lines:
+        parts = line.split()
+        if len(parts) != 4 or parts[1] == ZERO_SHA:  # deleting a remote ref pushes no content
+            continue
+        local_sha, remote_sha = parts[1], parts[3]
+        if remote_sha == ZERO_SHA:
+            revs += _git(repo, "rev-list", local_sha, "--not", "--remotes").split()
+        else:
+            revs += _git(repo, "rev-list", f"{remote_sha}..{local_sha}").split()
+    return list(dict.fromkeys(revs))
+
+
 def main() -> None:
+    args = sys.argv[1:]
     result = check_publication()
+    revs: list[str] = []
+    if "--commits" in args:
+        revs = _git(ROOT, "rev-list", args[args.index("--commits") + 1]).split()
+    if "--pre-push" in args:
+        revs = _pre_push_revs(sys.stdin.read().splitlines())
+    if revs:
+        commit_findings = scan_commits(revs, load_real_values(REAL_VALUES, PRIVATE_PACK))
+        result["commits_scanned"] = len(revs)
+        result["commit_findings"] = commit_findings
+        result["pass"] = bool(result["pass"]) and not commit_findings
     print(json.dumps(result, ensure_ascii=False))
     if not result["pass"]:
         sys.exit(1)

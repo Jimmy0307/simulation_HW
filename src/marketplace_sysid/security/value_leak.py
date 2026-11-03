@@ -50,6 +50,7 @@ class RealValues:
     keyed_all: dict[str, set[float]] = field(default_factory=lambda: defaultdict(set))  # scalars + table rows
     all_values: set[float] = field(default_factory=set)
     names: set[str] = field(default_factory=set)
+    derived_rates: set[float] = field(default_factory=set)  # rate/4, /12, /100, /400 of real rate scalars
 
     @property
     def empty(self) -> bool:
@@ -83,7 +84,31 @@ def load_real_values(values_json: Path | None, private_pack: Path | None = None)
                     real.scalars[key].update(numbers)
     if private_pack and private_pack.exists():
         _absorb_pack(real, json.loads(private_pack.read_text(encoding="utf-8")))
+    real.derived_rates = derived_rates(real)
     return real
+
+
+RATE_WORDS = re.compile(r"(?i)(rate|slope|interest|yield|apr|利率|斜率|利息)")
+
+
+def derived_rates(real: RealValues) -> set[float]:
+    """Values a document can leak a real rate through without naming it: rate/4 (quarterly), /12, /100, /400.
+
+    Only values with at least two decimal places are kept (round numbers such as 0.1 or 1.5 are too common to be
+    evidence). They are flagged only on lines that also talk about a rate, slope or interest.
+    """
+    out: set[float] = set()
+    for key, values in real.scalars.items():
+        if "rate" not in key:
+            continue
+        for rate in values:
+            if rate <= 0:
+                continue
+            for divisor in (4, 12, 100, 400):
+                value = round(rate / divisor, 10)
+                if abs(round(value * 100, 9) - round(value * 100)) > 1e-9:
+                    out.add(value)
+    return out
 
 
 def _absorb_pack(real: RealValues, pack: dict[str, Any]) -> None:
@@ -165,6 +190,10 @@ def scan_text(relpath: str, text: str, real: RealValues) -> list[Finding]:
         for ident in idents & set(real.scalars):
             if numbers & real.scalars[ident]:
                 findings.append(Finding(relpath, "keyed-scalar", f"line {line_no}: field '{ident}'"))
+    if real.derived_rates:
+        for line_no, line in enumerate(text.splitlines(), start=1):
+            if RATE_WORDS.search(line) and {round(n, 10) for n in numbers_in(line)} & real.derived_rates:
+                findings.append(Finding(relpath, "derived-rate", f"line {line_no}"))
     for name in real.names:
         if name in text:
             findings.append(Finding(relpath, "real-name", f"{len(name)}-char name"))
@@ -199,17 +228,26 @@ def scan_paths(root: Path, relpaths: list[str], real: RealValues) -> list[Findin
     findings: list[Finding] = []
     for rel in relpaths:
         path = root / rel
-        if not path.is_file() or path.suffix.lower() not in {".py", ".md", ".json", ".yaml", ".yml", ".toml", ".html", ""}:
+        if not path.is_file() or path.suffix.lower() not in TEXT_SUFFIXES:
             continue
-        text = path.read_text(encoding="utf-8", errors="replace")
-        findings += scan_text(rel, text, real)
-        if rel.replace("\\", "/").startswith("examples/") and path.suffix.lower() in {".json", ".yaml", ".yml"}:
-            try:
-                import yaml
+        findings += scan_file_text(rel, path.read_text(encoding="utf-8", errors="replace"), real)
+    return findings
 
-                data = json.loads(text) if path.suffix.lower() == ".json" else yaml.safe_load(text)
-            except Exception:  # noqa: BLE001 - unparsable example files are a finding of their own
-                findings.append(Finding(rel, "example-unparsable", "cannot parse"))
-                continue
-            findings += scan_example_values(rel, data, real)
+
+TEXT_SUFFIXES = {".py", ".md", ".json", ".yaml", ".yml", ".toml", ".html", ".ts", ".tsx", ".js", ".mjs", ".cjs",
+                 ".css", ".txt", ".svg", ""}
+
+
+def scan_file_text(rel: str, text: str, real: RealValues) -> list[Finding]:
+    """All checks for one file's text (working tree or a historical blob). Example files get the strict checks."""
+    findings = scan_text(rel, text, real)
+    suffix = Path(rel).suffix.lower()
+    if rel.replace("\\", "/").startswith("examples/") and suffix in {".json", ".yaml", ".yml"}:
+        try:
+            import yaml
+
+            data = json.loads(text) if suffix == ".json" else yaml.safe_load(text)
+        except Exception:  # noqa: BLE001 - unparsable example files are a finding of their own
+            return [*findings, Finding(rel, "example-unparsable", "cannot parse")]
+        findings += scan_example_values(rel, data, real)
     return findings
