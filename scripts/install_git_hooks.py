@@ -1,7 +1,8 @@
 """Install a local git pre-push hook that runs the publication gate on every commit about to be pushed.
 
 The hook lives in .git/hooks (local only, never committed). It blocks a push when any pushed commit, not just the
-final tree, contains a forbidden path or a real value. Usage: python scripts/install_git_hooks.py
+final tree, contains a forbidden path or a real value. While docs/TODO-history-cleanup.md is not marked CLEANED,
+the same hook also rings scripts/history_guard.py when the repository is public. Usage: python scripts/install_git_hooks.py
 """
 
 from __future__ import annotations

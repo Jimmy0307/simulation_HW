@@ -12,6 +12,7 @@ Scanning commits matters because a leak that is scrubbed by a later commit still
 
 from __future__ import annotations
 
+import importlib.util
 import json
 import subprocess
 import sys
@@ -264,6 +265,17 @@ def _pre_push_revs(lines: list[str], repo: Path = ROOT) -> list[str]:
     return list(dict.fromkeys(revs))
 
 
+def _history_reminder(action: str) -> dict[str, Any]:
+    """Ring scripts/history_guard.py for a publication action. Informational: never changes the gate result."""
+    spec = importlib.util.spec_from_file_location("history_guard", Path(__file__).with_name("history_guard.py"))
+    assert spec is not None and spec.loader is not None
+    guard = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(guard)
+    result: dict[str, Any] = guard.check(action)
+    guard.announce(result)
+    return result
+
+
 def main() -> None:
     args = sys.argv[1:]
     result = check_publication()
@@ -273,8 +285,11 @@ def main() -> None:
     if "--require-dist" in args and not FRONTEND_DIST.exists():
         result["pass"] = False
         result["dist"] = {"present": False, "findings": [{"path": "frontend/dist", "rule": "missing", "detail": ""}]}
+    if "--require-dist" in args:
+        result["history_cleanup"] = _history_reminder("dist")
     if "--pre-push" in args:
         revs = _pre_push_revs(sys.stdin.read().splitlines())
+        result["history_cleanup"] = _history_reminder("push")
     if revs:
         commit_findings = scan_commits(revs, load_real_values(REAL_VALUES, PRIVATE_PACK))
         result["commits_scanned"] = len(revs)

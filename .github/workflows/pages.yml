@@ -1,6 +1,6 @@
 # Publish the static synthetic demo of the UI to GitHub Pages.
-# MANUAL ONLY (workflow_dispatch). Read docs/ui-guide.md and docs/history-cleanup-plan.md before running it:
-# do not publish while the repository history still contains real values.
+# MANUAL ONLY (workflow_dispatch). Read docs/ui-guide.md, docs/history-cleanup-plan.md and docs/TODO-history-cleanup.md
+# before running it: do not publish while the repository history still contains real values (enforced below).
 # The workflow builds only committed sources and the committed synthetic bundle (frontend/public/demo), which the
 # local publication gate checked against the private reference values. CI itself has no private data.
 name: demo-pages
@@ -30,6 +30,10 @@ jobs:
         run: |
           echo "Confirmation text missing; nothing is published." && exit 1
       - uses: actions/checkout@v4
+      - name: Refuse while the git history is not cleaned (docs/TODO-history-cleanup.md)
+        # Hard rule b: no GitHub Pages before the history cleanup. Nobody hears a bell in CI, so this step is strict:
+        # it fails unless the TODO marker reads CLEANED.
+        run: python3 scripts/history_guard.py --action pages --strict
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
