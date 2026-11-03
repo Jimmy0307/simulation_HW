@@ -73,12 +73,17 @@ def recurring_lease(outlets: Sequence[OutletSpec], open_keys: set[str]) -> Tagge
 
 # --- product and production ------------------------------------------------------------------------------------------
 
+def compatible(component: Component, brand_type: BrandType) -> bool:
+    """A component fits a brand type when their type masks overlap, or when the component has no mask."""
+    return bool(component.type_mask & brand_type.type_mask) or not component.type_mask
+
+
 def default_components(pack: ParamPack, brand_type: BrandType) -> list[Component]:
     chosen = []
     for group in pack.component_groups:
         if not group.required:
             continue
-        candidates = [c for c in pack.components if c.group == group.id and (c.type_mask & brand_type.type_mask or not c.type_mask)]
+        candidates = [c for c in pack.components if c.group == group.id and compatible(c, brand_type)]
         if candidates:
             chosen.append(min(candidates, key=lambda c: c.price))
     return chosen
@@ -266,6 +271,6 @@ def _mean_wtp(markets: Sequence[Market], segment_id: str) -> float:
 
 
 __all__ = ["BaselineBot", "DemandModel", "FittedDemand", "Offer", "PlaceholderDemand", "RandomBot", "ReplayCompetitors",
-           "capacity_purchase", "cd_quarter", "const", "coverage", "default_components", "design_cost", "emergency_loan",
+           "capacity_purchase", "cd_quarter", "compatible", "const", "coverage", "default_components", "design_cost", "emergency_loan",
            "income_tax", "opening_cost", "quarterly_capacity", "reach", "recurring_lease", "segment_fit", "stock_raise",
            "total", "unit_cost"]

@@ -16,10 +16,12 @@ from typing import Any
 
 import yaml
 
+from marketplace_sim import modules as m
 from marketplace_sim.control import events as ev
 from marketplace_sim.control.diff import diff_dirs, red_flags
+from marketplace_sim.control.runner import build_competitor
 from marketplace_sim.control.runner import run_scenario as _run_scenario
-from marketplace_sim.control.spec import spec_from_dict
+from marketplace_sim.control.spec import CompetitorSpec, ScenarioSpec, spec_from_dict
 from marketplace_sim.control.sweep import run_sweep as _run_sweep
 from marketplace_sim.control.sweep import sweep_from_dict
 from marketplace_sim.control.sweep import worst as _worst
@@ -104,6 +106,8 @@ class Session:
     seed: int = 0
     save_path: Path | None = None
     last_sweep: dict[str, Any] | None = None
+    competitors: list[CompetitorSpec] | None = None  # game mode opponents; None = the engine's default bots
+    game_meta: dict[str, Any] | None = None  # game mode settings shown back to the UI (opponents, objective)
     lock: threading.Lock = field(default_factory=threading.Lock)
 
     @property
@@ -141,6 +145,7 @@ def load_pack_into(session: Session, source: str, path: str | None = None) -> di
         raise ApiError("source must be 'synthetic' or 'private'")
     session.pack_dir, session.pack = directory.resolve(), pack
     session.state, session.history, session.save_path, session.last_sweep = None, [], None, None
+    session.competitors, session.game_meta = None, None
     return pack_info(session)
 
 
@@ -161,6 +166,7 @@ def game(session: Session) -> dict[str, Any]:
 
 def new_game(session: Session, quarter: int = 1) -> dict[str, Any]:
     session.state, session.history, session.save_path = CompanyState.initial(session.pack, quarter), [], None
+    session.competitors, session.game_meta = None, None
     return game(session)
 
 
@@ -204,10 +210,18 @@ def _require_state(session: Session) -> CompanyState:
     return session.state
 
 
+def session_competitors(session: Session) -> list[m.Competitor] | None:
+    """Game-mode opponents built by the control plane (same code path as scenarios); None keeps the defaults."""
+    if not session.competitors:
+        return None
+    scenario = ScenarioSpec(name="game-mode", base_params=str(session.pack_dir))
+    return [build_competitor(spec, scenario) for spec in session.competitors]
+
+
 def play(session: Session, plan: dict[str, Any]) -> dict[str, Any]:
     state = _require_state(session)
     new_state, report = advance(state, Plan.from_dict(plan, name=str(plan.get("name", "plan"))), session.pack,
-                                seed=session.seed)
+                                competitors=session_competitors(session), seed=session.seed)
     session.state = new_state
     data = report_dict(report)
     session.history.append(data)
@@ -216,14 +230,16 @@ def play(session: Session, plan: dict[str, Any]) -> dict[str, Any]:
 
 def preview(session: Session, plan: dict[str, Any]) -> dict[str, Any]:
     state = _require_state(session)
-    _, report = advance(state, Plan.from_dict(plan, name=str(plan.get("name", "plan"))), session.pack, seed=session.seed)
+    _, report = advance(state, Plan.from_dict(plan, name=str(plan.get("name", "plan"))), session.pack,
+                        competitors=session_competitors(session), seed=session.seed)
     return {**pack_info(session), "report": report_dict(report)}
 
 
 def compare(session: Session, plans: list[dict[str, Any]]) -> dict[str, Any]:
     state = _require_state(session)
+    rivals = session_competitors(session)
     reports = [report_dict(advance(state, Plan.from_dict(p, name=str(p.get("name", f"plan-{i + 1}"))), session.pack,
-                                   seed=session.seed)[1]) for i, p in enumerate(plans)]
+                                   competitors=rivals, seed=session.seed)[1]) for i, p in enumerate(plans)]
     return {**pack_info(session), "quarter": state.quarter, "reports": reports}
 
 

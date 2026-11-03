@@ -879,6 +879,126 @@
      "uncalibrated": true,
      "value": 0.0
     },
+    "rival_share[bot-a]": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "rival units / market_units_total",
+       "level": "literature",
+       "metric": "rival_share[firm]",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "sum of one rival's units demanded",
+       "level": "literature",
+       "metric": "rival_units[firm]",
+       "note": "Same demand model as ours; rivals are assumed unconstrained by inventory."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "our units sold + rival units demanded",
+       "level": "literature",
+       "metric": "market_units_total",
+       "note": "Rivals are assumed unconstrained by inventory."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "rival units / market_units_total",
+     "uncalibrated": true,
+     "value": 0.8257434528280287
+    },
+    "rival_share[bot-b]": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "rival units / market_units_total",
+       "level": "literature",
+       "metric": "rival_share[firm]",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "sum of one rival's units demanded",
+       "level": "literature",
+       "metric": "rival_units[firm]",
+       "note": "Same demand model as ours; rivals are assumed unconstrained by inventory."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "our units sold + rival units demanded",
+       "level": "literature",
+       "metric": "market_units_total",
+       "note": "Rivals are assumed unconstrained by inventory."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "rival units / market_units_total",
+     "uncalibrated": true,
+     "value": 0.17425654717197117
+    },
+    "rival_units[bot-a]": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "sum of one rival's units demanded",
+       "level": "literature",
+       "metric": "rival_units[firm]",
+       "note": "Same demand model as ours; rivals are assumed unconstrained by inventory."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "sum of the rival's units demanded (rivals unconstrained)",
+     "uncalibrated": true,
+     "value": 3530.5790064340968
+    },
+    "rival_units[bot-b]": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "sum of one rival's units demanded",
+       "level": "literature",
+       "metric": "rival_units[firm]",
+       "note": "Same demand model as ours; rivals are assumed unconstrained by inventory."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "sum of the rival's units demanded (rivals unconstrained)",
+     "uncalibrated": true,
+     "value": 745.0576871932919
+    },
     "stock_raised": {
      "chain": [
       {
@@ -1827,6 +1947,126 @@
      "source": "sum(units_sold x price)",
      "uncalibrated": true,
      "value": 726741.8487539652
+    },
+    "rival_share[bot-a]": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "rival units / market_units_total",
+       "level": "literature",
+       "metric": "rival_share[firm]",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "sum of one rival's units demanded",
+       "level": "literature",
+       "metric": "rival_units[firm]",
+       "note": "Same demand model as ours; rivals are assumed unconstrained by inventory."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "our units sold + rival units demanded",
+       "level": "literature",
+       "metric": "market_units_total",
+       "note": "Rivals are assumed unconstrained by inventory."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "rival units / market_units_total",
+     "uncalibrated": true,
+     "value": 0.6666274207349826
+    },
+    "rival_share[bot-b]": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "rival units / market_units_total",
+       "level": "literature",
+       "metric": "rival_share[firm]",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "sum of one rival's units demanded",
+       "level": "literature",
+       "metric": "rival_units[firm]",
+       "note": "Same demand model as ours; rivals are assumed unconstrained by inventory."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "our units sold + rival units demanded",
+       "level": "literature",
+       "metric": "market_units_total",
+       "note": "Rivals are assumed unconstrained by inventory."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "rival units / market_units_total",
+     "uncalibrated": true,
+     "value": 0.13714608143783566
+    },
+    "rival_units[bot-a]": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "sum of one rival's units demanded",
+       "level": "literature",
+       "metric": "rival_units[firm]",
+       "note": "Same demand model as ours; rivals are assumed unconstrained by inventory."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "sum of the rival's units demanded (rivals unconstrained)",
+     "uncalibrated": true,
+     "value": 2935.318354610984
+    },
+    "rival_units[bot-b]": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "sum of one rival's units demanded",
+       "level": "literature",
+       "metric": "rival_units[firm]",
+       "note": "Same demand model as ours; rivals are assumed unconstrained by inventory."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "sum of the rival's units demanded (rivals unconstrained)",
+     "uncalibrated": true,
+     "value": 603.8866653033948
     },
     "stock_raised": {
      "chain": [
@@ -2868,6 +3108,126 @@
      "source": "sum(units_sold x price)",
      "uncalibrated": true,
      "value": 743035.6106279982
+    },
+    "rival_share[bot-a]": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "rival units / market_units_total",
+       "level": "literature",
+       "metric": "rival_share[firm]",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "sum of one rival's units demanded",
+       "level": "literature",
+       "metric": "rival_units[firm]",
+       "note": "Same demand model as ours; rivals are assumed unconstrained by inventory."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "our units sold + rival units demanded",
+       "level": "literature",
+       "metric": "market_units_total",
+       "note": "Rivals are assumed unconstrained by inventory."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "rival units / market_units_total",
+     "uncalibrated": true,
+     "value": 0.43079667409205286
+    },
+    "rival_share[bot-b]": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "rival units / market_units_total",
+       "level": "literature",
+       "metric": "rival_share[firm]",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "sum of one rival's units demanded",
+       "level": "literature",
+       "metric": "rival_units[firm]",
+       "note": "Same demand model as ours; rivals are assumed unconstrained by inventory."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "our units sold + rival units demanded",
+       "level": "literature",
+       "metric": "market_units_total",
+       "note": "Rivals are assumed unconstrained by inventory."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "rival units / market_units_total",
+     "uncalibrated": true,
+     "value": 0.3795386627184909
+    },
+    "rival_units[bot-a]": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "sum of one rival's units demanded",
+       "level": "literature",
+       "metric": "rival_units[firm]",
+       "note": "Same demand model as ours; rivals are assumed unconstrained by inventory."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "sum of the rival's units demanded (rivals unconstrained)",
+     "uncalibrated": true,
+     "value": 2103.2070295927892
+    },
+    "rival_units[bot-b]": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "sum of one rival's units demanded",
+       "level": "literature",
+       "metric": "rival_units[firm]",
+       "note": "Same demand model as ours; rivals are assumed unconstrained by inventory."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "sum of the rival's units demanded (rivals unconstrained)",
+     "uncalibrated": true,
+     "value": 1852.9585566419823
     },
     "stock_raised": {
      "chain": [

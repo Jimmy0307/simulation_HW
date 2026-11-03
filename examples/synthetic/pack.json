@@ -3,6 +3,7 @@
  "name": "synthetic-demo",
  "provenance": "synthetic",
  "note": "Every name and number in this file is invented for demonstration. It is not derived from any real course or simulation data.",
+ "theme": {"product": "自行車", "unit": "輛", "icon": "bicycle"},
  "days_per_quarter": 65,
  "finance": {"cd_rate_annual_percent": 4.4, "tax_rate_percent": 33.3, "emergency_rate_min_percent": 17.7},
  "initial_state": {"cash": 2345679, "cd": 0, "fixed_capacity_units": 0, "stock_total": 0, "shares_total": 0},

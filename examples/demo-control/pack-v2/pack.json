@@ -3,6 +3,7 @@
  "name": "synthetic-v2",
  "provenance": "synthetic",
  "note": "Synthetic pack, \"next quarter\" variant for the params-diff demo. All values invented.",
+ "theme": {"product": "自行車", "unit": "輛", "icon": "bicycle"},
  "days_per_quarter": 65,
  "finance": {
   "cd_rate_annual_percent": 3.9,

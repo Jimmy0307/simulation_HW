@@ -10,6 +10,7 @@ from typing import Any
 from fastapi import Body, FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 
+from marketplace_sim.api import game as gm
 from marketplace_sim.api import service as svc
 
 DEV_ORIGINS = ["http://localhost:5173", "http://127.0.0.1:5173", "http://localhost:4173", "http://127.0.0.1:4173"]
@@ -78,6 +79,14 @@ def create_app(session: svc.Session | None = None) -> FastAPI:
     @app.post("/api/compare")
     def post_compare(body: dict[str, Any] = Body(...)) -> dict[str, Any]:  # noqa: B008
         return dict(guarded(svc.compare, state, list(body.get("plans", []))))
+
+    @app.get("/api/game-mode/setup")
+    def get_game_mode() -> dict[str, Any]:
+        return dict(guarded(gm.setup, state))
+
+    @app.post("/api/game-mode/start")
+    def post_game_mode(body: dict[str, Any] = Body(...)) -> dict[str, Any]:  # noqa: B008
+        return dict(guarded(gm.start, state, body))
 
     @app.get("/api/scenarios")
     def get_scenarios() -> dict[str, Any]:

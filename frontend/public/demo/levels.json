@@ -185,6 +185,25 @@
    "note": ""
   },
   {
+   "evidence": "docs/demand-model-spec.md",
+   "formula": "sum of one rival's units demanded",
+   "inputs": [],
+   "level": "literature",
+   "metric": "rival_units[firm]",
+   "note": "Same demand model as ours; rivals are assumed unconstrained by inventory."
+  },
+  {
+   "evidence": "docs/demand-model-spec.md",
+   "formula": "rival units / market_units_total",
+   "inputs": [
+    "rival_units[firm]",
+    "market_units_total"
+   ],
+   "level": "literature",
+   "metric": "rival_share[firm]",
+   "note": ""
+  },
+  {
    "evidence": "weakest input decides (demand model level)",
    "formula": "sum(units_sold x price)",
    "inputs": [

@@ -19,7 +19,7 @@
       "demand_q2": -0.3,
       "rivals": "calm"
      },
-     "fingerprint": "8ae34fec9260e762",
+     "fingerprint": "98e5100aa9653502",
      "id": "demo-stress-000",
      "objective": 2506697.209808358,
      "summary": {
@@ -50,7 +50,7 @@
       "demand_q2": -0.3,
       "rivals": "aggressive"
      },
-     "fingerprint": "3fc166574ceafe24",
+     "fingerprint": "45e62066589d3a4a",
      "id": "demo-stress-001",
      "objective": 2528957.738779867,
      "summary": {
@@ -81,7 +81,7 @@
       "demand_q2": 0.0,
       "rivals": "calm"
      },
-     "fingerprint": "04579b589c9e3c42",
+     "fingerprint": "ea5538b4e8785fdd",
      "id": "demo-stress-002",
      "objective": 2841471.38711521,
      "summary": {
@@ -112,7 +112,7 @@
       "demand_q2": 0.0,
       "rivals": "aggressive"
      },
-     "fingerprint": "3e45d2cdef838ff8",
+     "fingerprint": "495e7c1598f696da",
      "id": "demo-stress-003",
      "objective": 2826832.339755422,
      "summary": {
@@ -143,7 +143,7 @@
       "demand_q2": 0.1,
       "rivals": "calm"
      },
-     "fingerprint": "bdf280c3ef7d2ce3",
+     "fingerprint": "c1d24448b8d390de",
      "id": "demo-stress-004",
      "objective": 2863681.210366374,
      "summary": {
@@ -174,7 +174,7 @@
       "demand_q2": 0.1,
       "rivals": "aggressive"
      },
-     "fingerprint": "facad05b64c81b89",
+     "fingerprint": "a46e6a0353950d64",
      "id": "demo-stress-005",
      "objective": 2863068.8838030514,
      "summary": {
@@ -205,7 +205,7 @@
       "demand_q2": -0.3,
       "rivals": "calm"
      },
-     "fingerprint": "5bc11ee7c6bdc3d4",
+     "fingerprint": "ecd4f1cf9988f139",
      "id": "demo-stress-006",
      "objective": 2390496.1248083576,
      "summary": {
@@ -236,7 +236,7 @@
       "demand_q2": -0.3,
       "rivals": "aggressive"
      },
-     "fingerprint": "2649ff6596bf8aa7",
+     "fingerprint": "d7d265c13ac08e80",
      "id": "demo-stress-007",
      "objective": 2412756.6537798666,
      "summary": {
@@ -267,7 +267,7 @@
       "demand_q2": 0.0,
       "rivals": "calm"
      },
-     "fingerprint": "5c0f12ab74693f26",
+     "fingerprint": "3efe1ecd7586e5be",
      "id": "demo-stress-008",
      "objective": 2725270.3021152094,
      "summary": {
@@ -298,7 +298,7 @@
       "demand_q2": 0.0,
       "rivals": "aggressive"
      },
-     "fingerprint": "abe6979c2afd1b4c",
+     "fingerprint": "ac1e8b79dea8c483",
      "id": "demo-stress-009",
      "objective": 2710631.2547554215,
      "summary": {
@@ -329,7 +329,7 @@
       "demand_q2": 0.1,
       "rivals": "calm"
      },
-     "fingerprint": "d64a72ae72dd991d",
+     "fingerprint": "2fdbfe62e0f4b063",
      "id": "demo-stress-010",
      "objective": 2747480.125366373,
      "summary": {
@@ -360,7 +360,7 @@
       "demand_q2": 0.1,
       "rivals": "aggressive"
      },
-     "fingerprint": "ef71267b628673df",
+     "fingerprint": "db60ceec6c8109cd",
      "id": "demo-stress-011",
      "objective": 2746867.798803051,
      "summary": {
@@ -391,7 +391,7 @@
       "demand_q2": -0.3,
       "rivals": "calm"
      },
-     "fingerprint": "dbd2639bf20438fe",
+     "fingerprint": "713f61ed95c8ce9d",
      "id": "demo-stress-012",
      "objective": 2099993.4123083577,
      "summary": {
@@ -422,7 +422,7 @@
       "demand_q2": -0.3,
       "rivals": "aggressive"
      },
-     "fingerprint": "f74fa82b8cf18e40",
+     "fingerprint": "ecd81bd097a42050",
      "id": "demo-stress-013",
      "objective": 2122253.9412798667,
      "summary": {
@@ -453,7 +453,7 @@
       "demand_q2": 0.0,
       "rivals": "calm"
      },
-     "fingerprint": "a2406155e8ee8355",
+     "fingerprint": "2b6dccf0ffa65f6c",
      "id": "demo-stress-014",
      "objective": 2434767.5896152095,
      "summary": {
@@ -484,7 +484,7 @@
       "demand_q2": 0.0,
       "rivals": "aggressive"
      },
-     "fingerprint": "3ff550e972ef8d18",
+     "fingerprint": "d0aba8982d4fb9e9",
      "id": "demo-stress-015",
      "objective": 2420128.5422554216,
      "summary": {
@@ -515,7 +515,7 @@
       "demand_q2": 0.1,
       "rivals": "calm"
      },
-     "fingerprint": "50876d8e09c4c9f4",
+     "fingerprint": "b04ee8f45ac92628",
      "id": "demo-stress-016",
      "objective": 2456977.412866373,
      "summary": {
@@ -546,7 +546,7 @@
       "demand_q2": 0.1,
       "rivals": "aggressive"
      },
-     "fingerprint": "eb75f129558d8773",
+     "fingerprint": "312c3a77265441ef",
      "id": "demo-stress-017",
      "objective": 2456365.086303051,
      "summary": {
@@ -613,7 +613,7 @@
       "demand_q2": -0.3,
       "rivals": "calm"
      },
-     "fingerprint": "dbd2639bf20438fe",
+     "fingerprint": "713f61ed95c8ce9d",
      "id": "demo-stress-012",
      "objective": 2099993.4123083577,
      "summary": {
@@ -644,7 +644,7 @@
       "demand_q2": -0.3,
       "rivals": "aggressive"
      },
-     "fingerprint": "f74fa82b8cf18e40",
+     "fingerprint": "ecd81bd097a42050",
      "id": "demo-stress-013",
      "objective": 2122253.9412798667,
      "summary": {
@@ -675,7 +675,7 @@
       "demand_q2": -0.3,
       "rivals": "calm"
      },
-     "fingerprint": "5bc11ee7c6bdc3d4",
+     "fingerprint": "ecd4f1cf9988f139",
      "id": "demo-stress-006",
      "objective": 2390496.1248083576,
      "summary": {
@@ -706,7 +706,7 @@
       "demand_q2": -0.3,
       "rivals": "aggressive"
      },
-     "fingerprint": "2649ff6596bf8aa7",
+     "fingerprint": "d7d265c13ac08e80",
      "id": "demo-stress-007",
      "objective": 2412756.6537798666,
      "summary": {
@@ -737,7 +737,7 @@
       "demand_q2": 0.0,
       "rivals": "aggressive"
      },
-     "fingerprint": "3ff550e972ef8d18",
+     "fingerprint": "d0aba8982d4fb9e9",
      "id": "demo-stress-015",
      "objective": 2420128.5422554216,
      "summary": {
@@ -778,7 +778,7 @@
       "demand_q2": -0.3,
       "price_sensitivity": 1.5
      },
-     "fingerprint": "fe02d79ad25caee3",
+     "fingerprint": "07a317610a299997",
      "id": "demo-demand-assumptions-000",
      "objective": -183312.34591225756,
      "summary": {
@@ -809,7 +809,7 @@
       "demand_q2": 0.0,
       "price_sensitivity": 1.5
      },
-     "fingerprint": "dec4c924d36b07d6",
+     "fingerprint": "85483863cb824331",
      "id": "demo-demand-assumptions-001",
      "objective": 262111.83573059767,
      "summary": {
@@ -840,7 +840,7 @@
       "demand_q2": -0.3,
       "price_sensitivity": 1.5
      },
-     "fingerprint": "6c61761ac0143418",
+     "fingerprint": "dbf9ce59213730d9",
      "id": "demo-demand-assumptions-002",
      "objective": -158630.8228370947,
      "summary": {
@@ -871,7 +871,7 @@
       "demand_q2": 0.0,
       "price_sensitivity": 1.5
      },
-     "fingerprint": "6f3a96371ba21f48",
+     "fingerprint": "e22e13ecaa77b36c",
      "id": "demo-demand-assumptions-003",
      "objective": 271956.5139680924,
      "summary": {
@@ -902,7 +902,7 @@
       "demand_q2": -0.3,
       "price_sensitivity": 2.6
      },
-     "fingerprint": "23cef3bc399e953d",
+     "fingerprint": "ac0bb40642b16df2",
      "id": "demo-demand-assumptions-004",
      "objective": -198975.2375937444,
      "summary": {
@@ -933,7 +933,7 @@
       "demand_q2": 0.0,
       "price_sensitivity": 2.6
      },
-     "fingerprint": "a63becb7ae0063a8",
+     "fingerprint": "32c562fd1461c0ff",
      "id": "demo-demand-assumptions-005",
      "objective": 254263.21006892907,
      "summary": {
@@ -964,7 +964,7 @@
       "demand_q2": -0.3,
       "price_sensitivity": 2.6
      },
-     "fingerprint": "6a99dc1c186041ff",
+     "fingerprint": "3e46ba2a36e07971",
      "id": "demo-demand-assumptions-006",
      "objective": -178215.4099141722,
      "summary": {
@@ -995,7 +995,7 @@
       "demand_q2": 0.0,
       "price_sensitivity": 2.6
      },
-     "fingerprint": "ed2a43932c73249a",
+     "fingerprint": "4471c88f5edeea05",
      "id": "demo-demand-assumptions-007",
      "objective": 239757.82404045152,
      "summary": {
@@ -1026,7 +1026,7 @@
       "demand_q2": -0.3,
       "price_sensitivity": 4.0
      },
-     "fingerprint": "f9318851b8350bda",
+     "fingerprint": "aa3efb831850c141",
      "id": "demo-demand-assumptions-008",
      "objective": -212939.26400955045,
      "summary": {
@@ -1057,7 +1057,7 @@
       "demand_q2": 0.0,
       "price_sensitivity": 4.0
      },
-     "fingerprint": "5a8cabf1faaa74a4",
+     "fingerprint": "f8894493c3e9ee7f",
      "id": "demo-demand-assumptions-009",
      "objective": 174967.5081054895,
      "summary": {
@@ -1088,7 +1088,7 @@
       "demand_q2": -0.3,
       "price_sensitivity": 4.0
      },
-     "fingerprint": "811c8ea0f4b1bff5",
+     "fingerprint": "1d2e0c8457088828",
      "id": "demo-demand-assumptions-010",
      "objective": -197095.16985338836,
      "summary": {
@@ -1119,7 +1119,7 @@
       "demand_q2": 0.0,
       "price_sensitivity": 4.0
      },
-     "fingerprint": "cb2ec607ec9e4362",
+     "fingerprint": "7ac8d5864a7eb6b6",
      "id": "demo-demand-assumptions-011",
      "objective": 157594.381135943,
      "summary": {
@@ -1186,7 +1186,7 @@
       "demand_q2": -0.3,
       "price_sensitivity": 4.0
      },
-     "fingerprint": "f9318851b8350bda",
+     "fingerprint": "aa3efb831850c141",
      "id": "demo-demand-assumptions-008",
      "objective": -212939.26400955045,
      "summary": {
@@ -1217,7 +1217,7 @@
       "demand_q2": -0.3,
       "price_sensitivity": 2.6
      },
-     "fingerprint": "23cef3bc399e953d",
+     "fingerprint": "ac0bb40642b16df2",
      "id": "demo-demand-assumptions-004",
      "objective": -198975.2375937444,
      "summary": {
@@ -1248,7 +1248,7 @@
       "demand_q2": -0.3,
       "price_sensitivity": 4.0
      },
-     "fingerprint": "811c8ea0f4b1bff5",
+     "fingerprint": "1d2e0c8457088828",
      "id": "demo-demand-assumptions-010",
      "objective": -197095.16985338836,
      "summary": {
@@ -1279,7 +1279,7 @@
       "demand_q2": -0.3,
       "price_sensitivity": 1.5
      },
-     "fingerprint": "fe02d79ad25caee3",
+     "fingerprint": "07a317610a299997",
      "id": "demo-demand-assumptions-000",
      "objective": -183312.34591225756,
      "summary": {
@@ -1310,7 +1310,7 @@
       "demand_q2": -0.3,
       "price_sensitivity": 2.6
      },
-     "fingerprint": "6a99dc1c186041ff",
+     "fingerprint": "3e46ba2a36e07971",
      "id": "demo-demand-assumptions-006",
      "objective": -178215.4099141722,
      "summary": {
@@ -1351,7 +1351,7 @@
       "demand": -0.3,
       "plan": "cautious"
      },
-     "fingerprint": "3b22eb2b7e79903d",
+     "fingerprint": "088c28cab60ee930",
      "id": "demo-plan-robustness-000",
      "objective": 3078116.903,
      "summary": {
@@ -1382,7 +1382,7 @@
       "demand": -0.3,
       "plan": "cautious"
      },
-     "fingerprint": "362946bf8b30db07",
+     "fingerprint": "333dc7dc78e28e7b",
      "id": "demo-plan-robustness-001",
      "objective": 2971510.403,
      "summary": {
@@ -1413,7 +1413,7 @@
       "demand": 0.0,
       "plan": "cautious"
      },
-     "fingerprint": "3dd58f6761e64a1c",
+     "fingerprint": "5d897a1615396feb",
      "id": "demo-plan-robustness-002",
      "objective": 3078116.903,
      "summary": {
@@ -1444,7 +1444,7 @@
       "demand": 0.0,
       "plan": "cautious"
      },
-     "fingerprint": "ad53466c2e3f2682",
+     "fingerprint": "2e31a8ffa311d477",
      "id": "demo-plan-robustness-003",
      "objective": 2971510.403,
      "summary": {
@@ -1475,7 +1475,7 @@
       "demand": 0.1,
       "plan": "cautious"
      },
-     "fingerprint": "e34d2ac1165ef574",
+     "fingerprint": "9bbe35fb1ca47811",
      "id": "demo-plan-robustness-004",
      "objective": 3078116.903,
      "summary": {
@@ -1506,7 +1506,7 @@
       "demand": 0.1,
       "plan": "cautious"
      },
-     "fingerprint": "ccf7ebb09374c8c7",
+     "fingerprint": "61f5b3ada63198a3",
      "id": "demo-plan-robustness-005",
      "objective": 2971510.403,
      "summary": {
@@ -1537,7 +1537,7 @@
       "demand": -0.3,
       "plan": "balanced"
      },
-     "fingerprint": "ee5fa69cfc06311f",
+     "fingerprint": "8a773eb564f3b42e",
      "id": "demo-plan-robustness-006",
      "objective": 2925318.9661734267,
      "summary": {
@@ -1568,7 +1568,7 @@
       "demand": -0.3,
       "plan": "balanced"
      },
-     "fingerprint": "8b2bda13fa2f5579",
+     "fingerprint": "a4c3b7f13b11210a",
      "id": "demo-plan-robustness-007",
      "objective": 2818712.4661734267,
      "summary": {
@@ -1599,7 +1599,7 @@
       "demand": 0.0,
       "plan": "balanced"
      },
-     "fingerprint": "e08d29eae3576c46",
+     "fingerprint": "e484554ce25adfa8",
      "id": "demo-plan-robustness-008",
      "objective": 3078116.903,
      "summary": {
@@ -1630,7 +1630,7 @@
       "demand": 0.0,
       "plan": "balanced"
      },
-     "fingerprint": "f74e9fc993168362",
+     "fingerprint": "adfe1840363474a0",
      "id": "demo-plan-robustness-009",
      "objective": 2971510.403,
      "summary": {
@@ -1661,7 +1661,7 @@
       "demand": 0.1,
       "plan": "balanced"
      },
-     "fingerprint": "5ca9998ea3c34908",
+     "fingerprint": "ae81d07656919860",
      "id": "demo-plan-robustness-010",
      "objective": 3078116.903,
      "summary": {
@@ -1692,7 +1692,7 @@
       "demand": 0.1,
       "plan": "balanced"
      },
-     "fingerprint": "fd9a48123e7aaec3",
+     "fingerprint": "c5a62af21603d68c",
      "id": "demo-plan-robustness-011",
      "objective": 2971510.403,
      "summary": {
@@ -1723,7 +1723,7 @@
       "demand": -0.3,
       "plan": "aggressive"
      },
-     "fingerprint": "a6821f378bf83c48",
+     "fingerprint": "1d6eec5c789be1b8",
      "id": "demo-plan-robustness-012",
      "objective": 0.0,
      "summary": {
@@ -1754,7 +1754,7 @@
       "demand": -0.3,
       "plan": "aggressive"
      },
-     "fingerprint": "b56da6d466a71fde",
+     "fingerprint": "a9e1e3508e4d64c4",
      "id": "demo-plan-robustness-013",
      "objective": 0.0,
      "summary": {
@@ -1785,7 +1785,7 @@
       "demand": 0.0,
       "plan": "aggressive"
      },
-     "fingerprint": "c0c0497af0b0d80e",
+     "fingerprint": "7590c95a4b6b751e",
      "id": "demo-plan-robustness-014",
      "objective": 25368.684518006165,
      "summary": {
@@ -1816,7 +1816,7 @@
       "demand": 0.0,
       "plan": "aggressive"
      },
-     "fingerprint": "d4b959c0dd49f0dd",
+     "fingerprint": "87f96e7c4644a61e",
      "id": "demo-plan-robustness-015",
      "objective": 0.0,
      "summary": {
@@ -1847,7 +1847,7 @@
       "demand": 0.1,
       "plan": "aggressive"
      },
-     "fingerprint": "85cbe8fc717ae91b",
+     "fingerprint": "b59c02b2aadf25ef",
      "id": "demo-plan-robustness-016",
      "objective": 40252.59527861362,
      "summary": {
@@ -1878,7 +1878,7 @@
       "demand": 0.1,
       "plan": "aggressive"
      },
-     "fingerprint": "e716d25efba2e6f2",
+     "fingerprint": "f91f857a7466304c",
      "id": "demo-plan-robustness-017",
      "objective": 0.0,
      "summary": {
@@ -1945,7 +1945,7 @@
       "demand": -0.3,
       "plan": "aggressive"
      },
-     "fingerprint": "a6821f378bf83c48",
+     "fingerprint": "1d6eec5c789be1b8",
      "id": "demo-plan-robustness-012",
      "objective": 0.0,
      "summary": {
@@ -1976,7 +1976,7 @@
       "demand": -0.3,
       "plan": "aggressive"
      },
-     "fingerprint": "b56da6d466a71fde",
+     "fingerprint": "a9e1e3508e4d64c4",
      "id": "demo-plan-robustness-013",
      "objective": 0.0,
      "summary": {
@@ -2007,7 +2007,7 @@
       "demand": 0.0,
       "plan": "aggressive"
      },
-     "fingerprint": "d4b959c0dd49f0dd",
+     "fingerprint": "87f96e7c4644a61e",
      "id": "demo-plan-robustness-015",
      "objective": 0.0,
      "summary": {
@@ -2038,7 +2038,7 @@
       "demand": 0.1,
       "plan": "aggressive"
      },
-     "fingerprint": "e716d25efba2e6f2",
+     "fingerprint": "f91f857a7466304c",
      "id": "demo-plan-robustness-017",
      "objective": 0.0,
      "summary": {
@@ -2069,7 +2069,7 @@
       "demand": 0.0,
       "plan": "aggressive"
      },
-     "fingerprint": "c0c0497af0b0d80e",
+     "fingerprint": "7590c95a4b6b751e",
      "id": "demo-plan-robustness-014",
      "objective": 25368.684518006165,
      "summary": {

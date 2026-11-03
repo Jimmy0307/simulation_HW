@@ -221,6 +221,13 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
                                          "our units sold + rival units demanded (rivals unconstrained)")
     lines["market_share"] = Tagged(sold_total / market_units if market_units > 0 else 0.0, demand.level,
                                    "our units sold / market_units_total")
+    # Per-rival view of the same demand result (report only: no input above changes).
+    for firm in sorted({k[0] for k in demanded if k[0] != "us"}):
+        firm_units = sum(v.value for k, v in demanded.items() if k[0] == firm)
+        lines[f"rival_units[{firm}]"] = Tagged(firm_units, demand.level,
+                                               "sum of the rival's units demanded (rivals unconstrained)")
+        lines[f"rival_share[{firm}]"] = Tagged(firm_units / market_units if market_units > 0 else 0.0, demand.level,
+                                               "rival units / market_units_total")
     lines["revenue"] = total(revenue, "sum(units_sold x price)", empty_level=demand.level)
 
     expenses = total([lines["store_setup"], lines["web_center_setup"], lines["outlet_lease"], lines["design_cost"],

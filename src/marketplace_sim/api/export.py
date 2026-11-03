@@ -36,6 +36,27 @@ def _assert_synthetic(obj: Any, where: str) -> None:
         raise svc.ApiError(f"{where}: refusing to export absolute local paths")
 
 
+DEMO_GAME = {"source": "synthetic", "objective": "讓期末現金最大化",
+             "opponents": [{"difficulty": "conservative"}, {"difficulty": "normal"}, {"difficulty": "aggressive"}]}
+
+
+def build_game_script() -> dict[str, Any]:
+    """A pre-recorded game-mode run (3 opponents, the demo quarters) for the read-only static demo."""
+    from marketplace_sim.api import game as gm
+
+    session = svc.Session()
+    start = gm.start(session, {**DEMO_GAME, "preset": None})
+    steps = []
+    for name in DEMO_QUARTERS:
+        plan = _plan(svc.SYNTHETIC_PLANS / name)
+        before = gm.state_view(session)
+        preview = svc.preview(session, plan)["report"]
+        report = svc.play(session, plan)["report"]
+        steps.append({"quarter": report["quarter"], "plan": plan, "before": before, "preview": preview,
+                      "report": report})
+    return {"config": DEMO_GAME, "start": start, "steps": steps, "final": gm.state_view(session)}
+
+
 def build_bundle() -> dict[str, Any]:
     session = svc.Session()
     if session.is_private:
@@ -57,6 +78,7 @@ def build_bundle() -> dict[str, Any]:
     bundle["sweeps"] = {**sweeps, "results": {s["id"]: svc.run_sweep(session, s["sweep"]) for s in sweeps["sweeps"]}}
     bundle["diff"] = {"packs": [{"id": "synthetic"}, {"id": "synthetic-v2"}],
                       "result": svc.params_diff(str(svc.SYNTHETIC_PACK), str(svc.ROOT / "examples" / "demo-control" / "pack-v2"))}
+    bundle["gamemode"] = build_game_script()
     for key, value in bundle.items():
         _assert_synthetic(value, key)
     return bundle
