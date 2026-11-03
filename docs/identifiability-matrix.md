@@ -1,7 +1,7 @@
 # Identifiability matrix
 
 For each decision field, this shows how its effect on each output group can be observed **today**.
-Static evidence only; the what-if path is not runtime-verified yet (runbook EXP-01).
+The cells come from static evidence. `W✅` marks a pair whose what-if path an operator experiment verified at runtime (EXP-01, 2026-11-03: `CD.deposit`, no save, Cancel restored, interest slope = displayed rate/4).
 
 | Code | Meaning |
 |---|---|
@@ -19,7 +19,7 @@ Output groups: **own-calc** = the same screen's `calculate` outputs; **client** 
 | BasesCompetitiveAdvantage | `basis` | unknown | - | - | P | Q | - |
 | BuyInitialMarketResearch | `plan` | unknown | - | - | P | Q | - |
 | BuyMarketResearch | `buy` | boolean | W | - | P | Q | total |
-| CD | `deposit` | integer | W | - | P | Q | cd, interest |
+| CD | `deposit` | integer | W✅ (EXP-01) | - | P | Q | cd, interest |
 | CD | `withdraw` | integer | W | - | P | Q | cd, interest |
 | CompanyName | `companyName` | text | - | - | - | X | - |
 | CompanyName | `logoDataName` | unknown | - | - | P | Q | - |
@@ -271,7 +271,7 @@ Output groups: **own-calc** = the same screen's `calculate` outputs; **client** 
 | WrapUp | `wrapped` | boolean | X | - | Q | Q | - |
 | WrapUp | `targetSegments` | list | X | - | Q | Q | - |
 
-Cell counts: -=450, F=24, P=197, Q=201, W=87, X=57
+Cell counts: -=450, F=24, P=197, Q=201, W=86, W✅ (EXP-01)=1, X=57
 
 ## Client formulas referenced (F)
 

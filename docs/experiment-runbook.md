@@ -86,6 +86,12 @@ ProForma recomputation but writes. EXP-10 is the demand model: one confounded ob
 
 ### EXP-01 · CD.deposit (validate the what-if channel)
 
+> **Status: ✅ VERIFIED 2026-11-03.** See [experiments/EXP-01.md](experiments/EXP-01.md). It ran via REA
+> `capture_browser_scenario` behind the tiered network guard. Method sequence `modify → calculate ×4 → cancel`, no
+> `save`, 0 blocked requests, stored value restored, lock released. Lessons for the next items: a programmatic
+> `fill` does not trigger `calculate`, so one Shift press (keyup) is needed; a negative input returns `checkResult.ok=false`;
+> the lock lasts 3600 s.
+
 * **Before:** Finance → Certificate of Deposit in view mode. Steps A, B. Note `deposit` and `withdraw`.
 * **Change:** Modify, then deposit = original − 10 000 (if ≥ 0), wait 2 s; original + 10 000, wait 2 s; original. Cancel.
 * **After:** steps D, E. Expect 3+ `calculate` rows in which only `deposit` changes, `calculate.interest`

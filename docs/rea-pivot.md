@@ -99,6 +99,29 @@ What it can and cannot do today:
   or compute what-if results. It is not a simulator.
 * It was **built, not run**. Docker 29.6.2 is installed, but the `agent-env` runner is not.
 
+## 6b. Operator-experiment network guard (safety mechanism, not REA functionality)
+
+`tools/guard/guard.mjs` (local-only; `tools/` is git-ignored) attaches to the operator's page over CDP and intercepts
+`backend-json.php` requests with `Fetch.enable`. It continues only whitelisted methods
+(`view`, `calculate`, `modify`, `cancel`, plus `TokenProvider.getHeaderToken`, which is
+continue-only, with no response or header access). Blocked `ServiceStatus.gs` polls use
+`failRequest(BlockedByClient)`. Every other blocked request gets a local
+`{"error":-10}` reply instead of `failRequest`. **Reason:** the engine's `errorHandler`
+shows a native `alert()` for network failures (codes −4/−5/−6), and the operator rules
+forbid dialogs. Code −10 is the client's own "aborted" code and is handled silently. With
+either mechanism, nothing reaches the server. The guard logs only service, method, decision and time.
+
+**Policy v3 (tiered), 2026-11-03.** The first two guard versions used a short method
+whitelist. They broke the page on every load: REA `capture_browser_scenario` connect mode
+always navigates to `start_url`, and a page load needs `TokenProvider.getHeaderToken` and
+`StudentInit.runInit`. The guard now applies three tiers. (1) **Baseline**: calls a normal
+login/refresh makes anyway (`TokenProvider.getHeaderToken/deleteRefreshToken`,
+`StudentInit.runInit/runFinish`, `ServiceStatus.gs`, `Settings.saveSettings/saveQuarterScreenSettings`).
+These are allowed because they are not experiment effects, and blocking them only disables the page.
+(2) **Experiment**: any `view`; `CD.modify/calculate/cancel/validateLock/prolongLock`.
+(3) **Strict**: any `save`, `WrapUp.*`, `Chat.*`, `Email.*`, `createChatSession/createResponse`.
+These are blocked and flagged as anomalies. Unknown methods are blocked and logged.
+
 ## 7. What changed in the repository
 
 * `src/marketplace_mcp` → `src/marketplace_sysid` (security, experiments, model kept; `rea_ingest.py` and `experiments/runbook.py` added).

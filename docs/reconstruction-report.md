@@ -4,7 +4,11 @@ Branch `rea/full-reconstruction`. Round one is preserved as [`reconstruction-rep
 Tools: REA `rea-agents@6.8.0` on Node 24.22.2 (see [rea-pivot.md](rea-pivot.md)). All raw inputs and REA
 Evidence stay in ignored `evidence/private/`.
 
-> ## ⭐ What-if channel: **PRESENT (strong static evidence; not yet runtime-verified)**
+> ## ⭐ What-if channel: **PRESENT, runtime-verified on `CD.deposit` (EXP-01, 2026-11-03)**
+>
+> Operator-run with teammate consent, behind a local network guard: `modify → calculate ×4 → cancel`, no `save`.
+> The stored value was unchanged after Cancel and the lock was released. Interest = Δdeposit × displayed rate/4. See
+> [experiments/EXP-01.md](experiments/EXP-01.md). Other screens remain static evidence only.
 >
 > Every decision screen inherits `calculate(user, draftDecisions, 0)` from the shared `Decision` base class
 > (`sstudent.js:1:192346`, REA module `8939`). It sends the **unsaved** decisions currently on screen and
@@ -17,8 +21,9 @@ Evidence stay in ignored `evidence/private/`.
 > * **Precondition:** the screen must be in modify mode. `onTimerCalculate` checks `inModifyMode`, which
 >   requires `modify(user, 0)`, which **acquires a server-side edit lock** that teammates see. The lock is
 >   released by `cancel(user, 0, lockToken)`.
-> * **Not proven:** that `calculate` has no server-side side effects, and that `modify`'s only effect is the lock.
->   Runbook **EXP-01** verifies both with REA passive capture plus a DevTools HAR, then Cancel.
+> * **Still not provable from the client:** server-internal effects of `calculate`/`modify`. EXP-01 found no
+>   client-visible persistent change after Cancel. REA coverage was not re-evaluated with EXP-01 as a verifier:
+>   REA accepts only canonical Evidence bundles, and producing one would mean repeating the Modify/Cancel run inside an MCP session.
 > * **Not draft-sensitive:** ProForma Income Statement / Balance Sheet / Cash Flow `view`, and `GameInfo.liveProForma([user])`,
 >   send no decisions, so they can only reflect **saved** state (INFERRED). `projectDemandNextQuarter` is a
 >   read-only `FixedCapacity.dynamicData` value, and `projectedCash` a read-only `CD.dynamicData` value, in the capture.

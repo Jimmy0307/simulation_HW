@@ -11,6 +11,7 @@ from marketplace_sysid.rea_ingest import (
     endpoint_literals,
     iter_module_sources,
     public_catalogs,
+    scenario_value_rows,
     top_level_members,
 )
 
@@ -119,6 +120,34 @@ def test_capture_rpc_keeps_shapes_not_values(tmp_path: Path) -> None:
     assert len(rows) == 1
     assert rows[0]["calculate_keys"] == ["total"]
     assert "12.5" not in json.dumps(rows)
+
+
+def test_scenario_value_rows_join_rea_events_by_transaction() -> None:
+    import base64
+
+    def content(obj: object) -> dict[str, object]:
+        return {"state": "captured", "encoding": "base64",
+                "content": base64.b64encode(json.dumps(obj).encode()).decode()}
+
+    url = "https://example.test/mpl/backend-json.php?Widget"
+    record = {"normalized_result": {
+        "steps": [{"step_index": 1, "step_id": "shift"}],
+        "events": {"items": [
+            {"kind": "request", "transaction_id": "t1", "sequence": 1, "step_index": 1, "url": {"url": url}},
+            {"kind": "response", "transaction_id": "t1", "sequence": 2, "step_index": 1, "status": 200},
+            {"kind": "network-content", "transaction_id": "t1", "sequence": 3, "step_index": 1, "phase": "request",
+             "body": content({"method": "calculate", "parameters": [{"studentID": 1}, {"deposit": "10000"}, 0]})},
+            {"kind": "network-content", "transaction_id": "t1", "sequence": 4, "step_index": 1, "phase": "response",
+             "body": content({"error": 0, "result": {"checkResult": {"ok": True, "errors": {"inputErrors": 0}},
+                                                     "calculateResult": {"interest": 150}}})},
+            {"kind": "request", "transaction_id": "t2", "sequence": 5, "step_index": 1,
+             "url": {"url": "https://example.test/a.png"}},
+        ]}}}
+    rows = scenario_value_rows(record)
+    assert rows == [{"step": "shift", "service": "Widget", "method": "calculate", "status": 200,
+                     "decisions_sent": {"deposit": 10000.0}, "calculate_result": {"interest": 150.0},
+                     "check_ok": True, "check_errors": {"inputErrors": 0.0}, "lock_duration_s": None,
+                     "save_result": None}]
 
 
 def test_method_classification_is_conservative() -> None:

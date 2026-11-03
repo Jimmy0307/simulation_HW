@@ -6,6 +6,7 @@
  "experiments": [
   {
    "id": "EXP-01",
+   "status": "VERIFIED_2026-11-03 (see docs/experiments/EXP-01.md)",
    "rank": 1,
    "title": "Validate the no-save what-if channel on Certificate of Deposit",
    "module": "CD",

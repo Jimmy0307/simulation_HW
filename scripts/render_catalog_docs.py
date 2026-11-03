@@ -21,7 +21,9 @@ CLIENT_FORMULA_MODULES = {
     "DemandProjection": "brandDemand / 65; operatingCapacityNeeded / 65",
     "DemandProjectionRegional": "brandDemand / 65; regional share = demand x 100 / lqTotalDemand",
 }
-MARKET_OUTPUTS = "Sales / MarketShare / IncomeStatement actuals / BalancedScorecard"
+# (module, field) pairs whose what-if path was verified by an operator experiment.
+VERIFIED_WHATIF = {("CD", "deposit"): "EXP-01"}
+MARKET_OUTPUTS ="Sales / MarketShare / IncomeStatement actuals / BalancedScorecard"
 NUMERIC = {"integer", "float", "boolean", "enum", "unknown", "list"}
 
 
@@ -143,7 +145,8 @@ def render_matrix(decisions: dict[str, Any], calc_by_module: dict[str, list[str]
         "# Identifiability matrix",
         "",
         "For each decision field, this shows how its effect on each output group can be observed **today**.",
-        "Static evidence only; the what-if path is not runtime-verified yet (runbook EXP-01).",
+        ("The cells come from static evidence. `W✅` marks a pair whose what-if path an operator experiment verified at "
+         "runtime (EXP-01, 2026-11-03: `CD.deposit`, no save, Cancel restored, interest slope = displayed rate/4)."),
         "",
         "| Code | Meaning |",
         "|---|---|",
@@ -172,6 +175,8 @@ def render_matrix(decisions: dict[str, Any], calc_by_module: dict[str, list[str]
                 cells = ["-", "-", "-", "X"]
             else:
                 own = "W" if row.get("whatif_path") and calc_by_module.get(module) else "-"
+                if own == "W" and (module, field["field"]) in VERIFIED_WHATIF:
+                    own = f"W✅ ({VERIFIED_WHATIF[(module, field['field'])]})"
                 client = "F" if module in CLIENT_FORMULA_MODULES else "-"
                 cells = [own, client, "P", "Q"]
             for cell in cells:

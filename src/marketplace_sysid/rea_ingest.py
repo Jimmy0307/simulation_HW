@@ -23,6 +23,7 @@ and keeps only structure, types, bounds and provenance categories.
 from __future__ import annotations
 
 import argparse
+import base64
 import hashlib
 import json
 import re
@@ -559,6 +560,80 @@ def experiment_value_rows(capture_record: JSON) -> list[JSON]:
     return rows
 
 
+def _decode_scenario_body(body: JSON) -> Any:
+    if not isinstance(body, dict) or body.get("state") != "captured":
+        return None
+    content = str(body.get("content") or "")
+    if body.get("encoding") == "base64":
+        content = base64.b64decode(content).decode("utf-8", "replace")
+    try:
+        return json.loads(content)
+    except ValueError:
+        return None
+
+
+def scenario_value_rows(scenario_record: JSON) -> list[JSON]:
+    """PRIVATE: per-RPC rows from a REA ``capture_browser_scenario`` Evidence record.
+
+    Joins REA ``request`` and ``network-content`` events by ``transaction_id``. Like
+    :func:`experiment_value_rows`, the rows hold simulation values and belong under
+    ``evidence/private`` only.
+    """
+    result = scenario_record["normalized_result"]
+    step_ids = {step["step_index"]: step["step_id"] for step in result.get("steps", [])}
+    transactions: dict[str, JSON] = {}
+    for item in result["events"]["items"]:
+        transaction = item.get("transaction_id")
+        if not transaction:
+            continue
+        row = transactions.setdefault(transaction, {"sequence": item.get("sequence"), "step_index": item.get("step_index")})
+        if item.get("kind") == "request":
+            row["url"] = item["url"]["url"]
+        elif item.get("kind") == "response":
+            row["status"] = item.get("status")
+        elif item.get("kind") == "network-content":
+            row[f"{item['phase']}_body"] = _decode_scenario_body(item.get("body", {}))
+    rows: list[JSON] = []
+    for row in sorted(transactions.values(), key=lambda r: int(r.get("sequence") or 0)):
+        parts = urlsplit(str(row.get("url", "")))
+        if not parts.path.endswith("backend-json.php"):
+            continue
+        raw_request = row.get("request_body")
+        request: JSON = raw_request if isinstance(raw_request, dict) else {}
+        raw_payload = row.get("response_body")
+        payload: JSON = raw_payload if isinstance(raw_payload, dict) else {}
+        method = request.get("method")
+        params = request.get("parameters") or []
+        sent = params[1] if method in {"calculate", "save"} and len(params) > 1 else None
+        raw_result = payload.get("result")
+        result_obj: JSON = raw_result if isinstance(raw_result, dict) else {}
+        calc = result_obj.get("calculateResult", result_obj.get("calculate"))
+        raw_check = result_obj.get("checkResult")
+        check: JSON = raw_check if isinstance(raw_check, dict) else {}
+        sent_numbers: dict[str, float] | None = None
+        if isinstance(sent, dict):
+            sent_numbers = {}
+            for key, value in sent.items():
+                try:
+                    sent_numbers[str(key)] = float(value)
+                except (TypeError, ValueError):
+                    continue
+        rows.append({
+            "step": step_ids.get(row.get("step_index")),
+            "service": parts.query.split("&")[0],
+            "method": method,
+            "status": row.get("status"),
+            "decisions_sent": sent_numbers,
+            "calculate_result": _flatten_numbers(calc) if calc is not None else None,
+            "check_ok": check.get("ok"),
+            "check_errors": _flatten_numbers(check.get("errors")) if check else None,
+            "lock_duration_s": (result_obj.get("lock") or {}).get("lockDuration")
+            if isinstance(result_obj.get("lock"), dict) else None,
+            "save_result": result_obj.get("saveResult"),
+        })
+    return rows
+
+
 # ---------------------------------------------------------------------------
 # Rendered menu tree (private HTML pages)
 
@@ -815,6 +890,8 @@ def main() -> None:
     parser.add_argument("--public-out", type=Path, help="Directory for de-identified catalogs")
     parser.add_argument("--experiment-capture", type=Path,
                         help="PRIVATE: REA capture bundle of an operator experiment; values go to --private-out")
+    parser.add_argument("--experiment-scenario", type=Path,
+                        help="PRIVATE: REA capture_browser_scenario Evidence JSON; values go to --private-out")
     args = parser.parse_args()
     if "private" not in args.private_out.resolve().as_posix().split("/"):
         raise SystemExit("--private-out must be inside a 'private' directory")
@@ -822,6 +899,10 @@ def main() -> None:
     if args.experiment_capture:
         rows = experiment_value_rows(find_record(load_bundle(args.experiment_capture),
                                                  "inspect_web_network_capture"))
+        (args.private_out / "experiment_values.json").write_text(json.dumps(rows, indent=1), encoding="utf-8")
+    if args.experiment_scenario:
+        record = json.loads(args.experiment_scenario.read_text(encoding="utf-8"))
+        rows = scenario_value_rows(record)
         (args.private_out / "experiment_values.json").write_text(json.dumps(rows, indent=1), encoding="utf-8")
     inventory = build_private_inventory(args.capture_bundle, args.app_bundle, args.source_root, args.html_dir)
     (args.private_out / "inventory.json").write_text(json.dumps(inventory, indent=1), encoding="utf-8")
