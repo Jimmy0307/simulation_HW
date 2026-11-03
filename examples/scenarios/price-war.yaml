@@ -1,0 +1,15 @@
+# Price war (synthetic): rivals cut prices 20% from Q2, one rival plays erratically.
+name: price-war
+description: "Rival price war from Q2 (-20%), one erratic rival"
+base_params: ../synthetic
+horizon: 4
+seed: 3
+events:
+  - {type: competitor_price_cut, from_quarter: 2, target: "*", magnitude: -0.2, duration: 3, label: "price war"}
+competitors:
+  - {name: rival-a, strategy: baseline, params: {price_factor: 0.93}}
+  - {name: rival-b, strategy: random}
+our_policy:
+  type: fixed
+  default: ../demo/plans/b-balanced.yaml
+  plans: {1: ../demo/q1.yaml, 2: ../demo/q2.yaml, 3: ../demo/q3.yaml}

@@ -4,6 +4,10 @@
   mpsim play SAVE.json --decisions PLAN.yaml [--seed N]
   mpsim compare SAVE.json PLAN.yaml [PLAN.yaml ...] [--seed N]
   mpsim explain METRIC
+  mpsim scenario new|run|templates ...             (game master)
+  mpsim what-if SAVE.json --set PATH=VALUE --event TYPE:TARGET:MAGNITUDE
+  mpsim sweep run SWEEP.yaml --out DIR | mpsim sweep worst RESULTS.json --top N   (agent harness)
+  mpsim params diff OLD_DIR NEW_DIR [--values --out PRIVATE_FILE]
   mpsim build-pack --out evidence/private/model     (private; reads your own REA Evidence)
 """
 
@@ -111,13 +115,166 @@ def cmd_explain(args: argparse.Namespace) -> None:
     _ = Level
 
 
+SCENARIO_TEMPLATE = """\
+# Scenario definition (schema marketplace-sim/scenario@1). Run: mpsim scenario run {file} --out outputs/scenarios
+name: {name}
+description: "What this scenario tests"
+base_params: {params}          # parameter pack directory (relative to this file); private packs stay private
+horizon: 4                     # quarters to simulate
+start_quarter: 1
+seed: 0                        # same spec + seed => identical results
+overrides:                     # parameter changes; path syntax: a.b, list[*], list[key=value], dict.*
+  - {{path: "capacity_options[*].cost", scale: 1.0, from_quarter: 3}}
+events:                        # cost_shock | demand_shock | rate_change | fx_shock | competitor_price_cut | supply_disruption
+  - {{type: cost_shock, from_quarter: 3, target: capacity, magnitude: 0.15, duration: 2}}
+competitors:                   # strategy: baseline | random | replay (replay panel files must be private)
+  - {{name: rival-a, strategy: baseline}}
+  - {{name: rival-b, strategy: random, params: {{price_factor: 0.95}}}}
+our_policy:                    # hold | fixed (default + per-quarter plans) | external (dir with q<N>.yaml)
+  type: fixed
+  default: ../demo/plans/b-balanced.yaml
+  plans: {{1: ../demo/q1.yaml}}
+"""
+
+
+def _guard_output(pack_provenance: str, out: Path) -> None:
+    if pack_provenance != "synthetic" and "private" not in out.resolve().as_posix().split("/"):
+        raise SystemExit("outputs built from a non-synthetic pack must be written under a 'private' directory")
+
+
+def cmd_scenario(args: argparse.Namespace) -> None:
+    from marketplace_sim.control.html import render_results
+    from marketplace_sim.control.runner import run_scenario, write_result
+    from marketplace_sim.control.spec import load_spec
+
+    if args.action == "new":
+        path = Path(args.file)
+        if path.exists():
+            raise SystemExit(f"{path} exists; refusing to overwrite")
+        params = Path(args.params).resolve()
+        try:
+            params_ref = Path(str(params.relative_to(path.parent.resolve()))).as_posix()
+        except ValueError:
+            params_ref = params.as_posix()
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(SCENARIO_TEMPLATE.format(file=path.as_posix(), name=path.stem, params=params_ref), encoding="utf-8")
+        print(f"scenario skeleton written: {path}")
+    elif args.action == "templates":
+        for spec_path in sorted(Path(args.dir).glob("*.yaml")):
+            spec = load_spec(spec_path)
+            print(f"{spec_path.as_posix():45} {spec.name:22} {spec.description}")
+    elif args.action == "run":
+        spec = load_spec(Path(args.file))
+        pack = load_pack(spec.resolve(spec.base_params))
+        out = Path(args.out)
+        _guard_output(pack.provenance, out)
+        result = run_scenario(spec)
+        path = write_result(result, out)
+        data = result.to_dict()
+        (out / f"{result.name}.html").write_text(render_results([data], f"Scenario {result.name}"), encoding="utf-8")
+        for q in data["quarters"]:
+            cash = q["lines"]["cash_end"]
+            print(f"Q{q['quarter']}: cash_end {cash['value']:,.2f} [{cash['level'][0].upper()}]"
+                  + (f"  events: {'; '.join(q['events'])}" if q["events"] else ""))
+        print(f"summary: {json.dumps(data['summary'], ensure_ascii=False)}\nwritten: {path} and {result.name}.html")
+
+
+def _parse_set(item: str) -> tuple[str, str, float | str]:
+    path, _, raw = item.partition("=")
+    if raw.startswith(("x", "*")):
+        return path, "scale", float(raw[1:])
+    if raw.startswith(("+", "-")) and raw[1:].replace(".", "", 1).isdigit():
+        return path, "add", float(raw)
+    try:
+        return path, "set", float(raw)
+    except ValueError:
+        return path, "set", raw
+
+
+def cmd_what_if(args: argparse.Namespace) -> None:
+    from marketplace_sim.control.events import apply_events
+    from marketplace_sim.control.spec import EventSpec, Override, apply_overrides
+    from marketplace_sim.pack import pack_from_dict
+
+    save, pack, state = _load_save(Path(args.save))
+    raw = json.loads(pack.path.read_text(encoding="utf-8")) if pack.path else {}
+    overrides = [Override(p, op, v) for p, op, v in (_parse_set(s) for s in args.set or [])]
+    events = []
+    for item in args.event or []:
+        etype, target, magnitude = (item.split(":") + ["*", "0"])[:3]
+        events.append(EventSpec(etype, state.quarter, float(magnitude), target))
+    data, applied = apply_overrides(raw, overrides, state.quarter)
+    data, adjust = apply_events(data, events, state.quarter)
+    plan = _read_plan(Path(args.decisions)) if args.decisions else Plan(name="hold")
+    base = advance(state, plan, pack, seed=args.seed)[1]
+    base.plan = "baseline"
+    changed = advance(state, plan, pack_from_dict(data, pack.path), seed=args.seed, adjust=adjust)[1]
+    changed.plan = "what-if"
+    print(_compare_table([base, changed]))
+    for note in applied + [f"event: {label}" for label in adjust.labels]:
+        print(f"applied: {note}")
+    _ = save
+
+
+def cmd_sweep(args: argparse.Namespace) -> None:
+    from marketplace_sim.control.spec import load_spec
+    from marketplace_sim.control.sweep import load_sweep, run_sweep, worst, write_sweep
+
+    if args.action == "run":
+        sweep = load_sweep(Path(args.file))
+        spec = load_spec(sweep.base_scenario)
+        _guard_output(load_pack(spec.resolve(spec.base_params)).provenance, Path(args.out))
+        result = run_sweep(sweep)
+        path = write_sweep(result, Path(args.out))
+        print(f"{len(result['rows'])} scenarios -> {path}")
+        print("most sensitive: " + ", ".join(f"{s['variable']} (range {s['main_effect_range']:,.0f})"
+                                             for s in result["sensitivity"] if s["main_effect_range"] is not None))
+    else:
+        data = json.loads(Path(args.file).read_text(encoding="utf-8"))
+        rows = worst(data["rows"], args.top)
+        print(f"worst {len(rows)} by {data['objective']} (lowest first):")
+        for row in rows:
+            print(f"  {row['id']}  {row['objective']:>16,.2f}  {json.dumps(row['assignment'], ensure_ascii=False)}  "
+                  f"[{row['fingerprint']}]")
+
+
+def cmd_params(args: argparse.Namespace) -> None:
+    from marketplace_sim.control.diff import diff_dirs, render
+
+    changes = diff_dirs(Path(args.old), Path(args.new))
+    synthetic = load_pack(Path(args.old)).provenance == "synthetic" and load_pack(Path(args.new)).provenance == "synthetic"
+    if args.out:
+        out = Path(args.out)
+        if args.values and not synthetic and "private" not in out.resolve().as_posix().split("/"):
+            raise SystemExit("a diff with real values must be written under a 'private' directory")
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(render(changes, include_values=args.values), encoding="utf-8")
+        print(f"written: {out}")
+    print(render(changes, include_values=args.values and synthetic))
+
+
 def cmd_build_pack(args: argparse.Namespace) -> None:
     from marketplace_sim.pack_builder import build_private_pack
 
     print(build_private_pack(Path(args.out), Path(args.evidence)))
+    if args.quarter_label:
+        from marketplace_sim.control.diff import quarterly_snapshot, red_flags, render
+
+        changes, previous = quarterly_snapshot(Path(args.out), args.quarter_label)
+        if previous is None:
+            print(f"snapshot {args.quarter_label} stored (first quarter, nothing to diff)")
+            return
+        print(f"diff vs {previous}: {len(changes)} change(s); full report in {args.out}/diffs/")
+        for flag in red_flags(changes):
+            print(flag)
+        print(render(changes, include_values=False))
 
 
 def main(argv: list[str] | None = None) -> None:
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure is not None:
+            reconfigure(encoding="utf-8", errors="replace")
     parser = argparse.ArgumentParser(prog="mpsim", description=__doc__.splitlines()[0])
     sub = parser.add_subparsers(dest="cmd", required=True)
     p = sub.add_parser("new", help="create a new save from a parameter pack")
@@ -138,9 +295,37 @@ def main(argv: list[str] | None = None) -> None:
     p = sub.add_parser("explain", help="explain a metric")
     p.add_argument("metric")
     p.set_defaults(func=cmd_explain)
+    p = sub.add_parser("scenario", help="game master: create, list and run scenarios")
+    p.add_argument("action", choices=["new", "run", "templates"])
+    p.add_argument("file", nargs="?", default="")
+    p.add_argument("--out", default="outputs/scenarios")
+    p.add_argument("--params", default="examples/synthetic")
+    p.add_argument("--dir", default="examples/scenarios")
+    p.set_defaults(func=cmd_scenario)
+    p = sub.add_parser("what-if", help="one-off parameter/event change on a save, compared with the baseline")
+    p.add_argument("save")
+    p.add_argument("--set", action="append", help="path=value | path=x1.15 (scale) | path=+5 (add)")
+    p.add_argument("--event", action="append", help="type:target:magnitude, e.g. cost_shock:capacity:0.15")
+    p.add_argument("--decisions")
+    p.add_argument("--seed", type=int, default=0)
+    p.set_defaults(func=cmd_what_if)
+    p = sub.add_parser("sweep", help="agent harness: batch stress tests")
+    p.add_argument("action", choices=["run", "worst"])
+    p.add_argument("file")
+    p.add_argument("--out", default="outputs/sweeps")
+    p.add_argument("--top", type=int, default=10)
+    p.set_defaults(func=cmd_sweep)
+    p = sub.add_parser("params", help="parameter pack tools")
+    p.add_argument("action", choices=["diff"])
+    p.add_argument("old")
+    p.add_argument("new")
+    p.add_argument("--values", action="store_true", help="include old/new values (private output only)")
+    p.add_argument("--out")
+    p.set_defaults(func=cmd_params)
     p = sub.add_parser("build-pack", help="build a private pack from your own REA Evidence")
     p.add_argument("--out", required=True)
     p.add_argument("--evidence", default="evidence/private")
+    p.add_argument("--quarter-label", help="e.g. Q2: snapshot the pack and diff it against the previous quarter")
     p.set_defaults(func=cmd_build_pack)
     args = parser.parse_args(argv)
     args.func(args)

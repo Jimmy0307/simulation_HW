@@ -37,3 +37,6 @@ examples/**/*-save.json
 *.mpsim-save.json
 # Local agent configuration (per-quarter command with operational rules)
 .claude/
+
+# Generated scenario/sweep reports (regenerable; reports built from real data stay in evidence/private/)
+outputs/

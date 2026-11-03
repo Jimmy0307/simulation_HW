@@ -1,0 +1,16 @@
+# Demand decline (synthetic): every segment shrinks 25% from Q2, segment 3 another 15% in Q3.
+name: demand-decline
+description: "Market contraction: all segments -25% from Q2, Gamma-like segment -15% more in Q3"
+base_params: ../synthetic
+horizon: 4
+seed: 0
+events:
+  - {type: demand_shock, from_quarter: 2, target: "*", magnitude: -0.25, duration: 3, label: "recession"}
+  - {type: demand_shock, from_quarter: 3, target: "3", magnitude: -0.15}
+competitors:
+  - {name: rival-a, strategy: baseline}
+  - {name: rival-b, strategy: baseline}
+our_policy:
+  type: fixed
+  default: ../demo/plans/b-balanced.yaml
+  plans: {1: ../demo/q1.yaml, 2: ../demo/q2.yaml, 3: ../demo/q3.yaml}

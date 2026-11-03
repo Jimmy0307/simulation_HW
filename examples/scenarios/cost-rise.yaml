@@ -1,0 +1,19 @@
+# Cost rise (synthetic): capacity +15% from Q3 for two quarters, outlet costs +7% from Q2 onwards.
+name: cost-rise
+description: "Capacity cost shock in Q3-Q4 plus a permanent outlet cost increase"
+base_params: ../synthetic
+horizon: 4
+seed: 0
+overrides:
+  - {path: "stores[*].lease_cost", scale: 1.07, from_quarter: 2}
+  - {path: "web_centers[*].lease_cost", scale: 1.07, from_quarter: 2}
+events:
+  - {type: cost_shock, from_quarter: 3, target: capacity, magnitude: 0.15, duration: 2, label: "machine price spike"}
+  - {type: cost_shock, from_quarter: 2, target: components, magnitude: 0.09, duration: 3}
+competitors:
+  - {name: rival-a, strategy: baseline}
+  - {name: rival-b, strategy: baseline}
+our_policy:
+  type: fixed
+  default: ../demo/plans/b-balanced.yaml
+  plans: {1: ../demo/q1.yaml, 2: ../demo/q2.yaml, 3: ../demo/q3.yaml}

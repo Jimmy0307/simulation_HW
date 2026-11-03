@@ -1,0 +1,284 @@
+{
+ "schema": "marketplace-sim/param-pack@1",
+ "name": "synthetic-v2",
+ "provenance": "synthetic",
+ "note": "Synthetic pack, \"next quarter\" variant for the params-diff demo. All values invented.",
+ "days_per_quarter": 65,
+ "finance": {
+  "cd_rate_annual_percent": 3.9,
+  "tax_rate_percent": 33.3,
+  "emergency_rate_min_percent": 17.7
+ },
+ "initial_state": {
+  "cash": 2345679,
+  "cd": 0,
+  "fixed_capacity_units": 0,
+  "stock_total": 0,
+  "shares_total": 0
+ },
+ "capacity_options": [
+  {
+   "units": 0,
+   "cost": 0,
+   "machines": 0
+  },
+  {
+   "units": 9,
+   "cost": 230270,
+   "machines": 6
+  },
+  {
+   "units": 18,
+   "cost": 460540,
+   "machines": 12
+  },
+  {
+   "units": 27,
+   "cost": 690810,
+   "machines": 18
+  },
+  {
+   "units": 45,
+   "cost": 1151350,
+   "machines": 30
+  },
+  {
+   "units": 63,
+   "cost": 1611890,
+   "machines": 42
+  }
+ ],
+ "stores": [
+  {
+   "key": "N1-Northwick",
+   "region": "N1",
+   "name": "Northwick",
+   "setup_cost": 123457,
+   "lease_cost": 23451,
+   "opened": false
+  },
+  {
+   "key": "N1-Eastmere",
+   "region": "N1",
+   "name": "Eastmere",
+   "setup_cost": 98761,
+   "lease_cost": 25111,
+   "opened": false
+  },
+  {
+   "key": "N1-Southby",
+   "region": "N1",
+   "name": "Southby",
+   "setup_cost": 145679,
+   "lease_cost": 19997,
+   "opened": false
+  }
+ ],
+ "web_centers": [
+  {
+   "key": "N1",
+   "region": "N1",
+   "name": "Region N1",
+   "setup_cost": 171717,
+   "lease_cost": 31313,
+   "opened": false
+  }
+ ],
+ "segments": [
+  {
+   "id": "1",
+   "name": "Alpha",
+   "needs": {
+    "Sturdy build": 131,
+    "Low cost": 127,
+    "Bright colours": 88
+   },
+   "use_pattern": {
+    "Commuting": 133,
+    "Leisure": 87
+   }
+  },
+  {
+   "id": "2",
+   "name": "Beta",
+   "needs": {
+    "Sturdy build": 89,
+    "Low cost": 77,
+    "Bright colours": 137
+   },
+   "use_pattern": {
+    "Commuting": 79,
+    "Leisure": 139
+   }
+  },
+  {
+   "id": "3",
+   "name": "Gamma",
+   "needs": {
+    "Sturdy build": 141,
+    "Low cost": 67,
+    "Bright colours": 93
+   },
+   "use_pattern": {
+    "Commuting": 97,
+    "Leisure": 99
+   }
+  }
+ ],
+ "markets": [
+  {
+   "key": "N1-Northwick",
+   "region": "N1",
+   "name": "Northwick",
+   "segments": {
+    "1": {
+     "size_12m": 4011,
+     "wtp": 777
+    },
+    "2": {
+     "size_12m": 2987,
+     "wtp": 913
+    },
+    "3": {
+     "size_12m": 1777,
+     "wtp": 1291
+    }
+   }
+  },
+  {
+   "key": "N1-Eastmere",
+   "region": "N1",
+   "name": "Eastmere",
+   "segments": {
+    "1": {
+     "size_12m": 3989,
+     "wtp": 743
+    },
+    "2": {
+     "size_12m": 3313,
+     "wtp": 887
+    },
+    "3": {
+     "size_12m": 1499,
+     "wtp": 1247
+    }
+   }
+  },
+  {
+   "key": "N1-Southby",
+   "region": "N1",
+   "name": "Southby",
+   "segments": {
+    "1": {
+     "size_12m": 2719,
+     "wtp": 799
+    },
+    "2": {
+     "size_12m": 2111,
+     "wtp": 941
+    },
+    "3": {
+     "size_12m": 2203,
+     "wtp": 1319
+    }
+   }
+  }
+ ],
+ "component_groups": [
+  {
+   "id": "g1",
+   "name": "Core kit",
+   "required": true,
+   "multi": false
+  },
+  {
+   "id": "g2",
+   "name": "Body",
+   "required": true,
+   "multi": false
+  },
+  {
+   "id": "g3",
+   "name": "Finish",
+   "required": false,
+   "multi": false
+  }
+ ],
+ "components": [
+  {
+   "id": "c1",
+   "group": "g1",
+   "name": "Core kit standard",
+   "price": 21,
+   "type_mask": 56
+  },
+  {
+   "id": "c2",
+   "group": "g2",
+   "name": "Body type A",
+   "price": 57,
+   "type_mask": 8
+  },
+  {
+   "id": "c3",
+   "group": "g2",
+   "name": "Body type B",
+   "price": 141,
+   "type_mask": 16
+  },
+  {
+   "id": "c4",
+   "group": "g2",
+   "name": "Body type C",
+   "price": 199,
+   "type_mask": 32
+  },
+  {
+   "id": "c5",
+   "group": "g3",
+   "name": "Glossy finish",
+   "price": 6,
+   "type_mask": 56
+  },
+  {
+   "id": "c99",
+   "group": "g3",
+   "name": "Hyperlink module",
+   "price": 71,
+   "type_mask": 56,
+   "available_quarter": 3
+  }
+ ],
+ "brand_types": [
+  {
+   "code": "A",
+   "name": "Type A",
+   "type_mask": 8,
+   "segment_id": "1",
+   "price_adj": 1,
+   "cost_adj": 1
+  },
+  {
+   "code": "B",
+   "name": "Type B",
+   "type_mask": 16,
+   "segment_id": "2",
+   "price_adj": 1,
+   "cost_adj": 1
+  },
+  {
+   "code": "C",
+   "name": "Type C",
+   "type_mask": 32,
+   "segment_id": "3",
+   "price_adj": 1,
+   "cost_adj": 1
+  }
+ ],
+ "production": {
+  "design_cost": 27777,
+  "manufacturing_setup_cost": 333,
+  "min_direct_labor": 9,
+  "min_overhead_cpu": 222
+ }
+}

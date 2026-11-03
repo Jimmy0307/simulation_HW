@@ -1,0 +1,12 @@
+# Demo-control sweep (synthetic): 3 x 3 x 2 grid = 18 runs of the demo scenario.
+name: demo-stress
+base_scenario: scenario.yaml
+mode: grid
+objective: min_cash
+variables:
+  - {name: capacity_cost, path: "capacity_options[*].cost", op: scale, values: [0.9, 1.0, 1.25], base: 1.0}
+  - {name: demand_q2, event: {type: demand_shock, from_quarter: 2, target: "*", duration: 3}, values: [-0.3, 0.0, 0.1], base: 0.0}
+  - name: rivals
+    competitors:
+      calm: [{name: rival-a, strategy: baseline}, {name: rival-b, strategy: baseline}]
+      aggressive: [{name: rival-a, strategy: baseline, params: {price_factor: 0.8}}, {name: rival-b, strategy: random}]

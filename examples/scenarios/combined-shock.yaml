@@ -1,0 +1,20 @@
+# Combined shock (synthetic): cost rise + demand fall + price war + rate change + supply disruption, stacked.
+name: combined-shock
+description: "Stacked stress: costs up, demand down, price war, CD rate cut, capacity disruption"
+base_params: ../synthetic
+horizon: 4
+seed: 5
+events:
+  - {type: cost_shock, from_quarter: 2, target: "*", magnitude: 0.12, duration: 3}
+  - {type: demand_shock, from_quarter: 2, target: "*", magnitude: -0.2, duration: 3}
+  - {type: competitor_price_cut, from_quarter: 3, target: "*", magnitude: -0.15, duration: 2}
+  - {type: rate_change, from_quarter: 2, target: cd, magnitude: -1.5, duration: 3}
+  - {type: fx_shock, from_quarter: 3, target: "*", magnitude: -0.05}
+  - {type: supply_disruption, from_quarter: 3, target: capacity, magnitude: 0.3}
+competitors:
+  - {name: rival-a, strategy: baseline}
+  - {name: rival-b, strategy: random, params: {price_factor: 0.95}}
+our_policy:
+  type: fixed
+  default: ../demo/plans/b-balanced.yaml
+  plans: {1: ../demo/q1.yaml, 2: ../demo/q2.yaml, 3: ../demo/q3.yaml}

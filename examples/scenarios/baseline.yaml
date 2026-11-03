@@ -1,0 +1,14 @@
+# Baseline (synthetic): the demo plan sequence with calm rivals and no shocks.
+name: baseline
+description: "Synthetic baseline: demo plans, calm rivals, no events"
+base_params: ../synthetic
+horizon: 4
+start_quarter: 1
+seed: 0
+competitors:
+  - {name: rival-a, strategy: baseline}
+  - {name: rival-b, strategy: baseline}
+our_policy:
+  type: fixed
+  default: ../demo/plans/b-balanced.yaml
+  plans: {1: ../demo/q1.yaml, 2: ../demo/q2.yaml, 3: ../demo/q3.yaml}

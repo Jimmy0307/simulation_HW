@@ -1,0 +1,13 @@
+# Which demo plan holds up best under shocks? 3 plans x 3 demand shocks x 2 capacity-cost levels = 18 runs.
+name: demo-plan-robustness
+base_scenario: scenario.yaml
+mode: grid
+objective: min_cash
+variables:
+  - name: plan
+    policies:
+      cautious: {type: fixed, default: ../demo/plans/a-cautious.yaml, plans: {1: ../demo/q1.yaml}}
+      balanced: {type: fixed, default: ../demo/plans/b-balanced.yaml, plans: {1: ../demo/q1.yaml}}
+      aggressive: {type: fixed, default: ../demo/plans/c-aggressive.yaml, plans: {1: ../demo/q1.yaml}}
+  - {name: demand, event: {type: demand_shock, from_quarter: 2, target: "*", duration: 3}, values: [-0.3, 0.0, 0.1], base: 0.0}
+  - {name: capacity_cost, path: "capacity_options[*].cost", op: scale, values: [1.0, 1.25], base: 1.0}

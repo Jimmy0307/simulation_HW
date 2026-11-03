@@ -1,0 +1,15 @@
+# Demo-control scenario (synthetic): baseline plans with a capacity cost shock in Q3.
+name: demo-cost-shock
+description: "Synthetic demo: +15% capacity cost shock in Q3, calm rivals"
+base_params: ../synthetic
+horizon: 4
+seed: 0
+events:
+  - {type: cost_shock, from_quarter: 3, target: capacity, magnitude: 0.15, label: "capacity cost +15%"}
+competitors:
+  - {name: rival-a, strategy: baseline}
+  - {name: rival-b, strategy: baseline}
+our_policy:
+  type: fixed
+  default: ../demo/plans/b-balanced.yaml
+  plans: {1: ../demo/q1.yaml, 2: ../demo/q2.yaml, 3: ../demo/q3.yaml}

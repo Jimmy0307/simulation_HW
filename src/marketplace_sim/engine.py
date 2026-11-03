@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import copy
 import random
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, replace
 from typing import Any
 
 from marketplace_sim import modules as m
@@ -114,21 +114,35 @@ class Report:
                 "lines": {k: {"value": v.value, "level": v.level.label, "source": v.source} for k, v in self.lines.items()}}
 
 
+@dataclass
+class Adjustments:
+    """Scenario-level adjustments applied by the control plane (events). Defaults change nothing."""
+
+    capacity_factor: float = 1.0
+    rival_price_factor: dict[str, float] = field(default_factory=dict)  # firm name or "*" -> multiplier
+    labels: list[str] = field(default_factory=list)
+
+
 def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.DemandModel | None = None,
-            competitors: list[m.Competitor] | None = None, seed: int = 0) -> tuple[CompanyState, Report]:
+            competitors: list[m.Competitor] | None = None, seed: int = 0,
+            adjust: Adjustments | None = None) -> tuple[CompanyState, Report]:
     """Apply one quarter of decisions. Returns the next state and a fully tagged report."""
     demand = demand or m.PlaceholderDemand()
     competitors = competitors if competitors is not None else [m.BaselineBot("bot-a"), m.RandomBot("bot-b")]
+    adjust = adjust or Adjustments()
     rng = random.Random(seed * 1009 + state.quarter)
     new = copy.deepcopy(state)
     lines: dict[str, Tagged] = {}
-    notes: list[str] = []
+    notes: list[str] = [f"event: {label}" for label in adjust.labels]
     start_cash = const(state.cash, Level[state.cash_level.upper()], "cash at quarter start (carried state)")
     lines["cash_start"] = start_cash
 
     # Capacity bought now becomes usable next quarter (screen semantics "next quarter capacity": derived).
     lines["capex_capacity"] = m.capacity_purchase(pack, plan.capacity_increase)
     lines["capacity_units_per_quarter"] = m.quarterly_capacity(pack, state.fixed_capacity_units)
+    if adjust.capacity_factor != 1.0:
+        lines["capacity_units_per_quarter"] = lines["capacity_units_per_quarter"].scaled(
+            adjust.capacity_factor, f"scenario capacity factor {adjust.capacity_factor:g}")
 
     stores_before, web_before = set(state.stores_open), set(state.web_centers_open)
     lines["store_setup"] = m.opening_cost(pack.stores, plan.open_stores, stores_before, "stores")
@@ -175,6 +189,9 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
     lines["advertising"] = const(sum(b.advertising for b in plan.brands), Level.VERIFIED, "plan input")
 
     rival_offers = [o for c in competitors for o in c.offers(pack, state.quarter, rng)]
+    if adjust.rival_price_factor:
+        rival_offers = [replace(o, price=o.price * adjust.rival_price_factor.get(o.firm, adjust.rival_price_factor.get("*", 1.0)))
+                        for o in rival_offers]
     demanded = demand.units(pack, own_offers + rival_offers)
     revenue: list[Tagged] = []
     for offer in own_offers:
