@@ -19,7 +19,27 @@
 |---|---|---|
 | `setup-once.bat` | 安裝 git pre-push hook（每次 push 前逐一檢查 commit），並確認 hook 確實存在。前端相依沒裝就依 `package-lock.json` 安裝一次。最後查詢 GitHub 上的 repo 是 public 還是 private；是 public 就印出大字警告。 | **只需要一次**：新電腦、重新 clone、或搬移 repo 資料夾之後（hook 記錄了 Python 的路徑） |
 | `start-ui.bat` | 啟動前會檢查 Python、API 模組、Node、前端相依與 private 參數包。接著同時啟動本機 API（private 參數包）與 live 模式前端，並打開瀏覽器。按 Enter 或直接關閉視窗，兩者都會一起停止。 | **每天用**：要用真實資料試算、比較方案時。加 `-Synthetic` 改用虛構資料練習 |
-| `backup-private.bat` | 把整個 `evidence\private\` 複製到備份位置（包含外洩留存 `leak-archive\` 與完整歷史 bundle）。複製後比對檔案數、總大小與每個檔案的大小。只複製，不刪除來源。 | 每次有重要的新私有資料後，以及**清除 git 歷史之前**。預設存到同磁碟機的 `\tools\backup\simulation_HW\<日期時間>\`；建議指定外接硬碟，例如 `backup-private.bat E:\backup` |
+| `backup-private.bat` | 把整個 `evidence\private\` 複製到備份位置（包含外洩留存 `leak-archive\` 與完整歷史 bundle）。複製後比對檔案數、總大小與每個檔案的大小。只複製，不刪除來源。目的地若在 repo 內部或任何含 `.git` 的資料夾裡，會直接拒絕。 | 每次有重要的新私有資料後，以及**清除 git 歷史之前**。預設存到同磁碟機的 `\tools\backup\simulation_HW\<日期時間>\`；建議指定外接硬碟，例如 `backup-private.bat E:\backup`。要放雲端時用 `--cloud`（見下方） |
+
+### 雲端暫存：`backup-private.bat --cloud`
+
+想在私人 Google Drive 也留一份時使用。**腳本只準備檔案，不會上傳；上傳一律由你手動進行。**
+
+1. 執行 `backup-private.bat --cloud`。備份會放在固定、好找的暫存區：同磁碟機的 `\tools\cloud-staging\simulation_HW\<日期時間>\`。要改用別的暫存區，就加上路徑，例如 `backup-private.bat --cloud F:\stage`。
+2. 複製並校驗後，腳本會再做兩件事：
+   * 在備份資料夾裡寫一份 `READ-ME-BEFORE-UPLOAD.txt`，說明內容與上傳規則；
+   * 把整個資料夾打包成旁邊的 `<日期時間>.zip`，並校驗 zip 內的檔案數與每個檔案的大小。打包不會刪除資料夾。
+3. 視窗會印出資料夾與 zip 的完整路徑。把**其中一個**手動拖進你的**私人** Google Drive。
+4. 上傳後在 Drive 對它按「共用」確認：
+   * 只有你自己，沒有共用給別人；
+   * 不在共用資料夾或共用雲端硬碟裡；
+   * 「一般存取權」是「限制」，不是「知道連結的任何人」。
+
+> [!CAUTION]
+> 這份備份含真實數值與從遊戲擷取的內容，也是將來清除 git 歷史後，唯一保有外洩原始內容的副本之一。
+> * 只能放在**私人** Google Drive：不可公開、不可產生分享連結、不可放共用資料夾。
+> * **絕對不可推到 GitHub** 或任何公開位置。
+> * 上傳完成後，暫存區（`\tools\cloud-staging\`）可以自行刪除；另外保留一份外接硬碟的離線備份。
 
 > [!IMPORTANT]
 > * `start-ui.bat` 開的是實戰模式。畫面上帶 [L] 或 [P] 標記（「未校準 · 非預測」）的銷量、營收、市佔、利潤**不是預測**；只有標 [V] 的成本面數字可信。
