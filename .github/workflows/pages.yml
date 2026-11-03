@@ -1,0 +1,66 @@
+# Publish the static synthetic demo of the UI to GitHub Pages.
+# MANUAL ONLY (workflow_dispatch). Read docs/ui-guide.md and docs/history-cleanup-plan.md before running it:
+# do not publish while the repository history still contains real values.
+# The workflow builds only committed sources and the committed synthetic bundle (frontend/public/demo), which the
+# local publication gate checked against the private reference values. CI itself has no private data.
+name: demo-pages
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: "Type PUBLISH-SYNTHETIC-DEMO to confirm the history has been cleaned and the demo is synthetic"
+        required: true
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require explicit confirmation
+        if: ${{ github.event.inputs.confirm != 'PUBLISH-SYNTHETIC-DEMO' }}
+        run: |
+          echo "Confirmation text missing; nothing is published." && exit 1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Check the demo bundle is synthetic
+        run: |
+          node -e "const m=require('./frontend/public/demo/manifest.json'); if (m.provenance!=='synthetic'||m.is_private!==false) process.exit(1)"
+          ! grep -R -l '"is_private": true' frontend/public/demo
+      - name: Install, test, build
+        working-directory: frontend
+        env:
+          MPSIM_BASE: /${{ github.event.repository.name }}/
+          VITE_DATA_SOURCE: static
+        run: |
+          npm ci --no-audit --no-fund
+          npm test
+          npm run build
+      - name: Check the build has no private markers
+        run: |
+          ! grep -R -l -e '"is_private": true' -e 'evidence/private' frontend/dist
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: frontend/dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
