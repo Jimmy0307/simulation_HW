@@ -1,0 +1,7519 @@
+{
+ "schema": "marketplace-sysid/parameter-catalog@1",
+ "values_included": false,
+ "classes": [
+  "parameter_table",
+  "parameter",
+  "state_value",
+  "result_value",
+  "decision",
+  "identifier"
+ ],
+ "fields": [
+  {
+   "service": "BasesCompetitiveAdvantage",
+   "path": "decisions.basis",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "BasesCompetitiveAdvantage",
+   "path": "staticData.bases[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "CD",
+   "path": "decisions.deposit",
+   "type": "number",
+   "unit": "currency",
+   "class": "decision",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "CD",
+   "path": "decisions.withdraw",
+   "type": "number",
+   "unit": "currency",
+   "class": "decision",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "CD",
+   "path": "dynamicData.maxCD",
+   "type": "number",
+   "unit": "unknown",
+   "class": "parameter",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "CD",
+   "path": "staticData.rate",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "CD",
+   "path": "calculate.cd",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "CD",
+   "path": "calculate.interest",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "CD",
+   "path": "calculateResult.cd",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "calculate"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "CD",
+   "path": "calculateResult.interest",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "calculate"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "CD",
+   "path": "dynamicData.projectedCash",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "CD",
+   "path": "dynamicData.stockIncrease",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "CD",
+   "path": "staticData.cash",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "CD",
+   "path": "staticData.cd",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "CD",
+   "path": "staticData.salesQuarter",
+   "type": "boolean",
+   "unit": "quarters",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "CompanyName",
+   "path": "staticData.maxLength",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "CompanyName",
+   "path": "dynamicData.companyNameChangedThisQuarter",
+   "type": "boolean",
+   "unit": "quarters",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "CorporateObjectives",
+   "path": "decisions.objectives[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 7
+  },
+  {
+   "service": "CorporateObjectives",
+   "path": "decisions.objectives[*].priority",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 7
+  },
+  {
+   "service": "CorporateObjectives",
+   "path": "staticData.objectives[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 7
+  },
+  {
+   "service": "CorporateObjectives",
+   "path": "staticData.maxTextSize",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "Culture",
+   "path": "staticData.maxLength",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "CustomerNeeds",
+   "path": "staticData.segments[*].segmentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 12
+  },
+  {
+   "service": "CustomerNeeds",
+   "path": "staticData.tables[*].items[*].itemID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 144
+  },
+  {
+   "service": "CustomerNeeds",
+   "path": "staticData.tables[*].items[*].segments[*].segmentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 432
+  },
+  {
+   "service": "CustomerNeeds",
+   "path": "staticData.tables[*].tableID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 8
+  },
+  {
+   "service": "CustomerNeeds",
+   "path": "staticData.tables[*].items[*].segments[*].value",
+   "type": "number",
+   "unit": "unknown",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 432
+  },
+  {
+   "service": "CustomerNeeds",
+   "path": "staticData.isBought",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 4
+  },
+  {
+   "service": "CustomerNeeds",
+   "path": "staticData.tables[*].sameData",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 8
+  },
+  {
+   "service": "DevelopBrand",
+   "path": "decisions.brandFeatures[*].featureID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 25
+  },
+  {
+   "service": "DevelopBrand",
+   "path": "decisions.brandFeatures[*].selected",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 25
+  },
+  {
+   "service": "DevelopBrand",
+   "path": "decisions.implicitBrandID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "Email",
+   "path": "allNew",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "getNewEmailsCount"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 28
+  },
+  {
+   "service": "Email",
+   "path": "inboxCurrent",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "getNewEmailsCount"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 28
+  },
+  {
+   "service": "Email",
+   "path": "inboxPrevious",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "getNewEmailsCount"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 28
+  },
+  {
+   "service": "Email",
+   "path": "outboxCurrent",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "getNewEmailsCount"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 28
+  },
+  {
+   "service": "Email",
+   "path": "outboxPrevious",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "getNewEmailsCount"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 28
+  },
+  {
+   "service": "ExecutiveResponsibilities",
+   "path": "decisions.students[*].responsibilityID1",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "ExecutiveResponsibilities",
+   "path": "decisions.students[*].responsibilityID2",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "ExecutiveResponsibilities",
+   "path": "decisions.students[*].studentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "ExecutiveResponsibilities",
+   "path": "staticData.responsibilities[*].responsibilityID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 7
+  },
+  {
+   "service": "ExecutiveResponsibilities",
+   "path": "staticData.students[*].studentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "ExecutiveResponsibilities",
+   "path": "dynamicData.decisionChangedThisQuarter",
+   "type": "boolean",
+   "unit": "quarters",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ExecutiveResponsibilities",
+   "path": "staticData.students[*].isMe",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "ExecutiveResponsibilities",
+   "path": "staticData.students[*].responsibilityID1",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "ExecutiveResponsibilities",
+   "path": "staticData.students[*].responsibilityID2",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "FinalCheck",
+   "path": "dynamicData.errors[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "FinalCheck",
+   "path": "dynamicData.submitPreventingErrors[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "FinancialResources",
+   "path": "decisions.resources[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "FinancialResources",
+   "path": "decisions.resources[*].priority",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "FinancialResources",
+   "path": "staticData.resources[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "FinancialResources",
+   "path": "staticData.futureInvestments[*].investment",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "FinancialResources",
+   "path": "staticData.cash",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "FinancialResources",
+   "path": "staticData.cd",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "FinancialResources",
+   "path": "staticData.futureInvestments[*].quarter",
+   "type": "number",
+   "unit": "quarters",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "FinancialResources",
+   "path": "staticData.hasLongTermLoan",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "FinancialResources",
+   "path": "staticData.hasShortTermLoan",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "FinancialResources",
+   "path": "staticData.investment",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "FinancialResources",
+   "path": "staticData.netEquity",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "FinancialResources",
+   "path": "staticData.newInvestment",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "FinancialResources",
+   "path": "staticData.retainedEarnings",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "FinancialResources",
+   "path": "staticData.totalCash",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "FinancialResources",
+   "path": "staticData.totalEquity",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "FinancialResources",
+   "path": "staticData.unusedLong",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "FinancialResources",
+   "path": "staticData.unusedShort",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "FixedCapacity",
+   "path": "decisions.increase",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "FixedCapacity",
+   "path": "decisions.supplier",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "FixedCapacity",
+   "path": "staticData.defaultSupplierRegionID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "FixedCapacity",
+   "path": "dynamicData.minimumOperatingCapacity",
+   "type": "number",
+   "unit": "units",
+   "class": "parameter",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "FixedCapacity",
+   "path": "staticData.capacityOptions[*].cost",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 40
+  },
+  {
+   "service": "FixedCapacity",
+   "path": "staticData.capacityOptions[*].machines",
+   "type": "number",
+   "unit": "count",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 40
+  },
+  {
+   "service": "FixedCapacity",
+   "path": "staticData.capacityOptions[*].units",
+   "type": "number",
+   "unit": "units",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 40
+  },
+  {
+   "service": "FixedCapacity",
+   "path": "calculate.acquirement",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "FixedCapacity",
+   "path": "calculate.expansion",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "FixedCapacity",
+   "path": "calculate.total",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "FixedCapacity",
+   "path": "calculateResult.acquirement",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "calculate"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 9
+  },
+  {
+   "service": "FixedCapacity",
+   "path": "calculateResult.expansion",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "calculate"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 9
+  },
+  {
+   "service": "FixedCapacity",
+   "path": "calculateResult.total",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "calculate"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 9
+  },
+  {
+   "service": "FixedCapacity",
+   "path": "dynamicData.averageProductivity",
+   "type": "number",
+   "unit": "percent",
+   "class": "state_value",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "FixedCapacity",
+   "path": "dynamicData.hasProjectedDemandNextQuarter",
+   "type": "boolean",
+   "unit": "units",
+   "class": "state_value",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "FixedCapacity",
+   "path": "dynamicData.projectDemandNextQuarter",
+   "type": "number",
+   "unit": "units",
+   "class": "state_value",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "FixedCapacity",
+   "path": "staticData.fixedCapacity",
+   "type": "number",
+   "unit": "units",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "FixedCapacity",
+   "path": "staticData.hasFactoryProductivity",
+   "type": "boolean",
+   "unit": "percent",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "FixedCapacity",
+   "path": "staticData.haveMachines",
+   "type": "boolean",
+   "unit": "count",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "GameInfo",
+   "path": "teams[*].students[*].studentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "studentsOnline"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 66
+  },
+  {
+   "service": "GameInfo",
+   "path": "teams[*].teamID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "studentsOnline"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 12
+  },
+  {
+   "service": "GameInfo",
+   "path": "teams[*].students[*].active",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "studentsOnline"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 66
+  },
+  {
+   "service": "InitialSalesForceCompensation",
+   "path": "staticData.healthInsuranceOptions[*].optionID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "InitialSalesForceCompensation",
+   "path": "staticData.regions[*].regionID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialSalesForceCompensation",
+   "path": "staticData.vacationOptions[*].optionID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 8
+  },
+  {
+   "service": "InitialSalesForceCompensation",
+   "path": "staticData.regions[*].healthInsurance",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialSalesForceCompensation",
+   "path": "staticData.regions[*].healthInsuranceOption",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialSalesForceCompensation",
+   "path": "staticData.regions[*].healthInsurancePercent",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialSalesForceCompensation",
+   "path": "staticData.regions[*].pension",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialSalesForceCompensation",
+   "path": "staticData.regions[*].pensionPercent",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialSalesForceCompensation",
+   "path": "staticData.regions[*].salary",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialSalesForceCompensation",
+   "path": "staticData.regions[*].total",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialSalesForceCompensation",
+   "path": "staticData.regions[*].vacation",
+   "type": "number",
+   "unit": "unknown",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialSalesForceCompensation",
+   "path": "staticData.regions[*].vacationWeeks",
+   "type": "number",
+   "unit": "weeks",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialSalesForceCompensation",
+   "path": "staticData.importance.healthInsurance",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialSalesForceCompensation",
+   "path": "staticData.importance.pension",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialSalesForceCompensation",
+   "path": "staticData.importance.salary",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialSalesForceCompensation",
+   "path": "staticData.importance.vacation",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialWorkersCompensation",
+   "path": "staticData.healthInsuranceOptions[*].optionID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "InitialWorkersCompensation",
+   "path": "staticData.regions[*].regionID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialWorkersCompensation",
+   "path": "staticData.vacationOptions[*].optionID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 8
+  },
+  {
+   "service": "InitialWorkersCompensation",
+   "path": "staticData.regions[*].healthInsurance",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialWorkersCompensation",
+   "path": "staticData.regions[*].healthInsuranceOption",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialWorkersCompensation",
+   "path": "staticData.regions[*].healthInsurancePercent",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialWorkersCompensation",
+   "path": "staticData.regions[*].pension",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialWorkersCompensation",
+   "path": "staticData.regions[*].pensionPercent",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialWorkersCompensation",
+   "path": "staticData.regions[*].salary",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialWorkersCompensation",
+   "path": "staticData.regions[*].total",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialWorkersCompensation",
+   "path": "staticData.regions[*].vacation",
+   "type": "number",
+   "unit": "unknown",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialWorkersCompensation",
+   "path": "staticData.regions[*].vacationWeeks",
+   "type": "number",
+   "unit": "weeks",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialWorkersCompensation",
+   "path": "staticData.importance.healthInsurance",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialWorkersCompensation",
+   "path": "staticData.importance.pension",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialWorkersCompensation",
+   "path": "staticData.importance.salary",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "InitialWorkersCompensation",
+   "path": "staticData.importance.vacation",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "MarketSize",
+   "path": "staticData.regions[*].regionID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "MarketSize",
+   "path": "staticData.segments[*].segmentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "MarketSize",
+   "path": "staticData.tables[*].items[*].cityID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 8
+  },
+  {
+   "service": "MarketSize",
+   "path": "staticData.tables[*].items[*].itemID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 8
+  },
+  {
+   "service": "MarketSize",
+   "path": "staticData.tables[*].items[*].regionID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 8
+  },
+  {
+   "service": "MarketSize",
+   "path": "staticData.tables[*].items[*].segments[*].segmentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 24
+  },
+  {
+   "service": "MarketSize",
+   "path": "staticData.tables[*].tableID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "MarketSize",
+   "path": "staticData.tables[*].items[*].segments[*].value",
+   "type": "number",
+   "unit": "unknown",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 24
+  },
+  {
+   "service": "MarketSize",
+   "path": "staticData.isBought",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "MarketSize",
+   "path": "staticData.tables[*].sameData",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "Mission",
+   "path": "staticData.maxLength",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "decisions.brandID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.componentGroups[*].brandFeatures[*].featureID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 25
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.componentGroups[*].groupID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 13
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.maxBrandDesigns",
+   "type": "number",
+   "unit": "unknown",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.maxBrandFeatures",
+   "type": "number",
+   "unit": "unknown",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.maxNameLength",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.minDecreaseCost",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.minDirectLabor",
+   "type": "number",
+   "unit": "unknown",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.minIncreaseCost",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.minOverheadCPU",
+   "type": "number",
+   "unit": "unknown",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.brandTypes[*].costAdj",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.brandTypes[*].priceAdj",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.brandTypes[*].unitsPerOCUnit",
+   "type": "number",
+   "unit": "units",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.componentGroups[*].brandFeatures[*].featurePrice",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 25
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.componentGroups[*].brandFeatures[*].projectCost",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 25
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "dynamicData.executivesCompensation",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "dynamicData.executivesDailyCompensation",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "dynamicData.newDesignAllowed",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "dynamicData.projectedWorkersProductivity",
+   "type": "number",
+   "unit": "percent",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "dynamicData.workersCompensation",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "dynamicData.workersDailyCompensation",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.brandTypes[*].canDesign",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.brandTypes[*].featureType",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.componentGroups[*].brandFeatures[*].featureTypes",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 25
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.componentGroups[*].brandFeatures[*].quarterToAppear",
+   "type": "number",
+   "unit": "quarters",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 25
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.componentGroups[*].brandFeatures[*].rd",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 25
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.componentGroups[*].displayOrder",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 13
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.componentGroups[*].multiSelect",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 13
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.componentGroups[*].required",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 13
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.componentThresholdNumber",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.designCost",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.directLaborPenalty",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.factoryCostIndex",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.factoryRegion",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.fixedCapacity",
+   "type": "number",
+   "unit": "units",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.inefficiencyElasticity",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.learnCurve",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.learnCurveFloor",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.manufacturingSetupCost",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.overheadPenalty",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.psupType",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.scaleThreshold",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.simpleMarketing",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.specialOptions",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.varDecreaseCPU",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.varDirectLabor",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.varIncreaseCPU",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.varOverheadCPU",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ModifyBrand",
+   "path": "staticData.workersProductivity",
+   "type": "number",
+   "unit": "percent",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "OpenSalesOffice",
+   "path": "decisions.regions[*].cities[*].change",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 44
+  },
+  {
+   "service": "OpenSalesOffice",
+   "path": "decisions.regions[*].cities[*].cityID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 44
+  },
+  {
+   "service": "OpenSalesOffice",
+   "path": "decisions.regions[*].regionID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 11
+  },
+  {
+   "service": "OpenSalesOffice",
+   "path": "staticData.regions[*].cities[*].cityID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 40
+  },
+  {
+   "service": "OpenSalesOffice",
+   "path": "staticData.regions[*].cities[*].mr[*].segmentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 120
+  },
+  {
+   "service": "OpenSalesOffice",
+   "path": "staticData.regions[*].regionID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 10
+  },
+  {
+   "service": "OpenSalesOffice",
+   "path": "staticData.segments[*].segmentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 30
+  },
+  {
+   "service": "OpenSalesOffice",
+   "path": "staticData.regions[*].cities[*].leaseCost",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 40
+  },
+  {
+   "service": "OpenSalesOffice",
+   "path": "staticData.regions[*].cities[*].mr[*].price",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 120
+  },
+  {
+   "service": "OpenSalesOffice",
+   "path": "staticData.regions[*].cities[*].mr[*].size",
+   "type": "number",
+   "unit": "units_market",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 120
+  },
+  {
+   "service": "OpenSalesOffice",
+   "path": "staticData.regions[*].cities[*].setupCost",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 40
+  },
+  {
+   "service": "OpenSalesOffice",
+   "path": "calculate.total",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 11
+  },
+  {
+   "service": "OpenSalesOffice",
+   "path": "calculate.totalClose",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 11
+  },
+  {
+   "service": "OpenSalesOffice",
+   "path": "calculate.totalLease",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 11
+  },
+  {
+   "service": "OpenSalesOffice",
+   "path": "calculate.totalSetup",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 11
+  },
+  {
+   "service": "OpenSalesOffice",
+   "path": "calculateResult.total",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "calculate"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 8
+  },
+  {
+   "service": "OpenSalesOffice",
+   "path": "calculateResult.totalClose",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "calculate"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 8
+  },
+  {
+   "service": "OpenSalesOffice",
+   "path": "calculateResult.totalLease",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "calculate"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 8
+  },
+  {
+   "service": "OpenSalesOffice",
+   "path": "calculateResult.totalSetup",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "calculate"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 8
+  },
+  {
+   "service": "OpenSalesOffice",
+   "path": "staticData.onlyReseller",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 10
+  },
+  {
+   "service": "OpenSalesOffice",
+   "path": "staticData.regions[*].cities[*].opened",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 40
+  },
+  {
+   "service": "OpenWebcenter",
+   "path": "decisions.regions[*].change",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 11
+  },
+  {
+   "service": "OpenWebcenter",
+   "path": "decisions.regions[*].regionID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 11
+  },
+  {
+   "service": "OpenWebcenter",
+   "path": "staticData.regions[*].cities[*].cityID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 40
+  },
+  {
+   "service": "OpenWebcenter",
+   "path": "staticData.regions[*].cityID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 10
+  },
+  {
+   "service": "OpenWebcenter",
+   "path": "staticData.regions[*].regionID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 10
+  },
+  {
+   "service": "OpenWebcenter",
+   "path": "staticData.regions[*].leaseCost",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 10
+  },
+  {
+   "service": "OpenWebcenter",
+   "path": "staticData.regions[*].setupCost",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 10
+  },
+  {
+   "service": "OpenWebcenter",
+   "path": "calculate.total",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 11
+  },
+  {
+   "service": "OpenWebcenter",
+   "path": "calculate.totalClose",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 11
+  },
+  {
+   "service": "OpenWebcenter",
+   "path": "calculate.totalLease",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 11
+  },
+  {
+   "service": "OpenWebcenter",
+   "path": "calculate.totalSetup",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "modify",
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 11
+  },
+  {
+   "service": "OpenWebcenter",
+   "path": "calculateResult.total",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "calculate"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "OpenWebcenter",
+   "path": "calculateResult.totalClose",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "calculate"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "OpenWebcenter",
+   "path": "calculateResult.totalLease",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "calculate"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "OpenWebcenter",
+   "path": "calculateResult.totalSetup",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "calculate"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "OpenWebcenter",
+   "path": "staticData.onlyReseller",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 10
+  },
+  {
+   "service": "OpenWebcenter",
+   "path": "staticData.regions[*].opened",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 10
+  },
+  {
+   "service": "PersonalGoals",
+   "path": "decisions.students[*].goals[*].pgoalID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 25
+  },
+  {
+   "service": "PersonalGoals",
+   "path": "decisions.students[*].mostImportantGoal",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "PersonalGoals",
+   "path": "decisions.students[*].studentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "PersonalGoals",
+   "path": "staticData.goals[*].pgoalID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 21
+  },
+  {
+   "service": "PersonalGoals",
+   "path": "staticData.students[*].studentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "PersonalGoals",
+   "path": "staticData.maxTextSize",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "PersonalGoals",
+   "path": "dynamicData.decisionChangedThisQuarter",
+   "type": "boolean",
+   "unit": "quarters",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "PersonalGoals",
+   "path": "staticData.goals[*].customText",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 21
+  },
+  {
+   "service": "PriceWillingToPay",
+   "path": "staticData.regions[*].regionID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "PriceWillingToPay",
+   "path": "staticData.segments[*].segmentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "PriceWillingToPay",
+   "path": "staticData.tables[*].items[*].cityID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 4
+  },
+  {
+   "service": "PriceWillingToPay",
+   "path": "staticData.tables[*].items[*].itemID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 4
+  },
+  {
+   "service": "PriceWillingToPay",
+   "path": "staticData.tables[*].items[*].regionID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 4
+  },
+  {
+   "service": "PriceWillingToPay",
+   "path": "staticData.tables[*].items[*].segments[*].segmentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 12
+  },
+  {
+   "service": "PriceWillingToPay",
+   "path": "staticData.tables[*].tableID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "PriceWillingToPay",
+   "path": "staticData.tables[*].items[*].segments[*].value",
+   "type": "number",
+   "unit": "unknown",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 12
+  },
+  {
+   "service": "PriceWillingToPay",
+   "path": "staticData.isBought",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "PriceWillingToPay",
+   "path": "staticData.tables[*].sameData",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaBalanceSheet",
+   "path": "staticData.cdRate",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaBalanceSheet",
+   "path": "staticData.elRateInc",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaBalanceSheet",
+   "path": "staticData.elRateMin",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaBalanceSheet",
+   "path": "staticData.fill",
+   "type": "number",
+   "unit": "quarters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaBalanceSheet",
+   "path": "staticData.inventoryTax",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaBalanceSheet",
+   "path": "staticData.ltRate5yr",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaBalanceSheet",
+   "path": "staticData.quarters",
+   "type": "number",
+   "unit": "quarters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaBalanceSheet",
+   "path": "staticData.slRateMax",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaBalanceSheet",
+   "path": "staticData.slRateMin",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaBalanceSheet",
+   "path": "staticData.taxRate",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaBalanceSheet",
+   "path": "staticData.sections[*].items[*].sign",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 9
+  },
+  {
+   "service": "ProFormaBalanceSheet",
+   "path": "staticData.sections[*].sign",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 4
+  },
+  {
+   "service": "ProFormaCashFlow",
+   "path": "decisions.items[*].quarters[*]",
+   "type": "number",
+   "unit": "quarters",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 22
+  },
+  {
+   "service": "ProFormaCashFlow",
+   "path": "staticData.cdRate",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaCashFlow",
+   "path": "staticData.elRateInc",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaCashFlow",
+   "path": "staticData.elRateMin",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaCashFlow",
+   "path": "staticData.fill",
+   "type": "number",
+   "unit": "quarters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaCashFlow",
+   "path": "staticData.inventoryTax",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaCashFlow",
+   "path": "staticData.ltRate5yr",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaCashFlow",
+   "path": "staticData.quarters",
+   "type": "number",
+   "unit": "quarters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaCashFlow",
+   "path": "staticData.slRateMax",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaCashFlow",
+   "path": "staticData.slRateMin",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaCashFlow",
+   "path": "staticData.taxRate",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaCashFlow",
+   "path": "dynamicData.items[*].value",
+   "type": "number",
+   "unit": "unknown",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 27
+  },
+  {
+   "service": "ProFormaCashFlow",
+   "path": "calculate.items[*].quarters[*]",
+   "type": "number",
+   "unit": "quarters",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 10
+  },
+  {
+   "service": "ProFormaCashFlow",
+   "path": "staticData.autoCalculated",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaCashFlow",
+   "path": "staticData.importTacticalPlan",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaCashFlow",
+   "path": "staticData.sections[*].items[*].calculated",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 32
+  },
+  {
+   "service": "ProFormaCashFlow",
+   "path": "staticData.sections[*].items[*].sign",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 32
+  },
+  {
+   "service": "ProFormaCashFlow",
+   "path": "staticData.sections[*].sign",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "ProFormaIncomeStatement",
+   "path": "staticData.cdRate",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaIncomeStatement",
+   "path": "staticData.elRateInc",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaIncomeStatement",
+   "path": "staticData.elRateMin",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaIncomeStatement",
+   "path": "staticData.fill",
+   "type": "number",
+   "unit": "quarters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaIncomeStatement",
+   "path": "staticData.inventoryTax",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaIncomeStatement",
+   "path": "staticData.ltRate5yr",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaIncomeStatement",
+   "path": "staticData.quarters",
+   "type": "number",
+   "unit": "quarters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaIncomeStatement",
+   "path": "staticData.slRateMax",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaIncomeStatement",
+   "path": "staticData.slRateMin",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaIncomeStatement",
+   "path": "staticData.taxRate",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "ProFormaIncomeStatement",
+   "path": "staticData.sections[*].items[*].quarters[*]",
+   "type": "number",
+   "unit": "quarters",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "ProFormaIncomeStatement",
+   "path": "staticData.sections[*].items[*].sign",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 29
+  },
+  {
+   "service": "ProFormaIncomeStatement",
+   "path": "staticData.sections[*].sign",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 8
+  },
+  {
+   "service": "Problem",
+   "path": "staticData.maxLength",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "Stock",
+   "path": "decisions.stocks[*].investorID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "Stock",
+   "path": "decisions.stocks[*].price",
+   "type": "number",
+   "unit": "currency",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "Stock",
+   "path": "decisions.stocks[*].shares",
+   "type": "number",
+   "unit": "count",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "Stock",
+   "path": "decisions.stocks[*].type",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "Stock",
+   "path": "calculate.stocks[*].investorID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "Stock",
+   "path": "dynamicData.investors[*].investorID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "Stock",
+   "path": "staticData.warnMaxPrice",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "Stock",
+   "path": "staticData.warnMinPrice",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "Stock",
+   "path": "calculate.dividends",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "Stock",
+   "path": "calculate.sharesIncrease",
+   "type": "number",
+   "unit": "count",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "Stock",
+   "path": "calculate.sharesTotal",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "Stock",
+   "path": "calculate.stockIncrease",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "Stock",
+   "path": "calculate.stockTotal",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "Stock",
+   "path": "calculate.stocks[*].total",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "Stock",
+   "path": "dynamicData.dividend",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "Stock",
+   "path": "staticData.sharesTotal",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "Stock",
+   "path": "staticData.stockTotal",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "StrategicThrustsCorporate",
+   "path": "decisions.thrustGroups[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "StrategicThrustsCorporate",
+   "path": "staticData.thrustGroups[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "StrategicThrustsCorporate",
+   "path": "staticData.thrustGroups[*].thrusts[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 29
+  },
+  {
+   "service": "StrategicThrustsCorporate",
+   "path": "staticData.maxTextSize",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "StrategicThrustsCorporate",
+   "path": "staticData.thrustGroups[*].multiSelect",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "StrategicThrustsFinance",
+   "path": "decisions.thrustGroups[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "StrategicThrustsFinance",
+   "path": "staticData.thrustGroups[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "StrategicThrustsFinance",
+   "path": "staticData.thrustGroups[*].thrusts[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 28
+  },
+  {
+   "service": "StrategicThrustsFinance",
+   "path": "staticData.maxTextSize",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "StrategicThrustsFinance",
+   "path": "staticData.thrustGroups[*].multiSelect",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "StrategicThrustsHumanResource",
+   "path": "decisions.thrustGroups[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 4
+  },
+  {
+   "service": "StrategicThrustsHumanResource",
+   "path": "staticData.thrustGroups[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 4
+  },
+  {
+   "service": "StrategicThrustsHumanResource",
+   "path": "staticData.thrustGroups[*].thrusts[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 15
+  },
+  {
+   "service": "StrategicThrustsHumanResource",
+   "path": "staticData.maxTextSize",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "StrategicThrustsHumanResource",
+   "path": "staticData.thrustGroups[*].multiSelect",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 4
+  },
+  {
+   "service": "StrategicThrustsManufacturing",
+   "path": "decisions.thrustGroups[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "StrategicThrustsManufacturing",
+   "path": "staticData.thrustGroups[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "StrategicThrustsManufacturing",
+   "path": "staticData.thrustGroups[*].thrusts[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 12
+  },
+  {
+   "service": "StrategicThrustsManufacturing",
+   "path": "staticData.maxTextSize",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "StrategicThrustsManufacturing",
+   "path": "staticData.thrustGroups[*].multiSelect",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "StrategicThrustsMarketing",
+   "path": "decisions.thrustGroups[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 9
+  },
+  {
+   "service": "StrategicThrustsMarketing",
+   "path": "staticData.thrustGroups[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 9
+  },
+  {
+   "service": "StrategicThrustsMarketing",
+   "path": "staticData.thrustGroups[*].thrusts[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 34
+  },
+  {
+   "service": "StrategicThrustsMarketing",
+   "path": "staticData.maxTextSize",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "StrategicThrustsMarketing",
+   "path": "staticData.thrustGroups[*].multiSelect",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 9
+  },
+  {
+   "service": "StrategicThrustsSalesChannel",
+   "path": "decisions.thrustGroups[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "StrategicThrustsSalesChannel",
+   "path": "staticData.thrustGroups[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "StrategicThrustsSalesChannel",
+   "path": "staticData.thrustGroups[*].thrusts[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 22
+  },
+  {
+   "service": "StrategicThrustsSalesChannel",
+   "path": "staticData.maxTextSize",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "StrategicThrustsSalesChannel",
+   "path": "staticData.thrustGroups[*].multiSelect",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.decisions.brandID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.decisions.deposit",
+   "type": "number",
+   "unit": "currency",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.decisions.increase",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.decisions.regions[*].change",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.decisions.regions[*].cities[*].change",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 4
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.decisions.regions[*].cities[*].cityID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 4
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.decisions.regions[*].regionID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.decisions.stocks[*].investorID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.decisions.stocks[*].price",
+   "type": "number",
+   "unit": "currency",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.decisions.stocks[*].shares",
+   "type": "number",
+   "unit": "count",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.decisions.stocks[*].type",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.decisions.students[*].mostImportantGoal",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.decisions.students[*].responsibilityID1",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.decisions.students[*].responsibilityID2",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.decisions.students[*].studentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 10
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.decisions.supplier",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.decisions.targetSegments[*].priority",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.decisions.targetSegments[*].segmentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.decisions.withdraw",
+   "type": "number",
+   "unit": "currency",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.calculate.stocks[*].investorID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.dynamicData.investors[*].investorID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.componentGroups[*].brandFeatures[*].featureID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 25
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.componentGroups[*].groupID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 13
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.defaultSupplierRegionID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.goals[*].pgoalID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 21
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.norms[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 15
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.processes[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.regions[*].cities[*].cityID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 8
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.regions[*].cities[*].mr[*].segmentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 12
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.regions[*].cityID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.regions[*].regionID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.responsibilities[*].responsibilityID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 7
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.segments[*].segmentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.students[*].studentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 10
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.dynamicData.maxCD",
+   "type": "number",
+   "unit": "unknown",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.dynamicData.minimumOperatingCapacity",
+   "type": "number",
+   "unit": "units",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.maxBrandDesigns",
+   "type": "number",
+   "unit": "unknown",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.maxBrandFeatures",
+   "type": "number",
+   "unit": "unknown",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.maxLength",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.maxNameLength",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.maxTextSize",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.minDecreaseCost",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.minDirectLabor",
+   "type": "number",
+   "unit": "unknown",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.minIncreaseCost",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.minOverheadCPU",
+   "type": "number",
+   "unit": "unknown",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.rate",
+   "type": "number",
+   "unit": "percent",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.warnMaxPrice",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.warnMinPrice",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.brandTypes[*].costAdj",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.brandTypes[*].priceAdj",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.brandTypes[*].unitsPerOCUnit",
+   "type": "number",
+   "unit": "units",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.capacityOptions[*].cost",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 8
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.capacityOptions[*].machines",
+   "type": "number",
+   "unit": "count",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 8
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.capacityOptions[*].units",
+   "type": "number",
+   "unit": "units",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 8
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.componentGroups[*].brandFeatures[*].featurePrice",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 25
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.componentGroups[*].brandFeatures[*].projectCost",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 25
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.regions[*].cities[*].leaseCost",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 4
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.regions[*].cities[*].mr[*].price",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 12
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.regions[*].cities[*].mr[*].size",
+   "type": "number",
+   "unit": "units_market",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 12
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.regions[*].cities[*].setupCost",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 4
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.regions[*].leaseCost",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.regions[*].setupCost",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.calculate.acquirement",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.calculate.cd",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.calculate.cogsEstimates[*].cost",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.calculate.cogsEstimates[*].units",
+   "type": "number",
+   "unit": "units",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.calculate.dividends",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.calculate.expansion",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.calculate.interest",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.calculate.materialCost",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.calculate.sharesIncrease",
+   "type": "number",
+   "unit": "count",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.calculate.sharesTotal",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.calculate.stockIncrease",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.calculate.stockTotal",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.calculate.stocks[*].total",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.calculate.total",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.calculate.totalClose",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.calculate.totalLease",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.calculate.totalSetup",
+   "type": "number",
+   "unit": "currency",
+   "class": "result_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.commonData.allowExport",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 11
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.commonData.currentQuarter",
+   "type": "number",
+   "unit": "quarters",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 11
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.dynamicData.averageProductivity",
+   "type": "number",
+   "unit": "percent",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.dynamicData.companyNameChangedThisQuarter",
+   "type": "boolean",
+   "unit": "quarters",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.dynamicData.decisionChangedThisQuarter",
+   "type": "boolean",
+   "unit": "quarters",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.dynamicData.dividend",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.dynamicData.executivesCompensation",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.dynamicData.executivesDailyCompensation",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.dynamicData.hasProjectedDemandNextQuarter",
+   "type": "boolean",
+   "unit": "units",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.dynamicData.newDesignAllowed",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.dynamicData.projectDemandNextQuarter",
+   "type": "number",
+   "unit": "units",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.dynamicData.projectedCash",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.dynamicData.projectedWorkersProductivity",
+   "type": "number",
+   "unit": "percent",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.dynamicData.stockIncrease",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.dynamicData.workersCompensation",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.dynamicData.workersDailyCompensation",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.brandTypes[*].canDesign",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.brandTypes[*].featureType",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.cash",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.cd",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.componentGroups[*].brandFeatures[*].featureTypes",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 25
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.componentGroups[*].brandFeatures[*].quarterToAppear",
+   "type": "number",
+   "unit": "quarters",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 25
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.componentGroups[*].brandFeatures[*].rd",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 25
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.componentGroups[*].displayOrder",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 13
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.componentGroups[*].multiSelect",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 13
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.componentGroups[*].required",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 13
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.componentThresholdNumber",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.designCost",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.directLaborPenalty",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.factoryCostIndex",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.factoryRegion",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.fixedCapacity",
+   "type": "number",
+   "unit": "units",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.goals[*].customText",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 21
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.hasFactoryProductivity",
+   "type": "boolean",
+   "unit": "percent",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.haveMachines",
+   "type": "boolean",
+   "unit": "count",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.inefficiencyElasticity",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.learnCurve",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.learnCurveFloor",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.manufacturingSetupCost",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.onlyReseller",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.overheadPenalty",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.psupType",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.regions[*].cities[*].opened",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 4
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.regions[*].opened",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.salesQuarter",
+   "type": "boolean",
+   "unit": "quarters",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.scaleThreshold",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.sharesTotal",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.simpleMarketing",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.specialOptions",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.stockTotal",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.students[*].isMe",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.students[*].responsibilityID1",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.students[*].responsibilityID2",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.varDecreaseCPU",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.varDirectLabor",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.varIncreaseCPU",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.varOverheadCPU",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "path": "staticData.categories[*].decisions[*].data.staticData.workersProductivity",
+   "type": "number",
+   "unit": "percent",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.decisions.basis",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.decisions.objectives[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 7
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.decisions.objectives[*].priority",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 7
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.decisions.resources[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.decisions.resources[*].priority",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.decisions.targetSegments[*].priority",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.decisions.targetSegments[*].segmentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.decisions.thrustGroups[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 33
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.staticData.bases[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.staticData.objectives[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 7
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.staticData.resources[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.staticData.segments[*].segmentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.staticData.thrustGroups[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 33
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.staticData.thrustGroups[*].thrusts[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 140
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.staticData.maxLength",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.staticData.maxTextSize",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 7
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.staticData.futureInvestments[*].investment",
+   "type": "number",
+   "unit": "currency",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.commonData.allowExport",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 13
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.commonData.currentQuarter",
+   "type": "number",
+   "unit": "quarters",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 13
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.staticData.cash",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.staticData.cd",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.staticData.futureInvestments[*].quarter",
+   "type": "number",
+   "unit": "quarters",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.staticData.hasLongTermLoan",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.staticData.hasShortTermLoan",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.staticData.investment",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.staticData.netEquity",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.staticData.newInvestment",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.staticData.retainedEarnings",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.staticData.thrustGroups[*].multiSelect",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 33
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.staticData.totalCash",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.staticData.totalEquity",
+   "type": "number",
+   "unit": "currency",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.staticData.unusedLong",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "path": "staticData.categories[*].decisions[*].data.staticData.unusedShort",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "TacticStrategyLinksFinance",
+   "path": "staticData.fill",
+   "type": "number",
+   "unit": "quarters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "TacticStrategyLinksFinance",
+   "path": "staticData.maxTextSize",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "TacticStrategyLinksFinance",
+   "path": "dynamicData.tactics[*][*].isText",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 13
+  },
+  {
+   "service": "TacticStrategyLinksHumanResource",
+   "path": "staticData.fill",
+   "type": "number",
+   "unit": "quarters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "TacticStrategyLinksHumanResource",
+   "path": "staticData.maxTextSize",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "TacticStrategyLinksHumanResource",
+   "path": "dynamicData.tactics[*][*].isText",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "TacticStrategyLinksManufacturing",
+   "path": "staticData.fill",
+   "type": "number",
+   "unit": "quarters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "TacticStrategyLinksManufacturing",
+   "path": "staticData.maxTextSize",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 2
+  },
+  {
+   "service": "TacticStrategyLinksManufacturing",
+   "path": "dynamicData.tactics[*][*].isText",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har",
+    "scenario"
+   ],
+   "observations": 14
+  },
+  {
+   "service": "TacticStrategyLinksMarketing",
+   "path": "staticData.fill",
+   "type": "number",
+   "unit": "quarters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "TacticStrategyLinksMarketing",
+   "path": "staticData.maxTextSize",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "TacticStrategyLinksMarketing",
+   "path": "dynamicData.tactics[*][*].isText",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 8
+  },
+  {
+   "service": "TacticStrategyLinksSalesChannel",
+   "path": "staticData.fill",
+   "type": "number",
+   "unit": "quarters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "TacticStrategyLinksSalesChannel",
+   "path": "staticData.maxTextSize",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "TacticStrategyLinksSalesChannel",
+   "path": "dynamicData.tactics[*][*].isText",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 21
+  },
+  {
+   "service": "TargetSegments",
+   "path": "decisions.targetSegments[*].priority",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "TargetSegments",
+   "path": "decisions.targetSegments[*].segmentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "TargetSegments",
+   "path": "staticData.segments[*].segmentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "TeamNorms",
+   "path": "decisions.norms[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 13
+  },
+  {
+   "service": "TeamNorms",
+   "path": "decisions.processes[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "decision",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "TeamNorms",
+   "path": "staticData.norms[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 15
+  },
+  {
+   "service": "TeamNorms",
+   "path": "staticData.processes[*].id",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 5
+  },
+  {
+   "service": "TeamNorms",
+   "path": "staticData.maxTextSize",
+   "type": "number",
+   "unit": "characters",
+   "class": "parameter",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "TeamNorms",
+   "path": "dynamicData.decisionChangedThisQuarter",
+   "type": "boolean",
+   "unit": "quarters",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "TokenProvider",
+   "path": "expiresIn",
+   "type": "number",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "getHeaderToken"
+   ],
+   "sources": [
+    "scenario"
+   ],
+   "observations": 28
+  },
+  {
+   "service": "UsePattern",
+   "path": "staticData.segments[*].segmentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 3
+  },
+  {
+   "service": "UsePattern",
+   "path": "staticData.tables[*].items[*].itemID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 6
+  },
+  {
+   "service": "UsePattern",
+   "path": "staticData.tables[*].items[*].segments[*].segmentID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 18
+  },
+  {
+   "service": "UsePattern",
+   "path": "staticData.tables[*].tableID",
+   "type": "number",
+   "unit": "unknown",
+   "class": "identifier",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "UsePattern",
+   "path": "staticData.tables[*].items[*].segments[*].value",
+   "type": "number",
+   "unit": "unknown",
+   "class": "parameter_table",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 18
+  },
+  {
+   "service": "UsePattern",
+   "path": "staticData.isBought",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  },
+  {
+   "service": "UsePattern",
+   "path": "staticData.tables[*].sameData",
+   "type": "boolean",
+   "unit": "unknown",
+   "class": "state_value",
+   "methods": [
+    "view"
+   ],
+   "sources": [
+    "har"
+   ],
+   "observations": 1
+  }
+ ]
+}

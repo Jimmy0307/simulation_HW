@@ -49,8 +49,8 @@ def test_guard_policy_is_conservative() -> None:
     # No write method may be allowed by the baseline or experiment tiers.
     assert not any(pair.endswith(".save") for pair in baseline)
     assert all("save" not in methods for methods in experiment.values())
-    # Exactly one screen is in the active experiment tier.
-    assert list(experiment) == ["FixedCapacity"]
+    # At most one screen is in the active experiment tier at any time.
+    assert len(experiment) <= 1
     assert policy["experiment"]["any_service_methods"] == ["view"]
     assert policy["evaluation_order"][:2] == ["baseline", "strict"]
 

@@ -10,7 +10,8 @@
    "StudentInit.runInit", "StudentInit.runFinish",
    "ServiceStatus.gs",
    "Settings.saveSettings", "Settings.saveQuarterScreenSettings",
-   "Email.getNewEmailsCount"
+   "Email.getNewEmailsCount",
+   "GameInfo.studentsOnline"
   ]
  },
  "strict": {
@@ -27,12 +28,13 @@
  "experiment": {
   "decision": "allow",
   "any_service_methods": ["view"],
-  "active_experiment": "EXP-02",
-  "service_methods": {
-   "FixedCapacity": ["view", "modify", "calculate", "cancel", "validateLock", "prolongLock"]
-  },
+  "active_experiment": "NONE",
+  "service_methods": {},
   "history": {
-   "EXP-01": {"CD": ["view", "modify", "calculate", "cancel", "validateLock", "prolongLock"]}
+   "EXP-01": {"CD": ["view", "modify", "calculate", "cancel", "validateLock", "prolongLock"]},
+   "EXP-02": {"FixedCapacity": ["view", "modify", "calculate", "cancel", "validateLock", "prolongLock"]},
+   "EXP-03": {"OpenSalesOffice": ["view", "modify", "calculate", "cancel", "validateLock", "prolongLock"]},
+   "EXP-04": {"OpenWebcenter": ["view", "modify", "calculate", "cancel", "validateLock", "prolongLock"]}
   }
  },
  "unknown": {"decision": "block", "log": true, "note": "Unknown methods seen during page load are reported to the operator, never auto-added."},
