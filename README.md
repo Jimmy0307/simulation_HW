@@ -12,6 +12,8 @@
 src/marketplace_sim/        open, generic planning engine (mpsim CLI); data enters only through a parameter pack
 examples/synthetic/         invented parameter pack (same schema as a real pack)
 examples/demo/              3-quarter demo plans + alternative plans for `mpsim compare`
+src/marketplace_sim/api/    local FastAPI (loopback only) over the engine + synthetic demo export for the UI
+frontend/                   Vite + React + TypeScript UI (StaticProvider for the demo, ApiProvider for live use)
 src/marketplace_sim/control/ control plane: scenarios, events, competitors, sweeps, param diff, HTML, optional MCP
 examples/scenarios/         synthetic scenario templates (baseline, cost rise, demand decline, price war, combined)
 examples/demo-control/      reproducible control-plane demo (scenario -> sweep -> worst cases -> param diff)
@@ -53,6 +55,20 @@ python -m venv .venv
 * **Optional MCP layer** (`python -m marketplace_sim.control.mcp_server`): wraps only this local engine (run_scenario,
   run_sweep, list_scenarios, explain_result). It is **unrelated to the REA MCP server** used for reverse engineering and
   never contacts the game or any online service.
+
+## Web UI (static synthetic demo or live local API)
+
+```powershell
+python scriptsuild_demo.py                         # export synthetic demo -> test -> build -> gate-check frontend/dist
+cd frontend; npm run preview                         # static demo (read-only, synthetic data)
+.\.venv\Scripts\python.exe -m marketplace_sim.api --pack synthetic   # live mode: local API (127.0.0.1 only) ...
+cd frontend; npm run dev:api                         # ... and the UI talking to it
+```
+
+The UI never computes numbers. It renders what the Python engine returns, every number shows its source level, and
+anything with a literature or placeholder input carries an "uncalibrated · not a forecast" mark with a hover source
+chain. See [docs/ui-guide.md](docs/ui-guide.md) (Chinese). The GitHub Pages workflow is manual and must not be run
+before the history cleanup ([docs/history-cleanup-plan.md](docs/history-cleanup-plan.md)).
 
 ## Load your own data (private)
 
@@ -97,6 +113,8 @@ inputs. Today:
 | [docs/private-play-guide.md](docs/private-play-guide.md) | Build a private save, play, compare plans |
 | [docs/gamemaster-guide.md](docs/gamemaster-guide.md) | 主持端：情境、事件、對手、what-if、HTML 報告（中文） |
 | [docs/agent-harness.md](docs/agent-harness.md) | Sweeps, worst cases, sensitivity, JSON formats, optional local MCP |
+| [docs/ui-guide.md](docs/ui-guide.md) | Web UI：兩種模式、切換參數包、來源等級標記（中文） |
+| [docs/history-cleanup-plan.md](docs/history-cleanup-plan.md) | Git history leak investigation and cleanup plan (Chinese) |
 | [docs/demand-literature.md](docs/demand-literature.md) | Public literature on demand forms, parameter ranges and fit grades |
 | [docs/demand-model-spec.md](docs/demand-model-spec.md) | Literature-level demand chain, coefficients, mapped vs placeholder, upgrade path |
 | [docs/quarterly-runbook.md](docs/quarterly-runbook.md) | What happens each quarter, what the operator does, how to read the report |
