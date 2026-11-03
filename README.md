@@ -1,61 +1,80 @@
-# Marketplace Simulation: REA-based reconstruction and system-identification prep
+# Open business-simulation toolkit: evidence-based reconstruction + local planning simulator
 
-> **Deprecated:** the self-built "Marketplace Simulation MCP" (22 tools, Python HAR/JS parsers)
-> from branch `codex/marketplace-sim-mcp` now lives in [`legacy/`](legacy/README.md). Reverse
-> engineering is done with [REA](https://github.com/morluto/rea), which is itself an MCP server.
-> See [docs/rea-pivot.md](docs/rea-pivot.md).
+> **Disclaimer.** This is an unofficial, independent project. It is **not affiliated with, endorsed by, or connected to
+> Marketplace Simulations / Innovative Learning Solutions** or any course provider. The repository contains **no game
+> content**: no parameters, market data, fitted models, text, screenshots or assets. Every number shipped here is
+> invented (`examples/`). Users must obtain any data **themselves, legitimately, from their own account**, and keep it
+> private. See [docs/legal-scope.md](docs/legal-scope.md).
 
-This repository holds:
+## Architecture: open engine, bring your own data
 
-1. **Publication boundary**: `src/marketplace_sysid/security/` and `scripts/publication_gate.py`.
-   Raw HAR/HTML/JS, REA Evidence and REA environment bundles stay in ignored `evidence/private/`.
-2. **REA ingest**: `src/marketplace_sysid/rea_ingest.py` reads REA Evidence JSON
-   (`inspect_web_network_capture`, `analyze_javascript_application`) and produces
-   de-identified catalogs in `data/`.
-3. **System-identification planning**: `src/marketplace_sysid/experiments/` (OFAT specification,
-   runbook dry-run, finite differences, interaction pairs, held-out surrogate fitting).
-4. **Documentation** of what is known, how strongly, and what to measure next.
+```
+src/marketplace_sim/        open, generic planning engine (mpsim CLI); data enters only through a parameter pack
+examples/synthetic/         invented parameter pack (same schema as a real pack)
+examples/demo/              3-quarter demo plans + alternative plans for `mpsim compare`
+src/marketplace_sysid/      evidence tooling: REA Evidence ingest, parameter extraction, verified cost rules, gate
+evidence/private/           YOUR data (git-ignored): REA Evidence, real pack (model/pack.json), saves, briefs
+```
 
-## Headline findings (static, REA-attributed)
+* The **engine** is public. A **parameter pack** (`pack.json`, schema `marketplace-sim/param-pack@1`) supplies all
+  numbers: `--params examples/synthetic` or, privately, `--params evidence/private/model`.
+* The **publication gate** (`scripts/publication_gate.py`) refuses any commit that contains your private values: runs of
+  real table values, real parameter values next to their field names, real values reused in `examples/`, or real names.
 
-* Every screen is a `Decision` subclass whose RPC service equals its class name. 310 class
-  registrations: **123 editable decision screens, 1 finalization screen (`WrapUp`, menu label "Submit"), 128 reports**.
-* The shared base class exposes `view`, `modify` (server lock), **`calculate` (draft decisions → server-computed
-  results + validation, no save)**, `save`, `cancel`, `removeLock`, `validateLock`, `prolongLock`.
-* **What-if channel: verified at runtime** on 4 screens (EXP-01 CD, EXP-02 FixedCapacity, EXP-11 OpenSalesOffice,
-  EXP-12 OpenWebcenter): `modify → calculate → cancel`, no save, state restored. It needs the `modify` lock (visible to
-  teammates). See [docs/experiments/](docs/experiments/).
-* **Cost model:** `src/marketplace_sysid/cost_model.py` reproduces every measured cost-side `calculate` output from `view`
-  parameters with residual 0 (24 points). See [docs/cost-model.md](docs/cost-model.md).
-
-## Use
+## Install and run the synthetic demo
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -e ".[dev]"
-# REA (Node >= 24.22.1) produced the private Evidence bundles; see docs/rea-pivot.md for the exact commands.
-.\.venv\Scripts\marketplace-rea-ingest.exe --capture-bundle evidence\private\rea\01_capture\capture.bundle.json `
-  --app-bundle evidence\private\rea\02_js_full\app.bundle.json --source-root evidence\private\rea\02_js\app `
-  --html-dir evidence\private\extracted\customer_needs --private-out evidence\private\rea\04_ingest --public-out data
-.\.venv\Scripts\python.exe -m marketplace_sysid.experiments.runbook        # dry-run only
-.\.venv\Scripts\python.exe scripts\publication_gate.py
+.\.venv\Scripts\mpsim.exe new --params examples/synthetic --out demo-save.json
+.\.venv\Scripts\mpsim.exe play demo-save.json --decisions examples/demo/q1.yaml
+.\.venv\Scripts\mpsim.exe play demo-save.json --decisions examples/demo/q2.yaml
+.\.venv\Scripts\mpsim.exe compare demo-save.json "examples/demo/plans/*.yaml"
+.\.venv\Scripts\mpsim.exe explain cd_interest
 ```
+
+## Load your own data (private)
+
+1. Capture your own sessions with [REA](https://github.com/morluto/rea) into `evidence/private/` (see
+   [docs/rea-pivot.md](docs/rea-pivot.md) and [docs/quarterly-runbook.md](docs/quarterly-runbook.md)).
+2. `mpsim build-pack --out evidence/private/model` turns your captured `view` responses into a private pack.
+3. Play and compare with `--params evidence/private/model`. See [docs/private-play-guide.md](docs/private-play-guide.md).
+
+## Source levels (shown on every number)
+
+| Mark | Level | Meaning |
+|---|---|---|
+| `[V]` | verified | Reproduced against measured server results with zero residual (operator what-if experiments) |
+| `[D]` | derived | Follows directly from published parameters (exact identities) |
+| `[E]` | estimated | Fitted to observed data (future demand model) |
+| `[P]` | placeholder | Illustrative and uncalibrated; never read as a forecast |
+
+A combined number takes the **weakest** level of its inputs. Today: capacity investment, outlet opening cost, CD balance
+and interest are verified; stock raise is derived; production cost, demand, revenue, tax and profit are placeholders.
+
+## Method summary
+
+* **Reverse engineering with REA:** captures and shipped JavaScript are analysed with REA (Evidence IDs, coverage,
+  limits). Repo code only reads REA Evidence ([docs/rea-pivot.md](docs/rea-pivot.md)).
+* **Network guard:** live observation runs behind a local CDP guard with a tiered allow-list
+  ([data/guard_policy.json](data/guard_policy.json)). Writes such as `save` and submission are always blocked.
+* **What-if verification:** the client's no-save `calculate` path is used in operator-approved experiments, each
+  restored with Cancel ([docs/experiments/](docs/experiments/)).
+* **Evidence grades:** every claim states its evidence and strength
+  ([docs/reconstruction-report.md](docs/reconstruction-report.md), [docs/cost-model.md](docs/cost-model.md)).
 
 ## Documents
 
 | Document | Content |
 |---|---|
-| [docs/rea-pivot.md](docs/rea-pivot.md) | Why we pivoted, environment, architecture, REA gaps, offline environment |
-| [docs/reconstruction-report.md](docs/reconstruction-report.md) | Current reconstruction (v2, REA-based) |
-| [docs/rea-reconciliation.md](docs/rea-reconciliation.md) | REA results compared with the round-one Python results |
-| [docs/rpc-contract.md](docs/rpc-contract.md) | RPC contracts incl. statically inferred write candidates (never called) |
-| [docs/decision-catalog.md](docs/decision-catalog.md), [docs/metric-catalog.md](docs/metric-catalog.md) | Generated from `data/*.json` |
-| [docs/identifiability-matrix.md](docs/identifiability-matrix.md) | How each decision → output pair can be observed |
-| [docs/experiment-runbook.md](docs/experiment-runbook.md) | Human-run experiments ranked by information gain |
-| [docs/parameter-catalog.md](docs/parameter-catalog.md) | Model parameters found in `view`/`calculate` responses (value-free), plus market data inventory |
-| [docs/calculate-screen-triage.md](docs/calculate-screen-triage.md) | A/B/C triage of every calculate-capable screen |
-| [docs/cost-model.md](docs/cost-model.md) | Verified cost-side model and what it does not cover |
-| [docs/experiments/](docs/experiments/) | Per-experiment write-ups (de-identified) |
+| [docs/private-play-guide.md](docs/private-play-guide.md) | Build a private save, play, compare plans |
+| [docs/quarterly-runbook.md](docs/quarterly-runbook.md) | What happens each quarter, what the operator does, how to read the report |
+| [docs/reconstruction-report.md](docs/reconstruction-report.md) | Reconstruction findings (REA-based) |
+| [docs/cost-model.md](docs/cost-model.md) | Verified cost rules and what is not covered |
+| [docs/calculate-screen-triage.md](docs/calculate-screen-triage.md) | Which screens are derived, need experiments, or are pending |
+| [docs/parameter-catalog.md](docs/parameter-catalog.md) | Parameter structure (value-free) |
+| [docs/experiment-runbook.md](docs/experiment-runbook.md), [docs/experiments/](docs/experiments/) | Experiment designs and results |
 | [docs/decisions-log.md](docs/decisions-log.md) | Autonomous-run decisions |
+| [legacy/](legacy/README.md) | Deprecated round-one Python MCP toolkit |
 
-See [SECURITY.md](SECURITY.md) and [docs/legal-scope.md](docs/legal-scope.md) before contributing.
+See [SECURITY.md](SECURITY.md) before contributing.

@@ -1,5 +1,9 @@
 # Roadmap
 
+> **Publication timing:** the demand model (FittedDemand) and any optimisation features are developed on this branch
+> and kept unpublished until **the game has ended**. Only then will they be considered for `main`, after the
+> publication gate and a manual review confirm that no game data is included.
+
 1. **EXP-01 (operator, team consent):** verify that `calculate` is non-persistent and that Cancel releases the lock. Everything in the W column depends on it.
 2. Capture additional quarters' menus and screens passively (REA `inspect_web_page` / `observe_web_session` on a CDP browser the operator logged into) to replace "registered but unseen" with observed screens.
 3. Run EXP-02…08 and accumulate private `experiment_values.json`; fit local slopes, then held-out surrogates for the cost functions.
