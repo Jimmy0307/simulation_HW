@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from itertools import combinations
 
-from marketplace_mcp.experiments.specification import DecisionVariable
+from marketplace_sysid.experiments.specification import DecisionVariable
 
 _SUPPORTED_INTERACTIONS = {
     frozenset(("price", "advertising")),

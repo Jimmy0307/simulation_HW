@@ -3,22 +3,21 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "marketplace-simulation-mcp"
-version = "0.1.0"
-description = "Local-first, evidence-driven Marketplace Simulation protocol and behavior analysis"
+name = "marketplace-simulation-sysid"
+version = "0.2.0"
+description = "Publication gate, REA Evidence ingestion and system-identification planning for Marketplace Simulation"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "MIT" }
-dependencies = ["mcp>=2.0,<3"]
+dependencies = []
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.11"]
 surrogate = ["scikit-learn>=1.5"]
 
 [project.scripts]
-marketplace-mcp = "marketplace_mcp.server:main"
-marketplace-discover = "marketplace_mcp.discovery.cli:main"
-marketplace-scan-evidence = "marketplace_mcp.security.evidence_scan:main"
+marketplace-scan-evidence = "marketplace_sysid.security.evidence_scan:main"
+marketplace-rea-ingest = "marketplace_sysid.rea_ingest:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -30,11 +29,14 @@ pythonpath = ["src"]
 [tool.ruff]
 line-length = 100
 target-version = "py311"
+extend-exclude = ["legacy"]
 
 [tool.mypy]
 python_version = "3.11"
 mypy_path = "src"
 strict = true
+files = ["src", "scripts", "tests"]
+exclude = ["^legacy/"]
 
 [[tool.mypy.overrides]]
 module = ["sklearn.*"]

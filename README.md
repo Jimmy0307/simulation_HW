@@ -1,42 +1,55 @@
-# Marketplace Simulation MCP
+# Marketplace Simulation: REA-based reconstruction and system-identification prep
 
-A local-first toolkit for turning a user's own browser exports into a sanitized map of the Marketplace Simulation client, observed RPC contracts, and visible data flow. It keeps private evidence local and labels server-side behavior as opaque when the browser evidence does not show its formula.
+> **Deprecated:** the self-built "Marketplace Simulation MCP" (22 tools, Python HAR/JS parsers)
+> from branch `codex/marketplace-sim-mcp` now lives in [`legacy/`](legacy/README.md). Reverse
+> engineering is done with [REA](https://github.com/morluto/rea), which is itself an MCP server.
+> See [docs/rea-pivot.md](docs/rea-pivot.md).
 
-## Current reconstruction
+This repository holds:
 
-The current private capture yields six Quarter 1 HTML pages, 31 observed backend services/methods, 9,435 named JavaScript function symbols, two pure arithmetic client formula records, and seven numeric server-opaque metric fields. The observed RPC methods are 29 `READ` methods and two `UNKNOWN` methods; no write contract was established. See [the reconstruction report](docs/reconstruction-report.md) for scope, evidence limits, and unknowns.
+1. **Publication boundary**: `src/marketplace_sysid/security/` and `scripts/publication_gate.py`.
+   Raw HAR/HTML/JS, REA Evidence and REA environment bundles stay in ignored `evidence/private/`.
+2. **REA ingest**: `src/marketplace_sysid/rea_ingest.py` reads REA Evidence JSON
+   (`inspect_web_network_capture`, `analyze_javascript_application`) and produces
+   de-identified catalogs in `data/`.
+3. **System-identification planning**: `src/marketplace_sysid/experiments/` (OFAT specification,
+   runbook dry-run, finite differences, interaction pairs, held-out surrogate fitting).
+4. **Documentation** of what is known, how strongly, and what to measure next.
 
-The report describes this specific capture, not a complete map of every Marketplace screen or simulation behavior. Public JSON artifacts contain sanitized schemas and structural metadata only. Raw evidence remains in the ignored `evidence/private/` directory.
+## Headline findings (static, REA-attributed)
 
-## Install and use
+* Every screen is a `Decision` subclass whose RPC service equals its class name. 310 class
+  registrations: **123 editable decision screens, 1 finalization screen (`WrapUp`, menu label "Submit"), 128 reports**.
+* The shared base class exposes `view`, `modify` (server lock), **`calculate` (draft decisions → server-computed
+  results + validation, no save)**, `save`, `cancel`, `removeLock`, `validateLock`, `prolongLock`.
+* **What-if channel: present by static evidence, not yet verified at runtime.** It needs the
+  `modify` lock (visible to teammates) and ends with `cancel`. See
+  [docs/reconstruction-report.md](docs/reconstruction-report.md) §E and the
+  [experiment runbook](docs/experiment-runbook.md).
 
-Requires Python 3.11 or later.
+## Use
 
 ```powershell
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -e ".[dev]"
-.\.venv\Scripts\python.exe -m marketplace_mcp.discovery.cli --input evidence\private\extracted --output evidence\private\staging_public
+# REA (Node >= 24.22.1) produced the private Evidence bundles; see docs/rea-pivot.md for the exact commands.
+.\.venv\Scripts\marketplace-rea-ingest.exe --capture-bundle evidence\private\rea\01_capture\capture.bundle.json `
+  --app-bundle evidence\private\rea\02_js_full\app.bundle.json --source-root evidence\private\rea\02_js\app `
+  --html-dir evidence\private\extracted\customer_needs --private-out evidence\private\rea\04_ingest --public-out data
+.\.venv\Scripts\python.exe -m marketplace_sysid.experiments.runbook        # dry-run only
 .\.venv\Scripts\python.exe scripts\publication_gate.py
 ```
 
-Review the sanitized staging artifacts and run the publication gate before regenerating the reviewed artifacts under `data/` with `--output data`. The CLI never writes the original request/response values to its output. To start the stdio MCP server after the public data is present, run:
+## Documents
 
-```powershell
-.\.venv\Scripts\marketplace-mcp.exe
-```
+| Document | Content |
+|---|---|
+| [docs/rea-pivot.md](docs/rea-pivot.md) | Why we pivoted, environment, architecture, REA gaps, offline environment |
+| [docs/reconstruction-report.md](docs/reconstruction-report.md) | Current reconstruction (v2, REA-based) |
+| [docs/rea-reconciliation.md](docs/rea-reconciliation.md) | REA results compared with the round-one Python results |
+| [docs/rpc-contract.md](docs/rpc-contract.md) | RPC contracts incl. statically inferred write candidates (never called) |
+| [docs/decision-catalog.md](docs/decision-catalog.md), [docs/metric-catalog.md](docs/metric-catalog.md) | Generated from `data/*.json` |
+| [docs/identifiability-matrix.md](docs/identifiability-matrix.md) | How each decision → output pair can be observed |
+| [docs/experiment-runbook.md](docs/experiment-runbook.md) | Human-run experiments ranked by information gain |
 
-The MCP layer answers from local structural data. Optional runtime RPC access is read-only and requires explicit runtime environment configuration; it is disabled by default and is not used by the MCP tools in this repository.
-
-## What is and is not established
-
-- Browser HTML and JavaScript show UI controllers, route construction, and the browser-side transport flow.
-- Captured `POST` requests to `backend-json.php?<service>` carry JSON-RPC-like method/parameter envelopes.
-- The visible JavaScript contains a pure arithmetic `quarterlyCapacity(s)` expression. It does not prove how the server calculates simulation outputs.
-- The capture contains no demonstrated editable-decision response pairs, so the decision graph records observed protocol data flow rather than causal effects.
-- `GameInfo.studentsOnline` and generic `ServiceStatus.gs` are left unknown and are never callable by the adapter.
-
-See [security](SECURITY.md), [legal scope](docs/legal-scope.md), and [provenance rules](docs/provenance.md) before contributing or publishing.
-
-## Method reference
-
-The analysis workflow was informed by [morluto/rea](https://github.com/morluto/rea), especially its local evidence, coverage, and provenance practices. No REA source files or Marketplace assets are redistributed here. This implementation uses the official [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk) for its local stdio server.
+See [SECURITY.md](SECURITY.md) and [docs/legal-scope.md](docs/legal-scope.md) before contributing.

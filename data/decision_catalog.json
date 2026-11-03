@@ -1,0 +1,6434 @@
+{
+ "schema": "marketplace-sysid/decision-catalog@1",
+ "values_included": false,
+ "decisions": [
+  {
+   "module": "RisksCompany",
+   "service": "RisksCompany",
+   "inherits": [
+    "RisksStrategic"
+   ],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "description",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Description",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "title",
+     "control_type": "edit",
+     "value_type": "text",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "RisksCompany.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "60258"
+  },
+  {
+   "module": "RisksIndustry",
+   "service": "RisksIndustry",
+   "inherits": [
+    "RisksStrategic"
+   ],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "description",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Description",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "title",
+     "control_type": "edit",
+     "value_type": "text",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "RisksIndustry.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "19619"
+  },
+  {
+   "module": "RiskAnalysisStrategic",
+   "service": "RiskAnalysisStrategic",
+   "inherits": [
+    "RiskAnalysis"
+   ],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "explanation",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "mitigation",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "specification",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Specify the risks that your firm faces.",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "RiskAnalysisStrategic.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "156"
+  },
+  {
+   "module": "RiskAnalysisCompany",
+   "service": "RiskAnalysisCompany",
+   "inherits": [
+    "RiskAnalysis"
+   ],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "explanation",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "mitigation",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "specification",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Specify the risks that your firm faces.",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "RiskAnalysisCompany.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "20629"
+  },
+  {
+   "module": "RiskAnalysisIndustry",
+   "service": "RiskAnalysisIndustry",
+   "inherits": [
+    "RiskAnalysis"
+   ],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "explanation",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "mitigation",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "specification",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Specify the risks that your firm faces.",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "RiskAnalysisIndustry.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "99090"
+  },
+  {
+   "module": "PartnerAnalysis",
+   "service": "PartnerAnalysis",
+   "inherits": [
+    "CompetitorAnalysis"
+   ],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "aggressiveness",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Aggressiveness",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "changesInTactics",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Most Likely Changes in Strategy and Tactics",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "levelOfThreat",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Level of Cooperation",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "significantStrengths",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Significant Strengths",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "significantWeaknesses",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Significant Weaknesses",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "targetSegment1",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "targetSegment2",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "PartnerAnalysis.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "45221"
+  },
+  {
+   "module": "RisksLikelihoodCompany",
+   "service": "RisksLikelihoodCompany",
+   "inherits": [
+    "RisksLikelihoodStrategic"
+   ],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "impact",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Impact",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "likelihood",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Likelihood",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "mitigate",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": "Need to Monitor / Mitigate",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "RisksLikelihoodCompany.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "73188"
+  },
+  {
+   "module": "RisksLikelihoodIndustry",
+   "service": "RisksLikelihoodIndustry",
+   "inherits": [
+    "RisksLikelihoodStrategic"
+   ],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "impact",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Impact",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "likelihood",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Likelihood",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "mitigate",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": "Need to Monitor / Mitigate",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "RisksLikelihoodIndustry.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "41041"
+  },
+  {
+   "module": "ModifyBrandSimple",
+   "service": "ModifyBrandSimple",
+   "inherits": [
+    "ModifyBrandAnim2",
+    "ModifyBrand"
+   ],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "restoreBrand",
+    "deleteBrand",
+    "modify",
+    "goBack"
+   ],
+   "modify_mode_buttons": [
+    "revertChanges",
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "brandID",
+     "control_type": "unknown",
+     "value_type": "unknown",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": null,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "brandType",
+     "control_type": "unknown",
+     "value_type": "unknown",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": null,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "decisions",
+     "control_type": "edit",
+     "value_type": "text",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "ModifyBrandSimple.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "69419"
+  },
+  {
+   "module": "WarehouseLocation",
+   "service": "WarehouseLocation",
+   "inherits": [
+    "FactoryLocation"
+   ],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "factoryRegion",
+     "control_type": "unknown",
+     "value_type": "unknown",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": null,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "WarehouseLocation.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "85561"
+  },
+  {
+   "module": "TacticStrategyLinksFinance",
+   "service": "TacticStrategyLinksFinance",
+   "inherits": [
+    "TacticStrategyLinks"
+   ],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": {
+    "type": "object",
+    "properties": {
+     "thrusts": {
+      "type": "array",
+      "items": [
+       {
+        "type": "unknown"
+       }
+      ]
+     }
+    }
+   },
+   "submit_path": "TacticStrategyLinksFinance.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7",
+    "ev_579388377fcb78fcf4b2c20d9a117f3cbb2778bf3cbf51c8d49379fd879671c4"
+   ],
+   "rea_module_key": "21809"
+  },
+  {
+   "module": "RisksMitigationCompany",
+   "service": "RisksMitigationCompany",
+   "inherits": [
+    "RisksMitigationStrategic"
+   ],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "mitigation",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "RisksMitigationCompany.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "19391"
+  },
+  {
+   "module": "RisksMitigationIndustry",
+   "service": "RisksMitigationIndustry",
+   "inherits": [
+    "RisksMitigationStrategic"
+   ],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "mitigation",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "RisksMitigationIndustry.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "19448"
+  },
+  {
+   "module": "TacticStrategyLinksMarketing",
+   "service": "TacticStrategyLinksMarketing",
+   "inherits": [
+    "TacticStrategyLinks"
+   ],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": null,
+   "submit_path": "TacticStrategyLinksMarketing.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "14135"
+  },
+  {
+   "module": "WarehouseLocationRegional",
+   "service": "WarehouseLocationRegional",
+   "inherits": [
+    "FactoryLocationRegional"
+   ],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "open",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": "Open",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "WarehouseLocationRegional.save(user, decisions, 0, lockToken)",
+   "whatif_path": "WarehouseLocationRegional.calculate(user, decisions, 0) while WarehouseLocationRegional.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "68463"
+  },
+  {
+   "module": "StrategicThrustsSales",
+   "service": "StrategicThrustsSales",
+   "inherits": [
+    "StrategicThrustsCorporate"
+   ],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": null,
+   "submit_path": "StrategicThrustsSales.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "32838"
+  },
+  {
+   "module": "TacticStrategyLinksSalesChannel",
+   "service": "TacticStrategyLinksSalesChannel",
+   "inherits": [
+    "TacticStrategyLinks"
+   ],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": null,
+   "submit_path": "TacticStrategyLinksSalesChannel.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "6128"
+  },
+  {
+   "module": "StrategicThrustsFinance",
+   "service": "StrategicThrustsFinance",
+   "inherits": [
+    "StrategicThrustsCorporate"
+   ],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": {
+    "type": "object",
+    "properties": {
+     "thrustGroups": {
+      "type": "array",
+      "items": [
+       {
+        "type": "object",
+        "properties": {
+         "id": {
+          "type": "number"
+         },
+         "thrusts": {
+          "type": "array",
+          "items": [
+           {
+            "type": "unknown"
+           }
+          ]
+         }
+        }
+       }
+      ]
+     }
+    }
+   },
+   "submit_path": "StrategicThrustsFinance.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7",
+    "ev_579388377fcb78fcf4b2c20d9a117f3cbb2778bf3cbf51c8d49379fd879671c4"
+   ],
+   "rea_module_key": "88584"
+  },
+  {
+   "module": "TacticStrategyLinksHumanResource",
+   "service": "TacticStrategyLinksHumanResource",
+   "inherits": [
+    "TacticStrategyLinks"
+   ],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": {
+    "type": "object",
+    "properties": {
+     "thrusts": {
+      "type": "array",
+      "items": [
+       {
+        "type": "unknown"
+       }
+      ]
+     }
+    }
+   },
+   "submit_path": "TacticStrategyLinksHumanResource.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7",
+    "ev_579388377fcb78fcf4b2c20d9a117f3cbb2778bf3cbf51c8d49379fd879671c4"
+   ],
+   "rea_module_key": "4378"
+  },
+  {
+   "module": "TacticStrategyLinksManufacturing",
+   "service": "TacticStrategyLinksManufacturing",
+   "inherits": [
+    "TacticStrategyLinks"
+   ],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": {
+    "type": "object",
+    "properties": {
+     "thrusts": {
+      "type": "array",
+      "items": [
+       {
+        "type": "unknown"
+       }
+      ]
+     }
+    }
+   },
+   "submit_path": "TacticStrategyLinksManufacturing.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7",
+    "ev_579388377fcb78fcf4b2c20d9a117f3cbb2778bf3cbf51c8d49379fd879671c4"
+   ],
+   "rea_module_key": "97077"
+  },
+  {
+   "module": "StrategicThrustsMarketing",
+   "service": "StrategicThrustsMarketing",
+   "inherits": [
+    "StrategicThrustsCorporate"
+   ],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": {
+    "type": "object",
+    "properties": {
+     "thrustGroups": {
+      "type": "array",
+      "items": [
+       {
+        "type": "object",
+        "properties": {
+         "id": {
+          "type": "number"
+         },
+         "thrusts": {
+          "type": "array",
+          "items": [
+           {
+            "type": "unknown"
+           }
+          ]
+         }
+        }
+       }
+      ]
+     }
+    }
+   },
+   "submit_path": "StrategicThrustsMarketing.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7",
+    "ev_579388377fcb78fcf4b2c20d9a117f3cbb2778bf3cbf51c8d49379fd879671c4"
+   ],
+   "rea_module_key": "82582"
+  },
+  {
+   "module": "StrategicThrustsPurchasing",
+   "service": "StrategicThrustsPurchasing",
+   "inherits": [
+    "StrategicThrustsCorporate"
+   ],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": null,
+   "submit_path": "StrategicThrustsPurchasing.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "15824"
+  },
+  {
+   "module": "GoalsStrategicDirectionSupplier",
+   "service": "GoalsStrategicDirectionSupplier",
+   "inherits": [
+    "GoalsStrategicDirection"
+   ],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "mission",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Mission statement",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "priority",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "strategicDirections",
+     "control_type": "unknown",
+     "value_type": "unknown",
+     "label": "Strategic directions",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": null,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "GoalsStrategicDirectionSupplier.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "40010"
+  },
+  {
+   "module": "StrategicThrustsSalesChannel",
+   "service": "StrategicThrustsSalesChannel",
+   "inherits": [
+    "StrategicThrustsCorporate"
+   ],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": null,
+   "submit_path": "StrategicThrustsSalesChannel.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "66531"
+  },
+  {
+   "module": "StrategicThrustsHumanResource",
+   "service": "StrategicThrustsHumanResource",
+   "inherits": [
+    "StrategicThrustsCorporate"
+   ],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": null,
+   "submit_path": "StrategicThrustsHumanResource.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "74271"
+  },
+  {
+   "module": "StrategicThrustsManufacturing",
+   "service": "StrategicThrustsManufacturing",
+   "inherits": [
+    "StrategicThrustsCorporate"
+   ],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": null,
+   "submit_path": "StrategicThrustsManufacturing.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "43176"
+  },
+  {
+   "module": "WorkersCompensation",
+   "service": "WorkersCompensation",
+   "inherits": [
+    "WorkersCompensationRegional",
+    "SalesForceCompensation"
+   ],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": null,
+   "submit_path": "WorkersCompensation.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "83232"
+  },
+  {
+   "module": "ExecutiveCompensation",
+   "service": "ExecutiveCompensation",
+   "inherits": [
+    "WorkersCompensation",
+    "WorkersCompensationRegional",
+    "SalesForceCompensation"
+   ],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": null,
+   "submit_path": "ExecutiveCompensation.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "76621"
+  },
+  {
+   "module": "WorkersCompensationRegional",
+   "service": "WorkersCompensationRegional",
+   "inherits": [
+    "SalesForceCompensation"
+   ],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": null,
+   "submit_path": "WorkersCompensationRegional.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "59857"
+  },
+  {
+   "module": "Culture",
+   "service": "Culture",
+   "inherits": [],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "culture",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Company Culture",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": {
+    "type": "object",
+    "properties": {
+     "culture": {
+      "type": "string"
+     }
+    }
+   },
+   "submit_path": "Culture.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7",
+    "ev_579388377fcb78fcf4b2c20d9a117f3cbb2778bf3cbf51c8d49379fd879671c4"
+   ],
+   "rea_module_key": "36243"
+  },
+  {
+   "module": "Mission",
+   "service": "Mission",
+   "inherits": [],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "mission",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Mission Statement",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": {
+    "type": "object",
+    "properties": {
+     "mission": {
+      "type": "string"
+     }
+    }
+   },
+   "submit_path": "Mission.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7",
+    "ev_579388377fcb78fcf4b2c20d9a117f3cbb2778bf3cbf51c8d49379fd879671c4"
+   ],
+   "rea_module_key": "39063"
+  },
+  {
+   "module": "HRSurvey",
+   "service": "HRSurvey",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "plan",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "HRSurvey.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "19137"
+  },
+  {
+   "module": "Goals",
+   "service": "Goals",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "value",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "Goals.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "86521"
+  },
+  {
+   "module": "Problem",
+   "service": "Problem",
+   "inherits": [],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "problem",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Problem",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "solution",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Solution",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": {
+    "type": "object",
+    "properties": {
+     "problem": {
+      "type": "string"
+     },
+     "solution": {
+      "type": "string"
+     }
+    }
+   },
+   "submit_path": "Problem.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7",
+    "ev_579388377fcb78fcf4b2c20d9a117f3cbb2778bf3cbf51c8d49379fd879671c4"
+   ],
+   "rea_module_key": "98182"
+  },
+  {
+   "module": "FactoryEfficiency",
+   "service": "FactoryEfficiency",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": null,
+   "submit_path": "FactoryEfficiency.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "70746"
+  },
+  {
+   "module": "CorrectiveActions",
+   "service": "CorrectiveActions",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "action",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Action",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "problem",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Problem, Opportunity",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "CorrectiveActions.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "70842"
+  },
+  {
+   "module": "BuyInitialMarketResearch",
+   "service": "BuyInitialMarketResearch",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "plan",
+     "control_type": "unknown",
+     "value_type": "unknown",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": null,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "BuyInitialMarketResearch.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "11260"
+  },
+  {
+   "module": "ComponentRework",
+   "service": "ComponentRework",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": null,
+   "submit_path": "ComponentRework.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "21718"
+  },
+  {
+   "module": "SupplyChainStrategy",
+   "service": "SupplyChainStrategy",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "roleNo",
+     "control_type": "unknown",
+     "value_type": "unknown",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": null,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "SupplyChainStrategy.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "83268"
+  },
+  {
+   "module": "RiskManagementReview",
+   "service": "RiskManagementReview",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "review",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "RiskManagementReview.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "19345"
+  },
+  {
+   "module": "CD",
+   "service": "CD",
+   "inherits": [],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 2,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "deposit",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "withdraw",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": {
+    "type": "object",
+    "properties": {
+     "deposit": {
+      "type": "number"
+     },
+     "withdraw": {
+      "type": "number"
+     }
+    }
+   },
+   "submit_path": "CD.save(user, decisions, 0, lockToken)",
+   "whatif_path": "CD.calculate(user, decisions, 0) while CD.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7",
+    "ev_579388377fcb78fcf4b2c20d9a117f3cbb2778bf3cbf51c8d49379fd879671c4"
+   ],
+   "rea_module_key": "14146"
+  },
+  {
+   "module": "PaymentToPartners",
+   "service": "PaymentToPartners",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "payment",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "PaymentToPartners.save(user, decisions, 0, lockToken)",
+   "whatif_path": "PaymentToPartners.calculate(user, decisions, 0) while PaymentToPartners.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "91745"
+  },
+  {
+   "module": "EnvironmentalConcerns",
+   "service": "EnvironmentalConcerns",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": null,
+   "submit_path": "EnvironmentalConcerns.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "41976"
+  },
+  {
+   "module": "GoodNeighbor",
+   "service": "GoodNeighbor",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": null,
+   "submit_path": "GoodNeighbor.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "8722"
+  },
+  {
+   "module": "BuyMarketResearch",
+   "service": "BuyMarketResearch",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "buy",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": "Buy",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "BuyMarketResearch.save(user, decisions, 0, lockToken)",
+   "whatif_path": "BuyMarketResearch.calculate(user, decisions, 0) while BuyMarketResearch.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "33472"
+  },
+  {
+   "module": "TargetSegments",
+   "service": "TargetSegments",
+   "inherits": [],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "priority",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Priority",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "TargetSegments.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "67354"
+  },
+  {
+   "module": "RisksMitigationStrategic",
+   "service": "RisksMitigationStrategic",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "mitigation",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "RisksMitigationStrategic.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "15218"
+  },
+  {
+   "module": "CorporateObjectives",
+   "service": "CorporateObjectives",
+   "inherits": [],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": {
+    "type": "object",
+    "properties": {
+     "objectives": {
+      "type": "array",
+      "items": [
+       {
+        "type": "object",
+        "properties": {
+         "id": {
+          "type": "number"
+         },
+         "priority": {
+          "type": "number"
+         },
+         "text": {
+          "type": "string"
+         }
+        }
+       }
+      ]
+     }
+    }
+   },
+   "submit_path": "CorporateObjectives.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7",
+    "ev_579388377fcb78fcf4b2c20d9a117f3cbb2778bf3cbf51c8d49379fd879671c4"
+   ],
+   "rea_module_key": "30370"
+  },
+  {
+   "module": "Dividends",
+   "service": "Dividends",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "dividend",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "Dividends.save(user, decisions, 0, lockToken)",
+   "whatif_path": "Dividends.calculate(user, decisions, 0) while Dividends.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "6113"
+  },
+  {
+   "module": "BasesCompetitiveAdvantage",
+   "service": "BasesCompetitiveAdvantage",
+   "inherits": [],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "basis",
+     "control_type": "unknown",
+     "value_type": "unknown",
+     "label": "Basis for Competitive Advantage",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": null,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": {
+    "type": "object",
+    "properties": {
+     "basis": {
+      "type": "number"
+     }
+    }
+   },
+   "submit_path": "BasesCompetitiveAdvantage.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7",
+    "ev_579388377fcb78fcf4b2c20d9a117f3cbb2778bf3cbf51c8d49379fd879671c4"
+   ],
+   "rea_module_key": "63411"
+  },
+  {
+   "module": "Feedback",
+   "service": "Feedback",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "disagreeExplanation",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "Feedback.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "41406"
+  },
+  {
+   "module": "ProductionRules",
+   "service": "ProductionRules",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "rules",
+     "control_type": "unknown",
+     "value_type": "unknown",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": null,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "ProductionRules.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "16863"
+  },
+  {
+   "module": "EmployeeInvolvement",
+   "service": "EmployeeInvolvement",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": null,
+   "submit_path": "EmployeeInvolvement.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "86740"
+  },
+  {
+   "module": "ShortTermLoan",
+   "service": "ShortTermLoan",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 2,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "borrow",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "repay",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "ShortTermLoan.save(user, decisions, 0, lockToken)",
+   "whatif_path": "ShortTermLoan.calculate(user, decisions, 0) while ShortTermLoan.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "35899"
+  },
+  {
+   "module": "FollowUpStudy",
+   "service": "FollowUpStudy",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "buy",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": "Initiate Study",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "FollowUpStudy.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "96816"
+  },
+  {
+   "module": "ProductionControlSystem",
+   "service": "ProductionControlSystem",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "systemID",
+     "control_type": "unknown",
+     "value_type": "unknown",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": null,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "ProductionControlSystem.save(user, decisions, 0, lockToken)",
+   "whatif_path": "ProductionControlSystem.calculate(user, decisions, 0) while ProductionControlSystem.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "18868"
+  },
+  {
+   "module": "LongTermLoan",
+   "service": "LongTermLoan",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "borrow",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "LongTermLoan.save(user, decisions, 0, lockToken)",
+   "whatif_path": "LongTermLoan.calculate(user, decisions, 0) while LongTermLoan.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "771"
+  },
+  {
+   "module": "SellUnwantedInventory",
+   "service": "SellUnwantedInventory",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "sellInventory",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": "Number of Units to Sell",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "SellUnwantedInventory.save(user, decisions, 0, lockToken)",
+   "whatif_path": "SellUnwantedInventory.calculate(user, decisions, 0) while SellUnwantedInventory.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "59197"
+  },
+  {
+   "module": "ImprovementActions",
+   "service": "ImprovementActions",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "operate",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "ImprovementActions.save(user, decisions, 0, lockToken)",
+   "whatif_path": "ImprovementActions.calculate(user, decisions, 0) while ImprovementActions.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "67654"
+  },
+  {
+   "module": "FinancialResources",
+   "service": "FinancialResources",
+   "inherits": [],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": {
+    "type": "object",
+    "properties": {
+     "resources": {
+      "type": "array",
+      "items": [
+       {
+        "type": "object",
+        "properties": {
+         "id": {
+          "type": "number"
+         },
+         "priority": {
+          "type": "number"
+         }
+        }
+       }
+      ]
+     }
+    }
+   },
+   "submit_path": "FinancialResources.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7",
+    "ev_579388377fcb78fcf4b2c20d9a117f3cbb2778bf3cbf51c8d49379fd879671c4"
+   ],
+   "rea_module_key": "34257"
+  },
+  {
+   "module": "FactoryLocation",
+   "service": "FactoryLocation",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "factoryRegion",
+     "control_type": "unknown",
+     "value_type": "unknown",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": null,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "FactoryLocation.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "74116"
+  },
+  {
+   "module": "InspectQuality",
+   "service": "InspectQuality",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "inspection",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": "Inspection",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "InspectQuality.save(user, decisions, 0, lockToken)",
+   "whatif_path": "InspectQuality.calculate(user, decisions, 0) while InspectQuality.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "1652"
+  },
+  {
+   "module": "FeatureRD",
+   "service": "FeatureRD",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": null,
+   "submit_path": "FeatureRD.save(user, decisions, 0, lockToken)",
+   "whatif_path": "FeatureRD.calculate(user, decisions, 0) while FeatureRD.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "77969"
+  },
+  {
+   "module": "InventoryControl",
+   "service": "InventoryControl",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "maxEndingInventory",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "produce",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": "Produce",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "InventoryControl.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "37340"
+  },
+  {
+   "module": "FactoryLocationRegional",
+   "service": "FactoryLocationRegional",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "open",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": "Open",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "FactoryLocationRegional.save(user, decisions, 0, lockToken)",
+   "whatif_path": "FactoryLocationRegional.calculate(user, decisions, 0) while FactoryLocationRegional.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "86221"
+  },
+  {
+   "module": "SWOTAnalysis",
+   "service": "SWOTAnalysis",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "opportunities",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Opportunities",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "strengths",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Strengths",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "threats",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Threats",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "weaknesses",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Weaknesses",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "SWOTAnalysis.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "11918"
+  },
+  {
+   "module": "TeamNorms",
+   "service": "TeamNorms",
+   "inherits": [],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "norms",
+     "control_type": "unknown",
+     "value_type": "unknown",
+     "label": "Team Norms",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": null,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "processes",
+     "control_type": "unknown",
+     "value_type": "unknown",
+     "label": "Decision-making Process",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": null,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "TeamNorms.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "55333"
+  },
+  {
+   "module": "StrategicThrustsCorporate",
+   "service": "StrategicThrustsCorporate",
+   "inherits": [],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": {
+    "type": "object",
+    "properties": {
+     "thrustGroups": {
+      "type": "array",
+      "items": [
+       {
+        "type": "object",
+        "properties": {
+         "id": {
+          "type": "number"
+         },
+         "thrusts": {
+          "type": "array",
+          "items": [
+           {
+            "type": "unknown"
+           }
+          ]
+         }
+        }
+       }
+      ]
+     }
+    }
+   },
+   "submit_path": "StrategicThrustsCorporate.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7",
+    "ev_579388377fcb78fcf4b2c20d9a117f3cbb2778bf3cbf51c8d49379fd879671c4"
+   ],
+   "rea_module_key": "57945"
+  },
+  {
+   "module": "RiskAnalysis",
+   "service": "RiskAnalysis",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "explanation",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "mitigation",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "specification",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Specify the risks that your firm faces.",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "RiskAnalysis.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "81024"
+  },
+  {
+   "module": "OpenWebcenter",
+   "service": "OpenWebcenter",
+   "inherits": [],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "change",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": {
+    "type": "object",
+    "properties": {
+     "regions": {
+      "type": "array",
+      "items": [
+       {
+        "type": "object",
+        "properties": {
+         "regionID": {
+          "type": "number"
+         },
+         "change": {
+          "type": "boolean"
+         }
+        }
+       }
+      ]
+     }
+    }
+   },
+   "submit_path": "OpenWebcenter.save(user, decisions, 0, lockToken)",
+   "whatif_path": "OpenWebcenter.calculate(user, decisions, 0) while OpenWebcenter.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7",
+    "ev_579388377fcb78fcf4b2c20d9a117f3cbb2778bf3cbf51c8d49379fd879671c4"
+   ],
+   "rea_module_key": "43346"
+  },
+  {
+   "module": "RisksStrategic",
+   "service": "RisksStrategic",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "description",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Description",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "title",
+     "control_type": "edit",
+     "value_type": "text",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "RisksStrategic.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "83615"
+  },
+  {
+   "module": "RiskRegistryAll",
+   "service": "RiskRegistryAll",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "auditDate",
+     "control_type": "edit",
+     "value_type": "text",
+     "label": "Audit Date",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "auditParticipants",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Audit Participants",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "auditResults",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Audit Results",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "processOwner",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Process Owner",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "RiskRegistryAll.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "96358"
+  },
+  {
+   "module": "SupplyChainInformationSystem",
+   "service": "SupplyChainInformationSystem",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 2,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "setupEdi",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "SupplyChainInformationSystem.save(user, decisions, 0, lockToken)",
+   "whatif_path": "SupplyChainInformationSystem.calculate(user, decisions, 0) while SupplyChainInformationSystem.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "49026"
+  },
+  {
+   "module": "RisksLikelihoodStrategic",
+   "service": "RisksLikelihoodStrategic",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "impact",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Impact",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "likelihood",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Likelihood",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "mitigate",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": "Need to Monitor / Mitigate",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "RisksLikelihoodStrategic.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "11693"
+  },
+  {
+   "module": "CompanyName",
+   "service": "CompanyName",
+   "inherits": [],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "companyName",
+     "control_type": "edit",
+     "value_type": "text",
+     "label": "Company name:",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "logoDataName",
+     "control_type": "unknown",
+     "value_type": "unknown",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": null,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "logoDataUri",
+     "control_type": "unknown",
+     "value_type": "unknown",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": null,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": {
+    "type": "object",
+    "properties": {
+     "companyName": {
+      "type": "string"
+     }
+    }
+   },
+   "submit_path": "CompanyName.save(user, decisions, 0, lockToken)",
+   "whatif_path": "CompanyName.calculate(user, decisions, 0) while CompanyName.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7",
+    "ev_579388377fcb78fcf4b2c20d9a117f3cbb2778bf3cbf51c8d49379fd879671c4"
+   ],
+   "rea_module_key": "70369"
+  },
+  {
+   "module": "SourceStudy",
+   "service": "SourceStudy",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "buy",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": "Buy",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "SourceStudy.save(user, decisions, 0, lockToken)",
+   "whatif_path": "SourceStudy.calculate(user, decisions, 0) while SourceStudy.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "50499"
+  },
+  {
+   "module": "VarianceStudy",
+   "service": "VarianceStudy",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "buy",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": "Buy",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "VarianceStudy.save(user, decisions, 0, lockToken)",
+   "whatif_path": "VarianceStudy.calculate(user, decisions, 0) while VarianceStudy.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "81397"
+  },
+  {
+   "module": "OpenSalesOffice",
+   "service": "OpenSalesOffice",
+   "inherits": [],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "change",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": {
+    "type": "object",
+    "properties": {
+     "regions": {
+      "type": "array",
+      "items": [
+       {
+        "type": "object",
+        "properties": {
+         "regionID": {
+          "type": "number"
+         },
+         "cities": {
+          "type": "array",
+          "items": [
+           {
+            "type": "object",
+            "properties": {
+             "cityID": {
+              "type": "truncated"
+             },
+             "change": {
+              "type": "truncated"
+             }
+            }
+           }
+          ]
+         }
+        }
+       }
+      ]
+     }
+    }
+   },
+   "submit_path": "OpenSalesOffice.save(user, decisions, 0, lockToken)",
+   "whatif_path": "OpenSalesOffice.calculate(user, decisions, 0) while OpenSalesOffice.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7",
+    "ev_579388377fcb78fcf4b2c20d9a117f3cbb2778bf3cbf51c8d49379fd879671c4"
+   ],
+   "rea_module_key": "28533"
+  },
+  {
+   "module": "ImproveChangeover",
+   "service": "ImproveChangeover",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "rdChover",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": "R&amp;D Expenditure to Improve Changeover",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "ImproveChangeover.save(user, decisions, 0, lockToken)",
+   "whatif_path": "ImproveChangeover.calculate(user, decisions, 0) while ImproveChangeover.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "84103"
+  },
+  {
+   "module": "HireWebSalesPeople",
+   "service": "HireWebSalesPeople",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 2,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "sf",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": "Web Sales",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "support",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": "Web Support",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "HireWebSalesPeople.save(user, decisions, 0, lockToken)",
+   "whatif_path": "HireWebSalesPeople.calculate(user, decisions, 0) while HireWebSalesPeople.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "43494"
+  },
+  {
+   "module": "DemandProjectionNextQuarter",
+   "service": "DemandProjectionNextQuarter",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 4,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "demandPerSalesPerson",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "demandPerWebSalesPerson",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "salesPeople",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "webSalesPeople",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "DemandProjectionNextQuarter.save(user, decisions, 0, lockToken)",
+   "whatif_path": "DemandProjectionNextQuarter.calculate(user, decisions, 0) while DemandProjectionNextQuarter.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "37560"
+  },
+  {
+   "module": "Overtime",
+   "service": "Overtime",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": null,
+   "submit_path": "Overtime.save(user, decisions, 0, lockToken)",
+   "whatif_path": "Overtime.calculate(user, decisions, 0) while Overtime.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "82574"
+  },
+  {
+   "module": "InvestInActions",
+   "service": "InvestInActions",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "budget",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "InvestInActions.save(user, decisions, 0, lockToken)",
+   "whatif_path": "InvestInActions.calculate(user, decisions, 0) while InvestInActions.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "30228"
+  },
+  {
+   "module": "OvertimeRegional",
+   "service": "OvertimeRegional",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": null,
+   "submit_path": "OvertimeRegional.save(user, decisions, 0, lockToken)",
+   "whatif_path": "OvertimeRegional.calculate(user, decisions, 0) while OvertimeRegional.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "28231"
+  },
+  {
+   "module": "DemandProjectionNextQuarterRegional",
+   "service": "DemandProjectionNextQuarterRegional",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 4,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "demandPerSalesPerson",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "demandPerWebSalesPerson",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "salesPeople",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "webSalesPeople",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "DemandProjectionNextQuarterRegional.save(user, decisions, 0, lockToken)",
+   "whatif_path": "DemandProjectionNextQuarterRegional.calculate(user, decisions, 0) while DemandProjectionNextQuarterRegional.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "69257"
+  },
+  {
+   "module": "CurrencyFunds",
+   "service": "CurrencyFunds",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "cashToCurrencies",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "distrToCurrency",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "withdraw",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "CurrencyFunds.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "83228"
+  },
+  {
+   "module": "SearchEngineMarketing",
+   "service": "SearchEngineMarketing",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 2,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "budget",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "maxBid",
+     "control_type": "fedit",
+     "value_type": "float",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "SearchEngineMarketing.save(user, decisions, 0, lockToken)",
+   "whatif_path": "SearchEngineMarketing.calculate(user, decisions, 0) while SearchEngineMarketing.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "87627"
+  },
+  {
+   "module": "ProFormaDivisionProfitability",
+   "service": "ProFormaDivisionProfitability",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "loaddata",
+    "calculate",
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": true,
+   "fields": [
+    {
+     "field": "demandMultiplier",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Percent of forecasted demand",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": true
+    },
+    {
+     "field": "estimatedDemand",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": true
+    },
+    {
+     "field": "estimatedPrice",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": true
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "ProFormaDivisionProfitability.save(user, decisions, 0, lockToken)",
+   "whatif_path": "ProFormaDivisionProfitability.calculate(user, decisions, 0) while ProFormaDivisionProfitability.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "28512"
+  },
+  {
+   "module": "SalesForceCompensation",
+   "service": "SalesForceCompensation",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": null,
+   "submit_path": "SalesForceCompensation.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "11584"
+  },
+  {
+   "module": "ProFormaCashFlow",
+   "service": "ProFormaCashFlow",
+   "inherits": [],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "loaddata",
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": {
+    "type": "object",
+    "properties": {
+     "items": {
+      "type": "array",
+      "items": [
+       {
+        "type": "object",
+        "properties": {
+         "id": {
+          "type": "string"
+         },
+         "quarters": {
+          "type": "array",
+          "items": [
+           {
+            "type": "number"
+           }
+          ]
+         }
+        }
+       }
+      ]
+     }
+    }
+   },
+   "submit_path": "ProFormaCashFlow.save(user, decisions, 0, lockToken)",
+   "whatif_path": "ProFormaCashFlow.calculate(user, decisions, 0) while ProFormaCashFlow.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7",
+    "ev_579388377fcb78fcf4b2c20d9a117f3cbb2778bf3cbf51c8d49379fd879671c4"
+   ],
+   "rea_module_key": "4510"
+  },
+  {
+   "module": "DesignWebPage",
+   "service": "DesignWebPage",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 2,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "ofKwId",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "webActive",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Web Active",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "DesignWebPage.save(user, decisions, 0, lockToken)",
+   "whatif_path": "DesignWebPage.calculate(user, decisions, 0) while DesignWebPage.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "37006"
+  },
+  {
+   "module": "FixedCapacity",
+   "service": "FixedCapacity",
+   "inherits": [],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 2,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "increase",
+     "control_type": "unknown",
+     "value_type": "unknown",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": null,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "supplier",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": {
+    "type": "object",
+    "properties": {
+     "supplier": {
+      "type": "number"
+     },
+     "increase": {
+      "type": "number"
+     }
+    }
+   },
+   "submit_path": "FixedCapacity.save(user, decisions, 0, lockToken)",
+   "whatif_path": "FixedCapacity.calculate(user, decisions, 0) while FixedCapacity.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7",
+    "ev_579388377fcb78fcf4b2c20d9a117f3cbb2778bf3cbf51c8d49379fd879671c4"
+   ],
+   "rea_module_key": "63171"
+  },
+  {
+   "module": "PersonalGoals",
+   "service": "PersonalGoals",
+   "inherits": [],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "mostImportantGoal",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Most important goal",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "PersonalGoals.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "11881"
+  },
+  {
+   "module": "CompetitorAnalysis",
+   "service": "CompetitorAnalysis",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "aggressiveness",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Aggressiveness",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "changesInTactics",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Most Likely Changes in Strategy and Tactics",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "levelOfThreat",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Level of Threat",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "significantStrengths",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Significant Strengths",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "significantWeaknesses",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Significant Weaknesses",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "targetSegment1",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "targetSegment2",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "CompetitorAnalysis.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "30861"
+  },
+  {
+   "module": "WebProductivity",
+   "service": "WebProductivity",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 2,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "change",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "quarterlyBudget",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": "Quarterly Budget",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "WebProductivity.save(user, decisions, 0, lockToken)",
+   "whatif_path": "WebProductivity.calculate(user, decisions, 0) while WebProductivity.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "24703"
+  },
+  {
+   "module": "GoalsStrategicDirection",
+   "service": "GoalsStrategicDirection",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "mission",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Mission statement",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "priority",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Priority",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "strategicDirections",
+     "control_type": "unknown",
+     "value_type": "unknown",
+     "label": "Strategic directions",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": null,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "GoalsStrategicDirection.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "35798"
+  },
+  {
+   "module": "RegionalMedia",
+   "service": "RegionalMedia",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "inserts",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "RegionalMedia.save(user, decisions, 0, lockToken)",
+   "whatif_path": "RegionalMedia.calculate(user, decisions, 0) while RegionalMedia.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "45522"
+  },
+  {
+   "module": "LocalMedia",
+   "service": "LocalMedia",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "inserts",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "LocalMedia.save(user, decisions, 0, lockToken)",
+   "whatif_path": "LocalMedia.calculate(user, decisions, 0) while LocalMedia.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "12915"
+  },
+  {
+   "module": "OperatingCapacity",
+   "service": "OperatingCapacity",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 2,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "operatingCapacity",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": "Operating Capacity",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "projectedWorkersProductivity",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": "Projected worker productivity [%]",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "OperatingCapacity.save(user, decisions, 0, lockToken)",
+   "whatif_path": "OperatingCapacity.calculate(user, decisions, 0) while OperatingCapacity.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "84654"
+  },
+  {
+   "module": "SpecialPrograms",
+   "service": "SpecialPrograms",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 3,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "contest",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "demoKit",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "training",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "SpecialPrograms.save(user, decisions, 0, lockToken)",
+   "whatif_path": "SpecialPrograms.calculate(user, decisions, 0) while SpecialPrograms.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "72471"
+  },
+  {
+   "module": "Pricing",
+   "service": "Pricing",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "pop",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": "Point of Purchase Display",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "price",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": "Retail Price",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "priority",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": "Sales Priority",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "rebate",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": "Price Rebate",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "sell",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "Pricing.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "15735"
+  },
+  {
+   "module": "TacticStrategyLinks",
+   "service": "TacticStrategyLinks",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": null,
+   "submit_path": "TacticStrategyLinks.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "27031"
+  },
+  {
+   "module": "SocialMedia",
+   "service": "SocialMedia",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 1,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "change",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "quarterlyBudget",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": "Quarterly Budget",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "SocialMedia.save(user, decisions, 0, lockToken)",
+   "whatif_path": "SocialMedia.calculate(user, decisions, 0) while SocialMedia.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "40976"
+  },
+  {
+   "module": "Promotions",
+   "service": "Promotions",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 2,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "cashBonus",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": "Cash Bonus for Top Third of Sales People",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "freeGift",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": "Free Gift (SPIFF) for Top Third of Sales People",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "Promotions.save(user, decisions, 0, lockToken)",
+   "whatif_path": "Promotions.calculate(user, decisions, 0) while Promotions.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "46699"
+  },
+  {
+   "module": "ExecutiveResponsibilities",
+   "service": "ExecutiveResponsibilities",
+   "inherits": [],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "responsibilityID1",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "responsibilityID2",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "ExecutiveResponsibilities.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "11737"
+  },
+  {
+   "module": "WebTraffic",
+   "service": "WebTraffic",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 3,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "change",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "commission",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "quarterlyBudget",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": "Quarterly Budget",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "WebTraffic.save(user, decisions, 0, lockToken)",
+   "whatif_path": "WebTraffic.calculate(user, decisions, 0) while WebTraffic.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "58010"
+  },
+  {
+   "module": "DemandProjection",
+   "service": "DemandProjection",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "fixDemand",
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 3,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "demand",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": "Demand",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "demandPerSp",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "demandPerWebSp",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "DemandProjection.save(user, decisions, 0, lockToken)",
+   "whatif_path": "DemandProjection.calculate(user, decisions, 0) while DemandProjection.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "31191"
+  },
+  {
+   "module": "HireSalesPeople",
+   "service": "HireSalesPeople",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 3,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "sf",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "support",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": "Support",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "HireSalesPeople.save(user, decisions, 0, lockToken)",
+   "whatif_path": "HireSalesPeople.calculate(user, decisions, 0) while HireSalesPeople.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "18287"
+  },
+  {
+   "module": "GoalsDirectionThrusts",
+   "service": "GoalsDirectionThrusts",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "mission",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Mission statement",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "priority",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Priority",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "strategicDirections",
+     "control_type": "unknown",
+     "value_type": "unknown",
+     "label": "Strategic directions",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": null,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "GoalsDirectionThrusts.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "94873"
+  },
+  {
+   "module": "DemandProjectionRegional",
+   "service": "DemandProjectionRegional",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "fixDemand",
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 3,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "demand",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": "Demand",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "demandPerSp",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "demandPerWebSp",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "DemandProjectionRegional.save(user, decisions, 0, lockToken)",
+   "whatif_path": "DemandProjectionRegional.calculate(user, decisions, 0) while DemandProjectionRegional.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "4594"
+  },
+  {
+   "module": "OperatingCapacityRegional",
+   "service": "OperatingCapacityRegional",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 3,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "fixedCapacityIncrease",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "operatingCapacity",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": "Operating Capacity",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "projectedWorkersProductivity",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "OperatingCapacityRegional.save(user, decisions, 0, lockToken)",
+   "whatif_path": "OperatingCapacityRegional.calculate(user, decisions, 0) while OperatingCapacityRegional.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "33031"
+  },
+  {
+   "module": "WrapUp",
+   "service": "WrapUp",
+   "finalization": true,
+   "never_automate": true,
+   "rendered_in_q1_menu": true,
+   "view_mode_buttons": [
+    "continueWrapup",
+    "continueWrapup1",
+    "unwrap"
+   ],
+   "modify_mode_buttons": [],
+   "fields": [
+    {
+     "field": "wrapped",
+     "value_type": "boolean",
+     "control_type": "button"
+    },
+    {
+     "field": "targetSegments",
+     "value_type": "list",
+     "control_type": "checkbox"
+    }
+   ],
+   "submit_path": "WrapUp.calculate then WrapUp.save(decisions={wrapped: true, ...})",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "68220"
+  },
+  {
+   "module": "TargetReplenishPoint",
+   "service": "TargetReplenishPoint",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "priority",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "replenish",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "target",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "TargetReplenishPoint.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "82192"
+  },
+  {
+   "module": "FactorySimulation",
+   "service": "FactorySimulation",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "calculate",
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": true,
+   "fields": [
+    {
+     "field": "estimatedDemand",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": true
+    },
+    {
+     "field": "estimatedPrice",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": true
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "FactorySimulation.save(user, decisions, 0, lockToken)",
+   "whatif_path": "FactorySimulation.calculate(user, decisions, 0) while FactorySimulation.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "19060"
+  },
+  {
+   "module": "FactorySimulationRegional",
+   "service": "FactorySimulationRegional",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "calculate",
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": true,
+   "fields": [
+    {
+     "field": "estimatedDemand",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": true
+    },
+    {
+     "field": "estimatedPrice",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": true
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "FactorySimulationRegional.save(user, decisions, 0, lockToken)",
+   "whatif_path": "FactorySimulationRegional.calculate(user, decisions, 0) while FactorySimulationRegional.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "96285"
+  },
+  {
+   "module": "ConfirmLongRFP",
+   "service": "ConfirmLongRFP",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "createNew",
+    "modify",
+    "goBack"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "action",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "action",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "goalsAndIntent",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "incentive",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "partnerID",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "specialTerms",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "ConfirmLongRFP.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "62439"
+  },
+  {
+   "module": "ModifyAd",
+   "service": "ModifyAd",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "restoreBrand",
+    "deleteAd",
+    "modify",
+    "goBack"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "adID",
+     "control_type": "unknown",
+     "value_type": "unknown",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": null,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "decisions",
+     "control_type": "edit",
+     "value_type": "text",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "ModifyAd.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "12762"
+  },
+  {
+   "module": "SimpleInternetMarketing",
+   "service": "SimpleInternetMarketing",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 4,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "budget",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "ofKwId",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "smActive",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "webActive",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": true,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "SimpleInternetMarketing.save(user, decisions, 0, lockToken)",
+   "whatif_path": "SimpleInternetMarketing.calculate(user, decisions, 0) while SimpleInternetMarketing.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "74208"
+  },
+  {
+   "module": "ConfirmRD",
+   "service": "ConfirmRD",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "createNew",
+    "modify",
+    "goBack"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "buyerTeamID",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "cannotLicence",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "cannotResell",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "featureID",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "penalty",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "price",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "quarter",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "specialTerms",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": "Special Terms",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "ConfirmRD.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "42039"
+  },
+  {
+   "module": "ExtFactorySimulationRegional",
+   "service": "ExtFactorySimulationRegional",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "loaddata",
+    "calculate",
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": true,
+   "fields": [
+    {
+     "field": "demandMultiplier",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Percent of forecasted demand",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": true
+    },
+    {
+     "field": "hoursInDay",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Maximum hours of overtime per day",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": true
+    },
+    {
+     "field": "operatingCapacity",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": "Operating capacity",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": true
+    },
+    {
+     "field": "projectedWorkersProductivity",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": true
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "ExtFactorySimulationRegional.save(user, decisions, 0, lockToken)",
+   "whatif_path": "ExtFactorySimulationRegional.calculate(user, decisions, 0) while ExtFactorySimulationRegional.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "52772"
+  },
+  {
+   "module": "TacticalPlan",
+   "service": "TacticalPlan",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "loaddata",
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [],
+   "observed_decision_shape": null,
+   "submit_path": "TacticalPlan.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "69075"
+  },
+  {
+   "module": "ModifyBrand",
+   "service": "ModifyBrand",
+   "inherits": [],
+   "rendered_in_q1_menu": true,
+   "q1_menu_marked_decision_screen": true,
+   "view_mode_buttons": [
+    "deleteBrand",
+    "modify",
+    "goBack"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "brandID",
+     "control_type": "unknown",
+     "value_type": "unknown",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": null,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "brandType",
+     "control_type": "unknown",
+     "value_type": "unknown",
+     "label": "Brand Type",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": null,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "decisions",
+     "control_type": "edit",
+     "value_type": "text",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": true,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "ModifyBrand.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "52034"
+  },
+  {
+   "module": "ConfirmRFP",
+   "service": "ConfirmRFP",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "createNew",
+    "modify",
+    "goBack"
+   ],
+   "modify_mode_buttons": [
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": false,
+   "live_calculate_bindings": 0,
+   "calculate_button": false,
+   "fields": [
+    {
+     "field": "contractEstimate",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "contractMax",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "contractQuantity",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": "Quantity",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "feeNotDelivered",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "feeNotDemanded",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "frequency",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Shipment frequency:",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "guaranteedMax",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "guaranteedMin",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "include",
+     "control_type": "checkbox",
+     "value_type": "boolean",
+     "label": "Include",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "mode",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Transportation mode:",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "outsourcedPrice",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "preferredProductionPriority",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "shippingPaidBy",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "specialTerms",
+     "control_type": "memo",
+     "value_type": "text",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    },
+    {
+     "field": "supplierID",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": false
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "ConfirmRFP.save(user, decisions, 0, lockToken)",
+   "whatif_path": null,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "49509"
+  },
+  {
+   "module": "ExtFactorySimulation",
+   "service": "ExtFactorySimulation",
+   "inherits": [],
+   "rendered_in_q1_menu": false,
+   "q1_menu_marked_decision_screen": false,
+   "view_mode_buttons": [
+    "modify"
+   ],
+   "modify_mode_buttons": [
+    "loaddata",
+    "calculate",
+    "save",
+    "cancel"
+   ],
+   "view_sends_calculate": true,
+   "live_calculate_bindings": 0,
+   "calculate_button": true,
+   "fields": [
+    {
+     "field": "controlSystem",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Production Control System",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": true
+    },
+    {
+     "field": "demandMultiplier",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Percent of forecasted demand",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": true
+    },
+    {
+     "field": "hoursInDay",
+     "control_type": "combobox",
+     "value_type": "enum",
+     "label": "Maximum hours of overtime per day",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": true
+    },
+    {
+     "field": "maxEndingInventory",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": true
+    },
+    {
+     "field": "operatingCapacity",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": "Operating capacity",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": true
+    },
+    {
+     "field": "plannedProduction",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": null,
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": true
+    },
+    {
+     "field": "projectedWorkersProductivity",
+     "control_type": "iedit",
+     "value_type": "integer",
+     "label": "Projected worker productivity [%]",
+     "client_bounds": "none-declared (numeric bounds are server-validated via checkResult)",
+     "server_validated": false,
+     "triggers_live_calculate": false,
+     "possibly_triggers_live_calculate_via_dynamic_binding": false,
+     "recalculated_by_calculate_button": true
+    }
+   ],
+   "observed_decision_shape": null,
+   "submit_path": "ExtFactorySimulation.save(user, decisions, 0, lockToken)",
+   "whatif_path": "ExtFactorySimulation.calculate(user, decisions, 0) while ExtFactorySimulation.modify lock is held",
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_evidence": [
+    "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7"
+   ],
+   "rea_module_key": "36161"
+  }
+ ]
+}

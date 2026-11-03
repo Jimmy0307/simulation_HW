@@ -1,0 +1,440 @@
+{
+ "base_decision_methods": {
+  "view": {
+   "params": "[user, sendStatic, sendDynamic, sendErrors, sendCalculate]",
+   "class": "READ"
+  },
+  "modify": {
+   "params": "[user, 0]",
+   "class": "STATE_TRACKING_LOCK"
+  },
+  "calculate": {
+   "params": "[user, decisions, 0]",
+   "class": "CALCULATION_TRIGGER"
+  },
+  "save": {
+   "params": "[user, decisions, 0, lockToken]",
+   "class": "WRITE"
+  },
+  "cancel": {
+   "params": "[user, 0, lockToken]",
+   "class": "STATE_TRACKING_LOCK"
+  },
+  "removeLock": {
+   "params": "[user, 0]",
+   "class": "STATE_TRACKING_LOCK"
+  },
+  "validateLock": {
+   "params": "[user, 0, lockToken]",
+   "class": "STATE_TRACKING_LOCK"
+  },
+  "prolongLock": {
+   "params": "[user, 0, lockToken]",
+   "class": "STATE_TRACKING_LOCK"
+  }
+ },
+ "literal_methods": [
+  {
+   "method": "basicInfo",
+   "classification": "READ_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "checkSession",
+   "classification": "READ_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "getChannels",
+   "classification": "READ_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "getCode",
+   "classification": "READ_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "getDetails",
+   "classification": "READ_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "getEmails",
+   "classification": "READ_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "getHeaderToken",
+   "classification": "READ_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "getHistoryMessages",
+   "classification": "READ_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "getMessages",
+   "classification": "READ_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "getNewEmailsCount",
+   "classification": "READ_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "gs",
+   "classification": "READ_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "joinChannel",
+   "classification": "WRITE_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "leftMenuItems",
+   "classification": "READ_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "liveProForma",
+   "classification": "READ_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "loadInstructorSettings",
+   "classification": "READ_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "postMessage",
+   "classification": "WRITE_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "resolve",
+   "classification": "READ_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "resourceList",
+   "classification": "READ_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "runFinish",
+   "classification": "WRITE_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "runInit",
+   "classification": "WRITE_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "saveInstructorSettings",
+   "classification": "WRITE_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "saveOverlays",
+   "classification": "WRITE_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "saveQuarterScreenSettings",
+   "classification": "WRITE_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "schedule",
+   "classification": "READ_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "setEmailRead",
+   "classification": "WRITE_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "studentsOnline",
+   "classification": "READ_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "teamMonitor",
+   "classification": "READ_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "welcome",
+   "classification": "READ_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "wrapupStatus",
+   "classification": "READ_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  },
+  {
+   "method": "yourTurnContracts",
+   "classification": "READ_CANDIDATE",
+   "provenance": [
+    "REA_STATIC_ENDPOINT"
+   ]
+  }
+ ],
+ "observed_pairs": [
+  {
+   "service": "BasesCompetitiveAdvantage",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "CD",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "CompanyName",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "CorporateObjectives",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "Culture",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "CustomerNeeds",
+   "method": "view",
+   "observed_count": 2,
+   "classification": "READ"
+  },
+  {
+   "service": "FinancialResources",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "FixedCapacity",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "GameInfo",
+   "method": "studentsOnline",
+   "observed_count": 2,
+   "classification": "READ_CANDIDATE"
+  },
+  {
+   "service": "InitialSalesForceCompensation",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "InitialWorkersCompensation",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "MarketSize",
+   "method": "view",
+   "observed_count": 2,
+   "classification": "READ"
+  },
+  {
+   "service": "Mission",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "OpenSalesOffice",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "OpenWebcenter",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "PriceWillingToPay",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "ProFormaBalanceSheet",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "ProFormaCashFlow",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "ProFormaIncomeStatement",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "Problem",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "ServiceStatus",
+   "method": "gs",
+   "observed_count": 37,
+   "classification": "READ_CANDIDATE"
+  },
+  {
+   "service": "Stock",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "StrategicThrustsCorporate",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "StrategicThrustsFinance",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "StrategicThrustsMarketing",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "SummaryOfDecisions",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "SummaryOfStrategy",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "TacticStrategyLinksFinance",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "TacticStrategyLinksHumanResource",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "TacticStrategyLinksManufacturing",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  },
+  {
+   "service": "UsePattern",
+   "method": "view",
+   "observed_count": 1,
+   "classification": "READ"
+  }
+ ],
+ "rea_evidence": [
+  "ev_7131e083513834ff2cfa4e0c4390f677114e6765e598732d2bae394c54d375d7",
+  "ev_579388377fcb78fcf4b2c20d9a117f3cbb2778bf3cbf51c8d49379fd879671c4"
+ ]
+}

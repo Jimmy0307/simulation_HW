@@ -7,7 +7,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from marketplace_mcp.security.evidence_scan import PATTERNS, scan_evidence
+from marketplace_sysid.security.evidence_scan import PATTERNS, scan_evidence
 
 ROOT = Path(__file__).resolve().parents[1]
 FORBIDDEN_SUFFIXES = {
@@ -16,11 +16,12 @@ FORBIDDEN_SUFFIXES = {
 }
 ALLOWED_ROOTS = {
     ".gitignore", "CONTRIBUTING.md", "LICENSE", "README.md", "SECURITY.md",
-    "data", "docs", "fixtures", "pyproject.toml", "scripts", "src", "tests",
+    "data", "docs", "fixtures", "legacy", "pyproject.toml", "scripts", "src", "tests",
 }
 ALLOWED_SUFFIXES = {".md", ".py", ".json", ".html", ".toml", ""}
 PUBLIC_SCAN_ROOTS = (
     ROOT / "data",
+    ROOT / "legacy" / "data",
     ROOT / "fixtures" / "synthetic",
     ROOT / "evidence" / "private" / "staging_public",
 )
@@ -49,6 +50,8 @@ def _path_is_allowed(relative: str) -> bool:
         return normalized.startswith("fixtures/synthetic/") and path.suffix.casefold() in {".json", ".html"}
     if normalized.startswith(("src/", "scripts/", "tests/")):
         return path.suffix.casefold() == ".py"
+    if normalized.startswith("legacy/"):
+        return path.suffix.casefold() in {".py", ".md", ".json"}
     return len(path.parts) == 1 and relative in ALLOWED_ROOTS
 
 
@@ -88,7 +91,7 @@ def check_publication() -> dict[str, object]:
     staged_payload_counts: dict[str, dict[str, int]] = {}
     staged_invalid_json: list[str] = []
     for relative in paths:
-        if not relative.replace("\\", "/").startswith(("data/", "fixtures/")):
+        if not relative.replace("\\", "/").startswith(("data/", "fixtures/", "legacy/data/")):
             continue
         staged_result = subprocess.run(
             ["git", "show", f":{relative}"], cwd=ROOT, check=False,

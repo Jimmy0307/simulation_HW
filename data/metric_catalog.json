@@ -1,0 +1,6213 @@
+{
+ "schema": "marketplace-sysid/metric-catalog@1",
+ "values_included": false,
+ "metrics": [
+  {
+   "metric": "total",
+   "source": "calculate",
+   "module": "WarehouseLocationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "68463"
+  },
+  {
+   "metric": "messages",
+   "source": "view.staticData",
+   "module": "CCConfidentialNewsletter",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "39446"
+  },
+  {
+   "metric": "regionID",
+   "source": "view.staticData",
+   "module": "PriceWillingToPay",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "observed_in_capture": true,
+   "rea_module_key": "4061"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "PriceWillingToPay",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "observed_in_capture": true,
+   "rea_module_key": "4061"
+  },
+  {
+   "metric": "regionID",
+   "source": "view.staticData",
+   "module": "MarketSize",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "observed_in_capture": true,
+   "rea_module_key": "61844"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "MarketSize",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "observed_in_capture": true,
+   "rea_module_key": "61844"
+  },
+  {
+   "metric": "links",
+   "source": "view.staticData",
+   "module": "NewsSources",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "2814"
+  },
+  {
+   "metric": "componentGroups",
+   "source": "view.staticData",
+   "module": "ComponentChangeover",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "55223"
+  },
+  {
+   "metric": "startQuarter",
+   "source": "view.staticData",
+   "module": "Morale",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "69279"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "Morale",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "69279"
+  },
+  {
+   "metric": "sections",
+   "source": "view.staticData",
+   "module": "ProFormaCashFlowLive",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "40844"
+  },
+  {
+   "metric": "startQuarter",
+   "source": "view.staticData",
+   "module": "Reputation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "63782"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "Reputation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "63782"
+  },
+  {
+   "metric": "criticalGroups",
+   "source": "view.staticData",
+   "module": "WarrantyCosts",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "77283"
+  },
+  {
+   "metric": "active",
+   "source": "view.staticData",
+   "module": "Assistant",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "46549"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "Fulfillment",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "66207"
+  },
+  {
+   "metric": "riskTypes",
+   "source": "view.staticData",
+   "module": "RiskAnalysisReview",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "27864"
+  },
+  {
+   "metric": "warnings",
+   "source": "view.dynamicData",
+   "module": "ResultCheck",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "29114"
+  },
+  {
+   "metric": "available",
+   "source": "view.staticData",
+   "module": "FinancialPosition",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "22761"
+  },
+  {
+   "metric": "netInvestment",
+   "source": "view.staticData",
+   "module": "FinancialPosition",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "22761"
+  },
+  {
+   "metric": "newInvestment",
+   "source": "view.staticData",
+   "module": "FinancialPosition",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "22761"
+  },
+  {
+   "metric": "operatingProfitPriorQtr",
+   "source": "view.staticData",
+   "module": "FinancialPosition",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "22761"
+  },
+  {
+   "metric": "rd",
+   "source": "view.staticData",
+   "module": "FinancialPosition",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "22761"
+  },
+  {
+   "metric": "soOpen",
+   "source": "view.staticData",
+   "module": "FinancialPosition",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "22761"
+  },
+  {
+   "metric": "unusedFinances",
+   "source": "view.staticData",
+   "module": "FinancialPosition",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "22761"
+  },
+  {
+   "metric": "unusedFinancesPriorQtr",
+   "source": "view.staticData",
+   "module": "FinancialPosition",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "22761"
+  },
+  {
+   "metric": "hrSurveyBought",
+   "source": "view.staticData",
+   "module": "HRSurveyResult",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "35372"
+  },
+  {
+   "metric": "studies",
+   "source": "view.staticData",
+   "module": "HRSurveyResult",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "35372"
+  },
+  {
+   "metric": "groups",
+   "source": "view.staticData",
+   "module": "ImprovementActionsInvestments",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "9862"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "ImprovementActionsInvestments",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "9862"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "ChannelDemand",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "38869"
+  },
+  {
+   "metric": "brands",
+   "source": "view.staticData",
+   "module": "IllWill",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "50534"
+  },
+  {
+   "metric": "illWillPenalty",
+   "source": "view.staticData",
+   "module": "IllWill",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "50534"
+  },
+  {
+   "metric": "percentOfLostSales",
+   "source": "view.staticData",
+   "module": "IllWill",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "50534"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "CompetitorsInCity",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "60062"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "CompetitorsInCity",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "60062"
+  },
+  {
+   "metric": "dividends",
+   "source": "calculate",
+   "module": "Stock",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_module_key": "38375"
+  },
+  {
+   "metric": "sharesIncrease",
+   "source": "calculate",
+   "module": "Stock",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_module_key": "38375"
+  },
+  {
+   "metric": "sharesTotal",
+   "source": "calculate",
+   "module": "Stock",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_module_key": "38375"
+  },
+  {
+   "metric": "stockIncrease",
+   "source": "calculate",
+   "module": "Stock",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_module_key": "38375"
+  },
+  {
+   "metric": "stockTotal",
+   "source": "calculate",
+   "module": "Stock",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_module_key": "38375"
+  },
+  {
+   "metric": "stocks",
+   "source": "calculate",
+   "module": "Stock",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_module_key": "38375"
+  },
+  {
+   "metric": "investors",
+   "source": "view.dynamicData",
+   "module": "Stock",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "observed_in_capture": true,
+   "rea_module_key": "38375"
+  },
+  {
+   "metric": "stocks",
+   "source": "view.staticData",
+   "module": "Stock",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "observed_in_capture": true,
+   "rea_module_key": "38375"
+  },
+  {
+   "metric": "healthInsuranceOptions",
+   "source": "view.staticData",
+   "module": "InitialWorkersCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "observed_in_capture": true,
+   "rea_module_key": "62876"
+  },
+  {
+   "metric": "importance",
+   "source": "view.staticData",
+   "module": "InitialWorkersCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "observed_in_capture": true,
+   "rea_module_key": "62876"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "InitialWorkersCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "observed_in_capture": true,
+   "rea_module_key": "62876"
+  },
+  {
+   "metric": "vacationOptions",
+   "source": "view.staticData",
+   "module": "InitialWorkersCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "observed_in_capture": true,
+   "rea_module_key": "62876"
+  },
+  {
+   "metric": "healthInsuranceOptions",
+   "source": "view.staticData",
+   "module": "InitialExecutiveCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "24289"
+  },
+  {
+   "metric": "importance",
+   "source": "view.staticData",
+   "module": "InitialExecutiveCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "24289"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "InitialExecutiveCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "24289"
+  },
+  {
+   "metric": "vacationOptions",
+   "source": "view.staticData",
+   "module": "InitialExecutiveCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "24289"
+  },
+  {
+   "metric": "healthInsuranceOptions",
+   "source": "view.staticData",
+   "module": "InitialSalesForceCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "observed_in_capture": true,
+   "rea_module_key": "63876"
+  },
+  {
+   "metric": "importance",
+   "source": "view.staticData",
+   "module": "InitialSalesForceCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "observed_in_capture": true,
+   "rea_module_key": "63876"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "InitialSalesForceCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "observed_in_capture": true,
+   "rea_module_key": "63876"
+  },
+  {
+   "metric": "vacationOptions",
+   "source": "view.staticData",
+   "module": "InitialSalesForceCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "observed_in_capture": true,
+   "rea_module_key": "63876"
+  },
+  {
+   "metric": "available",
+   "source": "view.staticData",
+   "module": "InitialFinancialPosition",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "69909"
+  },
+  {
+   "metric": "minInvestment",
+   "source": "view.staticData",
+   "module": "InitialFinancialPosition",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "69909"
+  },
+  {
+   "metric": "netInvestment",
+   "source": "view.staticData",
+   "module": "InitialFinancialPosition",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "69909"
+  },
+  {
+   "metric": "newInvestment",
+   "source": "view.staticData",
+   "module": "InitialFinancialPosition",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "69909"
+  },
+  {
+   "metric": "operatingProfitPriorQtr",
+   "source": "view.staticData",
+   "module": "InitialFinancialPosition",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "69909"
+  },
+  {
+   "metric": "unusedFinancesPriorQtr",
+   "source": "view.staticData",
+   "module": "InitialFinancialPosition",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "69909"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "ReliabilityJudgment",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "41005"
+  },
+  {
+   "metric": "criticalGroups",
+   "source": "view.staticData",
+   "module": "QualityCosts",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "15336"
+  },
+  {
+   "metric": "badges",
+   "source": "view.staticData",
+   "module": "TrophyRoom",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "65184"
+  },
+  {
+   "metric": "badgesIG",
+   "source": "view.staticData",
+   "module": "TrophyRoom",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "65184"
+  },
+  {
+   "metric": "brands",
+   "source": "view.dynamicData",
+   "module": "CostOfProduction",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "48338"
+  },
+  {
+   "metric": "demandProjection",
+   "source": "view.dynamicData",
+   "module": "CostOfProduction",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "48338"
+  },
+  {
+   "metric": "units",
+   "source": "view.staticData",
+   "module": "CostOfProduction",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "48338"
+  },
+  {
+   "metric": "group",
+   "source": "view.staticData",
+   "module": "FinancialRatios",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "43154"
+  },
+  {
+   "metric": "groups",
+   "source": "view.staticData",
+   "module": "FinancialRatios",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "43154"
+  },
+  {
+   "metric": "ai",
+   "source": "view.staticData",
+   "module": "PlayersStanding",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "18715"
+  },
+  {
+   "metric": "humanTeams",
+   "source": "view.staticData",
+   "module": "PlayersStanding",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "18715"
+  },
+  {
+   "metric": "indicators",
+   "source": "view.staticData",
+   "module": "PlayersStanding",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "18715"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "PlayersStanding",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "18715"
+  },
+  {
+   "metric": "brands",
+   "source": "view.staticData",
+   "module": "IllWillRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "92831"
+  },
+  {
+   "metric": "illWillPenalty",
+   "source": "view.staticData",
+   "module": "IllWillRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "92831"
+  },
+  {
+   "metric": "percentOfLostSales",
+   "source": "view.staticData",
+   "module": "IllWillRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "92831"
+  },
+  {
+   "metric": "regionID",
+   "source": "view.staticData",
+   "module": "IllWillRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "92831"
+  },
+  {
+   "metric": "regionName",
+   "source": "view.staticData",
+   "module": "IllWillRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "92831"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "IllWillRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "92831"
+  },
+  {
+   "metric": "brands",
+   "source": "view.staticData",
+   "module": "BrandProfitability",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "16126"
+  },
+  {
+   "metric": "culture",
+   "source": "view.staticData",
+   "module": "CCScorecard",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "22035"
+  },
+  {
+   "metric": "quarters",
+   "source": "view.staticData",
+   "module": "CCScorecard",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "22035"
+  },
+  {
+   "metric": "sections",
+   "source": "view.staticData",
+   "module": "CCScorecard",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "22035"
+  },
+  {
+   "metric": "startQuarter",
+   "source": "view.staticData",
+   "module": "CCScorecard",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "22035"
+  },
+  {
+   "metric": "fill",
+   "source": "view.staticData",
+   "module": "ProFormaFinance",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "21747"
+  },
+  {
+   "metric": "quarters",
+   "source": "view.staticData",
+   "module": "ProFormaFinance",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "21747"
+  },
+  {
+   "metric": "sections",
+   "source": "view.staticData",
+   "module": "ProFormaFinance",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "21747"
+  },
+  {
+   "metric": "cd",
+   "source": "calculate",
+   "module": "CD",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_module_key": "14146"
+  },
+  {
+   "metric": "interest",
+   "source": "calculate",
+   "module": "CD",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_module_key": "14146"
+  },
+  {
+   "metric": "total",
+   "source": "calculate",
+   "module": "PaymentToPartners",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "91745"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "CompetitorsSalesForce",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "59377"
+  },
+  {
+   "metric": "segments",
+   "source": "view.staticData",
+   "module": "CompetitorsSalesForce",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "59377"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "CompetitorsSalesForce",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "59377"
+  },
+  {
+   "metric": "brands",
+   "source": "view.dynamicData",
+   "module": "CostOfProductionRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "2403"
+  },
+  {
+   "metric": "demandProjection",
+   "source": "view.dynamicData",
+   "module": "CostOfProductionRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "2403"
+  },
+  {
+   "metric": "regionID",
+   "source": "view.dynamicData",
+   "module": "CostOfProductionRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "2403"
+  },
+  {
+   "metric": "regionName",
+   "source": "view.dynamicData",
+   "module": "CostOfProductionRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "2403"
+  },
+  {
+   "metric": "regions",
+   "source": "view.dynamicData",
+   "module": "CostOfProductionRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "2403"
+  },
+  {
+   "metric": "units",
+   "source": "view.staticData",
+   "module": "CostOfProductionRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "2403"
+  },
+  {
+   "metric": "total",
+   "source": "calculate",
+   "module": "BuyMarketResearch",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "33472"
+  },
+  {
+   "metric": "keywords",
+   "source": "view.staticData",
+   "module": "SearchEngineMarketingResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "12517"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "SearchEngineMarketingResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "12517"
+  },
+  {
+   "metric": "segments",
+   "source": "view.staticData",
+   "module": "SearchEngineMarketingResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "12517"
+  },
+  {
+   "metric": "brandTypes",
+   "source": "view.staticData",
+   "module": "CompareDesigns",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "46907"
+  },
+  {
+   "metric": "componentGroups",
+   "source": "view.staticData",
+   "module": "CompareDesigns",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "46907"
+  },
+  {
+   "metric": "segments",
+   "source": "view.staticData",
+   "module": "CompareDesigns",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "46907"
+  },
+  {
+   "metric": "ads",
+   "source": "view.staticData",
+   "module": "AdJudgment",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36128"
+  },
+  {
+   "metric": "regionName",
+   "source": "view.staticData",
+   "module": "AdJudgment",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36128"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "AdJudgment",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36128"
+  },
+  {
+   "metric": "segments",
+   "source": "view.staticData",
+   "module": "AdJudgment",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36128"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "AdJudgment",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36128"
+  },
+  {
+   "metric": "adGroups",
+   "source": "view.staticData",
+   "module": "CompareAds",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "12418"
+  },
+  {
+   "metric": "ads",
+   "source": "view.staticData",
+   "module": "CompareAds",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "12418"
+  },
+  {
+   "metric": "reviews",
+   "source": "view.staticData",
+   "module": "AdReview",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "57384"
+  },
+  {
+   "metric": "segments",
+   "source": "view.staticData",
+   "module": "AdReview",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "57384"
+  },
+  {
+   "metric": "teamID",
+   "source": "view.staticData",
+   "module": "AdReview",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "57384"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "AdReview",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "57384"
+  },
+  {
+   "metric": "dividends",
+   "source": "calculate",
+   "module": "Dividends",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "6113"
+  },
+  {
+   "metric": "sharesTotal",
+   "source": "calculate",
+   "module": "Dividends",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "6113"
+  },
+  {
+   "metric": "stockTotal",
+   "source": "calculate",
+   "module": "Dividends",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "6113"
+  },
+  {
+   "metric": "categories",
+   "source": "view.staticData",
+   "module": "SummaryOfDecisions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "observed_in_capture": true,
+   "rea_module_key": "89985"
+  },
+  {
+   "metric": "graphs",
+   "source": "view.staticData",
+   "module": "CostTrends",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "40252"
+  },
+  {
+   "metric": "params",
+   "source": "view.staticData",
+   "module": "CostTrends",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "40252"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "CostTrends",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "40252"
+  },
+  {
+   "metric": "data",
+   "source": "view.staticData",
+   "module": "NumberOfSearches",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "25033"
+  },
+  {
+   "metric": "keywords",
+   "source": "view.staticData",
+   "module": "NumberOfSearches",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "25033"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "NumberOfSearches",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "25033"
+  },
+  {
+   "metric": "series",
+   "source": "view.staticData",
+   "module": "NumberOfSearches",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "25033"
+  },
+  {
+   "metric": "categories",
+   "source": "view.staticData",
+   "module": "SummaryOfTacticsMarketing",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "23267"
+  },
+  {
+   "metric": "criticalGroups",
+   "source": "view.staticData",
+   "module": "InvestInActionsResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "52332"
+  },
+  {
+   "metric": "distrUnits",
+   "source": "view.staticData",
+   "module": "InvestInActionsResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "52332"
+  },
+  {
+   "metric": "groupID",
+   "source": "view.staticData",
+   "module": "InvestInActionsResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "52332"
+  },
+  {
+   "metric": "wasInvested",
+   "source": "view.staticData",
+   "module": "InvestInActionsResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "52332"
+  },
+  {
+   "metric": "issuerUrl",
+   "source": "view.staticData",
+   "module": "Certification",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "32039"
+  },
+  {
+   "metric": "openBadges",
+   "source": "view.staticData",
+   "module": "Certification",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "32039"
+  },
+  {
+   "metric": "annualRate",
+   "source": "calculate",
+   "module": "ShortTermLoan",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "35899"
+  },
+  {
+   "metric": "borrow",
+   "source": "calculate",
+   "module": "ShortTermLoan",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "35899"
+  },
+  {
+   "metric": "interest",
+   "source": "calculate",
+   "module": "ShortTermLoan",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "35899"
+  },
+  {
+   "metric": "quarterlyRate",
+   "source": "calculate",
+   "module": "ShortTermLoan",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "35899"
+  },
+  {
+   "metric": "repay",
+   "source": "calculate",
+   "module": "ShortTermLoan",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "35899"
+  },
+  {
+   "metric": "shortTermLoan",
+   "source": "calculate",
+   "module": "ShortTermLoan",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "35899"
+  },
+  {
+   "metric": "grade",
+   "source": "view.staticData",
+   "module": "Grades",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "48289"
+  },
+  {
+   "metric": "gradingComponents",
+   "source": "view.staticData",
+   "module": "Grades",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "48289"
+  },
+  {
+   "metric": "letterGrade",
+   "source": "view.staticData",
+   "module": "Grades",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "48289"
+  },
+  {
+   "metric": "released",
+   "source": "view.staticData",
+   "module": "Grades",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "48289"
+  },
+  {
+   "metric": "brandType",
+   "source": "view.staticData",
+   "module": "CompareBrands",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "43124"
+  },
+  {
+   "metric": "brandTypes",
+   "source": "view.staticData",
+   "module": "CompareBrands",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "43124"
+  },
+  {
+   "metric": "brands",
+   "source": "view.staticData",
+   "module": "CompareBrands",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "43124"
+  },
+  {
+   "metric": "componentGroups",
+   "source": "view.staticData",
+   "module": "CompareBrands",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "43124"
+  },
+  {
+   "metric": "indicators",
+   "source": "view.staticData",
+   "module": "CumulativeBalancedScorecard",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "99232"
+  },
+  {
+   "metric": "adGroups",
+   "source": "view.staticData",
+   "module": "CompetitorsAds",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "95958"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "CompetitorsAds",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "95958"
+  },
+  {
+   "metric": "productionSystems",
+   "source": "calculate",
+   "module": "ProductionControlSystem",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "18868"
+  },
+  {
+   "metric": "quarterlyExpense",
+   "source": "calculate",
+   "module": "ProductionControlSystem",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "18868"
+  },
+  {
+   "metric": "setupCost",
+   "source": "calculate",
+   "module": "ProductionControlSystem",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "18868"
+  },
+  {
+   "metric": "healthInsuranceOptions",
+   "source": "view.staticData",
+   "module": "IndustryWorkersCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "55946"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "IndustryWorkersCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "55946"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "IndustryWorkersCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "55946"
+  },
+  {
+   "metric": "vacationOptions",
+   "source": "view.staticData",
+   "module": "IndustryWorkersCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "55946"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "MarketShareSupplier",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "72122"
+  },
+  {
+   "metric": "totalDemand",
+   "source": "view.staticData",
+   "module": "MarketShareSupplier",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "72122"
+  },
+  {
+   "metric": "healthInsuranceOptions",
+   "source": "view.staticData",
+   "module": "IndustryExecutiveCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "75535"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "IndustryExecutiveCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "75535"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "IndustryExecutiveCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "75535"
+  },
+  {
+   "metric": "vacationOptions",
+   "source": "view.staticData",
+   "module": "IndustryExecutiveCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "75535"
+  },
+  {
+   "metric": "healthInsuranceOptions",
+   "source": "view.staticData",
+   "module": "IndustrySalesForceCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "11622"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "IndustrySalesForceCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "11622"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "IndustrySalesForceCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "11622"
+  },
+  {
+   "metric": "vacationOptions",
+   "source": "view.staticData",
+   "module": "IndustrySalesForceCompensation",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "11622"
+  },
+  {
+   "metric": "adID",
+   "source": "view.dynamicData",
+   "module": "CheckAdClaims",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "18133"
+  },
+  {
+   "metric": "ads",
+   "source": "view.dynamicData",
+   "module": "CheckAdClaims",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "18133"
+  },
+  {
+   "metric": "longTermLoan",
+   "source": "calculate",
+   "module": "LongTermLoan",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "771"
+  },
+  {
+   "metric": "ltRecord",
+   "source": "calculate",
+   "module": "LongTermLoan",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "771"
+  },
+  {
+   "metric": "brands",
+   "source": "calculate",
+   "module": "SellUnwantedInventory",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "59197"
+  },
+  {
+   "metric": "totalPrice",
+   "source": "calculate",
+   "module": "SellUnwantedInventory",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "59197"
+  },
+  {
+   "metric": "actions",
+   "source": "calculate",
+   "module": "ImprovementActions",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "67654"
+  },
+  {
+   "metric": "groups",
+   "source": "calculate",
+   "module": "ImprovementActions",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "67654"
+  },
+  {
+   "metric": "total",
+   "source": "calculate",
+   "module": "ImprovementActions",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "67654"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "RegionalProfitability",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "41738"
+  },
+  {
+   "metric": "keywords",
+   "source": "view.staticData",
+   "module": "SimpleInternetMarketingResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "14512"
+  },
+  {
+   "metric": "paidActive",
+   "source": "view.staticData",
+   "module": "SimpleInternetMarketingResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "14512"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "SimpleInternetMarketingResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "14512"
+  },
+  {
+   "metric": "segments",
+   "source": "view.staticData",
+   "module": "SimpleInternetMarketingResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "14512"
+  },
+  {
+   "metric": "smActive",
+   "source": "view.staticData",
+   "module": "SimpleInternetMarketingResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "14512"
+  },
+  {
+   "metric": "graphs",
+   "source": "view.staticData",
+   "module": "CompetitorsSocialMediaDecisions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "43990"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "CompetitorsSocialMediaDecisions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "43990"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "CompetitorsSocialMediaDecisions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "43990"
+  },
+  {
+   "metric": "brandType",
+   "source": "view.staticData",
+   "module": "CompetitorsBrands",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "2056"
+  },
+  {
+   "metric": "brandTypes",
+   "source": "view.staticData",
+   "module": "CompetitorsBrands",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "2056"
+  },
+  {
+   "metric": "componentGroups",
+   "source": "view.staticData",
+   "module": "CompetitorsBrands",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "2056"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "CompetitorsBrands",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "2056"
+  },
+  {
+   "metric": "total",
+   "source": "calculate",
+   "module": "InspectQuality",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "1652"
+  },
+  {
+   "metric": "messages",
+   "source": "view.staticData",
+   "module": "Newsletter",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "11362"
+  },
+  {
+   "metric": "rdFeatures",
+   "source": "calculate",
+   "module": "FeatureRD",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "77969"
+  },
+  {
+   "metric": "total",
+   "source": "calculate",
+   "module": "FeatureRD",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "77969"
+  },
+  {
+   "metric": "copyright",
+   "source": "view.staticData",
+   "module": "EconomicIndexes",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "35654"
+  },
+  {
+   "metric": "processDate",
+   "source": "view.staticData",
+   "module": "EconomicIndexes",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "35654"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "EconomicIndexes",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "35654"
+  },
+  {
+   "metric": "quarters",
+   "source": "view.staticData",
+   "module": "FactoryProductivityRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "55482"
+  },
+  {
+   "metric": "regionID",
+   "source": "view.staticData",
+   "module": "FactoryProductivityRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "55482"
+  },
+  {
+   "metric": "regionName",
+   "source": "view.staticData",
+   "module": "FactoryProductivityRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "55482"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "FactoryProductivityRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "55482"
+  },
+  {
+   "metric": "myTeam",
+   "source": "view.staticData",
+   "module": "DemandImpactFactors",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "46458"
+  },
+  {
+   "metric": "sections",
+   "source": "view.staticData",
+   "module": "DemandImpactFactors",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "46458"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "DemandImpactFactors",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "46458"
+  },
+  {
+   "metric": "total",
+   "source": "calculate",
+   "module": "FactoryLocationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "86221"
+  },
+  {
+   "metric": "factoryCities",
+   "source": "view.staticData",
+   "module": "FactoryLocations",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "16235"
+  },
+  {
+   "metric": "locations",
+   "source": "view.staticData",
+   "module": "FactoryLocations",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "16235"
+  },
+  {
+   "metric": "mis",
+   "source": "view.staticData",
+   "module": "FactoryLocations",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "16235"
+  },
+  {
+   "metric": "productionSystems",
+   "source": "view.staticData",
+   "module": "FactoryLocations",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "16235"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "CompetitorsWebDecisions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "45319"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "CompetitorsWebDecisions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "45319"
+  },
+  {
+   "metric": "webProductivities",
+   "source": "view.staticData",
+   "module": "CompetitorsWebDecisions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "45319"
+  },
+  {
+   "metric": "webTraffics",
+   "source": "view.staticData",
+   "module": "CompetitorsWebDecisions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "45319"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "CompetitorsPrices",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "34274"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "CompetitorsPrices",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "34274"
+  },
+  {
+   "metric": "quarters",
+   "source": "view.staticData",
+   "module": "FactoryProductivity",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "43359"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "FactoryProductivity",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "43359"
+  },
+  {
+   "metric": "contracts",
+   "source": "view.staticData",
+   "module": "ResultsOfContracts",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "5199"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "ResultsOfContracts",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "5199"
+  },
+  {
+   "metric": "total",
+   "source": "calculate",
+   "module": "OpenWebcenter",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_module_key": "43346"
+  },
+  {
+   "metric": "totalClose",
+   "source": "calculate",
+   "module": "OpenWebcenter",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_module_key": "43346"
+  },
+  {
+   "metric": "totalFactorySetup",
+   "source": "calculate",
+   "module": "OpenWebcenter",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_module_key": "43346"
+  },
+  {
+   "metric": "totalLease",
+   "source": "calculate",
+   "module": "OpenWebcenter",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_module_key": "43346"
+  },
+  {
+   "metric": "totalSetup",
+   "source": "calculate",
+   "module": "OpenWebcenter",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_module_key": "43346"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "CompetitorsLocalAdvertising",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "35249"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "CompetitorsLocalAdvertising",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "35249"
+  },
+  {
+   "metric": "errors",
+   "source": "view.dynamicData",
+   "module": "FinalCheck",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "35653"
+  },
+  {
+   "metric": "notes",
+   "source": "view.dynamicData",
+   "module": "FinalCheck",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "35653"
+  },
+  {
+   "metric": "warnings",
+   "source": "view.dynamicData",
+   "module": "FinalCheck",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "35653"
+  },
+  {
+   "metric": "firstSegment",
+   "source": "view.staticData",
+   "module": "BalancedScorecard",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "42201"
+  },
+  {
+   "metric": "iAmSupOrRes",
+   "source": "view.staticData",
+   "module": "BalancedScorecard",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "42201"
+  },
+  {
+   "metric": "indicators",
+   "source": "view.staticData",
+   "module": "BalancedScorecard",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "42201"
+  },
+  {
+   "metric": "secondSegment",
+   "source": "view.staticData",
+   "module": "BalancedScorecard",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "42201"
+  },
+  {
+   "metric": "segmentsToChoose",
+   "source": "view.staticData",
+   "module": "BalancedScorecard",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "42201"
+  },
+  {
+   "metric": "ediSetup",
+   "source": "calculate",
+   "module": "SupplyChainInformationSystem",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "49026"
+  },
+  {
+   "metric": "mis",
+   "source": "calculate",
+   "module": "SupplyChainInformationSystem",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "49026"
+  },
+  {
+   "metric": "misID",
+   "source": "calculate",
+   "module": "SupplyChainInformationSystem",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "49026"
+  },
+  {
+   "metric": "misQuarterlyCost",
+   "source": "calculate",
+   "module": "SupplyChainInformationSystem",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "49026"
+  },
+  {
+   "metric": "misSetup",
+   "source": "calculate",
+   "module": "SupplyChainInformationSystem",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "49026"
+  },
+  {
+   "metric": "partners",
+   "source": "calculate",
+   "module": "SupplyChainInformationSystem",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "49026"
+  },
+  {
+   "metric": "brands",
+   "source": "view.dynamicData",
+   "module": "InventoryControlRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "67781"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "InventoryControlRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "67781"
+  },
+  {
+   "metric": "media",
+   "source": "view.staticData",
+   "module": "CompetitorsRegionalAdvertising",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "12241"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "CompetitorsRegionalAdvertising",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "12241"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "CompetitorsRegionalAdvertising",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "12241"
+  },
+  {
+   "metric": "maxDays",
+   "source": "view.staticData",
+   "module": "OutsourcedBrandResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "12991"
+  },
+  {
+   "metric": "outsourcedBrands",
+   "source": "view.staticData",
+   "module": "OutsourcedBrandResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "12991"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "OutsourcedBrandResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "12991"
+  },
+  {
+   "metric": "total",
+   "source": "calculate",
+   "module": "SourceStudy",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "50499"
+  },
+  {
+   "metric": "total",
+   "source": "calculate",
+   "module": "VarianceStudy",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "81397"
+  },
+  {
+   "metric": "total",
+   "source": "calculate",
+   "module": "OpenSalesOffice",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_module_key": "28533"
+  },
+  {
+   "metric": "totalClose",
+   "source": "calculate",
+   "module": "OpenSalesOffice",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_module_key": "28533"
+  },
+  {
+   "metric": "totalFactorySetup",
+   "source": "calculate",
+   "module": "OpenSalesOffice",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_module_key": "28533"
+  },
+  {
+   "metric": "totalLease",
+   "source": "calculate",
+   "module": "OpenSalesOffice",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_module_key": "28533"
+  },
+  {
+   "metric": "totalSetup",
+   "source": "calculate",
+   "module": "OpenSalesOffice",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_module_key": "28533"
+  },
+  {
+   "metric": "changeoverCost",
+   "source": "calculate",
+   "module": "ImproveChangeover",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "84103"
+  },
+  {
+   "metric": "changeoverTime",
+   "source": "calculate",
+   "module": "ImproveChangeover",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "84103"
+  },
+  {
+   "metric": "costReductionPct",
+   "source": "calculate",
+   "module": "ImproveChangeover",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "84103"
+  },
+  {
+   "metric": "timeReductionPct",
+   "source": "calculate",
+   "module": "ImproveChangeover",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "84103"
+  },
+  {
+   "metric": "fromRow",
+   "source": "view.staticData",
+   "module": "ImprovementActionsCosts",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "51058"
+  },
+  {
+   "metric": "groups",
+   "source": "view.staticData",
+   "module": "ImprovementActionsCosts",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "51058"
+  },
+  {
+   "metric": "jelement",
+   "source": "view.staticData",
+   "module": "ImprovementActionsCosts",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "51058"
+  },
+  {
+   "metric": "toRow",
+   "source": "view.staticData",
+   "module": "ImprovementActionsCosts",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "51058"
+  },
+  {
+   "metric": "items",
+   "source": "view.staticData",
+   "module": "CustomerNeeds",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "observed_in_capture": true,
+   "rea_module_key": "24468"
+  },
+  {
+   "metric": "sameData",
+   "source": "view.staticData",
+   "module": "CustomerNeeds",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "observed_in_capture": true,
+   "rea_module_key": "24468"
+  },
+  {
+   "metric": "segments",
+   "source": "view.staticData",
+   "module": "CustomerNeeds",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "observed_in_capture": true,
+   "rea_module_key": "24468"
+  },
+  {
+   "metric": "tableID",
+   "source": "view.staticData",
+   "module": "CustomerNeeds",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "observed_in_capture": true,
+   "rea_module_key": "24468"
+  },
+  {
+   "metric": "tableName",
+   "source": "view.staticData",
+   "module": "CustomerNeeds",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "observed_in_capture": true,
+   "rea_module_key": "24468"
+  },
+  {
+   "metric": "tables",
+   "source": "view.staticData",
+   "module": "CustomerNeeds",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "observed_in_capture": true,
+   "rea_module_key": "24468"
+  },
+  {
+   "metric": "employCost",
+   "source": "calculate",
+   "module": "HireWebSalesPeople",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "43494"
+  },
+  {
+   "metric": "hireCost",
+   "source": "calculate",
+   "module": "HireWebSalesPeople",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "43494"
+  },
+  {
+   "metric": "lastQuarterSalesPeople",
+   "source": "calculate",
+   "module": "HireWebSalesPeople",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "43494"
+  },
+  {
+   "metric": "layOffCost",
+   "source": "calculate",
+   "module": "HireWebSalesPeople",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "43494"
+  },
+  {
+   "metric": "opened",
+   "source": "calculate",
+   "module": "HireWebSalesPeople",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "43494"
+  },
+  {
+   "metric": "regionID",
+   "source": "calculate",
+   "module": "HireWebSalesPeople",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "43494"
+  },
+  {
+   "metric": "regions",
+   "source": "calculate",
+   "module": "HireWebSalesPeople",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "43494"
+  },
+  {
+   "metric": "salesPeople",
+   "source": "calculate",
+   "module": "HireWebSalesPeople",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "43494"
+  },
+  {
+   "metric": "sf",
+   "source": "calculate",
+   "module": "HireWebSalesPeople",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "43494"
+  },
+  {
+   "metric": "support",
+   "source": "calculate",
+   "module": "HireWebSalesPeople",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "43494"
+  },
+  {
+   "metric": "total",
+   "source": "calculate",
+   "module": "HireWebSalesPeople",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "43494"
+  },
+  {
+   "metric": "projection",
+   "source": "calculate",
+   "module": "DemandProjectionNextQuarter",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "37560"
+  },
+  {
+   "metric": "data",
+   "source": "calculate",
+   "module": "Overtime",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "82574"
+  },
+  {
+   "metric": "fixedCapacity",
+   "source": "calculate",
+   "module": "Overtime",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "82574"
+  },
+  {
+   "metric": "hasWorkersCompensation",
+   "source": "calculate",
+   "module": "Overtime",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "82574"
+  },
+  {
+   "metric": "hoursInDay",
+   "source": "calculate",
+   "module": "Overtime",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "82574"
+  },
+  {
+   "metric": "overtimeLaborChange",
+   "source": "calculate",
+   "module": "Overtime",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "82574"
+  },
+  {
+   "metric": "showLegend",
+   "source": "calculate",
+   "module": "Overtime",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "82574"
+  },
+  {
+   "metric": "title",
+   "source": "calculate",
+   "module": "Overtime",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "82574"
+  },
+  {
+   "metric": "x",
+   "source": "calculate",
+   "module": "Overtime",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "82574"
+  },
+  {
+   "metric": "y",
+   "source": "calculate",
+   "module": "Overtime",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "82574"
+  },
+  {
+   "metric": "quarters",
+   "source": "view.staticData",
+   "module": "FinanceReport",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "66997"
+  },
+  {
+   "metric": "sections",
+   "source": "view.staticData",
+   "module": "FinanceReport",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "66997"
+  },
+  {
+   "metric": "budget",
+   "source": "calculate",
+   "module": "InvestInActions",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "30228"
+  },
+  {
+   "metric": "criticalGroups",
+   "source": "calculate",
+   "module": "InvestInActions",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "30228"
+  },
+  {
+   "metric": "total",
+   "source": "calculate",
+   "module": "InvestInActions",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "30228"
+  },
+  {
+   "metric": "brands",
+   "source": "view.staticData",
+   "module": "BrandJudgment",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "5192"
+  },
+  {
+   "metric": "regionName",
+   "source": "view.staticData",
+   "module": "BrandJudgment",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "5192"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "BrandJudgment",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "5192"
+  },
+  {
+   "metric": "segmentID",
+   "source": "view.staticData",
+   "module": "BrandJudgment",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "5192"
+  },
+  {
+   "metric": "segments",
+   "source": "view.staticData",
+   "module": "BrandJudgment",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "5192"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "BrandJudgment",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "5192"
+  },
+  {
+   "metric": "currency",
+   "source": "view.staticData",
+   "module": "ExchangeRates",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "61989"
+  },
+  {
+   "metric": "currencyName",
+   "source": "view.staticData",
+   "module": "ExchangeRates",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "61989"
+  },
+  {
+   "metric": "er",
+   "source": "view.staticData",
+   "module": "ExchangeRates",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "61989"
+  },
+  {
+   "metric": "headquarters",
+   "source": "view.staticData",
+   "module": "ExchangeRates",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "61989"
+  },
+  {
+   "metric": "messages",
+   "source": "view.staticData",
+   "module": "ExchangeRates",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "61989"
+  },
+  {
+   "metric": "processDate",
+   "source": "view.staticData",
+   "module": "ExchangeRates",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "61989"
+  },
+  {
+   "metric": "regionName",
+   "source": "view.staticData",
+   "module": "ExchangeRates",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "61989"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "ExchangeRates",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "61989"
+  },
+  {
+   "metric": "sourceInfo",
+   "source": "view.staticData",
+   "module": "ExchangeRates",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "61989"
+  },
+  {
+   "metric": "hours",
+   "source": "calculate",
+   "module": "OvertimeRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "28231"
+  },
+  {
+   "metric": "overtime",
+   "source": "calculate",
+   "module": "OvertimeRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "28231"
+  },
+  {
+   "metric": "regions",
+   "source": "calculate",
+   "module": "OvertimeRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "28231"
+  },
+  {
+   "metric": "totalDemand",
+   "source": "calculate",
+   "module": "DemandProjectionNextQuarterRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "69257"
+  },
+  {
+   "metric": "demand",
+   "source": "view.staticData",
+   "module": "MarketShare",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "23142"
+  },
+  {
+   "metric": "segments",
+   "source": "view.staticData",
+   "module": "MarketShare",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "23142"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "MarketShare",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "23142"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "BusinessRelationships",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "6456"
+  },
+  {
+   "metric": "segments",
+   "source": "view.staticData",
+   "module": "BusinessRelationships",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "6456"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "BusinessRelationships",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "6456"
+  },
+  {
+   "metric": "companyItems",
+   "source": "view.staticData",
+   "module": "CompetitorsProfiles",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "99472"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "CompetitorsProfiles",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "99472"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "CompetitorsProfiles",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "99472"
+  },
+  {
+   "metric": "all",
+   "source": "calculate",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "data",
+   "source": "calculate",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "frequency",
+   "source": "calculate",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "graph",
+   "source": "calculate",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "mode",
+   "source": "calculate",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "partnerID",
+   "source": "calculate",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "showLegend",
+   "source": "calculate",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "title",
+   "source": "calculate",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "units",
+   "source": "calculate",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "x",
+   "source": "calculate",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "y",
+   "source": "calculate",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "category",
+   "source": "view.dynamicData",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "conditionalYLines",
+   "source": "view.dynamicData",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "data",
+   "source": "view.dynamicData",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "labelX",
+   "source": "view.dynamicData",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "labelY",
+   "source": "view.dynamicData",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "labels",
+   "source": "view.dynamicData",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "legend",
+   "source": "view.dynamicData",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "minX",
+   "source": "view.dynamicData",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "minY",
+   "source": "view.dynamicData",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "partners",
+   "source": "view.dynamicData",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "units",
+   "source": "view.dynamicData",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "yLines",
+   "source": "view.dynamicData",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "factoryCities",
+   "source": "view.staticData",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "frequencies",
+   "source": "view.staticData",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "frequency",
+   "source": "view.staticData",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "maxDays",
+   "source": "view.staticData",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "mode",
+   "source": "view.staticData",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "modes",
+   "source": "view.staticData",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "partnerID",
+   "source": "view.staticData",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "units",
+   "source": "view.staticData",
+   "module": "ShipmentOptions",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "36913"
+  },
+  {
+   "metric": "regions",
+   "source": "calculate",
+   "module": "SearchEngineMarketing",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "87627"
+  },
+  {
+   "metric": "totalBudget",
+   "source": "calculate",
+   "module": "SearchEngineMarketing",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "87627"
+  },
+  {
+   "metric": "brandsForSale",
+   "source": "calculate",
+   "module": "ProFormaDivisionProfitability",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "28512"
+  },
+  {
+   "metric": "items",
+   "source": "calculate",
+   "module": "ProFormaDivisionProfitability",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "28512"
+  },
+  {
+   "metric": "items",
+   "source": "calculate",
+   "module": "ProFormaCashFlow",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_module_key": "4510"
+  },
+  {
+   "metric": "adsCost",
+   "source": "calculate",
+   "module": "DesignWebPage",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "37006"
+  },
+  {
+   "metric": "keywords",
+   "source": "calculate",
+   "module": "DesignWebPage",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "37006"
+  },
+  {
+   "metric": "regions",
+   "source": "calculate",
+   "module": "DesignWebPage",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "37006"
+  },
+  {
+   "metric": "totalCost",
+   "source": "calculate",
+   "module": "DesignWebPage",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "37006"
+  },
+  {
+   "metric": "acquirement",
+   "source": "calculate",
+   "module": "FixedCapacity",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_module_key": "63171"
+  },
+  {
+   "metric": "expansion",
+   "source": "calculate",
+   "module": "FixedCapacity",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_module_key": "63171"
+  },
+  {
+   "metric": "total",
+   "source": "calculate",
+   "module": "FixedCapacity",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE",
+    "REA_CAPTURE_RECORD"
+   ],
+   "rea_module_key": "63171"
+  },
+  {
+   "metric": "total",
+   "source": "calculate",
+   "module": "WebProductivity",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "24703"
+  },
+  {
+   "metric": "ads",
+   "source": "calculate",
+   "module": "RegionalMedia",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "45522"
+  },
+  {
+   "metric": "adsCost",
+   "source": "calculate",
+   "module": "RegionalMedia",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "45522"
+  },
+  {
+   "metric": "mediaCost",
+   "source": "calculate",
+   "module": "RegionalMedia",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "45522"
+  },
+  {
+   "metric": "mediaCount",
+   "source": "calculate",
+   "module": "RegionalMedia",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "45522"
+  },
+  {
+   "metric": "regionCost",
+   "source": "calculate",
+   "module": "RegionalMedia",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "45522"
+  },
+  {
+   "metric": "regions",
+   "source": "calculate",
+   "module": "RegionalMedia",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "45522"
+  },
+  {
+   "metric": "globalSales",
+   "source": "view.staticData",
+   "module": "Sales",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "60941"
+  },
+  {
+   "metric": "officeSales",
+   "source": "view.staticData",
+   "module": "Sales",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "60941"
+  },
+  {
+   "metric": "outsourcingSales",
+   "source": "view.staticData",
+   "module": "Sales",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "60941"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "Sales",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "60941"
+  },
+  {
+   "metric": "unwanted",
+   "source": "view.staticData",
+   "module": "Sales",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "60941"
+  },
+  {
+   "metric": "webSales",
+   "source": "view.staticData",
+   "module": "Sales",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "60941"
+  },
+  {
+   "metric": "ads",
+   "source": "calculate",
+   "module": "LocalMedia",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "12915"
+  },
+  {
+   "metric": "adsCost",
+   "source": "calculate",
+   "module": "LocalMedia",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "12915"
+  },
+  {
+   "metric": "mediaCost",
+   "source": "calculate",
+   "module": "LocalMedia",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "12915"
+  },
+  {
+   "metric": "mediaCount",
+   "source": "calculate",
+   "module": "LocalMedia",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "12915"
+  },
+  {
+   "metric": "regionCost",
+   "source": "calculate",
+   "module": "LocalMedia",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "12915"
+  },
+  {
+   "metric": "regions",
+   "source": "calculate",
+   "module": "LocalMedia",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "12915"
+  },
+  {
+   "metric": "split",
+   "source": "calculate",
+   "module": "LocalMedia",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "12915"
+  },
+  {
+   "metric": "chartSettings",
+   "source": "calculate",
+   "module": "OperatingCapacity",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "84654"
+  },
+  {
+   "metric": "costToChangeOperatingCapacity",
+   "source": "calculate",
+   "module": "OperatingCapacity",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "84654"
+  },
+  {
+   "metric": "data",
+   "source": "calculate",
+   "module": "OperatingCapacity",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "84654"
+  },
+  {
+   "metric": "directLaborCPU",
+   "source": "calculate",
+   "module": "OperatingCapacity",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "84654"
+  },
+  {
+   "metric": "fixedCapacity",
+   "source": "calculate",
+   "module": "OperatingCapacity",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "84654"
+  },
+  {
+   "metric": "graph",
+   "source": "calculate",
+   "module": "OperatingCapacity",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "84654"
+  },
+  {
+   "metric": "hasWorkersCompensation",
+   "source": "calculate",
+   "module": "OperatingCapacity",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "84654"
+  },
+  {
+   "metric": "height",
+   "source": "calculate",
+   "module": "OperatingCapacity",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "84654"
+  },
+  {
+   "metric": "isJustInTime",
+   "source": "calculate",
+   "module": "OperatingCapacity",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "84654"
+  },
+  {
+   "metric": "overheadCPU",
+   "source": "calculate",
+   "module": "OperatingCapacity",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "84654"
+  },
+  {
+   "metric": "previousQuarterFixedCapacity",
+   "source": "calculate",
+   "module": "OperatingCapacity",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "84654"
+  },
+  {
+   "metric": "previousQuarterOperatingCapacity",
+   "source": "calculate",
+   "module": "OperatingCapacity",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "84654"
+  },
+  {
+   "metric": "contest",
+   "source": "calculate",
+   "module": "SpecialPrograms",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "72471"
+  },
+  {
+   "metric": "contestBudget",
+   "source": "calculate",
+   "module": "SpecialPrograms",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "72471"
+  },
+  {
+   "metric": "demoKit",
+   "source": "calculate",
+   "module": "SpecialPrograms",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "72471"
+  },
+  {
+   "metric": "demoKitBudget",
+   "source": "calculate",
+   "module": "SpecialPrograms",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "72471"
+  },
+  {
+   "metric": "newSalesForce",
+   "source": "calculate",
+   "module": "SpecialPrograms",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "72471"
+  },
+  {
+   "metric": "newWebSalesForce",
+   "source": "calculate",
+   "module": "SpecialPrograms",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "72471"
+  },
+  {
+   "metric": "totalBudget",
+   "source": "calculate",
+   "module": "SpecialPrograms",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "72471"
+  },
+  {
+   "metric": "totalSalesForce",
+   "source": "calculate",
+   "module": "SpecialPrograms",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "72471"
+  },
+  {
+   "metric": "totalWebSalesForce",
+   "source": "calculate",
+   "module": "SpecialPrograms",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "72471"
+  },
+  {
+   "metric": "training",
+   "source": "calculate",
+   "module": "SpecialPrograms",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "72471"
+  },
+  {
+   "metric": "trainingBudget",
+   "source": "calculate",
+   "module": "SpecialPrograms",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "72471"
+  },
+  {
+   "metric": "keywords",
+   "source": "view.staticData",
+   "module": "OrganicSearchEngineResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "44594"
+  },
+  {
+   "metric": "oldOrganic",
+   "source": "view.staticData",
+   "module": "OrganicSearchEngineResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "44594"
+  },
+  {
+   "metric": "rank",
+   "source": "view.staticData",
+   "module": "OrganicSearchEngineResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "44594"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "OrganicSearchEngineResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "44594"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "OrganicSearchEngineResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "44594"
+  },
+  {
+   "metric": "total",
+   "source": "calculate",
+   "module": "SocialMedia",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "40976"
+  },
+  {
+   "metric": "brands",
+   "source": "calculate",
+   "module": "Promotions",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "46699"
+  },
+  {
+   "metric": "height",
+   "source": "calculate",
+   "module": "Promotions",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "46699"
+  },
+  {
+   "metric": "regionID",
+   "source": "calculate",
+   "module": "Promotions",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "46699"
+  },
+  {
+   "metric": "regions",
+   "source": "calculate",
+   "module": "Promotions",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "46699"
+  },
+  {
+   "metric": "totalBudget",
+   "source": "calculate",
+   "module": "Promotions",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "46699"
+  },
+  {
+   "metric": "keywords",
+   "source": "view.staticData",
+   "module": "IndustrySearchEngineMarketingResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "27783"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "IndustrySearchEngineMarketingResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "27783"
+  },
+  {
+   "metric": "segments",
+   "source": "view.staticData",
+   "module": "IndustrySearchEngineMarketingResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "27783"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "IndustrySearchEngineMarketingResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "27783"
+  },
+  {
+   "metric": "total",
+   "source": "calculate",
+   "module": "WebTraffic",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "58010"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "DetailedBrandDemandReport",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "17837"
+  },
+  {
+   "metric": "segments",
+   "source": "view.staticData",
+   "module": "DetailedBrandDemandReport",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "17837"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "DetailedBrandDemandReport",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "17837"
+  },
+  {
+   "metric": "brandDemand",
+   "source": "calculate",
+   "module": "DemandProjection",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "31191"
+  },
+  {
+   "metric": "brands",
+   "source": "calculate",
+   "module": "DemandProjection",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "31191"
+  },
+  {
+   "metric": "demandPerSp",
+   "source": "calculate",
+   "module": "DemandProjection",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "31191"
+  },
+  {
+   "metric": "demandPerWebSp",
+   "source": "calculate",
+   "module": "DemandProjection",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "31191"
+  },
+  {
+   "metric": "hasOperatingCapacity",
+   "source": "calculate",
+   "module": "DemandProjection",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "31191"
+  },
+  {
+   "metric": "hasZeroMaxEndingInventory",
+   "source": "calculate",
+   "module": "DemandProjection",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "31191"
+  },
+  {
+   "metric": "lqDemandPerSp",
+   "source": "calculate",
+   "module": "DemandProjection",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "31191"
+  },
+  {
+   "metric": "lqDemandPerWebSp",
+   "source": "calculate",
+   "module": "DemandProjection",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "31191"
+  },
+  {
+   "metric": "lqSf",
+   "source": "calculate",
+   "module": "DemandProjection",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "31191"
+  },
+  {
+   "metric": "lqSoDemand",
+   "source": "calculate",
+   "module": "DemandProjection",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "31191"
+  },
+  {
+   "metric": "lqTotalDemand",
+   "source": "calculate",
+   "module": "DemandProjection",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "31191"
+  },
+  {
+   "metric": "lqTotalSf",
+   "source": "calculate",
+   "module": "DemandProjection",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "31191"
+  },
+  {
+   "metric": "lqWebDemand",
+   "source": "calculate",
+   "module": "DemandProjection",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "31191"
+  },
+  {
+   "metric": "lqWebSf",
+   "source": "calculate",
+   "module": "DemandProjection",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "31191"
+  },
+  {
+   "metric": "operatingCapacityNeeded",
+   "source": "calculate",
+   "module": "DemandProjection",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "31191"
+  },
+  {
+   "metric": "soDemand",
+   "source": "calculate",
+   "module": "DemandProjection",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "31191"
+  },
+  {
+   "metric": "totalDemand",
+   "source": "calculate",
+   "module": "DemandProjection",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "31191"
+  },
+  {
+   "metric": "webDemand",
+   "source": "calculate",
+   "module": "DemandProjection",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "31191"
+  },
+  {
+   "metric": "ind",
+   "source": "view.staticData",
+   "module": "DrillDownBSC",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "86834"
+  },
+  {
+   "metric": "indicators",
+   "source": "view.staticData",
+   "module": "DrillDownBSC",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "86834"
+  },
+  {
+   "metric": "teams",
+   "source": "view.staticData",
+   "module": "DrillDownBSC",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "86834"
+  },
+  {
+   "metric": "regions",
+   "source": "calculate",
+   "module": "HireSalesPeople",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "18287"
+  },
+  {
+   "metric": "total",
+   "source": "calculate",
+   "module": "HireSalesPeople",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "18287"
+  },
+  {
+   "metric": "categories",
+   "source": "view.staticData",
+   "module": "StrategicGraphs",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "75610"
+  },
+  {
+   "metric": "chartTemplates",
+   "source": "view.staticData",
+   "module": "StrategicGraphs",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "75610"
+  },
+  {
+   "metric": "brandsForSale",
+   "source": "view.staticData",
+   "module": "ManufacturingResultsRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "9920"
+  },
+  {
+   "metric": "on",
+   "source": "view.staticData",
+   "module": "ManufacturingResultsRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "9920"
+  },
+  {
+   "metric": "producing",
+   "source": "view.staticData",
+   "module": "ManufacturingResultsRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "9920"
+  },
+  {
+   "metric": "regionID",
+   "source": "view.staticData",
+   "module": "ManufacturingResultsRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "9920"
+  },
+  {
+   "metric": "regions",
+   "source": "view.staticData",
+   "module": "ManufacturingResultsRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "9920"
+  },
+  {
+   "metric": "selling",
+   "source": "view.staticData",
+   "module": "ManufacturingResultsRegional",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "9920"
+  },
+  {
+   "metric": "totalDemand",
+   "source": "calculate",
+   "module": "DemandProjectionRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "4594"
+  },
+  {
+   "metric": "brandsForProduction",
+   "source": "calculate",
+   "module": "FactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "19060"
+  },
+  {
+   "metric": "brandsForSale",
+   "source": "calculate",
+   "module": "FactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "19060"
+  },
+  {
+   "metric": "choverLabor",
+   "source": "calculate",
+   "module": "FactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "19060"
+  },
+  {
+   "metric": "choverOC",
+   "source": "calculate",
+   "module": "FactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "19060"
+  },
+  {
+   "metric": "choverOCPercent",
+   "source": "calculate",
+   "module": "FactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "19060"
+  },
+  {
+   "metric": "choverOverhead",
+   "source": "calculate",
+   "module": "FactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "19060"
+  },
+  {
+   "metric": "costToChangeOC",
+   "source": "calculate",
+   "module": "FactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "19060"
+  },
+  {
+   "metric": "excessLabor",
+   "source": "calculate",
+   "module": "FactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "19060"
+  },
+  {
+   "metric": "excessOC",
+   "source": "calculate",
+   "module": "FactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "19060"
+  },
+  {
+   "metric": "excessOCPercent",
+   "source": "calculate",
+   "module": "FactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "19060"
+  },
+  {
+   "metric": "excessOverhead",
+   "source": "calculate",
+   "module": "FactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "19060"
+  },
+  {
+   "metric": "operatingOverhead",
+   "source": "calculate",
+   "module": "FactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "19060"
+  },
+  {
+   "metric": "productionOC",
+   "source": "calculate",
+   "module": "FactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "19060"
+  },
+  {
+   "metric": "productionOCPercent",
+   "source": "calculate",
+   "module": "FactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "19060"
+  },
+  {
+   "metric": "productionOverhead",
+   "source": "calculate",
+   "module": "FactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "19060"
+  },
+  {
+   "metric": "totalOC",
+   "source": "calculate",
+   "module": "FactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "19060"
+  },
+  {
+   "metric": "totalOverhead",
+   "source": "calculate",
+   "module": "FactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "19060"
+  },
+  {
+   "metric": "brandsForProduction",
+   "source": "calculate",
+   "module": "FactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "96285"
+  },
+  {
+   "metric": "brandsForSale",
+   "source": "calculate",
+   "module": "FactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "96285"
+  },
+  {
+   "metric": "choverLabor",
+   "source": "calculate",
+   "module": "FactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "96285"
+  },
+  {
+   "metric": "choverOC",
+   "source": "calculate",
+   "module": "FactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "96285"
+  },
+  {
+   "metric": "choverOCPercent",
+   "source": "calculate",
+   "module": "FactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "96285"
+  },
+  {
+   "metric": "choverOverhead",
+   "source": "calculate",
+   "module": "FactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "96285"
+  },
+  {
+   "metric": "costToChangeOC",
+   "source": "calculate",
+   "module": "FactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "96285"
+  },
+  {
+   "metric": "excessLabor",
+   "source": "calculate",
+   "module": "FactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "96285"
+  },
+  {
+   "metric": "excessOC",
+   "source": "calculate",
+   "module": "FactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "96285"
+  },
+  {
+   "metric": "excessOCPercent",
+   "source": "calculate",
+   "module": "FactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "96285"
+  },
+  {
+   "metric": "excessOverhead",
+   "source": "calculate",
+   "module": "FactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "96285"
+  },
+  {
+   "metric": "operatingOverhead",
+   "source": "calculate",
+   "module": "FactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "96285"
+  },
+  {
+   "metric": "productionOC",
+   "source": "calculate",
+   "module": "FactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "96285"
+  },
+  {
+   "metric": "productionOCPercent",
+   "source": "calculate",
+   "module": "FactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "96285"
+  },
+  {
+   "metric": "productionOverhead",
+   "source": "calculate",
+   "module": "FactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "96285"
+  },
+  {
+   "metric": "totalOC",
+   "source": "calculate",
+   "module": "FactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "96285"
+  },
+  {
+   "metric": "totalOverhead",
+   "source": "calculate",
+   "module": "FactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "96285"
+  },
+  {
+   "metric": "DECENT_PERCENTILE",
+   "source": "view.staticData",
+   "module": "CompetencyReport",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "23642"
+  },
+  {
+   "metric": "competencies",
+   "source": "view.staticData",
+   "module": "CompetencyReport",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "23642"
+  },
+  {
+   "metric": "pools",
+   "source": "view.staticData",
+   "module": "CompetencyReport",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "23642"
+  },
+  {
+   "metric": "student",
+   "source": "view.staticData",
+   "module": "CompetencyReport",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "23642"
+  },
+  {
+   "metric": "studentCompetencies",
+   "source": "view.staticData",
+   "module": "CompetencyReport",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "23642"
+  },
+  {
+   "metric": "brandsForProduction",
+   "source": "view.staticData",
+   "module": "ManufacturingResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "61298"
+  },
+  {
+   "metric": "brandsForSale",
+   "source": "view.staticData",
+   "module": "ManufacturingResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "61298"
+  },
+  {
+   "metric": "inSupplyChain",
+   "source": "view.staticData",
+   "module": "ManufacturingResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "61298"
+  },
+  {
+   "metric": "overhead",
+   "source": "view.staticData",
+   "module": "ManufacturingResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "61298"
+  },
+  {
+   "metric": "producing",
+   "source": "view.staticData",
+   "module": "ManufacturingResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "61298"
+  },
+  {
+   "metric": "selling",
+   "source": "view.staticData",
+   "module": "ManufacturingResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "61298"
+  },
+  {
+   "metric": "split",
+   "source": "view.staticData",
+   "module": "ManufacturingResults",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "observed_in_capture": false,
+   "rea_module_key": "61298"
+  },
+  {
+   "metric": "ads",
+   "source": "calculate",
+   "module": "SimpleInternetMarketing",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "74208"
+  },
+  {
+   "metric": "adsCost",
+   "source": "calculate",
+   "module": "SimpleInternetMarketing",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "74208"
+  },
+  {
+   "metric": "is",
+   "source": "calculate",
+   "module": "SimpleInternetMarketing",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "74208"
+  },
+  {
+   "metric": "prop",
+   "source": "calculate",
+   "module": "SimpleInternetMarketing",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "74208"
+  },
+  {
+   "metric": "regionID",
+   "source": "calculate",
+   "module": "SimpleInternetMarketing",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "74208"
+  },
+  {
+   "metric": "totalCost",
+   "source": "calculate",
+   "module": "SimpleInternetMarketing",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "74208"
+  },
+  {
+   "metric": "val",
+   "source": "calculate",
+   "module": "SimpleInternetMarketing",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "74208"
+  },
+  {
+   "metric": "brandID",
+   "source": "calculate",
+   "module": "ExtFactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "52772"
+  },
+  {
+   "metric": "brandsForSale",
+   "source": "calculate",
+   "module": "ExtFactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "52772"
+  },
+  {
+   "metric": "demandMultiplier",
+   "source": "calculate",
+   "module": "ExtFactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "52772"
+  },
+  {
+   "metric": "demandProjection",
+   "source": "calculate",
+   "module": "ExtFactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "52772"
+  },
+  {
+   "metric": "hasWorkersCompensations",
+   "source": "calculate",
+   "module": "ExtFactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "52772"
+  },
+  {
+   "metric": "hasZeroMaxEndingInventory",
+   "source": "calculate",
+   "module": "ExtFactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "52772"
+  },
+  {
+   "metric": "hoursInDay",
+   "source": "calculate",
+   "module": "ExtFactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "52772"
+  },
+  {
+   "metric": "isEasyPush",
+   "source": "calculate",
+   "module": "ExtFactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "52772"
+  },
+  {
+   "metric": "isIn",
+   "source": "calculate",
+   "module": "ExtFactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "52772"
+  },
+  {
+   "metric": "isJustInTime",
+   "source": "calculate",
+   "module": "ExtFactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "52772"
+  },
+  {
+   "metric": "isProductivityEditable",
+   "source": "calculate",
+   "module": "ExtFactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "52772"
+  },
+  {
+   "metric": "operatingCapacityNeeded",
+   "source": "calculate",
+   "module": "ExtFactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "52772"
+  },
+  {
+   "metric": "price",
+   "source": "calculate",
+   "module": "ExtFactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "52772"
+  },
+  {
+   "metric": "teamID",
+   "source": "calculate",
+   "module": "ExtFactorySimulationRegional",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "52772"
+  },
+  {
+   "metric": "items",
+   "source": "calculate",
+   "module": "TacticalPlan",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "69075"
+  },
+  {
+   "metric": "cpuShipped",
+   "source": "calculate",
+   "module": "ConfirmRFP",
+   "available_before_save": false,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "49509"
+  },
+  {
+   "metric": "RFPs",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "attr",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "brandID",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "brandsForProduction",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "brandsForSale",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "choverLabor",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "choverOC",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "choverOCPercent",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "choverOverhead",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "contractID",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "costToChangeOC",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "demandProjection",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "directLaborCPUOtInc",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "estimatedDemand",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "estimatedPrice",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "excessLabor",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "excessOC",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "excessOCPercent",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "excessOverhead",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "hasFactoryProductivity",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "hasOvertime",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "hasWorkersCompensations",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "hasZeroMaxEndingInventory",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "html",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "inSupplyChain",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "isEasyPull",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "isEasyPush",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "isJustInTime",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "isPull",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "maxEndingInventory",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "operatingCapacityNeeded",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "operatingOverhead",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "overtimeAdjProductivity",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "overtimeHours",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "overtimeOC",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "plannedOC",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "plannedOCwithOt",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "plannedProduction",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "produce",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "produceIndex",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "producing",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "productionOC",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "productionOCPercent",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "productionOverhead",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "productionPriority",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "removeAttr",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "replenishmentPoint",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "resellerRFPs",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "supplierRFPs",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "targetPoint",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "teamID",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "totalOC",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  },
+  {
+   "metric": "totalOverhead",
+   "source": "calculate",
+   "module": "ExtFactorySimulation",
+   "available_before_save": true,
+   "provenance": [
+    "REA_STATIC_MODULE"
+   ],
+   "rea_module_key": "36161"
+  }
+ ]
+}
