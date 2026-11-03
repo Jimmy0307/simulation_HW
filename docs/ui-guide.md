@@ -10,6 +10,22 @@
 
 畫面右上角一定會標出目前的參數包：綠色 **SYNTHETIC 虛構資料**，或閃爍的紅色 **PRIVATE 真實資料**。同時也會標出目前是哪個模式。
 
+## 0. 三個一鍵腳本（Windows，雙擊即可）
+
+放在 `tools\bat\`。它們是本機工具，**不在 repo 裡**（`tools/` 整個被 git 忽略），所以新 clone 不會有，需要從原本的電腦複製過去。
+三個腳本都會自己從所在位置推算 repo 根目錄，搬移資料夾後仍可使用；出錯時會印出中文說明並停住視窗。
+
+| 腳本 | 做什麼 | 什麼時候點 |
+|---|---|---|
+| `setup-once.bat` | 安裝 git pre-push hook（每次 push 前逐一檢查 commit），並確認 hook 確實存在。前端相依沒裝就依 `package-lock.json` 安裝一次。最後查詢 GitHub 上的 repo 是 public 還是 private；是 public 就印出大字警告。 | **只需要一次**：新電腦、重新 clone、或搬移 repo 資料夾之後（hook 記錄了 Python 的路徑） |
+| `start-ui.bat` | 啟動前會檢查 Python、API 模組、Node、前端相依與 private 參數包。接著同時啟動本機 API（private 參數包）與 live 模式前端，並打開瀏覽器。按 Enter 或直接關閉視窗，兩者都會一起停止。 | **每天用**：要用真實資料試算、比較方案時。加 `-Synthetic` 改用虛構資料練習 |
+| `backup-private.bat` | 把整個 `evidence\private\` 複製到備份位置（包含外洩留存 `leak-archive\` 與完整歷史 bundle）。複製後比對檔案數、總大小與每個檔案的大小。只複製，不刪除來源。 | 每次有重要的新私有資料後，以及**清除 git 歷史之前**。預設存到同磁碟機的 `\tools\backup\simulation_HW\<日期時間>\`；建議指定外接硬碟，例如 `backup-private.bat E:\backup` |
+
+> [!IMPORTANT]
+> * `start-ui.bat` 開的是實戰模式。畫面上帶 [L] 或 [P] 標記（「未校準 · 非預測」）的銷量、營收、市佔、利潤**不是預測**；只有標 [V] 的成本面數字可信。
+> * `backup-private.bat` 的備份是將來清除 git 歷史後，唯一保有外洩原始內容的副本。請放在外接硬碟或其他實體位置，不要放進雲端同步資料夾或任何 repo。
+> * `setup-once.bat` 查詢 repo 是否公開時，會向 GitHub 發一次不帶憑證的唯讀請求。
+
 ## 1. 啟動 Demo 模式
 
 ```powershell
@@ -23,7 +39,7 @@ npm run preview                          # 開 http://127.0.0.1:4173
 
 ## 2. 啟動實戰模式
 
-一鍵啟動（本機腳本，**不在 repo 裡**）：
+一鍵啟動：雙擊 `tools\bat\start-ui.bat`（見第 0 節）。它是下面這個 PowerShell 腳本的外殼，兩者都是本機腳本，**不在 repo 裡**：
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File tools\live\start_ui.ps1                 # 載入 private 參數包
@@ -31,7 +47,7 @@ powershell -ExecutionPolicy Bypass -File tools\live\start_ui.ps1 -Save <存檔�
 powershell -ExecutionPolicy Bypass -File tools\live\start_ui.ps1 -Synthetic      # 用虛構參數練習
 ```
 
-腳本會同時啟動本機 API 與 Vite 開發伺服器（live 模式），並開啟瀏覽器。按 Enter 會同時關閉兩者。
+腳本會同時啟動本機 API 與 Vite 開發伺服器（live 模式），兩者都回應後才開啟瀏覽器。按 Enter 或關閉視窗，兩者會一起停止。加 `-NoBrowser` 則不開瀏覽器。
 
 也可以手動在兩個終端機分別執行：
 
