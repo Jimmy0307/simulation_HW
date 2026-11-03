@@ -39,6 +39,17 @@ _RATES = {"cd": "finance.cd_rate_annual_percent", "tax": "finance.tax_rate_perce
           "emergency": "finance.emergency_rate_min_percent"}
 
 
+# Metadata for user interfaces (descriptions of the table in the module docstring; no computation).
+EVENT_INFO: dict[str, dict[str, Any]] = {
+    "cost_shock": {"targets": sorted(_COST_PATHS), "effect": "cost fields x (1 + m)"},
+    "demand_shock": {"targets": ["*", "<segment id>"], "effect": "12-month market size x (1 + m)"},
+    "rate_change": {"targets": sorted(_RATES), "effect": "annual rate + m percentage points"},
+    "fx_shock": {"targets": ["*", "<region key>"], "effect": "local willingness to pay and outlet costs x (1 + m)"},
+    "competitor_price_cut": {"targets": ["*", "<competitor name>"], "effect": "rival prices x (1 + m); m < 0 is a cut"},
+    "supply_disruption": {"targets": ["capacity"], "effect": "usable capacity x (1 - m), 0 <= m <= 1"},
+}
+
+
 def validate(event: EventSpec) -> None:
     if event.type not in EVENT_TYPES:
         raise ValueError(f"unknown event type '{event.type}' (known: {', '.join(EVENT_TYPES)})")

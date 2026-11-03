@@ -116,3 +116,35 @@ def test_gate_scans_every_commit_not_just_the_final_tree(tmp_path: Path) -> None
     rules = {(f["path"], f["rule"]) for f in findings}
     assert ("docs/a.md", "sequence") in rules  # the leak is found although the final tree is clean
     assert ("private/x.md", "forbidden-path") in rules
+
+
+def test_gate_checks_frontend_dist_and_demo_bundle(tmp_path: Path) -> None:
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location("gate2", Path(__file__).parents[1] / "scripts" / "publication_gate.py")
+    assert spec and spec.loader
+    gate = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(gate)
+    values, pack = _fake_private(tmp_path)
+    real = load_real_values(values, pack)
+    dist = tmp_path / "dist"
+    (dist / "assets").mkdir(parents=True)
+    (dist / "demo").mkdir()
+    (dist / "index.html").write_text("<html></html>", encoding="utf-8")
+    (dist / "assets" / "app.js").write_text("const a=[52341,104682,157023];", encoding="utf-8")  # planted real run
+    (dist / "demo" / "manifest.json").write_text(json.dumps({"provenance": "synthetic", "is_private": False}), encoding="utf-8")
+    (dist / "demo" / "pack.json").write_text(json.dumps({"is_private": True}), encoding="utf-8")
+    (dist / "logo.png").write_bytes(b"\x89PNG")
+    rules = {(f["path"], f["rule"]) for f in gate.check_dist(dist, real)["findings"]}
+    assert ("assets/app.js", "sequence") in rules
+    assert ("demo/pack.json", "private-marker") in rules
+    assert ("logo.png", "unexpected-file-type") in rules
+    clean = tmp_path / "clean"
+    (clean / "demo").mkdir(parents=True)
+    (clean / "index.html").write_text("<html>synthetic</html>", encoding="utf-8")
+    (clean / "demo" / "manifest.json").write_text(json.dumps({"provenance": "synthetic", "is_private": False}), encoding="utf-8")
+    (clean / "demo" / "pack.json").write_text(json.dumps({"is_private": False}), encoding="utf-8")
+    assert gate.check_dist(clean, real)["findings"] == []
+    assert gate._path_is_allowed("frontend/src/App.tsx") and gate._path_is_allowed("frontend/public/demo/game.json")
+    assert not gate._path_is_allowed("frontend/dist/index.html") and not gate._path_is_allowed("frontend/src/x.css")
+    assert not gate._path_is_allowed("frontend/public/logo.svg") and gate._path_is_allowed(".github/workflows/pages.yml")

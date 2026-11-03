@@ -1,0 +1,17 @@
+{
+ "schema": "marketplace-sim/demo-bundle@1",
+ "provenance": "synthetic",
+ "is_private": false,
+ "source_pack": "examples/synthetic",
+ "files": [
+  "compare.json",
+  "diff.json",
+  "events.json",
+  "game.json",
+  "levels.json",
+  "pack.json",
+  "plans.json",
+  "scenarios.json",
+  "sweeps.json"
+ ]
+}

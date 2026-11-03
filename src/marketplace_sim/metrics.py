@@ -14,6 +14,7 @@ class MetricInfo:
     formula: str
     evidence: str
     note: str = ""
+    inputs: tuple[str, ...] = ()  # report lines this metric is computed from (for the source chain)
 
 
 METRICS: dict[str, MetricInfo] = {m.name: m for m in [
@@ -55,6 +56,43 @@ METRICS: dict[str, MetricInfo] = {m.name: m for m in [
                "VERIFIED only if every component is"),
     MetricInfo("fixed_capacity_next_quarter", Level.DERIVED, "current + increase", "capacity screen 'next quarter' row"),
 ]}
+
+
+_OPEX = ("store_setup", "web_center_setup", "outlet_lease", "design_cost", "production_cost", "advertising")
+INPUTS: dict[str, tuple[str, ...]] = {
+    "cd_interest": ("cd_balance",),
+    "production_cost": ("unit_cost[brand]",),
+    "units_sold[brand]": ("units_demanded[brand]",),
+    "market_units_total": ("units_sold[brand]",),
+    "market_share": ("units_sold[brand]", "market_units_total"),
+    "revenue": ("units_sold[brand]",),
+    "operating_profit_before_tax": ("revenue", "cd_interest", *_OPEX),
+    "income_tax": ("operating_profit_before_tax",),
+    "net_income": ("operating_profit_before_tax", "income_tax"),
+    "emergency_loan": ("cash_start", "revenue", "stock_raised", "cd_interest", "capex_capacity", "income_tax", *_OPEX),
+    "cash_end": ("cash_start", "revenue", "stock_raised", "cd_interest", "capex_capacity", "income_tax",
+                 "emergency_loan", *_OPEX),
+    "fixed_capacity_next_quarter": ("capacity_units_per_quarter",),
+}
+METRICS = {k: (MetricInfo(v.name, v.level, v.formula, v.evidence, v.note, INPUTS.get(k, ()))) for k, v in METRICS.items()}
+
+
+def chain(name: str) -> list[MetricInfo]:
+    """The metric and everything upstream of it (depth-first, each once): the full source chain of a report line."""
+    out: list[MetricInfo] = []
+    seen: set[str] = set()
+
+    def walk(metric: str) -> None:
+        info = lookup(metric)
+        if info is None or info.name in seen:
+            return
+        seen.add(info.name)
+        out.append(info)
+        for upstream in info.inputs:
+            walk(upstream)
+
+    walk(name)
+    return out
 
 
 def lookup(name: str) -> MetricInfo | None:

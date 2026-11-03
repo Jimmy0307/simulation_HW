@@ -12,13 +12,15 @@ license = { text = "MIT" }
 dependencies = ["pyyaml>=6"]
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.11", "types-PyYAML"]
+dev = ["pytest>=8", "ruff>=0.6", "mypy>=1.11", "types-PyYAML", "fastapi>=0.115", "uvicorn>=0.30", "httpx>=0.27"]
+api = ["fastapi>=0.115", "uvicorn>=0.30"]
 surrogate = ["scikit-learn>=1.5"]
 
 [project.scripts]
 marketplace-scan-evidence = "marketplace_sysid.security.evidence_scan:main"
 marketplace-rea-ingest = "marketplace_sysid.rea_ingest:main"
 mpsim = "marketplace_sim.cli:main"
+mpsim-api = "marketplace_sim.api.__main__:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]

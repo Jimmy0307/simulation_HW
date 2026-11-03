@@ -1,0 +1,57 @@
+{
+ "types": [
+  {
+   "effect": "cost fields x (1 + m)",
+   "targets": [
+    "*",
+    "capacity",
+    "components",
+    "outlets",
+    "production",
+    "stores",
+    "web_centers"
+   ],
+   "type": "cost_shock"
+  },
+  {
+   "effect": "12-month market size x (1 + m)",
+   "targets": [
+    "*",
+    "<segment id>"
+   ],
+   "type": "demand_shock"
+  },
+  {
+   "effect": "annual rate + m percentage points",
+   "targets": [
+    "cd",
+    "emergency",
+    "tax"
+   ],
+   "type": "rate_change"
+  },
+  {
+   "effect": "local willingness to pay and outlet costs x (1 + m)",
+   "targets": [
+    "*",
+    "<region key>"
+   ],
+   "type": "fx_shock"
+  },
+  {
+   "effect": "rival prices x (1 + m); m < 0 is a cut",
+   "targets": [
+    "*",
+    "<competitor name>"
+   ],
+   "type": "competitor_price_cut"
+  },
+  {
+   "effect": "usable capacity x (1 - m), 0 <= m <= 1",
+   "targets": [
+    "capacity"
+   ],
+   "type": "supply_disruption"
+  }
+ ]
+}

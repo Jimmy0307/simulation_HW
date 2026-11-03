@@ -1,0 +1,2276 @@
+{
+ "demand_model": "literature",
+ "is_private": false,
+ "name": "synthetic-demo",
+ "provenance": "synthetic",
+ "quarter": 4,
+ "results": {
+  "sweep": {
+   "caveat": "Demand is at 'literature' level: the worst cases reflect literature demand assumptions (published forms with uncalibrated coefficients, or placeholders), not a forecast of this game. Cost-side lines keep their own levels.",
+   "demand_level": "literature",
+   "is_private": false,
+   "mode": "grid",
+   "name": "demo-stress",
+   "objective": "min_cash",
+   "rows": [
+    {
+     "assignment": {
+      "capacity_cost": 0.9,
+      "demand_q2": -0.3,
+      "rivals": "calm"
+     },
+     "fingerprint": "8ae34fec9260e762",
+     "id": "demo-stress-000",
+     "objective": 2506697.209808358,
+     "summary": {
+      "cumulative_net_income": -188053.2951260347,
+      "emergency_loans": 0.0,
+      "final_cash": 2618756.939873966,
+      "min_cash": 2506697.209808358,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1045809.7649999999,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 0.9,
+      "demand_q2": -0.3,
+      "rivals": "aggressive"
+     },
+     "fingerprint": "3fc166574ceafe24",
+     "id": "demo-stress-001",
+     "objective": 2528957.738779867,
+     "summary": {
+      "cumulative_net_income": -183732.0086214899,
+      "emergency_loans": 0.0,
+      "final_cash": 2623078.2263785102,
+      "min_cash": 2528957.738779867,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1045809.7649999999,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 0.9,
+      "demand_q2": 0.0,
+      "rivals": "calm"
+     },
+     "fingerprint": "04579b589c9e3c42",
+     "id": "demo-stress-002",
+     "objective": 2841471.38711521,
+     "summary": {
+      "cumulative_net_income": 249069.74630474916,
+      "emergency_loans": 0.0,
+      "final_cash": 3055879.9813047494,
+      "min_cash": 2841471.38711521,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1045809.7649999999,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 0.9,
+      "demand_q2": 0.0,
+      "rivals": "aggressive"
+     },
+     "fingerprint": "3e45d2cdef838ff8",
+     "id": "demo-stress-003",
+     "objective": 2826832.339755422,
+     "summary": {
+      "cumulative_net_income": 217482.28981154662,
+      "emergency_loans": 0.0,
+      "final_cash": 3024292.524811547,
+      "min_cash": 2826832.339755422,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1045809.7649999999,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 0.9,
+      "demand_q2": 0.1,
+      "rivals": "calm"
+     },
+     "fingerprint": "bdf280c3ef7d2ce3",
+     "id": "demo-stress-004",
+     "objective": 2863681.210366374,
+     "summary": {
+      "cumulative_net_income": 271976.47436637327,
+      "emergency_loans": 0.0,
+      "final_cash": 3078786.7093663737,
+      "min_cash": 2863681.210366374,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1045809.7649999999,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 0.9,
+      "demand_q2": 0.1,
+      "rivals": "aggressive"
+     },
+     "fingerprint": "facad05b64c81b89",
+     "id": "demo-stress-005",
+     "objective": 2863068.8838030514,
+     "summary": {
+      "cumulative_net_income": 268987.8429594366,
+      "emergency_loans": 0.0,
+      "final_cash": 3075798.077959437,
+      "min_cash": 2863068.8838030514,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1045809.7649999999,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.0,
+      "demand_q2": -0.3,
+      "rivals": "calm"
+     },
+     "fingerprint": "5bc11ee7c6bdc3d4",
+     "id": "demo-stress-006",
+     "objective": 2390496.1248083576,
+     "summary": {
+      "cumulative_net_income": -188053.2951260347,
+      "emergency_loans": 0.0,
+      "final_cash": 2502555.8548739655,
+      "min_cash": 2390496.1248083576,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.0,
+      "demand_q2": -0.3,
+      "rivals": "aggressive"
+     },
+     "fingerprint": "2649ff6596bf8aa7",
+     "id": "demo-stress-007",
+     "objective": 2412756.6537798666,
+     "summary": {
+      "cumulative_net_income": -183732.0086214899,
+      "emergency_loans": 0.0,
+      "final_cash": 2506877.1413785093,
+      "min_cash": 2412756.6537798666,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.0,
+      "demand_q2": 0.0,
+      "rivals": "calm"
+     },
+     "fingerprint": "5c0f12ab74693f26",
+     "id": "demo-stress-008",
+     "objective": 2725270.3021152094,
+     "summary": {
+      "cumulative_net_income": 249069.74630474916,
+      "emergency_loans": 0.0,
+      "final_cash": 2939678.896304749,
+      "min_cash": 2725270.3021152094,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.0,
+      "demand_q2": 0.0,
+      "rivals": "aggressive"
+     },
+     "fingerprint": "abe6979c2afd1b4c",
+     "id": "demo-stress-009",
+     "objective": 2710631.2547554215,
+     "summary": {
+      "cumulative_net_income": 217482.28981154662,
+      "emergency_loans": 0.0,
+      "final_cash": 2908091.4398115464,
+      "min_cash": 2710631.2547554215,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.0,
+      "demand_q2": 0.1,
+      "rivals": "calm"
+     },
+     "fingerprint": "d64a72ae72dd991d",
+     "id": "demo-stress-010",
+     "objective": 2747480.125366373,
+     "summary": {
+      "cumulative_net_income": 271976.47436637327,
+      "emergency_loans": 0.0,
+      "final_cash": 2962585.624366373,
+      "min_cash": 2747480.125366373,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.0,
+      "demand_q2": 0.1,
+      "rivals": "aggressive"
+     },
+     "fingerprint": "ef71267b628673df",
+     "id": "demo-stress-011",
+     "objective": 2746867.798803051,
+     "summary": {
+      "cumulative_net_income": 268987.8429594366,
+      "emergency_loans": 0.0,
+      "final_cash": 2959596.992959436,
+      "min_cash": 2746867.798803051,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.25,
+      "demand_q2": -0.3,
+      "rivals": "calm"
+     },
+     "fingerprint": "dbd2639bf20438fe",
+     "id": "demo-stress-012",
+     "objective": 2099993.4123083577,
+     "summary": {
+      "cumulative_net_income": -188053.2951260347,
+      "emergency_loans": 0.0,
+      "final_cash": 2212053.1423739656,
+      "min_cash": 2099993.4123083577,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1452513.5625,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.25,
+      "demand_q2": -0.3,
+      "rivals": "aggressive"
+     },
+     "fingerprint": "f74fa82b8cf18e40",
+     "id": "demo-stress-013",
+     "objective": 2122253.9412798667,
+     "summary": {
+      "cumulative_net_income": -183732.0086214899,
+      "emergency_loans": 0.0,
+      "final_cash": 2216374.42887851,
+      "min_cash": 2122253.9412798667,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1452513.5625,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.25,
+      "demand_q2": 0.0,
+      "rivals": "calm"
+     },
+     "fingerprint": "a2406155e8ee8355",
+     "id": "demo-stress-014",
+     "objective": 2434767.5896152095,
+     "summary": {
+      "cumulative_net_income": 249069.74630474916,
+      "emergency_loans": 0.0,
+      "final_cash": 2649176.183804749,
+      "min_cash": 2434767.5896152095,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1452513.5625,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.25,
+      "demand_q2": 0.0,
+      "rivals": "aggressive"
+     },
+     "fingerprint": "3ff550e972ef8d18",
+     "id": "demo-stress-015",
+     "objective": 2420128.5422554216,
+     "summary": {
+      "cumulative_net_income": 217482.28981154662,
+      "emergency_loans": 0.0,
+      "final_cash": 2617588.7273115464,
+      "min_cash": 2420128.5422554216,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1452513.5625,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.25,
+      "demand_q2": 0.1,
+      "rivals": "calm"
+     },
+     "fingerprint": "50876d8e09c4c9f4",
+     "id": "demo-stress-016",
+     "objective": 2456977.412866373,
+     "summary": {
+      "cumulative_net_income": 271976.47436637327,
+      "emergency_loans": 0.0,
+      "final_cash": 2672082.911866373,
+      "min_cash": 2456977.412866373,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1452513.5625,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.25,
+      "demand_q2": 0.1,
+      "rivals": "aggressive"
+     },
+     "fingerprint": "eb75f129558d8773",
+     "id": "demo-stress-017",
+     "objective": 2456365.086303051,
+     "summary": {
+      "cumulative_net_income": 268987.8429594366,
+      "emergency_loans": 0.0,
+      "final_cash": 2669094.2804594366,
+      "min_cash": 2456365.086303051,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1452513.5625,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    }
+   ],
+   "schema": "marketplace-sim/sweep-result@1",
+   "sensitivity": [
+    {
+     "kind": "override",
+     "local_slope": -1162010.8499999996,
+     "main_effect_range": 406703.79749999987,
+     "mean_objective_by_value": {
+      "0.9": 2738451.4616047135,
+      "1.0": 2622250.3766047135,
+      "1.25": 2331747.6641047136
+     },
+     "variable": "capacity_cost"
+    },
+    {
+     "kind": "event",
+     "local_slope": 863868.9319764997,
+     "main_effect_range": 345547.5727905999,
+     "mean_objective_by_value": {
+      "-0.3": 2343525.846794112,
+      "0.0": 2659850.2359353155,
+      "0.1": 2689073.419584712
+     },
+     "variable": "demand_q2"
+    },
+    {
+     "kind": "competitors",
+     "main_effect_range": 2336.385016132146,
+     "mean_objective_by_value": {
+      "aggressive": 2565318.026612779,
+      "calm": 2562981.641596647
+     },
+     "variable": "rivals"
+    }
+   ],
+   "worst": [
+    {
+     "assignment": {
+      "capacity_cost": 1.25,
+      "demand_q2": -0.3,
+      "rivals": "calm"
+     },
+     "fingerprint": "dbd2639bf20438fe",
+     "id": "demo-stress-012",
+     "objective": 2099993.4123083577,
+     "summary": {
+      "cumulative_net_income": -188053.2951260347,
+      "emergency_loans": 0.0,
+      "final_cash": 2212053.1423739656,
+      "min_cash": 2099993.4123083577,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1452513.5625,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.25,
+      "demand_q2": -0.3,
+      "rivals": "aggressive"
+     },
+     "fingerprint": "f74fa82b8cf18e40",
+     "id": "demo-stress-013",
+     "objective": 2122253.9412798667,
+     "summary": {
+      "cumulative_net_income": -183732.0086214899,
+      "emergency_loans": 0.0,
+      "final_cash": 2216374.42887851,
+      "min_cash": 2122253.9412798667,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1452513.5625,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.0,
+      "demand_q2": -0.3,
+      "rivals": "calm"
+     },
+     "fingerprint": "5bc11ee7c6bdc3d4",
+     "id": "demo-stress-006",
+     "objective": 2390496.1248083576,
+     "summary": {
+      "cumulative_net_income": -188053.2951260347,
+      "emergency_loans": 0.0,
+      "final_cash": 2502555.8548739655,
+      "min_cash": 2390496.1248083576,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.0,
+      "demand_q2": -0.3,
+      "rivals": "aggressive"
+     },
+     "fingerprint": "2649ff6596bf8aa7",
+     "id": "demo-stress-007",
+     "objective": 2412756.6537798666,
+     "summary": {
+      "cumulative_net_income": -183732.0086214899,
+      "emergency_loans": 0.0,
+      "final_cash": 2506877.1413785093,
+      "min_cash": 2412756.6537798666,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.25,
+      "demand_q2": 0.0,
+      "rivals": "aggressive"
+     },
+     "fingerprint": "3ff550e972ef8d18",
+     "id": "demo-stress-015",
+     "objective": 2420128.5422554216,
+     "summary": {
+      "cumulative_net_income": 217482.28981154662,
+      "emergency_loans": 0.0,
+      "final_cash": 2617588.7273115464,
+      "min_cash": 2420128.5422554216,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1452513.5625,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    }
+   ]
+  },
+  "sweep-demand": {
+   "caveat": "Demand is at 'literature' level: the worst cases reflect literature demand assumptions (published forms with uncalibrated coefficients, or placeholders), not a forecast of this game. Cost-side lines keep their own levels.",
+   "demand_level": "literature",
+   "is_private": false,
+   "mode": "grid",
+   "name": "demo-demand-assumptions",
+   "objective": "cumulative_net_income",
+   "rows": [
+    {
+     "assignment": {
+      "ad_elasticity": 0.12,
+      "demand_q2": -0.3,
+      "price_sensitivity": 1.5
+     },
+     "fingerprint": "fe02d79ad25caee3",
+     "id": "demo-demand-assumptions-000",
+     "objective": -183312.34591225756,
+     "summary": {
+      "cumulative_net_income": -183312.34591225756,
+      "emergency_loans": 0.0,
+      "final_cash": 2507296.804087742,
+      "min_cash": 2398132.844958286,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "ad_elasticity": 0.12,
+      "demand_q2": 0.0,
+      "price_sensitivity": 1.5
+     },
+     "fingerprint": "dec4c924d36b07d6",
+     "id": "demo-demand-assumptions-001",
+     "objective": 262111.83573059767,
+     "summary": {
+      "cumulative_net_income": 262111.83573059767,
+      "emergency_loans": 0.0,
+      "final_cash": 2952720.9857305977,
+      "min_cash": 2704768.7088789865,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "ad_elasticity": 0.41,
+      "demand_q2": -0.3,
+      "price_sensitivity": 1.5
+     },
+     "fingerprint": "6c61761ac0143418",
+     "id": "demo-demand-assumptions-002",
+     "objective": -158630.8228370947,
+     "summary": {
+      "cumulative_net_income": -158630.8228370947,
+      "emergency_loans": 0.0,
+      "final_cash": 2531978.3271629056,
+      "min_cash": 2401023.3992538983,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "ad_elasticity": 0.41,
+      "demand_q2": 0.0,
+      "price_sensitivity": 1.5
+     },
+     "fingerprint": "6f3a96371ba21f48",
+     "id": "demo-demand-assumptions-003",
+     "objective": 271956.5139680924,
+     "summary": {
+      "cumulative_net_income": 271956.5139680924,
+      "emergency_loans": 0.0,
+      "final_cash": 2962565.6639680923,
+      "min_cash": 2724519.4821392843,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "ad_elasticity": 0.12,
+      "demand_q2": -0.3,
+      "price_sensitivity": 2.6
+     },
+     "fingerprint": "23cef3bc399e953d",
+     "id": "demo-demand-assumptions-004",
+     "objective": -198975.2375937444,
+     "summary": {
+      "cumulative_net_income": -198975.2375937444,
+      "emergency_loans": 0.0,
+      "final_cash": 2491633.9124062555,
+      "min_cash": 2388665.893186821,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "ad_elasticity": 0.12,
+      "demand_q2": 0.0,
+      "price_sensitivity": 2.6
+     },
+     "fingerprint": "a63becb7ae0063a8",
+     "id": "demo-demand-assumptions-005",
+     "objective": 254263.21006892907,
+     "summary": {
+      "cumulative_net_income": 254263.21006892907,
+      "emergency_loans": 0.0,
+      "final_cash": 2944872.360068929,
+      "min_cash": 2721721.3971989946,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "ad_elasticity": 0.41,
+      "demand_q2": -0.3,
+      "price_sensitivity": 2.6
+     },
+     "fingerprint": "6a99dc1c186041ff",
+     "id": "demo-demand-assumptions-006",
+     "objective": -178215.4099141722,
+     "summary": {
+      "cumulative_net_income": -178215.4099141722,
+      "emergency_loans": 0.0,
+      "final_cash": 2512393.7400858277,
+      "min_cash": 2389203.713380533,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "ad_elasticity": 0.41,
+      "demand_q2": 0.0,
+      "price_sensitivity": 2.6
+     },
+     "fingerprint": "ed2a43932c73249a",
+     "id": "demo-demand-assumptions-007",
+     "objective": 239757.82404045152,
+     "summary": {
+      "cumulative_net_income": 239757.82404045152,
+      "emergency_loans": 0.0,
+      "final_cash": 2930366.974040451,
+      "min_cash": 2720330.321413028,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "ad_elasticity": 0.12,
+      "demand_q2": -0.3,
+      "price_sensitivity": 4.0
+     },
+     "fingerprint": "f9318851b8350bda",
+     "id": "demo-demand-assumptions-008",
+     "objective": -212939.26400955045,
+     "summary": {
+      "cumulative_net_income": -212939.26400955045,
+      "emergency_loans": 0.0,
+      "final_cash": 2477669.885990449,
+      "min_cash": 2380403.7304123007,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "ad_elasticity": 0.12,
+      "demand_q2": 0.0,
+      "price_sensitivity": 4.0
+     },
+     "fingerprint": "5a8cabf1faaa74a4",
+     "id": "demo-demand-assumptions-009",
+     "objective": 174967.5081054895,
+     "summary": {
+      "cumulative_net_income": 174967.5081054895,
+      "emergency_loans": 0.0,
+      "final_cash": 2865576.658105489,
+      "min_cash": 2685759.5554438904,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "ad_elasticity": 0.41,
+      "demand_q2": -0.3,
+      "price_sensitivity": 4.0
+     },
+     "fingerprint": "811c8ea0f4b1bff5",
+     "id": "demo-demand-assumptions-010",
+     "objective": -197095.16985338836,
+     "summary": {
+      "cumulative_net_income": -197095.16985338836,
+      "emergency_loans": 0.0,
+      "final_cash": 2493513.980146611,
+      "min_cash": 2377853.111663385,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "ad_elasticity": 0.41,
+      "demand_q2": 0.0,
+      "price_sensitivity": 4.0
+     },
+     "fingerprint": "cb2ec607ec9e4362",
+     "id": "demo-demand-assumptions-011",
+     "objective": 157594.381135943,
+     "summary": {
+      "cumulative_net_income": 157594.381135943,
+      "emergency_loans": 0.0,
+      "final_cash": 2848203.5311359433,
+      "min_cash": 2671222.1734658023,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    }
+   ],
+   "schema": "marketplace-sim/sweep-result@1",
+   "sensitivity": [
+    {
+     "kind": "event",
+     "local_slope": 1383233.0684276172,
+     "main_effect_range": 414969.92052828515,
+     "mean_objective_by_value": {
+      "-0.3": -188194.70835336795,
+      "0.0": 226775.2121749172
+     },
+     "variable": "demand_q2"
+    },
+    {
+     "kind": "override",
+     "local_slope": -26959.772557084412,
+     "main_effect_range": 67399.43139271103,
+     "mean_objective_by_value": {
+      "1.5": 48031.29523733445,
+      "2.6": 29207.596650366002,
+      "4.0": -19368.136155376575
+     },
+     "variable": "price_sensitivity"
+    },
+    {
+     "kind": "override",
+     "local_slope": 22558.396638142418,
+     "main_effect_range": 6541.935025061301,
+     "mean_objective_by_value": {
+      "0.12": 16019.284398243975,
+      "0.41": 22561.219423305276
+     },
+     "variable": "ad_elasticity"
+    }
+   ],
+   "worst": [
+    {
+     "assignment": {
+      "ad_elasticity": 0.12,
+      "demand_q2": -0.3,
+      "price_sensitivity": 4.0
+     },
+     "fingerprint": "f9318851b8350bda",
+     "id": "demo-demand-assumptions-008",
+     "objective": -212939.26400955045,
+     "summary": {
+      "cumulative_net_income": -212939.26400955045,
+      "emergency_loans": 0.0,
+      "final_cash": 2477669.885990449,
+      "min_cash": 2380403.7304123007,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "ad_elasticity": 0.12,
+      "demand_q2": -0.3,
+      "price_sensitivity": 2.6
+     },
+     "fingerprint": "23cef3bc399e953d",
+     "id": "demo-demand-assumptions-004",
+     "objective": -198975.2375937444,
+     "summary": {
+      "cumulative_net_income": -198975.2375937444,
+      "emergency_loans": 0.0,
+      "final_cash": 2491633.9124062555,
+      "min_cash": 2388665.893186821,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "ad_elasticity": 0.41,
+      "demand_q2": -0.3,
+      "price_sensitivity": 4.0
+     },
+     "fingerprint": "811c8ea0f4b1bff5",
+     "id": "demo-demand-assumptions-010",
+     "objective": -197095.16985338836,
+     "summary": {
+      "cumulative_net_income": -197095.16985338836,
+      "emergency_loans": 0.0,
+      "final_cash": 2493513.980146611,
+      "min_cash": 2377853.111663385,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "ad_elasticity": 0.12,
+      "demand_q2": -0.3,
+      "price_sensitivity": 1.5
+     },
+     "fingerprint": "fe02d79ad25caee3",
+     "id": "demo-demand-assumptions-000",
+     "objective": -183312.34591225756,
+     "summary": {
+      "cumulative_net_income": -183312.34591225756,
+      "emergency_loans": 0.0,
+      "final_cash": 2507296.804087742,
+      "min_cash": 2398132.844958286,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "ad_elasticity": 0.41,
+      "demand_q2": -0.3,
+      "price_sensitivity": 2.6
+     },
+     "fingerprint": "6a99dc1c186041ff",
+     "id": "demo-demand-assumptions-006",
+     "objective": -178215.4099141722,
+     "summary": {
+      "cumulative_net_income": -178215.4099141722,
+      "emergency_loans": 0.0,
+      "final_cash": 2512393.7400858277,
+      "min_cash": 2389203.713380533,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 1162010.85,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    }
+   ]
+  },
+  "sweep-plans": {
+   "caveat": "Demand is at 'literature' level: the worst cases reflect literature demand assumptions (published forms with uncalibrated coefficients, or placeholders), not a forecast of this game. Cost-side lines keep their own levels.",
+   "demand_level": "literature",
+   "is_private": false,
+   "mode": "grid",
+   "name": "demo-plan-robustness",
+   "objective": "min_cash",
+   "rows": [
+    {
+     "assignment": {
+      "capacity_cost": 1.0,
+      "demand": -0.3,
+      "plan": "cautious"
+     },
+     "fingerprint": "3b22eb2b7e79903d",
+     "id": "demo-plan-robustness-000",
+     "objective": 3078116.903,
+     "summary": {
+      "cumulative_net_income": -79671.7686574214,
+      "emergency_loans": 0.0,
+      "final_cash": 3247349.2313425783,
+      "min_cash": 3078116.903,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 426426.0,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.25,
+      "demand": -0.3,
+      "plan": "cautious"
+     },
+     "fingerprint": "362946bf8b30db07",
+     "id": "demo-plan-robustness-001",
+     "objective": 2971510.403,
+     "summary": {
+      "cumulative_net_income": -79671.7686574214,
+      "emergency_loans": 0.0,
+      "final_cash": 3140742.7313425783,
+      "min_cash": 2971510.403,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 533032.5,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.0,
+      "demand": 0.0,
+      "plan": "cautious"
+     },
+     "fingerprint": "3dd58f6761e64a1c",
+     "id": "demo-plan-robustness-002",
+     "objective": 3078116.903,
+     "summary": {
+      "cumulative_net_income": 28034.108902999986,
+      "emergency_loans": 0.0,
+      "final_cash": 3355055.108903,
+      "min_cash": 3078116.903,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 426426.0,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.25,
+      "demand": 0.0,
+      "plan": "cautious"
+     },
+     "fingerprint": "ad53466c2e3f2682",
+     "id": "demo-plan-robustness-003",
+     "objective": 2971510.403,
+     "summary": {
+      "cumulative_net_income": 28034.108902999986,
+      "emergency_loans": 0.0,
+      "final_cash": 3248448.608903,
+      "min_cash": 2971510.403,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 533032.5,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.0,
+      "demand": 0.1,
+      "plan": "cautious"
+     },
+     "fingerprint": "e34d2ac1165ef574",
+     "id": "demo-plan-robustness-004",
+     "objective": 3078116.903,
+     "summary": {
+      "cumulative_net_income": 28034.108902999986,
+      "emergency_loans": 0.0,
+      "final_cash": 3355055.108903,
+      "min_cash": 3078116.903,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 426426.0,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.25,
+      "demand": 0.1,
+      "plan": "cautious"
+     },
+     "fingerprint": "ccf7ebb09374c8c7",
+     "id": "demo-plan-robustness-005",
+     "objective": 2971510.403,
+     "summary": {
+      "cumulative_net_income": 28034.108902999986,
+      "emergency_loans": 0.0,
+      "final_cash": 3248448.608903,
+      "min_cash": 2971510.403,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 533032.5,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.0,
+      "demand": -0.3,
+      "plan": "balanced"
+     },
+     "fingerprint": "ee5fa69cfc06311f",
+     "id": "demo-plan-robustness-006",
+     "objective": 2925318.9661734267,
+     "summary": {
+      "cumulative_net_income": -190444.85398729893,
+      "emergency_loans": 0.0,
+      "final_cash": 3136576.146012701,
+      "min_cash": 2925318.9661734267,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 426426.0,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.25,
+      "demand": -0.3,
+      "plan": "balanced"
+     },
+     "fingerprint": "8b2bda13fa2f5579",
+     "id": "demo-plan-robustness-007",
+     "objective": 2818712.4661734267,
+     "summary": {
+      "cumulative_net_income": -190444.85398729893,
+      "emergency_loans": 0.0,
+      "final_cash": 3029969.646012701,
+      "min_cash": 2818712.4661734267,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 533032.5,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.0,
+      "demand": 0.0,
+      "plan": "balanced"
+     },
+     "fingerprint": "e08d29eae3576c46",
+     "id": "demo-plan-robustness-008",
+     "objective": 3078116.903,
+     "summary": {
+      "cumulative_net_income": 203401.63206560415,
+      "emergency_loans": 0.0,
+      "final_cash": 3530422.632065604,
+      "min_cash": 3078116.903,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 426426.0,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.25,
+      "demand": 0.0,
+      "plan": "balanced"
+     },
+     "fingerprint": "f74e9fc993168362",
+     "id": "demo-plan-robustness-009",
+     "objective": 2971510.403,
+     "summary": {
+      "cumulative_net_income": 203401.63206560415,
+      "emergency_loans": 0.0,
+      "final_cash": 3423816.132065604,
+      "min_cash": 2971510.403,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 533032.5,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.0,
+      "demand": 0.1,
+      "plan": "balanced"
+     },
+     "fingerprint": "5ca9998ea3c34908",
+     "id": "demo-plan-robustness-010",
+     "objective": 3078116.903,
+     "summary": {
+      "cumulative_net_income": 256723.61157929242,
+      "emergency_loans": 0.0,
+      "final_cash": 3583744.611579292,
+      "min_cash": 3078116.903,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 426426.0,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.25,
+      "demand": 0.1,
+      "plan": "balanced"
+     },
+     "fingerprint": "fd9a48123e7aaec3",
+     "id": "demo-plan-robustness-011",
+     "objective": 2971510.403,
+     "summary": {
+      "cumulative_net_income": 256723.61157929242,
+      "emergency_loans": 0.0,
+      "final_cash": 3477138.111579292,
+      "min_cash": 2971510.403,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 533032.5,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.0,
+      "demand": -0.3,
+      "plan": "aggressive"
+     },
+     "fingerprint": "a6821f378bf83c48",
+     "id": "demo-plan-robustness-012",
+     "objective": 0.0,
+     "summary": {
+      "cumulative_net_income": -308846.0515630323,
+      "emergency_loans": 339929.8015630324,
+      "final_cash": 0.0,
+      "min_cash": 0.0,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 3784530.75,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.25,
+      "demand": -0.3,
+      "plan": "aggressive"
+     },
+     "fingerprint": "b56da6d466a71fde",
+     "id": "demo-plan-robustness-013",
+     "objective": 0.0,
+     "summary": {
+      "cumulative_net_income": -308846.0515630323,
+      "emergency_loans": 1286062.4890630322,
+      "final_cash": 0.0,
+      "min_cash": 0.0,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 4730663.4375,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.0,
+      "demand": 0.0,
+      "plan": "aggressive"
+     },
+     "fingerprint": "c0c0497af0b0d80e",
+     "id": "demo-plan-robustness-014",
+     "objective": 25368.684518006165,
+     "summary": {
+      "cumulative_net_income": 56452.434518006805,
+      "emergency_loans": 0.0,
+      "final_cash": 25368.684518006165,
+      "min_cash": 25368.684518006165,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 3784530.75,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.25,
+      "demand": 0.0,
+      "plan": "aggressive"
+     },
+     "fingerprint": "d4b959c0dd49f0dd",
+     "id": "demo-plan-robustness-015",
+     "objective": 0.0,
+     "summary": {
+      "cumulative_net_income": 56452.434518006805,
+      "emergency_loans": 920764.0029819938,
+      "final_cash": 0.0,
+      "min_cash": 0.0,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 4730663.4375,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.0,
+      "demand": 0.1,
+      "plan": "aggressive"
+     },
+     "fingerprint": "85cbe8fc717ae91b",
+     "id": "demo-plan-robustness-016",
+     "objective": 40252.59527861362,
+     "summary": {
+      "cumulative_net_income": 71336.34527861426,
+      "emergency_loans": 0.0,
+      "final_cash": 40252.59527861362,
+      "min_cash": 40252.59527861362,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 3784530.75,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.25,
+      "demand": 0.1,
+      "plan": "aggressive"
+     },
+     "fingerprint": "e716d25efba2e6f2",
+     "id": "demo-plan-robustness-017",
+     "objective": 0.0,
+     "summary": {
+      "cumulative_net_income": 71336.34527861426,
+      "emergency_loans": 905880.0922213859,
+      "final_cash": 0.0,
+      "min_cash": 0.0,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 4730663.4375,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    }
+   ],
+   "schema": "marketplace-sim/sweep-result@1",
+   "sensitivity": [
+    {
+     "kind": "policy",
+     "main_effect_range": 3013876.773033897,
+     "mean_objective_by_value": {
+      "aggressive": 10936.879966103297,
+      "balanced": 2973881.007391142,
+      "cautious": 3024813.6530000004
+     },
+     "variable": "plan"
+    },
+    {
+     "kind": "override",
+     "local_slope": -313449.0132429423,
+     "main_effect_range": 78362.25331073557,
+     "mean_objective_by_value": {
+      "1.0": 2042391.6401077828,
+      "1.25": 1964029.3867970472
+     },
+     "variable": "capacity_cost"
+    },
+    {
+     "kind": "event",
+     "local_slope": 144103.52872156596,
+     "main_effect_range": 57641.411488626385,
+     "mean_objective_by_value": {
+      "-0.3": 1965609.7897244757,
+      "0.0": 2020770.5494196676,
+      "0.1": 2023251.201213102
+     },
+     "variable": "demand"
+    }
+   ],
+   "worst": [
+    {
+     "assignment": {
+      "capacity_cost": 1.0,
+      "demand": -0.3,
+      "plan": "aggressive"
+     },
+     "fingerprint": "a6821f378bf83c48",
+     "id": "demo-plan-robustness-012",
+     "objective": 0.0,
+     "summary": {
+      "cumulative_net_income": -308846.0515630323,
+      "emergency_loans": 339929.8015630324,
+      "final_cash": 0.0,
+      "min_cash": 0.0,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 3784530.75,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.25,
+      "demand": -0.3,
+      "plan": "aggressive"
+     },
+     "fingerprint": "b56da6d466a71fde",
+     "id": "demo-plan-robustness-013",
+     "objective": 0.0,
+     "summary": {
+      "cumulative_net_income": -308846.0515630323,
+      "emergency_loans": 1286062.4890630322,
+      "final_cash": 0.0,
+      "min_cash": 0.0,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 4730663.4375,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.25,
+      "demand": 0.0,
+      "plan": "aggressive"
+     },
+     "fingerprint": "d4b959c0dd49f0dd",
+     "id": "demo-plan-robustness-015",
+     "objective": 0.0,
+     "summary": {
+      "cumulative_net_income": 56452.434518006805,
+      "emergency_loans": 920764.0029819938,
+      "final_cash": 0.0,
+      "min_cash": 0.0,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 4730663.4375,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.25,
+      "demand": 0.1,
+      "plan": "aggressive"
+     },
+     "fingerprint": "e716d25efba2e6f2",
+     "id": "demo-plan-robustness-017",
+     "objective": 0.0,
+     "summary": {
+      "cumulative_net_income": 71336.34527861426,
+      "emergency_loans": 905880.0922213859,
+      "final_cash": 0.0,
+      "min_cash": 0.0,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 4730663.4375,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    },
+    {
+     "assignment": {
+      "capacity_cost": 1.0,
+      "demand": 0.0,
+      "plan": "aggressive"
+     },
+     "fingerprint": "c0c0497af0b0d80e",
+     "id": "demo-plan-robustness-014",
+     "objective": 25368.684518006165,
+     "summary": {
+      "cumulative_net_income": 56452.434518006805,
+      "emergency_loans": 0.0,
+      "final_cash": 25368.684518006165,
+      "min_cash": 25368.684518006165,
+      "quarters_with_events": [
+       2,
+       3,
+       4
+      ],
+      "total_capex": 3784530.75,
+      "weakest_level": {
+       "capacity_units_per_quarter": "verified",
+       "capex_capacity": "verified",
+       "cash_end": "placeholder",
+       "market_share": "literature",
+       "net_income": "placeholder",
+       "production_cost": "placeholder",
+       "revenue": "literature"
+      }
+     }
+    }
+   ]
+  }
+ },
+ "source": "synthetic",
+ "sweeps": [
+  {
+   "id": "sweep-demand",
+   "sweep": {
+    "base_scenario": "scenario.yaml",
+    "mode": "grid",
+    "name": "demo-demand-assumptions",
+    "objective": "cumulative_net_income",
+    "variables": [
+     {
+      "base": 2.6,
+      "name": "price_sensitivity",
+      "op": "set",
+      "path": "demand.coefficients.price_sensitivity",
+      "values": [
+       1.5,
+       2.6,
+       4.0
+      ]
+     },
+     {
+      "base": 0.24,
+      "name": "ad_elasticity",
+      "op": "set",
+      "path": "demand.coefficients.ad_elasticity",
+      "values": [
+       0.12,
+       0.41
+      ]
+     },
+     {
+      "base": 0.0,
+      "event": {
+       "duration": 3,
+       "from_quarter": 2,
+       "target": "*",
+       "type": "demand_shock"
+      },
+      "name": "demand_q2",
+      "values": [
+       -0.3,
+       0.0
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "sweep-plans",
+   "sweep": {
+    "base_scenario": "scenario.yaml",
+    "mode": "grid",
+    "name": "demo-plan-robustness",
+    "objective": "min_cash",
+    "variables": [
+     {
+      "name": "plan",
+      "policies": {
+       "aggressive": {
+        "default": "../demo/plans/c-aggressive.yaml",
+        "plans": {
+         "1": "../demo/q1.yaml"
+        },
+        "type": "fixed"
+       },
+       "balanced": {
+        "default": "../demo/plans/b-balanced.yaml",
+        "plans": {
+         "1": "../demo/q1.yaml"
+        },
+        "type": "fixed"
+       },
+       "cautious": {
+        "default": "../demo/plans/a-cautious.yaml",
+        "plans": {
+         "1": "../demo/q1.yaml"
+        },
+        "type": "fixed"
+       }
+      }
+     },
+     {
+      "base": 0.0,
+      "event": {
+       "duration": 3,
+       "from_quarter": 2,
+       "target": "*",
+       "type": "demand_shock"
+      },
+      "name": "demand",
+      "values": [
+       -0.3,
+       0.0,
+       0.1
+      ]
+     },
+     {
+      "base": 1.0,
+      "name": "capacity_cost",
+      "op": "scale",
+      "path": "capacity_options[*].cost",
+      "values": [
+       1.0,
+       1.25
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "sweep",
+   "sweep": {
+    "base_scenario": "scenario.yaml",
+    "mode": "grid",
+    "name": "demo-stress",
+    "objective": "min_cash",
+    "variables": [
+     {
+      "base": 1.0,
+      "name": "capacity_cost",
+      "op": "scale",
+      "path": "capacity_options[*].cost",
+      "values": [
+       0.9,
+       1.0,
+       1.25
+      ]
+     },
+     {
+      "base": 0.0,
+      "event": {
+       "duration": 3,
+       "from_quarter": 2,
+       "target": "*",
+       "type": "demand_shock"
+      },
+      "name": "demand_q2",
+      "values": [
+       -0.3,
+       0.0,
+       0.1
+      ]
+     },
+     {
+      "competitors": {
+       "aggressive": [
+        {
+         "name": "rival-a",
+         "params": {
+          "price_factor": 0.8
+         },
+         "strategy": "baseline"
+        },
+        {
+         "name": "rival-b",
+         "strategy": "random"
+        }
+       ],
+       "calm": [
+        {
+         "name": "rival-a",
+         "strategy": "baseline"
+        },
+        {
+         "name": "rival-b",
+         "strategy": "baseline"
+        }
+       ]
+      },
+      "name": "rivals"
+     }
+    ]
+   }
+  }
+ ]
+}

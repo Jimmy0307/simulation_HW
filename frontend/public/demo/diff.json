@@ -1,0 +1,305 @@
+{
+ "packs": [
+  {
+   "id": "synthetic"
+  },
+  {
+   "id": "synthetic-v2"
+  }
+ ],
+ "result": {
+  "changes": [
+   {
+    "kind": "changed",
+    "module": "store opening cost (EXP-11) / lease",
+    "module_level": "verified",
+    "needs_reverification": true,
+    "new": 25111,
+    "old": 11113,
+    "path": "stores[key=N1-Eastmere].lease_cost",
+    "relative": 1.2596058670026096
+   },
+   {
+    "kind": "changed",
+    "module": "CD interest (EXP-01)",
+    "module_level": "verified",
+    "needs_reverification": true,
+    "new": 3.9,
+    "old": 4.4,
+    "path": "finance.cd_rate_annual_percent",
+    "relative": -0.11363636363636373
+   },
+   {
+    "kind": "changed",
+    "module": "capacity investment (EXP-02)",
+    "module_level": "verified",
+    "needs_reverification": true,
+    "new": 460540,
+    "old": 426426,
+    "path": "capacity_options[units=18].cost",
+    "relative": 0.0799998123941786
+   },
+   {
+    "kind": "changed",
+    "module": "capacity investment (EXP-02)",
+    "module_level": "verified",
+    "needs_reverification": true,
+    "new": 690810,
+    "old": 639639,
+    "path": "capacity_options[units=27].cost",
+    "relative": 0.0799998123941786
+   },
+   {
+    "kind": "changed",
+    "module": "capacity investment (EXP-02)",
+    "module_level": "verified",
+    "needs_reverification": true,
+    "new": 1151350,
+    "old": 1066065,
+    "path": "capacity_options[units=45].cost",
+    "relative": 0.0799998123941786
+   },
+   {
+    "kind": "changed",
+    "module": "capacity investment (EXP-02)",
+    "module_level": "verified",
+    "needs_reverification": true,
+    "new": 1611890,
+    "old": 1492491,
+    "path": "capacity_options[units=63].cost",
+    "relative": 0.0799998123941786
+   },
+   {
+    "kind": "changed",
+    "module": "capacity investment (EXP-02)",
+    "module_level": "verified",
+    "needs_reverification": true,
+    "new": 230270,
+    "old": 213213,
+    "path": "capacity_options[units=9].cost",
+    "relative": 0.0799998123941786
+   },
+   {
+    "kind": "changed",
+    "module": "demand (literature form)",
+    "module_level": "literature",
+    "needs_reverification": false,
+    "new": 4011,
+    "old": 4321,
+    "path": "markets[key=N1-Northwick].segments.1.size_12m",
+    "relative": -0.07174265216385096
+   },
+   {
+    "kind": "removed",
+    "module": "demand model / coefficients",
+    "module_level": "literature",
+    "needs_reverification": false,
+    "new": null,
+    "old": 0.24,
+    "path": "demand.coefficients.ad_elasticity",
+    "relative": null
+   },
+   {
+    "kind": "removed",
+    "module": "demand model / coefficients",
+    "module_level": "literature",
+    "needs_reverification": false,
+    "new": null,
+    "old": 0.01,
+    "path": "demand.coefficients.ad_reference_share",
+    "relative": null
+   },
+   {
+    "kind": "removed",
+    "module": "demand model / coefficients",
+    "module_level": "literature",
+    "needs_reverification": false,
+    "new": null,
+    "old": "power",
+    "path": "demand.coefficients.ad_shape",
+    "relative": null
+   },
+   {
+    "kind": "removed",
+    "module": "demand model / coefficients",
+    "module_level": "literature",
+    "needs_reverification": false,
+    "new": null,
+    "old": 2.0,
+    "path": "demand.coefficients.adbudg_c",
+    "relative": null
+   },
+   {
+    "kind": "removed",
+    "module": "demand model / coefficients",
+    "module_level": "literature",
+    "needs_reverification": false,
+    "new": null,
+    "old": 1.5,
+    "path": "demand.coefficients.adbudg_max",
+    "relative": null
+   },
+   {
+    "kind": "removed",
+    "module": "demand model / coefficients",
+    "module_level": "literature",
+    "needs_reverification": false,
+    "new": null,
+    "old": 0.5,
+    "path": "demand.coefficients.carryover",
+    "relative": null
+   },
+   {
+    "kind": "removed",
+    "module": "demand model / coefficients",
+    "module_level": "literature",
+    "needs_reverification": false,
+    "new": null,
+    "old": 1.0,
+    "path": "demand.coefficients.distribution_elasticity",
+    "relative": null
+   },
+   {
+    "kind": "removed",
+    "module": "demand model / coefficients",
+    "module_level": "literature",
+    "needs_reverification": false,
+    "new": null,
+    "old": 3.0,
+    "path": "demand.coefficients.fit_weight",
+    "relative": null
+   },
+   {
+    "kind": "removed",
+    "module": "demand model / coefficients",
+    "module_level": "literature",
+    "needs_reverification": false,
+    "new": null,
+    "old": 0.0,
+    "path": "demand.coefficients.outside_utility",
+    "relative": null
+   },
+   {
+    "kind": "removed",
+    "module": "demand model / coefficients",
+    "module_level": "literature",
+    "needs_reverification": false,
+    "new": null,
+    "old": 2.6,
+    "path": "demand.coefficients.price_sensitivity",
+    "relative": null
+   },
+   {
+    "kind": "removed",
+    "module": "demand model / coefficients",
+    "module_level": "literature",
+    "needs_reverification": false,
+    "new": null,
+    "old": 1.0,
+    "path": "demand.coefficients.similarity_power",
+    "relative": null
+   },
+   {
+    "kind": "removed",
+    "module": "demand model / coefficients",
+    "module_level": "literature",
+    "needs_reverification": false,
+    "new": null,
+    "old": 0.5,
+    "path": "demand.coefficients.web_weight",
+    "relative": null
+   },
+   {
+    "kind": "removed",
+    "module": "demand model / coefficients",
+    "module_level": "literature",
+    "needs_reverification": false,
+    "new": null,
+    "old": "literature",
+    "path": "demand.model",
+    "relative": null
+   },
+   {
+    "kind": "removed",
+    "module": "demand model / coefficients",
+    "module_level": "literature",
+    "needs_reverification": false,
+    "new": null,
+    "old": "coefficients = public literature defaults (data/demand_literature.json); listed so scenarios can override them",
+    "path": "demand.note",
+    "relative": null
+   },
+   {
+    "kind": "added",
+    "module": "unit cost",
+    "module_level": "placeholder",
+    "needs_reverification": false,
+    "new": 3,
+    "old": null,
+    "path": "components[id=c99].available_quarter",
+    "relative": null
+   },
+   {
+    "kind": "added",
+    "module": "unit cost",
+    "module_level": "placeholder",
+    "needs_reverification": false,
+    "new": "g3",
+    "old": null,
+    "path": "components[id=c99].group",
+    "relative": null
+   },
+   {
+    "kind": "added",
+    "module": "unit cost",
+    "module_level": "placeholder",
+    "needs_reverification": false,
+    "new": "c99",
+    "old": null,
+    "path": "components[id=c99].id",
+    "relative": null
+   },
+   {
+    "kind": "added",
+    "module": "unit cost",
+    "module_level": "placeholder",
+    "needs_reverification": false,
+    "new": "Hyperlink module",
+    "old": null,
+    "path": "components[id=c99].name",
+    "relative": null
+   },
+   {
+    "kind": "added",
+    "module": "unit cost",
+    "module_level": "placeholder",
+    "needs_reverification": false,
+    "new": 71,
+    "old": null,
+    "path": "components[id=c99].price",
+    "relative": null
+   },
+   {
+    "kind": "added",
+    "module": "unit cost",
+    "module_level": "placeholder",
+    "needs_reverification": false,
+    "new": 56,
+    "old": null,
+    "path": "components[id=c99].type_mask",
+    "relative": null
+   }
+  ],
+  "is_private": false,
+  "new": "synthetic-v2",
+  "old": "synthetic-demo",
+  "red_flags": [
+   "RED FLAG: verified module changed, re-verify: CD interest (EXP-01)",
+   "RED FLAG: verified module changed, re-verify: capacity investment (EXP-02)",
+   "RED FLAG: verified module changed, re-verify: store opening cost (EXP-11) / lease",
+   "RED FLAG: 20 added/removed field(s) (schema or catalogue change)",
+   "RED FLAG: 1 field(s) moved by >= 25%"
+  ],
+  "values_included": true
+ }
+}

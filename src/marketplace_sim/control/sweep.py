@@ -86,6 +86,12 @@ def _rebase_policy(policy: dict[str, Any], sweep_dir: Path, scenario_dir: Path) 
 
 def load_sweep(path: Path) -> SweepSpec:
     data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    return sweep_from_dict(data, path.parent, path.stem)
+
+
+def sweep_from_dict(data: dict[str, Any], origin: Path, default_name: str = "sweep") -> SweepSpec:
+    """Build a SweepSpec from a mapping; relative paths resolve against ``origin`` (the sweep file's directory)."""
+    origin = origin.resolve()
     variables = []
     for raw in data.get("variables") or []:
         name = str(raw["name"])
@@ -98,8 +104,8 @@ def load_sweep(path: Path) -> SweepSpec:
             options = dict(raw["competitors"])
             variables.append(Variable(name, "competitors", list(options), raw.get("base"), options))
         elif "policies" in raw:
-            scenario_dir = (path.parent / data["base_scenario"]).resolve().parent
-            options = {str(k): _rebase_policy(dict(v), path.parent.resolve(), scenario_dir)
+            scenario_dir = (origin / data["base_scenario"]).resolve().parent
+            options = {str(k): _rebase_policy(dict(v), origin, scenario_dir)
                        for k, v in dict(raw["policies"]).items()}
             variables.append(Variable(name, "policy", list(options), raw.get("base"), options))
         elif "seeds" in raw:
@@ -109,7 +115,7 @@ def load_sweep(path: Path) -> SweepSpec:
     objective = str(data.get("objective", "final_cash"))
     if objective not in OBJECTIVES:
         raise ValueError(f"objective must be one of {OBJECTIVES}")
-    return SweepSpec(str(data.get("name", path.stem)), (path.parent / data["base_scenario"]).resolve(), variables,
+    return SweepSpec(str(data.get("name", default_name)), (origin / data["base_scenario"]).resolve(), variables,
                      str(data.get("mode", "grid")), int(data.get("samples", 20)), int(data.get("seed", 0)), objective)
 
 

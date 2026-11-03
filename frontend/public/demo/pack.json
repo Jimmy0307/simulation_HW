@@ -1,0 +1,8 @@
+{
+ "demand_model": "literature",
+ "is_private": false,
+ "name": "synthetic-demo",
+ "provenance": "synthetic",
+ "quarter": null,
+ "source": "synthetic"
+}

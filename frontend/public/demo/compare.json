@@ -1,0 +1,3078 @@
+{
+ "demand_model": "literature",
+ "is_private": false,
+ "name": "synthetic-demo",
+ "provenance": "synthetic",
+ "quarter": 4,
+ "reports": [
+  {
+   "lines": {
+    "advertising": {
+     "chain": [
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      }
+     ],
+     "level": "verified",
+     "mark": "V",
+     "source": "plan input",
+     "uncalibrated": false,
+     "value": 9973.0
+    },
+    "capacity_units_per_quarter": {
+     "chain": [
+      {
+       "evidence": "docs/experiments/EXP-02.md; docs/calculation-map.md #3",
+       "formula": "fixed capacity (units/day) x days per quarter",
+       "level": "verified",
+       "metric": "capacity_units_per_quarter",
+       "note": ""
+      }
+     ],
+     "level": "verified",
+     "mark": "V",
+     "source": "units/day x 65 (EXP-02 + client)",
+     "uncalibrated": false,
+     "value": 2925.0
+    },
+    "capex_capacity": {
+     "chain": [
+      {
+       "evidence": "docs/experiments/EXP-02.md",
+       "formula": "cost of the chosen capacity option row",
+       "level": "verified",
+       "metric": "capex_capacity",
+       "note": ""
+      }
+     ],
+     "level": "verified",
+     "mark": "V",
+     "source": "capacity option cost (EXP-02)",
+     "uncalibrated": false,
+     "value": 0.0
+    },
+    "cash_end": {
+     "chain": [
+      {
+       "evidence": "VERIFIED only if every component is",
+       "formula": "cash_start + inflows - outflows + emergency_loan",
+       "level": "placeholder",
+       "metric": "cash_end",
+       "note": ""
+      },
+      {
+       "evidence": "save file",
+       "formula": "state.cash",
+       "level": "verified",
+       "metric": "cash_start",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides (demand model level)",
+       "formula": "sum(units_sold x price)",
+       "level": "literature",
+       "metric": "revenue",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "docs/calculate-screen-triage.md (Stock, view identity)",
+       "formula": "sum(shares x price)",
+       "level": "derived",
+       "metric": "stock_raised",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_balance x annual rate / 4 / 100",
+       "level": "verified",
+       "metric": "cd_interest",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_prior + deposit - withdraw",
+       "level": "verified",
+       "metric": "cd_balance",
+       "note": "Only the deposit term was varied in the experiment."
+      },
+      {
+       "evidence": "docs/experiments/EXP-02.md",
+       "formula": "cost of the chosen capacity option row",
+       "level": "verified",
+       "metric": "capex_capacity",
+       "note": ""
+      },
+      {
+       "evidence": "rate from pack; rule unverified",
+       "formula": "max(pretax, 0) x tax rate",
+       "level": "placeholder",
+       "metric": "income_tax",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides",
+       "formula": "revenue + cd_interest - operating expenses",
+       "level": "placeholder",
+       "metric": "operating_profit_before_tax",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-11-OpenSalesOffice.md",
+       "formula": "sum(setup_cost) of stores opened this quarter",
+       "level": "verified",
+       "metric": "store_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-12-OpenWebcenter.md",
+       "formula": "sum(setup_cost) of web centers opened this quarter",
+       "level": "verified",
+       "metric": "web_center_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "lease_cost of outlets open at quarter start",
+       "level": "placeholder",
+       "metric": "outlet_lease",
+       "note": "Lease timing after opening is unverified."
+      },
+      {
+       "evidence": "pack parameter; charging rule unverified",
+       "formula": "design_cost x new brands",
+       "level": "placeholder",
+       "metric": "design_cost",
+       "note": ""
+      },
+      {
+       "evidence": "see unit_cost",
+       "formula": "sum(units x unit_cost)",
+       "level": "placeholder",
+       "metric": "production_cost",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+       "level": "placeholder",
+       "metric": "unit_cost[brand]",
+       "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      },
+      {
+       "evidence": "rule unverified",
+       "formula": "amount needed to bring cash to zero",
+       "level": "placeholder",
+       "metric": "emergency_loan",
+       "note": ""
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "((((((((cash at quarter start (carried state)) + (sum(units_sold x price))) + (sum(shares x price) (view identity))) + (withdraw - deposit)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)) - (capacity option cost (EXP-02))) - (max(pretax,0) x taxRate (placeholder: tax rule unverified))) + (covers negative cash (placeholder: emergency-loan rule unverified))",
+     "uncalibrated": true,
+     "value": 2916004.8937087697
+    },
+    "cash_start": {
+     "chain": [
+      {
+       "evidence": "save file",
+       "formula": "state.cash",
+       "level": "verified",
+       "metric": "cash_start",
+       "note": ""
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "cash at quarter start (carried state)",
+     "uncalibrated": true,
+     "value": 2845305.5617087698
+    },
+    "cd_balance": {
+     "chain": [
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_prior + deposit - withdraw",
+       "level": "verified",
+       "metric": "cd_balance",
+       "note": "Only the deposit term was varied in the experiment."
+      }
+     ],
+     "level": "verified",
+     "mark": "V",
+     "source": "cd = cd_prior + deposit - withdraw (EXP-01)",
+     "uncalibrated": false,
+     "value": 0.0
+    },
+    "cd_interest": {
+     "chain": [
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_balance x annual rate / 4 / 100",
+       "level": "verified",
+       "metric": "cd_interest",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_prior + deposit - withdraw",
+       "level": "verified",
+       "metric": "cd_balance",
+       "note": "Only the deposit term was varied in the experiment."
+      }
+     ],
+     "level": "verified",
+     "mark": "V",
+     "source": "interest = cd x rate/4/100 (EXP-01)",
+     "uncalibrated": false,
+     "value": 0.0
+    },
+    "design_cost": {
+     "chain": [
+      {
+       "evidence": "pack parameter; charging rule unverified",
+       "formula": "design_cost x new brands",
+       "level": "placeholder",
+       "metric": "design_cost",
+       "note": ""
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "designCost per new brand (placeholder)",
+     "uncalibrated": true,
+     "value": 0.0
+    },
+    "emergency_loan": {
+     "chain": [
+      {
+       "evidence": "rule unverified",
+       "formula": "amount needed to bring cash to zero",
+       "level": "placeholder",
+       "metric": "emergency_loan",
+       "note": ""
+      },
+      {
+       "evidence": "save file",
+       "formula": "state.cash",
+       "level": "verified",
+       "metric": "cash_start",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides (demand model level)",
+       "formula": "sum(units_sold x price)",
+       "level": "literature",
+       "metric": "revenue",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "docs/calculate-screen-triage.md (Stock, view identity)",
+       "formula": "sum(shares x price)",
+       "level": "derived",
+       "metric": "stock_raised",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_balance x annual rate / 4 / 100",
+       "level": "verified",
+       "metric": "cd_interest",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_prior + deposit - withdraw",
+       "level": "verified",
+       "metric": "cd_balance",
+       "note": "Only the deposit term was varied in the experiment."
+      },
+      {
+       "evidence": "docs/experiments/EXP-02.md",
+       "formula": "cost of the chosen capacity option row",
+       "level": "verified",
+       "metric": "capex_capacity",
+       "note": ""
+      },
+      {
+       "evidence": "rate from pack; rule unverified",
+       "formula": "max(pretax, 0) x tax rate",
+       "level": "placeholder",
+       "metric": "income_tax",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides",
+       "formula": "revenue + cd_interest - operating expenses",
+       "level": "placeholder",
+       "metric": "operating_profit_before_tax",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-11-OpenSalesOffice.md",
+       "formula": "sum(setup_cost) of stores opened this quarter",
+       "level": "verified",
+       "metric": "store_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-12-OpenWebcenter.md",
+       "formula": "sum(setup_cost) of web centers opened this quarter",
+       "level": "verified",
+       "metric": "web_center_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "lease_cost of outlets open at quarter start",
+       "level": "placeholder",
+       "metric": "outlet_lease",
+       "note": "Lease timing after opening is unverified."
+      },
+      {
+       "evidence": "pack parameter; charging rule unverified",
+       "formula": "design_cost x new brands",
+       "level": "placeholder",
+       "metric": "design_cost",
+       "note": ""
+      },
+      {
+       "evidence": "see unit_cost",
+       "formula": "sum(units x unit_cost)",
+       "level": "placeholder",
+       "metric": "production_cost",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+       "level": "placeholder",
+       "metric": "unit_cost[brand]",
+       "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "covers negative cash (placeholder: emergency-loan rule unverified)",
+     "uncalibrated": true,
+     "value": 0.0
+    },
+    "fixed_capacity_next_quarter": {
+     "chain": [
+      {
+       "evidence": "capacity screen 'next quarter' row",
+       "formula": "current + increase",
+       "level": "derived",
+       "metric": "fixed_capacity_next_quarter",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-02.md; docs/calculation-map.md #3",
+       "formula": "fixed capacity (units/day) x days per quarter",
+       "level": "verified",
+       "metric": "capacity_units_per_quarter",
+       "note": ""
+      }
+     ],
+     "level": "derived",
+     "mark": "D",
+     "source": "current + increase (screen 'next quarter' row)",
+     "uncalibrated": false,
+     "value": 45.0
+    },
+    "income_tax": {
+     "chain": [
+      {
+       "evidence": "rate from pack; rule unverified",
+       "formula": "max(pretax, 0) x tax rate",
+       "level": "placeholder",
+       "metric": "income_tax",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides",
+       "formula": "revenue + cd_interest - operating expenses",
+       "level": "placeholder",
+       "metric": "operating_profit_before_tax",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides (demand model level)",
+       "formula": "sum(units_sold x price)",
+       "level": "literature",
+       "metric": "revenue",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_balance x annual rate / 4 / 100",
+       "level": "verified",
+       "metric": "cd_interest",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_prior + deposit - withdraw",
+       "level": "verified",
+       "metric": "cd_balance",
+       "note": "Only the deposit term was varied in the experiment."
+      },
+      {
+       "evidence": "docs/experiments/EXP-11-OpenSalesOffice.md",
+       "formula": "sum(setup_cost) of stores opened this quarter",
+       "level": "verified",
+       "metric": "store_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-12-OpenWebcenter.md",
+       "formula": "sum(setup_cost) of web centers opened this quarter",
+       "level": "verified",
+       "metric": "web_center_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "lease_cost of outlets open at quarter start",
+       "level": "placeholder",
+       "metric": "outlet_lease",
+       "note": "Lease timing after opening is unverified."
+      },
+      {
+       "evidence": "pack parameter; charging rule unverified",
+       "formula": "design_cost x new brands",
+       "level": "placeholder",
+       "metric": "design_cost",
+       "note": ""
+      },
+      {
+       "evidence": "see unit_cost",
+       "formula": "sum(units x unit_cost)",
+       "level": "placeholder",
+       "metric": "production_cost",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+       "level": "placeholder",
+       "metric": "unit_cost[brand]",
+       "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "max(pretax,0) x taxRate (placeholder: tax rule unverified)",
+     "uncalibrated": true,
+     "value": 35296.668
+    },
+    "market_share": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "our units sold / market_units_total",
+       "level": "literature",
+       "metric": "market_share",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "our units sold + rival units demanded",
+       "level": "literature",
+       "metric": "market_units_total",
+       "note": "Rivals are assumed unconstrained by inventory."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "our units sold / market_units_total",
+     "uncalibrated": true,
+     "value": 0.09341603462794387
+    },
+    "market_units_total": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "our units sold + rival units demanded",
+       "level": "literature",
+       "metric": "market_units_total",
+       "note": "Rivals are assumed unconstrained by inventory."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "our units sold + rival units demanded (rivals unconstrained)",
+     "uncalibrated": true,
+     "value": 4485.311345838941
+    },
+    "net_income": {
+     "chain": [
+      {
+       "evidence": "weakest input decides",
+       "formula": "pretax - income_tax",
+       "level": "placeholder",
+       "metric": "net_income",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides",
+       "formula": "revenue + cd_interest - operating expenses",
+       "level": "placeholder",
+       "metric": "operating_profit_before_tax",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides (demand model level)",
+       "formula": "sum(units_sold x price)",
+       "level": "literature",
+       "metric": "revenue",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_balance x annual rate / 4 / 100",
+       "level": "verified",
+       "metric": "cd_interest",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_prior + deposit - withdraw",
+       "level": "verified",
+       "metric": "cd_balance",
+       "note": "Only the deposit term was varied in the experiment."
+      },
+      {
+       "evidence": "docs/experiments/EXP-11-OpenSalesOffice.md",
+       "formula": "sum(setup_cost) of stores opened this quarter",
+       "level": "verified",
+       "metric": "store_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-12-OpenWebcenter.md",
+       "formula": "sum(setup_cost) of web centers opened this quarter",
+       "level": "verified",
+       "metric": "web_center_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "lease_cost of outlets open at quarter start",
+       "level": "placeholder",
+       "metric": "outlet_lease",
+       "note": "Lease timing after opening is unverified."
+      },
+      {
+       "evidence": "pack parameter; charging rule unverified",
+       "formula": "design_cost x new brands",
+       "level": "placeholder",
+       "metric": "design_cost",
+       "note": ""
+      },
+      {
+       "evidence": "see unit_cost",
+       "formula": "sum(units x unit_cost)",
+       "level": "placeholder",
+       "metric": "production_cost",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+       "level": "placeholder",
+       "metric": "unit_cost[brand]",
+       "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      },
+      {
+       "evidence": "rate from pack; rule unverified",
+       "formula": "max(pretax, 0) x tax rate",
+       "level": "placeholder",
+       "metric": "income_tax",
+       "note": ""
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "(((sum(units_sold x price)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)) - (max(pretax,0) x taxRate (placeholder: tax rule unverified))",
+     "uncalibrated": true,
+     "value": 70699.332
+    },
+    "operating_profit_before_tax": {
+     "chain": [
+      {
+       "evidence": "weakest input decides",
+       "formula": "revenue + cd_interest - operating expenses",
+       "level": "placeholder",
+       "metric": "operating_profit_before_tax",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides (demand model level)",
+       "formula": "sum(units_sold x price)",
+       "level": "literature",
+       "metric": "revenue",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_balance x annual rate / 4 / 100",
+       "level": "verified",
+       "metric": "cd_interest",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_prior + deposit - withdraw",
+       "level": "verified",
+       "metric": "cd_balance",
+       "note": "Only the deposit term was varied in the experiment."
+      },
+      {
+       "evidence": "docs/experiments/EXP-11-OpenSalesOffice.md",
+       "formula": "sum(setup_cost) of stores opened this quarter",
+       "level": "verified",
+       "metric": "store_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-12-OpenWebcenter.md",
+       "formula": "sum(setup_cost) of web centers opened this quarter",
+       "level": "verified",
+       "metric": "web_center_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "lease_cost of outlets open at quarter start",
+       "level": "placeholder",
+       "metric": "outlet_lease",
+       "note": "Lease timing after opening is unverified."
+      },
+      {
+       "evidence": "pack parameter; charging rule unverified",
+       "formula": "design_cost x new brands",
+       "level": "placeholder",
+       "metric": "design_cost",
+       "note": ""
+      },
+      {
+       "evidence": "see unit_cost",
+       "formula": "sum(units x unit_cost)",
+       "level": "placeholder",
+       "metric": "production_cost",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+       "level": "placeholder",
+       "metric": "unit_cost[brand]",
+       "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "((sum(units_sold x price)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)",
+     "uncalibrated": true,
+     "value": 105996.0
+    },
+    "outlet_lease": {
+     "chain": [
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "lease_cost of outlets open at quarter start",
+       "level": "placeholder",
+       "metric": "outlet_lease",
+       "note": "Lease timing after opening is unverified."
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "(leaseCost of outlets open at quarter start (placeholder: lease timing unverified)) + (leaseCost of outlets open at quarter start (placeholder: lease timing unverified))",
+     "uncalibrated": true,
+     "value": 65877.0
+    },
+    "production_cost": {
+     "chain": [
+      {
+       "evidence": "see unit_cost",
+       "formula": "sum(units x unit_cost)",
+       "level": "placeholder",
+       "metric": "production_cost",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+       "level": "placeholder",
+       "metric": "unit_cost[brand]",
+       "note": "The real production cost function is not yet measured."
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "sum(units x unit_cost)",
+     "uncalibrated": true,
+     "value": 129471.0
+    },
+    "revenue": {
+     "chain": [
+      {
+       "evidence": "weakest input decides (demand model level)",
+       "formula": "sum(units_sold x price)",
+       "level": "literature",
+       "metric": "revenue",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "sum(units_sold x price)",
+     "uncalibrated": true,
+     "value": 311317.0
+    },
+    "stock_raised": {
+     "chain": [
+      {
+       "evidence": "docs/calculate-screen-triage.md (Stock, view identity)",
+       "formula": "sum(shares x price)",
+       "level": "derived",
+       "metric": "stock_raised",
+       "note": ""
+      }
+     ],
+     "level": "derived",
+     "mark": "D",
+     "source": "sum(shares x price) (view identity)",
+     "uncalibrated": false,
+     "value": 0
+    },
+    "store_setup": {
+     "chain": [
+      {
+       "evidence": "docs/experiments/EXP-11-OpenSalesOffice.md",
+       "formula": "sum(setup_cost) of stores opened this quarter",
+       "level": "verified",
+       "metric": "store_setup",
+       "note": ""
+      }
+     ],
+     "level": "verified",
+     "mark": "V",
+     "source": "sum(setupCost of newly opened stores) (EXP-11/EXP-12)",
+     "uncalibrated": false,
+     "value": 0.0
+    },
+    "unit_cost[Alpha-1]": {
+     "chain": [
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+       "level": "placeholder",
+       "metric": "unit_cost[brand]",
+       "note": "The real production cost function is not yet measured."
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "sum(component price) x costAdj + minDirectLabor + minOverheadCPU (placeholder: cost function unverified)",
+     "uncalibrated": true,
+     "value": 309.0
+    },
+    "units_demanded[Alpha-1]": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "LiteratureDemand: potential x attraction / (outside + sum attraction) (docs/demand-model-spec.md)",
+     "uncalibrated": true,
+     "value": 768.2617259063364
+    },
+    "units_sold[Alpha-1]": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "min(demand, inventory)",
+     "uncalibrated": true,
+     "value": 419.0
+    },
+    "web_center_setup": {
+     "chain": [
+      {
+       "evidence": "docs/experiments/EXP-12-OpenWebcenter.md",
+       "formula": "sum(setup_cost) of web centers opened this quarter",
+       "level": "verified",
+       "metric": "web_center_setup",
+       "note": ""
+      }
+     ],
+     "level": "verified",
+     "mark": "V",
+     "source": "sum(setupCost of newly opened web centers) (EXP-11/EXP-12)",
+     "uncalibrated": false,
+     "value": 0.0
+    }
+   },
+   "notes": [],
+   "plan": "cautious",
+   "quarter": 4
+  },
+  {
+   "lines": {
+    "advertising": {
+     "chain": [
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      }
+     ],
+     "level": "verified",
+     "mark": "V",
+     "source": "plan input",
+     "uncalibrated": false,
+     "value": 40164.0
+    },
+    "capacity_units_per_quarter": {
+     "chain": [
+      {
+       "evidence": "docs/experiments/EXP-02.md; docs/calculation-map.md #3",
+       "formula": "fixed capacity (units/day) x days per quarter",
+       "level": "verified",
+       "metric": "capacity_units_per_quarter",
+       "note": ""
+      }
+     ],
+     "level": "verified",
+     "mark": "V",
+     "source": "units/day x 65 (EXP-02 + client)",
+     "uncalibrated": false,
+     "value": 2925.0
+    },
+    "capex_capacity": {
+     "chain": [
+      {
+       "evidence": "docs/experiments/EXP-02.md",
+       "formula": "cost of the chosen capacity option row",
+       "level": "verified",
+       "metric": "capex_capacity",
+       "note": ""
+      }
+     ],
+     "level": "verified",
+     "mark": "V",
+     "source": "capacity option cost (EXP-02)",
+     "uncalibrated": false,
+     "value": 0.0
+    },
+    "cash_end": {
+     "chain": [
+      {
+       "evidence": "VERIFIED only if every component is",
+       "formula": "cash_start + inflows - outflows + emergency_loan",
+       "level": "placeholder",
+       "metric": "cash_end",
+       "note": ""
+      },
+      {
+       "evidence": "save file",
+       "formula": "state.cash",
+       "level": "verified",
+       "metric": "cash_start",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides (demand model level)",
+       "formula": "sum(units_sold x price)",
+       "level": "literature",
+       "metric": "revenue",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "docs/calculate-screen-triage.md (Stock, view identity)",
+       "formula": "sum(shares x price)",
+       "level": "derived",
+       "metric": "stock_raised",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_balance x annual rate / 4 / 100",
+       "level": "verified",
+       "metric": "cd_interest",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_prior + deposit - withdraw",
+       "level": "verified",
+       "metric": "cd_balance",
+       "note": "Only the deposit term was varied in the experiment."
+      },
+      {
+       "evidence": "docs/experiments/EXP-02.md",
+       "formula": "cost of the chosen capacity option row",
+       "level": "verified",
+       "metric": "capex_capacity",
+       "note": ""
+      },
+      {
+       "evidence": "rate from pack; rule unverified",
+       "formula": "max(pretax, 0) x tax rate",
+       "level": "placeholder",
+       "metric": "income_tax",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides",
+       "formula": "revenue + cd_interest - operating expenses",
+       "level": "placeholder",
+       "metric": "operating_profit_before_tax",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-11-OpenSalesOffice.md",
+       "formula": "sum(setup_cost) of stores opened this quarter",
+       "level": "verified",
+       "metric": "store_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-12-OpenWebcenter.md",
+       "formula": "sum(setup_cost) of web centers opened this quarter",
+       "level": "verified",
+       "metric": "web_center_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "lease_cost of outlets open at quarter start",
+       "level": "placeholder",
+       "metric": "outlet_lease",
+       "note": "Lease timing after opening is unverified."
+      },
+      {
+       "evidence": "pack parameter; charging rule unverified",
+       "formula": "design_cost x new brands",
+       "level": "placeholder",
+       "metric": "design_cost",
+       "note": ""
+      },
+      {
+       "evidence": "see unit_cost",
+       "formula": "sum(units x unit_cost)",
+       "level": "placeholder",
+       "metric": "production_cost",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+       "level": "placeholder",
+       "metric": "unit_cost[brand]",
+       "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      },
+      {
+       "evidence": "rule unverified",
+       "formula": "amount needed to bring cash to zero",
+       "level": "placeholder",
+       "metric": "emergency_loan",
+       "note": ""
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "((((((((cash at quarter start (carried state)) + (sum(units_sold x price))) + (sum(shares x price) (view identity))) + (withdraw - deposit)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)) - (capacity option cost (EXP-02))) - (max(pretax,0) x taxRate (placeholder: tax rule unverified))) + (covers negative cash (placeholder: emergency-loan rule unverified))",
+     "uncalibrated": true,
+     "value": 3060411.0607087696
+    },
+    "cash_start": {
+     "chain": [
+      {
+       "evidence": "save file",
+       "formula": "state.cash",
+       "level": "verified",
+       "metric": "cash_start",
+       "note": ""
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "cash at quarter start (carried state)",
+     "uncalibrated": true,
+     "value": 2845305.5617087698
+    },
+    "cd_balance": {
+     "chain": [
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_prior + deposit - withdraw",
+       "level": "verified",
+       "metric": "cd_balance",
+       "note": "Only the deposit term was varied in the experiment."
+      }
+     ],
+     "level": "verified",
+     "mark": "V",
+     "source": "cd = cd_prior + deposit - withdraw (EXP-01)",
+     "uncalibrated": false,
+     "value": 0.0
+    },
+    "cd_interest": {
+     "chain": [
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_balance x annual rate / 4 / 100",
+       "level": "verified",
+       "metric": "cd_interest",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_prior + deposit - withdraw",
+       "level": "verified",
+       "metric": "cd_balance",
+       "note": "Only the deposit term was varied in the experiment."
+      }
+     ],
+     "level": "verified",
+     "mark": "V",
+     "source": "interest = cd x rate/4/100 (EXP-01)",
+     "uncalibrated": false,
+     "value": 0.0
+    },
+    "design_cost": {
+     "chain": [
+      {
+       "evidence": "pack parameter; charging rule unverified",
+       "formula": "design_cost x new brands",
+       "level": "placeholder",
+       "metric": "design_cost",
+       "note": ""
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "designCost per new brand (placeholder)",
+     "uncalibrated": true,
+     "value": 0.0
+    },
+    "emergency_loan": {
+     "chain": [
+      {
+       "evidence": "rule unverified",
+       "formula": "amount needed to bring cash to zero",
+       "level": "placeholder",
+       "metric": "emergency_loan",
+       "note": ""
+      },
+      {
+       "evidence": "save file",
+       "formula": "state.cash",
+       "level": "verified",
+       "metric": "cash_start",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides (demand model level)",
+       "formula": "sum(units_sold x price)",
+       "level": "literature",
+       "metric": "revenue",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "docs/calculate-screen-triage.md (Stock, view identity)",
+       "formula": "sum(shares x price)",
+       "level": "derived",
+       "metric": "stock_raised",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_balance x annual rate / 4 / 100",
+       "level": "verified",
+       "metric": "cd_interest",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_prior + deposit - withdraw",
+       "level": "verified",
+       "metric": "cd_balance",
+       "note": "Only the deposit term was varied in the experiment."
+      },
+      {
+       "evidence": "docs/experiments/EXP-02.md",
+       "formula": "cost of the chosen capacity option row",
+       "level": "verified",
+       "metric": "capex_capacity",
+       "note": ""
+      },
+      {
+       "evidence": "rate from pack; rule unverified",
+       "formula": "max(pretax, 0) x tax rate",
+       "level": "placeholder",
+       "metric": "income_tax",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides",
+       "formula": "revenue + cd_interest - operating expenses",
+       "level": "placeholder",
+       "metric": "operating_profit_before_tax",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-11-OpenSalesOffice.md",
+       "formula": "sum(setup_cost) of stores opened this quarter",
+       "level": "verified",
+       "metric": "store_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-12-OpenWebcenter.md",
+       "formula": "sum(setup_cost) of web centers opened this quarter",
+       "level": "verified",
+       "metric": "web_center_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "lease_cost of outlets open at quarter start",
+       "level": "placeholder",
+       "metric": "outlet_lease",
+       "note": "Lease timing after opening is unverified."
+      },
+      {
+       "evidence": "pack parameter; charging rule unverified",
+       "formula": "design_cost x new brands",
+       "level": "placeholder",
+       "metric": "design_cost",
+       "note": ""
+      },
+      {
+       "evidence": "see unit_cost",
+       "formula": "sum(units x unit_cost)",
+       "level": "placeholder",
+       "metric": "production_cost",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+       "level": "placeholder",
+       "metric": "unit_cost[brand]",
+       "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "covers negative cash (placeholder: emergency-loan rule unverified)",
+     "uncalibrated": true,
+     "value": 0.0
+    },
+    "fixed_capacity_next_quarter": {
+     "chain": [
+      {
+       "evidence": "capacity screen 'next quarter' row",
+       "formula": "current + increase",
+       "level": "derived",
+       "metric": "fixed_capacity_next_quarter",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-02.md; docs/calculation-map.md #3",
+       "formula": "fixed capacity (units/day) x days per quarter",
+       "level": "verified",
+       "metric": "capacity_units_per_quarter",
+       "note": ""
+      }
+     ],
+     "level": "derived",
+     "mark": "D",
+     "source": "current + increase (screen 'next quarter' row)",
+     "uncalibrated": false,
+     "value": 45.0
+    },
+    "income_tax": {
+     "chain": [
+      {
+       "evidence": "rate from pack; rule unverified",
+       "formula": "max(pretax, 0) x tax rate",
+       "level": "placeholder",
+       "metric": "income_tax",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides",
+       "formula": "revenue + cd_interest - operating expenses",
+       "level": "placeholder",
+       "metric": "operating_profit_before_tax",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides (demand model level)",
+       "formula": "sum(units_sold x price)",
+       "level": "literature",
+       "metric": "revenue",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_balance x annual rate / 4 / 100",
+       "level": "verified",
+       "metric": "cd_interest",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_prior + deposit - withdraw",
+       "level": "verified",
+       "metric": "cd_balance",
+       "note": "Only the deposit term was varied in the experiment."
+      },
+      {
+       "evidence": "docs/experiments/EXP-11-OpenSalesOffice.md",
+       "formula": "sum(setup_cost) of stores opened this quarter",
+       "level": "verified",
+       "metric": "store_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-12-OpenWebcenter.md",
+       "formula": "sum(setup_cost) of web centers opened this quarter",
+       "level": "verified",
+       "metric": "web_center_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "lease_cost of outlets open at quarter start",
+       "level": "placeholder",
+       "metric": "outlet_lease",
+       "note": "Lease timing after opening is unverified."
+      },
+      {
+       "evidence": "pack parameter; charging rule unverified",
+       "formula": "design_cost x new brands",
+       "level": "placeholder",
+       "metric": "design_cost",
+       "note": ""
+      },
+      {
+       "evidence": "see unit_cost",
+       "formula": "sum(units x unit_cost)",
+       "level": "placeholder",
+       "metric": "production_cost",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+       "level": "placeholder",
+       "metric": "unit_cost[brand]",
+       "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "max(pretax,0) x taxRate (placeholder: tax rule unverified)",
+     "uncalibrated": true,
+     "value": 107391.50099999999
+    },
+    "market_share": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "our units sold / market_units_total",
+       "level": "literature",
+       "metric": "market_share",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "our units sold + rival units demanded",
+       "level": "literature",
+       "metric": "market_units_total",
+       "note": "Rivals are assumed unconstrained by inventory."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "our units sold / market_units_total",
+     "uncalibrated": true,
+     "value": 0.18742512188278135
+    },
+    "market_units_total": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "our units sold + rival units demanded",
+       "level": "literature",
+       "metric": "market_units_total",
+       "note": "Rivals are assumed unconstrained by inventory."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "our units sold + rival units demanded (rivals unconstrained)",
+     "uncalibrated": true,
+     "value": 4641.853724092077
+    },
+    "net_income": {
+     "chain": [
+      {
+       "evidence": "weakest input decides",
+       "formula": "pretax - income_tax",
+       "level": "placeholder",
+       "metric": "net_income",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides",
+       "formula": "revenue + cd_interest - operating expenses",
+       "level": "placeholder",
+       "metric": "operating_profit_before_tax",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides (demand model level)",
+       "formula": "sum(units_sold x price)",
+       "level": "literature",
+       "metric": "revenue",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_balance x annual rate / 4 / 100",
+       "level": "verified",
+       "metric": "cd_interest",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_prior + deposit - withdraw",
+       "level": "verified",
+       "metric": "cd_balance",
+       "note": "Only the deposit term was varied in the experiment."
+      },
+      {
+       "evidence": "docs/experiments/EXP-11-OpenSalesOffice.md",
+       "formula": "sum(setup_cost) of stores opened this quarter",
+       "level": "verified",
+       "metric": "store_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-12-OpenWebcenter.md",
+       "formula": "sum(setup_cost) of web centers opened this quarter",
+       "level": "verified",
+       "metric": "web_center_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "lease_cost of outlets open at quarter start",
+       "level": "placeholder",
+       "metric": "outlet_lease",
+       "note": "Lease timing after opening is unverified."
+      },
+      {
+       "evidence": "pack parameter; charging rule unverified",
+       "formula": "design_cost x new brands",
+       "level": "placeholder",
+       "metric": "design_cost",
+       "note": ""
+      },
+      {
+       "evidence": "see unit_cost",
+       "formula": "sum(units x unit_cost)",
+       "level": "placeholder",
+       "metric": "production_cost",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+       "level": "placeholder",
+       "metric": "unit_cost[brand]",
+       "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      },
+      {
+       "evidence": "rate from pack; rule unverified",
+       "formula": "max(pretax, 0) x tax rate",
+       "level": "placeholder",
+       "metric": "income_tax",
+       "note": ""
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "(((sum(units_sold x price)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)) - (max(pretax,0) x taxRate (placeholder: tax rule unverified))",
+     "uncalibrated": true,
+     "value": 215105.499
+    },
+    "operating_profit_before_tax": {
+     "chain": [
+      {
+       "evidence": "weakest input decides",
+       "formula": "revenue + cd_interest - operating expenses",
+       "level": "placeholder",
+       "metric": "operating_profit_before_tax",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides (demand model level)",
+       "formula": "sum(units_sold x price)",
+       "level": "literature",
+       "metric": "revenue",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_balance x annual rate / 4 / 100",
+       "level": "verified",
+       "metric": "cd_interest",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_prior + deposit - withdraw",
+       "level": "verified",
+       "metric": "cd_balance",
+       "note": "Only the deposit term was varied in the experiment."
+      },
+      {
+       "evidence": "docs/experiments/EXP-11-OpenSalesOffice.md",
+       "formula": "sum(setup_cost) of stores opened this quarter",
+       "level": "verified",
+       "metric": "store_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-12-OpenWebcenter.md",
+       "formula": "sum(setup_cost) of web centers opened this quarter",
+       "level": "verified",
+       "metric": "web_center_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "lease_cost of outlets open at quarter start",
+       "level": "placeholder",
+       "metric": "outlet_lease",
+       "note": "Lease timing after opening is unverified."
+      },
+      {
+       "evidence": "pack parameter; charging rule unverified",
+       "formula": "design_cost x new brands",
+       "level": "placeholder",
+       "metric": "design_cost",
+       "note": ""
+      },
+      {
+       "evidence": "see unit_cost",
+       "formula": "sum(units x unit_cost)",
+       "level": "placeholder",
+       "metric": "production_cost",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+       "level": "placeholder",
+       "metric": "unit_cost[brand]",
+       "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "((sum(units_sold x price)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)",
+     "uncalibrated": true,
+     "value": 322497.0
+    },
+    "outlet_lease": {
+     "chain": [
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "lease_cost of outlets open at quarter start",
+       "level": "placeholder",
+       "metric": "outlet_lease",
+       "note": "Lease timing after opening is unverified."
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "(leaseCost of outlets open at quarter start (placeholder: lease timing unverified)) + (leaseCost of outlets open at quarter start (placeholder: lease timing unverified))",
+     "uncalibrated": true,
+     "value": 65877.0
+    },
+    "production_cost": {
+     "chain": [
+      {
+       "evidence": "see unit_cost",
+       "formula": "sum(units x unit_cost)",
+       "level": "placeholder",
+       "metric": "production_cost",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+       "level": "placeholder",
+       "metric": "unit_cost[brand]",
+       "note": "The real production cost function is not yet measured."
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "sum(units x unit_cost)",
+     "uncalibrated": true,
+     "value": 305324.0
+    },
+    "revenue": {
+     "chain": [
+      {
+       "evidence": "weakest input decides (demand model level)",
+       "formula": "sum(units_sold x price)",
+       "level": "literature",
+       "metric": "revenue",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "sum(units_sold x price)",
+     "uncalibrated": true,
+     "value": 733862.0
+    },
+    "stock_raised": {
+     "chain": [
+      {
+       "evidence": "docs/calculate-screen-triage.md (Stock, view identity)",
+       "formula": "sum(shares x price)",
+       "level": "derived",
+       "metric": "stock_raised",
+       "note": ""
+      }
+     ],
+     "level": "derived",
+     "mark": "D",
+     "source": "sum(shares x price) (view identity)",
+     "uncalibrated": false,
+     "value": 0
+    },
+    "store_setup": {
+     "chain": [
+      {
+       "evidence": "docs/experiments/EXP-11-OpenSalesOffice.md",
+       "formula": "sum(setup_cost) of stores opened this quarter",
+       "level": "verified",
+       "metric": "store_setup",
+       "note": ""
+      }
+     ],
+     "level": "verified",
+     "mark": "V",
+     "source": "sum(setupCost of newly opened stores) (EXP-11/EXP-12)",
+     "uncalibrated": false,
+     "value": 0.0
+    },
+    "unit_cost[Alpha-1]": {
+     "chain": [
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+       "level": "placeholder",
+       "metric": "unit_cost[brand]",
+       "note": "The real production cost function is not yet measured."
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "sum(component price) x costAdj + minDirectLabor + minOverheadCPU (placeholder: cost function unverified)",
+     "uncalibrated": true,
+     "value": 309.0
+    },
+    "unit_cost[Gamma-1]": {
+     "chain": [
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+       "level": "placeholder",
+       "metric": "unit_cost[brand]",
+       "note": "The real production cost function is not yet measured."
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "sum(component price) x costAdj + minDirectLabor + minOverheadCPU (placeholder: cost function unverified)",
+     "uncalibrated": true,
+     "value": 451.0
+    },
+    "units_demanded[Alpha-1]": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "LiteratureDemand: potential x attraction / (outside + sum attraction) (docs/demand-model-spec.md)",
+     "uncalibrated": true,
+     "value": 876.4745352868791
+    },
+    "units_demanded[Gamma-1]": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "LiteratureDemand: potential x attraction / (outside + sum attraction) (docs/demand-model-spec.md)",
+     "uncalibrated": true,
+     "value": 274.7528523224882
+    },
+    "units_sold[Alpha-1]": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "min(demand, inventory)",
+     "uncalibrated": true,
+     "value": 613.0
+    },
+    "units_sold[Gamma-1]": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "min(demand, inventory)",
+     "uncalibrated": true,
+     "value": 257.0
+    },
+    "web_center_setup": {
+     "chain": [
+      {
+       "evidence": "docs/experiments/EXP-12-OpenWebcenter.md",
+       "formula": "sum(setup_cost) of web centers opened this quarter",
+       "level": "verified",
+       "metric": "web_center_setup",
+       "note": ""
+      }
+     ],
+     "level": "verified",
+     "mark": "V",
+     "source": "sum(setupCost of newly opened web centers) (EXP-11/EXP-12)",
+     "uncalibrated": false,
+     "value": 0.0
+    }
+   },
+   "notes": [],
+   "plan": "balanced",
+   "quarter": 4
+  },
+  {
+   "lines": {
+    "advertising": {
+     "chain": [
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      }
+     ],
+     "level": "verified",
+     "mark": "V",
+     "source": "plan input",
+     "uncalibrated": false,
+     "value": 79950.0
+    },
+    "capacity_units_per_quarter": {
+     "chain": [
+      {
+       "evidence": "docs/experiments/EXP-02.md; docs/calculation-map.md #3",
+       "formula": "fixed capacity (units/day) x days per quarter",
+       "level": "verified",
+       "metric": "capacity_units_per_quarter",
+       "note": ""
+      }
+     ],
+     "level": "verified",
+     "mark": "V",
+     "source": "units/day x 65 (EXP-02 + client)",
+     "uncalibrated": false,
+     "value": 2925.0
+    },
+    "capex_capacity": {
+     "chain": [
+      {
+       "evidence": "docs/experiments/EXP-02.md",
+       "formula": "cost of the chosen capacity option row",
+       "level": "verified",
+       "metric": "capex_capacity",
+       "note": ""
+      }
+     ],
+     "level": "verified",
+     "mark": "V",
+     "source": "capacity option cost (EXP-02)",
+     "uncalibrated": false,
+     "value": 1066065.0
+    },
+    "cash_end": {
+     "chain": [
+      {
+       "evidence": "VERIFIED only if every component is",
+       "formula": "cash_start + inflows - outflows + emergency_loan",
+       "level": "placeholder",
+       "metric": "cash_end",
+       "note": ""
+      },
+      {
+       "evidence": "save file",
+       "formula": "state.cash",
+       "level": "verified",
+       "metric": "cash_start",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides (demand model level)",
+       "formula": "sum(units_sold x price)",
+       "level": "literature",
+       "metric": "revenue",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "docs/calculate-screen-triage.md (Stock, view identity)",
+       "formula": "sum(shares x price)",
+       "level": "derived",
+       "metric": "stock_raised",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_balance x annual rate / 4 / 100",
+       "level": "verified",
+       "metric": "cd_interest",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_prior + deposit - withdraw",
+       "level": "verified",
+       "metric": "cd_balance",
+       "note": "Only the deposit term was varied in the experiment."
+      },
+      {
+       "evidence": "docs/experiments/EXP-02.md",
+       "formula": "cost of the chosen capacity option row",
+       "level": "verified",
+       "metric": "capex_capacity",
+       "note": ""
+      },
+      {
+       "evidence": "rate from pack; rule unverified",
+       "formula": "max(pretax, 0) x tax rate",
+       "level": "placeholder",
+       "metric": "income_tax",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides",
+       "formula": "revenue + cd_interest - operating expenses",
+       "level": "placeholder",
+       "metric": "operating_profit_before_tax",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-11-OpenSalesOffice.md",
+       "formula": "sum(setup_cost) of stores opened this quarter",
+       "level": "verified",
+       "metric": "store_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-12-OpenWebcenter.md",
+       "formula": "sum(setup_cost) of web centers opened this quarter",
+       "level": "verified",
+       "metric": "web_center_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "lease_cost of outlets open at quarter start",
+       "level": "placeholder",
+       "metric": "outlet_lease",
+       "note": "Lease timing after opening is unverified."
+      },
+      {
+       "evidence": "pack parameter; charging rule unverified",
+       "formula": "design_cost x new brands",
+       "level": "placeholder",
+       "metric": "design_cost",
+       "note": ""
+      },
+      {
+       "evidence": "see unit_cost",
+       "formula": "sum(units x unit_cost)",
+       "level": "placeholder",
+       "metric": "production_cost",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+       "level": "placeholder",
+       "metric": "unit_cost[brand]",
+       "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      },
+      {
+       "evidence": "rule unverified",
+       "formula": "amount needed to bring cash to zero",
+       "level": "placeholder",
+       "metric": "emergency_loan",
+       "note": ""
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "((((((((cash at quarter start (carried state)) + (sum(units_sold x price))) + (sum(shares x price) (view identity))) + (withdraw - deposit)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)) - (capacity option cost (EXP-02))) - (max(pretax,0) x taxRate (placeholder: tax rule unverified))) + (covers negative cash (placeholder: emergency-loan rule unverified))",
+     "uncalibrated": true,
+     "value": 1864952.0627087697
+    },
+    "cash_start": {
+     "chain": [
+      {
+       "evidence": "save file",
+       "formula": "state.cash",
+       "level": "verified",
+       "metric": "cash_start",
+       "note": ""
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "cash at quarter start (carried state)",
+     "uncalibrated": true,
+     "value": 2845305.5617087698
+    },
+    "cd_balance": {
+     "chain": [
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_prior + deposit - withdraw",
+       "level": "verified",
+       "metric": "cd_balance",
+       "note": "Only the deposit term was varied in the experiment."
+      }
+     ],
+     "level": "verified",
+     "mark": "V",
+     "source": "cd = cd_prior + deposit - withdraw (EXP-01)",
+     "uncalibrated": false,
+     "value": 0.0
+    },
+    "cd_interest": {
+     "chain": [
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_balance x annual rate / 4 / 100",
+       "level": "verified",
+       "metric": "cd_interest",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_prior + deposit - withdraw",
+       "level": "verified",
+       "metric": "cd_balance",
+       "note": "Only the deposit term was varied in the experiment."
+      }
+     ],
+     "level": "verified",
+     "mark": "V",
+     "source": "interest = cd x rate/4/100 (EXP-01)",
+     "uncalibrated": false,
+     "value": 0.0
+    },
+    "design_cost": {
+     "chain": [
+      {
+       "evidence": "pack parameter; charging rule unverified",
+       "formula": "design_cost x new brands",
+       "level": "placeholder",
+       "metric": "design_cost",
+       "note": ""
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "designCost per new brand (placeholder)",
+     "uncalibrated": true,
+     "value": 27777.0
+    },
+    "emergency_loan": {
+     "chain": [
+      {
+       "evidence": "rule unverified",
+       "formula": "amount needed to bring cash to zero",
+       "level": "placeholder",
+       "metric": "emergency_loan",
+       "note": ""
+      },
+      {
+       "evidence": "save file",
+       "formula": "state.cash",
+       "level": "verified",
+       "metric": "cash_start",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides (demand model level)",
+       "formula": "sum(units_sold x price)",
+       "level": "literature",
+       "metric": "revenue",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "docs/calculate-screen-triage.md (Stock, view identity)",
+       "formula": "sum(shares x price)",
+       "level": "derived",
+       "metric": "stock_raised",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_balance x annual rate / 4 / 100",
+       "level": "verified",
+       "metric": "cd_interest",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_prior + deposit - withdraw",
+       "level": "verified",
+       "metric": "cd_balance",
+       "note": "Only the deposit term was varied in the experiment."
+      },
+      {
+       "evidence": "docs/experiments/EXP-02.md",
+       "formula": "cost of the chosen capacity option row",
+       "level": "verified",
+       "metric": "capex_capacity",
+       "note": ""
+      },
+      {
+       "evidence": "rate from pack; rule unverified",
+       "formula": "max(pretax, 0) x tax rate",
+       "level": "placeholder",
+       "metric": "income_tax",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides",
+       "formula": "revenue + cd_interest - operating expenses",
+       "level": "placeholder",
+       "metric": "operating_profit_before_tax",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-11-OpenSalesOffice.md",
+       "formula": "sum(setup_cost) of stores opened this quarter",
+       "level": "verified",
+       "metric": "store_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-12-OpenWebcenter.md",
+       "formula": "sum(setup_cost) of web centers opened this quarter",
+       "level": "verified",
+       "metric": "web_center_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "lease_cost of outlets open at quarter start",
+       "level": "placeholder",
+       "metric": "outlet_lease",
+       "note": "Lease timing after opening is unverified."
+      },
+      {
+       "evidence": "pack parameter; charging rule unverified",
+       "formula": "design_cost x new brands",
+       "level": "placeholder",
+       "metric": "design_cost",
+       "note": ""
+      },
+      {
+       "evidence": "see unit_cost",
+       "formula": "sum(units x unit_cost)",
+       "level": "placeholder",
+       "metric": "production_cost",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+       "level": "placeholder",
+       "metric": "unit_cost[brand]",
+       "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "covers negative cash (placeholder: emergency-loan rule unverified)",
+     "uncalibrated": true,
+     "value": 0.0
+    },
+    "fixed_capacity_next_quarter": {
+     "chain": [
+      {
+       "evidence": "capacity screen 'next quarter' row",
+       "formula": "current + increase",
+       "level": "derived",
+       "metric": "fixed_capacity_next_quarter",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-02.md; docs/calculation-map.md #3",
+       "formula": "fixed capacity (units/day) x days per quarter",
+       "level": "verified",
+       "metric": "capacity_units_per_quarter",
+       "note": ""
+      }
+     ],
+     "level": "derived",
+     "mark": "D",
+     "source": "current + increase (screen 'next quarter' row)",
+     "uncalibrated": false,
+     "value": 90.0
+    },
+    "income_tax": {
+     "chain": [
+      {
+       "evidence": "rate from pack; rule unverified",
+       "formula": "max(pretax, 0) x tax rate",
+       "level": "placeholder",
+       "metric": "income_tax",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides",
+       "formula": "revenue + cd_interest - operating expenses",
+       "level": "placeholder",
+       "metric": "operating_profit_before_tax",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides (demand model level)",
+       "formula": "sum(units_sold x price)",
+       "level": "literature",
+       "metric": "revenue",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_balance x annual rate / 4 / 100",
+       "level": "verified",
+       "metric": "cd_interest",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_prior + deposit - withdraw",
+       "level": "verified",
+       "metric": "cd_balance",
+       "note": "Only the deposit term was varied in the experiment."
+      },
+      {
+       "evidence": "docs/experiments/EXP-11-OpenSalesOffice.md",
+       "formula": "sum(setup_cost) of stores opened this quarter",
+       "level": "verified",
+       "metric": "store_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-12-OpenWebcenter.md",
+       "formula": "sum(setup_cost) of web centers opened this quarter",
+       "level": "verified",
+       "metric": "web_center_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "lease_cost of outlets open at quarter start",
+       "level": "placeholder",
+       "metric": "outlet_lease",
+       "note": "Lease timing after opening is unverified."
+      },
+      {
+       "evidence": "pack parameter; charging rule unverified",
+       "formula": "design_cost x new brands",
+       "level": "placeholder",
+       "metric": "design_cost",
+       "note": ""
+      },
+      {
+       "evidence": "see unit_cost",
+       "formula": "sum(units x unit_cost)",
+       "level": "placeholder",
+       "metric": "production_cost",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+       "level": "placeholder",
+       "metric": "unit_cost[brand]",
+       "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "max(pretax,0) x taxRate (placeholder: tax rule unverified)",
+     "uncalibrated": true,
+     "value": 42791.498999999996
+    },
+    "market_share": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "our units sold / market_units_total",
+       "level": "literature",
+       "metric": "market_share",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "our units sold + rival units demanded",
+       "level": "literature",
+       "metric": "market_units_total",
+       "note": "Rivals are assumed unconstrained by inventory."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "our units sold / market_units_total",
+     "uncalibrated": true,
+     "value": 0.26010547333081013
+    },
+    "market_units_total": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "our units sold + rival units demanded",
+       "level": "literature",
+       "metric": "market_units_total",
+       "note": "Rivals are assumed unconstrained by inventory."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "our units sold + rival units demanded (rivals unconstrained)",
+     "uncalibrated": true,
+     "value": 4667.337386076446
+    },
+    "net_income": {
+     "chain": [
+      {
+       "evidence": "weakest input decides",
+       "formula": "pretax - income_tax",
+       "level": "placeholder",
+       "metric": "net_income",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides",
+       "formula": "revenue + cd_interest - operating expenses",
+       "level": "placeholder",
+       "metric": "operating_profit_before_tax",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides (demand model level)",
+       "formula": "sum(units_sold x price)",
+       "level": "literature",
+       "metric": "revenue",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_balance x annual rate / 4 / 100",
+       "level": "verified",
+       "metric": "cd_interest",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_prior + deposit - withdraw",
+       "level": "verified",
+       "metric": "cd_balance",
+       "note": "Only the deposit term was varied in the experiment."
+      },
+      {
+       "evidence": "docs/experiments/EXP-11-OpenSalesOffice.md",
+       "formula": "sum(setup_cost) of stores opened this quarter",
+       "level": "verified",
+       "metric": "store_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-12-OpenWebcenter.md",
+       "formula": "sum(setup_cost) of web centers opened this quarter",
+       "level": "verified",
+       "metric": "web_center_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "lease_cost of outlets open at quarter start",
+       "level": "placeholder",
+       "metric": "outlet_lease",
+       "note": "Lease timing after opening is unverified."
+      },
+      {
+       "evidence": "pack parameter; charging rule unverified",
+       "formula": "design_cost x new brands",
+       "level": "placeholder",
+       "metric": "design_cost",
+       "note": ""
+      },
+      {
+       "evidence": "see unit_cost",
+       "formula": "sum(units x unit_cost)",
+       "level": "placeholder",
+       "metric": "production_cost",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+       "level": "placeholder",
+       "metric": "unit_cost[brand]",
+       "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      },
+      {
+       "evidence": "rate from pack; rule unverified",
+       "formula": "max(pretax, 0) x tax rate",
+       "level": "placeholder",
+       "metric": "income_tax",
+       "note": ""
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "(((sum(units_sold x price)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)) - (max(pretax,0) x taxRate (placeholder: tax rule unverified))",
+     "uncalibrated": true,
+     "value": 85711.501
+    },
+    "operating_profit_before_tax": {
+     "chain": [
+      {
+       "evidence": "weakest input decides",
+       "formula": "revenue + cd_interest - operating expenses",
+       "level": "placeholder",
+       "metric": "operating_profit_before_tax",
+       "note": ""
+      },
+      {
+       "evidence": "weakest input decides (demand model level)",
+       "formula": "sum(units_sold x price)",
+       "level": "literature",
+       "metric": "revenue",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_balance x annual rate / 4 / 100",
+       "level": "verified",
+       "metric": "cd_interest",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-01.md",
+       "formula": "cd_prior + deposit - withdraw",
+       "level": "verified",
+       "metric": "cd_balance",
+       "note": "Only the deposit term was varied in the experiment."
+      },
+      {
+       "evidence": "docs/experiments/EXP-11-OpenSalesOffice.md",
+       "formula": "sum(setup_cost) of stores opened this quarter",
+       "level": "verified",
+       "metric": "store_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/experiments/EXP-12-OpenWebcenter.md",
+       "formula": "sum(setup_cost) of web centers opened this quarter",
+       "level": "verified",
+       "metric": "web_center_setup",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "lease_cost of outlets open at quarter start",
+       "level": "placeholder",
+       "metric": "outlet_lease",
+       "note": "Lease timing after opening is unverified."
+      },
+      {
+       "evidence": "pack parameter; charging rule unverified",
+       "formula": "design_cost x new brands",
+       "level": "placeholder",
+       "metric": "design_cost",
+       "note": ""
+      },
+      {
+       "evidence": "see unit_cost",
+       "formula": "sum(units x unit_cost)",
+       "level": "placeholder",
+       "metric": "production_cost",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+       "level": "placeholder",
+       "metric": "unit_cost[brand]",
+       "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "((sum(units_sold x price)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)",
+     "uncalibrated": true,
+     "value": 128503.0
+    },
+    "outlet_lease": {
+     "chain": [
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "lease_cost of outlets open at quarter start",
+       "level": "placeholder",
+       "metric": "outlet_lease",
+       "note": "Lease timing after opening is unverified."
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "(leaseCost of outlets open at quarter start (placeholder: lease timing unverified)) + (leaseCost of outlets open at quarter start (placeholder: lease timing unverified))",
+     "uncalibrated": true,
+     "value": 65877.0
+    },
+    "production_cost": {
+     "chain": [
+      {
+       "evidence": "see unit_cost",
+       "formula": "sum(units x unit_cost)",
+       "level": "placeholder",
+       "metric": "production_cost",
+       "note": ""
+      },
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+       "level": "placeholder",
+       "metric": "unit_cost[brand]",
+       "note": "The real production cost function is not yet measured."
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "sum(units x unit_cost)",
+     "uncalibrated": true,
+     "value": 400914.0
+    },
+    "revenue": {
+     "chain": [
+      {
+       "evidence": "weakest input decides (demand model level)",
+       "formula": "sum(units_sold x price)",
+       "level": "literature",
+       "metric": "revenue",
+       "note": ""
+      },
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "sum(units_sold x price)",
+     "uncalibrated": true,
+     "value": 848700.0
+    },
+    "stock_raised": {
+     "chain": [
+      {
+       "evidence": "docs/calculate-screen-triage.md (Stock, view identity)",
+       "formula": "sum(shares x price)",
+       "level": "derived",
+       "metric": "stock_raised",
+       "note": ""
+      }
+     ],
+     "level": "derived",
+     "mark": "D",
+     "source": "sum(shares x price) (view identity)",
+     "uncalibrated": false,
+     "value": 0
+    },
+    "store_setup": {
+     "chain": [
+      {
+       "evidence": "docs/experiments/EXP-11-OpenSalesOffice.md",
+       "formula": "sum(setup_cost) of stores opened this quarter",
+       "level": "verified",
+       "metric": "store_setup",
+       "note": ""
+      }
+     ],
+     "level": "verified",
+     "mark": "V",
+     "source": "sum(setupCost of newly opened stores) (EXP-11/EXP-12)",
+     "uncalibrated": false,
+     "value": 145679.0
+    },
+    "unit_cost[Alpha-1]": {
+     "chain": [
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+       "level": "placeholder",
+       "metric": "unit_cost[brand]",
+       "note": "The real production cost function is not yet measured."
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "sum(component price) x costAdj + minDirectLabor + minOverheadCPU (placeholder: cost function unverified)",
+     "uncalibrated": true,
+     "value": 309.0
+    },
+    "unit_cost[Beta-1]": {
+     "chain": [
+      {
+       "evidence": "docs/cost-model.md (not covered)",
+       "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+       "level": "placeholder",
+       "metric": "unit_cost[brand]",
+       "note": "The real production cost function is not yet measured."
+      }
+     ],
+     "level": "placeholder",
+     "mark": "P",
+     "source": "sum(component price) x costAdj + minDirectLabor + minOverheadCPU (placeholder: cost function unverified)",
+     "uncalibrated": true,
+     "value": 393.0
+    },
+    "units_demanded[Alpha-1]": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "LiteratureDemand: potential x attraction / (outside + sum attraction) (docs/demand-model-spec.md)",
+     "uncalibrated": true,
+     "value": 1054.0544121082783
+    },
+    "units_demanded[Beta-1]": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "LiteratureDemand: potential x attraction / (outside + sum attraction) (docs/demand-model-spec.md)",
+     "uncalibrated": true,
+     "value": 549.2019358387153
+    },
+    "units_sold[Alpha-1]": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "min(demand, inventory)",
+     "uncalibrated": true,
+     "value": 907.0
+    },
+    "units_sold[Beta-1]": {
+     "chain": [
+      {
+       "evidence": "docs/demand-model-spec.md",
+       "formula": "min(units_demanded, inventory)",
+       "level": "literature",
+       "metric": "units_sold[brand]",
+       "note": "Takes the demand model's level (placeholder if PlaceholderDemand is selected)."
+      },
+      {
+       "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
+       "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
+       "level": "literature",
+       "metric": "units_demanded[brand]",
+       "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      }
+     ],
+     "level": "literature",
+     "mark": "L",
+     "source": "min(demand, inventory)",
+     "uncalibrated": true,
+     "value": 307.0
+    },
+    "web_center_setup": {
+     "chain": [
+      {
+       "evidence": "docs/experiments/EXP-12-OpenWebcenter.md",
+       "formula": "sum(setup_cost) of web centers opened this quarter",
+       "level": "verified",
+       "metric": "web_center_setup",
+       "note": ""
+      }
+     ],
+     "level": "verified",
+     "mark": "V",
+     "source": "sum(setupCost of newly opened web centers) (EXP-11/EXP-12)",
+     "uncalibrated": false,
+     "value": 0.0
+    }
+   },
+   "notes": [],
+   "plan": "aggressive",
+   "quarter": 4
+  }
+ ],
+ "source": "synthetic"
+}
