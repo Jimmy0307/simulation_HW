@@ -71,6 +71,11 @@ chain. See [docs/ui-guide.md](docs/ui-guide.md) (Chinese). The GitHub Pages work
 before the history cleanup ([docs/history-cleanup-plan.md](docs/history-cleanup-plan.md), open TODO:
 [docs/TODO-history-cleanup.md](docs/TODO-history-cleanup.md); the workflow refuses to run until it is marked cleaned).
 
+**Game mode** (8th entry; the seven analysis screens are unchanged) is a turn-based view of the same engine: one
+quarter = one turn, with 1–6 opponents built from the control plane's existing bots. Trusted numbers (verified /
+derived) show directly; anything literature- or placeholder-level stays behind a faded "? 預估" (estimate) chip until
+clicked. The static demo replays one pre-recorded synthetic game. See [docs/ui-guide.md §6a](docs/ui-guide.md).
+
 ## Load your own data (private)
 
 1. Capture your own sessions with [REA](https://github.com/morluto/rea) into `evidence/private/` (see
