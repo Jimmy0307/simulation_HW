@@ -14,13 +14,15 @@ class Level(IntEnum):
     """Higher is stronger. Ordering is used to take the weakest level of a combination."""
 
     PLACEHOLDER = 0  # illustrative, uncalibrated
-    ESTIMATED = 1  # fitted to observed data (e.g. a demand model)
-    DERIVED = 2  # follows directly from published parameters; not separately measured
-    VERIFIED = 3  # reproduced against measured server results with zero residual
+    LITERATURE = 1  # functional form backed by published literature; coefficients not calibrated on this game
+    ESTIMATED = 2  # fitted to observed data (e.g. a demand model)
+    DERIVED = 3  # follows directly from published parameters; not separately measured
+    VERIFIED = 4  # reproduced against measured server results with zero residual
 
     @property
     def mark(self) -> str:
-        return {Level.VERIFIED: "V", Level.DERIVED: "D", Level.ESTIMATED: "E", Level.PLACEHOLDER: "P"}[self]
+        return {Level.VERIFIED: "V", Level.DERIVED: "D", Level.ESTIMATED: "E", Level.LITERATURE: "L",
+                Level.PLACEHOLDER: "P"}[self]
 
     @property
     def label(self) -> str:

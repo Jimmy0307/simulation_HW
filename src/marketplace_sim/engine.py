@@ -34,6 +34,7 @@ class CompanyState:
     shares_total: float = 0.0
     pending_capacity_units: float = 0.0
     cash_level: str = "verified"  # level of the cash balance carried from the previous quarter
+    ad_stock: dict[str, float] = field(default_factory=dict)  # advertising goodwill per brand (literature demand)
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -127,7 +128,11 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
             competitors: list[m.Competitor] | None = None, seed: int = 0,
             adjust: Adjustments | None = None) -> tuple[CompanyState, Report]:
     """Apply one quarter of decisions. Returns the next state and a fully tagged report."""
-    demand = demand or m.PlaceholderDemand()
+    from marketplace_sim.demand import demand_for
+
+    demand = demand or demand_for(pack)
+    carryover = float(getattr(demand, "carryover", 0.0))
+    web_weight = float((getattr(demand, "coefficients", None) or {}).get("web_weight", 1.0))
     competitors = competitors if competitors is not None else [m.BaselineBot("bot-a"), m.RandomBot("bot-b")]
     adjust = adjust or Adjustments()
     rng = random.Random(seed * 1009 + state.quarter)
@@ -166,6 +171,7 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
     own_offers: list[m.Offer] = []
     capacity_left = lines["capacity_units_per_quarter"].value
     market_reach = m.reach(pack, stores_before, web_before)
+    market_coverage = tuple(sorted(m.coverage(pack, stores_before, web_before, web_weight).items()))
     for bp in plan.brands:
         bt = pack.brand_type(bp.brand_type)
         if bp.name not in new.brands:
@@ -182,8 +188,12 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
         new.inventory[bp.name] = new.inventory.get(bp.name, 0.0) + units
         production_cost.append(cost.scaled(units, f"{units:.0f} units"))
         segment = brand.segment_id or (pack.segments[0].id if pack.segments else "")
+        stock = carryover * state.ad_stock.get(bp.name, 0.0) + max(bp.advertising, 0.0)
+        new.ad_stock[bp.name] = stock
         if bp.price > 0 and market_reach:
-            own_offers.append(m.Offer("us", bp.name, segment, bp.price, m.segment_fit(bt, segment), bp.advertising, market_reach))
+            own_offers.append(m.Offer("us", bp.name, segment, bp.price, m.segment_fit(bt, segment), bp.advertising,
+                                      market_reach, position=bt.segment_id, quality=1.0, ad_stock=stock,
+                                      coverage=market_coverage))
     lines["design_cost"] = m.design_cost(pack, new_brand_count)
     lines["production_cost"] = total(production_cost, "sum(units x unit_cost)", empty_level=Level.VERIFIED)
     lines["advertising"] = const(sum(b.advertising for b in plan.brands), Level.VERIFIED, "plan input")
@@ -194,14 +204,23 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
                         for o in rival_offers]
     demanded = demand.units(pack, own_offers + rival_offers)
     revenue: list[Tagged] = []
+    sold_total = 0.0
     for offer in own_offers:
         want = demanded.get(("us", offer.brand), Tagged(0.0, demand.level, "no demand"))
         sold = min(want.value, new.inventory.get(offer.brand, 0.0))
         new.inventory[offer.brand] = new.inventory.get(offer.brand, 0.0) - sold
+        sold_total += sold
+        lines[f"units_demanded[{offer.brand}]"] = want
         lines[f"units_sold[{offer.brand}]"] = Tagged(sold, want.level, "min(demand, inventory)")
         revenue.append(Tagged(sold * offer.price, want.level, "units_sold x price"))
     if not own_offers:
         notes.append("no sales: no priced brand or no open outlet at quarter start")
+    rivals_units = sum(v.value for k, v in demanded.items() if k[0] != "us")
+    market_units = sold_total + rivals_units
+    lines["market_units_total"] = Tagged(market_units, demand.level,
+                                         "our units sold + rival units demanded (rivals unconstrained)")
+    lines["market_share"] = Tagged(sold_total / market_units if market_units > 0 else 0.0, demand.level,
+                                   "our units sold / market_units_total")
     lines["revenue"] = total(revenue, "sum(units_sold x price)", empty_level=demand.level)
 
     expenses = total([lines["store_setup"], lines["web_center_setup"], lines["outlet_lease"], lines["design_cost"],

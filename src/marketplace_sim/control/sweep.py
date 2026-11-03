@@ -39,6 +39,7 @@ from marketplace_sim.control.spec import (
     ScenarioSpec,
     load_spec,
 )
+from marketplace_sim.provenance import Level
 from marketplace_sysid.experiments.sensitivity import finite_difference
 
 SWEEP_SCHEMA = "marketplace-sim/sweep-result@1"
@@ -163,8 +164,25 @@ def run_sweep(sweep: SweepSpec) -> dict[str, Any]:
         summary = result.summary()
         rows.append({"id": spec.name, "fingerprint": result.fingerprint, "assignment": assignment,
                      "objective": summary[sweep.objective], "summary": summary})
+    level = demand_level(rows)
     return {"schema": SWEEP_SCHEMA, "name": sweep.name, "objective": sweep.objective, "mode": sweep.mode,
+            "demand_level": level, "caveat": caveat(level),
             "rows": rows, "worst": worst(rows, 5), "sensitivity": sensitivity(sweep, rows)}
+
+
+def demand_level(rows: list[dict[str, Any]]) -> str:
+    """Weakest source level of revenue across all runs (revenue carries the demand model's level)."""
+    levels = [Level[r["summary"]["weakest_level"]["revenue"].upper()] for r in rows
+              if r["summary"]["weakest_level"].get("revenue")]
+    return min(levels, default=Level.PLACEHOLDER).label
+
+
+def caveat(level: str) -> str:
+    if Level[level.upper()] >= Level.ESTIMATED:
+        return ""
+    return (f"Demand is at '{level}' level: the worst cases reflect {level} demand assumptions (published forms with "
+            "uncalibrated coefficients, or placeholders), not a forecast of this game. Cost-side lines keep their "
+            "own levels.")
 
 
 def worst(rows: list[dict[str, Any]], top: int) -> list[dict[str, Any]]:
@@ -199,6 +217,7 @@ def write_sweep(result: dict[str, Any], out_dir: Path) -> Path:
     path = out_dir / f"{result['name']}.sweep.json"
     path.write_text(json.dumps(result, indent=1, ensure_ascii=False, default=str), encoding="utf-8")
     lines = [f"# Sweep {result['name']} (objective: {result['objective']})", "",
+             *([f"> {result['caveat']}", ""] if result.get("caveat") else []),
              "| id | objective | " + " | ".join(result["rows"][0]["assignment"]) + " | fingerprint |",
              "|---|---|" + "---|" * len(result["rows"][0]["assignment"]) + "---|"] if result["rows"] else []
     for row in result["rows"]:

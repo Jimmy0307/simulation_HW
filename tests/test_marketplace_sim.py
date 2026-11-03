@@ -62,14 +62,18 @@ def test_advance_reconciles_cash_and_tags_every_line(pack) -> None:  # type: ign
     assert new.cash_level == lines["cash_end"].level.label
 
 
-def test_sales_need_open_outlets_and_are_placeholder(pack) -> None:  # type: ignore[no-untyped-def]
+def test_sales_need_open_outlets_and_carry_the_demand_level(pack) -> None:  # type: ignore[no-untyped-def]
     state = CompanyState.initial(pack)
     state.fixed_capacity_units = 20
     state.stores_open = [pack.stores[0].key]
     plan = Plan.from_dict({"brands": [{"name": "X", "brand_type": "A", "price": 700, "production": 100}]})
-    _, report = advance(state, plan, pack)
-    assert report.lines["units_sold[X]"].level is Level.PLACEHOLDER
+    _, report = advance(state, plan, pack)  # default: literature demand
+    assert report.lines["units_sold[X]"].level is Level.LITERATURE
+    assert report.lines["revenue"].level is Level.LITERATURE
+    assert report.lines["operating_profit_before_tax"].level is Level.PLACEHOLDER  # production cost is placeholder
     assert 0 < report.lines["units_sold[X]"].value <= 100
+    _, placeholder = advance(state, plan, pack, demand=m.PlaceholderDemand())
+    assert placeholder.lines["units_sold[X]"].level is Level.PLACEHOLDER
     _, closed = advance(CompanyState.initial(pack), plan, pack)
     assert "units_sold[X]" not in closed.lines
 

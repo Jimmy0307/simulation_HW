@@ -123,6 +123,7 @@ class ParamPack:
     brand_types: list[BrandType]
     production: dict[str, float]
     path: Path | None = None
+    demand: dict[str, Any] = field(default_factory=dict)  # demand model choice and coefficient overrides
 
     def segment(self, segment_id: str) -> Segment:
         return next(s for s in self.segments if s.id == segment_id)
@@ -165,6 +166,7 @@ def pack_from_dict(data: dict[str, Any], path: Path | None = None) -> ParamPack:
                                float(b.get("price_adj", 1)), float(b.get("cost_adj", 1))) for b in data["brand_types"]],
         production={k: float(v) for k, v in data.get("production", {}).items()},
         path=path,
+        demand=dict(data.get("demand") or {}),
     )
 
 

@@ -1,0 +1,32 @@
+{
+ "schema": "marketplace-sim/demand-coefficients@1",
+ "note": "Literature defaults for LiteratureDemand. Forms and values come from public literature or are labelled defaults; none come from any game. See docs/demand-model-spec.md and docs/demand-literature.md.",
+ "coefficients": {
+  "price_sensitivity": 2.6,
+  "ad_elasticity": 0.24,
+  "carryover": 0.5,
+  "distribution_elasticity": 1.0,
+  "ad_shape": "power",
+  "adbudg_c": 2.0,
+  "adbudg_max": 1.5,
+  "fit_weight": 3.0,
+  "similarity_power": 1.0,
+  "web_weight": 0.5,
+  "outside_utility": 0.0,
+  "ad_reference_share": 0.01
+ },
+ "basis": {
+  "price_sensitivity": {"kind": "literature", "range": [1.5, 4.0], "sources": ["Tellis 1988", "Bijmolt, van Heerde & Pieters 2005"]},
+  "ad_elasticity": {"kind": "literature", "range": [0.12, 0.41], "sources": ["Sethuraman, Tellis & Briesch 2011", "Assmus, Farley & Lehmann 1984"]},
+  "carryover": {"kind": "literature", "range": [0.3, 0.7], "sources": ["Nerlove & Arrow 1962", "Sethuraman, Tellis & Briesch 2011", "Clarke 1976"]},
+  "distribution_elasticity": {"kind": "literature", "range": [0.74, 1.5], "sources": ["Ataman, van Heerde & Mela 2010", "Reibstein & Farris 1995", "Wilbur & Farris 2014"]},
+  "ad_shape": {"kind": "literature", "sources": ["Simon & Arndt 1980", "Little 1970", "Vakratsas et al. 2004"]},
+  "adbudg_c": {"kind": "labelled_default", "sources": ["Little 1970 (form only)"]},
+  "adbudg_max": {"kind": "labelled_default", "sources": ["Little 1970 (form only)"]},
+  "fit_weight": {"kind": "labelled_default", "sources": ["Green & Srinivasan 1978 (form only)"]},
+  "similarity_power": {"kind": "labelled_default", "sources": ["Shocker & Srinivasan 1979 (form only)"]},
+  "web_weight": {"kind": "labelled_default", "sources": ["Huff 1964 (form only)"]},
+  "outside_utility": {"kind": "labelled_default", "sources": ["Berry 1994 (form only)"]},
+  "ad_reference_share": {"kind": "labelled_default", "sources": []}
+ }
+}

@@ -49,5 +49,7 @@
   {"code": "B", "name": "Type B", "type_mask": 16, "segment_id": "2", "price_adj": 1, "cost_adj": 1},
   {"code": "C", "name": "Type C", "type_mask": 32, "segment_id": "3", "price_adj": 1, "cost_adj": 1}
  ],
- "production": {"design_cost": 27777, "manufacturing_setup_cost": 333, "min_direct_labor": 9, "min_overhead_cpu": 222}
+ "production": {"design_cost": 27777, "manufacturing_setup_cost": 333, "min_direct_labor": 9, "min_overhead_cpu": 222},
+ "demand": {"model": "literature", "note": "coefficients = public literature defaults (data/demand_literature.json); listed so scenarios can override them",
+  "coefficients": {"price_sensitivity": 2.6, "ad_elasticity": 0.24, "carryover": 0.5, "distribution_elasticity": 1.0, "ad_shape": "power", "adbudg_c": 2.0, "adbudg_max": 1.5, "fit_weight": 3.0, "similarity_power": 1.0, "web_weight": 0.5, "outside_utility": 0.0, "ad_reference_share": 0.01}}
 }

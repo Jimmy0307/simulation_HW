@@ -5,17 +5,17 @@ from __future__ import annotations
 import html
 from typing import Any
 
-LEVEL_CLASS = {"verified": "lv-v", "derived": "lv-d", "estimated": "lv-e", "placeholder": "lv-p"}
+LEVEL_CLASS = {"verified": "lv-v", "derived": "lv-d", "estimated": "lv-e", "literature": "lv-l", "placeholder": "lv-p"}
 CSS = """
 :root{--bg:#fbfaf7;--fg:#1f2328;--muted:#5b6470;--grid:#d9dde3;--card:#ffffff;
---v:#1a7f37;--d:#0b62c4;--e:#a16207;--p:#b42318;--line:#0b62c4;--line2:#7c3aed;--ev:#b42318}
+--v:#1a7f37;--d:#0b62c4;--e:#a16207;--l:#8250df;--p:#b42318;--line:#0b62c4;--line2:#7c3aed;--ev:#b42318}
 @media (prefers-color-scheme: dark){:root{--bg:#14171c;--fg:#e6e8eb;--muted:#9aa4b2;--grid:#2c323b;--card:#1b1f26;
---v:#4ac26b;--d:#58a6ff;--e:#e3b341;--p:#ff7b72;--line:#58a6ff;--line2:#b392f0;--ev:#ff7b72}}
+--v:#4ac26b;--d:#58a6ff;--e:#e3b341;--l:#c297ff;--p:#ff7b72;--line:#58a6ff;--line2:#b392f0;--ev:#ff7b72}}
 body{background:var(--bg);color:var(--fg);font:14px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif;margin:0;padding:24px;max-width:1200px}
 h1{font-size:22px;margin:0 0 4px} h2{font-size:17px;margin:28px 0 8px} .muted{color:var(--muted)}
 .card{background:var(--card);border:1px solid var(--grid);border-radius:10px;padding:16px;margin:12px 0;overflow-x:auto}
 table{border-collapse:collapse;font-variant-numeric:tabular-nums;width:100%} th,td{padding:4px 8px;border-bottom:1px solid var(--grid);text-align:right;white-space:nowrap}
-th:first-child,td:first-child{text-align:left} .lv-v{color:var(--v)} .lv-d{color:var(--d)} .lv-e{color:var(--e)} .lv-p{color:var(--p)}
+th:first-child,td:first-child{text-align:left} .lv-v{color:var(--v)} .lv-d{color:var(--d)} .lv-e{color:var(--e)} .lv-l{color:var(--l)} .lv-p{color:var(--p)}
 .tag{display:inline-block;border:1px solid currentColor;border-radius:4px;padding:0 4px;font-size:11px;margin-left:4px}
 .legend span{margin-right:14px} .ev{color:var(--ev);font-weight:600}
 svg text{fill:var(--muted);font-size:11px} .axis{stroke:var(--grid)} .s1{stroke:var(--line);fill:none;stroke-width:2.5}
@@ -65,7 +65,7 @@ def _chart(quarters: list[dict[str, Any]], metric: str, metric2: str | None, tit
 def render_results(results: list[dict[str, Any]], title: str = "Scenario report") -> str:
     body = [f"<h1>{html.escape(title)}</h1>",
             ('<p class="muted legend">Source level: <span class="lv-v">■ verified</span><span class="lv-d">■ derived</span>'
-             '<span class="lv-e">■ estimated</span><span class="lv-p">■ placeholder (illustrative, not a forecast)</span></p>')]
+             '<span class="lv-e">■ estimated</span><span class="lv-l">■ literature (published form, uncalibrated; not a forecast)</span><span class="lv-p">■ placeholder (illustrative, not a forecast)</span></p>')]
     for result in results:
         quarters = result["quarters"]
         summary = result["summary"]

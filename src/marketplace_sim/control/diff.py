@@ -25,8 +25,9 @@ MODULES: list[tuple[str, str, Level]] = [
     ("components", "unit cost", Level.PLACEHOLDER),
     ("brand_types", "unit cost / segment fit", Level.PLACEHOLDER),
     ("production", "unit cost / design cost", Level.PLACEHOLDER),
-    ("markets", "demand", Level.PLACEHOLDER),
-    ("segments", "demand", Level.PLACEHOLDER),
+    ("markets", "demand (literature form)", Level.LITERATURE),
+    ("segments", "demand (literature form)", Level.LITERATURE),
+    ("demand", "demand model / coefficients", Level.LITERATURE),
 ]
 
 

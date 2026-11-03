@@ -1,0 +1,11 @@
+# How much do conclusions depend on the literature demand assumptions? (synthetic)
+# 3 price sensitivities x 2 advertising elasticities x 2 demand shocks = 12 runs. While demand is at literature level,
+# the "worst" rows reflect literature assumptions, not a forecast of this game.
+name: demo-demand-assumptions
+base_scenario: scenario.yaml
+mode: grid
+objective: cumulative_net_income
+variables:
+  - {name: price_sensitivity, path: "demand.coefficients.price_sensitivity", op: set, values: [1.5, 2.6, 4.0], base: 2.6}
+  - {name: ad_elasticity, path: "demand.coefficients.ad_elasticity", op: set, values: [0.12, 0.41], base: 0.24}
+  - {name: demand_q2, event: {type: demand_shock, from_quarter: 2, target: "*", duration: 3}, values: [-0.3, 0.0], base: 0.0}

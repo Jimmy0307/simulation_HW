@@ -17,7 +17,7 @@ from marketplace_sim.pack import pack_from_dict
 from marketplace_sim.provenance import Level
 
 RESULT_SCHEMA = "marketplace-sim/scenario-result@1"
-KEY_OUTPUTS = ("cash_end", "net_income", "revenue", "capex_capacity", "production_cost", "capacity_units_per_quarter")
+KEY_OUTPUTS = ("cash_end", "net_income", "revenue", "market_share", "capex_capacity", "production_cost", "capacity_units_per_quarter")
 
 
 class _PriceScaledBot:

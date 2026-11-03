@@ -276,3 +276,10 @@ def test_policy_sweep_uses_portable_relative_paths() -> None:
     assert not Path(policy["default"]).is_absolute() and policy["default"].endswith("a-cautious.yaml")
     result = run_sweep(sweep)
     assert result["sensitivity"][0]["variable"] == "plan"
+
+
+def test_sweep_over_literature_coefficients_carries_a_caveat() -> None:
+    result = run_sweep(load_sweep(DEMO / "sweep-demand.yaml"))
+    assert len(result["rows"]) == 12
+    assert result["demand_level"] == "literature" and "not a forecast" in result["caveat"]
+    assert {s["variable"] for s in result["sensitivity"]} == {"price_sensitivity", "ad_elasticity", "demand_q2"}

@@ -80,7 +80,7 @@ def _compare_table(reports: list[Report]) -> str:
         keys += [k for k in report.lines if k not in keys]
     width = max(len(k) for k in keys)
     header = "metric".ljust(width) + "".join(f"  {r.plan[:22]:>24}" for r in reports) + "  weakest"
-    rows = [f"Quarter {reports[0].quarter} comparison   [V]=verified [D]=derived [E]=estimated [P]=placeholder",
+    rows = [f"Quarter {reports[0].quarter} comparison   [V]=verified [D]=derived [E]=estimated [L]=literature [P]=placeholder",
             header, "-" * len(header)]
     for key in keys:
         cells, levels = [], []
@@ -111,7 +111,8 @@ def cmd_explain(args: argparse.Namespace) -> None:
     print(f"{info.name}\n  level:    {info.level.label} [{info.level.mark}]\n  formula:  {info.formula}\n"
           f"  evidence: {info.evidence}" + (f"\n  note:     {info.note}" if info.note else ""))
     print("\nLevels: verified = reproduced against measured server results; derived = follows from published "
-          "parameters; estimated = fitted to data; placeholder = illustrative, uncalibrated.")
+          "parameters; estimated = fitted to data; literature = published functional form, coefficients not "
+          "calibrated on this game (not a forecast); placeholder = illustrative, uncalibrated.")
     _ = Level
 
 
@@ -227,12 +228,16 @@ def cmd_sweep(args: argparse.Namespace) -> None:
         result = run_sweep(sweep)
         path = write_sweep(result, Path(args.out))
         print(f"{len(result['rows'])} scenarios -> {path}")
+        if result["caveat"]:
+            print(f"NOTE: {result['caveat']}")
         print("most sensitive: " + ", ".join(f"{s['variable']} (range {s['main_effect_range']:,.0f})"
                                              for s in result["sensitivity"] if s["main_effect_range"] is not None))
     else:
         data = json.loads(Path(args.file).read_text(encoding="utf-8"))
         rows = worst(data["rows"], args.top)
         print(f"worst {len(rows)} by {data['objective']} (lowest first):")
+        if data.get("caveat"):
+            print(f"NOTE: {data['caveat']}")
         for row in rows:
             print(f"  {row['id']}  {row['objective']:>16,.2f}  {json.dumps(row['assignment'], ensure_ascii=False)}  "
                   f"[{row['fingerprint']}]")

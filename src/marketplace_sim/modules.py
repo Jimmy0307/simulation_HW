@@ -2,6 +2,7 @@
 
 * VERIFIED: thin wrappers around ``marketplace_sysid.cost_model`` (reproduced against measured server results).
 * DERIVED: follows directly from pack parameters (exact identities, display conversions).
+* LITERATURE: demand forms with published support and uncalibrated coefficients (``marketplace_sim.demand``).
 * PLACEHOLDER: illustrative rules for parts of the economy that are not yet measured.
 """
 
@@ -11,13 +12,13 @@ import math
 import random
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass
-from typing import Protocol
+from typing import Any, Protocol
 
 from marketplace_sim.pack import BrandType, Component, Market, OutletSpec, ParamPack
 from marketplace_sim.provenance import Level, Tagged, const, total
 from marketplace_sysid import cost_model as cm
 
-V, D, E, P = Level.VERIFIED, Level.DERIVED, Level.ESTIMATED, Level.PLACEHOLDER
+V, D, E, L, P = Level.VERIFIED, Level.DERIVED, Level.ESTIMATED, Level.LITERATURE, Level.PLACEHOLDER
 
 
 # --- finance -----------------------------------------------------------------------------------------------------
@@ -101,11 +102,20 @@ def design_cost(pack: ParamPack, new_brands: int) -> Tagged:
 class Offer:
     firm: str
     brand: str
-    segment_id: str
+    segment_id: str  # segment the offer targets
     price: float
-    fit: float
-    advertising: float
+    fit: float  # PlaceholderDemand only: fit to the targeted segment
+    advertising: float  # spend this quarter
     markets: frozenset[str]
+    position: str | None = None  # segment the product is designed for (ideal point); defaults to segment_id
+    quality: float = 1.0  # 0..1 product quality multiplier on fit (literature demand)
+    ad_stock: float | None = None  # goodwill stock; None = steady state of `advertising`
+    coverage: tuple[tuple[str, float], ...] = ()  # (market, distribution intensity 0..1); empty = 1 in `markets`
+
+    def coverage_in(self, market: str) -> float:
+        if self.coverage:
+            return dict(self.coverage).get(market, 0.0)
+        return 1.0 if market in self.markets else 0.0
 
 
 class DemandModel(Protocol):
@@ -141,22 +151,57 @@ class PlaceholderDemand:
 
 
 class FittedDemand:
-    """Interface for a demand model fitted on the private demand panel (evidence/private/model/demand_panel).
-
-    Not implemented until at least three quarters of panel data exist; see docs/quarterly-runbook.md.
+    """Demand fitted on the private demand panel (evidence/private/model/demand_panel): the literature form with
+    estimated coefficients. Loads ``model_path`` (schema marketplace-sim/fitted-demand@1) and refuses it unless its
+    hold-out validation passes; see docs/demand-model-spec.md section 6. Fitted values never leave evidence/private.
     """
 
     level = E
 
-    def __init__(self, model_path: str) -> None:
+    def __init__(self, model_path: str, pack: ParamPack | None = None) -> None:
         self.model_path = model_path
+        self.pack = pack
+        self._cached: Any = None
+
+    def _model(self) -> Any:
+        if self._cached is None:
+            from marketplace_sim.demand import LiteratureDemand, load_fitted_coefficients
+
+            model = LiteratureDemand(load_fitted_coefficients(self.model_path), pack=self.pack)
+            model.level = E
+            model.name = "FittedDemand"
+            self._cached = model
+        return self._cached
+
+    @property
+    def coefficients(self) -> dict[str, Any]:
+        coefficients: dict[str, Any] = self._model().coefficients
+        return coefficients
+
+    @property
+    def carryover(self) -> float:
+        return float(self._model().carryover)
 
     def units(self, pack: ParamPack, offers: Sequence[Offer]) -> dict[tuple[str, str], Tagged]:
-        raise NotImplementedError("FittedDemand needs a fitted model from the private demand panel")
+        result: dict[tuple[str, str], Tagged] = self._model().units(pack, offers)
+        return result
 
 
 def segment_fit(brand_type: BrandType, segment_id: str) -> float:
     return 1.0 if brand_type.segment_id == segment_id else 0.4
+
+
+def coverage(pack: ParamPack, stores_open: set[str], web_open: set[str], web_weight: float) -> dict[str, float]:
+    """Distribution intensity per market: 1 - (1 - store) x (1 - web_weight x web) (docs/demand-model-spec.md)."""
+    regions_with_web = {w.region for w in pack.web_centers if w.key in web_open}
+    out = {}
+    for market in pack.markets:
+        store = 1.0 if market.key in stores_open else 0.0
+        web = 1.0 if market.region in regions_with_web else 0.0
+        intensity = 1.0 - (1.0 - store) * (1.0 - web_weight * web)
+        if intensity > 0:
+            out[market.key] = intensity
+    return out
 
 
 def reach(pack: ParamPack, stores_open: set[str], web_open: set[str]) -> frozenset[str]:
@@ -183,7 +228,8 @@ class BaselineBot:
         result = []
         for segment in pack.segments:
             wtp = _mean_wtp(pack.markets, segment.id)
-            result.append(Offer(self.name, f"{self.name}-{segment.id}", segment.id, 0.9 * wtp, 1.0, 20000.0, markets))
+            result.append(Offer(self.name, f"{self.name}-{segment.id}", segment.id, 0.9 * wtp, 1.0, 20000.0, markets,
+                                position=segment.id))
         return result
 
 
@@ -195,8 +241,11 @@ class RandomBot:
 
     def offers(self, pack: ParamPack, quarter: int, rng: random.Random) -> list[Offer]:
         markets = frozenset(m.key for m in pack.markets if rng.random() < 0.7)
-        return [Offer(self.name, f"{self.name}-{s.id}", s.id, rng.uniform(0.75, 1.05) * _mean_wtp(pack.markets, s.id),
-                      rng.uniform(0.6, 1.0), rng.uniform(0, 60000), markets) for s in pack.segments]
+        result = []
+        for s in pack.segments:
+            price, fit, adv = rng.uniform(0.75, 1.05) * _mean_wtp(pack.markets, s.id), rng.uniform(0.6, 1.0), rng.uniform(0, 60000)
+            result.append(Offer(self.name, f"{self.name}-{s.id}", s.id, price, fit, adv, markets, position=s.id, quality=fit))
+        return result
 
 
 class ReplayCompetitors:
@@ -217,6 +266,6 @@ def _mean_wtp(markets: Sequence[Market], segment_id: str) -> float:
 
 
 __all__ = ["BaselineBot", "DemandModel", "FittedDemand", "Offer", "PlaceholderDemand", "RandomBot", "ReplayCompetitors",
-           "capacity_purchase", "cd_quarter", "const", "default_components", "design_cost", "emergency_loan",
+           "capacity_purchase", "cd_quarter", "const", "coverage", "default_components", "design_cost", "emergency_loan",
            "income_tax", "opening_cost", "quarterly_capacity", "reach", "recurring_lease", "segment_fit", "stock_raise",
            "total", "unit_cost"]

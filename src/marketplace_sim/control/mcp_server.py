@@ -53,6 +53,7 @@ def tool_run_sweep(path: str, top: int = 5) -> dict[str, Any]:
     result = run_sweep(sweep)
     write_sweep(result, _out_dir(sweep.base_scenario, "sweeps"))
     return {"name": result["name"], "objective": result["objective"], "runs": len(result["rows"]),
+            "demand_level": result["demand_level"], "caveat": result["caveat"],
             "worst": worst(result["rows"], top), "sensitivity": result["sensitivity"]}
 
 
