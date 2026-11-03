@@ -1,7 +1,7 @@
 # Identifiability matrix
 
 For each decision field, this shows how its effect on each output group can be observed **today**.
-The cells come from static evidence. `W✅` marks a pair whose what-if path an operator experiment verified at runtime (EXP-01, 2026-11-03: `CD.deposit`, no save, Cancel restored, interest slope = displayed rate/4).
+The cells come from static evidence. `W✅` marks a pair whose what-if path an operator experiment verified at runtime: EXP-01 (`CD.deposit`: interest slope = displayed rate/4) and EXP-02 (`FixedCapacity.increase`: capital cost exactly linear in units/day), 2026-11-03, no save, Cancel restored.
 
 | Code | Meaning |
 |---|---|
@@ -110,7 +110,7 @@ Output groups: **own-calc** = the same screen's `calculate` outputs; **client** 
 | FeatureRD | `(none parsed)` | unknown | W | - | P | Q | rdFeatures, total |
 | Feedback | `disagreeExplanation` | text | - | - | - | X | - |
 | FinancialResources | `(none parsed)` | unknown | - | - | P | Q | - |
-| FixedCapacity | `increase` | unknown | W | F | P | Q | acquirement, expansion, total |
+| FixedCapacity | `increase` | unknown | W✅ (EXP-02) | F | P | Q | acquirement, expansion, total |
 | FixedCapacity | `supplier` | enum | W | F | P | Q | acquirement, expansion, total |
 | FollowUpStudy | `buy` | boolean | - | - | P | Q | - |
 | Goals | `value` | integer | - | - | P | Q | - |
@@ -271,7 +271,7 @@ Output groups: **own-calc** = the same screen's `calculate` outputs; **client** 
 | WrapUp | `wrapped` | boolean | X | - | Q | Q | - |
 | WrapUp | `targetSegments` | list | X | - | Q | Q | - |
 
-Cell counts: -=450, F=24, P=197, Q=201, W=86, W✅ (EXP-01)=1, X=57
+Cell counts: -=450, F=24, P=197, Q=201, W=85, W✅ (EXP-01)=1, W✅ (EXP-02)=1, X=57
 
 ## Client formulas referenced (F)
 

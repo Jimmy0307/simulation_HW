@@ -24,6 +24,7 @@
   },
   {
    "id": "EXP-02",
+   "status": "VERIFIED_2026-11-03 (see docs/experiments/EXP-02.md)",
    "rank": 2,
    "title": "Fixed capacity option scan",
    "module": "FixedCapacity",

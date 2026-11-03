@@ -121,6 +121,25 @@ These are allowed because they are not experiment effects, and blocking them onl
 (2) **Experiment**: any `view`; `CD.modify/calculate/cancel/validateLock/prolongLock`.
 (3) **Strict**: any `save`, `WrapUp.*`, `Chat.*`, `Email.*`, `createChatSession/createResponse`.
 These are blocked and flagged as anomalies. Unknown methods are blocked and logged.
+`Email.getNewEmailsCount` (read-only unread counter, fired on every load) was later moved to baseline by operator decision.
+
+**Policy file (v4).** The tiers now live in [`data/guard_policy.json`](../data/guard_policy.json), the single source of truth.
+The experiment tier names exactly one screen at a time (EXP-02: `FixedCapacity.view/modify/calculate/cancel/validateLock/prolongLock`;
+EXP-01's CD entry is kept under `history`). The script itself stays out of the repository.
+
+**Rebuilding the guard** (about 80 lines of Node ≥ 22; no dependencies):
+
+1. Read `data/guard_policy.json`. Read the mode from a one-line file (`strict` or `selftest-block-view:<Service>`).
+2. Open `ws://127.0.0.1:9222/devtools/page/<targetId>` (target from `rea list-browser-targets`); send `Page.enable` and
+   `Fetch.enable {patterns:[{urlPattern:"*backend-json.php*", requestStage:"Request"}]}`.
+3. On `Fetch.requestPaused`: service = first query token of the URL; method = `JSON.parse(request.postData).method`.
+   Classify in the policy's `evaluation_order`: baseline pair → strict (method or service) → selftest → experiment
+   (`any_service_methods`, then `service_methods[service]`) → unknown.
+4. Allow with `Fetch.continueRequest`. Block with `Fetch.fulfillRequest` (status 200, body `{"error":-10,...}`). Never read
+   response bodies or headers.
+5. Append one JSON line per request: time, service, method, tier, decision. Log `Page.javascriptDialogOpening` and socket
+   close as anomalies. Write a heartbeat status file every 2 s.
+6. Before use: an offline table test of the classifier, then the two-phase self-test (block one report `view`, then allow it).
 
 ## 7. What changed in the repository
 

@@ -39,6 +39,22 @@ def test_dry_run_rejects_unsafe_items() -> None:
     assert all(result.experiment is None for result in results)
 
 
+def test_guard_policy_is_conservative() -> None:
+    policy = _load("guard_policy.json")
+    strict = policy["strict"]
+    assert "save" in strict["methods_any_service"]
+    assert {"WrapUp", "Chat", "Email"} <= set(strict["services_all_methods"])
+    baseline = set(policy["baseline"]["pairs"])
+    experiment = policy["experiment"]["service_methods"]
+    # No write method may be allowed by the baseline or experiment tiers.
+    assert not any(pair.endswith(".save") for pair in baseline)
+    assert all("save" not in methods for methods in experiment.values())
+    # Exactly one screen is in the active experiment tier.
+    assert list(experiment) == ["FixedCapacity"]
+    assert policy["experiment"]["any_service_methods"] == ["view"]
+    assert policy["evaluation_order"][:2] == ["baseline", "strict"]
+
+
 def test_published_catalogs_are_value_free_and_attributed() -> None:
     decisions = _load("decision_catalog.json")
     metrics = _load("metric_catalog.json")

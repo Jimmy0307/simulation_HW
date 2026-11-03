@@ -100,6 +100,10 @@ ProForma recomputation but writes. EXP-10 is the demand model: one confounded ob
 
 ### EXP-02 · FixedCapacity.increase
 
+> **Status: ✅ VERIFIED 2026-11-03.** See [experiments/EXP-02.md](experiments/EXP-02.md). Run in a REA MCP session;
+> `modify → calculate ×9 → cancel`, no `save`, 0 blocked requests. Capital cost is exactly linear in units/day, and the
+> stored option was restored. Radios are clicked by `#fcTable input[name=capOption]#capOption_<units>`.
+
 * **Before:** Manufacturing → Fixed Capacity. Note the selected capacity option and supplier.
 * **Change:** Modify, then click each capacity option radio once (wait 2 s each) and return to the original option. Cancel.
 * **After:** D, E. Fit `total` against option size (step shape, per-unit cost). Check that the on-screen

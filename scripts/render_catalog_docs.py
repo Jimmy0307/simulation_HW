@@ -22,7 +22,7 @@ CLIENT_FORMULA_MODULES = {
     "DemandProjectionRegional": "brandDemand / 65; regional share = demand x 100 / lqTotalDemand",
 }
 # (module, field) pairs whose what-if path was verified by an operator experiment.
-VERIFIED_WHATIF = {("CD", "deposit"): "EXP-01"}
+VERIFIED_WHATIF = {("CD", "deposit"): "EXP-01", ("FixedCapacity", "increase"): "EXP-02"}
 MARKET_OUTPUTS ="Sales / MarketShare / IncomeStatement actuals / BalancedScorecard"
 NUMERIC = {"integer", "float", "boolean", "enum", "unknown", "list"}
 
@@ -146,7 +146,8 @@ def render_matrix(decisions: dict[str, Any], calc_by_module: dict[str, list[str]
         "",
         "For each decision field, this shows how its effect on each output group can be observed **today**.",
         ("The cells come from static evidence. `W✅` marks a pair whose what-if path an operator experiment verified at "
-         "runtime (EXP-01, 2026-11-03: `CD.deposit`, no save, Cancel restored, interest slope = displayed rate/4)."),
+         "runtime: EXP-01 (`CD.deposit`: interest slope = displayed rate/4) and EXP-02 (`FixedCapacity.increase`: capital "
+         "cost exactly linear in units/day), 2026-11-03, no save, Cancel restored."),
         "",
         "| Code | Meaning |",
         "|---|---|",
