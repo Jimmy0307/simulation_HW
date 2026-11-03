@@ -67,11 +67,17 @@ python -m venv .venv
 |---|---|---|
 | `[V]` | verified | Reproduced against measured server results with zero residual (operator what-if experiments) |
 | `[D]` | derived | Follows directly from published parameters (exact identities) |
-| `[E]` | estimated | Fitted to observed data (future demand model) |
+| `[E]` | estimated | Fitted to observed data and validated on a held-out quarter (future demand model) |
+| `[L]` | literature | Functional form backed by published literature; coefficients **not** calibrated on this game's data; never read as a forecast |
 | `[P]` | placeholder | Illustrative and uncalibrated; never read as a forecast |
 
-A combined number takes the **weakest** level of its inputs. Today: capacity investment, outlet opening cost, CD balance
-and interest are verified; stock raise is derived; production cost, demand, revenue, tax and profit are placeholders.
+Order: verified > derived > estimated > literature > placeholder. A combined number takes the **weakest** level of its
+inputs. Today:
+* verified: capacity investment, outlet opening cost, CD balance and interest;
+* derived: stock raise;
+* literature: demand, units sold, market share and revenue, from
+  [docs/demand-model-spec.md](docs/demand-model-spec.md) and [docs/demand-literature.md](docs/demand-literature.md);
+* placeholder: production cost, tax and therefore profit and cash.
 
 ## Method summary
 
@@ -91,6 +97,8 @@ and interest are verified; stock raise is derived; production cost, demand, reve
 | [docs/private-play-guide.md](docs/private-play-guide.md) | Build a private save, play, compare plans |
 | [docs/gamemaster-guide.md](docs/gamemaster-guide.md) | 主持端：情境、事件、對手、what-if、HTML 報告（中文） |
 | [docs/agent-harness.md](docs/agent-harness.md) | Sweeps, worst cases, sensitivity, JSON formats, optional local MCP |
+| [docs/demand-literature.md](docs/demand-literature.md) | Public literature on demand forms, parameter ranges and fit grades |
+| [docs/demand-model-spec.md](docs/demand-model-spec.md) | Literature-level demand chain, coefficients, mapped vs placeholder, upgrade path |
 | [docs/quarterly-runbook.md](docs/quarterly-runbook.md) | What happens each quarter, what the operator does, how to read the report |
 | [docs/reconstruction-report.md](docs/reconstruction-report.md) | Reconstruction findings (REA-based) |
 | [docs/cost-model.md](docs/cost-model.md) | Verified cost rules and what is not covered |

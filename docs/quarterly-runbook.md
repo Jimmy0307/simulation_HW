@@ -23,7 +23,8 @@ but its main value is decision support.
   teammate-presence checks and Cancel-only restore.
 * Appends whatever competitor/market data is available to the **private demand panel**. After 2 quarters it assesses
   identifiability; after 3 it fits a demand model, validates it on a held-out quarter, and only then promotes demand from
-  `placeholder` to `estimated`.
+  `literature` to `estimated` (until then demand runs at `literature` level: published forms, uncalibrated
+  coefficients; upgrade path in `docs/demand-model-spec.md` §6).
 * Rebuilds the private pack with `mpsim build-pack --out evidence/private/model --quarter-label Q<N>`, which snapshots it,
   diffs it against the previous quarter (value-free summary on screen, full diff in `evidence/private/model/diffs/`)
   and raises red flags for verified modules whose parameters changed. Those modules are re-verified before their

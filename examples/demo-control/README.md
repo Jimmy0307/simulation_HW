@@ -26,6 +26,7 @@ mpsim what-if outputs/demo-control/demo-save.json --decisions examples/demo/q1.y
 |---|---|
 | `scenario.yaml` | demo plans for Q1-Q3, balanced plan afterwards, +15% capacity cost shock in Q3 |
 | `sweep.yaml` | grid over capacity cost x Q2 demand shock x rival behaviour, objective `min_cash` |
+| `sweep-demand.yaml` | sweep over the literature demand coefficients themselves (how much conclusions depend on them) |
 | `pack-v2/pack.json` | the synthetic pack with a few invented "next quarter" changes (CD rate, capacity costs, one lease, one market size, one new component) |
 
 Expected highlights: the capacity-cost variable has the largest main effect on `min_cash`; the worst case is

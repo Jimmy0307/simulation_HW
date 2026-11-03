@@ -60,7 +60,7 @@ Outputs built from a non-synthetic pack are refused unless the output directory 
   * `quarters_with_events[]`.
 
 **Sweep result** (`<name>.sweep.json`, schema `marketplace-sim/sweep-result@1`) plus a Markdown table:
-* `name`, `objective`, `mode`.
+* `name`, `objective`, `mode`, `demand_level` and `caveat` (non-empty while demand is below `estimated`).
 * `rows[]`, each with `id`, `fingerprint`, `assignment{variable: value}`, `objective` and `summary`.
 * `worst[]`: the bottom 5 by objective.
 * `sensitivity[]`, sorted by effect size. Each entry has:
@@ -69,8 +69,19 @@ Outputs built from a non-synthetic pack are refused unless the output directory 
   * `main_effect_range`;
   * `local_slope`, for numeric variables, from `marketplace_sysid.experiments.sensitivity.finite_difference`.
 
-Every metric has a level: `verified`, `derived`, `estimated` or `placeholder`. An agent must not rank decisions on
-`placeholder` metrics as if they were forecasts. Use `weakest_level` to know what a conclusion rests on.
+Every metric has a level: `verified`, `derived`, `estimated`, `literature` or `placeholder`. An agent must not rank
+decisions on `literature` or `placeholder` metrics as if they were forecasts. Use `weakest_level` to know what a
+conclusion rests on.
+
+**Stress tests before demand is estimated.**
+* Demand, units, market share and revenue are at `literature` level: published functional forms whose coefficients are
+  literature midpoints or labelled defaults ([demand-model-spec.md](demand-model-spec.md)).
+* Until `FittedDemand` passes hold-out validation, a sweep's "worst cases" reflect those **literature assumptions**,
+  not a forecast of this game.
+* Sweep results carry `demand_level` and a `caveat` field. The Markdown report and `mpsim sweep worst` print the caveat.
+  Agents must repeat it when reporting.
+* To see how much a conclusion depends on the assumptions, sweep the coefficients themselves (`path:
+  demand.coefficients.price_sensitivity`, …); see `examples/demo-control/sweep-demand.yaml`.
 
 ## 4. Optional MCP layer (local engine only)
 
