@@ -141,6 +141,19 @@ EXP-01's CD entry is kept under `history`). The script itself stays out of the r
    close as anomalies. Write a heartbeat status file every 2 s.
 6. Before use: an offline table test of the classifier, then the two-phase self-test (block one report `view`, then allow it).
 
+**v5 (hot policy).** The guard re-reads `data/guard_policy.json` whenever its content changes, so the experiment tier
+can be switched to the next screen without a restart. `GameInfo.studentsOnline` is in the baseline tier because the
+autonomous run checks teammate presence before each screen.
+
+## 6c. Known limitation: REA reconstruction coverage
+
+`evaluate_reconstruction_coverage` was run for the RPC, decision and output boundaries (unknown: `verifier-missing`) and
+for the what-if boundary with EXP-02 as a `controlled-replay` verifier (unknown: `package-proof-unknown`,
+`verifier-result-incompatible`). REA's fail-closed coverage model targets re-implementations with package proofs and
+verifier results matched to artifact/owner digests whose rules are not exposed in the compact schema. This project ships
+no re-implementation, so the verdict stays **unknown** by design. The operator chose not to pursue it further; the
+evidence for each verified relation is in `docs/experiments/` and `docs/cost-model.md` instead.
+
 ## 7. What changed in the repository
 
 * `src/marketplace_mcp` → `src/marketplace_sysid` (security, experiments, model kept; `rea_ingest.py` and `experiments/runbook.py` added).

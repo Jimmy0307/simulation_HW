@@ -1,7 +1,7 @@
 # Identifiability matrix
 
 For each decision field, this shows how its effect on each output group can be observed **today**.
-The cells come from static evidence. `W✅` marks a pair whose what-if path an operator experiment verified at runtime: EXP-01 (`CD.deposit`: interest slope = displayed rate/4) and EXP-02 (`FixedCapacity.increase`: capital cost exactly linear in units/day), 2026-11-03, no save, Cancel restored.
+The cells come from static evidence. `W✅` marks a pair whose what-if path an operator experiment verified at runtime (2026-11-03, no save, Cancel restored): EXP-01 `CD.deposit`, EXP-02 `FixedCapacity.increase`, EXP-11 `OpenSalesOffice.change`, EXP-12 `OpenWebcenter.change`. Screen-level A/B/C triage: [calculate-screen-triage.md](calculate-screen-triage.md).
 
 | Code | Meaning |
 |---|---|
@@ -146,8 +146,8 @@ Output groups: **own-calc** = the same screen's `calculate` outputs; **client** 
 | ModifyBrandSimple | `brandID` | unknown | - | - | P | Q | - |
 | ModifyBrandSimple | `brandType` | unknown | - | - | P | Q | - |
 | ModifyBrandSimple | `decisions` | text | - | - | - | X | - |
-| OpenSalesOffice | `change` | boolean | W | - | P | Q | total, totalClose, totalFactorySetup, totalLease, totalSetup |
-| OpenWebcenter | `change` | boolean | W | - | P | Q | total, totalClose, totalFactorySetup, totalLease, totalSetup |
+| OpenSalesOffice | `change` | boolean | W✅ (EXP-11) | - | P | Q | total, totalClose, totalFactorySetup, totalLease, totalSetup |
+| OpenWebcenter | `change` | boolean | W✅ (EXP-12) | - | P | Q | total, totalClose, totalFactorySetup, totalLease, totalSetup |
 | OperatingCapacity | `operatingCapacity` | integer | W | F | P | Q | chartSettings, costToChangeOperatingCapacity, data, directLaborCPU, fixedCapacity, graph, hasWorkersCompensation, height |
 | OperatingCapacity | `projectedWorkersProductivity` | integer | W | F | P | Q | chartSettings, costToChangeOperatingCapacity, data, directLaborCPU, fixedCapacity, graph, hasWorkersCompensation, height |
 | OperatingCapacityRegional | `fixedCapacityIncrease` | enum | - | F | P | Q | - |
@@ -271,7 +271,7 @@ Output groups: **own-calc** = the same screen's `calculate` outputs; **client** 
 | WrapUp | `wrapped` | boolean | X | - | Q | Q | - |
 | WrapUp | `targetSegments` | list | X | - | Q | Q | - |
 
-Cell counts: -=450, F=24, P=197, Q=201, W=85, W✅ (EXP-01)=1, W✅ (EXP-02)=1, X=57
+Cell counts: -=450, F=24, P=197, Q=201, W=83, W✅ (EXP-01)=1, W✅ (EXP-02)=1, W✅ (EXP-11)=1, W✅ (EXP-12)=1, X=57
 
 ## Client formulas referenced (F)
 

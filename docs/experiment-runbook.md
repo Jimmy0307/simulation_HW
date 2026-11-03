@@ -116,6 +116,19 @@ ProForma recomputation but writes. EXP-10 is the demand model: one confounded ob
 * **Change:** Modify, then estimatedDemand for one brand = original, −500, +500 (press **Calculate** after each), then original. Cancel.
 * **Learns:** per-unit material/labor/overhead and changeover/excess-capacity cost as a function of volume.
 
+### EXP-11 / EXP-12 · OpenSalesOffice.change / OpenWebcenter.change (autonomous run)
+
+> **Status: ✅ VERIFIED 2026-11-03.** See [EXP-11](experiments/EXP-11-OpenSalesOffice.md) and
+> [EXP-12](experiments/EXP-12-OpenWebcenter.md). Opening an outlet adds its `setupCost` only; lease and close stay 0 in
+> the opening quarter. Ran in REA MCP sessions behind guard v5 (per-screen experiment tier), after a teammate-presence check.
+
+### Status of the original items
+
+EXP-03 (FactorySimulation), EXP-05 (OperatingCapacity), EXP-06 (HireSalesPeople), EXP-07 (LocalMedia) and EXP-08
+(ShortTermLoan) are **pending later quarters**: those screens are not in the Q1 menu. EXP-04 (ProFormaDivisionProfitability)
+is pending for the same reason. EXP-09/EXP-10 need saves or submission and stay team decisions. See
+[calculate-screen-triage.md](calculate-screen-triage.md) for the ranked list.
+
 ## 3. After the experiments
 
 `experiment_values.json` rows feed `marketplace_sysid.experiments.sensitivity.finite_difference` (local slopes)

@@ -22,10 +22,11 @@ This repository holds:
   registrations: **123 editable decision screens, 1 finalization screen (`WrapUp`, menu label "Submit"), 128 reports**.
 * The shared base class exposes `view`, `modify` (server lock), **`calculate` (draft decisions → server-computed
   results + validation, no save)**, `save`, `cancel`, `removeLock`, `validateLock`, `prolongLock`.
-* **What-if channel: present by static evidence, not yet verified at runtime.** It needs the
-  `modify` lock (visible to teammates) and ends with `cancel`. See
-  [docs/reconstruction-report.md](docs/reconstruction-report.md) §E and the
-  [experiment runbook](docs/experiment-runbook.md).
+* **What-if channel: verified at runtime** on 4 screens (EXP-01 CD, EXP-02 FixedCapacity, EXP-11 OpenSalesOffice,
+  EXP-12 OpenWebcenter): `modify → calculate → cancel`, no save, state restored. It needs the `modify` lock (visible to
+  teammates). See [docs/experiments/](docs/experiments/).
+* **Cost model:** `src/marketplace_sysid/cost_model.py` reproduces every measured cost-side `calculate` output from `view`
+  parameters with residual 0 (24 points). See [docs/cost-model.md](docs/cost-model.md).
 
 ## Use
 
@@ -51,5 +52,10 @@ python -m venv .venv
 | [docs/decision-catalog.md](docs/decision-catalog.md), [docs/metric-catalog.md](docs/metric-catalog.md) | Generated from `data/*.json` |
 | [docs/identifiability-matrix.md](docs/identifiability-matrix.md) | How each decision → output pair can be observed |
 | [docs/experiment-runbook.md](docs/experiment-runbook.md) | Human-run experiments ranked by information gain |
+| [docs/parameter-catalog.md](docs/parameter-catalog.md) | Model parameters found in `view`/`calculate` responses (value-free), plus market data inventory |
+| [docs/calculate-screen-triage.md](docs/calculate-screen-triage.md) | A/B/C triage of every calculate-capable screen |
+| [docs/cost-model.md](docs/cost-model.md) | Verified cost-side model and what it does not cover |
+| [docs/experiments/](docs/experiments/) | Per-experiment write-ups (de-identified) |
+| [docs/decisions-log.md](docs/decisions-log.md) | Autonomous-run decisions |
 
 See [SECURITY.md](SECURITY.md) and [docs/legal-scope.md](docs/legal-scope.md) before contributing.
