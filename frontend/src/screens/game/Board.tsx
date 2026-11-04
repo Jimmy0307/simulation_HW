@@ -11,7 +11,8 @@ export type Selection =
   | { kind: "web"; key: string }
   | { kind: "factory" }
   | { kind: "product"; index: number }
-  | { kind: "preview" };
+  | { kind: "preview" }
+  | { kind: "modules" };
 
 /** Open outlets: the engine state is the source of truth (the demo replay only carries the state per quarter). */
 export function storeOpen(setup: GameSetupDoc, key: string): boolean {

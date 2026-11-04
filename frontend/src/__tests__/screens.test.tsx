@@ -20,10 +20,11 @@ async function open(route: string) {
 }
 
 describe("all seven screens with the synthetic demo bundle", () => {
-  it("keeps the seven analysis routes and adds game mode last", () => {
-    expect(ROUTES).toHaveLength(8);
+  it("keeps the seven analysis routes, then game mode, then the module maturity overview", () => {
+    expect(ROUTES).toHaveLength(9);
     expect(ROUTES.slice(0, 7).map((r) => r.id)).toEqual(["overview", "decisions", "compare", "scenario", "stress", "diff", "levels"]);
     expect(ROUTES[7]).toEqual({ id: "game", title: "遊戲模式" });
+    expect(ROUTES[8]).toEqual({ id: "modules", title: "模組成熟度" });
   });
 
   it("overview: synthetic badge, state, trend and uncalibrated marks", async () => {

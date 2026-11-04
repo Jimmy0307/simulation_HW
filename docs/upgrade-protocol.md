@@ -31,8 +31,9 @@
    費用列要加進 `_MODULE_OPEX`，讓 `cash_end` 的來源鏈包含它。
 5. ledger 該列：`maturity` 改成 `heuristic`，`ours` 寫實作名稱與一句話規則，`next_step` 改成 `To literature: ...`
    （寫出要查哪類文獻）。跑 `python scripts/render_ledger.py`。
-6. 前端：決策編輯（`frontend/src/screens/Decisions.tsx` 的模組區）與遊戲模式側欄（`frontend/src/screens/game/Modules.tsx`）
-   為新決策加控制項；heuristic 一律帶「練習」徽章（`PracticeBadge`）。
+6. 前端：在 `frontend/src/ui/ModuleBoard.tsx` 為新模組加一個編輯器（決策編輯與遊戲模式側欄共用這個元件；
+   模組總覽 `frontend/src/screens/Modules.tsx` 直接讀 ledger，不必改）。heuristic 的杆與結果一律帶「練習」徽章
+   （`frontend/src/ui/Practice.tsx` 的 `PracticeBanner` / `PracticeBadge`），並在 `frontend/src/__tests__/` 加測試。
 7. 測試（`tests/test_business_modules.py` 加一組，**是合理性測試，不是準確性測試**）：
    * 方向：加大投入 → 輸出往直覺方向動。
    * 單調與遞減：輸出對投入單調，邊際效果遞減（若規則如此）。

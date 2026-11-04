@@ -1,4 +1,5 @@
 import type { ChainStep, LevelLabel, Line } from "../types";
+import { PRACTICE_TEXT, PracticeBadge } from "./Practice";
 
 export const LEVEL_TEXT: Record<LevelLabel, { name: string; mark: string }> = {
   verified: { name: "已驗證", mark: "V" },
@@ -6,12 +7,15 @@ export const LEVEL_TEXT: Record<LevelLabel, { name: string; mark: string }> = {
   estimated: { name: "估計", mark: "E" },
   literature: { name: "文獻", mark: "L" },
   placeholder: { name: "佔位", mark: "P" },
+  heuristic: { name: "練習規則", mark: "H" },
 };
 
 export const UNCALIBRATED_LABEL = "未校準 · 非預測";
 
 /** The API marks every number; the level fallback only covers documents that predate the flag. */
 export function isUncalibrated(line: Pick<Line, "level" | "uncalibrated">): boolean {
+  // A practice (heuristic) number is never shown as trusted, whatever a document says.
+  if (line.level === "heuristic") return true;
   return line.uncalibrated ?? (line.level === "literature" || line.level === "placeholder");
 }
 
@@ -54,14 +58,16 @@ export function Num({ line, digits, label }: { line: Line; digits?: number; labe
       data-uncalibrated={uncal ? "true" : "false"}>
       <span className="v">{formatNumber(line.value, digits)}</span>
       <LevelMark level={line.level} />
-      {uncal ? <UncalibratedChip level={line.level} /> : null}
+      {line.level === "heuristic" ? <PracticeBadge /> : uncal ? <UncalibratedChip level={line.level} /> : null}
       <span className="tip" role="tooltip">
         <span className="tip-title">
           {label ? `${label} · ` : ""}{LEVEL_TEXT[line.level].name}（{line.level}）{uncal ? ` · ${UNCALIBRATED_LABEL}` : ""}
         </span>
         <span>規則：<code>{line.source}</code></span>
         {line.chain && line.chain.length > 0 ? (<><br /><span className="muted">來源鏈（由此往上游）：</span><Chain chain={line.chain} /></>) : null}
-        {uncal ? (
+        {line.level === "heuristic" ? (
+          <><br /><span><b>{PRACTICE_TEXT}</b>：上游含練習規則（一般商業常識，無文獻、無校準），只能看方向，不能當真。</span></>
+        ) : uncal ? (
           <><br /><span>上游含 literature 或 placeholder：形式或數值未用本局資料校準，不可當作預測。</span></>
         ) : null}
       </span>

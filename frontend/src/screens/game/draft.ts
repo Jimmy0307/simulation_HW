@@ -1,6 +1,6 @@
 // The turn being edited, and its conversion to the engine's plan format. No numbers are computed here: the draft only
 // holds the player's inputs; every result comes back from the engine (preview / play).
-import type { GameSetupDoc, PlanDoc } from "../../types";
+import type { GameSetupDoc, ModuleDecisions, PlanDoc } from "../../types";
 
 export interface ProductDraft {
   name: string;
@@ -20,9 +20,12 @@ export interface Draft {
   capacity_increase: number;
   /** One-off finance decisions carried from the starting plan (first quarter only). */
   finance: Pick<PlanDoc, "cd" | "stock_issue">;
+  /** Business-module decisions (heuristic practice modules); kept from quarter to quarter. */
+  modules: ModuleDecisions;
 }
 
-export const emptyDraft = (): Draft => ({ products: [], open_stores: [], open_web_centers: [], capacity_increase: 0, finance: {} });
+export const emptyDraft = (): Draft => ({ products: [], open_stores: [], open_web_centers: [], capacity_increase: 0, finance: {},
+  modules: {} });
 
 export function designed(setup: GameSetupDoc): Record<string, { brand_type: string; components: string[] }> {
   return setup.state?.brands ?? {};
@@ -45,6 +48,7 @@ export function fromPlan(plan: PlanDoc, setup: GameSetupDoc, keepOneOff: boolean
     open_web_centers: keepOneOff ? [...(plan.open_web_centers ?? [])] : [],
     capacity_increase: keepOneOff ? plan.capacity_increase ?? 0 : 0,
     finance: keepOneOff ? { ...(plan.cd ? { cd: plan.cd } : {}), ...(plan.stock_issue ? { stock_issue: plan.stock_issue } : {}) } : {},
+    modules: JSON.parse(JSON.stringify(plan.modules ?? {})) as ModuleDecisions,
   };
 }
 
@@ -60,12 +64,13 @@ export function toPlan(draft: Draft, quarter: number): PlanDoc {
       name: p.name, brand_type: p.brand_type, price: p.price, production: p.production, advertising: p.advertising,
       ...(p.locked ? {} : { components: p.components }),
     })),
+    ...(Object.keys(draft.modules).length ? { modules: draft.modules } : {}),
   };
 }
 
 /** Next quarter keeps the products (now designed) and drops one-off decisions. */
 export function carryOver(draft: Draft): Draft {
-  return { ...emptyDraft(), products: draft.products.map((p) => ({ ...p, locked: true })) };
+  return { ...emptyDraft(), products: draft.products.map((p) => ({ ...p, locked: true })), modules: draft.modules };
 }
 
 export function validate(draft: Draft): string | null {

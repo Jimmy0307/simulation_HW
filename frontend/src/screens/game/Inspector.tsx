@@ -1,5 +1,6 @@
 import { useEffect, useRef, type ReactNode } from "react";
-import type { GameSetupDoc, Report } from "../../types";
+import type { GameSetupDoc, ModulesDoc, Report } from "../../types";
+import { ModuleBoard } from "../../ui/ModuleBoard";
 import { formatNumber } from "../../ui/Num";
 import { storeOpen, webOpen, type Selection } from "./Board";
 import { chooseComponent, type Draft, type ProductDraft } from "./draft";
@@ -205,16 +206,29 @@ function PreviewPanel({ setup, preview }: { setup: GameSetupDoc; preview: Report
   );
 }
 
+function ModulesPanel({ draft, preview, readOnly, onChange, setup, catalog }: Common & { catalog: ModulesDoc | null }) {
+  if (!catalog) return <p className="muted">模組清單載入中…</p>;
+  return (
+    <div data-testid="modules-panel">
+      <p className="sheet-status">依可信度分組。練習規則可以調，但結果只能看方向；待建的還不能調。</p>
+      <ModuleBoard catalog={catalog} decisions={draft.modules} onChange={readOnly ? undefined : (modules) => onChange({ ...draft, modules })}
+        brands={draft.products.map((p) => ({ name: p.name, advertising: p.advertising }))} carried={setup.state?.module_state}
+        lines={preview?.lines} render={(line, label, format) => <Figure line={line} label={label} format={format} />} />
+    </div>
+  );
+}
+
 function title(setup: GameSetupDoc, draft: Draft, s: Selection): string {
   if (s.kind === "city") return setup.regions.flatMap((r) => r.cities).find((c) => c.key === s.key)?.name ?? s.key;
   if (s.kind === "web") return `${setup.regions.find((r) => r.web_center?.key === s.key)?.web_center?.name ?? s.key} 網路中心`;
   if (s.kind === "factory") return "工廠";
   if (s.kind === "product") return draft.products[s.index]?.name ?? setup.theme.product;
+  if (s.kind === "modules") return "經營模組";
   return "本季試算";
 }
 
 /** Side panel: the depth behind whatever was clicked on the board, a bike card or "試算". */
-export function Inspector(props: Common & { selection: Selection; onClose: () => void }) {
+export function Inspector(props: Common & { selection: Selection; onClose: () => void; catalog?: ModulesDoc | null }) {
   const { selection: s, onClose } = props;
   const headRef = useRef<HTMLHeadingElement>(null);
   const key = JSON.stringify(s);
@@ -232,6 +246,7 @@ export function Inspector(props: Common & { selection: Selection; onClose: () =>
         {s.kind === "factory" ? <FactoryPanel {...props} /> : null}
         {s.kind === "product" ? <ProductPanel {...props} index={s.index} onClose={onClose} /> : null}
         {s.kind === "preview" ? <PreviewPanel setup={props.setup} preview={props.preview} /> : null}
+        {s.kind === "modules" ? <ModulesPanel {...props} catalog={props.catalog ?? null} /> : null}
       </div>
     </aside>
   );

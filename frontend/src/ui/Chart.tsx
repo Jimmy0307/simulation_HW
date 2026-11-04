@@ -9,7 +9,7 @@ export interface Series {
 
 const COLOR: Record<LevelLabel, string> = {
   verified: "var(--lv-verified)", derived: "var(--lv-derived)", estimated: "var(--lv-estimated)",
-  literature: "var(--lv-literature)", placeholder: "var(--lv-placeholder)",
+  literature: "var(--lv-literature)", placeholder: "var(--lv-placeholder)", heuristic: "var(--lv-heuristic)",
 };
 
 /** Multi-series line chart. x = quarters; ⚑ marks quarters with scenario events. Pure presentation. */
@@ -46,7 +46,7 @@ export function LineChart({ quarters, series, events, title }: {
         ))}
         {series.map((s) => {
           const pts = s.values.map((v, i) => (v === null ? null : `${x(i).toFixed(1)},${y(v).toFixed(1)}`)).filter(Boolean);
-          const dashed = s.level === "literature" || s.level === "placeholder";
+          const dashed = s.level === "literature" || s.level === "placeholder" || s.level === "heuristic";
           return (
             <g key={s.name}>
               <polyline points={pts.join(" ")} fill="none" stroke={COLOR[s.level]} strokeWidth={2.5}
@@ -60,8 +60,8 @@ export function LineChart({ quarters, series, events, title }: {
         {series.map((s) => (
           <span key={s.name}>
             <svg width="26" height="8" aria-hidden="true"><line x1="0" x2="26" y1="4" y2="4" stroke={COLOR[s.level]} strokeWidth="3"
-              strokeDasharray={s.level === "literature" || s.level === "placeholder" ? "6 4" : undefined} /></svg>
-            {s.name}（{s.level}{s.level === "literature" || s.level === "placeholder" ? ` · ${UNCALIBRATED_LABEL}` : ""}）
+              strokeDasharray={s.level === "literature" || s.level === "placeholder" || s.level === "heuristic" ? "6 4" : undefined} /></svg>
+            {s.name}（{s.level}{s.level === "literature" || s.level === "placeholder" || s.level === "heuristic" ? ` · ${UNCALIBRATED_LABEL}` : ""}）
           </span>
         ))}
         {events?.some((e) => e && e.length) ? <span>⚑ = 該季有情境事件</span> : null}
@@ -71,7 +71,7 @@ export function LineChart({ quarters, series, events, title }: {
 }
 
 export function weakest(levels: LevelLabel[]): LevelLabel {
-  const order: LevelLabel[] = ["placeholder", "literature", "estimated", "derived", "verified"];
+  const order: LevelLabel[] = ["heuristic", "placeholder", "literature", "estimated", "derived", "verified"];
   return levels.reduce<LevelLabel>((w, l) => (order.indexOf(l) < order.indexOf(w) ? l : w), "verified");
 }
 

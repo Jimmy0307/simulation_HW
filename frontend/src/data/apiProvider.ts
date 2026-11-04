@@ -1,5 +1,5 @@
 import type {
-  CompareDoc, DiffDoc, EventType, GameDoc, GameScript, GameSetupDoc, GameStartConfig, LevelsDoc, PackInfo, PlanDoc,
+  CompareDoc, DiffDoc, EventType, GameDoc, GameScript, GameSetupDoc, GameStartConfig, LevelsDoc, ModulesDoc, PackInfo, PlanDoc,
   PlansDoc, Report, ScenarioRun, ScenarioSpecDoc, SweepResult,
 } from "../types";
 import type { DataProvider } from "./provider";
@@ -40,6 +40,10 @@ export class ApiProvider implements DataProvider {
 
   levels(): Promise<LevelsDoc> {
     return this.call<LevelsDoc>("/levels");
+  }
+
+  modules(): Promise<ModulesDoc> {
+    return this.call<ModulesDoc>("/modules");
   }
 
   async game(): Promise<GameDoc> {

@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 import type { LevelLabel, Line } from "../../types";
 import { formatNumber, isUncalibrated, Num } from "../../ui/Num";
+import { PRACTICE_TEXT, PracticeBadge } from "../../ui/Practice";
 
 /** Quiet mark beside an uncalibrated number. "≈" already reads as "about" to anyone, before any explanation. */
 export const APPROX = "≈";
@@ -12,6 +13,7 @@ export const LevelsContext = createContext(false);
 export function becomesActual(level: LevelLabel): string {
   if (level === "literature") return "Q2 數據校準後變實際（需求擬合通過留出季驗證）";
   if (level === "placeholder") return "成本規則尚未驗證；完成驗證實驗後才變實際";
+  if (level === "heuristic") return "練習規則換成文獻形式、再用 Q2 起的資料校準後才變實際";
   return "";
 }
 
@@ -19,12 +21,14 @@ export function becomesActual(level: LevelLabel): string {
 export function estimateHint(level: LevelLabel): string {
   if (level === "literature") return "預估 · Q2 校準後變實際";
   if (level === "placeholder") return "預估 · 成本規則驗證後變實際";
+  if (level === "heuristic") return PRACTICE_TEXT;
   return "";
 }
 
 const WHY: Partial<Record<LevelLabel, string>> = {
   literature: "需求形式來自公開文獻，係數還沒用本局資料校準。",
   placeholder: "示意用的佔位規則，還沒有實驗驗證。",
+  heuristic: "上游用了練習規則（一般商業常識，無文獻、無校準）。只能看方向，不要把因果當真。",
 };
 
 export type FigureFormat = "number" | "percent";
@@ -71,6 +75,14 @@ export function Figure({ line, label, digits, format = "number", unit }: {
   const text = `${display(line.value, format, digits)}${unit ?? ""}`;
   if (!uncal) {
     return <span className={cls} data-estimate="false" data-level={line.level}>{text}</span>;
+  }
+  if (line.level === "heuristic") {
+    return (
+      <span className={`${cls} practice`} data-estimate="true" data-level="heuristic" aria-label={`${label}：${text}，${PRACTICE_TEXT}`}>
+        <PracticeBadge />
+        <span className="fig-v">{text}</span>
+      </span>
+    );
   }
   return (
     <span className={cls} data-estimate="true" data-level={line.level} tabIndex={0}

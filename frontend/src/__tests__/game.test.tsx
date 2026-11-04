@@ -9,7 +9,9 @@ import { App } from "../App";
 import { ApiProvider } from "../data/apiProvider";
 import { StaticProvider } from "../data/staticProvider";
 import { APPROX, Figure, LevelsContext } from "../screens/game/Figure";
-import type { GameScript, GameSetupDoc, Line, Report } from "../types";
+import { summaryNote } from "../screens/game/Settlement";
+import type { GameScript, GameSetupDoc, Line, ModulesDoc, Report } from "../types";
+import { PRACTICE_TEXT } from "../ui/Practice";
 import { formatNumber } from "../ui/Num";
 
 afterEach(() => {
@@ -187,10 +189,19 @@ function fakeServer() {
       const report = withRivals(script.steps[1].preview);
       const cost = Object.entries(report.lines).find(([k]) => k.startsWith("unit_cost["))?.[1];
       const names = ((body?.brands ?? []) as { name: string }[]).map((b) => b.name);
-      out = { report: { ...report, lines: { ...report.lines, ...Object.fromEntries(names.map((n) => [`unit_cost[${n}]`, cost])) } } };
+      let lines: Report["lines"] = { ...report.lines, ...Object.fromEntries(names.map((n) => [`unit_cost[${n}]`, cost as Line])) };
+      if (body?.modules) {
+        // a practice module was decided: the real engine then marks the demand chain heuristic (engine.advance);
+        // the fake only mirrors that labelling so the screen can be checked
+        const chain = /^(units_|market_|rival_|revenue|net_income|cash_end|operating_profit)/;
+        lines = Object.fromEntries(Object.entries(lines).map(([k, l]) => [k, chain.test(k) ? { ...l, level: "heuristic" as const, uncalibrated: true } : l]));
+        lines.selling_effort = { value: 1.2, level: "heuristic", source: "practice rule", uncalibrated: true };
+      }
+      out = { report: { ...report, lines } };
     }
     else if (path === "/game/play") { out = { report: withRivals(script.steps[1].report) }; quarter += 1; }
     else if (path === "/pack") out = { ...script.start, is_private: isPrivate };
+    else if (path === "/modules") out = read("modules.json");
     else out = {};
     return new Response(JSON.stringify(out));
   }) as unknown as typeof fetch;
@@ -233,5 +244,90 @@ describe("game mode on the live engine (fake API)", () => {
     expect(within(card).getAllByTestId("rival-row")).toHaveLength(5);
     const play = calls.find((c) => c.path === "/game/play")!;
     expect((play.body?.brands as { name: string }[])[0].name).toBe("自行車-1");
+  });
+});
+
+// --- business modules: practice badge, locked modules, levers that reach the engine ------------------------------
+
+describe("practice (heuristic) numbers", () => {
+  it("get the loud practice badge, not the quiet ≈", () => {
+    const { container } = render(<Figure line={line(42, "heuristic")} label="h" />);
+    const fig = container.querySelector("[data-estimate]")!;
+    expect(fig.getAttribute("data-level")).toBe("heuristic");
+    expect(fig.querySelector(".fig-approx")).toBeNull();
+    const badge = within(fig as HTMLElement).getByTestId("practice-badge");
+    expect(badge.textContent).toContain("練習");
+    expect(badge.textContent).toContain(PRACTICE_TEXT);
+    expect(fig.querySelector(".fig-v")?.textContent).toBe("42");
+  });
+
+  it("with the levels switch on, the full mark is H plus the practice badge", () => {
+    const { container } = render(<LevelsContext.Provider value={true}><Figure line={line(42, "heuristic")} label="h" /></LevelsContext.Provider>);
+    expect(container.querySelector(".mark")?.textContent).toBe("H");
+    expect(container.querySelector(".uncal-chip")).toBeNull();
+    expect(screen.getByTestId("practice-badge")).toBeTruthy();
+  });
+
+  it("the report card's summary line says which numbers are practice", () => {
+    const report = { quarter: 2, plan: "p", notes: [], lines: { revenue: line(10, "heuristic"), cash_end: line(5, "placeholder") } };
+    const text = summaryNote(report) ?? "";
+    expect(text).toContain("練習");
+    expect(text).toContain(PRACTICE_TEXT);
+    expect(text).toContain(APPROX);
+  });
+});
+
+describe("game mode: business modules (fake API)", () => {
+  it("lists every module by maturity, locks the unbuilt ones, and sends practice levers to the engine", async () => {
+    const { calls, provider } = fakeServer();
+    await openGame(provider);
+    await act(async () => fireEvent.click(screen.getByText("開始第一季")));
+    await act(async () => fireEvent.click(await screen.findByText(/新增自行車/)));
+    // the shelf under the bikes: two practice modules and the locked count
+    const locked = await screen.findByTestId("shelf-locked");
+    const ledger = read("modules.json") as ModulesDoc;
+    expect(locked.textContent).toContain(`${ledger.counts["not-modeled"]} 個`);
+    expect(within(screen.getByTestId("shelf-sales")).getByTestId("practice-badge")).toBeTruthy();
+    await act(async () => fireEvent.click(screen.getByTestId("shelf-sales")));
+    const panel = screen.getByTestId("modules-panel");
+    // grouped by maturity, each group's size from the ledger
+    for (const m of ["verified", "literature", "heuristic", "not-modeled"] as const) {
+      expect(within(panel).getByTestId(`module-group-${m}`).textContent).toContain(`${ledger.counts[m]} 個`);
+    }
+    // a locked module explains itself when clicked
+    const quality = within(panel).getByTestId("locked-production.quality");
+    expect(quality.textContent).toContain("待建");
+    fireEvent.click(quality);
+    expect(within(panel).getByTestId("lock-reason").textContent).toContain("為什麼還不能調");
+    // the practice levers carry the banner; turning the sales force on and moving a slider reaches the engine
+    const sales = within(panel).getByTestId("sales-force-editor");
+    expect(sales.textContent).toContain(PRACTICE_TEXT);
+    fireEvent.click(within(sales).getByLabelText("啟用業務團隊"));
+    fireEvent.change(within(sales).getByLabelText("業務人數"), { target: { value: "12" } });
+    const media = within(panel).getByTestId("media-mix-editor");
+    fireEvent.click(within(media).getByLabelText(/分配「自行車-1」的廣告/));
+    fireEvent.change(within(media).getByLabelText("社群"), { target: { value: "60" } });
+    await waitFor(() => {
+      const last = calls.filter((c) => c.path === "/game/preview").at(-1);
+      const modules = last?.body?.modules as Record<string, Record<string, unknown>>;
+      expect(modules.sales_force.headcount).toBe(12);
+      expect((modules["marketing.media_mix"].mix as Record<string, Record<string, number>>)["自行車-1"].social).toBe(60);
+    }, { timeout: 3000 });
+    // the engine's practice results come back with the badge, in the panel and on the report numbers
+    await waitFor(() => expect(within(sales).getByText("銷售力倍數")).toBeTruthy(), { timeout: 3000 });
+    expect(within(sales).getAllByTestId("practice-badge").length).toBeGreaterThan(1);
+    await act(async () => fireEvent.click(screen.getByText("試算這一季（不推進）")));
+    const preview = await screen.findByTestId("preview-panel");
+    expect(within(preview).getAllByTestId("practice-badge").length).toBeGreaterThan(0);
+    expect(within(preview).getByTestId("literature-notice").textContent).toContain(PRACTICE_TEXT);
+  });
+
+  it("the static demo shows the module list read-only", async () => {
+    await openGame(staticProvider());
+    await act(async () => fireEvent.click(screen.getByText("開始第一季")));
+    await act(async () => fireEvent.click(await screen.findByTestId("shelf-media")));
+    const sales = screen.getByTestId("sales-force-editor");
+    expect((within(sales).getByLabelText("業務人數") as HTMLInputElement).disabled).toBe(true);
+    expect((within(sales).getByRole("checkbox") as HTMLInputElement).disabled).toBe(true);
   });
 });

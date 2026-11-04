@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { DataProvider } from "../data/provider";
-import type { GameScript, GameSetupDoc, GameStartConfig, PackInfo, PlanDoc, Report } from "../types";
+import type { GameScript, GameSetupDoc, GameStartConfig, ModulesDoc, PackInfo, PlanDoc, Report } from "../types";
 import { Banner } from "../ui/common";
 import { Board, type Selection } from "./game/Board";
 import { carryOver, emptyDraft, fromPlan, toPlan, validate, type Draft } from "./game/draft";
@@ -9,6 +9,7 @@ import { GameSetup } from "./game/GameSetup";
 import { Garage } from "./game/Garage";
 import { SourceStrip, StatusBar } from "./game/Hud";
 import { Inspector } from "./game/Inspector";
+import { ModuleShelf } from "./game/ModuleShelf";
 import { SettlementCard, Timeline } from "./game/Settlement";
 
 const PREVIEW_DELAY_MS = 350;
@@ -34,6 +35,7 @@ function storeLevels(on: boolean) {
 export function GameMode({ provider, onPack }: { provider: DataProvider; onPack?: (pack: PackInfo) => void }) {
   const [setup, setSetup] = useState<GameSetupDoc | null>(null);
   const [script, setScript] = useState<GameScript | null>(null);
+  const [catalog, setCatalog] = useState<ModulesDoc | null>(null);
   const [phase, setPhase] = useState<"setup" | "play">("setup");
   const [draft, setDraft] = useState<Draft>(emptyDraft);
   const [preview, setPreview] = useState<Report | null>(null);
@@ -49,6 +51,7 @@ export function GameMode({ provider, onPack }: { provider: DataProvider; onPack?
     Promise.all([provider.gameSetup(), provider.gameScript()])
       .then(([doc, demo]) => { setSetup(doc); setScript(demo); })
       .catch((e: unknown) => setError(e instanceof Error ? e.message : String(e)));
+    provider.modules().then(setCatalog).catch(() => setCatalog(null)); // the game still runs without the ledger
   }, [provider]);
 
   const quarter = setup?.state?.quarter ?? 1;
@@ -182,10 +185,12 @@ export function GameMode({ provider, onPack }: { provider: DataProvider; onPack?
             <Board setup={setup} draft={shown} selection={selection} onSelect={setSelection} />
             <Garage setup={setup} draft={shown} preview={preview} readOnly={readOnly} selection={selection}
               onSelect={setSelection} onChange={setDraft} />
+            <ModuleShelf catalog={catalog} draft={shown} setup={setup} selected={selection?.kind === "modules"}
+              onOpen={() => setSelection({ kind: "modules" })} />
           </div>
           {selection ? (
             <Inspector setup={setup} draft={shown} preview={preview} readOnly={readOnly} onChange={setDraft}
-              selection={selection} onClose={() => setSelection(null)} />
+              selection={selection} onClose={() => setSelection(null)} catalog={catalog} />
           ) : null}
         </div>
         <StatusBar setup={setup} problem={problem}>

@@ -1,5 +1,5 @@
 import type {
-  CompareDoc, DiffDoc, EventType, GameDoc, GameScript, GameSetupDoc, GameStartConfig, LevelsDoc, PackInfo, PlanDoc,
+  CompareDoc, DiffDoc, EventType, GameDoc, GameScript, GameSetupDoc, GameStartConfig, LevelsDoc, ModulesDoc, PackInfo, PlanDoc,
   PlansDoc, Report, ScenarioResult, ScenarioRun, ScenarioSpecDoc, SweepResult,
 } from "../types";
 import { ReadOnlyError } from "./errors";
@@ -38,6 +38,10 @@ export class StaticProvider implements DataProvider {
 
   levels(): Promise<LevelsDoc> {
     return this.load<LevelsDoc>("levels");
+  }
+
+  modules(): Promise<ModulesDoc> {
+    return this.load<ModulesDoc>("modules");
   }
 
   game(): Promise<GameDoc> {

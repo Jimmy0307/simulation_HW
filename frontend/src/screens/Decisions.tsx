@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import type { DataProvider } from "../data/provider";
 import type { BrandPlan, PlanDoc, Report } from "../types";
 import { Banner, Card, LinesTable, Status, useAsync } from "../ui/common";
+import { ModuleBoard } from "../ui/ModuleBoard";
+import { Num } from "../ui/Num";
 
 const clone = <T,>(v: T): T => JSON.parse(JSON.stringify(v)) as T;
 
@@ -15,6 +17,8 @@ function NumberField({ label, value, onChange, step }: { label: string; value: n
 
 export function Decisions({ provider, onPlayed }: { provider: DataProvider; onPlayed?: () => void }) {
   const plans = useAsync(() => provider.plans(), [provider]);
+  const catalog = useAsync(() => provider.modules(), [provider]);
+  const game = useAsync(() => provider.game(), [provider]);
   const [presetId, setPresetId] = useState<string>("");
   const [plan, setPlan] = useState<PlanDoc>({ name: "my-plan" });
   const [report, setReport] = useState<Report | null>(null);
@@ -124,6 +128,16 @@ export function Decisions({ provider, onPlayed }: { provider: DataProvider; onPl
               title={provider.canCompute ? "" : "Demo 模式唯讀"}>送出並推進一季</button>
           </div>
           {error ? <p className="error">{error}</p> : null}
+        </Card>
+      ) : null}
+      {options && catalog.data ? (
+        <Card title="經營模組（依可信度分組）">
+          <p className="muted">練習規則（heuristic）可以在這裡調；已驗證與文獻等級的杆在上面的產能、通路、品牌欄；待建的模組鎖定，點一下看原因。完整總表見「模組成熟度」。</p>
+          <ModuleBoard catalog={catalog.data} decisions={plan.modules ?? {}}
+            onChange={provider.canCompute ? (modules) => update({ modules: Object.keys(modules).length ? modules : undefined }) : undefined}
+            brands={(plan.brands ?? []).map((b) => ({ name: b.name, advertising: b.advertising ?? 0 }))}
+            carried={game.data?.state?.module_state} lines={report?.lines}
+            render={(line, label, format) => <Num line={line} label={label} digits={format === "percent" ? 3 : undefined} />} />
         </Card>
       ) : null}
       {report ? (

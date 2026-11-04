@@ -6,6 +6,7 @@ import { Decisions } from "./screens/Decisions";
 import { Diff } from "./screens/Diff";
 import { GameMode } from "./screens/GameMode";
 import { Levels } from "./screens/Levels";
+import { Modules } from "./screens/Modules";
 import { Overview } from "./screens/Overview";
 import { Scenario } from "./screens/Scenario";
 import { Stress } from "./screens/Stress";
@@ -21,6 +22,7 @@ export const ROUTES = [
   { id: "diff", title: "參數 diff" },
   { id: "levels", title: "來源等級說明" },
   { id: "game", title: "遊戲模式" },
+  { id: "modules", title: "模組成熟度" },
 ] as const;
 type RouteId = (typeof ROUTES)[number]["id"];
 
@@ -80,6 +82,7 @@ export function App({ provider }: { provider: DataProvider }) {
       case "stress": return <Stress key={key} provider={provider} />;
       case "diff": return <Diff key={key} provider={provider} />;
       case "levels": return <Levels key={key} provider={provider} />;
+      case "modules": return <Modules key={key} provider={provider} />;
       case "game": return <GameMode key={key} provider={provider} onPack={setPack} />;
       default: return <Overview key={key} provider={provider} />;
     }
@@ -98,7 +101,7 @@ export function App({ provider }: { provider: DataProvider }) {
           ))}
         </nav>
         <div style={{ marginTop: 22 }} className="legend" aria-label="來源等級圖例">
-          {(["verified", "derived", "estimated", "literature", "placeholder"] as const).map((lv) => (
+          {(["verified", "derived", "estimated", "literature", "placeholder", "heuristic"] as const).map((lv) => (
             <span key={lv}><LevelMark level={lv} />{LEVEL_TEXT[lv].name}</span>
           ))}
         </div>

@@ -78,6 +78,8 @@ quarter. Trusted numbers (verified / derived) show plainly; literature- or place
 with a hover note, and a "show all source levels" switch brings back the full marks. The static demo replays one
 pre-recorded synthetic game. See [docs/ui-guide.md §6a](docs/ui-guide.md).
 
+**Module maturity** (9th entry): every business function of a full company simulation is a row in `data/modeling_ledger.json` (rendered to `docs/modeling-ledger.md`) with a maturity — verified, literature, heuristic (practice rule) or not-modeled — and the next step to move it up (`docs/upgrade-protocol.md`). Two heuristic practice modules can be decided (sales force; advertising media mix). Their levers and every result they touch carry a striped "練習" badge, and the engine refuses decisions for not-modeled modules.
+
 ## Load your own data (private)
 
 1. Capture your own sessions with [REA](https://github.com/morluto/rea) into `evidence/private/` (see

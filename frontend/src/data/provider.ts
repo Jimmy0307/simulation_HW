@@ -1,5 +1,5 @@
 import type {
-  CompareDoc, DiffDoc, EventType, GameDoc, GameScript, GameSetupDoc, GameStartConfig, LevelsDoc, PackInfo, PlanDoc,
+  CompareDoc, DiffDoc, EventType, GameDoc, GameScript, GameSetupDoc, GameStartConfig, LevelsDoc, ModulesDoc, PackInfo, PlanDoc,
   PlansDoc, Report, ScenarioRun, ScenarioSpecDoc, SweepResult,
 } from "../types";
 import { ApiProvider } from "./apiProvider";
@@ -15,6 +15,8 @@ export interface DataProvider {
   pack(): Promise<PackInfo>;
   switchPack(source: "synthetic" | "private", path?: string): Promise<PackInfo>;
   levels(): Promise<LevelsDoc>;
+  /** The modeling ledger: every business module with its maturity (public structure, no values). */
+  modules(): Promise<ModulesDoc>;
   game(): Promise<GameDoc>;
   newGame(): Promise<GameDoc>;
   plans(): Promise<PlansDoc>;

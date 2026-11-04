@@ -1,7 +1,7 @@
 // Shapes of the documents served by the local API (and exported into the static demo bundle).
 // The UI never computes these numbers; it only renders what the Python engine produced.
 
-export type LevelLabel = "verified" | "derived" | "estimated" | "literature" | "placeholder";
+export type LevelLabel = "verified" | "derived" | "estimated" | "literature" | "placeholder" | "heuristic";
 
 export interface ChainStep {
   metric: string;
@@ -56,6 +56,8 @@ export interface CompanyState {
   stock_total: number;
   shares_total: number;
   ad_stock?: Record<string, number>;
+  /** Business-module state carried by the engine (e.g. the sales force still employed). */
+  module_state?: Record<string, Record<string, number>>;
 }
 
 export interface GameDoc extends PackInfo {
@@ -81,6 +83,45 @@ export interface PlanDoc {
   open_web_centers?: string[];
   stock_issue?: { shares: number; price: number }[];
   brands?: BrandPlan[];
+  /** Business-module decisions keyed like the ledger's `module` field (marketing.media_mix, sales_force). */
+  modules?: ModuleDecisions;
+}
+
+export type ModuleDecisions = Record<string, Record<string, unknown>>;
+
+export type Maturity = "verified" | "literature" | "heuristic" | "not-modeled";
+
+/** One row of data/modeling_ledger.json, plus what the engine can decide now. Structure only, no values. */
+export interface LedgerRow {
+  key: string;
+  module: string | null;
+  area: string;
+  name: string;
+  kind: "behaviour" | "accounting" | "information" | "qualitative" | "scenario";
+  real_status: "measured" | "inferred" | "unknown";
+  real_note: string;
+  screens: string[];
+  maturity: Maturity;
+  ours: string;
+  next_step: string;
+  capture: string;
+  sources: string[];
+  decidable: boolean;
+  implementation: string | null;
+  decisions: string[];
+  coefficients: Record<string, unknown> | null;
+}
+
+export interface ModulesDoc {
+  title: string;
+  rules: string[];
+  maturity_legend: Record<Maturity, string>;
+  kind_legend: Record<string, string>;
+  areas: { id: string; name: string }[];
+  sources: Record<string, string>;
+  modules: LedgerRow[];
+  counts: Record<Maturity, number>;
+  is_private: boolean;
 }
 
 export interface PlansDoc extends PackInfo {

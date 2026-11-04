@@ -15,7 +15,11 @@ export function summaryNote(report: Report): string | null {
   const parts: string[] = [];
   if (levels.has("literature")) parts.push("銷量、營收與市佔來自文獻假設，Q2 數據校準後變實際");
   if (levels.has("placeholder")) parts.push("單位成本、租金、稅與現金用的是佔位規則，驗證實驗完成後變實際");
-  return `標 ${APPROX} 的是預估，不是本局預測：${parts.join("；")}。`;
+  const practice = levels.has("heuristic")
+    ? "標「練習」的數字用了暫定的練習規則（業務團隊或廣告分配）：練習用 · 規則暫定 · 真實關係待 Q2，只能看方向。"
+    : "";
+  const estimates = parts.length ? `標 ${APPROX} 的是預估，不是本局預測：${parts.join("；")}。` : "";
+  return [practice, estimates].filter(Boolean).join(" ");
 }
 
 export function SummaryNote({ report }: { report: Report }) {
