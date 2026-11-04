@@ -18,6 +18,13 @@
   * 供應：`inventory_release[brand]`（季初出清的件數，搭配 `salvage_fraction` 計收入）、`holding_rate`（季末庫存價值 × 費率）。
   * 現金：`expenses`、`income`、`revenue_rates`。
   * 其他：`state`、`lines`。
+  * 第二批（加，不改舊的；沒有模組時逐位元不變）：需求 `attraction[brand]`、`price_factor[brand]`；產能 `capacity_factor`、
+    `capacity_extra`；成本 `labor_cost_factor`、`conversion_factor[brand]`、`unit_cost_add[brand]`；計畫
+    `production_units[brand]`、`production_order`；財務 `financing`（借還款、股利：現金流，不進損益）。
+  * 需求之後的掛鉤（選用）：`settle`（依銷量的費用或收入）、`tax`（換掉引擎的所得稅）、`close`（現金算完後的報表列與狀態）。
+* 槓桿：模組在類別上宣告 `fields`（決策欄位，含上下限、選項、對應的 ledger 列）、`ui`（橫幅文字與結果列）、`metrics`
+  （輸出列的公式、等級與它進入引擎的位置）。決策由 `read_fields` 檢查，前端用通用編輯器顯示，不必各寫一個畫面。
+* 模型選項（`stoppable = True`）：學習曲線、應計會計、計分卡、閒置產能、補貨規則；送 `{"stop": true}` 會停用並清掉狀態。
 * 登記：`src/marketplace_sim/business/registry.py` 的 `IMPLEMENTATIONS`（key → 類別）。
   決策從 `plan.modules[key]` 進來；沒有實作的 key 會被拒絕，並回覆 ledger 裡的「升級下一步」。
 * 係數：`data/module_defaults.json`（heuristic 的標示預設值）；pack 可以在 `modules.<key>` 覆寫。
@@ -94,6 +101,14 @@
 1. 照 `docs/experiment-runbook.md` 設計一次只改一個輸入的實驗；只用遊戲本身的試算或結算，不得送出不必要的決策。
 2. 在 `marketplace_sysid.cost_model` 實作規則，用實測值重現且殘差為 0；引擎模組改呼叫它，等級 `VERIFIED`。
 3. 實驗紀錄寫 `docs/experiments/EXP-xx.md`（不含真實數值，依 publication gate 規則）；ledger 改 `verified`。
+
+## 4a. 對帳（Q2 起）
+
+* 引擎列對應到遊戲報表列：`src/marketplace_sim/reconcile.py`（`CASH_ROWS`、`INCOME_ROWS`、`BALANCE_ROWS`），
+  對應關係用 Q1 擷取的結構（列 id 與正負號）檢查（`tests/test_reconcile.py`，私有檔案存在時才跑）。
+* Q2 結算回來後照 `docs/q2-capture-checklist.md` 擷取並建 `evidence/private/reconcile/q2.json`；
+  `tests/test_reconcile.py` 會重跑並只寫狀態（match / differs / not-modeled / missing）到 private。
+* 規則型的列：在「不是結構性 0」的一季 match，再用下一季保留驗證 match，才升 verified；只有一季 match 是候選。
 
 ## 5. 每次升級都要跑
 

@@ -32,9 +32,14 @@ describe("the ledger in the demo bundle", () => {
     }
     const total = Object.values(ledger.counts).reduce((a, b) => a + b, 0);
     expect(total).toBe(ledger.modules.length);
-    // the four implemented modules can be decided; everything not modeled is locked
-    expect(new Set(ledger.modules.filter((m) => m.decidable).map((m) => m.module)))
-      .toEqual(new Set(["marketing.media_mix", "sales_force", "supply.inventory", "supply.purchasing"]));
+    // every implemented module can be decided, each with exactly one primary row; everything not modeled is locked
+    const decidable = ledger.modules.filter((m) => m.decidable);
+    const modules = new Set(decidable.map((m) => m.module));
+    expect(modules).toContain("finance.loans");
+    expect(modules).toContain("accounting.accrual");
+    for (const key of modules) expect(decidable.filter((m) => m.module === key && m.primary).length).toBe(1);
+    // generic levers name the ledger row whose badge they carry
+    for (const row of decidable) for (const f of row.fields ?? []) expect(ledger.modules.some((m) => m.key === f.part)).toBe(true);
     // literature coefficients carry their published range
     const staffing = ledger.modules.find((m) => m.key === "sales_force.staffing")!;
     const [lo, hi] = staffing.ranges!.selling_elasticity;
@@ -99,7 +104,11 @@ describe("decision editor: modules by maturity", () => {
     expect(media.textContent).not.toContain(PRACTICE_TEXT);
     expect(within(literature).getByTestId("inventory-editor")).toBeTruthy();
     expect(within(within(board).getByTestId("module-group-heuristic")).getByTestId("purchasing-editor").textContent).toContain(PRACTICE_TEXT);
-    const loans = within(board).getByTestId("locked-finance.loans");
+    // a generic editor: loans (practice), read-only in the demo
+    const loanEditor = within(within(board).getByTestId("module-group-heuristic")).getByTestId("module-editor-finance.loans");
+    expect(loanEditor.textContent).toContain(PRACTICE_TEXT);
+    expect(within(board).getByTestId("module-editor-supply.replenishment").textContent).toContain("≈ 文獻");
+    const loans = within(board).getByTestId("locked-finance.venture_capital");
     expect(loans.getAttribute("aria-expanded")).toBe("false");
     await act(async () => fireEvent.click(loans));
     expect(loans.getAttribute("aria-expanded")).toBe("true");

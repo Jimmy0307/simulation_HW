@@ -376,6 +376,9 @@ tr.worst td { background: color-mix(in srgb, var(--danger) 8%, transparent); }
 .mod-editor-head h4 { margin: 0; font-size: 14.5px; }
 .mod-toggle { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; }
 .mod-levers { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); column-gap: 16px; }
+.mod-choice { display: grid; gap: 4px; font-size: 12.5px; color: var(--muted); margin: 6px 0; }
+.mod-choice select { font: inherit; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 6px; padding: 4px 6px; }
+.mod-levers > .mod-toggle { margin: 8px 0; }
 .mod-brand { border-top: 1px dashed var(--border); padding-top: 8px; margin-top: 8px; }
 .mod-results { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 6px 14px; margin: 8px 0 0; padding: 8px 10px;
   border-radius: 8px; background: var(--surface-2); }

@@ -91,6 +91,26 @@ export type ModuleDecisions = Record<string, Record<string, unknown>>;
 
 export type Maturity = "verified" | "literature" | "heuristic" | "not-modeled";
 
+export interface ModuleField {
+  name: string;
+  label: string;
+  part: string;
+  kind: "number" | "brand_number" | "choice" | "brand_choice" | "flag";
+  low: number;
+  high: number;
+  step: number;
+  default: number | string | boolean;
+  unit: string;
+  options: [string, string][];
+}
+
+export interface ModuleUi {
+  toggle?: string;
+  literature?: string;
+  practice?: string;
+  results?: [string, string, ("number" | "percent")?][];
+}
+
 /** One row of data/modeling_ledger.json, plus what the engine can decide now. Structure only, no values. */
 export interface LedgerRow {
   key: string;
@@ -110,6 +130,14 @@ export interface LedgerRow {
   implementation: string | null;
   decisions: string[];
   coefficients: Record<string, unknown> | null;
+  /** True on the row whose maturity group shows the module's levers (its main part). */
+  primary?: boolean;
+  /** Levers of the module (generic editor); each carries the ledger row (part) whose badge it shows. */
+  fields?: ModuleField[];
+  /** Texts and result lines for the generic editor; placeholders {brand}, {segment}, {rival} expand on line keys. */
+  ui?: ModuleUi | null;
+  /** A model option that can be switched off (sends {stop: true} while it carries state). */
+  stoppable?: boolean;
   /** Published ranges of the literature coefficients (checked by the engine). */
   ranges: Record<string, [number, number]> | null;
 }

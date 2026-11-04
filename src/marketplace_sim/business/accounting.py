@@ -41,6 +41,11 @@ NOTE = "practice rule: accrual structure from the captured statement, rules and 
 FINANCING_LOANS = ("loan_short_proceeds", "loan_short_repaid", "loan_long_proceeds", "loan_long_repaid")
 
 
+def _tidy(x: float) -> float:
+    """Rounding residue of a balanced sheet shows as 0 (not -0.00)."""
+    return 0.0 if abs(x) < 1e-6 else x
+
+
 def _v(lines: Mapping[str, Tagged], key: str) -> float:
     return lines[key].value if key in lines else 0.0
 
@@ -184,7 +189,7 @@ class AccrualAccounting:
                            ("bs_long_loans", _v(lines, "loan_balance_long")), ("bs_emergency_loans", emergency_end),
                            ("bs_liabilities", liabilities), ("bs_common_stock", co["stock_total"]),
                            ("bs_retained_earnings", retained_end), ("bs_equity", equity),
-                           ("balance_check", assets - liabilities - equity)]:
+                           ("balance_check", _tidy(assets - liabilities - equity))]:
             out.lines[key] = Tagged(value, H, NOTE)
         state = {k: v for k, v in q.items() if k.startswith("book|")}
         state.update({"plant": q["plant_end"], "loss_cf": q["loss_cf"], "retained": retained_end,

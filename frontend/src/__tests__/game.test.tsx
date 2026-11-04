@@ -295,7 +295,7 @@ describe("game mode: business modules (fake API)", () => {
       expect(within(panel).getByTestId(`module-group-${m}`).textContent).toContain(`${ledger.counts[m]} 個`);
     }
     // a locked module explains itself when clicked
-    const quality = within(panel).getByTestId("locked-production.quality");
+    const quality = within(panel).getByTestId("locked-finance.currency");
     expect(quality.textContent).toContain("待建");
     fireEvent.click(quality);
     expect(within(panel).getByTestId("lock-reason").textContent).toContain("為什麼還不能調");
@@ -312,6 +312,14 @@ describe("game mode: business modules (fake API)", () => {
     const buying = within(panel).getByTestId("purchasing-editor");
     fireEvent.click(within(buying).getByLabelText("簽採購合約"));
     fireEvent.change(within(buying).getByLabelText("每季承諾採購量（件）"), { target: { value: "600" } });
+    // a generic editor: a short loan and a dividend, and a per-product rebate
+    const loans = within(panel).getByTestId("module-editor-finance.loans");
+    fireEvent.click(within(loans).getByLabelText("借款或發股利"));
+    fireEvent.change(within(loans).getByLabelText("短期貸款（下季還清）"), { target: { value: "50000" } });
+    fireEvent.change(within(loans).getByLabelText("長期貸款期數"), { target: { value: "12" } });
+    const promo = within(panel).getByTestId("module-editor-marketing.promotions");
+    fireEvent.click(within(promo).getByLabelText("啟用促銷"));
+    fireEvent.change(within(promo).getByLabelText("每件回饋金額 · 自行車-1"), { target: { value: "25" } });
     await waitFor(() => {
       const last = calls.filter((c) => c.path === "/game/preview").at(-1);
       const modules = last?.body?.modules as Record<string, Record<string, unknown>>;
@@ -319,7 +327,12 @@ describe("game mode: business modules (fake API)", () => {
       expect((modules["marketing.media_mix"].mix as Record<string, Record<string, number>>)["自行車-1"].social).toBe(60);
       expect(modules["supply.inventory"]).toEqual({});
       expect(modules["supply.purchasing"].contract_units).toBe(600);
+      expect(modules["finance.loans"]).toEqual({ short_loan: 50000, long_term: "12" });
+      expect(modules["marketing.promotions"]).toEqual({ rebate: { "自行車-1": 25 } });
     }, { timeout: 3000 });
+    // the shelf now shows the modules that are on, and the rest behind one card
+    expect(screen.getByTestId("shelf-finance.loans").textContent).toContain("貸款");
+    expect(screen.getByTestId("shelf-more").textContent).toContain("可以啟用");
     // the engine's practice results come back with the badge, in the panel and on the report numbers
     await waitFor(() => expect(within(sales).getByText("銷售力倍數")).toBeTruthy(), { timeout: 3000 });
     expect(within(sales).getAllByTestId("practice-badge").length).toBeGreaterThan(1);

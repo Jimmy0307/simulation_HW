@@ -81,7 +81,7 @@ def _all_metric_bases() -> set[str]:
 
 def _is_module_metric(base: str) -> bool:
     return base in _MODULE_LINES or base in MODULE_METRICS or base.startswith(
-        ("sales_force_", "inventory_", "purchasing_"))
+        ("sales_force_", "web_sales_", "inventory_", "purchasing_"))
 
 
 def report_dict(report: Report) -> dict[str, Any]:
