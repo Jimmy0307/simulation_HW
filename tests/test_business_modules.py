@@ -114,7 +114,7 @@ def test_ledger_doc_is_rendered_from_the_json() -> None:
 
 def test_not_modeled_and_unknown_modules_are_refused(after_q1: svc.Session) -> None:
     with pytest.raises(ModuleDecisionError, match="not-modeled"):
-        preview(after_q1, {"production.quality": {"inspection": 1}})
+        preview(after_q1, {"finance.venture_capital": {"pitch": 1}})
     with pytest.raises(ModuleDecisionError, match="unknown business module"):
         preview(after_q1, {"no.such.module": {}})
     with pytest.raises(ModuleDecisionError, match="decided under"):
@@ -347,5 +347,5 @@ def test_api_lists_modules() -> None:
     by_key = {r["key"]: r for r in body["modules"]}
     assert by_key["sales_force.staffing"]["decidable"] is True and by_key["sales_force.staffing"]["module"] == "sales_force"
     assert by_key["supply.inventory_holding"]["ranges"]["annual_holding_rate"]
-    assert by_key["production.quality"]["decidable"] is False
+    assert by_key["finance.currency"]["decidable"] is False
     assert body["history"] and body["is_private"] is False

@@ -132,6 +132,7 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
             adjust: Adjustments | None = None) -> tuple[CompanyState, Report]:
     """Apply one quarter of decisions. Returns the next state and a fully tagged report."""
     from marketplace_sim.business import BrandInput, run_modules
+    from marketplace_sim.business.base import Outcome
     from marketplace_sim.demand import demand_for
 
     demand = demand or demand_for(pack)
@@ -179,9 +180,20 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
     # Business modules (marketplace_sim.business): their effects enter at fixed coupling points; the weakest level
     # of the demand couplings is applied to everything downstream of demand, cost couplings carry their own level.
     # No module decided or carried = nothing changes.
+    outlets = len(stores_before) + len(web_before)
     effects = run_modules(pack, quarter=state.quarter, decisions=plan.modules, carried=state.module_state,
-                          brands=[BrandInput(bp.name, bp.advertising, bp.production, bp.price) for bp in plan.brands],
-                          markets_reached=len(market_reach), inventory=state.inventory)
+                          brands=[BrandInput(bp.name, bp.advertising, bp.production, bp.price, _segment(pack, state, bp))
+                                  for bp in plan.brands],
+                          markets_reached=len(market_reach), inventory=state.inventory,
+                          web_share=len(web_before) / outlets if outlets else 0.0, capacity_units=capacity_left)
+    if effects.capacity_level is not None:  # shifts, overtime, productivity (business modules)
+        base_cap = lines["capacity_units_per_quarter"]
+        factor = effects.capacity_factor.value if effects.capacity_factor is not None else 1.0
+        extra = effects.capacity_extra.value if effects.capacity_extra is not None else 0.0
+        lines["capacity_units_per_quarter"] = Tagged(base_cap.value * factor + extra,
+                                                     min(base_cap.level, effects.capacity_level),
+                                                     f"{base_cap.source} x module capacity factor + module extra units")
+        capacity_left = lines["capacity_units_per_quarter"].value
     demand_level = demand.level if effects.demand_level is None else min(demand.level, effects.demand_level)
     if effects.active:
         level_note = f"demand-chain level {effects.demand_level.label}" if effects.demand_level is not None else \
@@ -194,31 +206,53 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
     for brand_name, out_units in effects.inventory_release.items():  # sell-off at quarter start
         new.inventory[brand_name] = new.inventory.get(brand_name, 0.0) - out_units.value
         released[brand_name] = out_units
-    for bp in plan.brands:
+    units_level: dict[str, Level] = {}  # below VERIFIED only when a module rule or a module capacity decided units
+    unit_costs: dict[str, Tagged] = {}
+    produced_units: dict[str, float] = {}
+    ordered = plan.brands
+    if effects.production_order is not None:
+        rank = {name: i for i, name in enumerate(effects.production_order)}
+        ordered = sorted(plan.brands, key=lambda b: rank.get(b.name, len(rank)))
+    for bp in ordered:
         bt = pack.brand_type(bp.brand_type)
         if bp.name not in new.brands:
             comps = [pack.component(c) for c in bp.components] if bp.components else m.default_components(pack, bt)
             new.brands[bp.name] = Brand(bp.name, bt.code, [c.id for c in comps], bp.segment or bt.segment_id)
             new_brand_count += 1
         brand = new.brands[bp.name]
-        cost = m.unit_cost(pack, bt, [pack.component(c) for c in brand.components],
-                           material_factor=effects.material_cost_factor)
+        cost = _unit_cost(pack, new, bp.name, effects)
         lines[f"unit_cost[{bp.name}]"] = cost
-        units = min(bp.production, capacity_left)
-        if units < bp.production:
-            notes.append(f"{bp.name}: production capped by capacity ({units:.0f} of {bp.production:.0f})")
+        unit_costs[bp.name] = cost
+        rule = effects.production_units.get(bp.name)
+        wanted = rule.value if rule is not None else bp.production
+        if rule is not None:
+            units_level[bp.name] = rule.level
+        units = min(wanted, capacity_left)
+        if units < wanted:
+            notes.append(f"{bp.name}: production capped by capacity ({units:.0f} of {wanted:.0f})")
+            if effects.capacity_level is not None:
+                units_level[bp.name] = min(units_level.get(bp.name, Level.VERIFIED), effects.capacity_level)
         capacity_left -= units
+        produced_units[bp.name] = units
         new.inventory[bp.name] = new.inventory.get(bp.name, 0.0) + units
         if units > 0:  # nothing produced costs nothing, whatever the (unverified) unit-cost rule says
-            production_cost.append(cost.scaled(units, f"{units:.0f} units"))
+            batch = cost.scaled(units, f"{units:.0f} units")
+            if bp.name in units_level:
+                batch = batch.with_level(units_level[bp.name], f"{batch.source} (units set by a module rule)")
+            production_cost.append(batch)
         segment = brand.segment_id or (pack.segments[0].id if pack.segments else "")
         stock = carryover * state.ad_stock.get(bp.name, 0.0) + max(bp.advertising, 0.0)
         new.ad_stock[bp.name] = stock
         split = effects.media_split.get(bp.name)
+        brand_effort = effort
+        if bp.name in effects.attraction:
+            brand_effort = effort * effects.attraction[bp.name].value
+        price_factor = effects.price_factor[bp.name].value if bp.name in effects.price_factor else 1.0
         if bp.price > 0 and market_reach:
             own_offers.append(m.Offer("us", bp.name, segment, bp.price, m.segment_fit(bt, segment), bp.advertising,
                                       market_reach, position=bt.segment_id, quality=1.0, ad_stock=stock,
-                                      coverage=market_coverage, effort=effort, media=split.parts if split else ()))
+                                      coverage=market_coverage, effort=brand_effort, media=split.parts if split else (),
+                                      price_factor=price_factor))
     lines["design_cost"] = m.design_cost(pack, new_brand_count)
     lines["production_cost"] = total(production_cost, "sum(units x unit_cost)", empty_level=Level.VERIFIED)
     lines["advertising"] = const(sum(b.advertising for b in plan.brands), Level.VERIFIED, "plan input")
@@ -242,6 +276,8 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
         sold_total += sold
         lines[f"units_demanded[{offer.brand}]"] = want
         sold_level = want.level if offer.brand not in released else min(want.level, released[offer.brand].level)
+        if offer.brand in units_level:
+            sold_level = min(sold_level, units_level[offer.brand])
         lines[f"units_sold[{offer.brand}]"] = Tagged(sold, sold_level, "min(demand, inventory)")
         revenue.append(Tagged(sold * offer.price, sold_level, "units_sold x price"))
     if not own_offers:
@@ -265,6 +301,25 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
         lines[key] = Tagged(lines["revenue"].value * rate.value, min(lines["revenue"].level, rate.level),
                             f"revenue x {rate.source}")
     module_income: list[str] = []
+    sold_units = {o.brand: lines[f"units_sold[{o.brand}]"].value for o in own_offers}
+
+    def outcome(expense_lines: tuple[str, ...] = (), income_lines: tuple[str, ...] = ()) -> Outcome:
+        costs = {b: unit_costs.get(b) or _unit_cost(pack, new, b, effects) for b in new.inventory if b in new.brands}
+        return Outcome(lines, sold_units, produced_units, {b: u.value for b, u in released.items()},
+                       dict(state.inventory), dict(new.inventory), costs,
+                       {"stock_total": new.stock_total, "cd": new.cd, "stock_start": state.stock_total,
+                        "cd_start": state.cd, "fixed_capacity_units": state.fixed_capacity_units + plan.capacity_increase},
+                       expense_lines, income_lines)
+
+    if effects.modules:  # sales-dependent module expenses and income (rebates paid, warranty, inventory tax)
+        for key, late in effects.hook("settle", outcome()):
+            effects.merge_late(key, late)
+            lines.update(late.lines)
+            lines.update(late.expenses)
+            lines.update(late.income)
+    for key in effects.income:  # module income lines (other income in the game's statement)
+        lines[key] = effects.income[key]
+        module_income.append(key)
     if released and effects.salvage_fraction is not None:
         frac = effects.salvage_fraction
         parts = [u.scaled(frac.value, frac.source).with_level(frac.level) for u in released.values()]
@@ -280,17 +335,22 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
         lines["inventory_holding_cost"] = total(held, "ending units x unit cost x quarterly carrying rate",
                                                 empty_level=rate.level)
 
-    expenses = total([lines["store_setup"], lines["web_center_setup"], lines["outlet_lease"], lines["design_cost"],
-                      lines["production_cost"], lines["advertising"],
-                      *(lines[k] for k in [*effects.expenses, *effects.revenue_rates]),
-                      *([lines["inventory_holding_cost"]] if "inventory_holding_cost" in lines else [])],
-                     "operating expenses")
+    expense_keys = ("store_setup", "web_center_setup", "outlet_lease", "design_cost", "production_cost", "advertising",
+                    *effects.expenses, *effects.revenue_rates,
+                    *(("inventory_holding_cost",) if "inventory_holding_cost" in lines else ()))
+    expenses = total([lines[k] for k in expense_keys], "operating expenses")
     pretax = lines["revenue"] + lines["cd_interest"] - expenses
     for key in module_income:  # e.g. sell-off proceeds (other income in the game's statement)
         pretax = pretax + lines[key]
     produced = any(new.inventory.get(b, 0.0) > 0 or state.inventory.get(b, 0.0) > 0 for b in new.inventory) or any(
         bp.production > 0 for bp in plan.brands)
     lines["income_tax"] = m.income_tax(pack, pretax, inventory_free=not produced)
+    if effects.modules:  # a module may tax on another basis (accrual income with loss carry-forward)
+        taxes = [t for _, t in effects.hook("tax", outcome(expense_keys, tuple(module_income))) if t is not None]
+        if len(taxes) > 1:
+            raise ValueError("two business modules compute the income tax")
+        if taxes:
+            lines["income_tax"] = taxes[0]
     # Our profit is cash-basis (production expensed when made, no depreciation). The game's income statement is
     # accrual (cost of goods sold, depreciation; captured Q1 structure), so these two lines are a different
     # statement, not just uncalibrated: they never rank above placeholder. Cash below uses the uncapped figures.
@@ -303,13 +363,21 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
             - lines["capex_capacity"] - lines["income_tax"])
     for key in module_income:
         cash = cash + lines[key]
+    for key, flow in effects.financing.items():  # loans and dividends: cash flows outside profit
+        lines[key] = flow
+        cash = cash + flow
     loan = m.emergency_loan(cash)
     lines["emergency_loan"] = loan
     lines["cash_end"] = cash + loan
     new.cash = lines["cash_end"].value
     new.cash_level = lines["cash_end"].level.label
 
-    new.module_state = {**{k: v for k, v in state.module_state.items() if k not in effects.active}, **effects.state}
+    if effects.modules:  # report-only lines once cash is known (balance sheet, scorecard, demand history)
+        for key, late in effects.hook("close", outcome(expense_keys, tuple(module_income))):
+            effects.merge_late(key, late)
+            lines.update(late.lines)
+    new.module_state = {**{k: v for k, v in state.module_state.items()
+                           if k not in effects.active and k not in effects.stopped}, **effects.state}
     new.fixed_capacity_units = state.fixed_capacity_units + plan.capacity_increase
     new.pending_capacity_units = 0.0
     new.quarter = state.quarter + 1
@@ -318,9 +386,18 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
     return new, Report(state.quarter, plan.name, lines, notes)
 
 
+def _segment(pack: ParamPack, state: CompanyState, bp: BrandPlan) -> str | None:
+    """The segment a planned brand targets (carried brand, else the plan, else its type's segment)."""
+    if bp.name in state.brands:
+        return state.brands[bp.name].segment_id
+    return bp.segment or pack.brand_type(bp.brand_type).segment_id
+
+
 def _unit_cost(pack: ParamPack, state: CompanyState, brand_name: str, effects: Any) -> Tagged:
-    """Unit cost of a carried brand (for valuing inventory held or sold off), with this quarter's material factor."""
+    """Unit cost of a brand this quarter (produced, held or sold off), with the business modules' cost effects."""
     brand = state.brands[brand_name]
     bt = pack.brand_type(brand.brand_type)
     return m.unit_cost(pack, bt, [pack.component(c) for c in brand.components],
-                       material_factor=effects.material_cost_factor)
+                       material_factor=effects.material_cost_factor, labor_factor=effects.labor_cost_factor,
+                       conversion_factor=effects.conversion_factor.get(brand_name),
+                       add=effects.unit_cost_add.get(brand_name))

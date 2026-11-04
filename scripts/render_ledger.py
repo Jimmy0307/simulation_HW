@@ -1,4 +1,5 @@
-"""Render docs/modeling-ledger.md from data/modeling_ledger.json (the single source; edit the JSON, not the doc).
+"""Render docs/modeling-ledger.md and docs/q2-capture-checklist.md from data/modeling_ledger.json (the single
+source; edit the JSON, not the docs).
 
 usage: python scripts/render_ledger.py [--check]
 """
@@ -14,6 +15,32 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 LEDGER = ROOT / "data" / "modeling_ledger.json"
 DOC = ROOT / "docs" / "modeling-ledger.md"
+CHECKLIST = ROOT / "docs" / "q2-capture-checklist.md"
+# Which captured statement rows decide a ledger row (row ids from the captured Q1 structure; IS = income statement,
+# BS = balance sheet, CF = cash flow). Rows not listed are decided by their screens.
+STATEMENT_ROWS = {
+    "finance.tax": "IS `e_income_before_taxes`, `loss`, `e_taxable_income`, `income_taxes`; CF `income_taxes`",
+    "channel.outlet_lease": "IS `so`; CF `so`（季初已開的店與網路中心）",
+    "production.design_cost": "IS `rd` 或 CF `production`（哪一列還沒確認）",
+    "production.unit_cost": "CF `production`；IS `cogs`（配合產量與售出量）",
+    "finance.emergency_loan": "CF `inc_emer_l`；BS `emer_loan`；IS `interest`",
+    "accounting.income_statement": "IS 全部列（`reconcile.INCOME_ROWS`）",
+    "accounting.balance_sheet": "BS 全部列（`reconcile.BALANCE_ROWS`）",
+    "production.excess_capacity": "IS `excess_capacity`（配合產能與產量）",
+    "supply.inventory_holding": "IS `other_exp`；報表參數 `inventoryTax`",
+    "market.demand_core": "銷售報表：各產品、各客群的銷量",
+    "marketing.pricing": "銷售報表：不同售價下的銷量",
+    "marketing.ad_budget": "銷售報表：不同廣告預算下的銷量",
+    "marketing.promotions": "IS `rebates`；銷售報表",
+    "marketing.internet": "IS `inet_exp`",
+    "marketing.market_research": "IS `mr`",
+    "sales_force.staffing": "IS `sf`；銷售報表",
+    "sales_force.compensation": "IS `sf`",
+    "sales_force.web_sales": "IS `wsc_exp`（推測）",
+    "rnd.feature_development": "IS `rd`",
+    "finance.loans": "CF 借還款列；BS `short_loan`；IS `interest`",
+    "production.learning_curve": "品牌畫面的單位成本（不同累積產量）",
+}
 ORDER = ["verified", "literature", "heuristic", "not-modeled"]
 MATURITY_ZH = {"verified": "verified（已驗證）", "literature": "literature（文獻）", "heuristic": "heuristic（練習規則）",
                "not-modeled": "not-modeled（未建）"}
@@ -99,18 +126,58 @@ def render() -> str:
     return "\n".join(out)
 
 
+def render_checklist() -> str:
+    data = json.loads(LEDGER.read_text(encoding="utf-8"))
+    due = [r for r in data["modules"] if r["capture"].startswith("Q2") or "settlement" in r["capture"]]
+    due.sort(key=lambda r: (ORDER.index(r["maturity"]), r["area"], r["key"]))
+    out = [
+        "# Q2 擷取清單（對帳準備）",
+        "",
+        ("> 由 `data/modeling_ledger.json` 產生（`python scripts/render_ledger.py`）。只列畫面、報表列名與要做的比對，"
+         "不含任何遊戲數值。"),
+        "",
+        "Q2 結算回來時，照這張表擷取；擷取到的東西只放 `evidence/private/`，不進 repo。",
+        "",
+        "## 怎麼對帳",
+        "",
+        "1. 擷取下表各列的畫面與報表（照第一季的方式存成 private 檔）。",
+        "2. 另存一份 `evidence/private/reconcile/q2.json`（private，不進 repo），格式：",
+        "   * `plans`：Q1、Q2 實際送出的決策，各自寫成引擎的 plan（與 `examples/synthetic/plans/*.yaml` 同欄位）；",
+        "   * `pack`：私有參數包的路徑（預設 `evidence/private/model/pack.json`）；",
+        "   * `statements`：Q2 報表各列的值，`income` / `balance` / `cash` 三組，鍵是報表列 id（例如 `sales`、`cogs`）。",
+        "3. 執行 `pytest tests/test_reconcile.py`。它用私有參數包重跑 Q1、Q2（打開應計會計選項），把引擎各列折算成報表列，"
+        "逐列比對，結果只寫狀態（match / differs / not-modeled / missing），存到 `evidence/private/reconcile/q2-result.json`；"
+        "不印任何數值。",
+        ("4. 升級規則（`docs/upgrade-protocol.md`）：規則型的列要在「不是結構性 0」的一季重現（match），"
+         "再用下一季當保留驗證，才能升到 verified；一季 match 只算候選。"),
+        "",
+        "## 要擷取的列",
+        "",
+        "| 模組 | 現在 | 要擷取的畫面 | 要讀的報表列 | 比對後要做什麼 |",
+        "|---|---|---|---|---|",
+    ]
+    for r in due:
+        screens = ", ".join(f"`{x}`" for x in r["screens"]) or "（無）"
+        out.append(f"| **{_cell(r['name'])}**<br>`{r['key']}` | {MATURITY_ZH[r['maturity']]} | {screens} "
+                   f"| {_cell(STATEMENT_ROWS.get(r['key'], '見畫面'))} | {_cell(r['next_step'])} |")
+    out += ["", f"共 {len(due)} 列。", ""]
+    return "\n".join(out)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--check", action="store_true", help="exit 1 if docs/modeling-ledger.md is stale")
-    text = render()
+    parser.add_argument("--check", action="store_true", help="exit 1 if a rendered doc is stale")
+    docs = {DOC: render(), CHECKLIST: render_checklist()}
     if parser.parse_args().check:
-        current = DOC.read_text(encoding="utf-8") if DOC.exists() else ""
-        if current != text:
-            print("docs/modeling-ledger.md is stale: run python scripts/render_ledger.py")
-            raise SystemExit(1)
+        for path, text in docs.items():
+            current = path.read_text(encoding="utf-8") if path.exists() else ""
+            if current != text:
+                print(f"{path.relative_to(ROOT).as_posix()} is stale: run python scripts/render_ledger.py")
+                raise SystemExit(1)
         return
-    DOC.write_text(text, encoding="utf-8", newline="\n")
-    print(f"wrote {DOC.relative_to(ROOT)}")
+    for path, text in docs.items():
+        path.write_text(text, encoding="utf-8", newline="\n")
+        print(f"wrote {path.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

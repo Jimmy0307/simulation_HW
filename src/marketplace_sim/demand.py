@@ -141,7 +141,7 @@ class LiteratureDemand:
                     fit = max(0.0, min(offer.quality, 1.0)) * similarity ** float(c["similarity_power"])
                     if fit <= 0:
                         continue
-                    relative_price = min(offer.price / cell.wtp, _MAX_RELATIVE_PRICE)
+                    relative_price = min(offer.price * offer.price_factor / cell.wtp, _MAX_RELATIVE_PRICE)
                     utility = float(c["fit_weight"]) * (fit - 1.0) - float(c["price_sensitivity"]) * (relative_price - 1.0)
                     utility = max(-_UTILITY_CLAMP, min(_UTILITY_CLAMP, utility))
                     attraction = (math.exp(utility) * self._ad_response(self.goodwill(offer), reference.get(sid, 0.0), offer.media)

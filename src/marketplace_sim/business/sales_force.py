@@ -21,6 +21,11 @@ HEURISTIC parts (no published quantified relation found; practice rules, labelle
   The carried headcount after quits is heuristic, so a quarter that runs on carried headcount is heuristic.
 * costs: salaries, hiring and severance, training, commission. The game's sales-force cost rules were not observed,
   so every cost line is heuristic (and so is cash once a sales force is paid).
+* ``sales_force.web_sales``: web salespeople (phone and chat for the web centers) add their own constant-elasticity
+  response, applied in proportion to the web share of our outlets:
+      effort x (1 + web share x ((1 + web force / web reference) ^ web elasticity - 1))
+  The personal-selling meta-analysis is about field sales forces, so its range is not carried over: the web
+  elasticity is a labelled practice default and any web salesperson makes effort heuristic. Paid the same salary.
 """
 
 from __future__ import annotations
@@ -49,11 +54,12 @@ class SalesForceModule:
     spec = ModuleSpec(
         key="sales_force", title="業務人力與薪酬",
         rows={"sales_force.staffing": Maturity.LITERATURE, "sales_force.training": Maturity.HEURISTIC,
-              "sales_force.compensation": Maturity.HEURISTIC},
-        decisions=("headcount", "salary", "commission_pct", "training"),
+              "sales_force.compensation": Maturity.HEURISTIC, "sales_force.web_sales": Maturity.HEURISTIC},
+        decisions=("headcount", "salary", "commission_pct", "training", "web_headcount"),
         outputs=("sales_force_headcount", "sales_force_hires", "sales_force_departures", "sales_force_quit_rate",
                  "sales_force_skill", "selling_effort", "sales_force_salaries", "sales_force_hiring",
-                 "sales_force_training", "sales_force_commission"),
+                 "sales_force_training", "sales_force_commission", "web_sales_headcount", "web_sales_effort",
+                 "web_sales_salaries"),
         couplings=("selling_effort", "expenses", "revenue_rates", "state"),
         evidence="src/marketplace_sim/business/sales_force.py; data/module_defaults.json (ranges)")
 
@@ -100,15 +106,22 @@ class SalesForceModule:
         commission = number(d, "commission_pct", float(inp.state.get("commission_pct", c["reference_commission_pct"])),
                             high=50.0)
         training = number(d, "training", 0.0, high=100 * c["reference_salary"])
+        web = number(d, "web_headcount", float(inp.state.get("web_headcount", 0.0)), high=c["max_headcount"])
         hires, layoffs = max(headcount - start, 0.0), max(start - headcount, 0.0)
         skill_start = skill_prior * start / headcount if headcount > 0 and headcount > start else skill_prior
         skill = self.skill_after(skill_start, training) if headcount > 0 else 0.0
         effort = self.effort(headcount, skill, inp.markets_reached)
+        web_factor = 1.0
+        if web > 0:
+            web_effort = (1 + web / c["web_force_reference"]) ** c["web_elasticity"]
+            web_factor = 1 + inp.web_share * (web_effort - 1)
+            effort *= web_factor
         quit_rate = self.quit_rate(salary, commission)
-        # Literature only when the force this quarter is the decided headcount and no (heuristic) skill is in play.
-        clean = decided and skill == 0.0
+        # Literature only when the force this quarter is the decided headcount and no (heuristic) part is in play.
+        clean = decided and skill == 0.0 and web == 0.0
         effort_level = L if clean else H
-        why = LIT if clean else f"{LIT}; with heuristic parts ({'skill from training' if skill else 'carried headcount after quits'})"
+        part = "web salespeople" if web else "skill from training" if skill else "carried headcount after quits"
+        why = LIT if clean else f"{LIT}; with heuristic parts ({part})"
 
         out = ModuleResult()
         out.selling_effort = Tagged(effort, effort_level, why)
@@ -125,9 +138,14 @@ class SalesForceModule:
                                                     f"hires x hire cost + layoffs x severance ({NOTE})")
         out.expenses["sales_force_training"] = Tagged(headcount * training, H, f"headcount x training per person ({NOTE})")
         out.revenue_rates["sales_force_commission"] = Tagged(commission / 100, H, f"commission % of revenue ({NOTE})")
+        if web > 0 or "web_headcount" in d:
+            out.lines["web_sales_headcount"] = Tagged(web, H, f"web salespeople (plan input or carried; {NOTE})")
+            out.lines["web_sales_effort"] = Tagged(web_factor, H, f"1 + web share x ((1 + web/ref)^e - 1) ({NOTE})")
+            out.expenses["web_sales_salaries"] = Tagged(web * salary, H, f"web salespeople x salary ({NOTE})")
         # Nobody employed: the module stops carrying state, so it no longer runs (or marks numbers) next quarter.
-        out.state = {} if headcount <= 0 else {"headcount": headcount * (1 - quit_rate), "skill": skill,
-                                               "salary": salary, "commission_pct": commission}
+        out.state = {} if headcount <= 0 and web <= 0 else {"headcount": headcount * (1 - quit_rate), "skill": skill,
+                                                            "salary": salary, "commission_pct": commission,
+                                                            **({"web_headcount": web} if web > 0 else {})}
         if headcount > 0 and inp.markets_reached == 0:
             out.notes.append("no open outlet at quarter start, so salespeople have no market to work")
         return out

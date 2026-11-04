@@ -5,13 +5,32 @@
   "marketing.media_mix": {
    "maturity": "literature",
    "coefficients": {
-    "media_weights": {"local": 0.25, "regional": 0.25, "social": 0.25, "search": 0.25}
+    "media_weights": {
+     "local": 0.25,
+     "regional": 0.25,
+     "social": 0.25,
+     "search": 0.25
+    }
    },
    "ranges": {},
    "basis": {
-    "form": {"kind": "literature", "sources": ["Cooper & Nakanishi 1988 (MCI: one multiplicative term with its own elasticity per instrument, eq. 2.7)"]},
-    "elasticity": {"kind": "literature", "sources": ["demand chain ad_elasticity (data/demand_literature.json): Sethuraman, Tellis & Briesch 2011, short-term mean 0.12 (median 0.05), long-term mean 0.24 (median 0.10)"]},
-    "media_weights": {"kind": "labelled_default", "sources": [], "why": "No published general ranking of local, regional, social and search media; equal weights are the neutral choice until Q2+ data."}
+    "form": {
+     "kind": "literature",
+     "sources": [
+      "Cooper & Nakanishi 1988 (MCI: one multiplicative term with its own elasticity per instrument, eq. 2.7)"
+     ]
+    },
+    "elasticity": {
+     "kind": "literature",
+     "sources": [
+      "demand chain ad_elasticity (data/demand_literature.json): Sethuraman, Tellis & Briesch 2011, short-term mean 0.12 (median 0.05), long-term mean 0.24 (median 0.10)"
+     ]
+    },
+    "media_weights": {
+     "kind": "labelled_default",
+     "sources": [],
+     "why": "No published general ranking of local, regional, social and search media; equal weights are the neutral choice until Q2+ data."
+    }
    }
   },
   "sales_force": {
@@ -32,16 +51,63 @@
     "severance_cost": 3000,
     "training_scale": 1500,
     "skill_decay": 0.2,
-    "skill_bonus": 0.5
+    "skill_bonus": 0.5,
+    "web_force_reference": 2,
+    "web_elasticity": 0.2
    },
-   "ranges": {"selling_elasticity": [0.31, 0.34]},
+   "ranges": {
+    "selling_elasticity": [
+     0.31,
+     0.34
+    ]
+   },
    "basis": {
-    "selling_elasticity": {"kind": "literature", "range": [0.31, 0.34], "sources": ["Albers, Mantrala & Sridhar 2010, JMR 47(5): mean current-period personal-selling elasticity 0.34, about 0.31 after method-bias correction (506 estimates; abstract verified; dispersion not verified)"]},
-    "form": {"kind": "literature", "sources": ["Lodish 1971 (call-response curves)", "constant-elasticity response as in the meta-analysis"]},
-    "force_reference": {"kind": "labelled_default", "sources": [], "why": "Scale of the force per market at which the response is (1+1)^e; chosen for the synthetic pack."},
-    "pay and retention (base_quit, pay_sensitivity, min_quit, max_quit, commission_weight, reference_*)": {"kind": "heuristic", "sources": ["direction only: Griffeth, Hom & Gaertner 2000, pay vs turnover rho about -0.09 (-0.12 in 1990s studies), no elasticity"]},
-    "training (training_scale, skill_decay, skill_bonus)": {"kind": "heuristic", "sources": ["candidate for the next step: Farrell & Hakstian 2001 (23.1% productivity gain from training, 12 effect sizes; seen as abstract snippet only, not verified)"]},
-    "costs (hire_cost, severance_cost)": {"kind": "heuristic", "sources": [], "why": "The game's sales-force cost rule was not observed."}
+    "selling_elasticity": {
+     "kind": "literature",
+     "range": [
+      0.31,
+      0.34
+     ],
+     "sources": [
+      "Albers, Mantrala & Sridhar 2010, JMR 47(5): mean current-period personal-selling elasticity 0.34, about 0.31 after method-bias correction (506 estimates; abstract verified; dispersion not verified)"
+     ]
+    },
+    "form": {
+     "kind": "literature",
+     "sources": [
+      "Lodish 1971 (call-response curves)",
+      "constant-elasticity response as in the meta-analysis"
+     ]
+    },
+    "force_reference": {
+     "kind": "labelled_default",
+     "sources": [],
+     "why": "Scale of the force per market at which the response is (1+1)^e; chosen for the synthetic pack."
+    },
+    "pay and retention (base_quit, pay_sensitivity, min_quit, max_quit, commission_weight, reference_*)": {
+     "kind": "heuristic",
+     "sources": [
+      "direction only: Griffeth, Hom & Gaertner 2000, pay vs turnover rho about -0.09",
+      "Sokolova & Sorensen 2021, ILR Review 74(1): median labour-supply elasticity to the firm 1.68 (1.41 direct estimates; working-paper full text); a separation elasticity would need a steady-state conversion, an inference not reported by them"
+     ]
+    },
+    "costs (hire_cost, severance_cost)": {
+     "kind": "heuristic",
+     "sources": [],
+     "why": "The game's sales-force cost rule was not observed."
+    },
+    "training (training_scale, skill_decay, skill_bonus)": {
+     "kind": "heuristic",
+     "sources": [
+      "Arthur, Bennett, Edens & Bell 2003, J. Applied Psychology 88(2): sample-weighted mean d = 0.62 on results criteria (0.60-0.63 across reaction, learning, behaviour, results; abstract verified in the published PDF)"
+     ],
+     "why": "d is in standard deviations of performance; turning it into a sales multiplier needs the spread of salesperson performance, which has no published general value. Farrell & Hakstian 2001's '23.1%' could not be verified anywhere and is no longer cited."
+    },
+    "web sales (web_force_reference, web_elasticity)": {
+     "kind": "heuristic",
+     "sources": [],
+     "why": "The personal-selling meta-analysis (Albers et al. 2010) covers field sales forces; no published elasticity for web or phone salespeople."
+    }
    }
   },
   "supply.inventory": {
@@ -50,23 +116,447 @@
     "annual_holding_rate": 0.25,
     "salvage_fraction": 0.4
    },
-   "ranges": {"annual_holding_rate": [0.12, 0.5]},
+   "ranges": {
+    "annual_holding_rate": [
+     0.12,
+     0.5
+    ]
+   },
    "basis": {
-    "annual_holding_rate": {"kind": "literature", "range": [0.12, 0.5], "sources": ["Azzi, Battini, Faccio, Persona & Sgarbossa 2014, Int. J. Logistics Management 25(1), literature review quoting Stock & Lambert 1993 (12-34%) and Schonberger & Knod 1997 / Pyke & Cohen 1994 (20-50%) of inventory value per year (introduction verified)", "form: Harris 1913"]},
-    "salvage_fraction": {"kind": "heuristic", "sources": [], "why": "No published general salvage rate (Cachon & Kok 2007 is about estimating it, not a value)."}
+    "annual_holding_rate": {
+     "kind": "literature",
+     "range": [
+      0.12,
+      0.5
+     ],
+     "sources": [
+      "Azzi, Battini, Faccio, Persona & Sgarbossa 2014, Int. J. Logistics Management 25(1), literature review quoting Stock & Lambert 1993 (12-34%) and Schonberger & Knod 1997 / Pyke & Cohen 1994 (20-50%) of inventory value per year (introduction verified)",
+      "form: Harris 1913"
+     ]
+    },
+    "salvage_fraction": {
+     "kind": "heuristic",
+     "sources": [],
+     "why": "No published general salvage rate (Cachon & Kok 2007 is about estimating it, not a value)."
+    }
    }
   },
   "supply.purchasing": {
    "maturity": "heuristic",
    "coefficients": {
-    "discount_tiers": [[300, 0.03], [600, 0.06], [1200, 0.10]],
+    "discount_tiers": [
+     [
+      300,
+      0.03
+     ],
+     [
+      600,
+      0.06
+     ],
+     [
+      1200,
+      0.1
+     ]
+    ],
     "shortfall_fee_per_unit": 20
    },
    "ranges": {},
    "basis": {
-    "form": {"kind": "literature", "sources": ["Dolan 1987 (all-units quantity discounts)", "Monahan 1984"]},
-    "discount_tiers": {"kind": "heuristic", "sources": [], "why": "No published typical discount magnitudes; tiers chosen for the synthetic pack's production volume."},
-    "shortfall_fee_per_unit": {"kind": "heuristic", "sources": []}
+    "form": {
+     "kind": "literature",
+     "sources": [
+      "Dolan 1987 (all-units quantity discounts)",
+      "Monahan 1984"
+     ]
+    },
+    "discount_tiers": {
+     "kind": "heuristic",
+     "sources": [],
+     "why": "No published typical discount magnitudes; tiers chosen for the synthetic pack's production volume."
+    },
+    "shortfall_fee_per_unit": {
+     "kind": "heuristic",
+     "sources": []
+    }
+   }
+  },
+  "marketing.promotions": {
+   "maturity": "heuristic",
+   "coefficients": {
+    "perceived_weight": 0.7,
+    "redemption_rate": 0.4
+   },
+   "ranges": {},
+   "basis": {
+    "form": {
+     "kind": "literature",
+     "sources": [
+      "price response of the demand chain (mean price elasticity -2.62: Bijmolt, van Heerde & Pieters 2005, JMR 42(2); abstract)"
+     ]
+    },
+    "perceived_weight, redemption_rate": {
+     "kind": "heuristic",
+     "sources": [],
+     "why": "No peer-reviewed redemption or slippage rate found (Lu & Moorthy 2007 and Gilpatric 2009 model rebates without a rate)."
+    }
+   }
+  },
+  "marketing.ad_copy": {
+   "maturity": "heuristic",
+   "coefficients": {
+    "lift": 0.1
+   },
+   "ranges": {},
+   "basis": {
+    "lift": {
+     "kind": "heuristic",
+     "sources": [],
+     "why": "Content moderates advertising response (direction only); no generalizable magnitude found."
+    }
+   }
+  },
+  "marketing.internet": {
+   "maturity": "heuristic",
+   "coefficients": {
+    "elasticity": 0.12,
+    "spend_reference": 50000
+   },
+   "ranges": {},
+   "basis": {
+    "elasticity": {
+     "kind": "heuristic",
+     "sources": [
+      "borrowed: Sethuraman, Tellis & Briesch 2011 short-term advertising mean 0.12 (not online-specific)"
+     ],
+     "why": "No online-specific meta-analytic elasticity found."
+    },
+    "spend_reference": {
+     "kind": "labelled_default",
+     "sources": []
+    }
+   }
+  },
+  "marketing.market_research": {
+   "maturity": "heuristic",
+   "coefficients": {
+    "report_price": 15000
+   },
+   "ranges": {},
+   "basis": {
+    "report_price": {
+     "kind": "heuristic",
+     "sources": [],
+     "why": "The game's report prices are unobserved."
+    }
+   }
+  },
+  "strategy.balanced_scorecard": {
+   "maturity": "heuristic",
+   "coefficients": {
+    "weights": {
+     "financial": 0.25,
+     "customer": 0.25,
+     "internal": 0.25,
+     "learning": 0.25
+    },
+    "reference_share": 0.25,
+    "reference_learning_share": 0.05
+   },
+   "ranges": {},
+   "basis": {
+    "form": {
+     "kind": "literature",
+     "sources": [
+      "Kaplan & Norton 1992, HBR 70(1): four perspectives"
+     ]
+    },
+    "weights and references": {
+     "kind": "heuristic",
+     "sources": [],
+     "why": "No published weights; the game's ranking formula is unverified."
+    }
+   }
+  },
+  "hr.production_workers": {
+   "maturity": "heuristic",
+   "coefficients": {
+    "productivity_elasticity": 0.3,
+    "min_productivity": 0.85,
+    "max_productivity": 1.1
+   },
+   "ranges": {},
+   "basis": {
+    "productivity_elasticity": {
+     "kind": "heuristic",
+     "sources": [
+      "direction: efficiency wages; Sokolova & Sorensen 2021 (labour supply, not output)"
+     ],
+     "why": "No published wage-to-productivity elasticity found."
+    }
+   }
+  },
+  "hr.executive_and_culture": {
+   "maturity": "heuristic",
+   "coefficients": {
+    "participation_scale": 50000,
+    "bonus_scale": 2,
+    "adjust_speed": 0.5,
+    "initial_morale": 0.3,
+    "morale_bonus": 0.05,
+    "survey_price": 8000
+   },
+   "ranges": {},
+   "basis": {
+    "all": {
+     "kind": "heuristic",
+     "sources": [
+      "direction: Doucouliagos 1995, ILR Review 49(1) (participation and productivity, 43 studies; abstract)"
+     ],
+     "why": "No usable coefficient at the depth verified."
+    }
+   }
+  },
+  "production.operating_capacity": {
+   "maturity": "heuristic",
+   "coefficients": {
+    "second_shift_efficiency": 0.9,
+    "third_shift_efficiency": 0.8,
+    "overtime_productivity_loss": 0.15,
+    "overtime_premium": 1.5,
+    "shift_fixed_cost": 40000
+   },
+   "ranges": {},
+   "basis": {
+    "overtime_premium": {
+     "kind": "labelled_default",
+     "sources": [
+      "29 U.S.C. 207(a)(1): at least 1.5 x the regular rate (statute, full text)"
+     ],
+     "why": "A legal floor, not the game's rule."
+    },
+    "overtime_productivity_loss": {
+     "kind": "heuristic",
+     "sources": [
+      "direction: Shepard & Clifton 2000 (abstract); Pencavel 2015 (abstract)"
+     ],
+     "why": "No published elasticity range found."
+    },
+    "shift efficiencies, shift cost": {
+     "kind": "heuristic",
+     "sources": []
+    }
+   }
+  },
+  "production.factory_location": {
+   "maturity": "heuristic",
+   "coefficients": {
+    "sites": {
+     "home": {
+      "labor_factor": 1.0,
+      "shipping_per_unit": 0
+     },
+     "low_cost": {
+      "labor_factor": 0.7,
+      "shipping_per_unit": 6
+     }
+    },
+    "relocation_cost": 250000
+   },
+   "ranges": {},
+   "basis": {
+    "all": {
+     "kind": "heuristic",
+     "sources": [],
+     "why": "The game's site options and costs are unobserved."
+    }
+   }
+  },
+  "supply.replenishment": {
+   "maturity": "literature",
+   "coefficients": {
+    "record_quarters": 4
+   },
+   "ranges": {},
+   "basis": {
+    "form": {
+     "kind": "literature",
+     "sources": [
+      "Arrow, Harris & Marschak 1951, Econometrica 19(3) (abstract)",
+      "Scarf 1960, (S,s) optimality (cited)",
+      "normal safety stock: Silver, Pyke & Peterson 1998 (textbook)"
+     ]
+    },
+    "record_quarters": {
+     "kind": "labelled_default",
+     "sources": [],
+     "why": "Window of the demand record; cover and z are the player's choices."
+    },
+    "priority (production.scheduling)": {
+     "kind": "heuristic",
+     "sources": [],
+     "why": "The game's allocation rule is unobserved."
+    }
+   }
+  },
+  "production.quality": {
+   "maturity": "heuristic",
+   "coefficients": {
+    "base_defect_rate": 0.06,
+    "qa_scale": 15,
+    "defect_sensitivity": 2.0,
+    "repair_share": 0.5
+   },
+   "ranges": {},
+   "basis": {
+    "all": {
+     "kind": "heuristic",
+     "sources": [
+      "direction: Buzzell & Gale 1987, The PIMS Principles"
+     ],
+     "why": "No meta-analytic quality-to-sales magnitude found."
+    }
+   }
+  },
+  "rnd.feature_development": {
+   "maturity": "literature",
+   "coefficients": {
+    "annual_depreciation": 0.15,
+    "rnd_elasticity": 0.08,
+    "stock_reference": 200000
+   },
+   "ranges": {
+    "annual_depreciation": [
+     0.08,
+     0.25
+    ],
+    "rnd_elasticity": [
+     0.01,
+     0.25
+    ]
+   },
+   "basis": {
+    "annual_depreciation": {
+     "kind": "literature",
+     "range": [
+      0.08,
+      0.25
+     ],
+     "sources": [
+      "Hall, Mairesse & Mohnen 2010, Handbook of the Economics of Innovation ch. 24 (NBER w15622, full text): perpetual inventory, Griliches' 15 %; results insensitive between 8 and 25 %"
+     ]
+    },
+    "rnd_elasticity": {
+     "kind": "literature",
+     "range": [
+      0.01,
+      0.25
+     ],
+     "sources": [
+      "Hall, Mairesse & Mohnen 2010: R&D output elasticity 0.01-0.25, centred about 0.08 (full text)"
+     ],
+     "why": "Used as an attraction elasticity: a labelled mapping from firm output to brand attraction."
+    },
+    "stock_reference": {
+     "kind": "labelled_default",
+     "sources": []
+    },
+    "spending line": {
+     "kind": "heuristic",
+     "sources": [],
+     "why": "How the game charges R&D is unobserved."
+    }
+   }
+  },
+  "production.learning_curve": {
+   "maturity": "literature",
+   "coefficients": {
+    "progress_ratio": 0.81,
+    "prior_experience": 2000
+   },
+   "ranges": {
+    "progress_ratio": [
+     0.8,
+     0.82
+    ]
+   },
+   "basis": {
+    "progress_ratio": {
+     "kind": "literature",
+     "range": [
+      0.8,
+      0.82
+     ],
+     "sources": [
+      "Dutton & Thomas 1984, AMR 9(2): 108 cases, centre of the distribution 80-82 % (via full-text secondary sources: Lapre 2011, Learning Curves ch. 2; OIES paper EL43, 2021); the full span reported is 55-108 %"
+     ]
+    },
+    "form": {
+     "kind": "literature",
+     "sources": [
+      "Wright 1936, J. Aeronautical Sciences 3; Stanford-B form with prior experience"
+     ]
+    },
+    "prior_experience": {
+     "kind": "labelled_default",
+     "sources": []
+    }
+   }
+  },
+  "finance.loans": {
+   "maturity": "heuristic",
+   "coefficients": {
+    "short_rate_quarterly": 0.025,
+    "long_rate_quarterly": 0.02,
+    "short_limit": 2000000
+   },
+   "ranges": {},
+   "basis": {
+    "all": {
+     "kind": "heuristic",
+     "sources": [],
+     "why": "The game's loan rates, limits and terms are unobserved; the arithmetic is exact."
+    }
+   }
+  },
+  "accounting.accrual": {
+   "maturity": "heuristic",
+   "coefficients": {
+    "depreciation_quarters": 40,
+    "inventory_tax_annual": 0.02
+   },
+   "ranges": {},
+   "basis": {
+    "structure": {
+     "kind": "measured-structure",
+     "sources": [
+      "captured Q1 statements: COGS, depreciation, loss carry-forward row, inventory tax parameter (structure only)"
+     ]
+    },
+    "depreciation_quarters, inventory_tax_annual": {
+     "kind": "heuristic",
+     "sources": [],
+     "why": "Rates and lives unobserved until Q2+ statements."
+    }
+   }
+  },
+  "production.excess_capacity": {
+   "maturity": "heuristic",
+   "coefficients": {
+    "idle_cost_per_unit": 2.0
+   },
+   "ranges": {},
+   "basis": {
+    "structure": {
+     "kind": "measured-structure",
+     "sources": [
+      "captured Q1 income statement: 'excess capacity' expense row (structure only)"
+     ]
+    },
+    "idle_cost_per_unit": {
+     "kind": "heuristic",
+     "sources": [],
+     "why": "The game's idle-capacity rule is unobserved."
+    }
    }
   }
  }

@@ -19,33 +19,14 @@ from marketplace_sim.api.export import DEMO_QUARTERS, _plan
 from marketplace_sim.engine import CompanyState, Plan, Report, advance
 from marketplace_sim.pack import load_pack
 from marketplace_sim.provenance import Level
+from marketplace_sim.reconcile import CASH_ROWS
 
 ROOT = Path(__file__).resolve().parents[1]
 PACK = load_pack(ROOT / "examples" / "synthetic")
 STATEMENT = (ROOT / "evidence" / "private" / "extracted" / "nested" / "marketplace-har" / "marketplace-har" / "out" / "q1"
              / "services" / "ProFormaCashFlow.json")
 
-# Engine line -> (game cash-flow row, effective sign). Rows we do not model are zero in the engine.
-CASH_ROWS: dict[str, tuple[str, int]] = {
-    "revenue": ("sales", +1),
-    "production_cost": ("production", -1),
-    "advertising": ("advertising", -1),
-    "store_setup": ("so", -1),
-    "web_center_setup": ("so", -1),
-    "outlet_lease": ("so", -1),
-    "sales_force_salaries": ("sf", -1),
-    "sales_force_hiring": ("sf", -1),
-    "sales_force_training": ("sf", -1),
-    "sales_force_commission": ("sf", -1),
-    "income_tax": ("income_taxes", -1),
-    "cd_interest": ("interest_income", +1),
-    "inventory_selloff_proceeds": ("other_income", +1),
-    "inventory_holding_cost": ("other_exp", -1),
-    "purchasing_shortfall_fee": ("other_exp", -1),
-    "capex_capacity": ("fixed_cap", -1),
-    "stock_raised": ("inc_comm", +1),
-    "emergency_loan": ("inc_emer_l", +1),
-}
+# Engine line -> (game cash-flow row, effective sign): src/marketplace_sim/reconcile.py (one source).
 # design_cost has no confirmed row (R&D or production): one reason it stays heuristic. Mapped as an outflow.
 UNCONFIRMED = {"design_cost": -1}
 

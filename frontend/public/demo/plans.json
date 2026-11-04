@@ -266,6 +266,20 @@
        "note": "The real production cost function is not yet measured."
       },
       {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople x salary",
+       "level": "heuristic",
+       "metric": "web_sales_salaries",
+       "note": ""
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople (plan input or carried)",
+       "level": "heuristic",
+       "metric": "web_sales_headcount",
+       "note": ""
+      },
+      {
        "evidence": "rule unverified",
        "formula": "amount needed to bring cash to zero",
        "level": "placeholder",
@@ -477,6 +491,20 @@
        "level": "placeholder",
        "metric": "unit_cost[brand]",
        "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople x salary",
+       "level": "heuristic",
+       "metric": "web_sales_salaries",
+       "note": ""
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople (plan input or carried)",
+       "level": "heuristic",
+       "metric": "web_sales_headcount",
+       "note": ""
       }
      ],
      "level": "placeholder",
@@ -607,6 +635,20 @@
        "level": "placeholder",
        "metric": "unit_cost[brand]",
        "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople x salary",
+       "level": "heuristic",
+       "metric": "web_sales_salaries",
+       "note": ""
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople (plan input or carried)",
+       "level": "heuristic",
+       "metric": "web_sales_headcount",
+       "note": ""
       }
      ],
      "level": "placeholder",
@@ -797,6 +839,20 @@
        "note": "The real production cost function is not yet measured."
       },
       {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople x salary",
+       "level": "heuristic",
+       "metric": "web_sales_salaries",
+       "note": ""
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople (plan input or carried)",
+       "level": "heuristic",
+       "metric": "web_sales_headcount",
+       "note": ""
+      },
+      {
        "evidence": "rate from pack; rule unverified",
        "formula": "max(pretax, 0) x tax rate",
        "level": "placeholder",
@@ -902,6 +958,20 @@
        "level": "placeholder",
        "metric": "unit_cost[brand]",
        "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople x salary",
+       "level": "heuristic",
+       "metric": "web_sales_salaries",
+       "note": ""
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople (plan input or carried)",
+       "level": "heuristic",
+       "metric": "web_sales_headcount",
+       "note": ""
       }
      ],
      "level": "placeholder",
@@ -1421,6 +1491,20 @@
        "note": "The real production cost function is not yet measured."
       },
       {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople x salary",
+       "level": "heuristic",
+       "metric": "web_sales_salaries",
+       "note": ""
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople (plan input or carried)",
+       "level": "heuristic",
+       "metric": "web_sales_headcount",
+       "note": ""
+      },
+      {
        "evidence": "rule unverified",
        "formula": "amount needed to bring cash to zero",
        "level": "placeholder",
@@ -1632,6 +1716,20 @@
        "level": "placeholder",
        "metric": "unit_cost[brand]",
        "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople x salary",
+       "level": "heuristic",
+       "metric": "web_sales_salaries",
+       "note": ""
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople (plan input or carried)",
+       "level": "heuristic",
+       "metric": "web_sales_headcount",
+       "note": ""
       }
      ],
      "level": "placeholder",
@@ -1762,6 +1860,20 @@
        "level": "placeholder",
        "metric": "unit_cost[brand]",
        "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople x salary",
+       "level": "heuristic",
+       "metric": "web_sales_salaries",
+       "note": ""
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople (plan input or carried)",
+       "level": "heuristic",
+       "metric": "web_sales_headcount",
+       "note": ""
       }
      ],
      "level": "placeholder",
@@ -1952,6 +2064,20 @@
        "note": "The real production cost function is not yet measured."
       },
       {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople x salary",
+       "level": "heuristic",
+       "metric": "web_sales_salaries",
+       "note": ""
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople (plan input or carried)",
+       "level": "heuristic",
+       "metric": "web_sales_headcount",
+       "note": ""
+      },
+      {
        "evidence": "rate from pack; rule unverified",
        "formula": "max(pretax, 0) x tax rate",
        "level": "placeholder",
@@ -2057,6 +2183,20 @@
        "level": "placeholder",
        "metric": "unit_cost[brand]",
        "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople x salary",
+       "level": "heuristic",
+       "metric": "web_sales_salaries",
+       "note": ""
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople (plan input or carried)",
+       "level": "heuristic",
+       "metric": "web_sales_headcount",
+       "note": ""
       }
      ],
      "level": "placeholder",
@@ -2645,6 +2785,20 @@
        "note": "The real production cost function is not yet measured."
       },
       {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople x salary",
+       "level": "heuristic",
+       "metric": "web_sales_salaries",
+       "note": ""
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople (plan input or carried)",
+       "level": "heuristic",
+       "metric": "web_sales_headcount",
+       "note": ""
+      },
+      {
        "evidence": "rule unverified",
        "formula": "amount needed to bring cash to zero",
        "level": "placeholder",
@@ -2856,6 +3010,20 @@
        "level": "placeholder",
        "metric": "unit_cost[brand]",
        "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople x salary",
+       "level": "heuristic",
+       "metric": "web_sales_salaries",
+       "note": ""
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople (plan input or carried)",
+       "level": "heuristic",
+       "metric": "web_sales_headcount",
+       "note": ""
       }
      ],
      "level": "placeholder",
@@ -2986,6 +3154,20 @@
        "level": "placeholder",
        "metric": "unit_cost[brand]",
        "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople x salary",
+       "level": "heuristic",
+       "metric": "web_sales_salaries",
+       "note": ""
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople (plan input or carried)",
+       "level": "heuristic",
+       "metric": "web_sales_headcount",
+       "note": ""
       }
      ],
      "level": "placeholder",
@@ -3176,6 +3358,20 @@
        "note": "The real production cost function is not yet measured."
       },
       {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople x salary",
+       "level": "heuristic",
+       "metric": "web_sales_salaries",
+       "note": ""
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople (plan input or carried)",
+       "level": "heuristic",
+       "metric": "web_sales_headcount",
+       "note": ""
+      },
+      {
        "evidence": "rate from pack; rule unverified",
        "formula": "max(pretax, 0) x tax rate",
        "level": "placeholder",
@@ -3281,6 +3477,20 @@
        "level": "placeholder",
        "metric": "unit_cost[brand]",
        "note": "The real production cost function is not yet measured."
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople x salary",
+       "level": "heuristic",
+       "metric": "web_sales_salaries",
+       "note": ""
+      },
+      {
+       "evidence": "src/marketplace_sim/business/sales_force.py",
+       "formula": "web salespeople (plan input or carried)",
+       "level": "heuristic",
+       "metric": "web_sales_headcount",
+       "note": ""
       }
      ],
      "level": "placeholder",

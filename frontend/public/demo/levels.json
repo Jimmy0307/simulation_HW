@@ -63,7 +63,12 @@
   {
    "evidence": "docs/experiments/EXP-02.md; docs/calculation-map.md #3",
    "formula": "fixed capacity (units/day) x days per quarter",
-   "inputs": [],
+   "inputs": [
+    "worker_productivity",
+    "culture_productivity",
+    "shift_factor",
+    "overtime_units"
+   ],
    "level": "verified",
    "metric": "capacity_units_per_quarter",
    "note": ""
@@ -122,7 +127,11 @@
    "evidence": "docs/cost-model.md (not covered)",
    "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
    "inputs": [
-    "material_cost_factor"
+    "material_cost_factor",
+    "labor_cost_factor",
+    "location_labor_factor",
+    "location_shipping",
+    "learning_factor[brand]"
    ],
    "level": "placeholder",
    "metric": "unit_cost[brand]",
@@ -140,7 +149,8 @@
    "evidence": "see unit_cost",
    "formula": "sum(units x unit_cost)",
    "inputs": [
-    "unit_cost[brand]"
+    "unit_cost[brand]",
+    "replenishment_units[brand]"
    ],
    "level": "placeholder",
    "metric": "production_cost",
@@ -160,7 +170,12 @@
    "inputs": [
     "advertising",
     "media_mix_index[brand]",
-    "selling_effort"
+    "selling_effort",
+    "promotion_price_factor[brand]",
+    "ad_copy_factor[brand]",
+    "internet_factor",
+    "quality_factor[brand]",
+    "rnd_factor[brand]"
    ],
    "level": "literature",
    "metric": "units_demanded[brand]",
@@ -242,8 +257,23 @@
     "sales_force_hiring",
     "sales_force_training",
     "sales_force_commission",
+    "web_sales_salaries",
     "inventory_holding_cost",
-    "purchasing_shortfall_fee"
+    "purchasing_shortfall_fee",
+    "promotion_rebates",
+    "internet_marketing",
+    "market_research",
+    "culture_participation",
+    "culture_survey",
+    "executive_bonus",
+    "shift_cost",
+    "overtime_premium",
+    "relocation_cost",
+    "excess_capacity_cost",
+    "warranty_cost",
+    "rnd_spending",
+    "loan_interest",
+    "inventory_tax"
    ],
    "level": "placeholder",
    "metric": "operating_profit_before_tax",
@@ -290,8 +320,28 @@
     "sales_force_hiring",
     "sales_force_training",
     "sales_force_commission",
+    "web_sales_salaries",
     "inventory_holding_cost",
-    "purchasing_shortfall_fee"
+    "purchasing_shortfall_fee",
+    "promotion_rebates",
+    "internet_marketing",
+    "market_research",
+    "culture_participation",
+    "culture_survey",
+    "executive_bonus",
+    "shift_cost",
+    "overtime_premium",
+    "relocation_cost",
+    "excess_capacity_cost",
+    "warranty_cost",
+    "rnd_spending",
+    "loan_interest",
+    "loan_short_proceeds",
+    "loan_short_repaid",
+    "loan_long_proceeds",
+    "loan_long_repaid",
+    "dividends_paid",
+    "inventory_tax"
    ],
    "level": "placeholder",
    "metric": "emergency_loan",
@@ -318,8 +368,28 @@
     "sales_force_hiring",
     "sales_force_training",
     "sales_force_commission",
+    "web_sales_salaries",
     "inventory_holding_cost",
-    "purchasing_shortfall_fee"
+    "purchasing_shortfall_fee",
+    "promotion_rebates",
+    "internet_marketing",
+    "market_research",
+    "culture_participation",
+    "culture_survey",
+    "executive_bonus",
+    "shift_cost",
+    "overtime_premium",
+    "relocation_cost",
+    "excess_capacity_cost",
+    "warranty_cost",
+    "rnd_spending",
+    "loan_interest",
+    "loan_short_proceeds",
+    "loan_short_repaid",
+    "loan_long_proceeds",
+    "loan_long_repaid",
+    "dividends_paid",
+    "inventory_tax"
    ],
    "level": "placeholder",
    "metric": "cash_end",
@@ -372,7 +442,8 @@
    "formula": "(1 + force per market / reference)^selling elasticity",
    "inputs": [
     "sales_force_headcount",
-    "sales_force_skill"
+    "sales_force_skill",
+    "web_sales_effort"
    ],
    "level": "literature",
    "metric": "selling_effort",
@@ -438,6 +509,34 @@
    "note": ""
   },
   {
+   "evidence": "src/marketplace_sim/business/sales_force.py",
+   "formula": "web salespeople (plan input or carried)",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "web_sales_headcount",
+   "note": ""
+  },
+  {
+   "evidence": "src/marketplace_sim/business/sales_force.py",
+   "formula": "1 + web share x ((1 + web force / reference)^elasticity - 1)",
+   "inputs": [
+    "web_sales_headcount"
+   ],
+   "level": "heuristic",
+   "metric": "web_sales_effort",
+   "note": "Practice rule: no published web-selling elasticity."
+  },
+  {
+   "evidence": "src/marketplace_sim/business/sales_force.py",
+   "formula": "web salespeople x salary",
+   "inputs": [
+    "web_sales_headcount"
+   ],
+   "level": "heuristic",
+   "metric": "web_sales_salaries",
+   "note": ""
+  },
+  {
    "evidence": "src/marketplace_sim/business/inventory.py; data/module_defaults.json",
    "formula": "ending units x unit cost x annual carrying rate / 4",
    "inputs": [
@@ -491,6 +590,628 @@
    "level": "heuristic",
    "metric": "purchasing_shortfall_fee",
    "note": ""
+  },
+  {
+   "evidence": "src/marketplace_sim/business/marketing_more.py",
+   "formula": "1 - perceived weight x rebate / price",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "promotion_price_factor[brand]",
+   "note": "practice rule: no published quantified relation, labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/marketing_more.py",
+   "formula": "sum(units sold x rebate x redemption rate)",
+   "inputs": [
+    "units_sold[brand]"
+   ],
+   "level": "heuristic",
+   "metric": "promotion_rebates",
+   "note": "practice rule: no published quantified relation, labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/marketing_more.py",
+   "formula": "1 + lift x (weight of the stressed need / mean need weight - 1), bounded",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "ad_copy_factor[brand]",
+   "note": "practice rule: no published quantified relation, labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/marketing_more.py",
+   "formula": "1 + web share x ((1 + spend / reference)^elasticity - 1)",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "internet_factor",
+   "note": "practice rule: no published quantified relation, labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/marketing_more.py",
+   "formula": "plan input: internet marketing spend",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "internet_marketing",
+   "note": "practice rule: no published quantified relation, labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/research.py",
+   "formula": "reports bought x report price",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "market_research",
+   "note": "practice rule: labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/research.py",
+   "formula": "engine estimate of units demanded per segment",
+   "inputs": [
+    "units_demanded[brand]"
+   ],
+   "level": "literature",
+   "metric": "research_segment_units[segment]",
+   "note": "Copy of the engine's own estimate, at its level."
+  },
+  {
+   "evidence": "src/marketplace_sim/business/research.py",
+   "formula": "engine estimate of a rival's share",
+   "inputs": [
+    "rival_share[firm]"
+   ],
+   "level": "literature",
+   "metric": "research_rival_share[firm]",
+   "note": "Copy of the engine's own estimate, at its level."
+  },
+  {
+   "evidence": "src/marketplace_sim/business/operations.py",
+   "formula": "wage index ^ productivity elasticity, bounded",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "worker_productivity",
+   "note": "practice rule: labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/operations.py",
+   "formula": "wage index (direct labour scales with the wage)",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "labor_cost_factor",
+   "note": "practice rule: labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/operations.py",
+   "formula": "decaying morale stock 0..1 from participation and bonus (shown with a survey)",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "hr_morale",
+   "note": "practice rule: labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/operations.py",
+   "formula": "1 + morale bonus x morale",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "culture_productivity",
+   "note": "practice rule: labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/operations.py",
+   "formula": "plan input",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "culture_participation",
+   "note": "practice rule: labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/operations.py",
+   "formula": "survey price when bought",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "culture_survey",
+   "note": "practice rule: labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/operations.py",
+   "formula": "revenue x bonus %",
+   "inputs": [
+    "revenue"
+   ],
+   "level": "heuristic",
+   "metric": "executive_bonus",
+   "note": "practice rule: labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/operations.py",
+   "formula": "1 + sum of later-shift efficiencies",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "shift_factor",
+   "note": "practice rule: labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/operations.py",
+   "formula": "base capacity x shift factor x overtime % x (1 - productivity loss)",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "overtime_units",
+   "note": "practice rule: labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/operations.py",
+   "formula": "extra shifts x fixed cost per shift",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "shift_cost",
+   "note": "practice rule: labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/operations.py",
+   "formula": "units made beyond regular capacity x direct labour x (premium - 1)",
+   "inputs": [
+    "capacity_units_per_quarter"
+   ],
+   "level": "heuristic",
+   "metric": "overtime_premium",
+   "note": "Premium 1.5 = US statutory floor (29 U.S.C. 207); game rule unobserved."
+  },
+  {
+   "evidence": "src/marketplace_sim/business/operations.py",
+   "formula": "labour factor of the chosen site",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "location_labor_factor",
+   "note": "practice rule: labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/operations.py",
+   "formula": "shipping per unit from the chosen site",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "location_shipping",
+   "note": "practice rule: labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/operations.py",
+   "formula": "one-off charge when the site changes",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "relocation_cost",
+   "note": "practice rule: labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/operations.py",
+   "formula": "capacity - units produced",
+   "inputs": [
+    "capacity_units_per_quarter"
+   ],
+   "level": "heuristic",
+   "metric": "idle_capacity_units",
+   "note": "practice rule: labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/operations.py",
+   "formula": "idle units x idle cost per unit",
+   "inputs": [
+    "idle_capacity_units"
+   ],
+   "level": "heuristic",
+   "metric": "excess_capacity_cost",
+   "note": "practice rule: labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/planning.py",
+   "formula": "mean of the recorded units demanded",
+   "inputs": [
+    "units_demanded[brand]"
+   ],
+   "level": "literature",
+   "metric": "demand_record_mean[brand]",
+   "note": ""
+  },
+  {
+   "evidence": "src/marketplace_sim/business/planning.py",
+   "formula": "mean x cover + z x sd x sqrt(cover)",
+   "inputs": [
+    "demand_record_mean[brand]"
+   ],
+   "level": "literature",
+   "metric": "replenishment_target[brand]",
+   "note": ""
+  },
+  {
+   "evidence": "src/marketplace_sim/business/planning.py",
+   "formula": "max(target - inventory at quarter start, 0)",
+   "inputs": [
+    "replenishment_target[brand]"
+   ],
+   "level": "literature",
+   "metric": "replenishment_units[brand]",
+   "note": "Replaces the plan's production for that brand."
+  },
+  {
+   "evidence": "src/marketplace_sim/business/product.py",
+   "formula": "base rate x exp(-QA per unit / scale)",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "defect_rate[brand]",
+   "note": "practice rule: labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/product.py",
+   "formula": "1 - sensitivity x defect rate",
+   "inputs": [
+    "defect_rate[brand]"
+   ],
+   "level": "heuristic",
+   "metric": "quality_factor[brand]",
+   "note": "practice rule: labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/product.py",
+   "formula": "units sold x defect rate x unit cost x repair share",
+   "inputs": [
+    "units_sold[brand]",
+    "unit_cost[brand]"
+   ],
+   "level": "heuristic",
+   "metric": "warranty_cost",
+   "note": "practice rule: labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/product.py; data/module_defaults.json (ranges)",
+   "formula": "(1 - quarterly depreciation) x prior stock + spend",
+   "inputs": [],
+   "level": "literature",
+   "metric": "rnd_stock[brand]",
+   "note": "Perpetual inventory, 15 %/year (Hall, Mairesse & Mohnen 2010)."
+  },
+  {
+   "evidence": "src/marketplace_sim/business/product.py; data/module_defaults.json (ranges)",
+   "formula": "(1 + stock / reference) ^ R&D elasticity",
+   "inputs": [
+    "rnd_stock[brand]"
+   ],
+   "level": "literature",
+   "metric": "rnd_factor[brand]",
+   "note": ""
+  },
+  {
+   "evidence": "src/marketplace_sim/business/product.py; data/module_defaults.json (ranges)",
+   "formula": "plan input: R&D spend",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "rnd_spending",
+   "note": "How the game charges R&D is unobserved."
+  },
+  {
+   "evidence": "src/marketplace_sim/business/product.py; data/module_defaults.json (ranges)",
+   "formula": "((cumulative at mid-quarter + B) / B) ^ log2(progress ratio)",
+   "inputs": [
+    "cumulative_units[brand]"
+   ],
+   "level": "literature",
+   "metric": "learning_factor[brand]",
+   "note": "Wright 1936, Stanford-B form; ratio in the published centre."
+  },
+  {
+   "evidence": "src/marketplace_sim/business/product.py; data/module_defaults.json (ranges)",
+   "formula": "units produced since the option was switched on",
+   "inputs": [],
+   "level": "literature",
+   "metric": "cumulative_units[brand]",
+   "note": ""
+  },
+  {
+   "evidence": "src/marketplace_sim/business/finance.py",
+   "formula": "short balance x short rate + long balance x long rate (balances at quarter start)",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "loan_interest",
+   "note": "practice rule: game loan terms unobserved, labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/finance.py",
+   "formula": "plan input",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "loan_short_proceeds",
+   "note": "practice rule: game loan terms unobserved, labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/finance.py",
+   "formula": "- last quarter's short loan",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "loan_short_repaid",
+   "note": "practice rule: game loan terms unobserved, labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/finance.py",
+   "formula": "plan input",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "loan_long_proceeds",
+   "note": "practice rule: game loan terms unobserved, labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/finance.py",
+   "formula": "- (instalment + extra repayment), at most the balance",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "loan_long_repaid",
+   "note": "practice rule: game loan terms unobserved, labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/finance.py",
+   "formula": "- plan input",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "dividends_paid",
+   "note": "practice rule: game loan terms unobserved, labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/finance.py",
+   "formula": "short loan outstanding at quarter end",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "loan_balance_short",
+   "note": "practice rule: game loan terms unobserved, labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/finance.py",
+   "formula": "long loan outstanding at quarter end",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "loan_balance_long",
+   "note": "practice rule: game loan terms unobserved, labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/accounting.py",
+   "formula": "units sold x moving-average unit cost",
+   "inputs": [
+    "units_sold[brand]",
+    "unit_cost[brand]"
+   ],
+   "level": "heuristic",
+   "metric": "accrual_cogs",
+   "note": "practice rule: accrual structure from the captured statement, rules and rates labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/accounting.py",
+   "formula": "plant book value / depreciation quarters",
+   "inputs": [
+    "capex_capacity"
+   ],
+   "level": "heuristic",
+   "metric": "accrual_depreciation",
+   "note": "practice rule: accrual structure from the captured statement, rules and rates labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/accounting.py",
+   "formula": "annual rate / 4 x inventory book value",
+   "inputs": [
+    "unit_cost[brand]"
+   ],
+   "level": "heuristic",
+   "metric": "inventory_tax",
+   "note": "practice rule: accrual structure from the captured statement, rules and rates labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/accounting.py",
+   "formula": "revenue + interest + other income - expenses (production capitalised) - COGS - depreciation - book value sold off",
+   "inputs": [
+    "revenue",
+    "accrual_cogs",
+    "accrual_depreciation"
+   ],
+   "level": "heuristic",
+   "metric": "accrual_pretax",
+   "note": "practice rule: accrual structure from the captured statement, rules and rates labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/accounting.py",
+   "formula": "losses not yet used against taxable income",
+   "inputs": [
+    "accrual_pretax"
+   ],
+   "level": "heuristic",
+   "metric": "loss_carryforward",
+   "note": "practice rule: accrual structure from the captured statement, rules and rates labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/accounting.py",
+   "formula": "carried-forward loss used against this quarter's income",
+   "inputs": [
+    "accrual_pretax"
+   ],
+   "level": "heuristic",
+   "metric": "accrual_loss_used",
+   "note": "practice rule: accrual structure from the captured statement, rules and rates labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/accounting.py",
+   "formula": "accrual pretax - income tax",
+   "inputs": [
+    "accrual_pretax",
+    "income_tax"
+   ],
+   "level": "heuristic",
+   "metric": "accrual_net_income",
+   "note": "practice rule: accrual structure from the captured statement, rules and rates labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/accounting.py",
+   "formula": "cash at quarter end",
+   "inputs": [
+    "cash_end"
+   ],
+   "level": "heuristic",
+   "metric": "bs_cash",
+   "note": "practice rule: accrual structure from the captured statement, rules and rates labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/accounting.py",
+   "formula": "CDs at quarter end",
+   "inputs": [
+    "cd_balance"
+   ],
+   "level": "heuristic",
+   "metric": "bs_cd",
+   "note": "practice rule: accrual structure from the captured statement, rules and rates labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/accounting.py",
+   "formula": "inventory at book value",
+   "inputs": [
+    "accrual_cogs"
+   ],
+   "level": "heuristic",
+   "metric": "bs_inventory",
+   "note": "practice rule: accrual structure from the captured statement, rules and rates labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/accounting.py",
+   "formula": "plant at book value",
+   "inputs": [
+    "accrual_depreciation"
+   ],
+   "level": "heuristic",
+   "metric": "bs_plant",
+   "note": "practice rule: accrual structure from the captured statement, rules and rates labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/accounting.py",
+   "formula": "cash + CDs + inventory + plant",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "bs_total_assets",
+   "note": "practice rule: accrual structure from the captured statement, rules and rates labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/accounting.py",
+   "formula": "loans outstanding",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "bs_loans",
+   "note": "practice rule: accrual structure from the captured statement, rules and rates labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/accounting.py",
+   "formula": "short-term loans outstanding",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "bs_short_loans",
+   "note": "practice rule: accrual structure from the captured statement, rules and rates labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/accounting.py",
+   "formula": "long-term loans outstanding (no such row on the captured Q1 sheet)",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "bs_long_loans",
+   "note": "practice rule: accrual structure from the captured statement, rules and rates labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/accounting.py",
+   "formula": "emergency loans taken while the option is on",
+   "inputs": [
+    "emergency_loan"
+   ],
+   "level": "heuristic",
+   "metric": "bs_emergency_loans",
+   "note": "practice rule: accrual structure from the captured statement, rules and rates labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/accounting.py",
+   "formula": "loans + emergency loans",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "bs_liabilities",
+   "note": "practice rule: accrual structure from the captured statement, rules and rates labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/accounting.py",
+   "formula": "stock issued",
+   "inputs": [
+    "stock_raised"
+   ],
+   "level": "heuristic",
+   "metric": "bs_common_stock",
+   "note": "practice rule: accrual structure from the captured statement, rules and rates labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/accounting.py",
+   "formula": "opening balance + accrual net income - dividends",
+   "inputs": [
+    "accrual_net_income"
+   ],
+   "level": "heuristic",
+   "metric": "bs_retained_earnings",
+   "note": "practice rule: accrual structure from the captured statement, rules and rates labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/accounting.py",
+   "formula": "common stock + retained earnings",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "bs_equity",
+   "note": "practice rule: accrual structure from the captured statement, rules and rates labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/accounting.py",
+   "formula": "assets - liabilities - equity (0 = balances)",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "balance_check",
+   "note": "practice rule: accrual structure from the captured statement, rules and rates labelled defaults"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/research.py",
+   "formula": "0.5 + net income / revenue, clipped to 0..1",
+   "inputs": [
+    "net_income",
+    "revenue"
+   ],
+   "level": "heuristic",
+   "metric": "scorecard_financial",
+   "note": "practice rule: labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/research.py",
+   "formula": "market share / reference share, clipped",
+   "inputs": [
+    "market_share"
+   ],
+   "level": "heuristic",
+   "metric": "scorecard_customer",
+   "note": "practice rule: labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/research.py",
+   "formula": "units produced / capacity, clipped",
+   "inputs": [
+    "capacity_units_per_quarter"
+   ],
+   "level": "heuristic",
+   "metric": "scorecard_internal",
+   "note": "practice rule: labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/research.py",
+   "formula": "training + R&D spend / revenue / reference, clipped",
+   "inputs": [
+    "revenue"
+   ],
+   "level": "heuristic",
+   "metric": "scorecard_learning",
+   "note": "practice rule: labelled defaults, no calibration"
+  },
+  {
+   "evidence": "src/marketplace_sim/business/research.py",
+   "formula": "weighted sum of the four perspectives",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "scorecard_total",
+   "note": "practice rule: labelled defaults, no calibration"
   }
  ],
  "order": [

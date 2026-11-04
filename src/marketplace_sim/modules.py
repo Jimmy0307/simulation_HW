@@ -109,15 +109,35 @@ def default_components(pack: ParamPack, brand_type: BrandType) -> list[Component
 
 
 def unit_cost(pack: ParamPack, brand_type: BrandType, components: Sequence[Component],
-              material_factor: Tagged | None = None) -> Tagged:
+              material_factor: Tagged | None = None, *, labor_factor: Tagged | None = None,
+              conversion_factor: Tagged | None = None, add: Tagged | None = None) -> Tagged:
+    """Placeholder unit cost; business modules may scale its parts (material, direct labour, labour + overhead) or
+    add to it. Each factor brings its own level (the result is never above placeholder)."""
     material = sum(c.price for c in components) * brand_type.cost_adj
     labor = pack.production.get("min_direct_labor", 0.0)
     overhead = pack.production.get("min_overhead_cpu", 0.0)
     rule = "sum(component price) x costAdj + minDirectLabor + minOverheadCPU (placeholder: cost function unverified)"
-    if material_factor is None:
-        return Tagged(material + labor + overhead, P, rule)
-    return Tagged(material * material_factor.value + labor + overhead, min(P, material_factor.level),
-                  f"{rule}; material x ({material_factor.source})")
+    if labor_factor is None and conversion_factor is None and add is None:
+        if material_factor is None:
+            return Tagged(material + labor + overhead, P, rule)
+        return Tagged(material * material_factor.value + labor + overhead, min(P, material_factor.level),
+                      f"{rule}; material x ({material_factor.source})")
+    level, why = P, [rule]
+    if material_factor is not None:
+        material, level = material * material_factor.value, min(level, material_factor.level)
+        why.append(f"material x ({material_factor.source})")
+    if labor_factor is not None:
+        labor, level = labor * labor_factor.value, min(level, labor_factor.level)
+        why.append(f"labour x ({labor_factor.source})")
+    conversion = labor + overhead
+    if conversion_factor is not None:
+        conversion, level = conversion * conversion_factor.value, min(level, conversion_factor.level)
+        why.append(f"labour + overhead x ({conversion_factor.source})")
+    value = material + conversion
+    if add is not None:
+        value, level = value + add.value, min(level, add.level)
+        why.append(f"+ ({add.source})")
+    return Tagged(value, level, "; ".join(why))
 
 
 def design_cost(pack: ParamPack, new_brands: int) -> Tagged:
@@ -144,6 +164,7 @@ class Offer:
     coverage: tuple[tuple[str, float], ...] = ()  # (market, distribution intensity 0..1); empty = 1 in `markets`
     effort: float = 1.0  # selling-effort multiplier on attraction (business module sales_force; 1 = no module)
     media: tuple[tuple[str, float, float], ...] = ()  # (medium, spend share, elasticity weight); empty = one response
+    price_factor: float = 1.0  # price the customer weighs / list price (a rebate lowers it; 1 = no module)
 
     def coverage_in(self, market: str) -> float:
         if self.coverage:
@@ -174,7 +195,7 @@ class PlaceholderDemand:
                 present = [o for o in offers if o.segment_id == segment_id and market.key in o.markets]
                 if not present or cell.wtp <= 0:
                     continue
-                weights = [o.fit * math.exp(3 * (cell.wtp - o.price) / cell.wtp)
+                weights = [o.fit * math.exp(3 * (cell.wtp - o.price * o.price_factor) / cell.wtp)
                            * (1 + 0.1 * math.log1p(_media_ratio(max(o.advertising, 0) / 1000, o.media))) * o.effort
                            for o in present]
                 denominator = 1 + sum(weights)

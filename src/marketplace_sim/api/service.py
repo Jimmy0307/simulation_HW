@@ -26,7 +26,7 @@ from marketplace_sim.control.sweep import run_sweep as _run_sweep
 from marketplace_sim.control.sweep import sweep_from_dict
 from marketplace_sim.control.sweep import worst as _worst
 from marketplace_sim.engine import CompanyState, Plan, Report, advance
-from marketplace_sim.metrics import METRICS, chain, lookup
+from marketplace_sim.metrics import METRICS, MODULE_METRICS, chain, lookup
 from marketplace_sim.pack import ParamPack, load_pack
 from marketplace_sim.provenance import Level
 
@@ -80,7 +80,8 @@ def _all_metric_bases() -> set[str]:
 
 
 def _is_module_metric(base: str) -> bool:
-    return base in _MODULE_LINES or base.startswith(("sales_force_", "inventory_", "purchasing_"))
+    return base in _MODULE_LINES or base in MODULE_METRICS or base.startswith(
+        ("sales_force_", "inventory_", "purchasing_"))
 
 
 def report_dict(report: Report) -> dict[str, Any]:

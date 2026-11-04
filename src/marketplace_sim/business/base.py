@@ -19,6 +19,26 @@ Coupling points (the only ways a module can change the quarter):
 * state     ``state``                the module's own state, carried to the next quarter in ``module_state``.
 * report    ``lines``                report-only lines (headcount, retention, mix index ...).
 
+Round 2 coupling points (same rules; each defaults to "no effect", so no module = bit-identical engine output):
+
+* demand    ``attraction[brand]``    multiplier on the attraction of one brand (promotion, message, quality, R&D).
+            ``price_factor[brand]``  multiplier on the price the customer weighs (a rebate lowers it); revenue still
+                                     books the list price, the rebate cost is a module expense.
+* capacity  ``capacity_factor``      multiplier on quarterly capacity (shifts, worker productivity, morale).
+            ``capacity_extra``       units added to quarterly capacity (overtime).
+* cost      ``labor_cost_factor``    multiplier on the direct-labour part of every unit cost (wage level, location).
+            ``conversion_factor[brand]`` multiplier on labour + overhead of one brand (learning curve).
+            ``unit_cost_add[brand]`` amount added to one brand's unit cost (quality spend, shipping).
+* plan      ``production_units[brand]`` production set by a rule instead of the plan (order-up-to policy).
+            ``production_order``     order in which brands get capacity when it binds (scheduling).
+* finance   ``financing``            signed cash flows outside profit (loan proceeds and repayments, dividends).
+
+Hooks after demand (optional methods; a module is active in a quarter when it is decided or carries state):
+
+* ``settle(inp, outcome)``  expenses / income that depend on sales (rebates paid, warranty, inventory tax).
+* ``tax(inp, outcome)``     replaces the engine's income tax (accrual basis with loss carry-forward).
+* ``close(inp, outcome)``   report lines and state once cash is known (balance sheet, scorecard, demand history).
+
 Every effect carries its own level. Demand couplings set the level of every number downstream of demand (units,
 shares, revenue, profit, cash); production couplings set the level of unit and production cost; cash lines carry
 their own level into profit and cash. "Downstream takes the weakest level" holds at every step.
@@ -94,6 +114,7 @@ class BrandInput:
     advertising: float
     production: float
     price: float
+    segment: str | None = None  # segment the brand targets (for message fit)
 
 
 @dataclass(frozen=True)
@@ -105,6 +126,8 @@ class ModuleInput:
     brands: Sequence[BrandInput]  # the plan's brands this quarter
     markets_reached: int  # markets our offers reach this quarter
     inventory: Mapping[str, float] = field(default_factory=dict)  # units carried in at quarter start, per brand
+    web_share: float = 0.0  # share of our reach that comes from web centers (0 = stores only)
+    capacity_units: float = 0.0  # quarterly capacity before any module (units)
 
 
 @dataclass(frozen=True)
@@ -114,6 +137,102 @@ class MediaSplit:
     parts: tuple[tuple[str, float, float], ...]
     level: Level
     source: str
+
+
+@dataclass(frozen=True)
+class Field:
+    """One lever of a module, for the decision parser and the generic editor (labels are shown to the player).
+
+    kind: ``number`` (one value), ``brand_number`` (one value per brand, a mapping brand -> value), ``choice`` /
+    ``brand_choice`` (one of ``options``), ``flag`` (true/false). ``part`` is the ledger row whose maturity the lever
+    carries (its badge in the UI).
+    """
+
+    name: str
+    label: str
+    part: str
+    kind: str = "number"
+    low: float = 0.0
+    high: float = 1.0
+    step: float = 1.0
+    default: Any = 0.0
+    unit: str = ""
+    options: tuple[tuple[str, str], ...] = ()
+
+    def to_dict(self) -> dict[str, Any]:
+        return {"name": self.name, "label": self.label, "part": self.part, "kind": self.kind, "low": self.low,
+                "high": self.high, "step": self.step, "default": self.default, "unit": self.unit,
+                "options": [list(o) for o in self.options]}
+
+
+@dataclass(frozen=True)
+class Metric:
+    """A report line a module produces, for ``mpsim explain`` and the source chain.
+
+    role: where the line enters the engine (``expense``, ``income``, ``financing``, ``demand``, ``cost``,
+    ``capacity``, ``tax`` or ``report``), so the chains of profit, cash, units and unit cost list it.
+    """
+
+    name: str
+    level: Level
+    formula: str
+    role: str = "report"
+    inputs: tuple[str, ...] = ()
+    note: str = ""
+
+
+def read_fields(fields: Sequence[Field], decisions: Mapping[str, Any], brands: Sequence[str]) -> dict[str, Any]:
+    """Parse a module's decisions against its fields: bounds and options enforced, unknown fields refused."""
+    known = {f.name for f in fields}
+    unknown = set(decisions) - known
+    if unknown:
+        raise ModuleDecisionError(f"unknown decision(s): {', '.join(sorted(unknown))}")
+    out: dict[str, Any] = {}
+    for f in fields:
+        raw = decisions.get(f.name)
+        if f.kind == "number":
+            out[f.name] = number(decisions, f.name, float(f.default), low=f.low, high=f.high)
+        elif f.kind == "flag":
+            out[f.name] = bool(f.default if raw is None else raw)
+        elif f.kind == "choice":
+            out[f.name] = _choice(f, f.default if raw is None else raw)
+        elif f.kind in {"brand_number", "brand_choice"}:
+            per = raw or {}
+            if not isinstance(per, Mapping):
+                raise ModuleDecisionError(f"{f.name} must map brand -> value")
+            stray = set(per) - set(brands)
+            if stray:
+                raise ModuleDecisionError(f"{f.name}: no such brand this quarter: {', '.join(sorted(stray))}")
+            if f.kind == "brand_number":
+                out[f.name] = {b: number(per, b, float(f.default), low=f.low, high=f.high) for b in brands}
+            else:
+                out[f.name] = {b: _choice(f, per.get(b, f.default)) for b in brands}
+        else:  # pragma: no cover - programming error in a module spec
+            raise ValueError(f"unknown field kind {f.kind}")
+    return out
+
+
+def _choice(f: Field, value: Any) -> str:
+    allowed = [o[0] for o in f.options]
+    if str(value) not in allowed:
+        raise ModuleDecisionError(f"{f.name} must be one of {', '.join(allowed)}")
+    return str(value)
+
+
+@dataclass(frozen=True)
+class Outcome:
+    """What the hooks after demand see: the quarter's report lines so far and the physical flows."""
+
+    lines: Mapping[str, Tagged]
+    units_sold: Mapping[str, float]
+    units_produced: Mapping[str, float]
+    units_released: Mapping[str, float]
+    inventory_start: Mapping[str, float]
+    inventory_end: Mapping[str, float]
+    unit_cost: Mapping[str, Tagged]  # this quarter's unit cost per brand (produced or held)
+    company: Mapping[str, float]  # stock_total, cd, fixed_capacity_units after the quarter
+    expense_lines: tuple[str, ...] = ()  # lines in the operating-expense total (tax and close hooks)
+    income_lines: tuple[str, ...] = ()  # module income lines in profit (tax and close hooks)
 
 
 @dataclass
@@ -128,6 +247,16 @@ class ModuleResult:
     inventory_release: dict[str, Tagged] = field(default_factory=dict)
     holding_rate: Tagged | None = None
     salvage_fraction: Tagged | None = None  # value of released units as a fraction of unit cost (income)
+    attraction: dict[str, Tagged] = field(default_factory=dict)
+    price_factor: dict[str, Tagged] = field(default_factory=dict)
+    capacity_factor: Tagged | None = None
+    capacity_extra: Tagged | None = None
+    labor_cost_factor: Tagged | None = None
+    conversion_factor: dict[str, Tagged] = field(default_factory=dict)
+    unit_cost_add: dict[str, Tagged] = field(default_factory=dict)
+    production_units: dict[str, Tagged] = field(default_factory=dict)
+    production_order: tuple[str, ...] | None = None
+    financing: dict[str, Tagged] = field(default_factory=dict)
     state: dict[str, float] = field(default_factory=dict)
     notes: list[str] = field(default_factory=list)
 

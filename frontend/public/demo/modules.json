@@ -46,9 +46,9 @@
   }
  ],
  "counts": {
-  "heuristic": 11,
-  "literature": 10,
-  "not-modeled": 25,
+  "heuristic": 27,
+  "literature": 14,
+  "not-modeled": 8,
   "verified": 6
  },
  "history": [
@@ -62,6 +62,17 @@
    "date": "2026-11-04",
    "label": "第 1 輪：模組管道",
    "total": 49
+  },
+  {
+   "counts": {
+    "heuristic": 11,
+    "literature": 10,
+    "not-modeled": 25,
+    "verified": 6
+   },
+   "date": "2026-11-05",
+   "label": "第 2 輪：做扎實與供應鏈",
+   "total": 52
   }
  ],
  "is_private": false,
@@ -85,6 +96,7 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "market.demand_core",
    "kind": "behaviour",
@@ -93,6 +105,7 @@
    "name": "需求核心（區隔選擇與外部選項）",
    "next_step": "To verified: fit the coefficients on Q2+ demand panels (FittedDemand) and pass hold-out validation (MAPE <= 20 %, direction hit rate >= 70 %).",
    "ours": "LiteratureDemand: multinomial-logit / MCI attraction with an outside option (src/marketplace_sim/demand.py).",
+   "primary": false,
    "ranges": null,
    "real_note": "Sales and market share are reported every quarter; the game's demand formula itself is not observable.",
    "real_status": "measured",
@@ -103,7 +116,9 @@
    "sources": [
     "L-DEMAND",
     "E-Q1"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "marketing",
@@ -111,6 +126,7 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "marketing.segment_targeting",
    "kind": "behaviour",
@@ -119,6 +135,7 @@
    "name": "目標區隔選擇",
    "next_step": "To verified: calibrate similarity_power and fit_weight on Q2+ brand-by-segment sales.",
    "ours": "Each brand targets a segment; fit to other segments falls with need similarity (demand chain).",
+   "primary": false,
    "ranges": null,
    "real_note": "Target Segments is a decision screen in the captured Q1 menu.",
    "real_status": "measured",
@@ -129,7 +146,9 @@
     "E-Q1",
     "P-HALES",
     "L-DEMAND"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "marketing",
@@ -137,6 +156,7 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "marketing.brand_design",
    "kind": "behaviour",
@@ -145,6 +165,7 @@
    "name": "品牌設計（類型與元件）",
    "next_step": "To verified: relate brand-judgment scores to sales once Q2 reports are captured; fit the quality term.",
    "ours": "Brand type and components chosen per brand; fit enters the demand chain; component choice also drives the (heuristic) unit cost.",
+   "primary": false,
    "ranges": null,
    "real_note": "Design Brand is a decision screen in the captured Q1 menu.",
    "real_status": "measured",
@@ -156,7 +177,9 @@
     "E-Q1",
     "P-HALES",
     "P-JAMS2003"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "rnd",
@@ -164,6 +187,7 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "rnd.product_line",
    "kind": "behaviour",
@@ -172,6 +196,7 @@
    "name": "產品線（多品牌與相互侵蝕）",
    "next_step": "To verified: check cannibalisation against Q2+ brand-level sales.",
    "ours": "Several brands per firm; they compete for the same buyers inside the logit (cannibalisation).",
+   "primary": false,
    "ranges": null,
    "real_note": "Several brands can be designed on the Q1 brand screen.",
    "real_status": "measured",
@@ -181,7 +206,9 @@
    "sources": [
     "E-Q1",
     "L-DEMAND"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "marketing",
@@ -189,6 +216,7 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "marketing.pricing",
    "kind": "behaviour",
@@ -197,6 +225,7 @@
    "name": "定價",
    "next_step": "To verified: fit price_sensitivity on Q2+ price and sales variation.",
    "ours": "Price relative to willingness to pay enters the utility (price_sensitivity).",
+   "primary": false,
    "ranges": null,
    "real_note": "A Pricing screen is registered but was not in the Q1 menu; public teaching sources list pricing.",
    "real_status": "inferred",
@@ -208,23 +237,45 @@
     "E-REG",
     "P-HALES",
     "L-DEMAND"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "marketing",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
-   "coefficients": null,
-   "decidable": false,
-   "decisions": [],
-   "implementation": null,
+   "coefficients": {
+    "perceived_weight": 0.7,
+    "redemption_rate": 0.4
+   },
+   "decidable": true,
+   "decisions": [
+    "rebate"
+   ],
+   "fields": [
+    {
+     "default": 0,
+     "high": 500,
+     "kind": "brand_number",
+     "label": "每件回饋金額",
+     "low": 0,
+     "name": "rebate",
+     "options": [],
+     "part": "marketing.promotions",
+     "step": 5,
+     "unit": ""
+    }
+   ],
+   "implementation": "PromotionsModule",
    "key": "marketing.promotions",
    "kind": "behaviour",
-   "maturity": "not-modeled",
-   "module": null,
+   "maturity": "heuristic",
+   "module": "marketing.promotions",
    "name": "促銷（回饋金、贈品、店頭陳列）",
-   "next_step": "To heuristic: rebate lowers the effective price for the share of buyers who redeem it, and costs rebate x redeemed units; free gift as a fixed cost per unit with a small attraction lift.",
-   "ours": "None.",
-   "ranges": null,
+   "next_step": "To literature: a published redemption / slippage rate (none found). Add gifts and display as further parts. To verified: Q2+ Promotions screen and its cost lines.",
+   "ours": "PromotionsModule: a per-unit rebate lowers the price the customer weighs (perceived share of the rebate), so the demand chain's price response decides volume; rebates are paid on redeemed units. Free gifts and point-of-purchase display are not modelled.",
+   "primary": true,
+   "ranges": {},
    "real_note": "Rebate and point-of-purchase fields on Pricing; a Promotions screen is registered.",
    "real_status": "inferred",
    "screens": [
@@ -233,8 +284,26 @@
    ],
    "sources": [
     "E-REG",
-    "P-HALES"
-   ]
+    "P-HALES",
+    "L-BIJMOLT2005",
+    "L-LU2007",
+    "L-GILPATRIC2009"
+   ],
+   "stoppable": false,
+   "ui": {
+    "practice": "回饋金讓顧客感受到的價格變低（用需求面的價格反應）；只有一部分買家會真的去兌換。感受比例與兌換率都是暫定值，沒有可用的文獻數字。",
+    "results": [
+     [
+      "promotion_price_factor[{brand}]",
+      "顧客感受價格倍數"
+     ],
+     [
+      "promotion_rebates",
+      "回饋金支出"
+     ]
+    ],
+    "toggle": "啟用促銷"
+   }
   },
   {
    "area": "marketing",
@@ -242,6 +311,7 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "marketing.ad_budget",
    "kind": "behaviour",
@@ -250,6 +320,7 @@
    "name": "廣告預算與累積效果",
    "next_step": "To verified: fit ad_elasticity and carryover on Q2+ data; keep the literature ranges as priors.",
    "ours": "Goodwill stock with carryover; power or ADBUDG response with diminishing returns (demand chain).",
+   "primary": false,
    "ranges": null,
    "real_note": "Media and ad screens are registered; public teaching sources describe advertising decisions.",
    "real_status": "inferred",
@@ -265,7 +336,9 @@
     "L-LITTLE1970",
     "L-CLARKE1976",
     "L-KOHLER2017"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "marketing",
@@ -282,6 +355,7 @@
    "decisions": [
     "mix[brand][medium]"
    ],
+   "fields": [],
    "implementation": "MediaMixLiterature",
    "key": "marketing.media_mix",
    "kind": "behaviour",
@@ -290,6 +364,7 @@
    "name": "廣告媒體分配",
    "next_step": "To verified: estimate the media weights w_m (and test a cross-media synergy term, Naik & Raman 2003) on Q2+ media-level spend and sales; pass hold-out validation. Still uncalibrated: the weights (neutral equal default; no published general ranking of these media).",
    "ours": "MediaMixLiterature: per-medium MCI advertising terms; the demand chain's own elasticity is split across media by weights w_m (sum 1). The best split is s_m = w_m, which reproduces the single literature response; any other split loses part of it.",
+   "primary": true,
    "ranges": {},
    "real_note": "Local, regional, social and search media screens are registered; public sources describe media selection.",
    "real_status": "inferred",
@@ -305,23 +380,61 @@
     "L-COOPER1988",
     "L-SETHURAMAN2011",
     "L-NAIK2003"
-   ]
+   ],
+   "stoppable": false,
+   "ui": {}
   },
   {
    "area": "marketing",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
-   "coefficients": null,
-   "decidable": false,
-   "decisions": [],
-   "implementation": null,
+   "coefficients": {
+    "lift": 0.1
+   },
+   "decidable": true,
+   "decisions": [
+    "message"
+   ],
+   "fields": [
+    {
+     "default": "none",
+     "high": 1.0,
+     "kind": "brand_choice",
+     "label": "廣告強調",
+     "low": 0.0,
+     "name": "message",
+     "options": [
+      [
+       "none",
+       "不指定"
+      ],
+      [
+       "first",
+       "客群最重視的需求"
+      ],
+      [
+       "second",
+       "第二重視的需求"
+      ],
+      [
+       "third",
+       "第三重視的需求"
+      ]
+     ],
+     "part": "marketing.ad_copy",
+     "step": 1.0,
+     "unit": ""
+    }
+   ],
+   "implementation": "AdCopyModule",
    "key": "marketing.ad_copy",
    "kind": "behaviour",
-   "maturity": "not-modeled",
-   "module": null,
+   "maturity": "heuristic",
+   "module": "marketing.ad_copy",
    "name": "廣告訊息與文案",
-   "next_step": "To heuristic: message fit = similarity of the stressed benefits to the target segment's needs, multiplying ad effectiveness.",
-   "ours": "None (advertising has no message content).",
-   "ranges": null,
+   "next_step": "To literature: a generalizable creative-effect magnitude (none found). To verified: the game's ad-copy screen and its effect from Q2+.",
+   "ours": "AdCopyModule: the message stresses the target segment's 1st/2nd/3rd need; attraction moves by at most a labelled lift in proportion to that need against the segment's mean need (only with advertising).",
+   "primary": true,
+   "ranges": {},
    "real_note": "Ad design screen and ad judgment report are registered; public sources mention ad copy and appeals.",
    "real_status": "inferred",
    "screens": [
@@ -333,23 +446,54 @@
     "E-REG",
     "P-HALES",
     "P-JAMS2003"
-   ]
+   ],
+   "stoppable": false,
+   "ui": {
+    "practice": "廣告強調目標客群重視的需求會加分、強調不重視的會扣分（最多 ± 暫定幅度）；只有方向有文獻支持。",
+    "results": [
+     [
+      "ad_copy_factor[{brand}]",
+      "訊息吸引力倍數"
+     ]
+    ],
+    "toggle": "指定廣告訊息"
+   }
   },
   {
    "area": "marketing",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
-   "coefficients": null,
-   "decidable": false,
-   "decisions": [],
-   "implementation": null,
+   "coefficients": {
+    "elasticity": 0.12,
+    "spend_reference": 50000
+   },
+   "decidable": true,
+   "decisions": [
+    "web_spend"
+   ],
+   "fields": [
+    {
+     "default": 0,
+     "high": 300000,
+     "kind": "number",
+     "label": "網路行銷預算（每季）",
+     "low": 0,
+     "name": "web_spend",
+     "options": [],
+     "part": "marketing.internet",
+     "step": 5000,
+     "unit": ""
+    }
+   ],
+   "implementation": "InternetMarketingModule",
    "key": "marketing.internet",
    "kind": "behaviour",
-   "maturity": "not-modeled",
-   "module": null,
+   "maturity": "heuristic",
+   "module": "marketing.internet",
    "name": "網路行銷（網頁、流量、社群）",
-   "next_step": "To heuristic: web traffic budget raises web-channel coverage with diminishing returns; page quality multiplies conversion.",
-   "ours": "None beyond the web center's distribution weight.",
-   "ranges": null,
+   "next_step": "To literature: an online-specific meta-analytic elasticity (none found; Dinner, van Heerde & Neslin 2014 numbers not verified). To verified: Q2+ web marketing screens.",
+   "ours": "InternetMarketingModule: company spend with a constant-elasticity response, applied in proportion to the web share of our outlets; spend is an expense.",
+   "primary": true,
+   "ranges": {},
    "real_note": "Web page, traffic and productivity screens are registered.",
    "real_status": "inferred",
    "screens": [
@@ -359,24 +503,72 @@
     "SimpleInternetMarketing"
    ],
    "sources": [
-    "E-REG"
-   ]
+    "E-REG",
+    "L-SETHURAMAN2011"
+   ],
+   "stoppable": false,
+   "ui": {
+    "practice": "網路行銷只對網路中心帶來的那部分市場有效（依網路中心占據點的比例），報酬遞減；彈性借用一般廣告彈性當暫定值，沒有網路專屬的後設分析。",
+    "results": [
+     [
+      "internet_factor",
+      "網路行銷吸引力倍數"
+     ],
+     [
+      "internet_marketing",
+      "網路行銷支出"
+     ]
+    ],
+    "toggle": "啟用網路行銷"
+   }
   },
   {
    "area": "marketing",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
-   "coefficients": null,
-   "decidable": false,
-   "decisions": [],
-   "implementation": null,
+   "coefficients": {
+    "report_price": 15000
+   },
+   "decidable": true,
+   "decisions": [
+    "segment_report",
+    "rival_report"
+   ],
+   "fields": [
+    {
+     "default": false,
+     "high": 1.0,
+     "kind": "flag",
+     "label": "買客群需求報告",
+     "low": 0.0,
+     "name": "segment_report",
+     "options": [],
+     "part": "marketing.market_research",
+     "step": 1.0,
+     "unit": ""
+    },
+    {
+     "default": false,
+     "high": 1.0,
+     "kind": "flag",
+     "label": "買對手報告",
+     "low": 0.0,
+     "name": "rival_report",
+     "options": [],
+     "part": "marketing.market_research",
+     "step": 1.0,
+     "unit": ""
+    }
+   ],
+   "implementation": "MarketResearchModule",
    "key": "marketing.market_research",
    "kind": "information",
-   "maturity": "not-modeled",
-   "module": null,
+   "maturity": "heuristic",
+   "module": "marketing.market_research",
    "name": "市場調查購買",
-   "next_step": "To heuristic: a cost line plus gating which reports are shown; no effect on demand.",
-   "ours": "None (all research data the pack holds is visible).",
-   "ranges": null,
+   "next_step": "To verified: the game's report list and prices once the market-research screen opens.",
+   "ours": "MarketResearchModule: segment and rival reports at a labelled price; their content is this engine's own estimate at its level.",
+   "primary": true,
+   "ranges": {},
    "real_note": "Market research purchase screens are registered; public sources list a research budget.",
    "real_status": "inferred",
    "screens": [
@@ -388,7 +580,26 @@
    "sources": [
     "E-REG",
     "P-HALES"
-   ]
+   ],
+   "stoppable": false,
+   "ui": {
+    "practice": "報告內容是本引擎自己的估計（等級跟需求鏈一樣，不會更可信）；報告價格是暫定值。",
+    "results": [
+     [
+      "market_research",
+      "調查費用"
+     ],
+     [
+      "research_segment_units[{segment}]",
+      "客群需求量"
+     ],
+     [
+      "research_rival_share[{rival}]",
+      "對手市佔"
+     ]
+    ],
+    "toggle": "購買市場調查"
+   }
   },
   {
    "area": "channel",
@@ -396,6 +607,7 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "channel.store_opening",
    "kind": "accounting",
@@ -404,6 +616,7 @@
    "name": "開店（設立成本）",
    "next_step": "Keep: re-run EXP-11 if the screen changes in a later quarter.",
    "ours": "Opening cost = setup cost of newly opened stores (cost_model).",
+   "primary": false,
    "ranges": null,
    "real_note": "Open Stores is a decision screen in Q1; opening cost reproduced by EXP-11.",
    "real_status": "measured",
@@ -414,7 +627,9 @@
     "E-Q1",
     "E-EXP",
     "P-HALES"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "channel",
@@ -422,6 +637,7 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "channel.web_center_opening",
    "kind": "accounting",
@@ -430,6 +646,7 @@
    "name": "網路銷售中心（設立成本）",
    "next_step": "Keep: re-run EXP-12 if the screen changes.",
    "ours": "Opening cost = setup cost of newly opened web centers.",
+   "primary": false,
    "ranges": null,
    "real_note": "Open Web Sales Center is a decision screen in Q1; opening cost reproduced by EXP-12. Not found in public descriptions.",
    "real_status": "measured",
@@ -439,7 +656,9 @@
    "sources": [
     "E-Q1",
     "E-EXP"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "channel",
@@ -447,6 +666,7 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "channel.distribution_coverage",
    "kind": "behaviour",
@@ -455,6 +675,7 @@
    "name": "通路覆蓋對需求的效果",
    "next_step": "To verified: fit distribution_elasticity and web_weight on Q2+ city-level sales.",
    "ours": "Coverage = 1 - (1 - store)(1 - web weight x web), raised to the distribution elasticity.",
+   "primary": false,
    "ranges": null,
    "real_note": "A channel demand report is registered; the effect of an open outlet on demand is not observable in Q1.",
    "real_status": "inferred",
@@ -464,7 +685,9 @@
    "sources": [
     "E-REG",
     "L-DEMAND"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "channel",
@@ -472,6 +695,7 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "channel.outlet_lease",
    "kind": "accounting",
@@ -480,6 +704,7 @@
    "name": "通路租金",
    "next_step": "Cannot be verified by arithmetic alone: needs the game's charge in the quarter after an opening. Read the Q2 statement after a Q1 opening; reproduce the lease row with zero residual.",
    "ours": "Placeholder: lease of outlets open at quarter start. Verified branch: nothing open at quarter start means no lease (EXP-11/12 measured no lease in the opening quarter).",
+   "primary": false,
    "ranges": null,
    "real_note": "Lease cost is a field on the Q1 outlet screens; when it is charged was not observed (EXP-11/12 showed none in the opening quarter).",
    "real_status": "measured",
@@ -490,7 +715,9 @@
    "sources": [
     "E-Q1",
     "E-EXP"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "sales_force",
@@ -511,15 +738,19 @@
     "severance_cost": 3000,
     "skill_bonus": 0.5,
     "skill_decay": 0.2,
-    "training_scale": 1500
+    "training_scale": 1500,
+    "web_elasticity": 0.2,
+    "web_force_reference": 2
    },
    "decidable": true,
    "decisions": [
     "headcount",
     "salary",
     "commission_pct",
-    "training"
+    "training",
+    "web_headcount"
    ],
+   "fields": [],
    "implementation": "SalesForceModule",
    "key": "sales_force.staffing",
    "kind": "behaviour",
@@ -528,6 +759,7 @@
    "name": "業務編制與招募",
    "next_step": "To verified: fit the elasticity and the reference scale on Q2+ sales by quarter and headcount; the game's hiring cost rule needs the HireSalesPeople calculate (awaiting Q2 capture).",
    "ours": "SalesForceModule: selling effort = (1 + force per market / reference)^elasticity, the elasticity inside the meta-analytic range; multiplies the attraction of our offers. Hiring cost lines stay heuristic.",
+   "primary": true,
    "ranges": {
     "selling_elasticity": [
      0.31,
@@ -546,7 +778,9 @@
     "L-ALBERS2010",
     "L-LODISH1971",
     "L-ZOLTNERS2004"
-   ]
+   ],
+   "stoppable": false,
+   "ui": {}
   },
   {
    "area": "sales_force",
@@ -567,15 +801,19 @@
     "severance_cost": 3000,
     "skill_bonus": 0.5,
     "skill_decay": 0.2,
-    "training_scale": 1500
+    "training_scale": 1500,
+    "web_elasticity": 0.2,
+    "web_force_reference": 2
    },
    "decidable": true,
    "decisions": [
     "headcount",
     "salary",
     "commission_pct",
-    "training"
+    "training",
+    "web_headcount"
    ],
+   "fields": [],
    "implementation": "SalesForceModule",
    "key": "sales_force.compensation",
    "kind": "behaviour",
@@ -584,6 +822,7 @@
    "name": "業務薪酬、佣金與留任",
    "next_step": "Stays heuristic until game data: the literature gives only small negative correlations between pay and turnover (Griffeth et al. 2000, rho about -0.09), no elasticity. To verified: observe headcount changes against pay from Q2 on.",
    "ours": "SalesForceModule (heuristic part): quit rate falls with relative pay (salary and commission), bounded; salaries and commission are expenses (cost rule unobserved).",
+   "primary": false,
    "ranges": {
     "selling_elasticity": [
      0.31,
@@ -603,7 +842,9 @@
     "L-COUGHLAN1992",
     "L-LUCAS1987",
     "L-GRIFFETH2000"
-   ]
+   ],
+   "stoppable": false,
+   "ui": {}
   },
   {
    "area": "sales_force",
@@ -624,23 +865,28 @@
     "severance_cost": 3000,
     "skill_bonus": 0.5,
     "skill_decay": 0.2,
-    "training_scale": 1500
+    "training_scale": 1500,
+    "web_elasticity": 0.2,
+    "web_force_reference": 2
    },
    "decidable": true,
    "decisions": [
     "headcount",
     "salary",
     "commission_pct",
-    "training"
+    "training",
+    "web_headcount"
    ],
+   "fields": [],
    "implementation": "SalesForceModule",
    "key": "sales_force.training",
    "kind": "behaviour",
    "maturity": "heuristic",
    "module": "sales_force",
    "name": "業務訓練",
-   "next_step": "To literature: verify Farrell & Hakstian 2001 in full text (a 23.1% productivity gain from training across 12 effect sizes, seen only as an abstract snippet) and bound the training lift by it; until then heuristic. To verified: observe the SpecialPrograms effect from Q2 on.",
+   "next_step": "To literature: Arthur et al. 2003 give d = 0.60-0.63 (verified) but turning d into a sales multiplier needs the spread of salesperson performance, which has no published general value. To verified: observe the SpecialPrograms effect from Q2 on.",
    "ours": "SalesForceModule (heuristic part): training builds a decaying skill stock that raises effective force; any skill makes the demand chain heuristic.",
+   "primary": false,
    "ranges": {
     "selling_elasticity": [
      0.31,
@@ -657,23 +903,57 @@
     "P-HALES",
     "L-ARTHUR2003",
     "L-FARRELL2001"
-   ]
+   ],
+   "stoppable": false,
+   "ui": {}
   },
   {
    "area": "sales_force",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
-   "coefficients": null,
-   "decidable": false,
-   "decisions": [],
-   "implementation": null,
+   "coefficients": {
+    "base_quit": 0.15,
+    "commission_weight": 0.3,
+    "force_reference": 2,
+    "hire_cost": 2000,
+    "initial_headcount": 0,
+    "max_headcount": 200,
+    "max_quit": 0.6,
+    "min_quit": 0.02,
+    "pay_sensitivity": 1.5,
+    "reference_commission_pct": 3,
+    "reference_salary": 6000,
+    "selling_elasticity": 0.31,
+    "severance_cost": 3000,
+    "skill_bonus": 0.5,
+    "skill_decay": 0.2,
+    "training_scale": 1500,
+    "web_elasticity": 0.2,
+    "web_force_reference": 2
+   },
+   "decidable": true,
+   "decisions": [
+    "headcount",
+    "salary",
+    "commission_pct",
+    "training",
+    "web_headcount"
+   ],
+   "fields": [],
+   "implementation": "SalesForceModule",
    "key": "sales_force.web_sales",
    "kind": "behaviour",
-   "maturity": "not-modeled",
-   "module": null,
+   "maturity": "heuristic",
+   "module": "sales_force",
    "name": "網路業務人員",
-   "next_step": "To heuristic: split selling effort into store and web forces; web effort applies to web coverage only.",
-   "ours": "None (the sales force is company-wide).",
-   "ranges": null,
+   "next_step": "To literature: an elasticity for web or phone selling (none found). To verified: HireWebSalesPeople from Q2+.",
+   "ours": "SalesForceModule (heuristic part): web salespeople add a constant-elasticity response weighted by the web share of our outlets; paid the field salary.",
+   "primary": false,
+   "ranges": {
+    "selling_elasticity": [
+     0.31,
+     0.34
+    ]
+   },
    "real_note": "Hire Web Sales People is registered; demand projection screens have per-web-salesperson fields.",
    "real_status": "inferred",
    "screens": [
@@ -682,23 +962,46 @@
    ],
    "sources": [
     "E-REG"
-   ]
+   ],
+   "stoppable": false,
+   "ui": {}
   },
   {
    "area": "hr",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
-   "coefficients": null,
-   "decidable": false,
-   "decisions": [],
-   "implementation": null,
+   "coefficients": {
+    "max_productivity": 1.1,
+    "min_productivity": 0.85,
+    "productivity_elasticity": 0.3
+   },
+   "decidable": true,
+   "decisions": [
+    "wage_index"
+   ],
+   "fields": [
+    {
+     "default": 1.0,
+     "high": 1.5,
+     "kind": "number",
+     "label": "工資水準（1 = 當地行情）",
+     "low": 0.7,
+     "name": "wage_index",
+     "options": [],
+     "part": "hr.production_workers",
+     "step": 0.05,
+     "unit": " 倍"
+    }
+   ],
+   "implementation": "ProductionWorkersModule",
    "key": "hr.production_workers",
    "kind": "behaviour",
-   "maturity": "not-modeled",
-   "module": null,
+   "maturity": "heuristic",
+   "module": "hr.production_workers",
    "name": "生產工人薪酬與生產力",
-   "next_step": "To heuristic: worker pay against a reference sets productivity and turnover; productivity scales usable capacity.",
-   "ours": "None (labour is a fixed per-unit amount inside the unit cost).",
-   "ranges": null,
+   "next_step": "To literature: a published wage-to-productivity elasticity (none found). To verified: worker screens from Q2+.",
+   "ours": "ProductionWorkersModule: wage index scales direct labour and, bounded, worker productivity (capacity).",
+   "primary": true,
+   "ranges": {},
    "real_note": "Industry Production Worker Compensation is a Q1 report; worker compensation and productivity screens are registered.",
    "real_status": "inferred",
    "screens": [
@@ -708,24 +1011,94 @@
    ],
    "sources": [
     "E-Q1",
-    "E-REG"
-   ]
+    "E-REG",
+    "L-SOKOLOVA2021"
+   ],
+   "stoppable": false,
+   "ui": {
+    "practice": "工資高於行情：直接人工成本變高，但留任與努力提高、產能略增（效率工資）；生產力彈性沒有可用的文獻數字，是暫定值。",
+    "results": [
+     [
+      "worker_productivity",
+      "工人生產力倍數"
+     ],
+     [
+      "labor_cost_factor",
+      "直接人工成本倍數"
+     ],
+     [
+      "capacity_units_per_quarter",
+      "本季產能"
+     ]
+    ],
+    "toggle": "設定生產工人工資"
+   }
   },
   {
    "area": "hr",
    "capture": "Q3+ (unverified · awaiting capture)",
-   "coefficients": null,
-   "decidable": false,
-   "decisions": [],
-   "implementation": null,
+   "coefficients": {
+    "adjust_speed": 0.5,
+    "bonus_scale": 2,
+    "initial_morale": 0.3,
+    "morale_bonus": 0.05,
+    "participation_scale": 50000,
+    "survey_price": 8000
+   },
+   "decidable": true,
+   "decisions": [
+    "participation",
+    "exec_bonus_pct",
+    "survey"
+   ],
+   "fields": [
+    {
+     "default": 0,
+     "high": 200000,
+     "kind": "number",
+     "label": "員工參與方案（每季）",
+     "low": 0,
+     "name": "participation",
+     "options": [],
+     "part": "hr.executive_and_culture",
+     "step": 5000,
+     "unit": ""
+    },
+    {
+     "default": 0,
+     "high": 5,
+     "kind": "number",
+     "label": "主管獎金池（營收的 %）",
+     "low": 0,
+     "name": "exec_bonus_pct",
+     "options": [],
+     "part": "hr.executive_and_culture",
+     "step": 0.1,
+     "unit": " %"
+    },
+    {
+     "default": false,
+     "high": 1.0,
+     "kind": "flag",
+     "label": "做員工調查（顯示士氣）",
+     "low": 0.0,
+     "name": "survey",
+     "options": [],
+     "part": "hr.executive_and_culture",
+     "step": 1.0,
+     "unit": ""
+    }
+   ],
+   "implementation": "CultureModule",
    "key": "hr.executive_and_culture",
    "kind": "behaviour",
-   "maturity": "not-modeled",
-   "module": null,
+   "maturity": "heuristic",
+   "module": "hr.executive_and_culture",
    "name": "主管薪酬、員工參與與人資調查",
-   "next_step": "To heuristic only if a numeric effect is observed in a captured report; otherwise keep as qualitative.",
-   "ours": "None.",
-   "ranges": null,
+   "next_step": "To literature: read Harter, Schmidt & Hayes 2002 in full for corrected effect sizes. To verified: Q3+ screens.",
+   "ours": "CultureModule: participation spend and an executive bonus pool build a morale stock that raises capacity a little; morale shown only with an employee survey.",
+   "primary": true,
+   "ranges": {},
    "real_note": "Executive compensation, employee involvement and HR survey screens are registered.",
    "real_status": "inferred",
    "screens": [
@@ -734,8 +1107,36 @@
     "HRSurvey"
    ],
    "sources": [
-    "E-REG"
-   ]
+    "E-REG",
+    "L-DOUCOULIAGOS1995"
+   ],
+   "stoppable": false,
+   "ui": {
+    "practice": "參與方案與主管獎金累積成「士氣」，士氣讓產能略增；士氣只有買員工調查才看得到。只有方向有文獻支持（參與與生產力的後設分析），幅度是暫定值。",
+    "results": [
+     [
+      "hr_morale",
+      "士氣（0–1）"
+     ],
+     [
+      "culture_productivity",
+      "士氣生產力倍數"
+     ],
+     [
+      "culture_participation",
+      "參與方案費用"
+     ],
+     [
+      "executive_bonus",
+      "主管獎金"
+     ],
+     [
+      "culture_survey",
+      "調查費用"
+     ]
+    ],
+    "toggle": "啟用人資與文化"
+   }
   },
   {
    "area": "production",
@@ -743,6 +1144,7 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "production.fixed_capacity",
    "kind": "accounting",
@@ -751,6 +1153,7 @@
    "name": "固定產能投資",
    "next_step": "Keep.",
    "ours": "Capacity option cost; capacity per quarter = units/day x days per quarter; usable next quarter.",
+   "primary": false,
    "ranges": null,
    "real_note": "Fixed Capacity is a Q1 decision screen; capacity cost reproduced by EXP-02.",
    "real_status": "measured",
@@ -761,7 +1164,9 @@
     "E-Q1",
     "E-EXP",
     "P-HALES"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "production",
@@ -769,6 +1174,7 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "production.unit_cost",
    "kind": "accounting",
@@ -777,6 +1183,7 @@
    "name": "單位生產成本",
    "next_step": "Cannot be verified by arithmetic alone: needs the game's cost of production for a known brand and volume (Q2 cost-of-production report or the FactorySimulation calculate).",
    "ours": "Placeholder: sum(component price) x cost adjustment + minimum labour + minimum overhead (ignores learning curve, scale and variable terms). Verified branch: nothing produced costs nothing. Material part can be scaled by the purchasing module.",
+   "primary": false,
    "ranges": null,
    "real_note": "The captured Q1 brand screen lists component prices and cost adjustment, but also learning-curve, scale-threshold, variable labour and overhead, and inefficiency parameters; the combination is unobserved.",
    "real_status": "measured",
@@ -786,7 +1193,9 @@
    ],
    "sources": [
     "E-Q1"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "production",
@@ -794,6 +1203,7 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "production.design_cost",
    "kind": "accounting",
@@ -802,6 +1212,7 @@
    "name": "設計與開線費",
    "next_step": "Cannot be verified by arithmetic alone: when and where the game charges design cost (R&D row or production) is unobserved. Match the Q2 statements after designing one brand in Q1.",
    "ours": "Placeholder: design cost per new brand. Verified branch: no new brand designed means no design cost (structural zero).",
+   "primary": false,
    "ranges": null,
    "real_note": "Design and setup cost are Q1 brand-screen parameters; when they are charged is unverified.",
    "real_status": "measured",
@@ -810,23 +1221,125 @@
    ],
    "sources": [
     "E-Q1"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
+  },
+  {
+   "area": "production",
+   "capture": "Q2 settlement (unverified · awaiting Q2 capture)",
+   "coefficients": {
+    "prior_experience": 2000,
+    "progress_ratio": 0.81
+   },
+   "decidable": true,
+   "decisions": [],
+   "fields": [],
+   "implementation": "LearningCurveModule",
+   "key": "production.learning_curve",
+   "kind": "behaviour",
+   "maturity": "literature",
+   "module": "production.learning_curve",
+   "name": "學習曲線",
+   "next_step": "To verified: compare unit costs across Q2+ quarters with known cumulative volume and fit the game's parameter.",
+   "ours": "LearningCurveModule (model option): Wright learning curve, Stanford-B form, on labour + overhead per brand; progress ratio in the published centre (80-82 %); experience counted from switch-on.",
+   "primary": true,
+   "ranges": {
+    "progress_ratio": [
+     0.8,
+     0.82
+    ]
+   },
+   "real_note": "The captured Q1 brand screen carries a learning-curve parameter (structure only); how the game applies it is unverified.",
+   "real_status": "measured",
+   "screens": [
+    "BrandManagement"
+   ],
+   "sources": [
+    "E-Q1",
+    "L-WRIGHT1936",
+    "L-DUTTON1984"
+   ],
+   "stoppable": true,
+   "ui": {
+    "literature": "累積產量每加倍，人工與製造費用降到「進步率」倍（Wright 1936；進步率在文獻分布中心 80–82%）。經驗從開啟這個選項的那一季開始累計；單位成本本身仍是佔位規則，所以成本仍標 ≈。",
+    "results": [
+     [
+      "learning_factor[{brand}]",
+      "人工與製造費用倍數"
+     ],
+     [
+      "cumulative_units[{brand}]",
+      "累積產量（期初）"
+     ]
+    ],
+    "toggle": "納入學習曲線（模型選項）"
+   }
   },
   {
    "area": "production",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
-   "coefficients": null,
-   "decidable": false,
-   "decisions": [],
-   "implementation": null,
+   "coefficients": {
+    "overtime_premium": 1.5,
+    "overtime_productivity_loss": 0.15,
+    "second_shift_efficiency": 0.9,
+    "shift_fixed_cost": 40000,
+    "third_shift_efficiency": 0.8
+   },
+   "decidable": true,
+   "decisions": [
+    "shifts",
+    "overtime_pct"
+   ],
+   "fields": [
+    {
+     "default": "1",
+     "high": 1.0,
+     "kind": "choice",
+     "label": "班別",
+     "low": 0.0,
+     "name": "shifts",
+     "options": [
+      [
+       "1",
+       "一班"
+      ],
+      [
+       "2",
+       "兩班"
+      ],
+      [
+       "3",
+       "三班"
+      ]
+     ],
+     "part": "production.operating_capacity",
+     "step": 1.0,
+     "unit": ""
+    },
+    {
+     "default": 0,
+     "high": 25,
+     "kind": "number",
+     "label": "加班（正常產能的 %）",
+     "low": 0,
+     "name": "overtime_pct",
+     "options": [],
+     "part": "production.operating_capacity",
+     "step": 1,
+     "unit": " %"
+    }
+   ],
+   "implementation": "OperatingCapacityModule",
    "key": "production.operating_capacity",
    "kind": "behaviour",
-   "maturity": "not-modeled",
-   "module": null,
+   "maturity": "heuristic",
+   "module": "production.operating_capacity",
    "name": "營運產能、加班與排班",
-   "next_step": "To heuristic: operating rate below fixed capacity; overtime adds capacity at a premium labour cost.",
-   "ours": "None (usable capacity = fixed capacity).",
-   "ranges": null,
+   "next_step": "To verified: the game's shift and overtime rules from Q2+ (capacity and cost lines).",
+   "ours": "OperatingCapacityModule: extra shifts multiply capacity (less efficient later shifts, fixed cost per shift); overtime adds units at a 1.5 x premium (statutory floor) with a productivity loss.",
+   "primary": true,
+   "ranges": {},
    "real_note": "Operating capacity and overtime screens are registered.",
    "real_status": "inferred",
    "screens": [
@@ -836,24 +1349,164 @@
    ],
    "sources": [
     "E-REG",
-    "R-GOOSEN1999"
-   ]
+    "R-GOOSEN1999",
+    "L-FLSA",
+    "L-SHEPARD2000",
+    "L-PENCAVEL2015"
+   ],
+   "stoppable": false,
+   "ui": {
+    "practice": "多開一班產能變多但效率較低、每班有固定費用；加班多出產能，加班工資按 1.5 倍（美國法定下限，遊戲規則未觀察到）並有效率損失。幅度都是暫定值。",
+    "results": [
+     [
+      "shift_factor",
+      "班別產能倍數"
+     ],
+     [
+      "overtime_units",
+      "加班可多產（件）"
+     ],
+     [
+      "capacity_units_per_quarter",
+      "本季產能"
+     ],
+     [
+      "shift_cost",
+      "加班別固定費用"
+     ],
+     [
+      "overtime_premium",
+      "加班工資加給"
+     ]
+    ],
+    "toggle": "設定班別與加班"
+   }
+  },
+  {
+   "area": "production",
+   "capture": "Q2 settlement (unverified · awaiting Q2 capture)",
+   "coefficients": {
+    "idle_cost_per_unit": 2.0
+   },
+   "decidable": true,
+   "decisions": [],
+   "fields": [],
+   "implementation": "ExcessCapacityModule",
+   "key": "production.excess_capacity",
+   "kind": "accounting",
+   "maturity": "heuristic",
+   "module": "production.excess_capacity",
+   "name": "閒置產能成本",
+   "next_step": "To verified (accounting): read the row on a Q2 statement with known capacity and production, and reproduce it.",
+   "ours": "ExcessCapacityModule (model option): unused capacity units x a labelled idle cost per unit.",
+   "primary": true,
+   "ranges": {},
+   "real_note": "The captured Q1 income statement has an 'excess capacity' expense row (structure only; how it is computed is not observed).",
+   "real_status": "measured",
+   "screens": [
+    "ProFormaIncomeStatement"
+   ],
+   "sources": [
+    "E-STMT"
+   ],
+   "stoppable": true,
+   "ui": {
+    "practice": "遊戲損益表有「閒置產能」費用列（Q1 擷取的結構），但怎麼算沒看到；這裡用「沒用到的產能 × 暫定單位成本」。",
+    "results": [
+     [
+      "idle_capacity_units",
+      "閒置產能（件）"
+     ],
+     [
+      "excess_capacity_cost",
+      "閒置產能成本"
+     ]
+    ],
+    "toggle": "計入閒置產能成本（模型選項）"
+   }
   },
   {
    "area": "production",
    "capture": "Q3+ (unverified · awaiting capture)",
-   "coefficients": null,
-   "decidable": false,
-   "decisions": [],
-   "implementation": null,
+   "coefficients": {
+    "record_quarters": 4
+   },
+   "decidable": true,
+   "decisions": [
+    "rule",
+    "cover",
+    "z",
+    "priority"
+   ],
+   "fields": [
+    {
+     "default": "plan",
+     "high": 1.0,
+     "kind": "brand_choice",
+     "label": "生產量怎麼定",
+     "low": 0.0,
+     "name": "rule",
+     "options": [
+      [
+       "plan",
+       "照計畫量"
+      ],
+      [
+       "order_up_to",
+       "補到目標庫存"
+      ]
+     ],
+     "part": "supply.replenishment",
+     "step": 1.0,
+     "unit": ""
+    },
+    {
+     "default": 1.0,
+     "high": 3,
+     "kind": "number",
+     "label": "目標庫存（幾季的平均需求）",
+     "low": 0.25,
+     "name": "cover",
+     "options": [],
+     "part": "supply.replenishment",
+     "step": 0.25,
+     "unit": " 季"
+    },
+    {
+     "default": 0.0,
+     "high": 3,
+     "kind": "number",
+     "label": "安全係數 z",
+     "low": 0,
+     "name": "z",
+     "options": [],
+     "part": "supply.replenishment",
+     "step": 0.1,
+     "unit": ""
+    },
+    {
+     "default": 5,
+     "high": 9,
+     "kind": "brand_number",
+     "label": "產能不夠時的優先順序（1 最先）",
+     "low": 1,
+     "name": "priority",
+     "options": [],
+     "part": "production.scheduling",
+     "step": 1,
+     "unit": ""
+    }
+   ],
+   "implementation": "ProductionPlanningModule",
    "key": "production.scheduling",
    "kind": "behaviour",
-   "maturity": "not-modeled",
-   "module": null,
+   "maturity": "heuristic",
+   "module": "supply.replenishment",
    "name": "生產規則與排程",
-   "next_step": "To heuristic: changeover loss per brand produced, reduced by changeover investment.",
-   "ours": "None (production = planned units, capped by capacity).",
-   "ranges": null,
+   "next_step": "Add changeover loss per brand produced; to verified: production-rule screens from Q3+.",
+   "ours": "ProductionPlanningModule (heuristic part): brands get capacity in the player's priority order when it binds. Changeover losses are not modelled.",
+   "primary": false,
+   "ranges": {},
    "real_note": "Production rules, control system and changeover screens are registered; scheduling is common to business games.",
    "real_status": "inferred",
    "screens": [
@@ -865,23 +1518,65 @@
    "sources": [
     "E-REG",
     "R-GOOSEN1999"
-   ]
+   ],
+   "stoppable": true,
+   "ui": {
+    "literature": "「補到目標庫存」用文獻的訂購點形式：平均需求 × 目標季數 + z × 標準差 × √季數，減掉期初庫存；需求紀錄來自本引擎自己的估計，所以生產量跟需求鏈同等級（≈）。第一季還沒有紀錄時用計畫量。",
+    "practice": "產能不夠時按優先順序分配；遊戲的分配規則未觀察到。",
+    "results": [
+     [
+      "replenishment_target[{brand}]",
+      "目標庫存"
+     ],
+     [
+      "replenishment_units[{brand}]",
+      "規則決定的產量"
+     ],
+     [
+      "demand_record_mean[{brand}]",
+      "需求紀錄平均"
+     ]
+    ],
+    "toggle": "啟用補貨與排程規則"
+   }
   },
   {
    "area": "production",
    "capture": "Q3+ (unverified · awaiting capture)",
-   "coefficients": null,
-   "decidable": false,
-   "decisions": [],
-   "implementation": null,
+   "coefficients": {
+    "base_defect_rate": 0.06,
+    "defect_sensitivity": 2.0,
+    "qa_scale": 15,
+    "repair_share": 0.5
+   },
+   "decidable": true,
+   "decisions": [
+    "qa_per_unit"
+   ],
+   "fields": [
+    {
+     "default": 0,
+     "high": 100,
+     "kind": "brand_number",
+     "label": "每件品管投入",
+     "low": 0,
+     "name": "qa_per_unit",
+     "options": [],
+     "part": "production.quality",
+     "step": 1,
+     "unit": ""
+    }
+   ],
+   "implementation": "QualityModule",
    "key": "production.quality",
    "kind": "behaviour",
-   "maturity": "not-modeled",
-   "module": null,
+   "maturity": "heuristic",
+   "module": "production.quality",
    "name": "品質、檢驗與重工",
-   "next_step": "To heuristic: defect rate falls with inspection and improvement spend; defects cost warranty and lower the quality term.",
-   "ours": "None (quality is fixed at 1 in the demand chain).",
-   "ranges": null,
+   "next_step": "To literature: a quality-to-sales magnitude (none found). To verified: quality screens from Q3+.",
+   "ours": "QualityModule: QA spend per unit lowers the defect rate; defects lower attraction and cost warranty repairs.",
+   "primary": true,
+   "ranges": {},
    "real_note": "Inspection, rework and corrective-action screens and quality-cost reports are registered; public sources mention product quality.",
    "real_status": "inferred",
    "screens": [
@@ -894,24 +1589,83 @@
    ],
    "sources": [
     "E-REG",
-    "P-HALES"
-   ]
+    "P-HALES",
+    "L-BUZZELL1987"
+   ],
+   "stoppable": false,
+   "ui": {
+    "practice": "每件品管投入降低不良率；不良品降低吸引力並產生保固維修費。只有方向有文獻支持（PIMS），幅度是暫定值。開啟這個模組但不投入時，不良率按基準值計算。",
+    "results": [
+     [
+      "defect_rate[{brand}]",
+      "不良率",
+      "percent"
+     ],
+     [
+      "quality_factor[{brand}]",
+      "品質吸引力倍數"
+     ],
+     [
+      "warranty_cost",
+      "保固維修費"
+     ]
+    ],
+    "toggle": "納入品質與保固"
+   }
   },
   {
    "area": "production",
    "capture": "Q3+ (unverified · awaiting capture)",
-   "coefficients": null,
-   "decidable": false,
-   "decisions": [],
-   "implementation": null,
+   "coefficients": {
+    "relocation_cost": 250000,
+    "sites": {
+     "home": {
+      "labor_factor": 1.0,
+      "shipping_per_unit": 0
+     },
+     "low_cost": {
+      "labor_factor": 0.7,
+      "shipping_per_unit": 6
+     }
+    }
+   },
+   "decidable": true,
+   "decisions": [
+    "location"
+   ],
+   "fields": [
+    {
+     "default": "home",
+     "high": 1.0,
+     "kind": "choice",
+     "label": "生產地點",
+     "low": 0.0,
+     "name": "location",
+     "options": [
+      [
+       "home",
+       "原地"
+      ],
+      [
+       "low_cost",
+       "低工資地區"
+      ]
+     ],
+     "part": "production.factory_location",
+     "step": 1.0,
+     "unit": ""
+    }
+   ],
+   "implementation": "FactoryLocationModule",
    "key": "production.factory_location",
    "kind": "accounting",
-   "maturity": "not-modeled",
-   "module": null,
+   "maturity": "heuristic",
+   "module": "production.factory_location",
    "name": "工廠與倉庫地點",
-   "next_step": "To heuristic: shipping cost per unit by distance band; a second factory adds fixed cost.",
-   "ours": "None (one factory, no location).",
-   "ranges": null,
+   "next_step": "To verified: the game's site options and costs from Q3+.",
+   "ours": "FactoryLocationModule: a lower-wage site scales direct labour and adds shipping per unit; a move costs a one-off charge.",
+   "primary": true,
+   "ranges": {},
    "real_note": "Factory and warehouse location screens are registered; public sources mention plant location.",
    "real_status": "inferred",
    "screens": [
@@ -921,7 +1675,26 @@
    "sources": [
     "E-REG",
     "P-HALES"
-   ]
+   ],
+   "stoppable": false,
+   "ui": {
+    "practice": "低工資地區：直接人工較便宜，但每件要多付運費；搬遷要付一次搬遷費。數字都是暫定值。",
+    "results": [
+     [
+      "location_labor_factor",
+      "直接人工倍數"
+     ],
+     [
+      "location_shipping",
+      "每件運費"
+     ],
+     [
+      "relocation_cost",
+      "搬遷費"
+     ]
+    ],
+    "toggle": "選擇生產地點"
+   }
   },
   {
    "area": "supply",
@@ -934,6 +1707,7 @@
    "decisions": [
     "sell_off[brand]"
    ],
+   "fields": [],
    "implementation": "InventoryModule",
    "key": "supply.inventory_holding",
    "kind": "accounting",
@@ -942,6 +1716,7 @@
    "name": "庫存持有成本",
    "next_step": "To verified: read the game's holding or inventory-tax charge on a Q2+ statement with known ending inventory; reproduce it.",
    "ours": "InventoryModule: annual carrying-cost rate (inside the published range) / 4 x value of units left at quarter end (unit cost). Placeholder downstream while unit cost is a placeholder.",
+   "primary": true,
    "ranges": {
     "annual_holding_rate": [
      0.12,
@@ -959,7 +1734,9 @@
     "E-STMT",
     "L-HARRIS1913",
     "L-AZZI2014"
-   ]
+   ],
+   "stoppable": false,
+   "ui": {}
   },
   {
    "area": "supply",
@@ -972,6 +1749,7 @@
    "decisions": [
     "sell_off[brand]"
    ],
+   "fields": [],
    "implementation": "InventoryModule",
    "key": "supply.inventory_selloff",
    "kind": "behaviour",
@@ -980,6 +1758,7 @@
    "name": "庫存出清",
    "next_step": "To verified: observe the game's sell-off price on SellUnwantedInventory once it opens; no general published salvage rate applies, so no literature step.",
    "ours": "InventoryModule (heuristic part): units sold off at quarter start bring a labelled salvage fraction of unit cost.",
+   "primary": false,
    "ranges": {
     "annual_holding_rate": [
      0.12,
@@ -993,23 +1772,92 @@
    ],
    "sources": [
     "E-REG"
-   ]
+   ],
+   "stoppable": false,
+   "ui": {}
   },
   {
    "area": "supply",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
-   "coefficients": null,
-   "decidable": false,
-   "decisions": [],
-   "implementation": null,
+   "coefficients": {
+    "record_quarters": 4
+   },
+   "decidable": true,
+   "decisions": [
+    "rule",
+    "cover",
+    "z",
+    "priority"
+   ],
+   "fields": [
+    {
+     "default": "plan",
+     "high": 1.0,
+     "kind": "brand_choice",
+     "label": "生產量怎麼定",
+     "low": 0.0,
+     "name": "rule",
+     "options": [
+      [
+       "plan",
+       "照計畫量"
+      ],
+      [
+       "order_up_to",
+       "補到目標庫存"
+      ]
+     ],
+     "part": "supply.replenishment",
+     "step": 1.0,
+     "unit": ""
+    },
+    {
+     "default": 1.0,
+     "high": 3,
+     "kind": "number",
+     "label": "目標庫存（幾季的平均需求）",
+     "low": 0.25,
+     "name": "cover",
+     "options": [],
+     "part": "supply.replenishment",
+     "step": 0.25,
+     "unit": " 季"
+    },
+    {
+     "default": 0.0,
+     "high": 3,
+     "kind": "number",
+     "label": "安全係數 z",
+     "low": 0,
+     "name": "z",
+     "options": [],
+     "part": "supply.replenishment",
+     "step": 0.1,
+     "unit": ""
+    },
+    {
+     "default": 5,
+     "high": 9,
+     "kind": "brand_number",
+     "label": "產能不夠時的優先順序（1 最先）",
+     "low": 1,
+     "name": "priority",
+     "options": [],
+     "part": "production.scheduling",
+     "step": 1,
+     "unit": ""
+    }
+   ],
+   "implementation": "ProductionPlanningModule",
    "key": "supply.replenishment",
    "kind": "behaviour",
-   "maturity": "not-modeled",
-   "module": null,
+   "maturity": "literature",
+   "module": "supply.replenishment",
    "name": "補貨點與生產控制規則",
-   "next_step": "To heuristic: a production rule that tops inventory up to a target, needing a production coupling (planned units from a rule) - next round with production.scheduling.",
-   "ours": "None (production is the planned quantity, capped by capacity).",
-   "ranges": null,
+   "next_step": "To verified: the game's InventoryControl rule (max ending inventory, produce) from Q2+.",
+   "ours": "ProductionPlanningModule (literature part): order-up-to rule, production = max(mean x cover + z x sd x sqrt(cover) - inventory, 0) from this engine's own record of units demanded; at the record's level (≈ at best).",
+   "primary": true,
+   "ranges": {},
    "real_note": "InventoryControl (maxEndingInventory, produce) and TargetReplenishPoint screens are registered.",
    "real_status": "inferred",
    "screens": [
@@ -1017,8 +1865,31 @@
     "TargetReplenishPoint"
    ],
    "sources": [
-    "E-REG"
-   ]
+    "E-REG",
+    "L-ARROW1951",
+    "L-SCARF1960",
+    "L-SILVER1998"
+   ],
+   "stoppable": true,
+   "ui": {
+    "literature": "「補到目標庫存」用文獻的訂購點形式：平均需求 × 目標季數 + z × 標準差 × √季數，減掉期初庫存；需求紀錄來自本引擎自己的估計，所以生產量跟需求鏈同等級（≈）。第一季還沒有紀錄時用計畫量。",
+    "practice": "產能不夠時按優先順序分配；遊戲的分配規則未觀察到。",
+    "results": [
+     [
+      "replenishment_target[{brand}]",
+      "目標庫存"
+     ],
+     [
+      "replenishment_units[{brand}]",
+      "規則決定的產量"
+     ],
+     [
+      "demand_record_mean[{brand}]",
+      "需求紀錄平均"
+     ]
+    ],
+    "toggle": "啟用補貨與排程規則"
+   }
   },
   {
    "area": "supply",
@@ -1044,6 +1915,7 @@
    "decisions": [
     "contract_units"
    ],
+   "fields": [],
    "implementation": "PurchasingHeuristic",
    "key": "supply.purchasing",
    "kind": "behaviour",
@@ -1052,6 +1924,7 @@
    "name": "採購、供應商與合約",
    "next_step": "To literature: only if a published range of component volume discounts is found (none so far; Dolan 1987 and Monahan 1984 give the form, not magnitudes). To verified: observe supplier terms (ConfirmRFP) once the screens open.",
    "ours": "PurchasingHeuristic: a quarterly component volume contract earns an all-units discount on the material part of unit cost for the units produced under it; unproduced contract units pay a fee. New production coupling: material cost factor.",
+   "primary": true,
    "ranges": {},
    "real_note": "Supply-chain strategy, information system, contract and partner-payment screens are registered; the captured Q1 brand screen lists component and scale thresholds, and the capacity screen a supplier field.",
    "real_status": "inferred",
@@ -1067,7 +1940,9 @@
     "E-Q1",
     "L-DOLAN1987",
     "L-MONAHAN1984"
-   ]
+   ],
+   "stoppable": false,
+   "ui": {}
   },
   {
    "area": "supply",
@@ -1075,14 +1950,16 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "supply.lead_time_disruption",
    "kind": "behaviour",
    "maturity": "not-modeled",
    "module": null,
    "name": "前置期與供應中斷",
-   "next_step": "Deferred on purpose: no evidence yet that the game has lead times or supply disruptions (status unknown). Capture first (Q2+ cost-trend and risk screens); build only what a report shows. The control plane can already stress-test a supply shock as a scenario event.",
+   "next_step": "Kept not-modeled on purpose: no evidence the game has lead times or disruptions; capture first (ledger rule for 'unknown').",
    "ours": "None. The control plane can apply shocks as scenario events (capacity factor), which is a stress test, not a model.",
+   "primary": false,
    "ranges": null,
    "real_note": "Risk and cost-trend screens are registered; no lead-time field has been seen.",
    "real_status": "unknown",
@@ -1092,23 +1969,55 @@
    ],
    "sources": [
     "E-REG"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "rnd",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
-   "coefficients": null,
-   "decidable": false,
-   "decisions": [],
-   "implementation": null,
+   "coefficients": {
+    "annual_depreciation": 0.15,
+    "rnd_elasticity": 0.08,
+    "stock_reference": 200000
+   },
+   "decidable": true,
+   "decisions": [
+    "rnd"
+   ],
+   "fields": [
+    {
+     "default": 0,
+     "high": 500000,
+     "kind": "brand_number",
+     "label": "研發投入（每季）",
+     "low": 0,
+     "name": "rnd",
+     "options": [],
+     "part": "rnd.feature_development",
+     "step": 5000,
+     "unit": ""
+    }
+   ],
+   "implementation": "RnDModule",
    "key": "rnd.feature_development",
    "kind": "behaviour",
-   "maturity": "not-modeled",
-   "module": null,
+   "maturity": "literature",
+   "module": "rnd.feature_development",
    "name": "研發新功能",
-   "next_step": "To heuristic: charge project cost and make the component available after a fixed delay.",
-   "ours": "Components can carry an availability quarter in the pack; project cost is not charged.",
-   "ranges": null,
+   "next_step": "Model the game's project cost and availability delay once FeatureRD is captured (Q2+); to verified then.",
+   "ours": "RnDModule: R&D stock by perpetual inventory (15 %/year), attraction elasticity in the published R&D range (a labelled mapping from output to attraction). Spending line heuristic. Feature availability after a delay is not modelled.",
+   "primary": true,
+   "ranges": {
+    "annual_depreciation": [
+     0.08,
+     0.25
+    ],
+    "rnd_elasticity": [
+     0.01,
+     0.25
+    ]
+   },
    "real_note": "Feature R&D screens are registered; Q1 component data carry an appearance quarter and a project cost.",
    "real_status": "inferred",
    "screens": [
@@ -1118,8 +2027,57 @@
    "sources": [
     "E-REG",
     "E-Q1",
-    "P-HALES"
-   ]
+    "P-HALES",
+    "L-HALL2010"
+   ],
+   "stoppable": false,
+   "ui": {
+    "literature": "研發累積成「研發存量」（每年折舊 15%，Griliches 慣例），吸引力依文獻範圍內的研發彈性（0.01–0.25）報酬遞減地提高；把產出彈性當成吸引力彈性是標明的對應假設。",
+    "practice": "研發支出怎麼入帳（遊戲規則）未觀察到，支出列是練習。",
+    "results": [
+     [
+      "rnd_stock[{brand}]",
+      "研發存量"
+     ],
+     [
+      "rnd_factor[{brand}]",
+      "研發吸引力倍數"
+     ],
+     [
+      "rnd_spending",
+      "研發支出"
+     ]
+    ],
+    "toggle": "投入研發"
+   }
+  },
+  {
+   "area": "rnd",
+   "capture": "unknown (unverified)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "fields": [],
+   "implementation": null,
+   "key": "rnd.licensing",
+   "kind": "accounting",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "技術授權（授權收入與授權費）",
+   "next_step": "Kept not-modeled: nothing tells what triggers a licence or its amount; capture the first quarter where the rows are non-zero.",
+   "ours": "None.",
+   "primary": false,
+   "ranges": null,
+   "real_note": "The captured Q1 income statement has licensing income and licensing fee rows (structure only); no licensing screen was seen in Q1.",
+   "real_status": "measured",
+   "screens": [
+    "ProFormaIncomeStatement"
+   ],
+   "sources": [
+    "E-STMT"
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "finance",
@@ -1127,6 +2085,7 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "finance.cd",
    "kind": "accounting",
@@ -1135,6 +2094,7 @@
    "name": "定存",
    "next_step": "Keep (the withdraw term was not varied: re-test when convenient).",
    "ours": "Balance and interest (cost_model).",
+   "primary": false,
    "ranges": null,
    "real_note": "Certificate of Deposit is a Q1 decision screen; reproduced by EXP-01.",
    "real_status": "measured",
@@ -1144,7 +2104,9 @@
    "sources": [
     "E-Q1",
     "E-EXP"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "finance",
@@ -1152,6 +2114,7 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "finance.stock",
    "kind": "accounting",
@@ -1160,6 +2123,7 @@
    "name": "增資（股票）",
    "next_step": "Keep.",
    "ours": "Raised = sum(shares x price) (derived identity).",
+   "primary": false,
    "ranges": null,
    "real_note": "Closely Held Stock is in the Q1 menu; the raise is a view identity.",
    "real_status": "measured",
@@ -1168,24 +2132,112 @@
    ],
    "sources": [
     "E-Q1"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "finance",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
-   "coefficients": null,
-   "decidable": false,
-   "decisions": [],
-   "implementation": null,
+   "coefficients": {
+    "long_rate_quarterly": 0.02,
+    "short_limit": 2000000,
+    "short_rate_quarterly": 0.025
+   },
+   "decidable": true,
+   "decisions": [
+    "short_loan",
+    "long_loan",
+    "long_term",
+    "extra_repayment",
+    "dividend"
+   ],
+   "fields": [
+    {
+     "default": 0,
+     "high": 5000000,
+     "kind": "number",
+     "label": "短期貸款（下季還清）",
+     "low": 0,
+     "name": "short_loan",
+     "options": [],
+     "part": "finance.loans",
+     "step": 10000,
+     "unit": ""
+    },
+    {
+     "default": 0,
+     "high": 10000000,
+     "kind": "number",
+     "label": "長期貸款（新借）",
+     "low": 0,
+     "name": "long_loan",
+     "options": [],
+     "part": "finance.loans",
+     "step": 10000,
+     "unit": ""
+    },
+    {
+     "default": "8",
+     "high": 1.0,
+     "kind": "choice",
+     "label": "長期貸款期數",
+     "low": 0.0,
+     "name": "long_term",
+     "options": [
+      [
+       "4",
+       "4 季"
+      ],
+      [
+       "8",
+       "8 季"
+      ],
+      [
+       "12",
+       "12 季"
+      ]
+     ],
+     "part": "finance.loans",
+     "step": 1.0,
+     "unit": ""
+    },
+    {
+     "default": 0,
+     "high": 10000000,
+     "kind": "number",
+     "label": "長期貸款提前還款",
+     "low": 0,
+     "name": "extra_repayment",
+     "options": [],
+     "part": "finance.loans",
+     "step": 10000,
+     "unit": ""
+    },
+    {
+     "default": 0,
+     "high": 5000000,
+     "kind": "number",
+     "label": "發放股利（總額）",
+     "low": 0,
+     "name": "dividend",
+     "options": [],
+     "part": "finance.dividends",
+     "step": 10000,
+     "unit": ""
+    }
+   ],
+   "implementation": "FinancingModule",
    "key": "finance.loans",
    "kind": "accounting",
-   "maturity": "not-modeled",
-   "module": null,
+   "maturity": "heuristic",
+   "module": "finance.loans",
    "name": "短期與長期貸款",
-   "next_step": "To heuristic: borrow and repay with an interest rate from the pack; to verified by experiment once the screen opens.",
-   "ours": "None (only the emergency loan).",
-   "ranges": null,
-   "real_note": "Short- and long-term loan screens are registered; public sources describe external funding.",
+   "next_step": "To verified: read the game's loan terms when the screens open (Q2+) and reproduce a loan's cash rows.",
+   "ours": "FinancingModule: short loans repaid next quarter, long loans in equal instalments, interest on balances at quarter start; exact arithmetic, labelled rates and terms.",
+   "primary": true,
+   "ranges": {},
+   "real_note": "Short- and long-term loan screens are registered; public sources describe external funding. The captured Q1 pro-forma balance sheet has a short-loan row and no long-term-loan row; the statements carry short-loan and 5-year rate parameters (structure only).",
    "real_status": "inferred",
    "screens": [
     "ShortTermLoan",
@@ -1194,7 +2246,30 @@
    "sources": [
     "E-REG",
     "P-HALES"
-   ]
+   ],
+   "stoppable": false,
+   "ui": {
+    "practice": "現金的進出是精確的算術，但利率、期數、上限都是暫定值（遊戲的貸款條件未觀察到）。借款與還本、股利是現金流（不進損益），利息是費用。",
+    "results": [
+     [
+      "loan_interest",
+      "利息"
+     ],
+     [
+      "loan_balance_short",
+      "短期貸款餘額"
+     ],
+     [
+      "loan_balance_long",
+      "長期貸款餘額"
+     ],
+     [
+      "dividends_paid",
+      "股利（現金流出）"
+     ]
+    ],
+    "toggle": "借款或發股利"
+   }
   },
   {
    "area": "finance",
@@ -1202,6 +2277,7 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "finance.emergency_loan",
    "kind": "accounting",
@@ -1210,6 +2286,7 @@
    "name": "緊急貸款",
    "next_step": "Cannot be verified by arithmetic alone: the loan rule and its interest (rate fields on the statement view) need a quarter that ends with negative cash (only if it happens naturally; never forced).",
    "ours": "Placeholder: covers negative cash, no interest charged. Verified branch: no loan while cash is not negative (captured Q1 statement: no emergency loan at positive cash; a minimum-cash threshold, if any, is unverified).",
+   "primary": false,
    "ranges": null,
    "real_note": "An emergency-loan rate field appears on the Q1 pro-forma cash flow; the rule was not observed.",
    "real_status": "measured",
@@ -1218,7 +2295,9 @@
    ],
    "sources": [
     "E-Q1"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "finance",
@@ -1226,6 +2305,7 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "finance.tax",
    "kind": "accounting",
@@ -1234,6 +2314,7 @@
    "name": "所得稅",
    "next_step": "Cannot be verified by arithmetic alone: needs the game's tax on a profitable quarter. First build the accrual income statement and carry-forward (structure measured), then reproduce the tax row of the first profitable settlement.",
    "ours": "Placeholder: max(cash-basis pretax, 0) x tax rate. Known incomplete (no carry-forward, no inventory tax, cash basis). Verified branch: no tax on a pre-tax loss with nothing produced or held (structural zero, as certain as the sign of pretax).",
+   "primary": false,
    "ranges": null,
    "real_note": "A tax-rate and an inventory-tax field appear on the captured Q1 statement view; the captured income statement has a loss carry-forward row before taxable income, and taxes accrual income. The rule was not observed.",
    "real_status": "measured",
@@ -1243,23 +2324,111 @@
    ],
    "sources": [
     "E-Q1"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "finance",
    "capture": "Q3+ (unverified · awaiting capture)",
-   "coefficients": null,
-   "decidable": false,
-   "decisions": [],
-   "implementation": null,
+   "coefficients": {
+    "long_rate_quarterly": 0.02,
+    "short_limit": 2000000,
+    "short_rate_quarterly": 0.025
+   },
+   "decidable": true,
+   "decisions": [
+    "short_loan",
+    "long_loan",
+    "long_term",
+    "extra_repayment",
+    "dividend"
+   ],
+   "fields": [
+    {
+     "default": 0,
+     "high": 5000000,
+     "kind": "number",
+     "label": "短期貸款（下季還清）",
+     "low": 0,
+     "name": "short_loan",
+     "options": [],
+     "part": "finance.loans",
+     "step": 10000,
+     "unit": ""
+    },
+    {
+     "default": 0,
+     "high": 10000000,
+     "kind": "number",
+     "label": "長期貸款（新借）",
+     "low": 0,
+     "name": "long_loan",
+     "options": [],
+     "part": "finance.loans",
+     "step": 10000,
+     "unit": ""
+    },
+    {
+     "default": "8",
+     "high": 1.0,
+     "kind": "choice",
+     "label": "長期貸款期數",
+     "low": 0.0,
+     "name": "long_term",
+     "options": [
+      [
+       "4",
+       "4 季"
+      ],
+      [
+       "8",
+       "8 季"
+      ],
+      [
+       "12",
+       "12 季"
+      ]
+     ],
+     "part": "finance.loans",
+     "step": 1.0,
+     "unit": ""
+    },
+    {
+     "default": 0,
+     "high": 10000000,
+     "kind": "number",
+     "label": "長期貸款提前還款",
+     "low": 0,
+     "name": "extra_repayment",
+     "options": [],
+     "part": "finance.loans",
+     "step": 10000,
+     "unit": ""
+    },
+    {
+     "default": 0,
+     "high": 5000000,
+     "kind": "number",
+     "label": "發放股利（總額）",
+     "low": 0,
+     "name": "dividend",
+     "options": [],
+     "part": "finance.dividends",
+     "step": 10000,
+     "unit": ""
+    }
+   ],
+   "implementation": "FinancingModule",
    "key": "finance.dividends",
    "kind": "accounting",
-   "maturity": "not-modeled",
-   "module": null,
+   "maturity": "heuristic",
+   "module": "finance.loans",
    "name": "股利",
-   "next_step": "To heuristic: a cash outflow; to verified by experiment once the screen opens.",
-   "ours": "None.",
-   "ranges": null,
+   "next_step": "To verified: the game's dividend rule and limits (Q3+).",
+   "ours": "FinancingModule (dividends): paid from cash as a financing flow.",
+   "primary": false,
+   "ranges": {},
    "real_note": "A Dividends screen is registered; dividends are common to business games.",
    "real_status": "inferred",
    "screens": [
@@ -1268,7 +2437,30 @@
    "sources": [
     "E-REG",
     "R-GOOSEN1999"
-   ]
+   ],
+   "stoppable": false,
+   "ui": {
+    "practice": "現金的進出是精確的算術，但利率、期數、上限都是暫定值（遊戲的貸款條件未觀察到）。借款與還本、股利是現金流（不進損益），利息是費用。",
+    "results": [
+     [
+      "loan_interest",
+      "利息"
+     ],
+     [
+      "loan_balance_short",
+      "短期貸款餘額"
+     ],
+     [
+      "loan_balance_long",
+      "長期貸款餘額"
+     ],
+     [
+      "dividends_paid",
+      "股利（現金流出）"
+     ]
+    ],
+    "toggle": "借款或發股利"
+   }
   },
   {
    "area": "finance",
@@ -1276,14 +2468,16 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "finance.currency",
    "kind": "accounting",
    "maturity": "not-modeled",
    "module": null,
    "name": "外匯與多幣別資金",
-   "next_step": "Only if a captured course shows it.",
+   "next_step": "Kept not-modeled: the pack carries no currency per market and the capture time is unknown; capture the markets' currencies first.",
    "ours": "None (one currency).",
+   "primary": false,
    "ranges": null,
    "real_note": "Currency fund screen and exchange-rate report are registered (probably international editions only).",
    "real_status": "inferred",
@@ -1293,7 +2487,9 @@
    ],
    "sources": [
     "E-REG"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "finance",
@@ -1301,21 +2497,25 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "finance.venture_capital",
    "kind": "behaviour",
    "maturity": "not-modeled",
    "module": null,
    "name": "創投募資談判",
-   "next_step": "Capture first; it may be a classroom activity outside the software.",
+   "next_step": "Kept not-modeled: the game's investor rules are not observed and no published form maps a company's results to an offer; capture first.",
    "ours": "Stock issue at a price the player enters.",
+   "primary": false,
    "ranges": null,
    "real_note": "Described in public teaching sources (business plan and equity negotiation); no matching decision screen has been identified.",
    "real_status": "inferred",
    "screens": [],
    "sources": [
     "P-HALES"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "accounting",
@@ -1323,6 +2523,7 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "accounting.cash_flow",
    "kind": "accounting",
@@ -1331,6 +2532,7 @@
    "name": "現金流量（現金恆等式）",
    "next_step": "Keep. The identity is verified; each row keeps its own level, so ending cash is only shown as verified when every row is. Re-check against a Q2 cash-flow statement with non-zero rows.",
    "ours": "Ending cash = beginning cash + revenue + stock raised + CD flow + interest - operating expenses - capacity investment - tax + emergency loan. Identity reproduced with zero residual in every run (tests), and every engine row maps to a statement row with the same sign. Rows the game has and we do not (rebates, R&D, internet marketing, shipping, excess capacity, licensing, other, loans) are listed; in the captured Q1 projection they are all zero.",
+   "primary": false,
    "ranges": null,
    "real_note": "The captured Q1 cash-flow statement gives the structure: beginning cash, operating receipts and disbursements, investing, financing, ending cash; every row is added with its sign (measured). Its totals are server-computed.",
    "real_status": "measured",
@@ -1343,23 +2545,30 @@
    "sources": [
     "E-Q1",
     "E-STMT"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "accounting",
    "capture": "Q2 settlement (unverified · awaiting Q2 capture)",
-   "coefficients": null,
-   "decidable": false,
+   "coefficients": {
+    "depreciation_quarters": 40,
+    "inventory_tax_annual": 0.02
+   },
+   "decidable": true,
    "decisions": [],
-   "implementation": null,
+   "fields": [],
+   "implementation": "AccrualAccounting",
    "key": "accounting.income_statement",
    "kind": "accounting",
    "maturity": "heuristic",
-   "module": null,
+   "module": "accounting.accrual",
    "name": "損益表（應計基礎）",
-   "next_step": "To verified (accounting): build the accrual statement from state (COGS on units sold, inventory as an asset, depreciation of capacity, loss carry-forward) and reproduce a Q2 income statement row by row.",
-   "ours": "Cash-basis profit (production expensed when made, no depreciation, no carry-forward): a different statement. Pre-tax profit and net income never rank above placeholder for that reason.",
-   "ranges": null,
+   "next_step": "To verified (accounting): reproduce a Q2 income statement row by row with the accrual option.",
+   "ours": "Engine default: cash-basis profit (never above placeholder). With the AccrualAccounting option: COGS at moving-average cost, depreciation, inventory tax, tax after a loss carry-forward (heuristic rules).",
+   "primary": false,
+   "ranges": {},
    "real_note": "The captured Q1 income statement is accrual: cost of goods sold, depreciation, a loss carry-forward row before taxable income, and an inventory tax parameter (structure only; Q1 values are all zero).",
    "real_status": "measured",
    "screens": [
@@ -1369,32 +2578,148 @@
    "sources": [
     "E-Q1",
     "E-STMT"
-   ]
+   ],
+   "stoppable": true,
+   "ui": {
+    "practice": "照遊戲報表的結構（銷貨成本、折舊、虧損扣抵、庫存稅）另算一份應計損益表和資產負債表，所得稅改用應計稅前利潤扣掉虧損扣抵後計算。折舊年限、庫存計價、稅率都是暫定值；資產負債表每季都會平衡（有測試）。",
+    "results": [
+     [
+      "accrual_cogs",
+      "銷貨成本"
+     ],
+     [
+      "accrual_depreciation",
+      "折舊"
+     ],
+     [
+      "inventory_tax",
+      "庫存稅"
+     ],
+     [
+      "accrual_pretax",
+      "應計稅前利潤"
+     ],
+     [
+      "loss_carryforward",
+      "可扣抵虧損（期末）"
+     ],
+     [
+      "accrual_net_income",
+      "應計淨利"
+     ],
+     [
+      "bs_inventory",
+      "存貨（帳面）"
+     ],
+     [
+      "bs_plant",
+      "廠房（帳面）"
+     ],
+     [
+      "bs_total_assets",
+      "資產合計"
+     ],
+     [
+      "bs_liabilities",
+      "負債合計"
+     ],
+     [
+      "bs_equity",
+      "權益合計"
+     ],
+     [
+      "balance_check",
+      "資產 − 負債 − 權益"
+     ]
+    ],
+    "toggle": "用應計基礎記帳（模型選項）"
+   }
   },
   {
    "area": "accounting",
    "capture": "Q1 (captured)",
-   "coefficients": null,
-   "decidable": false,
+   "coefficients": {
+    "depreciation_quarters": 40,
+    "inventory_tax_annual": 0.02
+   },
+   "decidable": true,
    "decisions": [],
-   "implementation": null,
+   "fields": [],
+   "implementation": "AccrualAccounting",
    "key": "accounting.balance_sheet",
    "kind": "accounting",
-   "maturity": "not-modeled",
-   "module": null,
+   "maturity": "heuristic",
+   "module": "accounting.accrual",
    "name": "資產負債表",
-   "next_step": "To verified (accounting): build the sheet from state and reproduce the Q1/Q2 rows.",
-   "ours": "None (state keeps cash, CD, capacity, stock, inventory, but no balance sheet).",
-   "ranges": null,
-   "real_note": "Pro-forma balance sheet is in the Q1 menu.",
+   "next_step": "To verified (accounting): reproduce the Q2 balance sheet row by row (valuation and depreciation rules).",
+   "ours": "AccrualAccounting (model option): cash, CDs, inventory at book value, plant | loans, emergency loans | stock, retained earnings; balances every quarter (tested). Capacity owned before the option is off the books. Our books also carry inventory and long-term loans, which the captured sheet has no rows for (src/marketplace_sim/reconcile.py BALANCE_EXTRA).",
+   "primary": true,
+   "ranges": {},
+   "real_note": "Pro-forma balance sheet is in the Q1 menu. Captured rows (structure): cash, CD, net fixed assets | short loan, emergency loan | common stock, retained earnings; no inventory row.",
    "real_status": "measured",
    "screens": [
     "ProFormaBalanceSheet",
     "BalanceSheet (report)"
    ],
    "sources": [
-    "E-Q1"
-   ]
+    "E-Q1",
+    "E-STMT"
+   ],
+   "stoppable": true,
+   "ui": {
+    "practice": "照遊戲報表的結構（銷貨成本、折舊、虧損扣抵、庫存稅）另算一份應計損益表和資產負債表，所得稅改用應計稅前利潤扣掉虧損扣抵後計算。折舊年限、庫存計價、稅率都是暫定值；資產負債表每季都會平衡（有測試）。",
+    "results": [
+     [
+      "accrual_cogs",
+      "銷貨成本"
+     ],
+     [
+      "accrual_depreciation",
+      "折舊"
+     ],
+     [
+      "inventory_tax",
+      "庫存稅"
+     ],
+     [
+      "accrual_pretax",
+      "應計稅前利潤"
+     ],
+     [
+      "loss_carryforward",
+      "可扣抵虧損（期末）"
+     ],
+     [
+      "accrual_net_income",
+      "應計淨利"
+     ],
+     [
+      "bs_inventory",
+      "存貨（帳面）"
+     ],
+     [
+      "bs_plant",
+      "廠房（帳面）"
+     ],
+     [
+      "bs_total_assets",
+      "資產合計"
+     ],
+     [
+      "bs_liabilities",
+      "負債合計"
+     ],
+     [
+      "bs_equity",
+      "權益合計"
+     ],
+     [
+      "balance_check",
+      "資產 − 負債 − 權益"
+     ]
+    ],
+    "toggle": "用應計基礎記帳（模型選項）"
+   }
   },
   {
    "area": "market",
@@ -1402,6 +2727,7 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "market.rival_behaviour",
    "kind": "scenario",
@@ -1410,6 +2736,7 @@
    "name": "對手行為",
    "next_step": "To verified: replay captured rival offers (control-plane replay) from Q2 on; bots stay as what-if assumptions.",
    "ours": "Bots with fixed rules (BaselineBot, RandomBot, price factors) chosen as opponents; a replay of real rival offers is reserved for the private Q2+ panel. Results are conditional on the chosen rivals.",
+   "primary": false,
    "ranges": null,
    "real_note": "Rivals are other teams; competitor reports are registered.",
    "real_status": "measured",
@@ -1419,7 +2746,9 @@
    ],
    "sources": [
     "E-REG"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "market",
@@ -1427,14 +2756,16 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "market.potential_growth",
    "kind": "behaviour",
    "maturity": "not-modeled",
    "module": null,
    "name": "市場潛量成長與季節性",
-   "next_step": "Capture the Q2 market-size screen and compare; model growth only from observed change.",
+   "next_step": "Kept not-modeled on purpose: whether the game's market grows or has seasons is unknown; capture first (ledger rule for 'unknown').",
    "ours": "Constant: quarterly potential = 12-month size / 4 every quarter.",
+   "primary": false,
    "ranges": null,
    "real_note": "Q1 market potential is a captured parameter; how it changes over quarters is unknown. An economic-index report is registered.",
    "real_status": "unknown",
@@ -1445,7 +2776,9 @@
    "sources": [
     "E-Q1",
     "E-REG"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "strategy",
@@ -1453,14 +2786,16 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "planning.demand_projection",
    "kind": "information",
-   "maturity": "not-modeled",
+   "maturity": "literature",
    "module": null,
    "name": "需求預測與產銷規劃工具",
-   "next_step": "No engine change needed; a UI aid only.",
-   "ours": "The preview (calculate) shows the engine's own result instead.",
+   "next_step": "To verified: the game's projection tool output against our estimate once captured (Q2+).",
+   "ours": "The preview (calculate) shows the engine's own demand estimate (literature, ≈); the order-up-to rule records it per brand.",
+   "primary": false,
    "ranges": null,
    "real_note": "Demand projection and factory simulation screens are registered; public sources describe a demand forecast by brand.",
    "real_status": "inferred",
@@ -1472,7 +2807,9 @@
    "sources": [
     "E-REG",
     "P-HALES"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "strategy",
@@ -1480,14 +2817,16 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "strategy.planning_statements",
    "kind": "qualitative",
    "maturity": "not-modeled",
    "module": null,
    "name": "策略規劃（使命、文化、策略主軸、戰術連結）",
-   "next_step": "Keep out of the numbers unless a captured report shows a numeric effect; at most feed a scorecard.",
+   "next_step": "Kept out of the numbers on purpose (text and choices, no numeric effect seen); at most a text form later.",
    "ours": "None.",
+   "primary": false,
    "ranges": null,
    "real_note": "Mission, culture, objectives, strategic thrusts and tactic-strategy links are Q1 decision screens (text and choices).",
    "real_status": "measured",
@@ -1503,7 +2842,9 @@
    "sources": [
     "E-Q1",
     "P-HALES"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "strategy",
@@ -1511,14 +2852,16 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "strategy.team_organization",
    "kind": "qualitative",
    "maturity": "not-modeled",
    "module": null,
    "name": "團隊組織（職責、規範、個人目標）",
-   "next_step": "Keep out of the numbers.",
+   "next_step": "Kept out of the numbers on purpose (text and choices, no numeric effect seen); at most a text form later.",
    "ours": "None.",
+   "primary": false,
    "ranges": null,
    "real_note": "Executive responsibilities, team norms and personal goals are Q1 decision screens.",
    "real_status": "measured",
@@ -1529,7 +2872,9 @@
    ],
    "sources": [
     "E-Q1"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "strategy",
@@ -1537,14 +2882,16 @@
    "coefficients": null,
    "decidable": false,
    "decisions": [],
+   "fields": [],
    "implementation": null,
    "key": "strategy.competitor_and_risk_analysis",
    "kind": "qualitative",
    "maturity": "not-modeled",
    "module": null,
    "name": "競爭、夥伴與風險分析",
-   "next_step": "Keep out of the numbers.",
+   "next_step": "Kept out of the numbers on purpose (text and choices, no numeric effect seen); at most a text form later.",
    "ours": "None.",
+   "primary": false,
    "ranges": null,
    "real_note": "Competitor, partner, SWOT and risk screens are registered.",
    "real_status": "inferred",
@@ -1556,23 +2903,36 @@
    ],
    "sources": [
     "E-REG"
-   ]
+   ],
+   "stoppable": false,
+   "ui": null
   },
   {
    "area": "strategy",
    "capture": "Q1 settlement (unverified · awaiting capture)",
-   "coefficients": null,
-   "decidable": false,
+   "coefficients": {
+    "reference_learning_share": 0.05,
+    "reference_share": 0.25,
+    "weights": {
+     "customer": 0.25,
+     "financial": 0.25,
+     "internal": 0.25,
+     "learning": 0.25
+    }
+   },
+   "decidable": true,
    "decisions": [],
-   "implementation": null,
+   "fields": [],
+   "implementation": "ScorecardModule",
    "key": "strategy.balanced_scorecard",
    "kind": "information",
-   "maturity": "not-modeled",
-   "module": null,
+   "maturity": "heuristic",
+   "module": "strategy.balanced_scorecard",
    "name": "平衡計分卡與排名",
-   "next_step": "To heuristic: a weighted score of the report lines, weights labelled as practice; to verified only from captured scorecards.",
-   "ours": "Game mode follows one objective (cash, share or profit).",
-   "ranges": null,
+   "next_step": "To verified: capture the game's scorecard after a settlement and reproduce its formula.",
+   "ours": "ScorecardModule (model option): the four Kaplan & Norton perspectives scored 0..1 from this quarter's lines; labelled equal weights. Not the game's ranking.",
+   "primary": true,
+   "ranges": {},
    "real_note": "Scorecard and standing reports are registered; public sources describe a cumulative balanced scorecard.",
    "real_status": "inferred",
    "screens": [
@@ -1584,8 +2944,36 @@
     "E-REG",
     "P-HALES",
     "P-IMPERIAL",
-    "R-CAPSIM"
-   ]
+    "R-CAPSIM",
+    "L-KAPLAN1992"
+   ],
+   "stoppable": true,
+   "ui": {
+    "practice": "四個構面（財務、顧客、內部流程、學習成長）來自 Kaplan & Norton（1992）；各構面怎麼打分、權重多少都是暫定值，不是遊戲的排名公式。",
+    "results": [
+     [
+      "scorecard_financial",
+      "財務"
+     ],
+     [
+      "scorecard_customer",
+      "顧客"
+     ],
+     [
+      "scorecard_internal",
+      "內部流程"
+     ],
+     [
+      "scorecard_learning",
+      "學習成長"
+     ],
+     [
+      "scorecard_total",
+      "總分（練習）"
+     ]
+    ],
+    "toggle": "顯示練習版計分卡（模型選項）"
+   }
   }
  ],
  "provenance": "public ledger (structure and maturity only)",
@@ -1602,24 +2990,40 @@
   "E-REG": "Client screen registry (docs/module-map.md section 2; field names in docs/decision-catalog.md): the screen exists in the delivered client; whether a course shows it, and when, is unverified.",
   "E-STMT": "Captured Q1 pro-forma statements (cash flow, income statement, balance sheet): row structure, signs and calculated flags only; the totals are server-computed. Private.",
   "L-ALBERS2010": "Albers, S., Mantrala, M.K. & Sridhar, S. (2010). Personal selling elasticities: a meta-analysis. Journal of Marketing Research 47(5), 840-853 (506 estimates; mean 0.34, about 0.31 after method-bias correction; abstract verified).",
+  "L-ARROW1951": "Arrow, K.J., Harris, T. & Marschak, J. (1951). Optimal inventory policy. Econometrica 19(3), 250-272 (abstract).",
   "L-ARTHUR2003": "Arthur, W. Jr., Bennett, W., Edens, P.S. & Bell, S.T. (2003). Effectiveness of training in organizations: a meta-analysis. Journal of Applied Psychology 88(2), 234-245 (general training, not sales-specific).",
   "L-AZZI2014": "Azzi, A., Battini, D., Faccio, M., Persona, A. & Sgarbossa, F. (2014). Inventory holding costs measurement: a multi-case study. International Journal of Logistics Management 25(1), 109-132 (review quotes 12-34% and 20-50% of inventory value per year).",
+  "L-BIJMOLT2005": "Bijmolt, T.H.A., van Heerde, H.J. & Pieters, R.G.M. (2005). New empirical generalizations on the determinants of price elasticity. Journal of Marketing Research 42(2), 141-156. Mean price elasticity -2.62 (1,851 elasticities, 81 studies; abstract).",
+  "L-BUZZELL1987": "Buzzell, R.D. & Gale, B.T. (1987). The PIMS Principles. Free Press (relative quality and performance: direction).",
   "L-CLARKE1976": "Clarke, D.G. (1976). Econometric measurement of the duration of advertising effect on sales. Journal of Marketing Research 13, 345-357.",
   "L-COOPER1988": "Cooper, L.G. & Nakanishi, M. (1988). Market-Share Analysis: Evaluating Competitive Marketing Effectiveness. Kluwer (MCI: one multiplicative term with its own elasticity per marketing instrument).",
   "L-COUGHLAN1992": "Coughlan, A.T. & Narasimhan, C. (1992). An empirical analysis of sales-force compensation plans. Journal of Business 65(1), 93-121.",
   "L-DEMAND": "docs/demand-literature.md (sources of the literature demand chain: multinomial logit / MCI attraction, outside option, distribution elasticity).",
   "L-DOLAN1987": "Dolan, R.J. (1987). Quantity discounts: managerial issues and research opportunities. Marketing Science 6(1), 1-22 (all-units and incremental discount schedules).",
-  "L-FARRELL2001": "Farrell, S. & Hakstian, A.R. (2001). Improving salesforce performance: a meta-analytic investigation of the effectiveness and utility of personnel selection procedures and training interventions. Psychology & Marketing 18(3), 281-316 (not yet verified in full text).",
+  "L-DOUCOULIAGOS1995": "Doucouliagos, C. (1995). Worker participation and productivity in labor-managed and participatory capitalist firms: a meta-analysis. ILR Review 49(1), 58-77 (abstract: direction only at that depth).",
+  "L-DUTTON1984": "Dutton, J.M. & Thomas, A. (1984). Treating progress functions as a managerial opportunity. Academy of Management Review 9(2), 235-247. 108 cases, centre 80-82 % (read through full-text secondary sources: Lapre 2011, Learning Curves: Theory, Models and Applications ch. 2; OIES paper EL43, 2021).",
+  "L-FARRELL2001": "Farrell, S. & Hakstian, A.R. (2001). Improving salesforce performance: a meta-analytic investigation. Psychology & Marketing 18(3), 281-316. Abstract snippet only: training effects significant on average; the often-quoted 23.1 % could not be verified and is not used.",
+  "L-FLSA": "US federal overtime statute, 29 U.S.C. 207(a)(1): overtime pay of at least 1.5 times the regular rate (statute, full text).",
+  "L-GILPATRIC2009": "Gilpatric, S.M. (2009). Slippage in rebate programs and present-biased preferences. Marketing Science 28(2), 229-238 (abstract: no rate).",
   "L-GRIFFETH2000": "Griffeth, R.W., Hom, P.W. & Gaertner, S. (2000). A meta-analysis of antecedents and correlates of employee turnover. Journal of Management 26(3), 463-488 (pay vs turnover rho about -0.09; -0.12 in 1990s studies; no elasticity).",
+  "L-HALL2010": "Hall, B.H., Mairesse, J. & Mohnen, P. (2010). Measuring the returns to R&D. Handbook of the Economics of Innovation vol. 2, ch. 24 (NBER w15622, full text): perpetual inventory with 15 % depreciation; output elasticity 0.01-0.25, centred about 0.08.",
   "L-HARRIS1913": "Harris, F.W. (1913). How many parts to make at once. Factory, The Magazine of Management 10(2), 135-136 (holding cost proportional to inventory value).",
+  "L-KAPLAN1992": "Kaplan, R.S. & Norton, D.P. (1992). The balanced scorecard: measures that drive performance. Harvard Business Review 70(1), 71-79. Four perspectives; no weights.",
   "L-KOHLER2017": "Kohler, C., Mantrala, M.K., Albers, S. & Kanuri, V.K. (2017). A meta-analysis of marketing communication carryover effects. Journal of Marketing Research 54(6), 990-1008.",
   "L-LITTLE1970": "Little, J.D.C. (1970). Models and managers: the concept of a decision calculus. Management Science 16(8), B466-B485 (ADBUDG).",
   "L-LODISH1971": "Lodish, L.M. (1971). CALLPLAN: an interactive salesman's call planning system. Management Science 18(4-II), P25-P40.",
+  "L-LU2007": "Lu, Q. & Moorthy, S. (2007). Coupons versus rebates. Marketing Science 26(1), 67-82 (abstract: a model, no redemption rate).",
   "L-LUCAS1987": "Lucas, G.H., Parasuraman, A., Davis, R.A. & Enis, B.M. (1987). An empirical study of salesforce turnover. Journal of Marketing 51(3), 34-59.",
   "L-MONAHAN1984": "Monahan, J.P. (1984). A quantity discount pricing model to increase vendor profits. Management Science 30(6), 720-726.",
   "L-NAIK2003": "Naik, P.A. & Raman, K. (2003). Understanding the impact of synergy in multimedia communications. Journal of Marketing Research 40(4), 375-388.",
+  "L-PENCAVEL2015": "Pencavel, J. (2015). The productivity of working hours. Economic Journal 125, 2052-2076 (abstract: output rises at a decreasing rate above a threshold).",
+  "L-SCARF1960": "Scarf, H. (1960). The optimality of (S,s) policies in the dynamic inventory problem. In Arrow, Karlin & Suppes (eds.), Mathematical Methods in the Social Sciences, 1959. Stanford UP, 196-202.",
   "L-SETHURAMAN2011": "Sethuraman, R., Tellis, G.J. & Briesch, R. (2011). How well does advertising work? Generalizations from meta-analysis of brand advertising elasticities. Journal of Marketing Research 48(3), 457-471 (mean short-term 0.12, long-term 0.24).",
+  "L-SHEPARD2000": "Shepard, E. & Clifton, T. (2000). Are longer hours reducing productivity in manufacturing? International Journal of Manpower 21(7), 540-553 (abstract: direction).",
+  "L-SILVER1998": "Silver, E.A., Pyke, D.F. & Peterson, R. (1998). Inventory Management and Production Planning and Scheduling, 3rd ed. Wiley (normal safety stock).",
+  "L-SOKOLOVA2021": "Sokolova, A. & Sorensen, T. (2021). Monopsony in labor markets: a meta-analysis. ILR Review 74(1), 27-55. Median labour-supply elasticity to the firm 1.68 (working-paper full text).",
   "L-VAKRATSAS2004": "Vakratsas, D., Feinberg, F.M., Bass, F.M. & Kalyanaram, G. (2004). The shape of advertising response functions revisited. Marketing Science 23(1), 109-119.",
+  "L-WRIGHT1936": "Wright, T.P. (1936). Factors affecting the cost of airplanes. Journal of the Aeronautical Sciences 3, 122-128 (learning curve).",
   "L-ZOLTNERS2004": "Zoltners, A.A., Sinha, P. & Lorimer, S.E. (2004). Sales Force Design for Strategic Advantage. Palgrave Macmillan.",
   "P-HALES": "Hales, C. Syllabus 'Managerial Game (Business Management)', University of Rzeszow, using Cadotte, The Business Management Simulation (2005) and Cadotte & Bruce, The Management of Strategy in the Marketplace (2008). https://www.ur.edu.pl/files/ur/import/Import/2012/7/MANAGERIAL-GAME-(BUSINESS-MANAGEMENT).pdf",
   "P-IMPERIAL": "Imperial College London, Educational Development Unit, case study 'Business Simulation'. https://www.imperial.ac.uk/staff/educational-development/teaching-toolkit/anatomy-of-assessment/case-studies/business-simulation/",

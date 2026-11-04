@@ -98,7 +98,23 @@
   "L-MONAHAN1984": "Monahan, J.P. (1984). A quantity discount pricing model to increase vendor profits. Management Science 30(6), 720-726.",
   "L-HARRIS1913": "Harris, F.W. (1913). How many parts to make at once. Factory, The Magazine of Management 10(2), 135-136 (holding cost proportional to inventory value).",
   "L-AZZI2014": "Azzi, A., Battini, D., Faccio, M., Persona, A. & Sgarbossa, F. (2014). Inventory holding costs measurement: a multi-case study. International Journal of Logistics Management 25(1), 109-132 (review quotes 12-34% and 20-50% of inventory value per year).",
-  "L-FARRELL2001": "Farrell, S. & Hakstian, A.R. (2001). Improving salesforce performance: a meta-analytic investigation of the effectiveness and utility of personnel selection procedures and training interventions. Psychology & Marketing 18(3), 281-316 (not yet verified in full text)."
+  "L-FARRELL2001": "Farrell, S. & Hakstian, A.R. (2001). Improving salesforce performance: a meta-analytic investigation. Psychology & Marketing 18(3), 281-316. Abstract snippet only: training effects significant on average; the often-quoted 23.1 % could not be verified and is not used.",
+  "L-BIJMOLT2005": "Bijmolt, T.H.A., van Heerde, H.J. & Pieters, R.G.M. (2005). New empirical generalizations on the determinants of price elasticity. Journal of Marketing Research 42(2), 141-156. Mean price elasticity -2.62 (1,851 elasticities, 81 studies; abstract).",
+  "L-LU2007": "Lu, Q. & Moorthy, S. (2007). Coupons versus rebates. Marketing Science 26(1), 67-82 (abstract: a model, no redemption rate).",
+  "L-GILPATRIC2009": "Gilpatric, S.M. (2009). Slippage in rebate programs and present-biased preferences. Marketing Science 28(2), 229-238 (abstract: no rate).",
+  "L-KAPLAN1992": "Kaplan, R.S. & Norton, D.P. (1992). The balanced scorecard: measures that drive performance. Harvard Business Review 70(1), 71-79. Four perspectives; no weights.",
+  "L-DOUCOULIAGOS1995": "Doucouliagos, C. (1995). Worker participation and productivity in labor-managed and participatory capitalist firms: a meta-analysis. ILR Review 49(1), 58-77 (abstract: direction only at that depth).",
+  "L-SOKOLOVA2021": "Sokolova, A. & Sorensen, T. (2021). Monopsony in labor markets: a meta-analysis. ILR Review 74(1), 27-55. Median labour-supply elasticity to the firm 1.68 (working-paper full text).",
+  "L-SHEPARD2000": "Shepard, E. & Clifton, T. (2000). Are longer hours reducing productivity in manufacturing? International Journal of Manpower 21(7), 540-553 (abstract: direction).",
+  "L-PENCAVEL2015": "Pencavel, J. (2015). The productivity of working hours. Economic Journal 125, 2052-2076 (abstract: output rises at a decreasing rate above a threshold).",
+  "L-FLSA": "US federal overtime statute, 29 U.S.C. 207(a)(1): overtime pay of at least 1.5 times the regular rate (statute, full text).",
+  "L-ARROW1951": "Arrow, K.J., Harris, T. & Marschak, J. (1951). Optimal inventory policy. Econometrica 19(3), 250-272 (abstract).",
+  "L-SCARF1960": "Scarf, H. (1960). The optimality of (S,s) policies in the dynamic inventory problem. In Arrow, Karlin & Suppes (eds.), Mathematical Methods in the Social Sciences, 1959. Stanford UP, 196-202.",
+  "L-SILVER1998": "Silver, E.A., Pyke, D.F. & Peterson, R. (1998). Inventory Management and Production Planning and Scheduling, 3rd ed. Wiley (normal safety stock).",
+  "L-BUZZELL1987": "Buzzell, R.D. & Gale, B.T. (1987). The PIMS Principles. Free Press (relative quality and performance: direction).",
+  "L-HALL2010": "Hall, B.H., Mairesse, J. & Mohnen, P. (2010). Measuring the returns to R&D. Handbook of the Economics of Innovation vol. 2, ch. 24 (NBER w15622, full text): perpetual inventory with 15 % depreciation; output elasticity 0.01-0.25, centred about 0.08.",
+  "L-WRIGHT1936": "Wright, T.P. (1936). Factors affecting the cost of airplanes. Journal of the Aeronautical Sciences 3, 122-128 (learning curve).",
+  "L-DUTTON1984": "Dutton, J.M. & Thomas, A. (1984). Treating progress functions as a managerial opportunity. Academy of Management Review 9(2), 235-247. 108 cases, centre 80-82 % (read through full-text secondary sources: Lapre 2011, Learning Curves: Theory, Models and Applications ch. 2; OIES paper EL43, 2021)."
  },
  "modules": [
   {
@@ -213,14 +229,18 @@
     "Pricing",
     "Promotions"
    ],
-   "maturity": "not-modeled",
-   "ours": "None.",
-   "next_step": "To heuristic: rebate lowers the effective price for the share of buyers who redeem it, and costs rebate x redeemed units; free gift as a fixed cost per unit with a small attraction lift.",
+   "maturity": "heuristic",
+   "ours": "PromotionsModule: a per-unit rebate lowers the price the customer weighs (perceived share of the rebate), so the demand chain's price response decides volume; rebates are paid on redeemed units. Free gifts and point-of-purchase display are not modelled.",
+   "next_step": "To literature: a published redemption / slippage rate (none found). Add gifts and display as further parts. To verified: Q2+ Promotions screen and its cost lines.",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
    "sources": [
     "E-REG",
-    "P-HALES"
-   ]
+    "P-HALES",
+    "L-BIJMOLT2005",
+    "L-LU2007",
+    "L-GILPATRIC2009"
+   ],
+   "module": "marketing.promotions"
   },
   {
    "key": "marketing.ad_budget",
@@ -285,15 +305,16 @@
     "AdJudgment (report)",
     "CompareAds (report)"
    ],
-   "maturity": "not-modeled",
-   "ours": "None (advertising has no message content).",
-   "next_step": "To heuristic: message fit = similarity of the stressed benefits to the target segment's needs, multiplying ad effectiveness.",
+   "maturity": "heuristic",
+   "ours": "AdCopyModule: the message stresses the target segment's 1st/2nd/3rd need; attraction moves by at most a labelled lift in proportion to that need against the segment's mean need (only with advertising).",
+   "next_step": "To literature: a generalizable creative-effect magnitude (none found). To verified: the game's ad-copy screen and its effect from Q2+.",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
    "sources": [
     "E-REG",
     "P-HALES",
     "P-JAMS2003"
-   ]
+   ],
+   "module": "marketing.ad_copy"
   },
   {
    "key": "marketing.internet",
@@ -308,13 +329,15 @@
     "WebProductivity",
     "SimpleInternetMarketing"
    ],
-   "maturity": "not-modeled",
-   "ours": "None beyond the web center's distribution weight.",
-   "next_step": "To heuristic: web traffic budget raises web-channel coverage with diminishing returns; page quality multiplies conversion.",
+   "maturity": "heuristic",
+   "ours": "InternetMarketingModule: company spend with a constant-elasticity response, applied in proportion to the web share of our outlets; spend is an expense.",
+   "next_step": "To literature: an online-specific meta-analytic elasticity (none found; Dinner, van Heerde & Neslin 2014 numbers not verified). To verified: Q2+ web marketing screens.",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
    "sources": [
-    "E-REG"
-   ]
+    "E-REG",
+    "L-SETHURAMAN2011"
+   ],
+   "module": "marketing.internet"
   },
   {
    "key": "marketing.market_research",
@@ -329,14 +352,15 @@
     "SourceStudy",
     "VarianceStudy"
    ],
-   "maturity": "not-modeled",
-   "ours": "None (all research data the pack holds is visible).",
-   "next_step": "To heuristic: a cost line plus gating which reports are shown; no effect on demand.",
+   "maturity": "heuristic",
+   "ours": "MarketResearchModule: segment and rival reports at a labelled price; their content is this engine's own estimate at its level.",
+   "next_step": "To verified: the game's report list and prices once the market-research screen opens.",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
    "sources": [
     "E-REG",
     "P-HALES"
-   ]
+   ],
+   "module": "marketing.market_research"
   },
   {
    "key": "channel.store_opening",
@@ -478,7 +502,7 @@
    ],
    "maturity": "heuristic",
    "ours": "SalesForceModule (heuristic part): training builds a decaying skill stock that raises effective force; any skill makes the demand chain heuristic.",
-   "next_step": "To literature: verify Farrell & Hakstian 2001 in full text (a 23.1% productivity gain from training across 12 effect sizes, seen only as an abstract snippet) and bound the training lift by it; until then heuristic. To verified: observe the SpecialPrograms effect from Q2 on.",
+   "next_step": "To literature: Arthur et al. 2003 give d = 0.60-0.63 (verified) but turning d into a sales multiplier needs the spread of salesperson performance, which has no published general value. To verified: observe the SpecialPrograms effect from Q2 on.",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
    "sources": [
     "E-REG",
@@ -498,13 +522,14 @@
     "HireWebSalesPeople",
     "DemandProjectionNextQuarter"
    ],
-   "maturity": "not-modeled",
-   "ours": "None (the sales force is company-wide).",
-   "next_step": "To heuristic: split selling effort into store and web forces; web effort applies to web coverage only.",
+   "maturity": "heuristic",
+   "ours": "SalesForceModule (heuristic part): web salespeople add a constant-elasticity response weighted by the web share of our outlets; paid the field salary.",
+   "next_step": "To literature: an elasticity for web or phone selling (none found). To verified: HireWebSalesPeople from Q2+.",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
    "sources": [
     "E-REG"
-   ]
+   ],
+   "module": "sales_force"
   },
   {
    "key": "hr.production_workers",
@@ -518,14 +543,16 @@
     "WorkersCompensation",
     "OperatingCapacity"
    ],
-   "maturity": "not-modeled",
-   "ours": "None (labour is a fixed per-unit amount inside the unit cost).",
-   "next_step": "To heuristic: worker pay against a reference sets productivity and turnover; productivity scales usable capacity.",
+   "maturity": "heuristic",
+   "ours": "ProductionWorkersModule: wage index scales direct labour and, bounded, worker productivity (capacity).",
+   "next_step": "To literature: a published wage-to-productivity elasticity (none found). To verified: worker screens from Q2+.",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
    "sources": [
     "E-Q1",
-    "E-REG"
-   ]
+    "E-REG",
+    "L-SOKOLOVA2021"
+   ],
+   "module": "hr.production_workers"
   },
   {
    "key": "hr.executive_and_culture",
@@ -539,13 +566,15 @@
     "EmployeeInvolvement",
     "HRSurvey"
    ],
-   "maturity": "not-modeled",
-   "ours": "None.",
-   "next_step": "To heuristic only if a numeric effect is observed in a captured report; otherwise keep as qualitative.",
+   "maturity": "heuristic",
+   "ours": "CultureModule: participation spend and an executive bonus pool build a morale stock that raises capacity a little; morale shown only with an employee survey.",
+   "next_step": "To literature: read Harter, Schmidt & Hayes 2002 in full for corrected effect sizes. To verified: Q3+ screens.",
    "capture": "Q3+ (unverified · awaiting capture)",
    "sources": [
-    "E-REG"
-   ]
+    "E-REG",
+    "L-DOUCOULIAGOS1995"
+   ],
+   "module": "hr.executive_and_culture"
   },
   {
    "key": "production.fixed_capacity",
@@ -605,6 +634,27 @@
    ]
   },
   {
+   "key": "production.learning_curve",
+   "module": "production.learning_curve",
+   "area": "production",
+   "name": "學習曲線",
+   "kind": "behaviour",
+   "real_status": "measured",
+   "real_note": "The captured Q1 brand screen carries a learning-curve parameter (structure only); how the game applies it is unverified.",
+   "screens": [
+    "BrandManagement"
+   ],
+   "maturity": "literature",
+   "ours": "LearningCurveModule (model option): Wright learning curve, Stanford-B form, on labour + overhead per brand; progress ratio in the published centre (80-82 %); experience counted from switch-on.",
+   "next_step": "To verified: compare unit costs across Q2+ quarters with known cumulative volume and fit the game's parameter.",
+   "capture": "Q2 settlement (unverified · awaiting Q2 capture)",
+   "sources": [
+    "E-Q1",
+    "L-WRIGHT1936",
+    "L-DUTTON1984"
+   ]
+  },
+  {
    "key": "production.operating_capacity",
    "area": "production",
    "name": "營運產能、加班與排班",
@@ -616,13 +666,36 @@
     "Overtime",
     "ExtFactorySimulation"
    ],
-   "maturity": "not-modeled",
-   "ours": "None (usable capacity = fixed capacity).",
-   "next_step": "To heuristic: operating rate below fixed capacity; overtime adds capacity at a premium labour cost.",
+   "maturity": "heuristic",
+   "ours": "OperatingCapacityModule: extra shifts multiply capacity (less efficient later shifts, fixed cost per shift); overtime adds units at a 1.5 x premium (statutory floor) with a productivity loss.",
+   "next_step": "To verified: the game's shift and overtime rules from Q2+ (capacity and cost lines).",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
    "sources": [
     "E-REG",
-    "R-GOOSEN1999"
+    "R-GOOSEN1999",
+    "L-FLSA",
+    "L-SHEPARD2000",
+    "L-PENCAVEL2015"
+   ],
+   "module": "production.operating_capacity"
+  },
+  {
+   "key": "production.excess_capacity",
+   "module": "production.excess_capacity",
+   "area": "production",
+   "name": "閒置產能成本",
+   "kind": "accounting",
+   "real_status": "measured",
+   "real_note": "The captured Q1 income statement has an 'excess capacity' expense row (structure only; how it is computed is not observed).",
+   "screens": [
+    "ProFormaIncomeStatement"
+   ],
+   "maturity": "heuristic",
+   "ours": "ExcessCapacityModule (model option): unused capacity units x a labelled idle cost per unit.",
+   "next_step": "To verified (accounting): read the row on a Q2 statement with known capacity and production, and reproduce it.",
+   "capture": "Q2 settlement (unverified · awaiting Q2 capture)",
+   "sources": [
+    "E-STMT"
    ]
   },
   {
@@ -638,14 +711,15 @@
     "ImproveChangeover",
     "FactoryEfficiency"
    ],
-   "maturity": "not-modeled",
-   "ours": "None (production = planned units, capped by capacity).",
-   "next_step": "To heuristic: changeover loss per brand produced, reduced by changeover investment.",
+   "maturity": "heuristic",
+   "ours": "ProductionPlanningModule (heuristic part): brands get capacity in the player's priority order when it binds. Changeover losses are not modelled.",
+   "next_step": "Add changeover loss per brand produced; to verified: production-rule screens from Q3+.",
    "capture": "Q3+ (unverified · awaiting capture)",
    "sources": [
     "E-REG",
     "R-GOOSEN1999"
-   ]
+   ],
+   "module": "supply.replenishment"
   },
   {
    "key": "production.quality",
@@ -662,14 +736,16 @@
     "QualityCosts (report)",
     "WarrantyCosts (report)"
    ],
-   "maturity": "not-modeled",
-   "ours": "None (quality is fixed at 1 in the demand chain).",
-   "next_step": "To heuristic: defect rate falls with inspection and improvement spend; defects cost warranty and lower the quality term.",
+   "maturity": "heuristic",
+   "ours": "QualityModule: QA spend per unit lowers the defect rate; defects lower attraction and cost warranty repairs.",
+   "next_step": "To literature: a quality-to-sales magnitude (none found). To verified: quality screens from Q3+.",
    "capture": "Q3+ (unverified · awaiting capture)",
    "sources": [
     "E-REG",
-    "P-HALES"
-   ]
+    "P-HALES",
+    "L-BUZZELL1987"
+   ],
+   "module": "production.quality"
   },
   {
    "key": "production.factory_location",
@@ -682,14 +758,15 @@
     "FactoryLocation",
     "WarehouseLocation"
    ],
-   "maturity": "not-modeled",
-   "ours": "None (one factory, no location).",
-   "next_step": "To heuristic: shipping cost per unit by distance band; a second factory adds fixed cost.",
+   "maturity": "heuristic",
+   "ours": "FactoryLocationModule: a lower-wage site scales direct labour and adds shipping per unit; a move costs a one-off charge.",
+   "next_step": "To verified: the game's site options and costs from Q3+.",
    "capture": "Q3+ (unverified · awaiting capture)",
    "sources": [
     "E-REG",
     "P-HALES"
-   ]
+   ],
+   "module": "production.factory_location"
   },
   {
    "key": "supply.inventory_holding",
@@ -744,13 +821,17 @@
     "InventoryControl",
     "TargetReplenishPoint"
    ],
-   "maturity": "not-modeled",
-   "ours": "None (production is the planned quantity, capped by capacity).",
-   "next_step": "To heuristic: a production rule that tops inventory up to a target, needing a production coupling (planned units from a rule) - next round with production.scheduling.",
+   "maturity": "literature",
+   "ours": "ProductionPlanningModule (literature part): order-up-to rule, production = max(mean x cover + z x sd x sqrt(cover) - inventory, 0) from this engine's own record of units demanded; at the record's level (≈ at best).",
+   "next_step": "To verified: the game's InventoryControl rule (max ending inventory, produce) from Q2+.",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
    "sources": [
-    "E-REG"
-   ]
+    "E-REG",
+    "L-ARROW1951",
+    "L-SCARF1960",
+    "L-SILVER1998"
+   ],
+   "module": "supply.replenishment"
   },
   {
    "key": "supply.purchasing",
@@ -791,7 +872,7 @@
    ],
    "maturity": "not-modeled",
    "ours": "None. The control plane can apply shocks as scenario events (capacity factor), which is a stress test, not a model.",
-   "next_step": "Deferred on purpose: no evidence yet that the game has lead times or supply disruptions (status unknown). Capture first (Q2+ cost-trend and risk screens); build only what a report shows. The control plane can already stress-test a supply shock as a scenario event.",
+   "next_step": "Kept not-modeled on purpose: no evidence the game has lead times or disruptions; capture first (ledger rule for 'unknown').",
    "capture": "unknown (unverified)",
    "sources": [
     "E-REG"
@@ -808,14 +889,34 @@
     "FeatureRD",
     "ConfirmRD"
    ],
-   "maturity": "not-modeled",
-   "ours": "Components can carry an availability quarter in the pack; project cost is not charged.",
-   "next_step": "To heuristic: charge project cost and make the component available after a fixed delay.",
+   "maturity": "literature",
+   "ours": "RnDModule: R&D stock by perpetual inventory (15 %/year), attraction elasticity in the published R&D range (a labelled mapping from output to attraction). Spending line heuristic. Feature availability after a delay is not modelled.",
+   "next_step": "Model the game's project cost and availability delay once FeatureRD is captured (Q2+); to verified then.",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
    "sources": [
     "E-REG",
     "E-Q1",
-    "P-HALES"
+    "P-HALES",
+    "L-HALL2010"
+   ],
+   "module": "rnd.feature_development"
+  },
+  {
+   "key": "rnd.licensing",
+   "area": "rnd",
+   "name": "技術授權（授權收入與授權費）",
+   "kind": "accounting",
+   "real_status": "measured",
+   "real_note": "The captured Q1 income statement has licensing income and licensing fee rows (structure only); no licensing screen was seen in Q1.",
+   "screens": [
+    "ProFormaIncomeStatement"
+   ],
+   "maturity": "not-modeled",
+   "ours": "None.",
+   "next_step": "Kept not-modeled: nothing tells what triggers a licence or its amount; capture the first quarter where the rows are non-zero.",
+   "capture": "unknown (unverified)",
+   "sources": [
+    "E-STMT"
    ]
   },
   {
@@ -861,19 +962,20 @@
    "name": "短期與長期貸款",
    "kind": "accounting",
    "real_status": "inferred",
-   "real_note": "Short- and long-term loan screens are registered; public sources describe external funding.",
+   "real_note": "Short- and long-term loan screens are registered; public sources describe external funding. The captured Q1 pro-forma balance sheet has a short-loan row and no long-term-loan row; the statements carry short-loan and 5-year rate parameters (structure only).",
    "screens": [
     "ShortTermLoan",
     "LongTermLoan"
    ],
-   "maturity": "not-modeled",
-   "ours": "None (only the emergency loan).",
-   "next_step": "To heuristic: borrow and repay with an interest rate from the pack; to verified by experiment once the screen opens.",
+   "maturity": "heuristic",
+   "ours": "FinancingModule: short loans repaid next quarter, long loans in equal instalments, interest on balances at quarter start; exact arithmetic, labelled rates and terms.",
+   "next_step": "To verified: read the game's loan terms when the screens open (Q2+) and reproduce a loan's cash rows.",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
    "sources": [
     "E-REG",
     "P-HALES"
-   ]
+   ],
+   "module": "finance.loans"
   },
   {
    "key": "finance.emergency_loan",
@@ -922,14 +1024,15 @@
    "screens": [
     "Dividends"
    ],
-   "maturity": "not-modeled",
-   "ours": "None.",
-   "next_step": "To heuristic: a cash outflow; to verified by experiment once the screen opens.",
+   "maturity": "heuristic",
+   "ours": "FinancingModule (dividends): paid from cash as a financing flow.",
+   "next_step": "To verified: the game's dividend rule and limits (Q3+).",
    "capture": "Q3+ (unverified · awaiting capture)",
    "sources": [
     "E-REG",
     "R-GOOSEN1999"
-   ]
+   ],
+   "module": "finance.loans"
   },
   {
    "key": "finance.currency",
@@ -944,7 +1047,7 @@
    ],
    "maturity": "not-modeled",
    "ours": "None (one currency).",
-   "next_step": "Only if a captured course shows it.",
+   "next_step": "Kept not-modeled: the pack carries no currency per market and the capture time is unknown; capture the markets' currencies first.",
    "capture": "unknown (unverified)",
    "sources": [
     "E-REG"
@@ -960,7 +1063,7 @@
    "screens": [],
    "maturity": "not-modeled",
    "ours": "Stock issue at a price the player enters.",
-   "next_step": "Capture first; it may be a classroom activity outside the software.",
+   "next_step": "Kept not-modeled: the game's investor rules are not observed and no published form maps a company's results to an offer; capture first.",
    "capture": "unknown (unverified)",
    "sources": [
     "P-HALES"
@@ -1000,13 +1103,14 @@
     "IncomeStatement (report)"
    ],
    "maturity": "heuristic",
-   "ours": "Cash-basis profit (production expensed when made, no depreciation, no carry-forward): a different statement. Pre-tax profit and net income never rank above placeholder for that reason.",
-   "next_step": "To verified (accounting): build the accrual statement from state (COGS on units sold, inventory as an asset, depreciation of capacity, loss carry-forward) and reproduce a Q2 income statement row by row.",
+   "ours": "Engine default: cash-basis profit (never above placeholder). With the AccrualAccounting option: COGS at moving-average cost, depreciation, inventory tax, tax after a loss carry-forward (heuristic rules).",
+   "next_step": "To verified (accounting): reproduce a Q2 income statement row by row with the accrual option.",
    "capture": "Q2 settlement (unverified · awaiting Q2 capture)",
    "sources": [
     "E-Q1",
     "E-STMT"
-   ]
+   ],
+   "module": "accounting.accrual"
   },
   {
    "key": "accounting.balance_sheet",
@@ -1014,18 +1118,20 @@
    "name": "資產負債表",
    "kind": "accounting",
    "real_status": "measured",
-   "real_note": "Pro-forma balance sheet is in the Q1 menu.",
+   "real_note": "Pro-forma balance sheet is in the Q1 menu. Captured rows (structure): cash, CD, net fixed assets | short loan, emergency loan | common stock, retained earnings; no inventory row.",
    "screens": [
     "ProFormaBalanceSheet",
     "BalanceSheet (report)"
    ],
-   "maturity": "not-modeled",
-   "ours": "None (state keeps cash, CD, capacity, stock, inventory, but no balance sheet).",
-   "next_step": "To verified (accounting): build the sheet from state and reproduce the Q1/Q2 rows.",
+   "maturity": "heuristic",
+   "ours": "AccrualAccounting (model option): cash, CDs, inventory at book value, plant | loans, emergency loans | stock, retained earnings; balances every quarter (tested). Capacity owned before the option is off the books. Our books also carry inventory and long-term loans, which the captured sheet has no rows for (src/marketplace_sim/reconcile.py BALANCE_EXTRA).",
+   "next_step": "To verified (accounting): reproduce the Q2 balance sheet row by row (valuation and depreciation rules).",
    "capture": "Q1 (captured)",
    "sources": [
-    "E-Q1"
-   ]
+    "E-Q1",
+    "E-STMT"
+   ],
+   "module": "accounting.accrual"
   },
   {
    "key": "market.rival_behaviour",
@@ -1059,7 +1165,7 @@
    ],
    "maturity": "not-modeled",
    "ours": "Constant: quarterly potential = 12-month size / 4 every quarter.",
-   "next_step": "Capture the Q2 market-size screen and compare; model growth only from observed change.",
+   "next_step": "Kept not-modeled on purpose: whether the game's market grows or has seasons is unknown; capture first (ledger rule for 'unknown').",
    "capture": "Q2 (unverified · awaiting Q2 capture)",
    "sources": [
     "E-Q1",
@@ -1078,9 +1184,9 @@
     "FactorySimulation",
     "ProFormaDivisionProfitability"
    ],
-   "maturity": "not-modeled",
-   "ours": "The preview (calculate) shows the engine's own result instead.",
-   "next_step": "No engine change needed; a UI aid only.",
+   "maturity": "literature",
+   "ours": "The preview (calculate) shows the engine's own demand estimate (literature, ≈); the order-up-to rule records it per brand.",
+   "next_step": "To verified: the game's projection tool output against our estimate once captured (Q2+).",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
    "sources": [
     "E-REG",
@@ -1105,7 +1211,7 @@
    ],
    "maturity": "not-modeled",
    "ours": "None.",
-   "next_step": "Keep out of the numbers unless a captured report shows a numeric effect; at most feed a scorecard.",
+   "next_step": "Kept out of the numbers on purpose (text and choices, no numeric effect seen); at most a text form later.",
    "capture": "Q1 (captured)",
    "sources": [
     "E-Q1",
@@ -1126,7 +1232,7 @@
    ],
    "maturity": "not-modeled",
    "ours": "None.",
-   "next_step": "Keep out of the numbers.",
+   "next_step": "Kept out of the numbers on purpose (text and choices, no numeric effect seen); at most a text form later.",
    "capture": "Q1 (captured)",
    "sources": [
     "E-Q1"
@@ -1147,7 +1253,7 @@
    ],
    "maturity": "not-modeled",
    "ours": "None.",
-   "next_step": "Keep out of the numbers.",
+   "next_step": "Kept out of the numbers on purpose (text and choices, no numeric effect seen); at most a text form later.",
    "capture": "Q3+ (unverified · awaiting capture)",
    "sources": [
     "E-REG"
@@ -1165,16 +1271,18 @@
     "CumulativeBalancedScorecard",
     "PlayersStanding"
    ],
-   "maturity": "not-modeled",
-   "ours": "Game mode follows one objective (cash, share or profit).",
-   "next_step": "To heuristic: a weighted score of the report lines, weights labelled as practice; to verified only from captured scorecards.",
+   "maturity": "heuristic",
+   "ours": "ScorecardModule (model option): the four Kaplan & Norton perspectives scored 0..1 from this quarter's lines; labelled equal weights. Not the game's ranking.",
+   "next_step": "To verified: capture the game's scorecard after a settlement and reproduce its formula.",
    "capture": "Q1 settlement (unverified · awaiting capture)",
    "sources": [
     "E-REG",
     "P-HALES",
     "P-IMPERIAL",
-    "R-CAPSIM"
-   ]
+    "R-CAPSIM",
+    "L-KAPLAN1992"
+   ],
+   "module": "strategy.balanced_scorecard"
   }
  ],
  "history": [
@@ -1188,6 +1296,17 @@
     "not-modeled": 26
    },
    "total": 49
+  },
+  {
+   "label": "第 2 輪：做扎實與供應鏈",
+   "date": "2026-11-05",
+   "counts": {
+    "verified": 6,
+    "literature": 10,
+    "heuristic": 11,
+    "not-modeled": 25
+   },
+   "total": 52
   }
  ]
 }

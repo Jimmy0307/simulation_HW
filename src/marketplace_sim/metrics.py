@@ -82,6 +82,11 @@ METRICS: dict[str, MetricInfo] = {m.name: m for m in [
                "src/marketplace_sim/business/sales_force.py"),
     MetricInfo("sales_force_commission", Level.HEURISTIC, "revenue x commission %",
                "src/marketplace_sim/business/sales_force.py"),
+    MetricInfo("web_sales_headcount", Level.HEURISTIC, "web salespeople (plan input or carried)",
+               "src/marketplace_sim/business/sales_force.py"),
+    MetricInfo("web_sales_effort", Level.HEURISTIC, "1 + web share x ((1 + web force / reference)^elasticity - 1)",
+               "src/marketplace_sim/business/sales_force.py", "Practice rule: no published web-selling elasticity."),
+    MetricInfo("web_sales_salaries", Level.HEURISTIC, "web salespeople x salary", "src/marketplace_sim/business/sales_force.py"),
     MetricInfo("inventory_holding_cost", Level.LITERATURE, "ending units x unit cost x annual carrying rate / 4",
                "src/marketplace_sim/business/inventory.py; data/module_defaults.json",
                "Rate in the published range; takes the unit cost's level (placeholder) downstream."),
@@ -98,7 +103,7 @@ METRICS: dict[str, MetricInfo] = {m.name: m for m in [
 ]}
 
 
-_MODULE_OPEX = ("sales_force_salaries", "sales_force_hiring", "sales_force_training", "sales_force_commission",
+_MODULE_OPEX = ("sales_force_salaries", "sales_force_hiring", "sales_force_training", "sales_force_commission", "web_sales_salaries",
                 "inventory_holding_cost", "purchasing_shortfall_fee")
 _OPEX = ("store_setup", "web_center_setup", "outlet_lease", "design_cost", "production_cost", "advertising", *_MODULE_OPEX)
 INPUTS: dict[str, tuple[str, ...]] = {
@@ -107,7 +112,9 @@ INPUTS: dict[str, tuple[str, ...]] = {
     "material_cost_factor": ("purchasing_discount",),
     "inventory_holding_cost": ("unit_cost[brand]",),
     "inventory_selloff_proceeds": ("inventory_selloff_units[brand]", "unit_cost[brand]"),
-    "selling_effort": ("sales_force_headcount", "sales_force_skill"),
+    "selling_effort": ("sales_force_headcount", "sales_force_skill", "web_sales_effort"),
+    "web_sales_effort": ("web_sales_headcount",),
+    "web_sales_salaries": ("web_sales_headcount",),
     "sales_force_departures": ("sales_force_headcount", "sales_force_quit_rate"),
     "sales_force_salaries": ("sales_force_headcount",),
     "sales_force_hiring": ("sales_force_hires",),
@@ -131,6 +138,37 @@ INPUTS: dict[str, tuple[str, ...]] = {
 METRICS = {k: (MetricInfo(v.name, v.level, v.formula, v.evidence, v.note, INPUTS.get(k, ()))) for k, v in METRICS.items()}
 
 
+def _with_module_metrics() -> tuple[dict[str, MetricInfo], frozenset[str]]:
+    """Add the lines declared by the business-module implementations (``metrics`` class attribute), and list each in
+    the chains of the core line its role feeds (profit and cash, units, unit cost, capacity, production)."""
+    from marketplace_sim.business.registry import IMPLEMENTATIONS
+
+    feeds = {"expense": ("operating_profit_before_tax", "cash_end", "emergency_loan"),
+             "income": ("operating_profit_before_tax", "cash_end", "emergency_loan"),
+             "financing": ("cash_end", "emergency_loan"), "demand": ("units_demanded[brand]",),
+             "cost": ("unit_cost[brand]",), "capacity": ("capacity_units_per_quarter",),
+             "plan": ("production_cost",), "tax": ("income_tax",)}
+    out = dict(METRICS)
+    extra: dict[str, list[str]] = {}
+    names: set[str] = set()
+    for cls in IMPLEMENTATIONS.values():
+        evidence = getattr(cls.spec, "evidence", "")
+        for m in getattr(cls, "metrics", ()):
+            if m.name in out:
+                continue
+            out[m.name] = MetricInfo(m.name, m.level, m.formula, evidence, m.note, m.inputs)
+            names.add(m.name.split("[", 1)[0])
+            for core in feeds.get(m.role, ()):
+                extra.setdefault(core, []).append(m.name)
+    for core, more in extra.items():
+        info = out[core]
+        out[core] = MetricInfo(info.name, info.level, info.formula, info.evidence, info.note, (*info.inputs, *more))
+    return out, frozenset(names)
+
+
+METRICS, MODULE_METRICS = _with_module_metrics()
+
+
 def chain(name: str, present: set[str] | None = None) -> list[MetricInfo]:
     """The metric and everything upstream of it (depth-first, each once): the full source chain of a report line.
 
@@ -144,7 +182,10 @@ def chain(name: str, present: set[str] | None = None) -> list[MetricInfo]:
         info = lookup(metric)
         if info is None or info.name in seen:
             return
-        if present is not None and out and info.name.split("[", 1)[0] not in present:
+        base = info.name.split("[", 1)[0]
+        if present is not None and out and base not in present:
+            return
+        if present is None and out and base in MODULE_METRICS:  # no report: a module's lines only when it runs
             return
         seen.add(info.name)
         out.append(info)
