@@ -10,9 +10,13 @@ defaults because no published quantified relation could be carried over (see dat
 * ``hr.executive_and_culture``: participation programmes and an executive bonus pool build a morale stock that raises
   productivity a little. Direction: Doucouliagos 1995 (participation and productivity, meta-analysis); no usable
   coefficient. Morale is only shown when an employee survey is bought.
-* ``production.operating_capacity``: extra shifts multiply capacity (each later shift less efficient), overtime adds
-  units at a wage premium of 1.5 x (the US statutory floor, 29 U.S.C. 207; the game's rule is unobserved) and with a
-  productivity loss (direction: Shepard & Clifton 2000, Pencavel 2015; no range).
+* ``production.operating_capacity`` (heuristic): extra shifts multiply capacity, each later shift less efficient, with a
+  fixed cost per shift. No verified relative efficiency of later shifts exists (Folkard, Lombardi & Tucker 2005 give
+  accident risk by shift, +18 % afternoon and +30 % night, not output).
+* ``production.overtime`` (LITERATURE capacity response): output against weekly hours is piecewise log-log
+  (Pencavel 2015, full text of IZA DP 8129): elasticity about 1 below 49 hours (1.002; 0.9 in Collewet & Sauermann
+  2017), 0.172 (s.e. 0.089) at 49 hours and above. Overtime % is taken on a labelled 40-hour regular week. The wage
+  premium is 1.5 x (the US statutory floor, 29 U.S.C. 207; the game's rule is unobserved), so the cost is heuristic.
 * ``production.factory_location``: moving production to a lower-wage site scales direct labour and adds shipping per
   unit; a move costs a one-off relocation charge.
 """
@@ -129,20 +133,23 @@ SHIFT_OPTIONS = (("1", "一班"), ("2", "兩班"), ("3", "三班"))
 class OperatingCapacityModule:
     spec = ModuleSpec(
         key="production.operating_capacity", title="營運產能：班別與加班",
-        rows={"production.operating_capacity": Maturity.HEURISTIC}, decisions=("shifts", "overtime_pct"),
+        rows={"production.operating_capacity": Maturity.HEURISTIC, "production.overtime": Maturity.LITERATURE},
+        decisions=("shifts", "overtime_pct"),
         outputs=("shift_factor", "overtime_units", "shift_cost", "overtime_premium"),
         couplings=("capacity_factor", "capacity_extra", "expenses", "settle: expenses"),
         evidence="src/marketplace_sim/business/operations.py")
     fields = (Field("shifts", "班別", "production.operating_capacity", "choice", default="1", options=SHIFT_OPTIONS),
-              Field("overtime_pct", "加班（正常產能的 %）", "production.operating_capacity", "number", 0, 25, 1, 0, " %"))
-    ui = {"toggle": "設定班別與加班", "practice": "多開一班產能變多但效率較低、每班有固定費用；加班多出產能，"
-          "加班工資按 1.5 倍（美國法定下限，遊戲規則未觀察到）並有效率損失。幅度都是暫定值。",
+              Field("overtime_pct", "加班（正常工時的 %）", "production.overtime", "number", 0, 50, 1, 0, " %"))
+    ui = {"toggle": "設定班別與加班", "literature": "加班的產能反應用文獻的工時–產出關係：每週 49 小時以下產出與工時成正比，"
+          "超過後彈性只剩約 0.17（Pencavel 2015）；以每週 40 小時為正常工時（標明的假設）。",
+          "practice": "多開一班產能變多但效率較低、每班有固定費用（後班效率沒有文獻數字）；加班工資按 1.5 倍"
+          "（美國法定下限，遊戲規則未觀察到），所以成本是練習。",
           "results": [["shift_factor", "班別產能倍數"], ["overtime_units", "加班可多產（件）"], ["capacity_units_per_quarter", "本季產能"],
                       ["shift_cost", "加班別固定費用"], ["overtime_premium", "加班工資加給"]]}
     metrics = (
         Metric("shift_factor", H, "1 + sum of later-shift efficiencies", "capacity", (), NOTE),
-        Metric("overtime_units", H, "base capacity x shift factor x overtime % x (1 - productivity loss)", "capacity",
-               (), NOTE),
+        Metric("overtime_units", Level.LITERATURE, "regular capacity x (relative output at 40 x (1 + overtime) hours - 1); "
+               "output vs hours piecewise log-log", "capacity", (), "Pencavel 2015: elasticity ~1 below 49 h, 0.172 above."),
         Metric("shift_cost", H, "extra shifts x fixed cost per shift", "expense", (), NOTE),
         Metric("overtime_premium", H, "units made beyond regular capacity x direct labour x (premium - 1)", "expense",
                ("capacity_units_per_quarter",), "Premium 1.5 = US statutory floor (29 U.S.C. 207); game rule unobserved."),
@@ -150,7 +157,19 @@ class OperatingCapacityModule:
 
     def __init__(self, coefficients: Mapping[str, Any], pack: ParamPack | None = None) -> None:
         self.c = _floats(coefficients)
+        from marketplace_sim.business.product import _check
+
+        _check(self.spec.key, self.c)
         self.labor = float((pack.production if pack else {}).get("min_direct_labor", 0.0))
+
+    def relative_output(self, overtime: float) -> float:
+        """Output at regular x (1 + overtime) hours relative to regular hours (Pencavel 2015, piecewise log-log)."""
+        c = self.c
+        hours = c["regular_hours"] * (1 + overtime)
+        if hours <= c["threshold_hours"]:
+            return float((1 + overtime) ** c["elasticity_below"])
+        at_threshold = (c["threshold_hours"] / c["regular_hours"]) ** c["elasticity_below"]
+        return float(at_threshold * (hours / c["threshold_hours"]) ** c["elasticity_above"])
 
     def _plan(self, inp: ModuleInput) -> tuple[int, float, float, float]:
         v = read_fields(self.fields, inp.decisions, [])
@@ -158,17 +177,23 @@ class OperatingCapacityModule:
         factor = 1.0 + (self.c["second_shift_efficiency"] if shifts >= 2 else 0.0) + (
             self.c["third_shift_efficiency"] if shifts >= 3 else 0.0)
         regular = inp.capacity_units * factor
-        overtime = regular * v["overtime_pct"] / 100 * (1 - self.c["overtime_productivity_loss"])
+        overtime = regular * (self.relative_output(v["overtime_pct"] / 100) - 1)
         return shifts, factor, regular, overtime
 
     def run(self, inp: ModuleInput) -> ModuleResult:
         shifts, factor, _regular, overtime = self._plan(inp)
         out = ModuleResult()
-        out.capacity_factor = Tagged(factor, H, f"1 + later-shift efficiencies ({NOTE})")
-        out.capacity_extra = Tagged(overtime, H, f"overtime units ({NOTE})")
-        out.lines["shift_factor"] = out.capacity_factor
-        out.lines["overtime_units"] = out.capacity_extra
-        out.expenses["shift_cost"] = Tagged((shifts - 1) * self.c["shift_fixed_cost"], H, f"extra shifts x fixed cost ({NOTE})")
+        if shifts > 1:  # one shift = the plain capacity: nothing to mark
+            out.capacity_factor = Tagged(factor, H, f"1 + later-shift efficiencies ({NOTE})")
+            out.lines["shift_factor"] = out.capacity_factor
+            out.expenses["shift_cost"] = Tagged((shifts - 1) * self.c["shift_fixed_cost"], H,
+                                                f"extra shifts x fixed cost ({NOTE})")
+        if overtime > 0:
+            # Literature unless it rides on a heuristic shift factor.
+            level = Level.LITERATURE if shifts == 1 else H
+            out.capacity_extra = Tagged(overtime, level, "regular capacity x (relative output of the longer week - 1) "
+                                        "(Pencavel 2015 piecewise log-log; 40-hour regular week labelled)")
+            out.lines["overtime_units"] = out.capacity_extra
         return out
 
     def settle(self, inp: ModuleInput, outcome: Outcome) -> ModuleResult:
@@ -176,6 +201,8 @@ class OperatingCapacityModule:
         # Regular capacity here is before the other capacity modules (productivity), a labelled simplification.
         beyond = max(sum(outcome.units_produced.values()) - regular, 0.0)
         out = ModuleResult()
+        if beyond <= 0 and "overtime_units" not in outcome.lines:
+            return out
         out.expenses["overtime_premium"] = Tagged(beyond * self.labor * (self.c["overtime_premium"] - 1), H,
                                                   f"units beyond regular capacity x direct labour x (premium - 1) ({NOTE})")
         return out

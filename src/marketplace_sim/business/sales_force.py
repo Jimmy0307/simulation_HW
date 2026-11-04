@@ -15,9 +15,16 @@ HEURISTIC parts (no published quantified relation found; practice rules, labelle
 
 * ``sales_force.training``: training builds a decaying skill stock in [0, 1] that raises effective force:
       force = headcount x (1 + skill_bonus x skill)
-  Any skill (trained this quarter or carried) makes effort, and everything downstream of demand, heuristic.
-* ``sales_force.compensation``: the quarterly quit rate falls as pay rises against a reference, bounded. Only
-  the direction has published support (pay satisfaction and turnover, Griffeth, Hom & Gaertner 2000); no elasticity.
+  The full-skill gain is bounded by the literature: training effect d = 0.60-0.63 SD (Arthur, Bennett, Edens & Bell
+  2003) times the spread of sales output, SDp = 38.5-47.7 % of mean output for non-insurance sales jobs (Hunter,
+  Schmidt & Judiesch 1990, full text), so skill_bonus lies in [0.231, 0.301]. How spending builds skill and how fast
+  it decays have no published values, so the part stays heuristic: any skill makes effort heuristic.
+* ``sales_force.compensation``: the quarterly quit rate falls with pay at a constant elasticity, bounded:
+      quit = base quit x pay index ^ (-quit elasticity)
+  The elasticity lies in the published range of separation elasticities with respect to the wage, 0.4-2.0 (Manning
+  2011; Sokolova & Sorensen 2021 separation-based estimates, mean 1.53 for the labour-supply elasticity = about 0.77
+  for separations), default 0.75. The base quit rate and how commission enters the pay index are practice defaults,
+  so the part stays heuristic.
   The carried headcount after quits is heuristic, so a quarter that runs on carried headcount is heuristic.
 * costs: salaries, hiring and severance, training, commission. The game's sales-force cost rules were not observed,
   so every cost line is heuristic (and so is cash once a sales force is paid).
@@ -79,7 +86,9 @@ class SalesForceModule:
         c = self.c
         w = c["commission_weight"]
         pay_index = (1 - w) * salary / c["reference_salary"] + w * commission_pct / c["reference_commission_pct"]
-        rate = c["base_quit"] * math.exp(-c["pay_sensitivity"] * (pay_index - 1))
+        if pay_index <= 0:
+            return c["max_quit"]
+        rate = float(c["base_quit"] * pay_index ** (-c["quit_elasticity"]))
         return min(c["max_quit"], max(c["min_quit"], rate))
 
     def skill_after(self, skill: float, training: float) -> float:

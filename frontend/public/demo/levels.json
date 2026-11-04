@@ -621,9 +621,9 @@
    "evidence": "src/marketplace_sim/business/marketing_more.py",
    "formula": "1 + web share x ((1 + spend / reference)^elasticity - 1)",
    "inputs": [],
-   "level": "heuristic",
+   "level": "literature",
    "metric": "internet_factor",
-   "note": "practice rule: no published quantified relation, labelled defaults, no calibration"
+   "note": "Elasticity in [0.003, 0.23] (Korkames et al. 2026; Bayer et al. 2020); default 0.05 (Sethuraman et al. 2011)."
   },
   {
    "evidence": "src/marketplace_sim/business/marketing_more.py",
@@ -729,11 +729,11 @@
   },
   {
    "evidence": "src/marketplace_sim/business/operations.py",
-   "formula": "base capacity x shift factor x overtime % x (1 - productivity loss)",
+   "formula": "regular capacity x (relative output at 40 x (1 + overtime) hours - 1); output vs hours piecewise log-log",
    "inputs": [],
-   "level": "heuristic",
+   "level": "literature",
    "metric": "overtime_units",
-   "note": "practice rule: labelled defaults, no calibration"
+   "note": "Pencavel 2015: elasticity ~1 below 49 h, 0.172 above."
   },
   {
    "evidence": "src/marketplace_sim/business/operations.py",

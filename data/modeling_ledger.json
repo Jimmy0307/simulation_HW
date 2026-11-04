@@ -90,7 +90,7 @@
   "L-ARTHUR2003": "Arthur, W. Jr., Bennett, W., Edens, P.S. & Bell, S.T. (2003). Effectiveness of training in organizations: a meta-analysis. Journal of Applied Psychology 88(2), 234-245 (general training, not sales-specific).",
   "L-COUGHLAN1992": "Coughlan, A.T. & Narasimhan, C. (1992). An empirical analysis of sales-force compensation plans. Journal of Business 65(1), 93-121.",
   "L-LUCAS1987": "Lucas, G.H., Parasuraman, A., Davis, R.A. & Enis, B.M. (1987). An empirical study of salesforce turnover. Journal of Marketing 51(3), 34-59.",
-  "L-GRIFFETH2000": "Griffeth, R.W., Hom, P.W. & Gaertner, S. (2000). A meta-analysis of antecedents and correlates of employee turnover. Journal of Management 26(3), 463-488 (pay vs turnover rho about -0.09; -0.12 in 1990s studies; no elasticity).",
+  "L-GRIFFETH2000": "Griffeth, R.W., Hom, P.W. & Gaertner, S. (2000). A meta-analysis of antecedents and correlates of employee turnover. Journal of Management 26(3), 463-488 (full text: pay rho -0.09, credibility -0.37 to +0.20).",
   "L-DEMAND": "docs/demand-literature.md (sources of the literature demand chain: multinomial logit / MCI attraction, outside option, distribution elasticity).",
   "E-STMT": "Captured Q1 pro-forma statements (cash flow, income statement, balance sheet): row structure, signs and calculated flags only; the totals are server-computed. Private.",
   "L-COOPER1988": "Cooper, L.G. & Nakanishi, M. (1988). Market-Share Analysis: Evaluating Competitive Marketing Effectiveness. Kluwer (MCI: one multiplicative term with its own elasticity per marketing instrument).",
@@ -104,9 +104,9 @@
   "L-GILPATRIC2009": "Gilpatric, S.M. (2009). Slippage in rebate programs and present-biased preferences. Marketing Science 28(2), 229-238 (abstract: no rate).",
   "L-KAPLAN1992": "Kaplan, R.S. & Norton, D.P. (1992). The balanced scorecard: measures that drive performance. Harvard Business Review 70(1), 71-79. Four perspectives; no weights.",
   "L-DOUCOULIAGOS1995": "Doucouliagos, C. (1995). Worker participation and productivity in labor-managed and participatory capitalist firms: a meta-analysis. ILR Review 49(1), 58-77 (abstract: direction only at that depth).",
-  "L-SOKOLOVA2021": "Sokolova, A. & Sorensen, T. (2021). Monopsony in labor markets: a meta-analysis. ILR Review 74(1), 27-55. Median labour-supply elasticity to the firm 1.68 (working-paper full text).",
+  "L-SOKOLOVA2021": "Sokolova, A. & Sorensen, T. (2021). Monopsony in labor markets: a meta-analysis. ILR Review 74(1), 27-55 (IZA DP 11966 full text: separation-based labour-supply elasticity mean 1.53, median 1.22; eps = -2 eps_S).",
   "L-SHEPARD2000": "Shepard, E. & Clifton, T. (2000). Are longer hours reducing productivity in manufacturing? International Journal of Manpower 21(7), 540-553 (abstract: direction).",
-  "L-PENCAVEL2015": "Pencavel, J. (2015). The productivity of working hours. Economic Journal 125, 2052-2076 (abstract: output rises at a decreasing rate above a threshold).",
+  "L-PENCAVEL2015": "Pencavel, J. (2015). The productivity of working hours. Economic Journal 125, 2052-2076 (IZA DP 8129 full text: output proportional to hours below 49 a week; elasticity 0.172 above).",
   "L-FLSA": "US federal overtime statute, 29 U.S.C. 207(a)(1): overtime pay of at least 1.5 times the regular rate (statute, full text).",
   "L-ARROW1951": "Arrow, K.J., Harris, T. & Marschak, J. (1951). Optimal inventory policy. Econometrica 19(3), 250-272 (abstract).",
   "L-SCARF1960": "Scarf, H. (1960). The optimality of (S,s) policies in the dynamic inventory problem. In Arrow, Karlin & Suppes (eds.), Mathematical Methods in the Social Sciences, 1959. Stanford UP, 196-202.",
@@ -114,7 +114,14 @@
   "L-BUZZELL1987": "Buzzell, R.D. & Gale, B.T. (1987). The PIMS Principles. Free Press (relative quality and performance: direction).",
   "L-HALL2010": "Hall, B.H., Mairesse, J. & Mohnen, P. (2010). Measuring the returns to R&D. Handbook of the Economics of Innovation vol. 2, ch. 24 (NBER w15622, full text): perpetual inventory with 15 % depreciation; output elasticity 0.01-0.25, centred about 0.08.",
   "L-WRIGHT1936": "Wright, T.P. (1936). Factors affecting the cost of airplanes. Journal of the Aeronautical Sciences 3, 122-128 (learning curve).",
-  "L-DUTTON1984": "Dutton, J.M. & Thomas, A. (1984). Treating progress functions as a managerial opportunity. Academy of Management Review 9(2), 235-247. 108 cases, centre 80-82 % (read through full-text secondary sources: Lapre 2011, Learning Curves: Theory, Models and Applications ch. 2; OIES paper EL43, 2021)."
+  "L-DUTTON1984": "Dutton, J.M. & Thomas, A. (1984). Treating progress functions as a managerial opportunity. Academy of Management Review 9(2), 235-247. 108 cases, centre 80-82 % (read through full-text secondary sources: Lapre 2011, Learning Curves: Theory, Models and Applications ch. 2; OIES paper EL43, 2021).",
+  "L-KORKAMES2026": "Korkames, Stanley & Stremersch (2026). Meta-analysis of advertising elasticities with publication-bias correction. International Journal of Research in Marketing 43(1), 131-151 (full text: short-term 0.0008, long-term 0.03; 10 % more advertising gives 0.03-1 % more sales; internet a positive moderator, coefficient not read).",
+  "L-BAYER2020": "Bayer, E., Srinivasan, S., Riedl, E.J. & Skiera, B. (2020). The impact of online display advertising and paid search advertising relative to offline advertising on firm performance and firm value. International Journal of Research in Marketing 37(4), 789-804 (full text: display sales elasticity 0.231).",
+  "L-PECHMANN2013": "Pechmann, C. & Silk, T. (2013). Policy and research related to consumer rebates: a comprehensive review. Journal of Public Policy & Marketing 32(2), 255-270 (full text: field redemption 7-50 % rising with rebate size).",
+  "L-COLLEWET2017": "Collewet, M. & Sauermann, J. (2017). Working hours and productivity. Labour Economics 47, 96-106 (IZA DP 10722 full text: elasticity of output to hours 0.9).",
+  "L-FOLKARD2005": "Folkard, S., Lombardi, D.A. & Tucker, P.T. (2005). Shiftwork: safety, sleepiness and sleep. Industrial Health 43, 20-23 (full text: accident risk +18 % afternoon, +30 % night shift).",
+  "L-HUNTER1990": "Hunter, J.E., Schmidt, F.L. & Judiesch, M.K. (1990). Individual differences in output variability as a function of job complexity. Journal of Applied Psychology 75(1), 28-42 (full text: SDp 38.5-47.7 % for non-insurance sales).",
+  "L-MANNING2011": "Manning, A. (2011). Imperfect competition in the labor market. Handbook of Labor Economics 4B, ch. 11 (CEP DP 981 full text: separation elasticities about 0.4 to 2)."
  },
  "modules": [
   {
@@ -230,15 +237,16 @@
     "Promotions"
    ],
    "maturity": "heuristic",
-   "ours": "PromotionsModule: a per-unit rebate lowers the price the customer weighs (perceived share of the rebate), so the demand chain's price response decides volume; rebates are paid on redeemed units. Free gifts and point-of-purchase display are not modelled.",
-   "next_step": "To literature: a published redemption / slippage rate (none found). Add gifts and display as further parts. To verified: Q2+ Promotions screen and its cost lines.",
+   "ours": "PromotionsModule: a per-unit rebate lowers the price the customer weighs (perceived share of the rebate, heuristic), so the demand chain's price response decides volume; rebates are paid on redeemed units at a rate inside the published field range (7-50 %, default 27 %). Free gifts and point-of-purchase display are not modelled.",
+   "next_step": "To literature: a published perceived value of a rebate at purchase (none found; only choice shares from one experiment). Add gifts and display as further parts. To verified: Q2+ Promotions screen and the rebates row.",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
    "sources": [
     "E-REG",
     "P-HALES",
     "L-BIJMOLT2005",
     "L-LU2007",
-    "L-GILPATRIC2009"
+    "L-GILPATRIC2009",
+    "L-PECHMANN2013"
    ],
    "module": "marketing.promotions"
   },
@@ -307,7 +315,7 @@
    ],
    "maturity": "heuristic",
    "ours": "AdCopyModule: the message stresses the target segment's 1st/2nd/3rd need; attraction moves by at most a labelled lift in proportion to that need against the segment's mean need (only with advertising).",
-   "next_step": "To literature: a generalizable creative-effect magnitude (none found). To verified: the game's ad-copy screen and its effect from Q2+.",
+   "next_step": "To literature: full text of Dall'Olio & Vakratsas 2023 (creative strategy and advertising elasticity; abstract has no numbers). To verified: the game's ad-copy screen from Q2+.",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
    "sources": [
     "E-REG",
@@ -329,13 +337,15 @@
     "WebProductivity",
     "SimpleInternetMarketing"
    ],
-   "maturity": "heuristic",
-   "ours": "InternetMarketingModule: company spend with a constant-elasticity response, applied in proportion to the web share of our outlets; spend is an expense.",
-   "next_step": "To literature: an online-specific meta-analytic elasticity (none found; Dinner, van Heerde & Neslin 2014 numbers not verified). To verified: Q2+ web marketing screens.",
+   "maturity": "literature",
+   "ours": "InternetMarketingModule: constant-elasticity response with the elasticity in [0.003, 0.23] (bias-corrected advertising meta-analysis to the online display estimate; default 0.05), applied in proportion to the web share of our outlets (labelled mapping); spending line heuristic.",
+   "next_step": "To verified: the game's web marketing screens and their effect on web sales from Q2+ (fit the elasticity inside the range).",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
    "sources": [
     "E-REG",
-    "L-SETHURAMAN2011"
+    "L-SETHURAMAN2011",
+    "L-KORKAMES2026",
+    "L-BAYER2020"
    ],
    "module": "marketing.internet"
   },
@@ -477,8 +487,8 @@
     "SalesForceCompensation"
    ],
    "maturity": "heuristic",
-   "ours": "SalesForceModule (heuristic part): quit rate falls with relative pay (salary and commission), bounded; salaries and commission are expenses (cost rule unobserved).",
-   "next_step": "Stays heuristic until game data: the literature gives only small negative correlations between pay and turnover (Griffeth et al. 2000, rho about -0.09), no elasticity. To verified: observe headcount changes against pay from Q2 on.",
+   "ours": "SalesForceModule (heuristic part): quit rate = base x pay index^(-elasticity), elasticity in the published separation range 0.4-2.0 (default 0.75); the base quit rate and the commission weight are practice defaults.",
+   "next_step": "To literature: a published base quit rate for comparable sales jobs and a pay-index definition. To verified: Q2+ headcount after pay changes.",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
    "sources": [
     "E-Q1",
@@ -486,7 +496,9 @@
     "P-HALES",
     "L-COUGHLAN1992",
     "L-LUCAS1987",
-    "L-GRIFFETH2000"
+    "L-GRIFFETH2000",
+    "L-MANNING2011",
+    "L-SOKOLOVA2021"
    ]
   },
   {
@@ -501,14 +513,14 @@
     "SpecialPrograms"
    ],
    "maturity": "heuristic",
-   "ours": "SalesForceModule (heuristic part): training builds a decaying skill stock that raises effective force; any skill makes the demand chain heuristic.",
-   "next_step": "To literature: Arthur et al. 2003 give d = 0.60-0.63 (verified) but turning d into a sales multiplier needs the spread of salesperson performance, which has no published general value. To verified: observe the SpecialPrograms effect from Q2 on.",
+   "ours": "SalesForceModule (heuristic part): training builds a decaying skill stock; the full-skill gain is bounded by the literature (d x SDp = 0.231-0.301), the dose and decay are practice rules; any skill makes the demand chain heuristic.",
+   "next_step": "To literature: a published dose-response or decay of sales training (Arthur et al. 1998 skill-decay review is a candidate, not yet verified). To verified: observe the SpecialPrograms effect from Q2 on.",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
    "sources": [
     "E-REG",
     "P-HALES",
     "L-ARTHUR2003",
-    "L-FARRELL2001"
+    "L-HUNTER1990"
    ]
   },
   {
@@ -545,7 +557,7 @@
    ],
    "maturity": "heuristic",
    "ours": "ProductionWorkersModule: wage index scales direct labour and, bounded, worker productivity (capacity).",
-   "next_step": "To literature: a published wage-to-productivity elasticity (none found). To verified: worker screens from Q2+.",
+   "next_step": "To literature: a verified wage elasticity of production (Krassoi Peach & Stanley 2009 meta-analysis: abstract only, value not verified). To verified: worker screens from Q2+.",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
    "sources": [
     "E-Q1",
@@ -568,7 +580,7 @@
    ],
    "maturity": "heuristic",
    "ours": "CultureModule: participation spend and an executive bonus pool build a morale stock that raises capacity a little; morale shown only with an employee survey.",
-   "next_step": "To literature: read Harter, Schmidt & Hayes 2002 in full for corrected effect sizes. To verified: Q3+ screens.",
+   "next_step": "To literature: the corrected engagement correlations of Harter, Schmidt & Hayes 2002 (full text not reachable; abstract has no numbers) and a causal reading of them. To verified: Q3+ screens.",
    "capture": "Q3+ (unverified · awaiting capture)",
    "sources": [
     "E-REG",
@@ -657,7 +669,7 @@
   {
    "key": "production.operating_capacity",
    "area": "production",
-   "name": "營運產能、加班與排班",
+   "name": "營運產能：班別",
    "kind": "behaviour",
    "real_status": "inferred",
    "real_note": "Operating capacity and overtime screens are registered.",
@@ -667,17 +679,40 @@
     "ExtFactorySimulation"
    ],
    "maturity": "heuristic",
-   "ours": "OperatingCapacityModule: extra shifts multiply capacity (less efficient later shifts, fixed cost per shift); overtime adds units at a 1.5 x premium (statutory floor) with a productivity loss.",
-   "next_step": "To verified: the game's shift and overtime rules from Q2+ (capacity and cost lines).",
+   "ours": "OperatingCapacityModule (heuristic part): extra shifts multiply capacity, later shifts less efficient, fixed cost per shift.",
+   "next_step": "To literature: a verified relative output of later shifts (only accident risk found). To verified: the game's shift rules from Q2+.",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
    "sources": [
     "E-REG",
     "R-GOOSEN1999",
-    "L-FLSA",
-    "L-SHEPARD2000",
-    "L-PENCAVEL2015"
+    "L-FOLKARD2005"
    ],
    "module": "production.operating_capacity"
+  },
+  {
+   "key": "production.overtime",
+   "module": "production.operating_capacity",
+   "area": "production",
+   "name": "加班",
+   "kind": "behaviour",
+   "real_status": "inferred",
+   "real_note": "Operating capacity and overtime screens are registered.",
+   "screens": [
+    "OperatingCapacity",
+    "Overtime",
+    "ExtFactorySimulation"
+   ],
+   "maturity": "literature",
+   "ours": "OperatingCapacityModule (literature part): overtime capacity from the piecewise log-log output-hours relation (elasticity ~1 below 49 hours a week, 0.17 above; Pencavel 2015) on a labelled 40-hour week; the 1.5 x premium (statutory floor) makes the cost heuristic.",
+   "next_step": "To verified: the game's overtime capacity and cost from Q2+ (fit the elasticities inside the range).",
+   "capture": "Q2+ (unverified · awaiting Q2 capture)",
+   "sources": [
+    "E-REG",
+    "L-PENCAVEL2015",
+    "L-COLLEWET2017",
+    "L-SHEPARD2000",
+    "L-FLSA"
+   ]
   },
   {
    "key": "production.excess_capacity",
@@ -738,7 +773,7 @@
    ],
    "maturity": "heuristic",
    "ours": "QualityModule: QA spend per unit lowers the defect rate; defects lower attraction and cost warranty repairs.",
-   "next_step": "To literature: a quality-to-sales magnitude (none found). To verified: quality screens from Q3+.",
+   "next_step": "To literature: no published sales or share elasticity to defect rate found (Tellis & Johnson 2007 is about stock returns; review valence 0.417 is perceived, not objective, quality). To verified: quality screens from Q3+.",
    "capture": "Q3+ (unverified · awaiting capture)",
    "sources": [
     "E-REG",
@@ -1307,6 +1342,17 @@
     "not-modeled": 25
    },
    "total": 52
+  },
+  {
+   "label": "第 3 輪：不需等 Q2 的全部",
+   "date": "2026-11-05",
+   "counts": {
+    "verified": 6,
+    "literature": 14,
+    "heuristic": 27,
+    "not-modeled": 8
+   },
+   "total": 55
   }
  ]
 }

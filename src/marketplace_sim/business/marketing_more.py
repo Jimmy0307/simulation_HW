@@ -1,20 +1,25 @@
 """Marketing levers beyond the media split: promotions (rebates), advertising message, internet marketing.
 
-All three are HEURISTIC (practice rules). Each enters demand through a fixed coupling point and carries its own
-level, so everything downstream of demand becomes "練習" as soon as one of them is used.
+Promotions and the advertising message are HEURISTIC; internet marketing is LITERATURE (its response part). Each
+enters demand through a fixed coupling point and carries its own level: downstream of demand takes the weakest.
 
 * ``marketing.promotions``: a per-unit rebate lowers the price the customer weighs by ``perceived_weight x rebate``
   (``price_factor``), so the demand chain's own price response (literature: Bijmolt, van Heerde & Pieters 2005)
-  decides the volume effect. The rebate is paid on the share of buyers who redeem (``redemption_rate``). No
-  peer-reviewed redemption or slippage rate was found (Lu & Moorthy 2007 and Gilpatric 2009 are models without a
-  rate), so both coefficients are labelled practice defaults.
+  decides the volume effect. The rebate is paid on the share of buyers who redeem (``redemption_rate``). The
+  redemption rate lies in the
+  range of field rates reported by Pechmann & Silk 2013 (JPP&M review, full text: 7 % for $1, 27 % for $10, 50 % for
+  $20 rebates). The perceived weight has no published value (a derivation from one experiment is not one), so the
+  price effect, and with it the module, stays heuristic.
 * ``marketing.ad_copy``: the advertising message stresses one of the target segment's needs. A message on a need the
   segment values above its average need raises attraction, one below lowers it, by at most ``lift``. Only the
   direction has published support (content moderates advertising response); no general magnitude.
-* ``marketing.internet``: company-wide internet marketing spend raises the attraction of every offer in proportion to
-  the web share of our outlets, with a constant-elasticity response. No online-specific meta-analytic elasticity was
-  found; the default elasticity reuses the short-term advertising mean (Sethuraman, Tellis & Briesch 2011) as a
-  labelled choice, so the part is heuristic.
+* ``marketing.internet`` (LITERATURE response): company-wide internet marketing spend raises the attraction of every
+  offer with a constant-elasticity (log-log) response, in proportion to the web share of our outlets (a labelled
+  mapping: internet marketing works through the web channel). The elasticity must lie in [0.003, 0.23]: from the
+  bias-corrected advertising meta-analysis (Korkames, Stanley & Stremersch 2026: 10 % more advertising, 0.03-1 % more
+  sales) to the online display estimate of Bayer, Srinivasan, Riedl & Skiera 2020 (0.231, firm panel); default 0.05,
+  the median short-term elasticity (Sethuraman, Tellis & Briesch 2011). All full text. The spend reference is a
+  labelled scale default; the spending line is heuristic (the game's charging rule is unobserved).
 """
 
 from __future__ import annotations
@@ -39,6 +44,12 @@ H = Level.HEURISTIC
 NOTE = "practice rule: no published quantified relation, labelled defaults, no calibration"
 
 
+def _check(key: str, c: Mapping[str, float]) -> None:
+    from marketplace_sim.business.product import _check as check
+
+    check(key, c)
+
+
 class PromotionsModule:
     spec = ModuleSpec(
         key="marketing.promotions", title="促銷（回饋金）", rows={"marketing.promotions": Maturity.HEURISTIC},
@@ -46,7 +57,7 @@ class PromotionsModule:
         couplings=("price_factor", "settle: expenses"), evidence="src/marketplace_sim/business/marketing_more.py")
     fields = (Field("rebate", "每件回饋金額", "marketing.promotions", "brand_number", 0, 500, 5, 0),)
     ui = {"toggle": "啟用促銷", "practice": "回饋金讓顧客感受到的價格變低（用需求面的價格反應）；只有一部分買家會真的去兌換。"
-          "感受比例與兌換率都是暫定值，沒有可用的文獻數字。",
+          "兌換率在文獻報告的實地範圍內（7–50%，預設 27%），但顧客把回饋金當幾成的「感受比例」沒有文獻數字，是暫定值，所以整個模組仍是練習。",
           "results": [["promotion_price_factor[{brand}]", "顧客感受價格倍數"], ["promotion_rebates", "回饋金支出"]]}
     metrics = (
         Metric("promotion_price_factor[brand]", H, "1 - perceived weight x rebate / price", "demand", (), NOTE),
@@ -55,6 +66,7 @@ class PromotionsModule:
 
     def __init__(self, coefficients: Mapping[str, Any], pack: ParamPack | None = None) -> None:
         self.c = {k: float(v) for k, v in coefficients.items()}
+        _check(self.spec.key, self.c)
 
     def run(self, inp: ModuleInput) -> ModuleResult:
         rebate = read_fields(self.fields, inp.decisions, [b.name for b in inp.brands])["rebate"]
@@ -116,20 +128,23 @@ class AdCopyModule:
 
 class InternetMarketingModule:
     spec = ModuleSpec(
-        key="marketing.internet", title="網路行銷", rows={"marketing.internet": Maturity.HEURISTIC},
+        key="marketing.internet", title="網路行銷", rows={"marketing.internet": Maturity.LITERATURE},
         decisions=("web_spend",), outputs=("internet_factor", "internet_marketing"),
         couplings=("attraction", "expenses"), evidence="src/marketplace_sim/business/marketing_more.py")
     fields = (Field("web_spend", "網路行銷預算（每季）", "marketing.internet", "number", 0, 300000, 5000, 0),)
-    ui = {"toggle": "啟用網路行銷", "practice": "網路行銷只對網路中心帶來的那部分市場有效（依網路中心占據點的比例），報酬遞減；"
-          "彈性借用一般廣告彈性當暫定值，沒有網路專屬的後設分析。",
+    ui = {"toggle": "啟用網路行銷", "literature": "固定彈性、報酬遞減；彈性限定在文獻範圍 0.003–0.23（廣告彈性後設分析到網路展示廣告的估計），"
+          "預設 0.05。只對網路中心帶來的那部分市場有效（依網路中心占據點的比例，標明的對應假設）。",
+          "practice": "網路行銷支出怎麼入帳（遊戲規則）未觀察到，支出列是練習。",
           "results": [["internet_factor", "網路行銷吸引力倍數"], ["internet_marketing", "網路行銷支出"]]}
     metrics = (
-        Metric("internet_factor", H, "1 + web share x ((1 + spend / reference)^elasticity - 1)", "demand", (), NOTE),
+        Metric("internet_factor", Level.LITERATURE, "1 + web share x ((1 + spend / reference)^elasticity - 1)", "demand", (),
+               "Elasticity in [0.003, 0.23] (Korkames et al. 2026; Bayer et al. 2020); default 0.05 (Sethuraman et al. 2011)."),
         Metric("internet_marketing", H, "plan input: internet marketing spend", "expense", (), NOTE),
     )
 
     def __init__(self, coefficients: Mapping[str, Any], pack: ParamPack | None = None) -> None:
         self.c = {k: float(v) for k, v in coefficients.items()}
+        _check(self.spec.key, self.c)
 
     def run(self, inp: ModuleInput) -> ModuleResult:
         spend = read_fields(self.fields, inp.decisions, [])["web_spend"]
@@ -137,7 +152,8 @@ class InternetMarketingModule:
         factor = 1 + inp.web_share * (response - 1)
         out = ModuleResult()
         out.expenses["internet_marketing"] = Tagged(spend, H, f"plan input (the game's charging rule is unobserved; {NOTE})")
-        out.lines["internet_factor"] = Tagged(factor, H, f"1 + web share x ((1 + spend/ref)^e - 1) ({NOTE})")
+        out.lines["internet_factor"] = Tagged(factor, Level.LITERATURE,
+                                              "1 + web share x ((1 + spend/ref)^e - 1), e in the published range")
         if factor != 1.0:
             for b in inp.brands:
                 out.attraction[b.name] = out.lines["internet_factor"]

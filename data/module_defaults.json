@@ -44,21 +44,29 @@
     "reference_commission_pct": 3,
     "commission_weight": 0.3,
     "base_quit": 0.15,
-    "pay_sensitivity": 1.5,
     "min_quit": 0.02,
     "max_quit": 0.6,
     "hire_cost": 2000,
     "severance_cost": 3000,
     "training_scale": 1500,
     "skill_decay": 0.2,
-    "skill_bonus": 0.5,
+    "skill_bonus": 0.239,
     "web_force_reference": 2,
-    "web_elasticity": 0.2
+    "web_elasticity": 0.2,
+    "quit_elasticity": 0.75
    },
    "ranges": {
     "selling_elasticity": [
      0.31,
      0.34
+    ],
+    "skill_bonus": [
+     0.231,
+     0.301
+    ],
+    "quit_elasticity": [
+     0.4,
+     2.0
     ]
    },
    "basis": {
@@ -84,29 +92,50 @@
      "sources": [],
      "why": "Scale of the force per market at which the response is (1+1)^e; chosen for the synthetic pack."
     },
-    "pay and retention (base_quit, pay_sensitivity, min_quit, max_quit, commission_weight, reference_*)": {
-     "kind": "heuristic",
-     "sources": [
-      "direction only: Griffeth, Hom & Gaertner 2000, pay vs turnover rho about -0.09",
-      "Sokolova & Sorensen 2021, ILR Review 74(1): median labour-supply elasticity to the firm 1.68 (1.41 direct estimates; working-paper full text); a separation elasticity would need a steady-state conversion, an inference not reported by them"
-     ]
-    },
     "costs (hire_cost, severance_cost)": {
      "kind": "heuristic",
      "sources": [],
      "why": "The game's sales-force cost rule was not observed."
     },
-    "training (training_scale, skill_decay, skill_bonus)": {
-     "kind": "heuristic",
-     "sources": [
-      "Arthur, Bennett, Edens & Bell 2003, J. Applied Psychology 88(2): sample-weighted mean d = 0.62 on results criteria (0.60-0.63 across reaction, learning, behaviour, results; abstract verified in the published PDF)"
-     ],
-     "why": "d is in standard deviations of performance; turning it into a sales multiplier needs the spread of salesperson performance, which has no published general value. Farrell & Hakstian 2001's '23.1%' could not be verified anywhere and is no longer cited."
-    },
     "web sales (web_force_reference, web_elasticity)": {
      "kind": "heuristic",
      "sources": [],
      "why": "The personal-selling meta-analysis (Albers et al. 2010) covers field sales forces; no published elasticity for web or phone salespeople."
+    },
+    "quit_elasticity": {
+     "kind": "literature",
+     "range": [
+      0.4,
+      2.0
+     ],
+     "sources": [
+      "Manning 2011, Handbook of Labor Economics 4B ch. 11 (CEP DP 981 full text): separation elasticities from about 0.4 to about 2",
+      "Sokolova & Sorensen 2021 (IZA DP 11966 full text): separation-based labour-supply elasticity mean 1.53, median 1.22; separation elasticity = half (their eps = -2 eps_S), default 0.75"
+     ]
+    },
+    "pay and retention (base_quit, min_quit, max_quit, commission_weight, reference_*)": {
+     "kind": "heuristic",
+     "sources": [
+      "direction and size of the correlation: Griffeth, Hom & Gaertner 2000 (full text): pay rho -0.09, 95 % credibility -0.37 to +0.20"
+     ],
+     "why": "The level of quits in the game and how commission counts as pay are unobserved."
+    },
+    "skill_bonus": {
+     "kind": "literature",
+     "range": [
+      0.231,
+      0.301
+     ],
+     "sources": [
+      "Arthur, Bennett, Edens & Bell 2003, J. Applied Psychology 88(2): training effect d = 0.60-0.63 (full text; mostly ratings and learning criteria, results d = 0.62)",
+      "Hunter, Schmidt & Judiesch 1990, J. Applied Psychology 75(1), Table 7 (full text): SDp for non-insurance sales 38.5 % (reliability-corrected) to 47.7 % (applicants); life insurance excluded (skewed)",
+      "range = d x SDp; default 0.62 x 0.385 = 0.239"
+     ]
+    },
+    "training dose and decay (training_scale, skill_decay)": {
+     "kind": "heuristic",
+     "sources": [],
+     "why": "No published value for how spending builds skill or how fast it decays."
     }
    }
   },
@@ -184,9 +213,14 @@
    "maturity": "heuristic",
    "coefficients": {
     "perceived_weight": 0.7,
-    "redemption_rate": 0.4
+    "redemption_rate": 0.27
    },
-   "ranges": {},
+   "ranges": {
+    "redemption_rate": [
+     0.07,
+     0.5
+    ]
+   },
    "basis": {
     "form": {
      "kind": "literature",
@@ -194,10 +228,22 @@
       "price response of the demand chain (mean price elasticity -2.62: Bijmolt, van Heerde & Pieters 2005, JMR 42(2); abstract)"
      ]
     },
-    "perceived_weight, redemption_rate": {
+    "redemption_rate": {
+     "kind": "literature",
+     "range": [
+      0.07,
+      0.5
+     ],
+     "sources": [
+      "Pechmann & Silk 2013, JPP&M 32(2) review (full text): field redemption 7 % for $1, 27 % for $10, 50 % for $20 rebates (data from a rebate administrator, reported in the review); higher rebates redeem more"
+     ]
+    },
+    "perceived_weight": {
      "kind": "heuristic",
-     "sources": [],
-     "why": "No peer-reviewed redemption or slippage rate found (Lu & Moorthy 2007 and Gilpatric 2009 model rebates without a rate)."
+     "sources": [
+      "indirect only: Pyone & Isen 2011 choice shares, as reported by Pechmann & Silk 2013"
+     ],
+     "why": "No published perceived value of a rebate at purchase; a derivation from one experiment is not one."
     }
    }
   },
@@ -216,23 +262,43 @@
    }
   },
   "marketing.internet": {
-   "maturity": "heuristic",
+   "maturity": "literature",
    "coefficients": {
-    "elasticity": 0.12,
+    "elasticity": 0.05,
     "spend_reference": 50000
    },
-   "ranges": {},
+   "ranges": {
+    "elasticity": [
+     0.003,
+     0.23
+    ]
+   },
    "basis": {
     "elasticity": {
-     "kind": "heuristic",
-     "sources": [
-      "borrowed: Sethuraman, Tellis & Briesch 2011 short-term advertising mean 0.12 (not online-specific)"
+     "kind": "literature",
+     "range": [
+      0.003,
+      0.23
      ],
-     "why": "No online-specific meta-analytic elasticity found."
+     "sources": [
+      "Korkames, Stanley & Stremersch 2026, IJRM 43(1): bias-corrected meta-analysis, 10 % more advertising gives 0.03-1 % more sales (full text)",
+      "Bayer, Srinivasan, Riedl & Skiera 2020, IJRM 37(4): online display sales elasticity 0.231, log-log with adstock, firm panel (full text); paid search 0.583 is not an advertising elasticity by their own note and is not used",
+      "default 0.05: Sethuraman, Tellis & Briesch 2011 median short-term elasticity (full text)"
+     ]
+    },
+    "web share weighting": {
+     "kind": "labelled_default",
+     "sources": [],
+     "why": "Internet marketing assumed to act through the web channel only."
     },
     "spend_reference": {
      "kind": "labelled_default",
      "sources": []
+    },
+    "spending line": {
+     "kind": "heuristic",
+     "sources": [],
+     "why": "The game's charging rule is unobserved."
     }
    }
   },
@@ -321,11 +387,27 @@
    "coefficients": {
     "second_shift_efficiency": 0.9,
     "third_shift_efficiency": 0.8,
-    "overtime_productivity_loss": 0.15,
     "overtime_premium": 1.5,
-    "shift_fixed_cost": 40000
+    "shift_fixed_cost": 40000,
+    "regular_hours": 40,
+    "threshold_hours": 49,
+    "elasticity_below": 1.0,
+    "elasticity_above": 0.17
    },
-   "ranges": {},
+   "ranges": {
+    "threshold_hours": [
+     49,
+     49
+    ],
+    "elasticity_below": [
+     0.9,
+     1.0
+    ],
+    "elasticity_above": [
+     0.0,
+     0.35
+    ]
+   },
    "basis": {
     "overtime_premium": {
      "kind": "labelled_default",
@@ -334,16 +416,48 @@
      ],
      "why": "A legal floor, not the game's rule."
     },
-    "overtime_productivity_loss": {
-     "kind": "heuristic",
-     "sources": [
-      "direction: Shepard & Clifton 2000 (abstract); Pencavel 2015 (abstract)"
-     ],
-     "why": "No published elasticity range found."
-    },
     "shift efficiencies, shift cost": {
      "kind": "heuristic",
-     "sources": []
+     "sources": [
+      "accident risk only: Folkard, Lombardi & Tucker 2005, Industrial Health 43 (full text): +18 % afternoon, +30 % night"
+     ],
+     "why": "No verified relative output of later shifts."
+    },
+    "regular_hours": {
+     "kind": "labelled_default",
+     "sources": [],
+     "why": "The game's regular week is unobserved; 40 hours assumed."
+    },
+    "threshold_hours": {
+     "kind": "literature",
+     "range": [
+      49,
+      49
+     ],
+     "sources": [
+      "Pencavel 2015, Economic Journal 125 (IZA DP 8129 full text): output proportional to hours below 49 a week (elasticity 1.002); 0.172 (s.e. 0.089) at 49 hours and above; range = estimate +/- 2 s.e., floored at 0"
+     ]
+    },
+    "elasticity_below": {
+     "kind": "literature",
+     "range": [
+      0.9,
+      1.0
+     ],
+     "sources": [
+      "Pencavel 2015, Economic Journal 125 (IZA DP 8129 full text): output proportional to hours below 49 a week (elasticity 1.002); 0.172 (s.e. 0.089) at 49 hours and above; range = estimate +/- 2 s.e., floored at 0",
+      "Collewet & Sauermann 2017, Labour Economics 47 (IZA DP 10722 full text): elasticity 0.9 (call centre, mostly part-time)"
+     ]
+    },
+    "elasticity_above": {
+     "kind": "literature",
+     "range": [
+      0.0,
+      0.35
+     ],
+     "sources": [
+      "Pencavel 2015, Economic Journal 125 (IZA DP 8129 full text): output proportional to hours below 49 a week (elasticity 1.002); 0.172 (s.e. 0.089) at 49 hours and above; range = estimate +/- 2 s.e., floored at 0"
+     ]
     }
    }
   },

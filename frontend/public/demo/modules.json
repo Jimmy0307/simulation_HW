@@ -46,8 +46,8 @@
   }
  ],
  "counts": {
-  "heuristic": 27,
-  "literature": 14,
+  "heuristic": 26,
+  "literature": 16,
   "not-modeled": 8,
   "verified": 6
  },
@@ -73,6 +73,17 @@
    "date": "2026-11-05",
    "label": "第 2 輪：做扎實與供應鏈",
    "total": 52
+  },
+  {
+   "counts": {
+    "heuristic": 27,
+    "literature": 14,
+    "not-modeled": 8,
+    "verified": 6
+   },
+   "date": "2026-11-05",
+   "label": "第 3 輪：不需等 Q2 的全部",
+   "total": 55
   }
  ],
  "is_private": false,
@@ -246,7 +257,7 @@
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
    "coefficients": {
     "perceived_weight": 0.7,
-    "redemption_rate": 0.4
+    "redemption_rate": 0.27
    },
    "decidable": true,
    "decisions": [
@@ -272,10 +283,15 @@
    "maturity": "heuristic",
    "module": "marketing.promotions",
    "name": "促銷（回饋金、贈品、店頭陳列）",
-   "next_step": "To literature: a published redemption / slippage rate (none found). Add gifts and display as further parts. To verified: Q2+ Promotions screen and its cost lines.",
-   "ours": "PromotionsModule: a per-unit rebate lowers the price the customer weighs (perceived share of the rebate), so the demand chain's price response decides volume; rebates are paid on redeemed units. Free gifts and point-of-purchase display are not modelled.",
+   "next_step": "To literature: a published perceived value of a rebate at purchase (none found; only choice shares from one experiment). Add gifts and display as further parts. To verified: Q2+ Promotions screen and the rebates row.",
+   "ours": "PromotionsModule: a per-unit rebate lowers the price the customer weighs (perceived share of the rebate, heuristic), so the demand chain's price response decides volume; rebates are paid on redeemed units at a rate inside the published field range (7-50 %, default 27 %). Free gifts and point-of-purchase display are not modelled.",
    "primary": true,
-   "ranges": {},
+   "ranges": {
+    "redemption_rate": [
+     0.07,
+     0.5
+    ]
+   },
    "real_note": "Rebate and point-of-purchase fields on Pricing; a Promotions screen is registered.",
    "real_status": "inferred",
    "screens": [
@@ -287,11 +303,12 @@
     "P-HALES",
     "L-BIJMOLT2005",
     "L-LU2007",
-    "L-GILPATRIC2009"
+    "L-GILPATRIC2009",
+    "L-PECHMANN2013"
    ],
    "stoppable": false,
    "ui": {
-    "practice": "回饋金讓顧客感受到的價格變低（用需求面的價格反應）；只有一部分買家會真的去兌換。感受比例與兌換率都是暫定值，沒有可用的文獻數字。",
+    "practice": "回饋金讓顧客感受到的價格變低（用需求面的價格反應）；只有一部分買家會真的去兌換。兌換率在文獻報告的實地範圍內（7–50%，預設 27%），但顧客把回饋金當幾成的「感受比例」沒有文獻數字，是暫定值，所以整個模組仍是練習。",
     "results": [
      [
       "promotion_price_factor[{brand}]",
@@ -431,7 +448,7 @@
    "maturity": "heuristic",
    "module": "marketing.ad_copy",
    "name": "廣告訊息與文案",
-   "next_step": "To literature: a generalizable creative-effect magnitude (none found). To verified: the game's ad-copy screen and its effect from Q2+.",
+   "next_step": "To literature: full text of Dall'Olio & Vakratsas 2023 (creative strategy and advertising elasticity; abstract has no numbers). To verified: the game's ad-copy screen from Q2+.",
    "ours": "AdCopyModule: the message stresses the target segment's 1st/2nd/3rd need; attraction moves by at most a labelled lift in proportion to that need against the segment's mean need (only with advertising).",
    "primary": true,
    "ranges": {},
@@ -463,7 +480,7 @@
    "area": "marketing",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
    "coefficients": {
-    "elasticity": 0.12,
+    "elasticity": 0.05,
     "spend_reference": 50000
    },
    "decidable": true,
@@ -487,13 +504,18 @@
    "implementation": "InternetMarketingModule",
    "key": "marketing.internet",
    "kind": "behaviour",
-   "maturity": "heuristic",
+   "maturity": "literature",
    "module": "marketing.internet",
    "name": "網路行銷（網頁、流量、社群）",
-   "next_step": "To literature: an online-specific meta-analytic elasticity (none found; Dinner, van Heerde & Neslin 2014 numbers not verified). To verified: Q2+ web marketing screens.",
-   "ours": "InternetMarketingModule: company spend with a constant-elasticity response, applied in proportion to the web share of our outlets; spend is an expense.",
+   "next_step": "To verified: the game's web marketing screens and their effect on web sales from Q2+ (fit the elasticity inside the range).",
+   "ours": "InternetMarketingModule: constant-elasticity response with the elasticity in [0.003, 0.23] (bias-corrected advertising meta-analysis to the online display estimate; default 0.05), applied in proportion to the web share of our outlets (labelled mapping); spending line heuristic.",
    "primary": true,
-   "ranges": {},
+   "ranges": {
+    "elasticity": [
+     0.003,
+     0.23
+    ]
+   },
    "real_note": "Web page, traffic and productivity screens are registered.",
    "real_status": "inferred",
    "screens": [
@@ -504,11 +526,14 @@
    ],
    "sources": [
     "E-REG",
-    "L-SETHURAMAN2011"
+    "L-SETHURAMAN2011",
+    "L-KORKAMES2026",
+    "L-BAYER2020"
    ],
    "stoppable": false,
    "ui": {
-    "practice": "網路行銷只對網路中心帶來的那部分市場有效（依網路中心占據點的比例），報酬遞減；彈性借用一般廣告彈性當暫定值，沒有網路專屬的後設分析。",
+    "literature": "固定彈性、報酬遞減；彈性限定在文獻範圍 0.003–0.23（廣告彈性後設分析到網路展示廣告的估計），預設 0.05。只對網路中心帶來的那部分市場有效（依網路中心占據點的比例，標明的對應假設）。",
+    "practice": "網路行銷支出怎麼入帳（遊戲規則）未觀察到，支出列是練習。",
     "results": [
      [
       "internet_factor",
@@ -731,12 +756,12 @@
     "max_headcount": 200,
     "max_quit": 0.6,
     "min_quit": 0.02,
-    "pay_sensitivity": 1.5,
+    "quit_elasticity": 0.75,
     "reference_commission_pct": 3,
     "reference_salary": 6000,
     "selling_elasticity": 0.31,
     "severance_cost": 3000,
-    "skill_bonus": 0.5,
+    "skill_bonus": 0.239,
     "skill_decay": 0.2,
     "training_scale": 1500,
     "web_elasticity": 0.2,
@@ -761,9 +786,17 @@
    "ours": "SalesForceModule: selling effort = (1 + force per market / reference)^elasticity, the elasticity inside the meta-analytic range; multiplies the attraction of our offers. Hiring cost lines stay heuristic.",
    "primary": true,
    "ranges": {
+    "quit_elasticity": [
+     0.4,
+     2.0
+    ],
     "selling_elasticity": [
      0.31,
      0.34
+    ],
+    "skill_bonus": [
+     0.231,
+     0.301
     ]
    },
    "real_note": "Hire Sales People is registered but not in the Q1 menu; public sources list the number of salespeople employed.",
@@ -794,12 +827,12 @@
     "max_headcount": 200,
     "max_quit": 0.6,
     "min_quit": 0.02,
-    "pay_sensitivity": 1.5,
+    "quit_elasticity": 0.75,
     "reference_commission_pct": 3,
     "reference_salary": 6000,
     "selling_elasticity": 0.31,
     "severance_cost": 3000,
-    "skill_bonus": 0.5,
+    "skill_bonus": 0.239,
     "skill_decay": 0.2,
     "training_scale": 1500,
     "web_elasticity": 0.2,
@@ -820,13 +853,21 @@
    "maturity": "heuristic",
    "module": "sales_force",
    "name": "業務薪酬、佣金與留任",
-   "next_step": "Stays heuristic until game data: the literature gives only small negative correlations between pay and turnover (Griffeth et al. 2000, rho about -0.09), no elasticity. To verified: observe headcount changes against pay from Q2 on.",
-   "ours": "SalesForceModule (heuristic part): quit rate falls with relative pay (salary and commission), bounded; salaries and commission are expenses (cost rule unobserved).",
+   "next_step": "To literature: a published base quit rate for comparable sales jobs and a pay-index definition. To verified: Q2+ headcount after pay changes.",
+   "ours": "SalesForceModule (heuristic part): quit rate = base x pay index^(-elasticity), elasticity in the published separation range 0.4-2.0 (default 0.75); the base quit rate and the commission weight are practice defaults.",
    "primary": false,
    "ranges": {
+    "quit_elasticity": [
+     0.4,
+     2.0
+    ],
     "selling_elasticity": [
      0.31,
      0.34
+    ],
+    "skill_bonus": [
+     0.231,
+     0.301
     ]
    },
    "real_note": "Industry Sales Force Compensation is a report in the Q1 menu (measured); the decision screen (SalesForceCompensation) is registered but not seen.",
@@ -841,7 +882,9 @@
     "P-HALES",
     "L-COUGHLAN1992",
     "L-LUCAS1987",
-    "L-GRIFFETH2000"
+    "L-GRIFFETH2000",
+    "L-MANNING2011",
+    "L-SOKOLOVA2021"
    ],
    "stoppable": false,
    "ui": {}
@@ -858,12 +901,12 @@
     "max_headcount": 200,
     "max_quit": 0.6,
     "min_quit": 0.02,
-    "pay_sensitivity": 1.5,
+    "quit_elasticity": 0.75,
     "reference_commission_pct": 3,
     "reference_salary": 6000,
     "selling_elasticity": 0.31,
     "severance_cost": 3000,
-    "skill_bonus": 0.5,
+    "skill_bonus": 0.239,
     "skill_decay": 0.2,
     "training_scale": 1500,
     "web_elasticity": 0.2,
@@ -884,13 +927,21 @@
    "maturity": "heuristic",
    "module": "sales_force",
    "name": "業務訓練",
-   "next_step": "To literature: Arthur et al. 2003 give d = 0.60-0.63 (verified) but turning d into a sales multiplier needs the spread of salesperson performance, which has no published general value. To verified: observe the SpecialPrograms effect from Q2 on.",
-   "ours": "SalesForceModule (heuristic part): training builds a decaying skill stock that raises effective force; any skill makes the demand chain heuristic.",
+   "next_step": "To literature: a published dose-response or decay of sales training (Arthur et al. 1998 skill-decay review is a candidate, not yet verified). To verified: observe the SpecialPrograms effect from Q2 on.",
+   "ours": "SalesForceModule (heuristic part): training builds a decaying skill stock; the full-skill gain is bounded by the literature (d x SDp = 0.231-0.301), the dose and decay are practice rules; any skill makes the demand chain heuristic.",
    "primary": false,
    "ranges": {
+    "quit_elasticity": [
+     0.4,
+     2.0
+    ],
     "selling_elasticity": [
      0.31,
      0.34
+    ],
+    "skill_bonus": [
+     0.231,
+     0.301
     ]
    },
    "real_note": "Special Programs (training, demo kit, contest) is registered; public sources list training.",
@@ -902,7 +953,7 @@
     "E-REG",
     "P-HALES",
     "L-ARTHUR2003",
-    "L-FARRELL2001"
+    "L-HUNTER1990"
    ],
    "stoppable": false,
    "ui": {}
@@ -919,12 +970,12 @@
     "max_headcount": 200,
     "max_quit": 0.6,
     "min_quit": 0.02,
-    "pay_sensitivity": 1.5,
+    "quit_elasticity": 0.75,
     "reference_commission_pct": 3,
     "reference_salary": 6000,
     "selling_elasticity": 0.31,
     "severance_cost": 3000,
-    "skill_bonus": 0.5,
+    "skill_bonus": 0.239,
     "skill_decay": 0.2,
     "training_scale": 1500,
     "web_elasticity": 0.2,
@@ -949,9 +1000,17 @@
    "ours": "SalesForceModule (heuristic part): web salespeople add a constant-elasticity response weighted by the web share of our outlets; paid the field salary.",
    "primary": false,
    "ranges": {
+    "quit_elasticity": [
+     0.4,
+     2.0
+    ],
     "selling_elasticity": [
      0.31,
      0.34
+    ],
+    "skill_bonus": [
+     0.231,
+     0.301
     ]
    },
    "real_note": "Hire Web Sales People is registered; demand projection screens have per-web-salesperson fields.",
@@ -998,7 +1057,7 @@
    "maturity": "heuristic",
    "module": "hr.production_workers",
    "name": "生產工人薪酬與生產力",
-   "next_step": "To literature: a published wage-to-productivity elasticity (none found). To verified: worker screens from Q2+.",
+   "next_step": "To literature: a verified wage elasticity of production (Krassoi Peach & Stanley 2009 meta-analysis: abstract only, value not verified). To verified: worker screens from Q2+.",
    "ours": "ProductionWorkersModule: wage index scales direct labour and, bounded, worker productivity (capacity).",
    "primary": true,
    "ranges": {},
@@ -1095,7 +1154,7 @@
    "maturity": "heuristic",
    "module": "hr.executive_and_culture",
    "name": "主管薪酬、員工參與與人資調查",
-   "next_step": "To literature: read Harter, Schmidt & Hayes 2002 in full for corrected effect sizes. To verified: Q3+ screens.",
+   "next_step": "To literature: the corrected engagement correlations of Harter, Schmidt & Hayes 2002 (full text not reachable; abstract has no numbers) and a causal reading of them. To verified: Q3+ screens.",
    "ours": "CultureModule: participation spend and an executive bonus pool build a morale stock that raises capacity a little; morale shown only with an employee survey.",
    "primary": true,
    "ranges": {},
@@ -1280,11 +1339,14 @@
    "area": "production",
    "capture": "Q2+ (unverified · awaiting Q2 capture)",
    "coefficients": {
+    "elasticity_above": 0.17,
+    "elasticity_below": 1.0,
     "overtime_premium": 1.5,
-    "overtime_productivity_loss": 0.15,
+    "regular_hours": 40,
     "second_shift_efficiency": 0.9,
     "shift_fixed_cost": 40000,
-    "third_shift_efficiency": 0.8
+    "third_shift_efficiency": 0.8,
+    "threshold_hours": 49
    },
    "decidable": true,
    "decisions": [
@@ -1319,13 +1381,13 @@
     },
     {
      "default": 0,
-     "high": 25,
+     "high": 50,
      "kind": "number",
-     "label": "加班（正常產能的 %）",
+     "label": "加班（正常工時的 %）",
      "low": 0,
      "name": "overtime_pct",
      "options": [],
-     "part": "production.operating_capacity",
+     "part": "production.overtime",
      "step": 1,
      "unit": " %"
     }
@@ -1335,11 +1397,24 @@
    "kind": "behaviour",
    "maturity": "heuristic",
    "module": "production.operating_capacity",
-   "name": "營運產能、加班與排班",
-   "next_step": "To verified: the game's shift and overtime rules from Q2+ (capacity and cost lines).",
-   "ours": "OperatingCapacityModule: extra shifts multiply capacity (less efficient later shifts, fixed cost per shift); overtime adds units at a 1.5 x premium (statutory floor) with a productivity loss.",
+   "name": "營運產能：班別",
+   "next_step": "To literature: a verified relative output of later shifts (only accident risk found). To verified: the game's shift rules from Q2+.",
+   "ours": "OperatingCapacityModule (heuristic part): extra shifts multiply capacity, later shifts less efficient, fixed cost per shift.",
    "primary": true,
-   "ranges": {},
+   "ranges": {
+    "elasticity_above": [
+     0.0,
+     0.35
+    ],
+    "elasticity_below": [
+     0.9,
+     1.0
+    ],
+    "threshold_hours": [
+     49,
+     49
+    ]
+   },
    "real_note": "Operating capacity and overtime screens are registered.",
    "real_status": "inferred",
    "screens": [
@@ -1350,13 +1425,135 @@
    "sources": [
     "E-REG",
     "R-GOOSEN1999",
-    "L-FLSA",
-    "L-SHEPARD2000",
-    "L-PENCAVEL2015"
+    "L-FOLKARD2005"
    ],
    "stoppable": false,
    "ui": {
-    "practice": "多開一班產能變多但效率較低、每班有固定費用；加班多出產能，加班工資按 1.5 倍（美國法定下限，遊戲規則未觀察到）並有效率損失。幅度都是暫定值。",
+    "literature": "加班的產能反應用文獻的工時–產出關係：每週 49 小時以下產出與工時成正比，超過後彈性只剩約 0.17（Pencavel 2015）；以每週 40 小時為正常工時（標明的假設）。",
+    "practice": "多開一班產能變多但效率較低、每班有固定費用（後班效率沒有文獻數字）；加班工資按 1.5 倍（美國法定下限，遊戲規則未觀察到），所以成本是練習。",
+    "results": [
+     [
+      "shift_factor",
+      "班別產能倍數"
+     ],
+     [
+      "overtime_units",
+      "加班可多產（件）"
+     ],
+     [
+      "capacity_units_per_quarter",
+      "本季產能"
+     ],
+     [
+      "shift_cost",
+      "加班別固定費用"
+     ],
+     [
+      "overtime_premium",
+      "加班工資加給"
+     ]
+    ],
+    "toggle": "設定班別與加班"
+   }
+  },
+  {
+   "area": "production",
+   "capture": "Q2+ (unverified · awaiting Q2 capture)",
+   "coefficients": {
+    "elasticity_above": 0.17,
+    "elasticity_below": 1.0,
+    "overtime_premium": 1.5,
+    "regular_hours": 40,
+    "second_shift_efficiency": 0.9,
+    "shift_fixed_cost": 40000,
+    "third_shift_efficiency": 0.8,
+    "threshold_hours": 49
+   },
+   "decidable": true,
+   "decisions": [
+    "shifts",
+    "overtime_pct"
+   ],
+   "fields": [
+    {
+     "default": "1",
+     "high": 1.0,
+     "kind": "choice",
+     "label": "班別",
+     "low": 0.0,
+     "name": "shifts",
+     "options": [
+      [
+       "1",
+       "一班"
+      ],
+      [
+       "2",
+       "兩班"
+      ],
+      [
+       "3",
+       "三班"
+      ]
+     ],
+     "part": "production.operating_capacity",
+     "step": 1.0,
+     "unit": ""
+    },
+    {
+     "default": 0,
+     "high": 50,
+     "kind": "number",
+     "label": "加班（正常工時的 %）",
+     "low": 0,
+     "name": "overtime_pct",
+     "options": [],
+     "part": "production.overtime",
+     "step": 1,
+     "unit": " %"
+    }
+   ],
+   "implementation": "OperatingCapacityModule",
+   "key": "production.overtime",
+   "kind": "behaviour",
+   "maturity": "literature",
+   "module": "production.operating_capacity",
+   "name": "加班",
+   "next_step": "To verified: the game's overtime capacity and cost from Q2+ (fit the elasticities inside the range).",
+   "ours": "OperatingCapacityModule (literature part): overtime capacity from the piecewise log-log output-hours relation (elasticity ~1 below 49 hours a week, 0.17 above; Pencavel 2015) on a labelled 40-hour week; the 1.5 x premium (statutory floor) makes the cost heuristic.",
+   "primary": false,
+   "ranges": {
+    "elasticity_above": [
+     0.0,
+     0.35
+    ],
+    "elasticity_below": [
+     0.9,
+     1.0
+    ],
+    "threshold_hours": [
+     49,
+     49
+    ]
+   },
+   "real_note": "Operating capacity and overtime screens are registered.",
+   "real_status": "inferred",
+   "screens": [
+    "OperatingCapacity",
+    "Overtime",
+    "ExtFactorySimulation"
+   ],
+   "sources": [
+    "E-REG",
+    "L-PENCAVEL2015",
+    "L-COLLEWET2017",
+    "L-SHEPARD2000",
+    "L-FLSA"
+   ],
+   "stoppable": false,
+   "ui": {
+    "literature": "加班的產能反應用文獻的工時–產出關係：每週 49 小時以下產出與工時成正比，超過後彈性只剩約 0.17（Pencavel 2015）；以每週 40 小時為正常工時（標明的假設）。",
+    "practice": "多開一班產能變多但效率較低、每班有固定費用（後班效率沒有文獻數字）；加班工資按 1.5 倍（美國法定下限，遊戲規則未觀察到），所以成本是練習。",
     "results": [
      [
       "shift_factor",
@@ -1573,7 +1770,7 @@
    "maturity": "heuristic",
    "module": "production.quality",
    "name": "品質、檢驗與重工",
-   "next_step": "To literature: a quality-to-sales magnitude (none found). To verified: quality screens from Q3+.",
+   "next_step": "To literature: no published sales or share elasticity to defect rate found (Tellis & Johnson 2007 is about stock returns; review valence 0.417 is perceived, not objective, quality). To verified: quality screens from Q3+.",
    "ours": "QualityModule: QA spend per unit lowers the defect rate; defects lower attraction and cost warranty repairs.",
    "primary": true,
    "ranges": {},
@@ -2993,9 +3190,11 @@
   "L-ARROW1951": "Arrow, K.J., Harris, T. & Marschak, J. (1951). Optimal inventory policy. Econometrica 19(3), 250-272 (abstract).",
   "L-ARTHUR2003": "Arthur, W. Jr., Bennett, W., Edens, P.S. & Bell, S.T. (2003). Effectiveness of training in organizations: a meta-analysis. Journal of Applied Psychology 88(2), 234-245 (general training, not sales-specific).",
   "L-AZZI2014": "Azzi, A., Battini, D., Faccio, M., Persona, A. & Sgarbossa, F. (2014). Inventory holding costs measurement: a multi-case study. International Journal of Logistics Management 25(1), 109-132 (review quotes 12-34% and 20-50% of inventory value per year).",
+  "L-BAYER2020": "Bayer, E., Srinivasan, S., Riedl, E.J. & Skiera, B. (2020). The impact of online display advertising and paid search advertising relative to offline advertising on firm performance and firm value. International Journal of Research in Marketing 37(4), 789-804 (full text: display sales elasticity 0.231).",
   "L-BIJMOLT2005": "Bijmolt, T.H.A., van Heerde, H.J. & Pieters, R.G.M. (2005). New empirical generalizations on the determinants of price elasticity. Journal of Marketing Research 42(2), 141-156. Mean price elasticity -2.62 (1,851 elasticities, 81 studies; abstract).",
   "L-BUZZELL1987": "Buzzell, R.D. & Gale, B.T. (1987). The PIMS Principles. Free Press (relative quality and performance: direction).",
   "L-CLARKE1976": "Clarke, D.G. (1976). Econometric measurement of the duration of advertising effect on sales. Journal of Marketing Research 13, 345-357.",
+  "L-COLLEWET2017": "Collewet, M. & Sauermann, J. (2017). Working hours and productivity. Labour Economics 47, 96-106 (IZA DP 10722 full text: elasticity of output to hours 0.9).",
   "L-COOPER1988": "Cooper, L.G. & Nakanishi, M. (1988). Market-Share Analysis: Evaluating Competitive Marketing Effectiveness. Kluwer (MCI: one multiplicative term with its own elasticity per marketing instrument).",
   "L-COUGHLAN1992": "Coughlan, A.T. & Narasimhan, C. (1992). An empirical analysis of sales-force compensation plans. Journal of Business 65(1), 93-121.",
   "L-DEMAND": "docs/demand-literature.md (sources of the literature demand chain: multinomial logit / MCI attraction, outside option, distribution elasticity).",
@@ -3004,24 +3203,29 @@
   "L-DUTTON1984": "Dutton, J.M. & Thomas, A. (1984). Treating progress functions as a managerial opportunity. Academy of Management Review 9(2), 235-247. 108 cases, centre 80-82 % (read through full-text secondary sources: Lapre 2011, Learning Curves: Theory, Models and Applications ch. 2; OIES paper EL43, 2021).",
   "L-FARRELL2001": "Farrell, S. & Hakstian, A.R. (2001). Improving salesforce performance: a meta-analytic investigation. Psychology & Marketing 18(3), 281-316. Abstract snippet only: training effects significant on average; the often-quoted 23.1 % could not be verified and is not used.",
   "L-FLSA": "US federal overtime statute, 29 U.S.C. 207(a)(1): overtime pay of at least 1.5 times the regular rate (statute, full text).",
+  "L-FOLKARD2005": "Folkard, S., Lombardi, D.A. & Tucker, P.T. (2005). Shiftwork: safety, sleepiness and sleep. Industrial Health 43, 20-23 (full text: accident risk +18 % afternoon, +30 % night shift).",
   "L-GILPATRIC2009": "Gilpatric, S.M. (2009). Slippage in rebate programs and present-biased preferences. Marketing Science 28(2), 229-238 (abstract: no rate).",
-  "L-GRIFFETH2000": "Griffeth, R.W., Hom, P.W. & Gaertner, S. (2000). A meta-analysis of antecedents and correlates of employee turnover. Journal of Management 26(3), 463-488 (pay vs turnover rho about -0.09; -0.12 in 1990s studies; no elasticity).",
+  "L-GRIFFETH2000": "Griffeth, R.W., Hom, P.W. & Gaertner, S. (2000). A meta-analysis of antecedents and correlates of employee turnover. Journal of Management 26(3), 463-488 (full text: pay rho -0.09, credibility -0.37 to +0.20).",
   "L-HALL2010": "Hall, B.H., Mairesse, J. & Mohnen, P. (2010). Measuring the returns to R&D. Handbook of the Economics of Innovation vol. 2, ch. 24 (NBER w15622, full text): perpetual inventory with 15 % depreciation; output elasticity 0.01-0.25, centred about 0.08.",
   "L-HARRIS1913": "Harris, F.W. (1913). How many parts to make at once. Factory, The Magazine of Management 10(2), 135-136 (holding cost proportional to inventory value).",
+  "L-HUNTER1990": "Hunter, J.E., Schmidt, F.L. & Judiesch, M.K. (1990). Individual differences in output variability as a function of job complexity. Journal of Applied Psychology 75(1), 28-42 (full text: SDp 38.5-47.7 % for non-insurance sales).",
   "L-KAPLAN1992": "Kaplan, R.S. & Norton, D.P. (1992). The balanced scorecard: measures that drive performance. Harvard Business Review 70(1), 71-79. Four perspectives; no weights.",
   "L-KOHLER2017": "Kohler, C., Mantrala, M.K., Albers, S. & Kanuri, V.K. (2017). A meta-analysis of marketing communication carryover effects. Journal of Marketing Research 54(6), 990-1008.",
+  "L-KORKAMES2026": "Korkames, Stanley & Stremersch (2026). Meta-analysis of advertising elasticities with publication-bias correction. International Journal of Research in Marketing 43(1), 131-151 (full text: short-term 0.0008, long-term 0.03; 10 % more advertising gives 0.03-1 % more sales; internet a positive moderator, coefficient not read).",
   "L-LITTLE1970": "Little, J.D.C. (1970). Models and managers: the concept of a decision calculus. Management Science 16(8), B466-B485 (ADBUDG).",
   "L-LODISH1971": "Lodish, L.M. (1971). CALLPLAN: an interactive salesman's call planning system. Management Science 18(4-II), P25-P40.",
   "L-LU2007": "Lu, Q. & Moorthy, S. (2007). Coupons versus rebates. Marketing Science 26(1), 67-82 (abstract: a model, no redemption rate).",
   "L-LUCAS1987": "Lucas, G.H., Parasuraman, A., Davis, R.A. & Enis, B.M. (1987). An empirical study of salesforce turnover. Journal of Marketing 51(3), 34-59.",
+  "L-MANNING2011": "Manning, A. (2011). Imperfect competition in the labor market. Handbook of Labor Economics 4B, ch. 11 (CEP DP 981 full text: separation elasticities about 0.4 to 2).",
   "L-MONAHAN1984": "Monahan, J.P. (1984). A quantity discount pricing model to increase vendor profits. Management Science 30(6), 720-726.",
   "L-NAIK2003": "Naik, P.A. & Raman, K. (2003). Understanding the impact of synergy in multimedia communications. Journal of Marketing Research 40(4), 375-388.",
-  "L-PENCAVEL2015": "Pencavel, J. (2015). The productivity of working hours. Economic Journal 125, 2052-2076 (abstract: output rises at a decreasing rate above a threshold).",
+  "L-PECHMANN2013": "Pechmann, C. & Silk, T. (2013). Policy and research related to consumer rebates: a comprehensive review. Journal of Public Policy & Marketing 32(2), 255-270 (full text: field redemption 7-50 % rising with rebate size).",
+  "L-PENCAVEL2015": "Pencavel, J. (2015). The productivity of working hours. Economic Journal 125, 2052-2076 (IZA DP 8129 full text: output proportional to hours below 49 a week; elasticity 0.172 above).",
   "L-SCARF1960": "Scarf, H. (1960). The optimality of (S,s) policies in the dynamic inventory problem. In Arrow, Karlin & Suppes (eds.), Mathematical Methods in the Social Sciences, 1959. Stanford UP, 196-202.",
   "L-SETHURAMAN2011": "Sethuraman, R., Tellis, G.J. & Briesch, R. (2011). How well does advertising work? Generalizations from meta-analysis of brand advertising elasticities. Journal of Marketing Research 48(3), 457-471 (mean short-term 0.12, long-term 0.24).",
   "L-SHEPARD2000": "Shepard, E. & Clifton, T. (2000). Are longer hours reducing productivity in manufacturing? International Journal of Manpower 21(7), 540-553 (abstract: direction).",
   "L-SILVER1998": "Silver, E.A., Pyke, D.F. & Peterson, R. (1998). Inventory Management and Production Planning and Scheduling, 3rd ed. Wiley (normal safety stock).",
-  "L-SOKOLOVA2021": "Sokolova, A. & Sorensen, T. (2021). Monopsony in labor markets: a meta-analysis. ILR Review 74(1), 27-55. Median labour-supply elasticity to the firm 1.68 (working-paper full text).",
+  "L-SOKOLOVA2021": "Sokolova, A. & Sorensen, T. (2021). Monopsony in labor markets: a meta-analysis. ILR Review 74(1), 27-55 (IZA DP 11966 full text: separation-based labour-supply elasticity mean 1.53, median 1.22; eps = -2 eps_S).",
   "L-VAKRATSAS2004": "Vakratsas, D., Feinberg, F.M., Bass, F.M. & Kalyanaram, G. (2004). The shape of advertising response functions revisited. Marketing Science 23(1), 109-119.",
   "L-WRIGHT1936": "Wright, T.P. (1936). Factors affecting the cost of airplanes. Journal of the Aeronautical Sciences 3, 122-128 (learning curve).",
   "L-ZOLTNERS2004": "Zoltners, A.A., Sinha, P. & Lorimer, S.E. (2004). Sales Force Design for Strategic Advantage. Palgrave Macmillan.",

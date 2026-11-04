@@ -170,7 +170,8 @@ def test_shifts_and_overtime_add_capacity_and_overtime_costs_only_when_used(afte
     one = preview(after_q1, {"production.operating_capacity": {"shifts": "1"}})
     two = preview(after_q1, {"production.operating_capacity": {"shifts": "2", "overtime_pct": 10}})
     assert v(two, "capacity_units_per_quarter") > v(one, "capacity_units_per_quarter")
-    assert v(two, "shift_cost") > 0 == v(one, "shift_cost")
+    assert v(two, "shift_cost") > 0 and "shift_cost" not in one and "capacity_units_per_quarter" in one
+    assert lvl(one, "capacity_units_per_quarter") == "verified"  # one shift, no overtime: nothing marked
     # production well under regular capacity: no overtime premium
     assert v(two, "overtime_premium") == 0
     big = preview(after_q1, {"production.operating_capacity": {"overtime_pct": 20}}, production=10**6)
@@ -342,3 +343,46 @@ def test_module_state_round_trips_through_a_save() -> None:
     state = out[1][0]
     again = CompanyState.from_dict(dataclasses.asdict(state))
     assert again.module_state == state.module_state and "finance.loans" in again.module_state
+
+
+def test_internet_response_is_literature_and_its_elasticity_is_bounded() -> None:
+    out = run([{}, {}, {"marketing.internet": {"web_spend": 50000}}])
+    q3 = out[2][1].lines
+    assert q3["internet_factor"].level.label == "literature" and q3["internet_marketing"].level.label == "heuristic"
+    from marketplace_sim.business.marketing_more import InternetMarketingModule, PromotionsModule
+
+    c = coefficients(PACK, "marketing.internet")
+    with pytest.raises(ValueError, match="literature range"):
+        InternetMarketingModule({**c, "elasticity": 0.5}, PACK)
+    p = coefficients(PACK, "marketing.promotions")
+    with pytest.raises(ValueError, match="literature range"):
+        PromotionsModule({**p, "redemption_rate": 0.9}, PACK)
+
+
+def test_overtime_follows_the_published_hours_output_relation(after_q1: svc.Session) -> None:
+    from marketplace_sim.business.operations import OperatingCapacityModule
+
+    m = OperatingCapacityModule(coefficients(PACK, "production.operating_capacity"), PACK)
+    # proportional up to 49 hours a week (40 x 1.225), then elasticity 0.17: each extra hour adds much less
+    assert m.relative_output(0.2) == pytest.approx(1.2)
+    gain_low = m.relative_output(0.2) - m.relative_output(0.1)
+    gain_high = m.relative_output(0.5) - m.relative_output(0.4)
+    assert gain_high < 0.3 * gain_low
+    ot = preview(after_q1, {"production.operating_capacity": {"overtime_pct": 10}})
+    assert lvl(ot, "overtime_units") == "literature" and lvl(ot, "capacity_units_per_quarter") == "literature"
+    with pytest.raises(ValueError, match="literature range"):
+        OperatingCapacityModule({**coefficients(PACK, "production.operating_capacity"), "elasticity_above": 0.6}, PACK)
+
+
+def test_training_gain_and_quit_elasticity_are_bounded_by_the_literature() -> None:
+    from marketplace_sim.business.sales_force import SalesForceModule
+
+    c = coefficients(PACK, "sales_force")
+    sf = SalesForceModule(c, PACK)
+    # constant elasticity: doubling pay index divides quits by 2^elasticity (inside the bounds)
+    ref = c["reference_salary"]
+    q1, q2 = sf.quit_rate(ref, c["reference_commission_pct"]), sf.quit_rate(2 * ref, 2 * c["reference_commission_pct"])
+    assert q2 / q1 == pytest.approx(2 ** -c["quit_elasticity"])
+    for bad in ({"skill_bonus": 0.5}, {"quit_elasticity": 3.0}):
+        with pytest.raises(ValueError, match="literature range"):
+            SalesForceModule({**c, **bad}, PACK)
