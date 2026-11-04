@@ -2,35 +2,29 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import type { DataProvider } from "../data/provider";
 import type { GameScript, GameSetupDoc, GameStartConfig, PackInfo, PlanDoc, Report } from "../types";
 import { Banner } from "../ui/common";
+import { Board, type Selection } from "./game/Board";
 import { carryOver, emptyDraft, fromPlan, toPlan, validate, type Draft } from "./game/draft";
+import { LevelsContext } from "./game/Figure";
 import { GameSetup } from "./game/GameSetup";
-import { Hud } from "./game/Hud";
-import { OutletMap } from "./game/OutletMap";
-import { ProductCards } from "./game/ProductCards";
-import { base, group, LITERATURE_NOTICE, MARKET, RESULT, Rows, SettlementCard, Timeline } from "./game/Settlement";
+import { Garage } from "./game/Garage";
+import { SourceStrip, StatusBar } from "./game/Hud";
+import { Inspector } from "./game/Inspector";
+import { SettlementCard, Timeline } from "./game/Settlement";
 
 const PREVIEW_DELAY_MS = 350;
+const LEVELS_KEY = "mpsim.game.showLevels";
 
 function packOf(doc: GameSetupDoc): PackInfo {
   return { name: doc.name, provenance: doc.provenance, is_private: doc.is_private, source: doc.source,
     demand_model: doc.demand_model, quarter: doc.quarter };
 }
 
-function PreviewPanel({ report }: { report: Report }) {
-  const literature = Object.values(report.lines).some((l) => l.level === "literature");
-  const cost = group(report.lines, (k) => !MARKET.has(base(k)) && !RESULT.has(base(k)) && !k.startsWith("rival_"));
-  const rest = group(report.lines, (k) => MARKET.has(base(k)) || RESULT.has(base(k)));
-  return (
-    <section className="card preview-panel" aria-label="試算結果" data-testid="preview-panel">
-      <h2>試算結果（未推進，還可以修改）</h2>
-      {literature ? <p className="settle-notice" role="note">{LITERATURE_NOTICE}</p> : null}
-      <div className="settle-grid">
-        <section><h3>成本面</h3><Rows rows={cost} /></section>
-        <section><h3>銷售、損益與現金（預估）</h3><Rows rows={rest} /></section>
-      </div>
-      {report.notes.length ? <ul className="settle-notes">{report.notes.map((n) => <li key={n}>{n}</li>)}</ul> : null}
-    </section>
-  );
+/** Per-viewer convenience only; the page works the same without storage. */
+function storedLevels(): boolean {
+  try { return window.localStorage.getItem(LEVELS_KEY) === "1"; } catch { return false; }
+}
+function storeLevels(on: boolean) {
+  try { window.localStorage.setItem(LEVELS_KEY, on ? "1" : "0"); } catch { /* storage unavailable */ }
 }
 
 /**
@@ -43,7 +37,8 @@ export function GameMode({ provider, onPack }: { provider: DataProvider; onPack?
   const [phase, setPhase] = useState<"setup" | "play">("setup");
   const [draft, setDraft] = useState<Draft>(emptyDraft);
   const [preview, setPreview] = useState<Report | null>(null);
-  const [previewShown, setPreviewShown] = useState(false);
+  const [selection, setSelection] = useState<Selection | null>(null);
+  const [showLevels, setShowLevels] = useState(storedLevels);
   const [settlement, setSettlement] = useState<Report | null>(null);
   const [history, setHistory] = useState<Report[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -96,7 +91,7 @@ export function GameMode({ provider, onPack }: { provider: DataProvider; onPack?
       setDraft(script && readOnly ? fromPlan(script.steps[0].plan, doc, true) : preset ? fromPlan(preset.plan, doc, true) : emptyDraft());
       setHistory([]);
       setPreview(null);
-      setPreviewShown(false);
+      setSelection(null);
       setPhase("play");
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
@@ -107,8 +102,8 @@ export function GameMode({ provider, onPack }: { provider: DataProvider; onPack?
 
   const calculate = async () => {
     setBusy(true);
-    const report = await runPreview();
-    setPreviewShown(report !== null);
+    setSelection({ kind: "preview" });
+    await runPreview();
     setBusy(false);
   };
 
@@ -124,7 +119,7 @@ export function GameMode({ provider, onPack }: { provider: DataProvider; onPack?
       setSetup(doc);
       setSettlement(report);
       setPreview(null);
-      setPreviewShown(false);
+      setSelection(null);
       const next = readOnly && script ? script.steps[played.length] : undefined;
       setDraft(next ? fromPlan(next.plan, doc, true) : carryOver(fromPlan(plan, doc, false)));
     } catch (e) {
@@ -167,36 +162,43 @@ export function GameMode({ provider, onPack }: { provider: DataProvider; onPack?
       </>
     );
   }
-  const objective = setup.objectives.find((o) => o.text === setup.game?.objective)?.metric ?? null;
+  const shown = readOnly && scripted ? fromPlan(scripted.plan, setup, true) : draft;
+  const levels = (on: boolean) => { setShowLevels(on); storeLevels(on); };
   return (
-    <div className="game">
-      <Hud setup={setup} mode={provider.mode} />
-      {readOnly ? (
-        <Banner kind="info" title="Demo 重播">
-          決策來自預錄的一局（第 {Math.min(history.length + 1, script?.steps.length ?? 0)} / {script?.steps.length} 季），控制項唯讀。
-          啟動本機 API 後即可自由調整。
-        </Banner>
-      ) : null}
-      {error ? <p className="error" role="alert">{error}</p> : null}
-      <div className="game-grid">
-        <ProductCards setup={setup} draft={readOnly && scripted ? fromPlan(scripted.plan, setup, true) : draft} preview={preview}
-          readOnly={readOnly} onChange={setDraft} />
-        <OutletMap setup={setup} draft={readOnly && scripted ? fromPlan(scripted.plan, setup, true) : draft} preview={preview}
-          readOnly={readOnly} onChange={setDraft} />
+    <LevelsContext.Provider value={showLevels}>
+      <div className="game">
+        <SourceStrip setup={setup} mode={provider.mode} showLevels={showLevels} onShowLevels={levels}>
+          <Timeline history={history} onOpen={setSettlement} />
+        </SourceStrip>
+        {readOnly ? (
+          <p className="demo-line">
+            Demo 重播：第 {Math.min(history.length + 1, script?.steps.length ?? 0)} / {script?.steps.length} 季的決策來自預錄的一局，只能看不能改。
+            啟動本機 API 後就能自己經營。
+          </p>
+        ) : null}
+        {error ? <p className="error" role="alert">{error}</p> : null}
+        <div className={`stage${selection ? " with-sheet" : ""}`}>
+          <div className="stage-main">
+            <Board setup={setup} draft={shown} selection={selection} onSelect={setSelection} />
+            <Garage setup={setup} draft={shown} preview={preview} readOnly={readOnly} selection={selection}
+              onSelect={setSelection} onChange={setDraft} />
+          </div>
+          {selection ? (
+            <Inspector setup={setup} draft={shown} preview={preview} readOnly={readOnly} onChange={setDraft}
+              selection={selection} onClose={() => setSelection(null)} />
+          ) : null}
+        </div>
+        <StatusBar setup={setup} problem={problem}>
+          {scriptDone ? <span className="muted">預錄的一局已播完。</span> : null}
+          <button type="button" className="btn" disabled={busy || Boolean(problem) || scriptDone} onClick={calculate}>
+            試算這一季（不推進）
+          </button>
+          <button type="button" className="btn primary" disabled={busy || Boolean(problem) || scriptDone} onClick={endQuarter}>
+            結束這一季
+          </button>
+        </StatusBar>
+        {settlement ? <SettlementCard report={settlement} setup={setup} onClose={() => setSettlement(null)} /> : null}
       </div>
-      {previewShown && preview ? <PreviewPanel report={preview} /> : null}
-      <Timeline history={history} objectiveMetric={objective} onOpen={setSettlement} />
-      <div className="turn-bar" role="toolbar" aria-label="回合動作">
-        <span className="turn-label">第 {quarter} 季{problem ? ` · ${problem}` : ""}</span>
-        {scriptDone ? <span className="muted">預錄的一局已播完。</span> : null}
-        <button type="button" className="btn" disabled={busy || Boolean(problem) || scriptDone} onClick={calculate}>
-          試算這一季（不推進）
-        </button>
-        <button type="button" className="btn primary" disabled={busy || Boolean(problem) || scriptDone} onClick={endQuarter}>
-          結束這一季
-        </button>
-      </div>
-      {settlement ? <SettlementCard report={settlement} setup={setup} onClose={() => setSettlement(null)} /> : null}
-    </div>
+    </LevelsContext.Provider>
   );
 }

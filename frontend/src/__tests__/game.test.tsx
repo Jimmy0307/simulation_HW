@@ -1,4 +1,5 @@
-// Game mode: opens, data source switches, uncalibrated numbers are in the estimate state, opponent count takes effect.
+// Game mode: opens, data source switches, uncalibrated numbers carry a quiet ≈ (full marks only behind the switch),
+// the map opens a side panel, product settings open behind "調整", opponent count takes effect.
 // The static runs use the real exported synthetic bundle (every number made by the Python engine).
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -7,12 +8,14 @@ import { afterEach, describe, expect, it } from "vitest";
 import { App } from "../App";
 import { ApiProvider } from "../data/apiProvider";
 import { StaticProvider } from "../data/staticProvider";
-import { Estimate } from "../screens/game/Estimate";
-import { LITERATURE_NOTICE } from "../screens/game/Settlement";
+import { APPROX, Figure, LevelsContext } from "../screens/game/Figure";
 import type { GameScript, GameSetupDoc, Line, Report } from "../types";
 import { formatNumber } from "../ui/Num";
 
-afterEach(cleanup);
+afterEach(() => {
+  cleanup();
+  try { window.localStorage.clear(); } catch { /* no storage */ }
+});
 
 const DEMO = join(__dirname, "..", "..", "public", "demo");
 const read = (name: string) => JSON.parse(readFileSync(join(DEMO, name), "utf-8"));
@@ -29,21 +32,33 @@ async function openGame(provider: StaticProvider | ApiProvider) {
 const line = (value: number, level: Line["level"]): Line => ({ value, level, source: "rule", uncalibrated:
   level === "literature" || level === "placeholder" });
 
-describe("estimate state", () => {
-  it("trusted levels show directly; uncalibrated levels start collapsed and reveal on click", () => {
-    const { container } = render(<><Estimate line={line(1234, "verified")} label="v" /><Estimate line={line(77, "literature")} label="l" />
-      <Estimate line={line(5, "placeholder")} label="p" /></>);
+const percent = (value: number) => `${(value * 100).toLocaleString("zh-TW", { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%`;
+
+describe("numbers in the game view", () => {
+  const three = () => (
+    <><Figure line={line(1234, "verified")} label="v" /><Figure line={line(77, "literature")} label="l" />
+      <Figure line={line(5, "placeholder")} label="p" /></>
+  );
+
+  it("trusted numbers are plain; uncalibrated ones get a quiet ≈ with a hover note, never letter marks", () => {
+    const { container } = render(three());
     const [trusted, lit, ph] = [...container.querySelectorAll("[data-estimate]")];
     expect(trusted.getAttribute("data-estimate")).toBe("false");
-    expect(trusted.textContent).toContain("1,234");
+    expect(trusted.textContent).toBe("1,234");
     expect(lit.getAttribute("data-estimate")).toBe("true");
-    expect(lit.textContent).toContain("預估");
-    expect(lit.textContent).not.toContain("77");
-    fireEvent.click(within(lit as HTMLElement).getByRole("button"));
-    expect(lit.textContent).toContain("77");
-    expect(lit.textContent).toContain("Q2 數據校準後變實際");
-    fireEvent.click(within(ph as HTMLElement).getByRole("button"));
-    expect(ph.textContent).toContain("成本規則尚未驗證");
+    expect(lit.querySelector(".fig-approx")?.textContent).toBe(APPROX);
+    expect(lit.querySelector(".fig-v")?.textContent).toBe("77");
+    expect(lit.querySelector('[role="tooltip"]')?.textContent).toContain("預估 · Q2 校準後變實際");
+    expect(ph.querySelector('[role="tooltip"]')?.textContent).toContain("預估 · 成本規則驗證後變實際");
+    expect(container.querySelectorAll(".mark, .uncal-chip, .estimate-btn")).toHaveLength(0);
+    expect(container.textContent).not.toMatch(/[VDLP]/);
+  });
+
+  it("the 'show all source levels' switch brings back the full marks", () => {
+    const { container } = render(<LevelsContext.Provider value={true}>{three()}</LevelsContext.Provider>);
+    expect([...container.querySelectorAll(".mark")].map((m) => m.textContent)).toEqual(["V", "L", "P"]);
+    expect(container.querySelectorAll(".uncal-chip")).toHaveLength(2);
+    expect(container.querySelector(".fig-approx")).toBeNull();
   });
 });
 
@@ -57,43 +72,70 @@ describe("game mode on the static synthetic demo", () => {
     expect(screen.getByTestId("replay-reason").textContent).toContain("private");
   });
 
-  it("plays the recorded game: product, map, calculate, end quarter, settlement, timeline", async () => {
+  it("plays the recorded game: map, bike cards, side panels, calculate, report card, timeline", async () => {
     const { container } = await openGame(staticProvider());
     await act(async () => fireEvent.click(screen.getByText("開始第一季")));
     expect((await screen.findByTestId("game-source")).textContent).toContain("SYNTHETIC");
-    expect(screen.getAllByTestId("product-card")).toHaveLength(script.steps[0].plan.brands?.length ?? 0);
-    // map: a click shows the city's segments and willingness to pay (data, trusted level)
-    const firstCity = script.start.regions[0].cities[1];
-    fireEvent.click(screen.getByTestId(`city-${firstCity.key}`));
+    const game = container.querySelector(".game") as HTMLElement;
+    // default view: no side panel, bikes show name + price only, no letter marks anywhere
+    expect(screen.queryByTestId("inspector")).toBeNull();
+    const plan = script.steps[0].plan;
+    const cards = screen.getAllByTestId("product-card");
+    expect(cards).toHaveLength(plan.brands?.length ?? 0);
+    expect(cards[0].textContent).toContain(plan.brands![0].name);
+    expect(cards[0].querySelector("input, select, [type=range]")).toBeNull();
+    expect(game.querySelectorAll(".mark, .uncal-chip")).toHaveLength(0);
+    // map: a click on a city opens the panel with segments, willingness to pay and opening cost (trusted, plain)
+    const city = script.start.regions[0].cities.find((c) => !(plan.open_stores ?? []).includes(c.key))!;
+    fireEvent.click(screen.getByTestId(`city-${city.key}`));
     const panel = screen.getByTestId("city-panel");
-    expect(panel.textContent).toContain(firstCity.name);
-    expect(panel.textContent).toContain(formatNumber(firstCity.segments[0].wtp.value));
-    expect(panel.textContent).toContain(formatNumber(firstCity.store!.setup_cost.value));
-    // calculate (no advance) shows the engine's preview
+    expect(screen.getByTestId("inspector").textContent).toContain(city.name);
+    expect(panel.textContent).toContain(formatNumber(city.segments[0].wtp.value));
+    expect(panel.textContent).toContain(formatNumber(city.store!.setup_cost.value));
+    expect(panel.textContent).toContain("本季在這裡開店");
+    const lease = within(panel).getByText("每季租金").parentElement!; // placeholder: the quiet ≈
+    expect(lease.querySelector(".fig-approx")?.textContent).toBe(APPROX);
+    // the factory opens the capacity panel; "調整" opens the bike's settings
+    fireEvent.click(screen.getByTestId("factory"));
+    expect(screen.getByTestId("factory-panel").textContent).toContain("擴充產能");
+    fireEvent.click(within(cards[0]).getByText("調整"));
+    const product = screen.getByTestId("product-panel");
+    for (const group of script.start.component_groups) expect(product.textContent).toContain(group.name);
+    for (const label of ["價格", "生產量", "廣告"]) expect(within(product).getByLabelText(label)).toBeTruthy();
+    fireEvent.keyDown(screen.getByTestId("inspector"), { key: "Escape" });
+    expect(screen.queryByTestId("inspector")).toBeNull();
+    // calculate (no advance): the engine's preview in the side panel
     await act(async () => fireEvent.click(screen.getByText("試算這一季（不推進）")));
-    expect(await screen.findByTestId("preview-panel")).toBeTruthy();
-    // end the quarter: settlement card
+    await waitFor(() => expect(screen.getByTestId("preview-panel").querySelector('[data-testid="key-results"]')).not.toBeNull());
+    // end the quarter: report card
     await act(async () => fireEvent.click(screen.getByText("結束這一季")));
     const card = await screen.findByTestId("settlement");
     const report = script.steps[0].report;
-    expect(within(card).getByTestId("literature-notice").textContent).toBe(LITERATURE_NOTICE);
+    const note = within(card).getByTestId("literature-notice").textContent ?? "";
+    expect(note).toContain(APPROX);
+    expect(note).toContain("Q2");
     expect(within(card).getAllByTestId("rival-row")).toHaveLength(3);
     expect(within(card).getByTestId("rival-table").textContent).toContain("對手 3 · 激進");
-    // trusted cost lines are plain; every uncalibrated line is collapsed
+    expect(within(card).getByTestId("share-us").textContent).toContain(percent(report.lines.market_share.value));
+    expect(card.querySelectorAll(".mark, .uncal-chip, .estimate-btn")).toHaveLength(0);
+    // full details one click away: trusted rows plain, uncalibrated rows with ≈ (unit cost is placeholder)
     const rows = [...card.querySelectorAll("tr[data-uncalibrated]")];
-    expect(rows.some((r) => r.getAttribute("data-uncalibrated") === "false" && r.querySelector('[data-estimate="false"]'))).toBe(true);
+    const trusted = rows.filter((r) => r.getAttribute("data-uncalibrated") === "false");
     const estimates = rows.filter((r) => r.getAttribute("data-uncalibrated") === "true");
+    expect(trusted.length).toBeGreaterThan(3);
+    for (const row of trusted) expect(row.querySelector(".fig-approx")).toBeNull();
     expect(estimates.length).toBeGreaterThan(5);
-    expect(estimates.map((r) => r.textContent).join(" ")).toContain("單位成本"); // placeholder cost is an estimate too
-    for (const row of estimates) {
-      expect(row.querySelector('[data-estimate="true"] .estimate-btn')).not.toBeNull();
-    }
-    expect(within(card).getByText("成本面（可信的直接顯示）")).toBeTruthy();
-    // the numbers are the engine's: reveal our market share and compare with the bundle
-    fireEvent.click(within(card).getByText("全部展開"));
-    expect(within(card).getByTestId("rival-table").textContent).toContain(formatNumber(report.lines.market_share.value));
+    for (const row of estimates) expect(row.querySelector(".fig-approx")).not.toBeNull();
+    expect(estimates.map((r) => r.textContent).join(" ")).toContain("單位成本");
     await act(async () => fireEvent.click(within(card).getByText("回到下一季")));
     expect(screen.getByTestId("timeline").textContent).toContain("Q1");
+    // the switch shows every source level; off again returns to the clean view
+    const levels = screen.getByTestId("levels-switch");
+    fireEvent.click(levels);
+    expect(levels.getAttribute("aria-checked")).toBe("true");
+    expect(game.querySelectorAll(".mark").length).toBeGreaterThan(0);
+    fireEvent.click(levels);
+    expect(game.querySelectorAll(".mark")).toHaveLength(0);
     // two more recorded quarters, then the replay ends
     for (const step of script.steps.slice(1)) {
       await act(async () => fireEvent.click(screen.getByText("結束這一季")));
@@ -104,6 +146,8 @@ describe("game mode on the static synthetic demo", () => {
     expect(screen.getByTestId("timeline").querySelectorAll("li")).toHaveLength(script.steps.length);
     expect((screen.getByText("結束這一季") as HTMLButtonElement).disabled).toBe(true);
     expect(container.textContent).toContain("預錄的一局已播完");
+    // after Q1 the stores opened in the recorded plan are lit on the map
+    for (const key of plan.open_stores ?? []) expect(screen.getByTestId(`city-${key}`).getAttribute("class")).toContain("open");
   });
 });
 
@@ -138,7 +182,13 @@ function fakeServer() {
       quarter = 1;
       out = setup();
     } else if (path === "/game-mode/setup") out = quarter === 1 && calls.length === 1 ? { ...setup(), game: null } : setup();
-    else if (path === "/game/preview") out = { report: withRivals(script.steps[1].preview) };
+    else if (path === "/game/preview") {
+      // the recorded preview, with its unit cost line renamed to the bike in the request
+      const report = withRivals(script.steps[1].preview);
+      const cost = Object.entries(report.lines).find(([k]) => k.startsWith("unit_cost["))?.[1];
+      const names = ((body?.brands ?? []) as { name: string }[]).map((b) => b.name);
+      out = { report: { ...report, lines: { ...report.lines, ...Object.fromEntries(names.map((n) => [`unit_cost[${n}]`, cost])) } } };
+    }
     else if (path === "/game/play") { out = { report: withRivals(script.steps[1].report) }; quarter += 1; }
     else if (path === "/pack") out = { ...script.start, is_private: isPrivate };
     else out = {};
@@ -148,7 +198,7 @@ function fakeServer() {
 }
 
 describe("game mode on the live engine (fake API)", () => {
-  it("data source and opponent count go to the engine and come back in the settlement", async () => {
+  it("data source and opponent count go to the engine and come back in the report card", async () => {
     const { calls, provider } = fakeServer();
     const { container } = await openGame(provider);
     fireEvent.change(screen.getByLabelText("對手數量"), { target: { value: "5" } });
@@ -162,17 +212,22 @@ describe("game mode on the live engine (fake API)", () => {
       .toEqual(["normal", "normal", "normal", "normal", "aggressive"]);
     expect((await screen.findByTestId("game-source")).textContent).toContain("PRIVATE");
     expect(screen.getByTestId("pack-badge").textContent).toContain("PRIVATE");
-    // make a product, open a store, set a price: each change is calculated by the engine (preview calls)
-    await act(async () => fireEvent.click(screen.getByText("＋ 新增自行車")));
+    // a new bike opens its settings; set a price, then open a store from the map: each change is calculated by the engine
+    await act(async () => fireEvent.click(screen.getByText(/新增自行車/)));
     expect(screen.getAllByTestId("product-card")).toHaveLength(1);
-    fireEvent.change(screen.getByLabelText("價格"), { target: { value: "650" } });
+    const product = screen.getByTestId("product-panel");
+    fireEvent.change(within(product).getByLabelText("價格"), { target: { value: "650" } });
+    expect(screen.getByTestId("product-card").querySelector(".bike-price-v")?.textContent).toBe("650");
     fireEvent.click(screen.getByTestId(`city-${script.start.regions[0].cities[0].key}`));
     await act(async () => fireEvent.click(screen.getByText("本季在這裡開店")));
+    expect(screen.getByTestId(`city-${script.start.regions[0].cities[0].key}`).getAttribute("class")).toContain("planned");
     await waitFor(() => {
       const last = calls.filter((c) => c.path === "/game/preview").at(-1);
       expect(last?.body?.open_stores).toEqual([script.start.regions[0].cities[0].key]);
       expect((last?.body?.brands as { price: number }[])[0].price).toBe(650);
     }, { timeout: 3000 });
+    // the engine's unit cost reaches the bike card's price gauge, with the quiet ≈ (placeholder)
+    await waitFor(() => expect(screen.getByTestId("price-gauge").querySelector(".fig-approx")).not.toBeNull(), { timeout: 3000 });
     await act(async () => fireEvent.click(screen.getByText("結束這一季")));
     const card = await screen.findByTestId("settlement");
     expect(within(card).getAllByTestId("rival-row")).toHaveLength(5);

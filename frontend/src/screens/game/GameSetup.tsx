@@ -33,11 +33,11 @@ export function GameSetup({ setup, canCompute, script, busy, onStart }: Props) {
   return (
     <div className="game-setup">
       <section className="card setup-hero">
-        <div className="setup-icon"><ProductIcon icon={setup.theme.icon} size={72} /></div>
+        <div className="setup-icon"><ProductIcon icon={setup.theme.icon} size={150} /></div>
         <div>
           <h2>開一局：{setup.theme.product}經營</h2>
           <p className="muted">一季 = 一回合。每回合做{setup.theme.product}、鋪貨、定價，先「試算」再「結束這一季」。
-            所有數字都由本機引擎計算；未校準的數字會以「？ 預估」顯示。</p>
+            所有數字都由本機引擎計算；還沒校準的數字前面會有一個小小的 ≈，表示預估。</p>
         </div>
       </section>
       {fixed ? (
