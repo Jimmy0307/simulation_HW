@@ -44,6 +44,10 @@ def create_app(session: svc.Session | None = None) -> FastAPI:
     def get_levels() -> dict[str, Any]:
         return svc.levels()
 
+    @app.get("/api/modules")
+    def get_modules() -> dict[str, Any]:
+        return svc.modules_catalog()
+
     @app.get("/api/explain/{metric}")
     def get_explain(metric: str) -> dict[str, Any]:
         return dict(guarded(svc.explain, metric))

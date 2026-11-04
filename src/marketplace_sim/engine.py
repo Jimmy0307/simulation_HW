@@ -35,6 +35,7 @@ class CompanyState:
     pending_capacity_units: float = 0.0
     cash_level: str = "verified"  # level of the cash balance carried from the previous quarter
     ad_stock: dict[str, float] = field(default_factory=dict)  # advertising goodwill per brand (literature demand)
+    module_state: dict[str, dict[str, float]] = field(default_factory=dict)  # business-module state (sales force ...)
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -76,6 +77,7 @@ class Plan:
     open_web_centers: list[str] = field(default_factory=list)
     stock_issue: list[tuple[float, float]] = field(default_factory=list)
     brands: list[BrandPlan] = field(default_factory=list)
+    modules: dict[str, Any] = field(default_factory=dict)  # business-module decisions, keyed like the ledger
 
     @classmethod
     def from_dict(cls, data: dict[str, Any], name: str = "plan") -> Plan:
@@ -92,6 +94,7 @@ class Plan:
                               components=[str(c) for c in b["components"]] if b.get("components") else None,
                               segment=None if b.get("segment") is None else str(b["segment"]))
                     for b in data.get("brands", [])],
+            modules=dict(data.get("modules") or {}),
         )
 
 
@@ -128,6 +131,7 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
             competitors: list[m.Competitor] | None = None, seed: int = 0,
             adjust: Adjustments | None = None) -> tuple[CompanyState, Report]:
     """Apply one quarter of decisions. Returns the next state and a fully tagged report."""
+    from marketplace_sim.business import run_modules
     from marketplace_sim.demand import demand_for
 
     demand = demand or demand_for(pack)
@@ -172,6 +176,16 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
     capacity_left = lines["capacity_units_per_quarter"].value
     market_reach = m.reach(pack, stores_before, web_before)
     market_coverage = tuple(sorted(m.coverage(pack, stores_before, web_before, web_weight).items()))
+    # Business modules (marketplace_sim.business): their effects enter at fixed coupling points, and their weakest
+    # level is applied to everything downstream of demand. No module decided or carried = nothing changes.
+    effects = run_modules(pack, quarter=state.quarter, decisions=plan.modules, carried=state.module_state,
+                          brands=[(bp.name, bp.advertising) for bp in plan.brands], markets_reached=len(market_reach))
+    demand_level = demand.level if effects.level is None else min(demand.level, effects.level)
+    if effects.level is not None:
+        notes.append(f"business modules active: {', '.join(effects.active)} (level {effects.level.label}; "
+                     "every number downstream of demand takes this level)")
+        notes.extend(effects.notes)
+    effort = effects.selling_effort.value if effects.selling_effort is not None else 1.0
     for bp in plan.brands:
         bt = pack.brand_type(bp.brand_type)
         if bp.name not in new.brands:
@@ -188,25 +202,32 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
         new.inventory[bp.name] = new.inventory.get(bp.name, 0.0) + units
         production_cost.append(cost.scaled(units, f"{units:.0f} units"))
         segment = brand.segment_id or (pack.segments[0].id if pack.segments else "")
-        stock = carryover * state.ad_stock.get(bp.name, 0.0) + max(bp.advertising, 0.0)
+        efficiency = effects.ad_efficiency.get(bp.name)
+        advertising = bp.advertising if efficiency is None else max(bp.advertising, 0.0) * efficiency.value
+        stock = carryover * state.ad_stock.get(bp.name, 0.0) + max(advertising, 0.0)
         new.ad_stock[bp.name] = stock
         if bp.price > 0 and market_reach:
-            own_offers.append(m.Offer("us", bp.name, segment, bp.price, m.segment_fit(bt, segment), bp.advertising,
+            own_offers.append(m.Offer("us", bp.name, segment, bp.price, m.segment_fit(bt, segment), advertising,
                                       market_reach, position=bt.segment_id, quality=1.0, ad_stock=stock,
-                                      coverage=market_coverage))
+                                      coverage=market_coverage, effort=effort))
     lines["design_cost"] = m.design_cost(pack, new_brand_count)
     lines["production_cost"] = total(production_cost, "sum(units x unit_cost)", empty_level=Level.VERIFIED)
     lines["advertising"] = const(sum(b.advertising for b in plan.brands), Level.VERIFIED, "plan input")
+    lines.update(effects.lines)
+    lines.update(effects.expenses)
 
     rival_offers = [o for c in competitors for o in c.offers(pack, state.quarter, rng)]
     if adjust.rival_price_factor:
         rival_offers = [replace(o, price=o.price * adjust.rival_price_factor.get(o.firm, adjust.rival_price_factor.get("*", 1.0)))
                         for o in rival_offers]
     demanded = demand.units(pack, own_offers + rival_offers)
+    if effects.level is not None:
+        why = f" · with business modules {', '.join(effects.active)} ({effects.level.label})"
+        demanded = {k: v.with_level(effects.level, v.source + why) for k, v in demanded.items()}
     revenue: list[Tagged] = []
     sold_total = 0.0
     for offer in own_offers:
-        want = demanded.get(("us", offer.brand), Tagged(0.0, demand.level, "no demand"))
+        want = demanded.get(("us", offer.brand), Tagged(0.0, demand_level, "no demand"))
         sold = min(want.value, new.inventory.get(offer.brand, 0.0))
         new.inventory[offer.brand] = new.inventory.get(offer.brand, 0.0) - sold
         sold_total += sold
@@ -217,21 +238,25 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
         notes.append("no sales: no priced brand or no open outlet at quarter start")
     rivals_units = sum(v.value for k, v in demanded.items() if k[0] != "us")
     market_units = sold_total + rivals_units
-    lines["market_units_total"] = Tagged(market_units, demand.level,
+    lines["market_units_total"] = Tagged(market_units, demand_level,
                                          "our units sold + rival units demanded (rivals unconstrained)")
-    lines["market_share"] = Tagged(sold_total / market_units if market_units > 0 else 0.0, demand.level,
+    lines["market_share"] = Tagged(sold_total / market_units if market_units > 0 else 0.0, demand_level,
                                    "our units sold / market_units_total")
     # Per-rival view of the same demand result (report only: no input above changes).
     for firm in sorted({k[0] for k in demanded if k[0] != "us"}):
         firm_units = sum(v.value for k, v in demanded.items() if k[0] == firm)
-        lines[f"rival_units[{firm}]"] = Tagged(firm_units, demand.level,
+        lines[f"rival_units[{firm}]"] = Tagged(firm_units, demand_level,
                                                "sum of the rival's units demanded (rivals unconstrained)")
-        lines[f"rival_share[{firm}]"] = Tagged(firm_units / market_units if market_units > 0 else 0.0, demand.level,
+        lines[f"rival_share[{firm}]"] = Tagged(firm_units / market_units if market_units > 0 else 0.0, demand_level,
                                                "rival units / market_units_total")
-    lines["revenue"] = total(revenue, "sum(units_sold x price)", empty_level=demand.level)
+    lines["revenue"] = total(revenue, "sum(units_sold x price)", empty_level=demand_level)
+    for key, rate in effects.revenue_rates.items():
+        lines[key] = Tagged(lines["revenue"].value * rate.value, min(lines["revenue"].level, rate.level),
+                            f"revenue x {rate.source}")
 
     expenses = total([lines["store_setup"], lines["web_center_setup"], lines["outlet_lease"], lines["design_cost"],
-                      lines["production_cost"], lines["advertising"]], "operating expenses")
+                      lines["production_cost"], lines["advertising"],
+                      *(lines[k] for k in [*effects.expenses, *effects.revenue_rates])], "operating expenses")
     pretax = lines["revenue"] + lines["cd_interest"] - expenses
     lines["operating_profit_before_tax"] = pretax
     lines["income_tax"] = m.income_tax(pack, pretax)
@@ -245,6 +270,7 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
     new.cash = lines["cash_end"].value
     new.cash_level = lines["cash_end"].level.label
 
+    new.module_state = {**{k: v for k, v in state.module_state.items() if k not in effects.active}, **effects.state}
     new.fixed_capacity_units = state.fixed_capacity_units + plan.capacity_increase
     new.pending_capacity_units = 0.0
     new.quarter = state.quarter + 1

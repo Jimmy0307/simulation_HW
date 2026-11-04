@@ -140,7 +140,7 @@ class LiteratureDemand:
                     utility = float(c["fit_weight"]) * (fit - 1.0) - float(c["price_sensitivity"]) * (relative_price - 1.0)
                     utility = max(-_UTILITY_CLAMP, min(_UTILITY_CLAMP, utility))
                     attraction = (math.exp(utility) * self._ad_response(self.goodwill(offer), reference.get(sid, 0.0))
-                                  * coverage ** float(c["distribution_elasticity"]))
+                                  * coverage ** float(c["distribution_elasticity"])) * offer.effort
                     attractions.append((offer, attraction))
                 if not attractions:
                     continue

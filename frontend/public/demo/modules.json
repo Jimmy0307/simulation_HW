@@ -1,0 +1,1430 @@
+{
+ "areas": [
+  {
+   "id": "marketing",
+   "name": "行銷"
+  },
+  {
+   "id": "channel",
+   "name": "通路"
+  },
+  {
+   "id": "sales_force",
+   "name": "業務人力"
+  },
+  {
+   "id": "hr",
+   "name": "人資（其他）"
+  },
+  {
+   "id": "production",
+   "name": "生產製造"
+  },
+  {
+   "id": "supply",
+   "name": "供應鏈"
+  },
+  {
+   "id": "rnd",
+   "name": "研發與產品線"
+  },
+  {
+   "id": "finance",
+   "name": "財務"
+  },
+  {
+   "id": "accounting",
+   "name": "會計報表"
+  },
+  {
+   "id": "market",
+   "name": "市場與競爭"
+  },
+  {
+   "id": "strategy",
+   "name": "策略與規劃"
+  }
+ ],
+ "counts": {
+  "heuristic": 11,
+  "literature": 7,
+  "not-modeled": 26,
+  "verified": 5
+ },
+ "is_private": false,
+ "kind_legend": {
+  "accounting": "A bookkeeping rule. Upgrades straight to verified by a controlled experiment; literature does not apply.",
+  "behaviour": "A causal response (a lever moves demand, retention ...). Heuristic behaviour is the riskiest: it can be mistaken for real cause and effect.",
+  "information": "Buys or shows information; changes no number of the quarter.",
+  "qualitative": "Text or planning decisions; no known numeric effect.",
+  "scenario": "An assumption the player chooses (rival behaviour). Results are conditional on it."
+ },
+ "maturity_legend": {
+  "heuristic": "Practice rule from general business sense; no literature, no calibration. Lowest rung. Placeholder accounting rules (structure from game parameters, combination unverified) are heuristic too.",
+  "literature": "Functional form backed by published literature; coefficients not calibrated on this game.",
+  "not-modeled": "The real game has it; this engine does not.",
+  "verified": "Captured from the game and reproduced (or fitted on game data and passed hold-out validation)."
+ },
+ "modules": [
+  {
+   "area": "market",
+   "capture": "Q2 settlement (unverified · awaiting Q2 capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "market.demand_core",
+   "kind": "behaviour",
+   "maturity": "literature",
+   "module": null,
+   "name": "需求核心（區隔選擇與外部選項）",
+   "next_step": "To verified: fit the coefficients on Q2+ demand panels (FittedDemand) and pass hold-out validation (MAPE <= 20 %, direction hit rate >= 70 %).",
+   "ours": "LiteratureDemand: multinomial-logit / MCI attraction with an outside option (src/marketplace_sim/demand.py).",
+   "real_note": "Sales and market share are reported every quarter; the game's demand formula itself is not observable.",
+   "real_status": "measured",
+   "screens": [
+    "Sales (report)",
+    "MarketShare* (report)"
+   ],
+   "sources": [
+    "L-DEMAND",
+    "E-Q1"
+   ]
+  },
+  {
+   "area": "marketing",
+   "capture": "Q1 (captured)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "marketing.segment_targeting",
+   "kind": "behaviour",
+   "maturity": "literature",
+   "module": null,
+   "name": "目標區隔選擇",
+   "next_step": "To verified: calibrate similarity_power and fit_weight on Q2+ brand-by-segment sales.",
+   "ours": "Each brand targets a segment; fit to other segments falls with need similarity (demand chain).",
+   "real_note": "Target Segments is a decision screen in the captured Q1 menu.",
+   "real_status": "measured",
+   "screens": [
+    "TargetSegments"
+   ],
+   "sources": [
+    "E-Q1",
+    "P-HALES",
+    "L-DEMAND"
+   ]
+  },
+  {
+   "area": "marketing",
+   "capture": "Q1 (captured)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "marketing.brand_design",
+   "kind": "behaviour",
+   "maturity": "literature",
+   "module": null,
+   "name": "品牌設計（類型與元件）",
+   "next_step": "To verified: relate brand-judgment scores to sales once Q2 reports are captured; fit the quality term.",
+   "ours": "Brand type and components chosen per brand; fit enters the demand chain; component choice also drives the (heuristic) unit cost.",
+   "real_note": "Design Brand is a decision screen in the captured Q1 menu.",
+   "real_status": "measured",
+   "screens": [
+    "ModifyBrand",
+    "BrandJudgment (report)"
+   ],
+   "sources": [
+    "E-Q1",
+    "P-HALES",
+    "P-JAMS2003"
+   ]
+  },
+  {
+   "area": "rnd",
+   "capture": "Q1 (captured)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "rnd.product_line",
+   "kind": "behaviour",
+   "maturity": "literature",
+   "module": null,
+   "name": "產品線（多品牌與相互侵蝕）",
+   "next_step": "To verified: check cannibalisation against Q2+ brand-level sales.",
+   "ours": "Several brands per firm; they compete for the same buyers inside the logit (cannibalisation).",
+   "real_note": "Several brands can be designed on the Q1 brand screen.",
+   "real_status": "measured",
+   "screens": [
+    "ModifyBrand"
+   ],
+   "sources": [
+    "E-Q1",
+    "L-DEMAND"
+   ]
+  },
+  {
+   "area": "marketing",
+   "capture": "Q2+ (unverified · awaiting Q2 capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "marketing.pricing",
+   "kind": "behaviour",
+   "maturity": "literature",
+   "module": null,
+   "name": "定價",
+   "next_step": "To verified: fit price_sensitivity on Q2+ price and sales variation.",
+   "ours": "Price relative to willingness to pay enters the utility (price_sensitivity).",
+   "real_note": "A Pricing screen is registered but was not in the Q1 menu; public teaching sources list pricing.",
+   "real_status": "inferred",
+   "screens": [
+    "Pricing",
+    "PriceJudgment (report)"
+   ],
+   "sources": [
+    "E-REG",
+    "P-HALES",
+    "L-DEMAND"
+   ]
+  },
+  {
+   "area": "marketing",
+   "capture": "Q2+ (unverified · awaiting Q2 capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "marketing.promotions",
+   "kind": "behaviour",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "促銷（回饋金、贈品、店頭陳列）",
+   "next_step": "To heuristic: rebate lowers the effective price for the share of buyers who redeem it, and costs rebate x redeemed units; free gift as a fixed cost per unit with a small attraction lift.",
+   "ours": "None.",
+   "real_note": "Rebate and point-of-purchase fields on Pricing; a Promotions screen is registered.",
+   "real_status": "inferred",
+   "screens": [
+    "Pricing",
+    "Promotions"
+   ],
+   "sources": [
+    "E-REG",
+    "P-HALES"
+   ]
+  },
+  {
+   "area": "marketing",
+   "capture": "Q2+ (unverified · awaiting Q2 capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "marketing.ad_budget",
+   "kind": "behaviour",
+   "maturity": "literature",
+   "module": null,
+   "name": "廣告預算與累積效果",
+   "next_step": "To verified: fit ad_elasticity and carryover on Q2+ data; keep the literature ranges as priors.",
+   "ours": "Goodwill stock with carryover; power or ADBUDG response with diminishing returns (demand chain).",
+   "real_note": "Media and ad screens are registered; public teaching sources describe advertising decisions.",
+   "real_status": "inferred",
+   "screens": [
+    "LocalMedia",
+    "RegionalMedia",
+    "ModifyAd"
+   ],
+   "sources": [
+    "E-REG",
+    "P-HALES",
+    "L-SETHURAMAN2011",
+    "L-LITTLE1970",
+    "L-CLARKE1976",
+    "L-KOHLER2017"
+   ]
+  },
+  {
+   "area": "marketing",
+   "capture": "Q2+ (unverified · awaiting Q2 capture)",
+   "coefficients": {
+    "media_weights": {
+     "local": 1.0,
+     "regional": 0.9,
+     "search": 0.7,
+     "social": 0.8
+    }
+   },
+   "decidable": true,
+   "decisions": [
+    "mix[brand][medium]"
+   ],
+   "implementation": "MediaMixHeuristic",
+   "key": "marketing.media_mix",
+   "kind": "behaviour",
+   "maturity": "heuristic",
+   "module": "marketing.media_mix",
+   "name": "廣告媒體分配",
+   "next_step": "To literature: replace the square-root rule with per-medium response curves (elasticity range from Sethuraman et al. 2011, shape from Vakratsas et al. 2004) plus a cross-media synergy term (Naik & Raman 2003); give coefficient ranges, not points; add sanity tests; update this row.",
+   "ours": "MediaMixHeuristic: split of each brand's budget across four media; efficiency (sum w sqrt(B_m))^2 / sum w^2 <= 1 scales the advertising that enters the demand chain.",
+   "real_note": "Local, regional, social and search media screens are registered; public sources describe media selection.",
+   "real_status": "inferred",
+   "screens": [
+    "LocalMedia",
+    "RegionalMedia",
+    "SocialMedia",
+    "SearchEngineMarketing"
+   ],
+   "sources": [
+    "E-REG",
+    "P-HALES",
+    "L-NAIK2003",
+    "L-SETHURAMAN2011",
+    "L-VAKRATSAS2004"
+   ]
+  },
+  {
+   "area": "marketing",
+   "capture": "Q2+ (unverified · awaiting Q2 capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "marketing.ad_copy",
+   "kind": "behaviour",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "廣告訊息與文案",
+   "next_step": "To heuristic: message fit = similarity of the stressed benefits to the target segment's needs, multiplying ad effectiveness.",
+   "ours": "None (advertising has no message content).",
+   "real_note": "Ad design screen and ad judgment report are registered; public sources mention ad copy and appeals.",
+   "real_status": "inferred",
+   "screens": [
+    "ModifyAd",
+    "AdJudgment (report)",
+    "CompareAds (report)"
+   ],
+   "sources": [
+    "E-REG",
+    "P-HALES",
+    "P-JAMS2003"
+   ]
+  },
+  {
+   "area": "marketing",
+   "capture": "Q2+ (unverified · awaiting Q2 capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "marketing.internet",
+   "kind": "behaviour",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "網路行銷（網頁、流量、社群）",
+   "next_step": "To heuristic: web traffic budget raises web-channel coverage with diminishing returns; page quality multiplies conversion.",
+   "ours": "None beyond the web center's distribution weight.",
+   "real_note": "Web page, traffic and productivity screens are registered.",
+   "real_status": "inferred",
+   "screens": [
+    "DesignWebPage",
+    "WebTraffic",
+    "WebProductivity",
+    "SimpleInternetMarketing"
+   ],
+   "sources": [
+    "E-REG"
+   ]
+  },
+  {
+   "area": "marketing",
+   "capture": "Q2+ (unverified · awaiting Q2 capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "marketing.market_research",
+   "kind": "information",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "市場調查購買",
+   "next_step": "To heuristic: a cost line plus gating which reports are shown; no effect on demand.",
+   "ours": "None (all research data the pack holds is visible).",
+   "real_note": "Market research purchase screens are registered; public sources list a research budget.",
+   "real_status": "inferred",
+   "screens": [
+    "BuyMarketResearch",
+    "FollowUpStudy",
+    "SourceStudy",
+    "VarianceStudy"
+   ],
+   "sources": [
+    "E-REG",
+    "P-HALES"
+   ]
+  },
+  {
+   "area": "channel",
+   "capture": "Q1 (captured)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "channel.store_opening",
+   "kind": "accounting",
+   "maturity": "verified",
+   "module": null,
+   "name": "開店（設立成本）",
+   "next_step": "Keep: re-run EXP-11 if the screen changes in a later quarter.",
+   "ours": "Opening cost = setup cost of newly opened stores (cost_model).",
+   "real_note": "Open Stores is a decision screen in Q1; opening cost reproduced by EXP-11.",
+   "real_status": "measured",
+   "screens": [
+    "OpenSalesOffice"
+   ],
+   "sources": [
+    "E-Q1",
+    "E-EXP",
+    "P-HALES"
+   ]
+  },
+  {
+   "area": "channel",
+   "capture": "Q1 (captured)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "channel.web_center_opening",
+   "kind": "accounting",
+   "maturity": "verified",
+   "module": null,
+   "name": "網路銷售中心（設立成本）",
+   "next_step": "Keep: re-run EXP-12 if the screen changes.",
+   "ours": "Opening cost = setup cost of newly opened web centers.",
+   "real_note": "Open Web Sales Center is a decision screen in Q1; opening cost reproduced by EXP-12. Not found in public descriptions.",
+   "real_status": "measured",
+   "screens": [
+    "OpenWebcenter"
+   ],
+   "sources": [
+    "E-Q1",
+    "E-EXP"
+   ]
+  },
+  {
+   "area": "channel",
+   "capture": "Q2 settlement (unverified · awaiting Q2 capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "channel.distribution_coverage",
+   "kind": "behaviour",
+   "maturity": "literature",
+   "module": null,
+   "name": "通路覆蓋對需求的效果",
+   "next_step": "To verified: fit distribution_elasticity and web_weight on Q2+ city-level sales.",
+   "ours": "Coverage = 1 - (1 - store)(1 - web weight x web), raised to the distribution elasticity.",
+   "real_note": "A channel demand report is registered; the effect of an open outlet on demand is not observable in Q1.",
+   "real_status": "inferred",
+   "screens": [
+    "ChannelDemand (report)"
+   ],
+   "sources": [
+    "E-REG",
+    "L-DEMAND"
+   ]
+  },
+  {
+   "area": "channel",
+   "capture": "Q2 settlement (unverified · awaiting Q2 capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "channel.outlet_lease",
+   "kind": "accounting",
+   "maturity": "heuristic",
+   "module": null,
+   "name": "通路租金",
+   "next_step": "To verified (accounting skips literature): read the Q2 income statement after a Q1 opening; reproduce the lease row with zero residual.",
+   "ours": "Placeholder: lease of outlets open at quarter start.",
+   "real_note": "Lease cost is a field on the Q1 outlet screens; when it is charged was not observed (EXP-11/12 showed none in the opening quarter).",
+   "real_status": "measured",
+   "screens": [
+    "OpenSalesOffice",
+    "OpenWebcenter"
+   ],
+   "sources": [
+    "E-Q1",
+    "E-EXP"
+   ]
+  },
+  {
+   "area": "sales_force",
+   "capture": "Q2+ (unverified · awaiting Q2 capture)",
+   "coefficients": {
+    "base_quit": 0.15,
+    "commission_weight": 0.3,
+    "force_scale": 3,
+    "hire_cost": 2000,
+    "initial_headcount": 0,
+    "max_headcount": 200,
+    "max_lift": 0.6,
+    "max_quit": 0.6,
+    "min_quit": 0.02,
+    "pay_sensitivity": 1.5,
+    "reference_commission_pct": 3,
+    "reference_salary": 6000,
+    "severance_cost": 3000,
+    "skill_bonus": 0.5,
+    "skill_decay": 0.2,
+    "training_scale": 1500
+   },
+   "decidable": true,
+   "decisions": [
+    "headcount",
+    "salary",
+    "commission_pct",
+    "training"
+   ],
+   "implementation": "SalesForceHeuristic",
+   "key": "sales_force.staffing",
+   "kind": "behaviour",
+   "maturity": "heuristic",
+   "module": "sales_force",
+   "name": "業務編制與招募",
+   "next_step": "To literature: replace the effort curve with a power response whose elasticity range follows Albers et al. 2010 (about 0.31 mean), shape after Lodish 1971; give ranges; sanity tests; update this row.",
+   "ours": "SalesForceHeuristic: headcount and training give selling effort 1 + max_lift x (1 - exp(-force per market / scale)), multiplying the attraction of our offers; hiring and severance costs.",
+   "real_note": "Hire Sales People is registered but not in the Q1 menu; public sources list the number of salespeople employed.",
+   "real_status": "inferred",
+   "screens": [
+    "HireSalesPeople",
+    "DemandProjection"
+   ],
+   "sources": [
+    "E-REG",
+    "P-HALES",
+    "L-ALBERS2010",
+    "L-LODISH1971",
+    "L-ZOLTNERS2004"
+   ]
+  },
+  {
+   "area": "sales_force",
+   "capture": "Q2+ (unverified · awaiting Q2 capture)",
+   "coefficients": {
+    "base_quit": 0.15,
+    "commission_weight": 0.3,
+    "force_scale": 3,
+    "hire_cost": 2000,
+    "initial_headcount": 0,
+    "max_headcount": 200,
+    "max_lift": 0.6,
+    "max_quit": 0.6,
+    "min_quit": 0.02,
+    "pay_sensitivity": 1.5,
+    "reference_commission_pct": 3,
+    "reference_salary": 6000,
+    "severance_cost": 3000,
+    "skill_bonus": 0.5,
+    "skill_decay": 0.2,
+    "training_scale": 1500
+   },
+   "decidable": true,
+   "decisions": [
+    "headcount",
+    "salary",
+    "commission_pct",
+    "training"
+   ],
+   "implementation": "SalesForceHeuristic",
+   "key": "sales_force.compensation",
+   "kind": "behaviour",
+   "maturity": "heuristic",
+   "module": "sales_force",
+   "name": "業務薪酬、佣金與留任",
+   "next_step": "To literature: commission share after Coughlan & Narasimhan 1992; turnover direction after Lucas et al. 1987 and Griffeth et al. 2000. No published pay-to-turnover elasticity was found, so retention may stay heuristic until Q2+ data; say so in the row.",
+   "ours": "SalesForceHeuristic: quit rate falls as pay (salary and commission) rises against a reference; salaries and commission are expenses.",
+   "real_note": "Industry Sales Force Compensation is a report in the Q1 menu (measured); the decision screen (SalesForceCompensation) is registered but not seen.",
+   "real_status": "inferred",
+   "screens": [
+    "InitialSalesForceCompensation (Q1 report)",
+    "SalesForceCompensation"
+   ],
+   "sources": [
+    "E-Q1",
+    "E-REG",
+    "P-HALES",
+    "L-COUGHLAN1992",
+    "L-LUCAS1987",
+    "L-GRIFFETH2000"
+   ]
+  },
+  {
+   "area": "sales_force",
+   "capture": "Q2+ (unverified · awaiting Q2 capture)",
+   "coefficients": {
+    "base_quit": 0.15,
+    "commission_weight": 0.3,
+    "force_scale": 3,
+    "hire_cost": 2000,
+    "initial_headcount": 0,
+    "max_headcount": 200,
+    "max_lift": 0.6,
+    "max_quit": 0.6,
+    "min_quit": 0.02,
+    "pay_sensitivity": 1.5,
+    "reference_commission_pct": 3,
+    "reference_salary": 6000,
+    "severance_cost": 3000,
+    "skill_bonus": 0.5,
+    "skill_decay": 0.2,
+    "training_scale": 1500
+   },
+   "decidable": true,
+   "decisions": [
+    "headcount",
+    "salary",
+    "commission_pct",
+    "training"
+   ],
+   "implementation": "SalesForceHeuristic",
+   "key": "sales_force.training",
+   "kind": "behaviour",
+   "maturity": "heuristic",
+   "module": "sales_force",
+   "name": "業務訓練",
+   "next_step": "To literature: bound the training lift with the general-training effect size of Arthur et al. 2003 (not sales-specific; mark that); add sanity tests.",
+   "ours": "SalesForceHeuristic: training builds a decaying skill stock that raises effective selling force.",
+   "real_note": "Special Programs (training, demo kit, contest) is registered; public sources list training.",
+   "real_status": "inferred",
+   "screens": [
+    "SpecialPrograms"
+   ],
+   "sources": [
+    "E-REG",
+    "P-HALES",
+    "L-ARTHUR2003"
+   ]
+  },
+  {
+   "area": "sales_force",
+   "capture": "Q2+ (unverified · awaiting Q2 capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "sales_force.web_sales",
+   "kind": "behaviour",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "網路業務人員",
+   "next_step": "To heuristic: split selling effort into store and web forces; web effort applies to web coverage only.",
+   "ours": "None (the sales force is company-wide).",
+   "real_note": "Hire Web Sales People is registered; demand projection screens have per-web-salesperson fields.",
+   "real_status": "inferred",
+   "screens": [
+    "HireWebSalesPeople",
+    "DemandProjectionNextQuarter"
+   ],
+   "sources": [
+    "E-REG"
+   ]
+  },
+  {
+   "area": "hr",
+   "capture": "Q2+ (unverified · awaiting Q2 capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "hr.production_workers",
+   "kind": "behaviour",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "生產工人薪酬與生產力",
+   "next_step": "To heuristic: worker pay against a reference sets productivity and turnover; productivity scales usable capacity.",
+   "ours": "None (labour is a fixed per-unit amount inside the unit cost).",
+   "real_note": "Industry Production Worker Compensation is a Q1 report; worker compensation and productivity screens are registered.",
+   "real_status": "inferred",
+   "screens": [
+    "InitialWorkersCompensation (Q1 report)",
+    "WorkersCompensation",
+    "OperatingCapacity"
+   ],
+   "sources": [
+    "E-Q1",
+    "E-REG"
+   ]
+  },
+  {
+   "area": "hr",
+   "capture": "Q3+ (unverified · awaiting capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "hr.executive_and_culture",
+   "kind": "behaviour",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "主管薪酬、員工參與與人資調查",
+   "next_step": "To heuristic only if a numeric effect is observed in a captured report; otherwise keep as qualitative.",
+   "ours": "None.",
+   "real_note": "Executive compensation, employee involvement and HR survey screens are registered.",
+   "real_status": "inferred",
+   "screens": [
+    "ExecutiveCompensation",
+    "EmployeeInvolvement",
+    "HRSurvey"
+   ],
+   "sources": [
+    "E-REG"
+   ]
+  },
+  {
+   "area": "production",
+   "capture": "Q1 (captured)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "production.fixed_capacity",
+   "kind": "accounting",
+   "maturity": "verified",
+   "module": null,
+   "name": "固定產能投資",
+   "next_step": "Keep.",
+   "ours": "Capacity option cost; capacity per quarter = units/day x days per quarter; usable next quarter.",
+   "real_note": "Fixed Capacity is a Q1 decision screen; capacity cost reproduced by EXP-02.",
+   "real_status": "measured",
+   "screens": [
+    "FixedCapacity"
+   ],
+   "sources": [
+    "E-Q1",
+    "E-EXP",
+    "P-HALES"
+   ]
+  },
+  {
+   "area": "production",
+   "capture": "Q2 settlement (unverified · awaiting Q2 capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "production.unit_cost",
+   "kind": "accounting",
+   "maturity": "heuristic",
+   "module": null,
+   "name": "單位生產成本",
+   "next_step": "To verified (accounting): read the Q2 cost-of-production report for a known brand; reproduce it with zero residual.",
+   "ours": "Placeholder: sum(component price) x cost adjustment + minimum labour + minimum overhead.",
+   "real_note": "Component prices, cost adjustment, minimum direct labour and overhead are Q1 brand-screen parameters; how they combine is unverified.",
+   "real_status": "measured",
+   "screens": [
+    "ModifyBrand",
+    "CostOfProduction (report)"
+   ],
+   "sources": [
+    "E-Q1"
+   ]
+  },
+  {
+   "area": "production",
+   "capture": "Q2 settlement (unverified · awaiting Q2 capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "production.design_cost",
+   "kind": "accounting",
+   "maturity": "heuristic",
+   "module": null,
+   "name": "設計與開線費",
+   "next_step": "To verified (accounting): match the Q2 income statement after designing one brand in Q1.",
+   "ours": "Placeholder: design cost per new brand.",
+   "real_note": "Design and setup cost are Q1 brand-screen parameters; when they are charged is unverified.",
+   "real_status": "measured",
+   "screens": [
+    "ModifyBrand"
+   ],
+   "sources": [
+    "E-Q1"
+   ]
+  },
+  {
+   "area": "production",
+   "capture": "Q2+ (unverified · awaiting Q2 capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "production.operating_capacity",
+   "kind": "behaviour",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "營運產能、加班與排班",
+   "next_step": "To heuristic: operating rate below fixed capacity; overtime adds capacity at a premium labour cost.",
+   "ours": "None (usable capacity = fixed capacity).",
+   "real_note": "Operating capacity and overtime screens are registered.",
+   "real_status": "inferred",
+   "screens": [
+    "OperatingCapacity",
+    "Overtime",
+    "ExtFactorySimulation"
+   ],
+   "sources": [
+    "E-REG",
+    "R-GOOSEN1999"
+   ]
+  },
+  {
+   "area": "production",
+   "capture": "Q3+ (unverified · awaiting capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "production.scheduling",
+   "kind": "behaviour",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "生產規則與排程",
+   "next_step": "To heuristic: changeover loss per brand produced, reduced by changeover investment.",
+   "ours": "None (production = planned units, capped by capacity).",
+   "real_note": "Production rules, control system and changeover screens are registered; scheduling is common to business games.",
+   "real_status": "inferred",
+   "screens": [
+    "ProductionRules",
+    "ProductionControlSystem",
+    "ImproveChangeover",
+    "FactoryEfficiency"
+   ],
+   "sources": [
+    "E-REG",
+    "R-GOOSEN1999"
+   ]
+  },
+  {
+   "area": "production",
+   "capture": "Q3+ (unverified · awaiting capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "production.quality",
+   "kind": "behaviour",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "品質、檢驗與重工",
+   "next_step": "To heuristic: defect rate falls with inspection and improvement spend; defects cost warranty and lower the quality term.",
+   "ours": "None (quality is fixed at 1 in the demand chain).",
+   "real_note": "Inspection, rework and corrective-action screens and quality-cost reports are registered; public sources mention product quality.",
+   "real_status": "inferred",
+   "screens": [
+    "InspectQuality",
+    "ComponentRework",
+    "CorrectiveActions",
+    "ImprovementActions",
+    "QualityCosts (report)",
+    "WarrantyCosts (report)"
+   ],
+   "sources": [
+    "E-REG",
+    "P-HALES"
+   ]
+  },
+  {
+   "area": "production",
+   "capture": "Q3+ (unverified · awaiting capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "production.factory_location",
+   "kind": "accounting",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "工廠與倉庫地點",
+   "next_step": "To heuristic: shipping cost per unit by distance band; a second factory adds fixed cost.",
+   "ours": "None (one factory, no location).",
+   "real_note": "Factory and warehouse location screens are registered; public sources mention plant location.",
+   "real_status": "inferred",
+   "screens": [
+    "FactoryLocation",
+    "WarehouseLocation"
+   ],
+   "sources": [
+    "E-REG",
+    "P-HALES"
+   ]
+  },
+  {
+   "area": "supply",
+   "capture": "Q2+ (unverified · awaiting Q2 capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "supply.inventory",
+   "kind": "accounting",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "庫存控制、補貨點與出清",
+   "next_step": "To heuristic: holding cost per unit carried; sell-off at a discount.",
+   "ours": "Unsold units carry over; no holding cost, no replenishment rule.",
+   "real_note": "Inventory control, replenishment and sell-off screens are registered.",
+   "real_status": "inferred",
+   "screens": [
+    "InventoryControl",
+    "TargetReplenishPoint",
+    "SellUnwantedInventory"
+   ],
+   "sources": [
+    "E-REG"
+   ]
+  },
+  {
+   "area": "supply",
+   "capture": "Q3+ (unverified · awaiting capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "supply.purchasing",
+   "kind": "behaviour",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "採購、供應商與合約",
+   "next_step": "To heuristic: volume discount on component price; contract penalties as fixed costs.",
+   "ours": "None (components are bought at list price).",
+   "real_note": "Supply-chain strategy, information system, contract and partner-payment screens are registered.",
+   "real_status": "inferred",
+   "screens": [
+    "SupplyChainStrategy",
+    "SupplyChainInformationSystem",
+    "ConfirmRFP",
+    "ConfirmLongRFP",
+    "PaymentToPartners"
+   ],
+   "sources": [
+    "E-REG"
+   ]
+  },
+  {
+   "area": "supply",
+   "capture": "unknown (unverified)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "supply.lead_time_disruption",
+   "kind": "behaviour",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "前置期與供應中斷",
+   "next_step": "Capture first; model only what a report shows.",
+   "ours": "None. The control plane can apply shocks as scenario events (capacity factor), which is a stress test, not a model.",
+   "real_note": "Risk and cost-trend screens are registered; no lead-time field has been seen.",
+   "real_status": "unknown",
+   "screens": [
+    "Risk* (risk screens)",
+    "CostTrends (report)"
+   ],
+   "sources": [
+    "E-REG"
+   ]
+  },
+  {
+   "area": "rnd",
+   "capture": "Q2+ (unverified · awaiting Q2 capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "rnd.feature_development",
+   "kind": "behaviour",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "研發新功能",
+   "next_step": "To heuristic: charge project cost and make the component available after a fixed delay.",
+   "ours": "Components can carry an availability quarter in the pack; project cost is not charged.",
+   "real_note": "Feature R&D screens are registered; Q1 component data carry an appearance quarter and a project cost.",
+   "real_status": "inferred",
+   "screens": [
+    "FeatureRD",
+    "ConfirmRD"
+   ],
+   "sources": [
+    "E-REG",
+    "E-Q1",
+    "P-HALES"
+   ]
+  },
+  {
+   "area": "finance",
+   "capture": "Q1 (captured)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "finance.cd",
+   "kind": "accounting",
+   "maturity": "verified",
+   "module": null,
+   "name": "定存",
+   "next_step": "Keep (the withdraw term was not varied: re-test when convenient).",
+   "ours": "Balance and interest (cost_model).",
+   "real_note": "Certificate of Deposit is a Q1 decision screen; reproduced by EXP-01.",
+   "real_status": "measured",
+   "screens": [
+    "CD"
+   ],
+   "sources": [
+    "E-Q1",
+    "E-EXP"
+   ]
+  },
+  {
+   "area": "finance",
+   "capture": "Q1 (captured)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "finance.stock",
+   "kind": "accounting",
+   "maturity": "verified",
+   "module": null,
+   "name": "增資（股票）",
+   "next_step": "Keep.",
+   "ours": "Raised = sum(shares x price) (derived identity).",
+   "real_note": "Closely Held Stock is in the Q1 menu; the raise is a view identity.",
+   "real_status": "measured",
+   "screens": [
+    "Stock"
+   ],
+   "sources": [
+    "E-Q1"
+   ]
+  },
+  {
+   "area": "finance",
+   "capture": "Q2+ (unverified · awaiting Q2 capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "finance.loans",
+   "kind": "accounting",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "短期與長期貸款",
+   "next_step": "To heuristic: borrow and repay with an interest rate from the pack; to verified by experiment once the screen opens.",
+   "ours": "None (only the emergency loan).",
+   "real_note": "Short- and long-term loan screens are registered; public sources describe external funding.",
+   "real_status": "inferred",
+   "screens": [
+    "ShortTermLoan",
+    "LongTermLoan"
+   ],
+   "sources": [
+    "E-REG",
+    "P-HALES"
+   ]
+  },
+  {
+   "area": "finance",
+   "capture": "unknown (unverified)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "finance.emergency_loan",
+   "kind": "accounting",
+   "maturity": "heuristic",
+   "module": null,
+   "name": "緊急貸款",
+   "next_step": "To verified (accounting): observe a quarter that ends with negative cash (only if it happens naturally; never forced).",
+   "ours": "Placeholder: covers negative cash; no interest charged.",
+   "real_note": "An emergency-loan rate field appears on the Q1 pro-forma cash flow; the rule was not observed.",
+   "real_status": "measured",
+   "screens": [
+    "ProFormaCashFlow"
+   ],
+   "sources": [
+    "E-Q1"
+   ]
+  },
+  {
+   "area": "finance",
+   "capture": "first profitable settlement (unverified)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "finance.tax",
+   "kind": "accounting",
+   "maturity": "heuristic",
+   "module": null,
+   "name": "所得稅",
+   "next_step": "To verified (accounting): reproduce the tax row of the first profitable quarter's income statement.",
+   "ours": "Placeholder: max(pretax, 0) x tax rate.",
+   "real_note": "A tax-rate field appears on the Q1 pro-forma cash flow; the rule was not observed.",
+   "real_status": "measured",
+   "screens": [
+    "ProFormaCashFlow",
+    "IncomeStatement (report)"
+   ],
+   "sources": [
+    "E-Q1"
+   ]
+  },
+  {
+   "area": "finance",
+   "capture": "Q3+ (unverified · awaiting capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "finance.dividends",
+   "kind": "accounting",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "股利",
+   "next_step": "To heuristic: a cash outflow; to verified by experiment once the screen opens.",
+   "ours": "None.",
+   "real_note": "A Dividends screen is registered; dividends are common to business games.",
+   "real_status": "inferred",
+   "screens": [
+    "Dividends"
+   ],
+   "sources": [
+    "E-REG",
+    "R-GOOSEN1999"
+   ]
+  },
+  {
+   "area": "finance",
+   "capture": "unknown (unverified)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "finance.currency",
+   "kind": "accounting",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "外匯與多幣別資金",
+   "next_step": "Only if a captured course shows it.",
+   "ours": "None (one currency).",
+   "real_note": "Currency fund screen and exchange-rate report are registered (probably international editions only).",
+   "real_status": "inferred",
+   "screens": [
+    "CurrencyFunds",
+    "ExchangeRates (report)"
+   ],
+   "sources": [
+    "E-REG"
+   ]
+  },
+  {
+   "area": "finance",
+   "capture": "unknown (unverified)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "finance.venture_capital",
+   "kind": "behaviour",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "創投募資談判",
+   "next_step": "Capture first; it may be a classroom activity outside the software.",
+   "ours": "Stock issue at a price the player enters.",
+   "real_note": "Described in public teaching sources (business plan and equity negotiation); no matching decision screen has been identified.",
+   "real_status": "inferred",
+   "screens": [],
+   "sources": [
+    "P-HALES"
+   ]
+  },
+  {
+   "area": "accounting",
+   "capture": "Q2 settlement (unverified · awaiting Q2 capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "accounting.cash_flow",
+   "kind": "accounting",
+   "maturity": "heuristic",
+   "module": null,
+   "name": "現金流量與損益表",
+   "next_step": "To verified (accounting): reproduce every row of the Q2 statements; then each placeholder row above can be promoted.",
+   "ours": "Simplified chain: revenue, interest and expenses into pretax, tax, net income and cash; it takes the weakest level of its rows.",
+   "real_note": "Pro-forma cash flow and income statement are in the Q1 menu (no what-if path).",
+   "real_status": "measured",
+   "screens": [
+    "ProFormaCashFlow",
+    "ProFormaIncomeStatement",
+    "IncomeStatement (report)",
+    "CashFlow (report)"
+   ],
+   "sources": [
+    "E-Q1"
+   ]
+  },
+  {
+   "area": "accounting",
+   "capture": "Q1 (captured)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "accounting.balance_sheet",
+   "kind": "accounting",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "資產負債表",
+   "next_step": "To verified (accounting): build the sheet from state and reproduce the Q1/Q2 rows.",
+   "ours": "None (state keeps cash, CD, capacity, stock, inventory, but no balance sheet).",
+   "real_note": "Pro-forma balance sheet is in the Q1 menu.",
+   "real_status": "measured",
+   "screens": [
+    "ProFormaBalanceSheet",
+    "BalanceSheet (report)"
+   ],
+   "sources": [
+    "E-Q1"
+   ]
+  },
+  {
+   "area": "market",
+   "capture": "Q2 settlement (unverified · awaiting Q2 capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "market.rival_behaviour",
+   "kind": "scenario",
+   "maturity": "heuristic",
+   "module": null,
+   "name": "對手行為",
+   "next_step": "To verified: replay captured rival offers (control-plane replay) from Q2 on; bots stay as what-if assumptions.",
+   "ours": "Bots with fixed rules (BaselineBot, RandomBot, price factors) chosen as opponents; a replay of real rival offers is reserved for the private Q2+ panel. Results are conditional on the chosen rivals.",
+   "real_note": "Rivals are other teams; competitor reports are registered.",
+   "real_status": "measured",
+   "screens": [
+    "Competitors* (reports)",
+    "CompetitorAnalysis"
+   ],
+   "sources": [
+    "E-REG"
+   ]
+  },
+  {
+   "area": "market",
+   "capture": "Q2 (unverified · awaiting Q2 capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "market.potential_growth",
+   "kind": "behaviour",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "市場潛量成長與季節性",
+   "next_step": "Capture the Q2 market-size screen and compare; model growth only from observed change.",
+   "ours": "Constant: quarterly potential = 12-month size / 4 every quarter.",
+   "real_note": "Q1 market potential is a captured parameter; how it changes over quarters is unknown. An economic-index report is registered.",
+   "real_status": "unknown",
+   "screens": [
+    "MarketSize",
+    "EconomicIndexes (report)"
+   ],
+   "sources": [
+    "E-Q1",
+    "E-REG"
+   ]
+  },
+  {
+   "area": "strategy",
+   "capture": "Q2+ (unverified · awaiting Q2 capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "planning.demand_projection",
+   "kind": "information",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "需求預測與產銷規劃工具",
+   "next_step": "No engine change needed; a UI aid only.",
+   "ours": "The preview (calculate) shows the engine's own result instead.",
+   "real_note": "Demand projection and factory simulation screens are registered; public sources describe a demand forecast by brand.",
+   "real_status": "inferred",
+   "screens": [
+    "DemandProjection",
+    "FactorySimulation",
+    "ProFormaDivisionProfitability"
+   ],
+   "sources": [
+    "E-REG",
+    "P-HALES"
+   ]
+  },
+  {
+   "area": "strategy",
+   "capture": "Q1 (captured)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "strategy.planning_statements",
+   "kind": "qualitative",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "策略規劃（使命、文化、策略主軸、戰術連結）",
+   "next_step": "Keep out of the numbers unless a captured report shows a numeric effect; at most feed a scorecard.",
+   "ours": "None.",
+   "real_note": "Mission, culture, objectives, strategic thrusts and tactic-strategy links are Q1 decision screens (text and choices).",
+   "real_status": "measured",
+   "screens": [
+    "Mission",
+    "Culture",
+    "Problem",
+    "CorporateObjectives",
+    "StrategicThrusts*",
+    "TacticStrategyLinks*",
+    "BasesCompetitiveAdvantage"
+   ],
+   "sources": [
+    "E-Q1",
+    "P-HALES"
+   ]
+  },
+  {
+   "area": "strategy",
+   "capture": "Q1 (captured)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "strategy.team_organization",
+   "kind": "qualitative",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "團隊組織（職責、規範、個人目標）",
+   "next_step": "Keep out of the numbers.",
+   "ours": "None.",
+   "real_note": "Executive responsibilities, team norms and personal goals are Q1 decision screens.",
+   "real_status": "measured",
+   "screens": [
+    "ExecutiveResponsibilities",
+    "TeamNorms",
+    "PersonalGoals"
+   ],
+   "sources": [
+    "E-Q1"
+   ]
+  },
+  {
+   "area": "strategy",
+   "capture": "Q3+ (unverified · awaiting capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "strategy.competitor_and_risk_analysis",
+   "kind": "qualitative",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "競爭、夥伴與風險分析",
+   "next_step": "Keep out of the numbers.",
+   "ours": "None.",
+   "real_note": "Competitor, partner, SWOT and risk screens are registered.",
+   "real_status": "inferred",
+   "screens": [
+    "CompetitorAnalysis",
+    "PartnerAnalysis",
+    "SWOTAnalysis",
+    "Risk* (risk screens)"
+   ],
+   "sources": [
+    "E-REG"
+   ]
+  },
+  {
+   "area": "strategy",
+   "capture": "Q1 settlement (unverified · awaiting capture)",
+   "coefficients": null,
+   "decidable": false,
+   "decisions": [],
+   "implementation": null,
+   "key": "strategy.balanced_scorecard",
+   "kind": "information",
+   "maturity": "not-modeled",
+   "module": null,
+   "name": "平衡計分卡與排名",
+   "next_step": "To heuristic: a weighted score of the report lines, weights labelled as practice; to verified only from captured scorecards.",
+   "ours": "Game mode follows one objective (cash, share or profit).",
+   "real_note": "Scorecard and standing reports are registered; public sources describe a cumulative balanced scorecard.",
+   "real_status": "inferred",
+   "screens": [
+    "BalancedScorecard",
+    "CumulativeBalancedScorecard",
+    "PlayersStanding"
+   ],
+   "sources": [
+    "E-REG",
+    "P-HALES",
+    "P-IMPERIAL",
+    "R-CAPSIM"
+   ]
+  }
+ ],
+ "provenance": "public ledger (structure and maturity only)",
+ "rules": [
+  "Structure and maturity only. No game values, no market data, no fitted coefficients.",
+  "real_status: measured = seen in the captured Q1 menu or reproduced by an experiment; inferred = a client screen is registered but was not seen in Q1, and/or a public teaching source describes it (unverified until captured); unknown = no evidence either way.",
+  "Anything inferred stays 'unverified, awaiting capture' until a later quarter is captured.",
+  "Downstream numbers always take the weakest maturity of their inputs."
+ ],
+ "schema": "marketplace-sim/modeling-ledger@1",
+ "sources": {
+  "E-EXP": "Controlled experiments EXP-01, EXP-02, EXP-11, EXP-12 (docs/experiments/).",
+  "E-Q1": "Captured Q1 menu (docs/module-map.md section 1): screen names only.",
+  "E-REG": "Client screen registry (docs/module-map.md section 2; field names in docs/decision-catalog.md): the screen exists in the delivered client; whether a course shows it, and when, is unverified.",
+  "L-ALBERS2010": "Albers, S., Mantrala, M.K. & Sridhar, S. (2010). Personal selling elasticities: a meta-analysis. Journal of Marketing Research 47(5), 840-853 (mean about 0.31 after method correction).",
+  "L-ARTHUR2003": "Arthur, W. Jr., Bennett, W., Edens, P.S. & Bell, S.T. (2003). Effectiveness of training in organizations: a meta-analysis. Journal of Applied Psychology 88(2), 234-245 (general training, not sales-specific).",
+  "L-CLARKE1976": "Clarke, D.G. (1976). Econometric measurement of the duration of advertising effect on sales. Journal of Marketing Research 13, 345-357.",
+  "L-COUGHLAN1992": "Coughlan, A.T. & Narasimhan, C. (1992). An empirical analysis of sales-force compensation plans. Journal of Business 65(1), 93-121.",
+  "L-DEMAND": "docs/demand-literature.md (sources of the literature demand chain: multinomial logit / MCI attraction, outside option, distribution elasticity).",
+  "L-GRIFFETH2000": "Griffeth, R.W., Hom, P.W. & Gaertner, S. (2000). A meta-analysis of antecedents and correlates of employee turnover. Journal of Management 26(3), 463-488 (pay satisfaction: direction only).",
+  "L-KOHLER2017": "Kohler, C., Mantrala, M.K., Albers, S. & Kanuri, V.K. (2017). A meta-analysis of marketing communication carryover effects. Journal of Marketing Research 54(6), 990-1008.",
+  "L-LITTLE1970": "Little, J.D.C. (1970). Models and managers: the concept of a decision calculus. Management Science 16(8), B466-B485 (ADBUDG).",
+  "L-LODISH1971": "Lodish, L.M. (1971). CALLPLAN: an interactive salesman's call planning system. Management Science 18(4-II), P25-P40.",
+  "L-LUCAS1987": "Lucas, G.H., Parasuraman, A., Davis, R.A. & Enis, B.M. (1987). An empirical study of salesforce turnover. Journal of Marketing 51(3), 34-59.",
+  "L-NAIK2003": "Naik, P.A. & Raman, K. (2003). Understanding the impact of synergy in multimedia communications. Journal of Marketing Research 40(4), 375-388.",
+  "L-SETHURAMAN2011": "Sethuraman, R., Tellis, G.J. & Briesch, R. (2011). How well does advertising work? Generalizations from meta-analysis of brand advertising elasticities. Journal of Marketing Research 48(3), 457-471 (mean short-term 0.12, long-term 0.24).",
+  "L-VAKRATSAS2004": "Vakratsas, D., Feinberg, F.M., Bass, F.M. & Kalyanaram, G. (2004). The shape of advertising response functions revisited. Marketing Science 23(1), 109-119.",
+  "L-ZOLTNERS2004": "Zoltners, A.A., Sinha, P. & Lorimer, S.E. (2004). Sales Force Design for Strategic Advantage. Palgrave Macmillan.",
+  "P-HALES": "Hales, C. Syllabus 'Managerial Game (Business Management)', University of Rzeszow, using Cadotte, The Business Management Simulation (2005) and Cadotte & Bruce, The Management of Strategy in the Marketplace (2008). https://www.ur.edu.pl/files/ur/import/Import/2012/7/MANAGERIAL-GAME-(BUSINESS-MANAGEMENT).pdf",
+  "P-IMPERIAL": "Imperial College London, Educational Development Unit, case study 'Business Simulation'. https://www.imperial.ac.uk/staff/educational-development/teaching-toolkit/anatomy-of-assessment/case-studies/business-simulation/",
+  "P-JAMS2003": "Book review of The Marketplace Game, Journal of the Academy of Marketing Science, Winter 2003 (reviewer attribution unclear; partially verified).",
+  "R-CAPSIM": "Capsim, Capstone team member guide, 'Company Departments' (public guide): R&D, marketing, production, finance; optional HR and TQM modules feeding a balanced scorecard.",
+  "R-FARIA2009": "Faria, A.J., Hutchinson, D., Wellington, W.J. & Gold, S. (2009). Developments in business gaming: a review of the past 40 years. Simulation & Gaming 40(4), 464-487.",
+  "R-GOOSEN1999": "Goosen, K.R., Jensen, R. & Wells, R.A. (1999). Purpose and learning benefits of business simulations: a design and development perspective. Developments in Business Simulation and Experiential Learning 26 (reports Keys & Biggs 1990: price, R&D and production scheduling common to all ten games compared).",
+  "R-KEYS1990": "Keys, B. & Wolfe, J. (1990). The role of management games and simulations in education and research. Journal of Management 16(2), 307-336.",
+  "R-MARKSTRAT": "StratX, Markstrat public description: brand portfolio, R&D projects, production, price, advertising, sales force size and channel allocation, market research."
+ },
+ "title": "Modeling ledger: every business function of a full company simulation, and how far this engine is from it"
+}

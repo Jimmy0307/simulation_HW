@@ -36,13 +36,14 @@ SYNTHETIC_SCENARIOS = ROOT / "examples" / "scenarios"
 SYNTHETIC_SWEEPS = ROOT / "examples" / "demo-control"
 SYNTHETIC_PLANS = ROOT / "examples" / "demo"
 PRIVATE_ROOT = ROOT / "evidence" / "private"
-UNCALIBRATED = {Level.LITERATURE, Level.PLACEHOLDER}
+UNCALIBRATED = {Level.LITERATURE, Level.PLACEHOLDER, Level.HEURISTIC}
 LEVEL_MEANING = {
     Level.VERIFIED: "Reproduced against measured server results with zero residual.",
     Level.DERIVED: "Follows directly from published parameters (exact identity).",
     Level.ESTIMATED: "Fitted to this game's data and validated on a held-out quarter.",
     Level.LITERATURE: "Functional form from published literature; coefficients not calibrated on this game. Not a forecast.",
     Level.PLACEHOLDER: "Illustrative, uncalibrated. Not a forecast.",
+    Level.HEURISTIC: "Practice rule from general business sense (business module): no literature, no calibration. Direction only; never a forecast.",
 }
 
 
@@ -56,15 +57,30 @@ def _is_private_path(path: Path) -> bool:
 
 # --- decoration (presentation metadata only) -------------------------------------------------------------------------
 
-def decorate_line(name: str, line: dict[str, Any]) -> dict[str, Any]:
+# Business-module lines: only shown in a source chain when the report has them (the module was active).
+_MODULE_LINES = {"ad_efficiency", "effective_advertising", "selling_effort"}
+
+
+def decorate_line(name: str, line: dict[str, Any], present: set[str] | None = None) -> dict[str, Any]:
     level = Level[str(line["level"]).upper()]
     return {**line, "mark": level.mark, "uncalibrated": level in UNCALIBRATED,
             "chain": [{"metric": c.name, "level": c.level.label, "formula": c.formula, "evidence": c.evidence,
-                       "note": c.note} for c in chain(name)]}
+                       "note": c.note} for c in chain(name, present)]}
 
 
 def decorate_lines(lines: dict[str, dict[str, Any]]) -> dict[str, dict[str, Any]]:
-    return {name: decorate_line(name, line) for name, line in lines.items()}
+    bases = {n.split("[", 1)[0] for n in lines}
+    # Upstream rows a report never carries as lines (e.g. unit_cost is per brand) stay; only module rows are filtered.
+    present = {name for name in _all_metric_bases() if name in bases or not _is_module_metric(name)}
+    return {name: decorate_line(name, line, present) for name, line in lines.items()}
+
+
+def _all_metric_bases() -> set[str]:
+    return {key.split("[", 1)[0] for key in METRICS}
+
+
+def _is_module_metric(base: str) -> bool:
+    return base in _MODULE_LINES or base.startswith("sales_force_")
 
 
 def report_dict(report: Report) -> dict[str, Any]:
@@ -85,6 +101,13 @@ def levels() -> dict[str, Any]:
                         "meaning": LEVEL_MEANING[lv]} for lv in sorted(Level, reverse=True)],
             "metrics": [{"metric": name, "level": info.level.label, "formula": info.formula, "evidence": info.evidence,
                          "note": info.note, "inputs": list(info.inputs)} for name, info in METRICS.items()]}
+
+
+def modules_catalog() -> dict[str, Any]:
+    """The modeling ledger (structure and maturity only, no values) plus which modules can be decided now."""
+    from marketplace_sim.business import catalog
+
+    return {**catalog(), "is_private": False, "provenance": "public ledger (structure and maturity only)"}
 
 
 def explain(metric: str) -> dict[str, Any]:

@@ -58,11 +58,44 @@ METRICS: dict[str, MetricInfo] = {m.name: m for m in [
     MetricInfo("cash_end", Level.PLACEHOLDER, "cash_start + inflows - outflows + emergency_loan",
                "VERIFIED only if every component is"),
     MetricInfo("fixed_capacity_next_quarter", Level.DERIVED, "current + increase", "capacity screen 'next quarter' row"),
+    # business modules (marketplace_sim.business): HEURISTIC practice rules, see docs/modeling-ledger.md
+    MetricInfo("ad_efficiency[brand]", Level.HEURISTIC, "(sum w_m sqrt(share_m))^2 / sum w_m^2 (media mix)",
+               "src/marketplace_sim/business/marketing.py", "Practice rule: no literature, no calibration."),
+    MetricInfo("effective_advertising[brand]", Level.HEURISTIC, "advertising x ad_efficiency",
+               "src/marketplace_sim/business/marketing.py", "Enters the demand chain instead of the raw budget."),
+    MetricInfo("sales_force_headcount", Level.HEURISTIC, "plan input; hiring assumed instant",
+               "src/marketplace_sim/business/sales_force.py"),
+    MetricInfo("sales_force_hires", Level.HEURISTIC, "max(headcount - carried headcount, 0)",
+               "src/marketplace_sim/business/sales_force.py"),
+    MetricInfo("sales_force_skill", Level.HEURISTIC, "training stock with decay, 0..1",
+               "src/marketplace_sim/business/sales_force.py", "Practice rule: no literature, no calibration."),
+    MetricInfo("selling_effort", Level.HEURISTIC, "1 + max_lift x (1 - exp(-force per market / scale))",
+               "src/marketplace_sim/business/sales_force.py", "Multiplies the attraction of our offers."),
+    MetricInfo("sales_force_quit_rate", Level.HEURISTIC, "base quit x exp(-sensitivity x (pay index - 1)), bounded",
+               "src/marketplace_sim/business/sales_force.py", "Practice rule: no literature, no calibration."),
+    MetricInfo("sales_force_departures", Level.HEURISTIC, "headcount x quit rate",
+               "src/marketplace_sim/business/sales_force.py"),
+    MetricInfo("sales_force_salaries", Level.HEURISTIC, "headcount x salary", "src/marketplace_sim/business/sales_force.py"),
+    MetricInfo("sales_force_hiring", Level.HEURISTIC, "hires x hire cost + layoffs x severance",
+               "src/marketplace_sim/business/sales_force.py"),
+    MetricInfo("sales_force_training", Level.HEURISTIC, "headcount x training per person",
+               "src/marketplace_sim/business/sales_force.py"),
+    MetricInfo("sales_force_commission", Level.HEURISTIC, "revenue x commission %",
+               "src/marketplace_sim/business/sales_force.py"),
 ]}
 
 
-_OPEX = ("store_setup", "web_center_setup", "outlet_lease", "design_cost", "production_cost", "advertising")
+_MODULE_OPEX = ("sales_force_salaries", "sales_force_hiring", "sales_force_training", "sales_force_commission")
+_OPEX = ("store_setup", "web_center_setup", "outlet_lease", "design_cost", "production_cost", "advertising", *_MODULE_OPEX)
 INPUTS: dict[str, tuple[str, ...]] = {
+    "effective_advertising[brand]": ("advertising", "ad_efficiency[brand]"),
+    "units_demanded[brand]": ("effective_advertising[brand]", "selling_effort"),
+    "selling_effort": ("sales_force_headcount", "sales_force_skill"),
+    "sales_force_departures": ("sales_force_headcount", "sales_force_quit_rate"),
+    "sales_force_salaries": ("sales_force_headcount",),
+    "sales_force_hiring": ("sales_force_hires",),
+    "sales_force_training": ("sales_force_headcount",),
+    "sales_force_commission": ("revenue",),
     "cd_interest": ("cd_balance",),
     "production_cost": ("unit_cost[brand]",),
     "units_sold[brand]": ("units_demanded[brand]",),
@@ -81,14 +114,20 @@ INPUTS: dict[str, tuple[str, ...]] = {
 METRICS = {k: (MetricInfo(v.name, v.level, v.formula, v.evidence, v.note, INPUTS.get(k, ()))) for k, v in METRICS.items()}
 
 
-def chain(name: str) -> list[MetricInfo]:
-    """The metric and everything upstream of it (depth-first, each once): the full source chain of a report line."""
+def chain(name: str, present: set[str] | None = None) -> list[MetricInfo]:
+    """The metric and everything upstream of it (depth-first, each once): the full source chain of a report line.
+
+    ``present``: base names of the lines in the same report. Upstream metrics absent from it are skipped, so an
+    inactive business module never shows up in a chain.
+    """
     out: list[MetricInfo] = []
     seen: set[str] = set()
 
     def walk(metric: str) -> None:
         info = lookup(metric)
         if info is None or info.name in seen:
+            return
+        if present is not None and out and info.name.split("[", 1)[0] not in present:
             return
         seen.add(info.name)
         out.append(info)

@@ -13,6 +13,7 @@ from enum import IntEnum
 class Level(IntEnum):
     """Higher is stronger. Ordering is used to take the weakest level of a combination."""
 
+    HEURISTIC = -1  # practice rule from general business sense: no literature, no calibration (business modules)
     PLACEHOLDER = 0  # illustrative, uncalibrated
     LITERATURE = 1  # functional form backed by published literature; coefficients not calibrated on this game
     ESTIMATED = 2  # fitted to observed data (e.g. a demand model)
@@ -22,7 +23,7 @@ class Level(IntEnum):
     @property
     def mark(self) -> str:
         return {Level.VERIFIED: "V", Level.DERIVED: "D", Level.ESTIMATED: "E", Level.LITERATURE: "L",
-                Level.PLACEHOLDER: "P"}[self]
+                Level.PLACEHOLDER: "P", Level.HEURISTIC: "H"}[self]
 
     @property
     def label(self) -> str:

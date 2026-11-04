@@ -61,7 +61,8 @@ def build_bundle() -> dict[str, Any]:
     session = svc.Session()
     if session.is_private:
         raise svc.ApiError("demo export uses the synthetic pack only")
-    bundle: dict[str, Any] = {"pack": svc.pack_info(session), "levels": svc.levels(), "events": svc.event_types()}
+    bundle: dict[str, Any] = {"pack": svc.pack_info(session), "levels": svc.levels(), "events": svc.event_types(),
+                              "modules": svc.modules_catalog()}
     svc.new_game(session)
     for name in DEMO_QUARTERS:
         svc.play(session, _plan(svc.SYNTHETIC_PLANS / name))

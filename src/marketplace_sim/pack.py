@@ -124,6 +124,7 @@ class ParamPack:
     production: dict[str, float]
     path: Path | None = None
     demand: dict[str, Any] = field(default_factory=dict)  # demand model choice and coefficient overrides
+    modules: dict[str, Any] = field(default_factory=dict)  # business-module coefficient overrides (marketplace_sim.business)
 
     def segment(self, segment_id: str) -> Segment:
         return next(s for s in self.segments if s.id == segment_id)
@@ -167,6 +168,7 @@ def pack_from_dict(data: dict[str, Any], path: Path | None = None) -> ParamPack:
         production={k: float(v) for k, v in data.get("production", {}).items()},
         path=path,
         demand=dict(data.get("demand") or {}),
+        modules=dict(data.get("modules") or {}),
     )
 
 

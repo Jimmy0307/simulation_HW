@@ -1,0 +1,35 @@
+{
+ "schema": "marketplace-sim/module-defaults@1",
+ "note": "Labelled practice defaults for HEURISTIC business modules. Invented from general business sense to give the right direction; no literature source, no calibration on any game. Not a forecast. A parameter pack may override any key under modules.<key>.",
+ "modules": {
+  "marketing.media_mix": {
+   "maturity": "heuristic",
+   "coefficients": {
+    "media_weights": {"local": 1.0, "regional": 0.9, "social": 0.8, "search": 0.7}
+   },
+   "why": "Relative reach weight per medium; equal-ish weights make a spread budget more effective than one medium."
+  },
+  "sales_force": {
+   "maturity": "heuristic",
+   "coefficients": {
+    "initial_headcount": 0,
+    "max_headcount": 200,
+    "reference_salary": 6000,
+    "reference_commission_pct": 3,
+    "commission_weight": 0.3,
+    "base_quit": 0.15,
+    "pay_sensitivity": 1.5,
+    "min_quit": 0.02,
+    "max_quit": 0.6,
+    "hire_cost": 2000,
+    "severance_cost": 3000,
+    "training_scale": 1500,
+    "skill_decay": 0.2,
+    "skill_bonus": 0.5,
+    "max_lift": 0.6,
+    "force_scale": 3
+   },
+   "why": "Scale chosen for the synthetic pack's price level: a handful of salespeople per open market moves demand noticeably, a large force saturates."
+  }
+ }
+}

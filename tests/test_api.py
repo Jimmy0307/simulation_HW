@@ -95,7 +95,7 @@ def test_diff_and_levels(client: TestClient) -> None:
     assert body["is_private"] is False and body["values_included"] is True
     assert any(c["needs_reverification"] for c in body["changes"]) and body["red_flags"]
     levels = client.get("/api/levels").json()
-    assert levels["order"] == ["verified", "derived", "estimated", "literature", "placeholder"]
+    assert levels["order"] == ["verified", "derived", "estimated", "literature", "placeholder", "heuristic"]
     explained = client.get("/api/explain/market_share").json()
     assert explained["level"] == "literature" and len(explained["chain"]) > 1
 

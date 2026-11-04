@@ -5,7 +5,8 @@ from __future__ import annotations
 import html
 from typing import Any
 
-LEVEL_CLASS = {"verified": "lv-v", "derived": "lv-d", "estimated": "lv-e", "literature": "lv-l", "placeholder": "lv-p"}
+LEVEL_CLASS = {"verified": "lv-v", "derived": "lv-d", "estimated": "lv-e", "literature": "lv-l", "placeholder": "lv-p",
+               "heuristic": "lv-h"}
 CSS = """
 :root{--bg:#fbfaf7;--fg:#1f2328;--muted:#5b6470;--grid:#d9dde3;--card:#ffffff;
 --v:#1a7f37;--d:#0b62c4;--e:#a16207;--l:#8250df;--p:#b42318;--line:#0b62c4;--line2:#7c3aed;--ev:#b42318}

@@ -34,6 +34,13 @@
    "meaning": "Illustrative, uncalibrated. Not a forecast.",
    "rank": 0,
    "uncalibrated": true
+  },
+  {
+   "label": "heuristic",
+   "mark": "H",
+   "meaning": "Practice rule from general business sense (business module): no literature, no calibration. Direction only; never a forecast.",
+   "rank": -1,
+   "uncalibrated": true
   }
  ],
  "metrics": [
@@ -148,7 +155,10 @@
   {
    "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
    "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
-   "inputs": [],
+   "inputs": [
+    "effective_advertising[brand]",
+    "selling_effort"
+   ],
    "level": "literature",
    "metric": "units_demanded[brand]",
    "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
@@ -224,7 +234,11 @@
     "outlet_lease",
     "design_cost",
     "production_cost",
-    "advertising"
+    "advertising",
+    "sales_force_salaries",
+    "sales_force_hiring",
+    "sales_force_training",
+    "sales_force_commission"
    ],
    "level": "placeholder",
    "metric": "operating_profit_before_tax",
@@ -266,7 +280,11 @@
     "outlet_lease",
     "design_cost",
     "production_cost",
-    "advertising"
+    "advertising",
+    "sales_force_salaries",
+    "sales_force_hiring",
+    "sales_force_training",
+    "sales_force_commission"
    ],
    "level": "placeholder",
    "metric": "emergency_loan",
@@ -288,7 +306,11 @@
     "outlet_lease",
     "design_cost",
     "production_cost",
-    "advertising"
+    "advertising",
+    "sales_force_salaries",
+    "sales_force_hiring",
+    "sales_force_training",
+    "sales_force_commission"
    ],
    "level": "placeholder",
    "metric": "cash_end",
@@ -303,6 +325,119 @@
    "level": "derived",
    "metric": "fixed_capacity_next_quarter",
    "note": ""
+  },
+  {
+   "evidence": "src/marketplace_sim/business/marketing.py",
+   "formula": "(sum w_m sqrt(share_m))^2 / sum w_m^2 (media mix)",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "ad_efficiency[brand]",
+   "note": "Practice rule: no literature, no calibration."
+  },
+  {
+   "evidence": "src/marketplace_sim/business/marketing.py",
+   "formula": "advertising x ad_efficiency",
+   "inputs": [
+    "advertising",
+    "ad_efficiency[brand]"
+   ],
+   "level": "heuristic",
+   "metric": "effective_advertising[brand]",
+   "note": "Enters the demand chain instead of the raw budget."
+  },
+  {
+   "evidence": "src/marketplace_sim/business/sales_force.py",
+   "formula": "plan input; hiring assumed instant",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "sales_force_headcount",
+   "note": ""
+  },
+  {
+   "evidence": "src/marketplace_sim/business/sales_force.py",
+   "formula": "max(headcount - carried headcount, 0)",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "sales_force_hires",
+   "note": ""
+  },
+  {
+   "evidence": "src/marketplace_sim/business/sales_force.py",
+   "formula": "training stock with decay, 0..1",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "sales_force_skill",
+   "note": "Practice rule: no literature, no calibration."
+  },
+  {
+   "evidence": "src/marketplace_sim/business/sales_force.py",
+   "formula": "1 + max_lift x (1 - exp(-force per market / scale))",
+   "inputs": [
+    "sales_force_headcount",
+    "sales_force_skill"
+   ],
+   "level": "heuristic",
+   "metric": "selling_effort",
+   "note": "Multiplies the attraction of our offers."
+  },
+  {
+   "evidence": "src/marketplace_sim/business/sales_force.py",
+   "formula": "base quit x exp(-sensitivity x (pay index - 1)), bounded",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "sales_force_quit_rate",
+   "note": "Practice rule: no literature, no calibration."
+  },
+  {
+   "evidence": "src/marketplace_sim/business/sales_force.py",
+   "formula": "headcount x quit rate",
+   "inputs": [
+    "sales_force_headcount",
+    "sales_force_quit_rate"
+   ],
+   "level": "heuristic",
+   "metric": "sales_force_departures",
+   "note": ""
+  },
+  {
+   "evidence": "src/marketplace_sim/business/sales_force.py",
+   "formula": "headcount x salary",
+   "inputs": [
+    "sales_force_headcount"
+   ],
+   "level": "heuristic",
+   "metric": "sales_force_salaries",
+   "note": ""
+  },
+  {
+   "evidence": "src/marketplace_sim/business/sales_force.py",
+   "formula": "hires x hire cost + layoffs x severance",
+   "inputs": [
+    "sales_force_hires"
+   ],
+   "level": "heuristic",
+   "metric": "sales_force_hiring",
+   "note": ""
+  },
+  {
+   "evidence": "src/marketplace_sim/business/sales_force.py",
+   "formula": "headcount x training per person",
+   "inputs": [
+    "sales_force_headcount"
+   ],
+   "level": "heuristic",
+   "metric": "sales_force_training",
+   "note": ""
+  },
+  {
+   "evidence": "src/marketplace_sim/business/sales_force.py",
+   "formula": "revenue x commission %",
+   "inputs": [
+    "revenue"
+   ],
+   "level": "heuristic",
+   "metric": "sales_force_commission",
+   "note": ""
   }
  ],
  "order": [
@@ -310,6 +445,7 @@
   "derived",
   "estimated",
   "literature",
-  "placeholder"
+  "placeholder",
+  "heuristic"
  ]
 }

@@ -68,6 +68,7 @@
     "Alpha-1": 79.72596172218698,
     "Gamma-1": 94.71452025045568
    },
+   "module_state": {},
    "pending_capacity_units": 0.0,
    "quarter": 4,
    "shares_total": 48611.0,
@@ -865,6 +866,7 @@
    "cd": 0.0,
    "fixed_capacity_units": 0.0,
    "inventory": {},
+   "module_state": {},
    "pending_capacity_units": 0.0,
    "quarter": 1,
    "shares_total": 0.0,
@@ -909,6 +911,7 @@
      "cd": 0.0,
      "fixed_capacity_units": 0.0,
      "inventory": {},
+     "module_state": {},
      "pending_capacity_units": 0.0,
      "quarter": 1,
      "shares_total": 0.0,
@@ -3247,6 +3250,7 @@
      "inventory": {
       "Alpha-1": 0.0
      },
+     "module_state": {},
      "pending_capacity_units": 0.0,
      "quarter": 2,
      "shares_total": 48611.0,
@@ -5779,6 +5783,7 @@
       "Alpha-1": 0.0,
       "Gamma-1": 73.61074500566261
      },
+     "module_state": {},
      "pending_capacity_units": 0.0,
      "quarter": 3,
      "shares_total": 48611.0,

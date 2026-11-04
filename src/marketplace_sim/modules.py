@@ -116,6 +116,7 @@ class Offer:
     quality: float = 1.0  # 0..1 product quality multiplier on fit (literature demand)
     ad_stock: float | None = None  # goodwill stock; None = steady state of `advertising`
     coverage: tuple[tuple[str, float], ...] = ()  # (market, distribution intensity 0..1); empty = 1 in `markets`
+    effort: float = 1.0  # selling-effort multiplier on attraction (business module sales_force; 1 = no module)
 
     def coverage_in(self, market: str) -> float:
         if self.coverage:
@@ -147,7 +148,7 @@ class PlaceholderDemand:
                 if not present or cell.wtp <= 0:
                     continue
                 weights = [o.fit * math.exp(3 * (cell.wtp - o.price) / cell.wtp)
-                           * (1 + 0.1 * math.log1p(max(o.advertising, 0) / 1000)) for o in present]
+                           * (1 + 0.1 * math.log1p(max(o.advertising, 0) / 1000)) * o.effort for o in present]
                 denominator = 1 + sum(weights)
                 for offer, weight in zip(present, weights, strict=True):
                     key = (offer.firm, offer.brand)
