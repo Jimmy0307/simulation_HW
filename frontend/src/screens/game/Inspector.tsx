@@ -212,7 +212,8 @@ function ModulesPanel({ draft, preview, readOnly, onChange, setup, catalog }: Co
     <div data-testid="modules-panel">
       <p className="sheet-status">依可信度分組。練習規則可以調，但結果只能看方向；待建的還不能調。</p>
       <ModuleBoard catalog={catalog} decisions={draft.modules} onChange={readOnly ? undefined : (modules) => onChange({ ...draft, modules })}
-        brands={draft.products.map((p) => ({ name: p.name, advertising: p.advertising }))} carried={setup.state?.module_state}
+        brands={draft.products.map((p) => ({ name: p.name, advertising: p.advertising, inventory: setup.state?.inventory[p.name] ?? 0 }))}
+        carried={setup.state?.module_state}
         lines={preview?.lines} render={(line, label, format) => <Figure line={line} label={label} format={format} />} />
     </div>
   );

@@ -443,4 +443,20 @@ tr.worst td { background: color-mix(in srgb, var(--danger) 8%, transparent); }
 .ledger-legend dd { margin: 0; }
 @media (max-width: 900px) { .ledger-layout.with-detail { grid-template-columns: 1fr; } .ledger-detail { position: static; } }
 @media (prefers-reduced-motion: reduce) { .practice-tip { transition: none; } }
+/* --- round 2: literature levers, before/after ladder ------------------------------------------------------------------ */
+.lit-mark { display: inline-block; font-size: 11px; font-weight: 600; color: var(--muted); padding: 1px 5px; border-radius: 5px;
+  border: 1px dashed var(--m-literature); white-space: nowrap; vertical-align: middle; }
+.lit-banner { display: flex; gap: 10px; align-items: flex-start; margin: 8px 0 8px; padding: 8px 11px; border-radius: 10px;
+  border: 1px dashed var(--m-literature); background: var(--surface); font-size: 13px; line-height: 1.5; }
+.mod-editor.lit { border: 1.5px solid var(--m-literature); }
+.slider-head .practice-badge, .slider-head .lit-mark { margin-left: 4px; }
+.mod-tiers { font-size: 12px; margin: 6px 0 0; }
+.ladder-row { display: grid; grid-template-columns: minmax(7em, 11em) 1fr; gap: 10px; align-items: center; margin: 6px 0; }
+.ladder-label { font-size: 12.5px; color: var(--muted); }
+.ladder-row[data-testid="ladder-previous"] .ladder-bar { height: 12px; opacity: .55; }
+.ladder-delta { margin-left: 6px; font-size: 11.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.ladder-delta.moved { color: var(--text); font-weight: 700; }
+.ladder-note { font-size: 12px; margin: 6px 0 0; }
+#ledger-ranges code, [data-testid="ledger-ranges"] code { margin-right: 8px; }
+@media (max-width: 640px) { .ladder-row { grid-template-columns: 1fr; gap: 2px; } }
 `;

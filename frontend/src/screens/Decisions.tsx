@@ -135,7 +135,7 @@ export function Decisions({ provider, onPlayed }: { provider: DataProvider; onPl
           <p className="muted">練習規則（heuristic）可以在這裡調；已驗證與文獻等級的杆在上面的產能、通路、品牌欄；待建的模組鎖定，點一下看原因。完整總表見「模組成熟度」。</p>
           <ModuleBoard catalog={catalog.data} decisions={plan.modules ?? {}}
             onChange={provider.canCompute ? (modules) => update({ modules: Object.keys(modules).length ? modules : undefined }) : undefined}
-            brands={(plan.brands ?? []).map((b) => ({ name: b.name, advertising: b.advertising ?? 0 }))}
+            brands={(plan.brands ?? []).map((b) => ({ name: b.name, advertising: b.advertising ?? 0, inventory: game.data?.state?.inventory[b.name] ?? 0 }))}
             carried={game.data?.state?.module_state} lines={report?.lines}
             render={(line, label, format) => <Num line={line} label={label} digits={format === "percent" ? 3 : undefined} />} />
         </Card>

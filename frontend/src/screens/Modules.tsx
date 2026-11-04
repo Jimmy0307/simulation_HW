@@ -14,21 +14,43 @@ const KIND_TEXT: Record<LedgerRow["kind"], string> = {
 
 type Filter = Maturity | "all" | "gap";
 
-function Ladder({ doc }: { doc: ModulesDoc }) {
-  const total = doc.modules.length;
+function Bar({ counts, label, testId }: { counts: Record<Maturity, number>; label: string; testId?: string }) {
   return (
-    <figure className="ladder" aria-label="各成熟度的模組數">
-      <div className="ladder-bar" role="img" aria-label={MATURITY_ORDER.map((m) => `${MATURITY_TEXT[m].name} ${doc.counts[m]} 個`).join("，")}>
+    <div className="ladder-row" data-testid={testId}>
+      <span className="ladder-label">{label}</span>
+      <div className="ladder-bar" role="img" aria-label={`${label}：${MATURITY_ORDER.map((m) => `${MATURITY_TEXT[m].name} ${counts[m] ?? 0} 個`).join("，")}`}>
         {MATURITY_ORDER.map((m) => (
-          <span key={m} className={`ladder-seg m-${m}`} style={{ flexGrow: doc.counts[m] || 0 }} title={`${MATURITY_TEXT[m].name}：${doc.counts[m]} 個`} />
+          <span key={m} className={`ladder-seg m-${m}`} style={{ flexGrow: counts[m] || 0 }} title={`${MATURITY_TEXT[m].name}：${counts[m] ?? 0} 個`} />
         ))}
       </div>
+    </div>
+  );
+}
+
+function delta(now: number, before: number | undefined): string {
+  if (before === undefined || now === before) return "±0";
+  return now > before ? `+${now - before}` : `${now - before}`;
+}
+
+function Ladder({ doc }: { doc: ModulesDoc }) {
+  const total = doc.modules.length;
+  const previous = doc.history.at(-1);
+  return (
+    <figure className="ladder" aria-label="各成熟度的模組數">
+      {previous ? <Bar counts={previous.counts} label={previous.label} testId="ladder-previous" /> : null}
+      <Bar counts={doc.counts} label="現在" testId="ladder-now" />
       <figcaption className="ladder-legend">
         {MATURITY_ORDER.map((m) => (
           <span key={m} data-testid={`count-${m}`}><i className={`key m-${m}`} aria-hidden="true" />{MATURITY_TEXT[m].name} <b>{doc.counts[m]}</b>
-            <small className="muted"> / {total}</small></span>
+            <small className="muted"> / {total}</small>
+            {previous ? <small className={`ladder-delta${(doc.counts[m] ?? 0) !== (previous.counts[m] ?? 0) ? " moved" : ""}`} data-testid={`delta-${m}`}>
+              {delta(doc.counts[m] ?? 0, previous.counts[m])}</small> : null}
+          </span>
         ))}
       </figcaption>
+      {previous ? (
+        <p className="muted ladder-note">和「{previous.label}」（{previous.total} 列）相比{previous.total !== total ? `；總表現在是 ${total} 列（有模組拆成更細的列或新增列）` : ""}。</p>
+      ) : null}
     </figure>
   );
 }
@@ -46,6 +68,9 @@ function Detail({ row, doc, onClose }: { row: LedgerRow; doc: ModulesDoc; onClos
         <dt>真實遊戲</dt><dd><b>{REAL_TEXT[row.real_status]}</b>。{row.real_note}</dd>
         <dt>對應畫面</dt><dd>{row.screens.length ? row.screens.map((s) => <code key={s}>{s}</code>) : "（沒有找到對應畫面）"}</dd>
         <dt>我們現在</dt><dd>{row.ours}{row.implementation ? <> · <code>{row.implementation}</code></> : null}</dd>
+        {row.ranges && Object.keys(row.ranges).length ? (
+          <><dt>文獻範圍</dt><dd data-testid="ledger-ranges">{Object.entries(row.ranges).map(([k, [lo, hi]]) => <code key={k}>{k} ∈ [{lo}, {hi}]</code>)}</dd></>
+        ) : null}
         <dt>升級下一步</dt><dd>{row.next_step}</dd>
         <dt>何時可擷取</dt><dd>{captureLabel(row.capture)}<small className="muted"> · {row.capture}</small></dd>
         <dt>可以調嗎</dt><dd>{row.decidable ? "可以：在決策編輯或遊戲模式的「經營模組」" : row.maturity === "not-modeled" ? "不行：鎖定，引擎會拒絕這類決策" : "不在這裡：見決策編輯與遊戲畫面"}</dd>
@@ -73,7 +98,8 @@ export function Modules({ provider }: { provider: DataProvider }) {
           推斷的真實遊戲範圍一律「未證實 · 待擷取」。</p>
         <Ladder doc={doc} />
         <p className="ledger-gap" data-testid="ledger-gap">真實遊戲有（實測或推斷）、我們完全還沒做：<b>{gap.length}</b> 個。
-          練習規則（heuristic）：<b>{doc.counts.heuristic}</b> 個，其中可以調的只有業務團隊與廣告分配。</p>
+          可以調的模組：{doc.modules.filter((r) => r.decidable).map((r) => r.name).join("、") || "（無）"}；
+          練習規則（heuristic）共 <b>{doc.counts.heuristic}</b> 列。</p>
       </Card>
       <div className="ledger-filters" role="group" aria-label="篩選">
         {(["all", ...MATURITY_ORDER, "gap"] as Filter[]).map((f) => (

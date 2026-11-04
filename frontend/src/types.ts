@@ -110,6 +110,8 @@ export interface LedgerRow {
   implementation: string | null;
   decisions: string[];
   coefficients: Record<string, unknown> | null;
+  /** Published ranges of the literature coefficients (checked by the engine). */
+  ranges: Record<string, [number, number]> | null;
 }
 
 export interface ModulesDoc {
@@ -121,6 +123,8 @@ export interface ModulesDoc {
   sources: Record<string, string>;
   modules: LedgerRow[];
   counts: Record<Maturity, number>;
+  /** Counts of earlier rounds, so progress is visible. */
+  history: { label: string; date: string; counts: Record<Maturity, number>; total: number }[];
   is_private: boolean;
 }
 

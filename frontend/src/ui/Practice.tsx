@@ -1,3 +1,4 @@
+import type { ReactNode } from "react";
 import type { Maturity } from "../types";
 
 /** The one sentence every heuristic lever and result carries. Louder than "≈" on purpose. */
@@ -24,13 +25,25 @@ export function PracticeBadge({ size = "sm", inert = false }: { size?: "sm" | "l
   );
 }
 
-/** A banner for a whole heuristic module (its levers and its results). */
-export function PracticeBanner() {
+/** A banner for the heuristic part of a module (its levers and its results). */
+export function PracticeBanner({ children }: { children?: ReactNode }) {
   return (
     <p className="practice-banner" role="note">
       <PracticeBadge size="lg" />
-      <span><b>{PRACTICE_TEXT}</b>。調這裡的杆會改變結果，但改變的方式是暫定的練習規則；
-        只要用了，需求、營收、利潤與現金都會一起標成「練習」。</span>
+      <span><b>{PRACTICE_TEXT}</b>。{children ?? "調這裡的杆會改變結果，但改變的方式是暫定的練習規則；只要用了，受影響的數字都會一起標成「練習」。"}</span>
+    </p>
+  );
+}
+
+/** What the quiet "≈" means on a literature lever. */
+export const APPROX_TEXT = "文獻：形式有公開文獻支持，係數未用本局資料校準；預估 · Q2 校準後變實際";
+
+/** A quiet banner for the literature part of a module: the ≈ treatment, not the practice alarm. */
+export function LiteratureBanner({ children }: { children: ReactNode }) {
+  return (
+    <p className="lit-banner" role="note">
+      <span className="lit-mark" aria-hidden="true">≈ 文獻</span>
+      <span>{children}<span className="muted">（預估 · Q2 校準後變實際）</span></span>
     </p>
   );
 }

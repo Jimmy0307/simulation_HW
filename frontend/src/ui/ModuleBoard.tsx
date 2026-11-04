@@ -1,10 +1,11 @@
 import { useState, type ReactNode } from "react";
 import type { LedgerRow, Line, Lines, Maturity, ModuleDecisions, ModulesDoc } from "../types";
 import { formatNumber } from "./Num";
-import { captureLabel, MATURITY_ORDER, MATURITY_TEXT, MaturityPill, PracticeBanner } from "./Practice";
+import { APPROX_TEXT, captureLabel, LiteratureBanner, MATURITY_ORDER, MATURITY_TEXT, MaturityPill, PracticeBadge, PracticeBanner } from "./Practice";
 
-// Every business module, grouped by maturity. Heuristic modules with an implementation get levers (and the practice
-// banner); verified / literature modules point to where they are decided; not-modeled ones are locked and explain why.
+// Every business module, grouped by maturity. A module with an implementation appears with its levers in the group of
+// its main part; each lever carries the badge of the part behind it (≈ literature, 練習 heuristic). Verified and
+// literature rows without levers point to where they are decided; not-modeled ones are locked and explain why.
 // No number is computed here: levers only edit the plan, results come back from the engine.
 
 /** Where a lever already lives on the other screens (presentation only). */
@@ -25,14 +26,27 @@ const LEVER_HOME: Record<string, string> = {
 
 const MEDIA_LABEL: Record<string, string> = { local: "地方媒體", regional: "區域媒體", social: "社群", search: "搜尋" };
 
-type Render = (line: Line, label: string, format?: "number" | "percent") => ReactNode;
+/** The module editors, and the ledger row that decides which maturity group shows them. */
+const EDITORS: { module: string; primary: string }[] = [
+  { module: "marketing.media_mix", primary: "marketing.media_mix" },
+  { module: "sales_force", primary: "sales_force.staffing" },
+  { module: "supply.inventory", primary: "supply.inventory_holding" },
+  { module: "supply.purchasing", primary: "supply.purchasing" },
+];
 
-function Range({ label, value, max, step, disabled, onChange, unit }: {
-  label: string; value: number; max: number; step: number; disabled: boolean; onChange: (v: number) => void; unit?: string;
+type Render = (line: Line, label: string, format?: "number" | "percent") => ReactNode;
+type Part = "literature" | "heuristic";
+
+function Badge({ part }: { part: Part }) {
+  return part === "heuristic" ? <PracticeBadge /> : <span className="lit-mark" title={APPROX_TEXT}>≈ 文獻</span>;
+}
+
+function Range({ label, value, max, step, disabled, onChange, unit, part }: {
+  label: string; value: number; max: number; step: number; disabled: boolean; onChange: (v: number) => void; unit?: string; part: Part;
 }) {
   return (
-    <label className="slider">
-      <span className="slider-head"><span>{label}</span><b className="slider-value">{formatNumber(value)}{unit ?? ""}</b></span>
+    <label className={`slider lever-${part}`}>
+      <span className="slider-head"><span>{label} <Badge part={part} /></span><b className="slider-value">{formatNumber(value)}{unit ?? ""}</b></span>
       <input type="range" min={0} max={max} step={step} value={Math.min(value, max)} disabled={disabled} aria-label={label}
         onChange={(e) => onChange(Number(e.target.value))} />
     </label>
@@ -51,32 +65,40 @@ function Results({ lines, keys, render }: { lines?: Lines | null; keys: [string,
   );
 }
 
-function SalesForceEditor({ catalog, decisions, carried, onChange, lines, render }: {
-  catalog: ModulesDoc; decisions: ModuleDecisions; carried?: Record<string, number>; onChange?: (d: ModuleDecisions) => void;
-  lines?: Lines | null; render: Render;
-}) {
-  const coeff = catalog.modules.find((r) => r.module === "sales_force")?.coefficients ?? {};
+interface EditorProps {
+  catalog: ModulesDoc; decisions: ModuleDecisions; onChange?: (d: ModuleDecisions) => void; lines?: Lines | null; render: Render;
+  brands: { name: string; advertising: number; inventory?: number }[]; carried?: Record<string, Record<string, number>>;
+}
+
+const coefficientsOf = (catalog: ModulesDoc, module: string) =>
+  (catalog.modules.find((r) => r.module === module)?.coefficients ?? {}) as Record<string, unknown>;
+
+function drop(decisions: ModuleDecisions, key: string): ModuleDecisions {
+  const { [key]: _drop, ...rest } = decisions;
+  return rest;
+}
+
+function SalesForceEditor({ catalog, decisions, carried, onChange, lines, render }: EditorProps) {
+  const coeff = coefficientsOf(catalog, "sales_force");
   const block = decisions.sales_force as Record<string, unknown> | undefined;
-  const employed = num(carried?.headcount, 0) > 0;
+  const team = carried?.sales_force;
+  const employed = num(team?.headcount, 0) > 0;
   const on = Boolean(block) || employed;
   const ref = num(coeff.reference_salary, 1);
   const values = {
-    headcount: num(block?.headcount, Math.round(num(carried?.headcount, 0))),
-    salary: num(block?.salary, num(carried?.salary, ref)),
-    commission_pct: num(block?.commission_pct, num(carried?.commission_pct, num(coeff.reference_commission_pct, 0))),
+    headcount: num(block?.headcount, Math.round(num(team?.headcount, 0))),
+    salary: num(block?.salary, num(team?.salary, ref)),
+    commission_pct: num(block?.commission_pct, num(team?.commission_pct, num(coeff.reference_commission_pct, 0))),
     training: num(block?.training, 0),
   };
   const set = (patch: Partial<typeof values>) => onChange?.({ ...decisions, sales_force: { ...values, ...patch } });
   const toggle = () => {
     if (!onChange) return;
-    if (on && !employed) {
-      const { sales_force: _drop, ...rest } = decisions;
-      onChange(rest);
-    } else set({});
+    if (on && !employed) onChange(drop(decisions, "sales_force")); else set({});
   };
   const disabled = !onChange || !on;
   return (
-    <section className="mod-editor" data-testid="sales-force-editor" aria-label="業務人力與薪酬">
+    <section className="mod-editor lit" data-testid="sales-force-editor" aria-label="業務人力與薪酬">
       <header className="mod-editor-head">
         <h4>業務人力與薪酬</h4>
         <label className="mod-toggle">
@@ -84,12 +106,13 @@ function SalesForceEditor({ catalog, decisions, carried, onChange, lines, render
           {employed ? "團隊在職中（把人數設為 0 才會解散）" : "啟用業務團隊"}
         </label>
       </header>
-      <PracticeBanner />
+      <LiteratureBanner>業務人數對銷售力的影響用文獻的固定彈性形式（報酬遞減），彈性在後設分析的範圍內。</LiteratureBanner>
+      <PracticeBanner>底薪、佣金、訓練對留任和技能的影響，以及各項成本，仍是練習規則；用到訓練或沿用上季留下的人數時，需求鏈也會變成練習。</PracticeBanner>
       <div className="mod-levers">
-        <Range label="業務人數" value={values.headcount} max={60} step={1} disabled={disabled} unit=" 人" onChange={(v) => set({ headcount: v })} />
-        <Range label="每人每季底薪" value={values.salary} max={Math.round(ref * 3)} step={100} disabled={disabled} onChange={(v) => set({ salary: v })} />
-        <Range label="佣金（營收的 %）" value={values.commission_pct} max={15} step={0.5} disabled={disabled} unit=" %" onChange={(v) => set({ commission_pct: v })} />
-        <Range label="每人訓練費" value={values.training} max={Math.round(num(coeff.training_scale, 1000) * 3)} step={100} disabled={disabled}
+        <Range part="literature" label="業務人數" value={values.headcount} max={60} step={1} disabled={disabled} unit=" 人" onChange={(v) => set({ headcount: v })} />
+        <Range part="heuristic" label="每人每季底薪" value={values.salary} max={Math.round(ref * 3)} step={100} disabled={disabled} onChange={(v) => set({ salary: v })} />
+        <Range part="heuristic" label="佣金（營收的 %）" value={values.commission_pct} max={15} step={0.5} disabled={disabled} unit=" %" onChange={(v) => set({ commission_pct: v })} />
+        <Range part="heuristic" label="每人訓練費" value={values.training} max={Math.round(num(coeff.training_scale, 1000) * 3)} step={100} disabled={disabled}
           onChange={(v) => set({ training: v })} />
       </div>
       <Results lines={lines} render={render} keys={[
@@ -100,25 +123,19 @@ function SalesForceEditor({ catalog, decisions, carried, onChange, lines, render
   );
 }
 
-function MediaMixEditor({ catalog, decisions, brands, onChange, lines, render }: {
-  catalog: ModulesDoc; decisions: ModuleDecisions; brands: { name: string; advertising: number }[];
-  onChange?: (d: ModuleDecisions) => void; lines?: Lines | null; render: Render;
-}) {
-  const weights = (catalog.modules.find((r) => r.module === "marketing.media_mix")?.coefficients?.media_weights ?? {}) as Record<string, number>;
+function MediaMixEditor({ catalog, decisions, brands, onChange, lines, render }: EditorProps) {
+  const weights = (coefficientsOf(catalog, "marketing.media_mix").media_weights ?? {}) as Record<string, number>;
   const media = Object.keys(weights);
   const block = (decisions["marketing.media_mix"] as { mix?: Record<string, Record<string, number>> } | undefined) ?? {};
   const mix = block.mix ?? {};
   const write = (next: Record<string, Record<string, number>>) => {
     if (!onChange) return;
-    if (!Object.keys(next).length) {
-      const { "marketing.media_mix": _drop, ...rest } = decisions;
-      onChange(rest);
-    } else onChange({ ...decisions, "marketing.media_mix": { mix: next } });
+    onChange(Object.keys(next).length ? { ...decisions, "marketing.media_mix": { mix: next } } : drop(decisions, "marketing.media_mix"));
   };
   return (
-    <section className="mod-editor" data-testid="media-mix-editor" aria-label="廣告媒體分配">
+    <section className="mod-editor lit" data-testid="media-mix-editor" aria-label="廣告媒體分配">
       <header className="mod-editor-head"><h4>廣告媒體分配</h4></header>
-      <PracticeBanner />
+      <LiteratureBanner>每種媒體各自報酬遞減（MCI 形式），預算的總效果沿用需求面的文獻彈性；各媒體的權重是中性預設（相等），Q2 起才能估計。</LiteratureBanner>
       {!brands.length ? <p className="muted">先新增產品，才有廣告可以分配。</p> : null}
       {brands.map((brand) => {
         const shares = mix[brand.name];
@@ -137,12 +154,11 @@ function MediaMixEditor({ catalog, decisions, brands, onChange, lines, render }:
               <>
                 <div className="mod-levers four">
                   {media.map((m) => (
-                    <Range key={m} label={MEDIA_LABEL[m] ?? m} value={num(shares?.[m], 0)} max={100} step={5} disabled={!onChange}
+                    <Range key={m} part="literature" label={MEDIA_LABEL[m] ?? m} value={num(shares?.[m], 0)} max={100} step={5} disabled={!onChange}
                       unit=" 份" onChange={(v) => write({ ...mix, [brand.name]: { ...shares, [m]: v } })} />
                   ))}
                 </div>
-                <Results lines={lines} render={render} keys={[[`ad_efficiency[${brand.name}]`, "分配效率"],
-                  [`effective_advertising[${brand.name}]`, "有效廣告量"]]} />
+                <Results lines={lines} render={render} keys={[[`media_mix_index[${brand.name}]`, "配比指數（1 = 最佳配比）"]]} />
               </>
             ) : null}
           </div>
@@ -151,6 +167,81 @@ function MediaMixEditor({ catalog, decisions, brands, onChange, lines, render }:
     </section>
   );
 }
+
+function InventoryEditor({ decisions, brands, onChange, lines, render }: EditorProps) {
+  const block = decisions["supply.inventory"] as { sell_off?: Record<string, number> } | undefined;
+  const on = Boolean(block);
+  const sell = block?.sell_off ?? {};
+  const write = (next: Record<string, number>) => onChange?.({ ...decisions, "supply.inventory": Object.keys(next).length ? { sell_off: next } : {} });
+  const carried = brands.filter((b) => (b.inventory ?? 0) > 0);
+  return (
+    <section className="mod-editor lit" data-testid="inventory-editor" aria-label="庫存持有成本與出清">
+      <header className="mod-editor-head">
+        <h4>庫存持有成本與出清</h4>
+        <label className="mod-toggle">
+          <input type="checkbox" checked={on} disabled={!onChange}
+            onChange={() => onChange?.(on ? drop(decisions, "supply.inventory") : { ...decisions, "supply.inventory": {} })} />
+          計入庫存持有成本
+        </label>
+      </header>
+      <LiteratureBanner>季末沒賣掉的庫存，按年持有成本率（文獻範圍內）÷ 4 乘以單位成本計費；單位成本仍是佔位規則，所以這筆費用顯示為佔位。</LiteratureBanner>
+      {on ? (
+        <>
+          <PracticeBanner>出清：季初把上季留下的庫存賣掉，回收單位成本的一個暫定比例（沒有可用的文獻比例）。</PracticeBanner>
+          {!carried.length ? <p className="muted">目前沒有上季留下的庫存可以出清。</p> : (
+            <div className="mod-levers">
+              {carried.map((b) => (
+                <Range key={b.name} part="heuristic" label={`出清 ${b.name}`} value={num(sell[b.name], 0)} max={Math.floor(b.inventory ?? 0)} step={1}
+                  disabled={!onChange} unit=" 件" onChange={(v) => {
+                    const { [b.name]: _drop, ...rest } = sell;
+                    write(v > 0 ? { ...rest, [b.name]: v } : rest);
+                  }} />
+              ))}
+            </div>
+          )}
+        </>
+      ) : null}
+      <Results lines={lines} render={render} keys={[["inventory_holding_cost", "庫存持有成本"], ["inventory_selloff_proceeds", "出清收入"]]} />
+    </section>
+  );
+}
+
+function PurchasingEditor({ catalog, decisions, onChange, lines, render }: EditorProps) {
+  const coeff = coefficientsOf(catalog, "supply.purchasing");
+  const tiers = (coeff.discount_tiers ?? []) as [number, number][];
+  const top = Math.max(1000, ...tiers.map(([u]) => u * 1.5));
+  const block = decisions["supply.purchasing"] as { contract_units?: number } | undefined;
+  const on = Boolean(block);
+  return (
+    <section className="mod-editor" data-testid="purchasing-editor" aria-label="採購合約與數量折扣">
+      <header className="mod-editor-head">
+        <h4>採購合約與數量折扣</h4>
+        <label className="mod-toggle">
+          <input type="checkbox" checked={on} disabled={!onChange}
+            onChange={() => onChange?.(on ? drop(decisions, "supply.purchasing") : { ...decisions, "supply.purchasing": { contract_units: 0 } })} />
+          簽採購合約
+        </label>
+      </header>
+      <PracticeBanner>承諾的元件數量越多，材料成本折扣越大；沒生產到承諾量要付差額費。折扣級距與費用都是暫定值。</PracticeBanner>
+      {on ? (
+        <div className="mod-levers">
+          <Range part="heuristic" label="每季承諾採購量（件）" value={num(block?.contract_units, 0)} max={Math.round(top)} step={50} disabled={!onChange}
+            onChange={(v) => onChange?.({ ...decisions, "supply.purchasing": { contract_units: v } })} />
+        </div>
+      ) : null}
+      {tiers.length ? <p className="muted mod-tiers">級距（暫定）：{tiers.map(([u, d]) => `${formatNumber(u)} 件起 ${Math.round(d * 100)}%`).join("、")}</p> : null}
+      <Results lines={lines} render={render} keys={[["purchasing_discount", "折扣", "percent"], ["material_cost_factor", "材料成本倍數"],
+        ["purchasing_shortfall_fee", "差額費"]]} />
+    </section>
+  );
+}
+
+const EDITOR_VIEW: Record<string, (p: EditorProps) => ReactNode> = {
+  "marketing.media_mix": MediaMixEditor,
+  sales_force: SalesForceEditor,
+  "supply.inventory": InventoryEditor,
+  "supply.purchasing": PurchasingEditor,
+};
 
 function LockedTile({ row }: { row: LedgerRow }) {
   const [open, setOpen] = useState(false);
@@ -162,7 +253,7 @@ function LockedTile({ row }: { row: LedgerRow }) {
       </button>
       {open ? (
         <div className="lock-reason" data-testid="lock-reason" role="note">
-          <p><b>為什麼還不能調：</b>引擎還沒有這個模組，送出這類決策會被拒絕。{row.ours !== "None." ? `目前：${row.ours}` : ""}</p>
+          <p><b>為什麼還不能調：</b>引擎還沒有這個模組，送出這類決策會被拒絕。{row.ours.startsWith("None") ? "" : `目前：${row.ours}`}</p>
           <p><b>真實遊戲：</b>{row.real_status === "measured" ? "實測" : row.real_status === "inferred" ? "推斷 · 未證實 · 待擷取" : "未知"}。{row.real_note}</p>
           <p><b>下一步：</b>{row.next_step}</p>
         </div>
@@ -173,10 +264,11 @@ function LockedTile({ row }: { row: LedgerRow }) {
 
 function InfoTile({ row }: { row: LedgerRow }) {
   const home = LEVER_HOME[row.key];
+  const covered = row.module && EDITORS.some((e) => e.module === row.module);
   return (
     <li className={`mod-tile m-${row.maturity}`} title={row.ours}>
       <span className="mod-name">{row.name}</span>
-      <span className="mod-meta">{home ? `在「${home}」調整` : row.kind === "accounting" ? "自動計算，沒有可調的杆" : "沒有可調的杆"}</span>
+      <span className="mod-meta">{covered ? "在上面的模組裡調整" : home ? `在「${home}」調整` : row.kind === "accounting" ? "自動計算，沒有可調的杆" : "沒有可調的杆"}</span>
     </li>
   );
 }
@@ -184,25 +276,23 @@ function InfoTile({ row }: { row: LedgerRow }) {
 /** All modules, grouped by maturity. `onChange` absent = read-only (demo). */
 export function ModuleBoard({ catalog, decisions, onChange, brands, carried, lines, render, only }: {
   catalog: ModulesDoc; decisions: ModuleDecisions; onChange?: (d: ModuleDecisions) => void;
-  brands: { name: string; advertising: number }[]; carried?: Record<string, Record<string, number>>;
+  brands: { name: string; advertising: number; inventory?: number }[]; carried?: Record<string, Record<string, number>>;
   lines?: Lines | null; render: Render; only?: Maturity[];
 }) {
+  const rowOf = (key: string) => catalog.modules.find((r) => r.key === key);
+  const props: EditorProps = { catalog, decisions, onChange, lines, render, brands, carried };
   const groups = (only ?? MATURITY_ORDER).map((m) => ({ maturity: m, rows: catalog.modules.filter((r) => r.maturity === m) }));
   return (
     <div className="module-board" data-testid="module-board">
       {groups.map(({ maturity, rows }) => {
-        const editable = maturity === "heuristic" ? [...new Set(rows.filter((r) => r.decidable).map((r) => r.module))] : [];
-        const rest = rows.filter((r) => !(r.decidable && maturity === "heuristic"));
+        const editors = EDITORS.filter((e) => rowOf(e.primary)?.maturity === maturity && rowOf(e.primary)?.decidable);
+        const shown = new Set(editors.map((e) => e.primary));
+        const rest = rows.filter((r) => !shown.has(r.key));
         return (
           <section key={maturity} className={`mod-group g-${maturity}`} data-testid={`module-group-${maturity}`}>
             <h3 className="mod-group-head"><MaturityPill maturity={maturity} /><span>{rows.length} 個</span>
               <small className="muted">{MATURITY_TEXT[maturity].short}</small></h3>
-            {editable.includes("sales_force") ? (
-              <SalesForceEditor catalog={catalog} decisions={decisions} carried={carried?.sales_force} onChange={onChange} lines={lines} render={render} />
-            ) : null}
-            {editable.includes("marketing.media_mix") ? (
-              <MediaMixEditor catalog={catalog} decisions={decisions} brands={brands} onChange={onChange} lines={lines} render={render} />
-            ) : null}
+            {editors.map((e) => <div key={e.module}>{EDITOR_VIEW[e.module](props)}</div>)}
             {rest.length ? (
               <ul className="mod-grid">
                 {rest.map((row) => (maturity === "not-modeled" ? <LockedTile key={row.key} row={row} /> : <InfoTile key={row.key} row={row} />))}

@@ -307,11 +307,18 @@ describe("game mode: business modules (fake API)", () => {
     const media = within(panel).getByTestId("media-mix-editor");
     fireEvent.click(within(media).getByLabelText(/分配「自行車-1」的廣告/));
     fireEvent.change(within(media).getByLabelText("社群"), { target: { value: "60" } });
+    // supply chain: holding cost on, and a purchasing contract
+    fireEvent.click(within(within(panel).getByTestId("inventory-editor")).getByLabelText("計入庫存持有成本"));
+    const buying = within(panel).getByTestId("purchasing-editor");
+    fireEvent.click(within(buying).getByLabelText("簽採購合約"));
+    fireEvent.change(within(buying).getByLabelText("每季承諾採購量（件）"), { target: { value: "600" } });
     await waitFor(() => {
       const last = calls.filter((c) => c.path === "/game/preview").at(-1);
       const modules = last?.body?.modules as Record<string, Record<string, unknown>>;
       expect(modules.sales_force.headcount).toBe(12);
       expect((modules["marketing.media_mix"].mix as Record<string, Record<string, number>>)["自行車-1"].social).toBe(60);
+      expect(modules["supply.inventory"]).toEqual({});
+      expect(modules["supply.purchasing"].contract_units).toBe(600);
     }, { timeout: 3000 });
     // the engine's practice results come back with the badge, in the panel and on the report numbers
     await waitFor(() => expect(within(sales).getByText("銷售力倍數")).toBeTruthy(), { timeout: 3000 });
@@ -329,5 +336,22 @@ describe("game mode: business modules (fake API)", () => {
     const sales = screen.getByTestId("sales-force-editor");
     expect((within(sales).getByLabelText("業務人數") as HTMLInputElement).disabled).toBe(true);
     expect((within(sales).getByRole("checkbox") as HTMLInputElement).disabled).toBe(true);
+  });
+});
+
+describe("accounting numbers the engine now trusts", () => {
+  it("demo Q1 lease and revenue are structural zeros: verified, shown plain without ≈", () => {
+    const q1 = script.steps[0].report.lines;
+    for (const key of ["outlet_lease", "revenue", "production_cost"]) {
+      expect(q1[key].level).toBe("verified");
+      expect(q1[key].uncalibrated).toBe(false);
+      const { container } = render(<Figure line={q1[key]} label={key} />);
+      expect(container.querySelector(".fig-approx")).toBeNull();
+      expect(container.querySelector("[data-estimate]")?.getAttribute("data-estimate")).toBe("false");
+      cleanup();
+    }
+    // still unverified rules keep the quiet ≈ (the demo designs a brand in Q1, so design cost and cash stay placeholder)
+    expect(q1.design_cost.level).toBe("placeholder");
+    expect(q1.net_income.level).toBe("placeholder");
   });
 });

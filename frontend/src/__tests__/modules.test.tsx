@@ -32,8 +32,14 @@ describe("the ledger in the demo bundle", () => {
     }
     const total = Object.values(ledger.counts).reduce((a, b) => a + b, 0);
     expect(total).toBe(ledger.modules.length);
-    // only the two practice modules can be decided; everything not modeled is locked
-    expect(new Set(ledger.modules.filter((m) => m.decidable).map((m) => m.module))).toEqual(new Set(["marketing.media_mix", "sales_force"]));
+    // the four implemented modules can be decided; everything not modeled is locked
+    expect(new Set(ledger.modules.filter((m) => m.decidable).map((m) => m.module)))
+      .toEqual(new Set(["marketing.media_mix", "sales_force", "supply.inventory", "supply.purchasing"]));
+    // literature coefficients carry their published range
+    const staffing = ledger.modules.find((m) => m.key === "sales_force.staffing")!;
+    const [lo, hi] = staffing.ranges!.selling_elasticity;
+    expect(lo).toBeLessThanOrEqual(staffing.coefficients!.selling_elasticity as number);
+    expect(staffing.coefficients!.selling_elasticity as number).toBeLessThanOrEqual(hi);
     expect(ledger.modules.filter((m) => m.maturity === "not-modeled").every((m) => !m.decidable)).toBe(true);
   });
 });
@@ -47,8 +53,16 @@ describe("module maturity overview", () => {
     const gap = ledger.modules.filter((m) => m.maturity === "not-modeled" && m.real_status !== "unknown").length;
     expect(screen.getByTestId("ledger-gap").textContent).toContain(`${gap}`);
     expect(screen.getByTestId("ledger-areas").querySelectorAll(".ledger-tile")).toHaveLength(ledger.modules.length);
-    // heuristic behaviour tiles carry the practice badge
-    expect(within(screen.getByTestId("tile-marketing.media_mix")).getByTestId("practice-badge")).toBeTruthy();
+    // heuristic behaviour tiles carry the practice badge; literature ones do not
+    expect(within(screen.getByTestId("tile-sales_force.training")).getByTestId("practice-badge")).toBeTruthy();
+    expect(within(screen.getByTestId("tile-marketing.media_mix")).queryByTestId("practice-badge")).toBeNull();
+    // progress since the previous round: a ghost ladder and a change per level
+    const previous = ledger.history.at(-1)!;
+    expect(screen.getByTestId("ladder-previous").textContent).toContain(previous.label);
+    for (const m of ["verified", "literature", "heuristic", "not-modeled"] as const) {
+      const change = ledger.counts[m] - previous.counts[m];
+      expect(screen.getByTestId(`delta-${m}`).textContent).toBe(change === 0 ? "±0" : change > 0 ? `+${change}` : `${change}`);
+    }
     // a tile opens its row: real-game status, next step, sources
     fireEvent.click(screen.getByTestId("tile-sales_force.staffing"));
     const detail = screen.getByTestId("ledger-detail");
@@ -56,7 +70,8 @@ describe("module maturity overview", () => {
     expect(detail.textContent).toContain("推斷 · 未證實");
     expect(detail.textContent).toContain(row.next_step);
     expect(detail.textContent).toContain("L-ALBERS2010");
-    expect(detail.textContent).toContain("SalesForceHeuristic");
+    expect(detail.textContent).toContain("SalesForceModule");
+    expect(screen.getByTestId("ledger-ranges").textContent).toContain("selling_elasticity");
     // filter: only modules the game has and we lack stay bright
     fireEvent.click(screen.getByRole("button", { name: "遊戲有、我們沒做" }));
     const dim = screen.getByTestId("ledger-areas").querySelectorAll("li.dim").length;
@@ -71,10 +86,19 @@ describe("decision editor: modules by maturity", () => {
     for (const m of ["verified", "literature", "heuristic", "not-modeled"] as const) {
       expect(within(board).getByTestId(`module-group-${m}`).textContent).toContain(`${ledger.counts[m]} 個`);
     }
-    const sales = within(board).getByTestId("sales-force-editor");
-    expect(sales.textContent).toContain(PRACTICE_TEXT);
+    // each editor sits in the group of its main part; each lever carries its own badge
+    const literature = within(board).getByTestId("module-group-literature");
+    const sales = within(literature).getByTestId("sales-force-editor");
+    expect(sales.textContent).toContain(PRACTICE_TEXT); // pay, training and costs are practice
+    expect(sales.textContent).toContain("≈ 文獻"); // headcount response is literature
+    expect(within(sales).getByLabelText("業務人數").closest("label")!.querySelector(".lit-mark")).not.toBeNull();
+    expect(within(sales).getByLabelText("每人每季底薪").closest("label")!.querySelector("[data-testid=practice-badge]")).not.toBeNull();
     expect((within(sales).getByLabelText("業務人數") as HTMLInputElement).disabled).toBe(true); // demo is read-only
-    expect(within(board).getByTestId("media-mix-editor").textContent).toContain(PRACTICE_TEXT);
+    const media = within(literature).getByTestId("media-mix-editor");
+    expect(media.textContent).toContain("≈ 文獻");
+    expect(media.textContent).not.toContain(PRACTICE_TEXT);
+    expect(within(literature).getByTestId("inventory-editor")).toBeTruthy();
+    expect(within(within(board).getByTestId("module-group-heuristic")).getByTestId("purchasing-editor").textContent).toContain(PRACTICE_TEXT);
     const loans = within(board).getByTestId("locked-finance.loans");
     expect(loans.getAttribute("aria-expanded")).toBe("false");
     await act(async () => fireEvent.click(loans));
