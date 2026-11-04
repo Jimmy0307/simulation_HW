@@ -1,17 +1,24 @@
 {
  "schema": "marketplace-sim/module-defaults@1",
- "note": "Labelled practice defaults for HEURISTIC business modules. Invented from general business sense to give the right direction; no literature source, no calibration on any game. Not a forecast. A parameter pack may override any key under modules.<key>.",
+ "note": "Coefficients for business modules. 'literature' coefficients must stay inside their published range ('ranges', checked by the engine and tests); 'labelled_default' are uncalibrated scale or neutral choices with no published range; 'heuristic' are practice values from general business sense. Nothing here comes from any game. Not a forecast.",
  "modules": {
   "marketing.media_mix": {
-   "maturity": "heuristic",
+   "maturity": "literature",
    "coefficients": {
-    "media_weights": {"local": 1.0, "regional": 0.9, "social": 0.8, "search": 0.7}
+    "media_weights": {"local": 0.25, "regional": 0.25, "social": 0.25, "search": 0.25}
    },
-   "why": "Relative reach weight per medium; equal-ish weights make a spread budget more effective than one medium."
+   "ranges": {},
+   "basis": {
+    "form": {"kind": "literature", "sources": ["Cooper & Nakanishi 1988 (MCI: one multiplicative term with its own elasticity per instrument, eq. 2.7)"]},
+    "elasticity": {"kind": "literature", "sources": ["demand chain ad_elasticity (data/demand_literature.json): Sethuraman, Tellis & Briesch 2011, short-term mean 0.12 (median 0.05), long-term mean 0.24 (median 0.10)"]},
+    "media_weights": {"kind": "labelled_default", "sources": [], "why": "No published general ranking of local, regional, social and search media; equal weights are the neutral choice until Q2+ data."}
+   }
   },
   "sales_force": {
-   "maturity": "heuristic",
+   "maturity": "literature",
    "coefficients": {
+    "selling_elasticity": 0.31,
+    "force_reference": 2,
     "initial_headcount": 0,
     "max_headcount": 200,
     "reference_salary": 6000,
@@ -25,11 +32,42 @@
     "severance_cost": 3000,
     "training_scale": 1500,
     "skill_decay": 0.2,
-    "skill_bonus": 0.5,
-    "max_lift": 0.6,
-    "force_scale": 3
+    "skill_bonus": 0.5
    },
-   "why": "Scale chosen for the synthetic pack's price level: a handful of salespeople per open market moves demand noticeably, a large force saturates."
+   "ranges": {"selling_elasticity": [0.31, 0.34]},
+   "basis": {
+    "selling_elasticity": {"kind": "literature", "range": [0.31, 0.34], "sources": ["Albers, Mantrala & Sridhar 2010, JMR 47(5): mean current-period personal-selling elasticity 0.34, about 0.31 after method-bias correction (506 estimates; abstract verified; dispersion not verified)"]},
+    "form": {"kind": "literature", "sources": ["Lodish 1971 (call-response curves)", "constant-elasticity response as in the meta-analysis"]},
+    "force_reference": {"kind": "labelled_default", "sources": [], "why": "Scale of the force per market at which the response is (1+1)^e; chosen for the synthetic pack."},
+    "pay and retention (base_quit, pay_sensitivity, min_quit, max_quit, commission_weight, reference_*)": {"kind": "heuristic", "sources": ["direction only: Griffeth, Hom & Gaertner 2000, pay vs turnover rho about -0.09 (-0.12 in 1990s studies), no elasticity"]},
+    "training (training_scale, skill_decay, skill_bonus)": {"kind": "heuristic", "sources": ["candidate for the next step: Farrell & Hakstian 2001 (23.1% productivity gain from training, 12 effect sizes; seen as abstract snippet only, not verified)"]},
+    "costs (hire_cost, severance_cost)": {"kind": "heuristic", "sources": [], "why": "The game's sales-force cost rule was not observed."}
+   }
+  },
+  "supply.inventory": {
+   "maturity": "literature",
+   "coefficients": {
+    "annual_holding_rate": 0.25,
+    "salvage_fraction": 0.4
+   },
+   "ranges": {"annual_holding_rate": [0.12, 0.5]},
+   "basis": {
+    "annual_holding_rate": {"kind": "literature", "range": [0.12, 0.5], "sources": ["Azzi, Battini, Faccio, Persona & Sgarbossa 2014, Int. J. Logistics Management 25(1), literature review quoting Stock & Lambert 1993 (12-34%) and Schonberger & Knod 1997 / Pyke & Cohen 1994 (20-50%) of inventory value per year (introduction verified)", "form: Harris 1913"]},
+    "salvage_fraction": {"kind": "heuristic", "sources": [], "why": "No published general salvage rate (Cachon & Kok 2007 is about estimating it, not a value)."}
+   }
+  },
+  "supply.purchasing": {
+   "maturity": "heuristic",
+   "coefficients": {
+    "discount_tiers": [[300, 0.03], [600, 0.06], [1200, 0.10]],
+    "shortfall_fee_per_unit": 20
+   },
+   "ranges": {},
+   "basis": {
+    "form": {"kind": "literature", "sources": ["Dolan 1987 (all-units quantity discounts)", "Monahan 1984"]},
+    "discount_tiers": {"kind": "heuristic", "sources": [], "why": "No published typical discount magnitudes; tiers chosen for the synthetic pack's production volume."},
+    "shortfall_fee_per_unit": {"kind": "heuristic", "sources": []}
+   }
   }
  }
 }

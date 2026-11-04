@@ -58,7 +58,7 @@ def _is_private_path(path: Path) -> bool:
 # --- decoration (presentation metadata only) -------------------------------------------------------------------------
 
 # Business-module lines: only shown in a source chain when the report has them (the module was active).
-_MODULE_LINES = {"ad_efficiency", "effective_advertising", "selling_effort"}
+_MODULE_LINES = {"media_mix_index", "selling_effort", "material_cost_factor", "purchasing_discount"}
 
 
 def decorate_line(name: str, line: dict[str, Any], present: set[str] | None = None) -> dict[str, Any]:
@@ -80,7 +80,7 @@ def _all_metric_bases() -> set[str]:
 
 
 def _is_module_metric(base: str) -> bool:
-    return base in _MODULE_LINES or base.startswith("sales_force_")
+    return base in _MODULE_LINES or base.startswith(("sales_force_", "inventory_", "purchasing_"))
 
 
 def report_dict(report: Report) -> dict[str, Any]:

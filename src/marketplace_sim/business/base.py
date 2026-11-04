@@ -7,16 +7,21 @@ implementation for the same key with the same coupling points; the framework and
 
 Coupling points (the only ways a module can change the quarter):
 
-* ``ad_efficiency[brand]``  multiplier on the advertising that enters the demand chain (goodwill input).
-* ``selling_effort``        multiplier on the attraction of our offers (every market an offer reaches).
-* ``expenses``              expense lines charged this quarter (enter operating expenses and cash).
-* ``revenue_rates``         expense = rate x revenue (computed by the engine after demand, e.g. commission).
-* ``state``                 the module's own state, carried to the next quarter in ``CompanyState.module_state``.
-* ``lines``                 report-only lines (headcount, retention, efficiency ...).
+* demand    ``media_split[brand]``   split of a brand's goodwill across media (share, elasticity weight per medium);
+                                     the demand chain's own advertising response is applied per medium (MCI form).
+            ``selling_effort``       multiplier on the attraction of our offers (every market an offer reaches).
+* production ``material_cost_factor`` multiplier on the component (material) part of every brand's unit cost.
+* supply    ``inventory_release[brand]`` units taken out of carried inventory at quarter start (e.g. a sell-off).
+            ``holding_rate``         expense = rate x value (units x unit cost) of inventory left at quarter end.
+* cash      ``expenses``             expense lines charged this quarter (enter operating expenses and cash).
+            ``income``               income lines this quarter (e.g. sell-off proceeds; enter pretax and cash).
+            ``revenue_rates``        expense = rate x revenue (computed by the engine after demand, e.g. commission).
+* state     ``state``                the module's own state, carried to the next quarter in ``module_state``.
+* report    ``lines``                report-only lines (headcount, retention, mix index ...).
 
-Every effect carries a level. The engine takes the weakest level of all active modules and applies it to every
-number downstream of a demand coupling point (units, shares, revenue, profit, cash): a heuristic input makes the
-whole chain heuristic.
+Every effect carries its own level. Demand couplings set the level of every number downstream of demand (units,
+shares, revenue, profit, cash); production couplings set the level of unit and production cost; cash lines carry
+their own level into profit and cash. "Downstream takes the weakest level" holds at every step.
 """
 
 from __future__ import annotations
@@ -44,7 +49,7 @@ class Maturity(StrEnum):
         return {Maturity.VERIFIED: 3, Maturity.LITERATURE: 2, Maturity.HEURISTIC: 1, Maturity.NOT_MODELED: 0}[self]
 
 
-# The level a module's outputs carry, per maturity (not-modeled modules produce nothing).
+# The level a module part's outputs carry, per maturity (not-modeled parts produce nothing).
 LEVEL_OF: dict[Maturity, Level] = {
     Maturity.VERIFIED: Level.VERIFIED,
     Maturity.LITERATURE: Level.LITERATURE,
@@ -63,15 +68,32 @@ def maturity_of(level: Level) -> Maturity:
 
 @dataclass(frozen=True)
 class ModuleSpec:
-    """What the framework needs to know about one implementation."""
+    """What the framework needs to know about one implementation.
+
+    ``rows`` maps every ledger row this implementation covers to the maturity of that part: one implementation can
+    hold a literature part and a heuristic part (each output line is tagged with the level of the part behind it).
+    """
 
     key: str  # plan.modules key, e.g. "marketing.media_mix"
     title: str
-    maturity: Maturity
+    rows: Mapping[str, Maturity]
     decisions: tuple[str, ...]  # decision fields read from plan.modules[key]
     outputs: tuple[str, ...]  # report lines it can produce
     couplings: tuple[str, ...]  # coupling points it uses (see module docstring)
     evidence: str  # where its form comes from (document path)
+
+    @property
+    def maturity(self) -> Maturity:
+        """The weakest part (what the module as a whole can promise)."""
+        return min(self.rows.values(), key=lambda m: m.rank)
+
+
+@dataclass(frozen=True)
+class BrandInput:
+    name: str
+    advertising: float
+    production: float
+    price: float
 
 
 @dataclass(frozen=True)
@@ -80,17 +102,32 @@ class ModuleInput:
     quarter: int
     decisions: Mapping[str, Any]  # plan.modules[key]
     state: Mapping[str, float]  # module_state[key] carried from the previous quarter (empty at the start)
-    brands: Sequence[tuple[str, float]]  # (brand name, advertising this quarter) from the plan
+    brands: Sequence[BrandInput]  # the plan's brands this quarter
     markets_reached: int  # markets our offers reach this quarter
+    inventory: Mapping[str, float] = field(default_factory=dict)  # units carried in at quarter start, per brand
+
+
+@dataclass(frozen=True)
+class MediaSplit:
+    """A brand's goodwill split across media: (medium, share of spend, elasticity weight); weights sum to 1."""
+
+    parts: tuple[tuple[str, float, float], ...]
+    level: Level
+    source: str
 
 
 @dataclass
 class ModuleResult:
     lines: dict[str, Tagged] = field(default_factory=dict)
     expenses: dict[str, Tagged] = field(default_factory=dict)
+    income: dict[str, Tagged] = field(default_factory=dict)
     revenue_rates: dict[str, Tagged] = field(default_factory=dict)
-    ad_efficiency: dict[str, Tagged] = field(default_factory=dict)
+    media_split: dict[str, MediaSplit] = field(default_factory=dict)
     selling_effort: Tagged | None = None
+    material_cost_factor: Tagged | None = None
+    inventory_release: dict[str, Tagged] = field(default_factory=dict)
+    holding_rate: Tagged | None = None
+    salvage_fraction: Tagged | None = None  # value of released units as a fraction of unit cost (income)
     state: dict[str, float] = field(default_factory=dict)
     notes: list[str] = field(default_factory=list)
 
@@ -117,4 +154,11 @@ def number(decisions: Mapping[str, Any], key: str, default: float, *, low: float
     if math.isnan(value) or value < low or (high is not None and value > high):
         bound = f"between {low:g} and {high:g}" if high is not None else f">= {low:g}"
         raise ModuleDecisionError(f"{key} must be {bound}")
+    return value
+
+
+def in_range(name: str, value: float, low: float, high: float) -> float:
+    """A coefficient that must stay inside its published range (literature parts)."""
+    if not low <= value <= high:
+        raise ValueError(f"{name}={value:g} is outside its literature range [{low:g}, {high:g}]")
     return value

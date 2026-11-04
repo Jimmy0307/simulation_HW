@@ -121,7 +121,9 @@
   {
    "evidence": "docs/cost-model.md (not covered)",
    "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
-   "inputs": [],
+   "inputs": [
+    "material_cost_factor"
+   ],
    "level": "placeholder",
    "metric": "unit_cost[brand]",
    "note": "The real production cost function is not yet measured."
@@ -156,7 +158,8 @@
    "evidence": "docs/demand-model-spec.md; docs/demand-literature.md",
    "formula": "sum over city x segment of potential x attraction / (outside + sum attraction)",
    "inputs": [
-    "effective_advertising[brand]",
+    "advertising",
+    "media_mix_index[brand]",
     "selling_effort"
    ],
    "level": "literature",
@@ -238,7 +241,9 @@
     "sales_force_salaries",
     "sales_force_hiring",
     "sales_force_training",
-    "sales_force_commission"
+    "sales_force_commission",
+    "inventory_holding_cost",
+    "purchasing_shortfall_fee"
    ],
    "level": "placeholder",
    "metric": "operating_profit_before_tax",
@@ -284,7 +289,9 @@
     "sales_force_salaries",
     "sales_force_hiring",
     "sales_force_training",
-    "sales_force_commission"
+    "sales_force_commission",
+    "inventory_holding_cost",
+    "purchasing_shortfall_fee"
    ],
    "level": "placeholder",
    "metric": "emergency_loan",
@@ -310,7 +317,9 @@
     "sales_force_salaries",
     "sales_force_hiring",
     "sales_force_training",
-    "sales_force_commission"
+    "sales_force_commission",
+    "inventory_holding_cost",
+    "purchasing_shortfall_fee"
    ],
    "level": "placeholder",
    "metric": "cash_end",
@@ -327,29 +336,18 @@
    "note": ""
   },
   {
-   "evidence": "src/marketplace_sim/business/marketing.py",
-   "formula": "(sum w_m sqrt(share_m))^2 / sum w_m^2 (media mix)",
+   "evidence": "src/marketplace_sim/business/marketing.py; docs/demand-literature.md (MCI)",
+   "formula": "Prod_m (1 + s_m / w_m)^w_m / 2 (1 = best split)",
    "inputs": [],
-   "level": "heuristic",
-   "metric": "ad_efficiency[brand]",
-   "note": "Practice rule: no literature, no calibration."
-  },
-  {
-   "evidence": "src/marketplace_sim/business/marketing.py",
-   "formula": "advertising x ad_efficiency",
-   "inputs": [
-    "advertising",
-    "ad_efficiency[brand]"
-   ],
-   "level": "heuristic",
-   "metric": "effective_advertising[brand]",
-   "note": "Enters the demand chain instead of the raw budget."
+   "level": "literature",
+   "metric": "media_mix_index[brand]",
+   "note": "Per-medium MCI advertising terms; media weights are a neutral labelled default."
   },
   {
    "evidence": "src/marketplace_sim/business/sales_force.py",
-   "formula": "plan input; hiring assumed instant",
+   "formula": "plan input (heuristic when carried after quits)",
    "inputs": [],
-   "level": "heuristic",
+   "level": "literature",
    "metric": "sales_force_headcount",
    "note": ""
   },
@@ -357,7 +355,7 @@
    "evidence": "src/marketplace_sim/business/sales_force.py",
    "formula": "max(headcount - carried headcount, 0)",
    "inputs": [],
-   "level": "heuristic",
+   "level": "literature",
    "metric": "sales_force_hires",
    "note": ""
   },
@@ -370,15 +368,15 @@
    "note": "Practice rule: no literature, no calibration."
   },
   {
-   "evidence": "src/marketplace_sim/business/sales_force.py",
-   "formula": "1 + max_lift x (1 - exp(-force per market / scale))",
+   "evidence": "src/marketplace_sim/business/sales_force.py; data/module_defaults.json",
+   "formula": "(1 + force per market / reference)^selling elasticity",
    "inputs": [
     "sales_force_headcount",
     "sales_force_skill"
    ],
-   "level": "heuristic",
+   "level": "literature",
    "metric": "selling_effort",
-   "note": "Multiplies the attraction of our offers."
+   "note": "Multiplies the attraction of our offers. Heuristic when trained skill or carried headcount is used."
   },
   {
    "evidence": "src/marketplace_sim/business/sales_force.py",
@@ -437,6 +435,61 @@
    ],
    "level": "heuristic",
    "metric": "sales_force_commission",
+   "note": ""
+  },
+  {
+   "evidence": "src/marketplace_sim/business/inventory.py; data/module_defaults.json",
+   "formula": "ending units x unit cost x annual carrying rate / 4",
+   "inputs": [
+    "unit_cost[brand]"
+   ],
+   "level": "literature",
+   "metric": "inventory_holding_cost",
+   "note": "Rate in the published range; takes the unit cost's level (placeholder) downstream."
+  },
+  {
+   "evidence": "src/marketplace_sim/business/inventory.py",
+   "formula": "plan input: units sold off at quarter start",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "inventory_selloff_units[brand]",
+   "note": ""
+  },
+  {
+   "evidence": "src/marketplace_sim/business/inventory.py",
+   "formula": "sold-off units x salvage fraction x unit cost",
+   "inputs": [
+    "inventory_selloff_units[brand]",
+    "unit_cost[brand]"
+   ],
+   "level": "heuristic",
+   "metric": "inventory_selloff_proceeds",
+   "note": "Salvage fraction is a labelled practice default."
+  },
+  {
+   "evidence": "src/marketplace_sim/business/purchasing.py",
+   "formula": "all-units discount tier of the contract volume",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "purchasing_discount",
+   "note": "Form: Dolan 1987; tiers are labelled defaults."
+  },
+  {
+   "evidence": "src/marketplace_sim/business/purchasing.py",
+   "formula": "1 - discount x covered share of production",
+   "inputs": [
+    "purchasing_discount"
+   ],
+   "level": "heuristic",
+   "metric": "material_cost_factor",
+   "note": ""
+  },
+  {
+   "evidence": "src/marketplace_sim/business/purchasing.py",
+   "formula": "unproduced contract units x fee",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "purchasing_shortfall_fee",
    "note": ""
   }
  ],

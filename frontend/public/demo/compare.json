@@ -93,6 +93,13 @@
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
       },
       {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      },
+      {
        "evidence": "docs/calculate-screen-triage.md (Stock, view identity)",
        "formula": "sum(shares x price)",
        "level": "derived",
@@ -177,13 +184,6 @@
        "note": "The real production cost function is not yet measured."
       },
       {
-       "evidence": "plan file",
-       "formula": "plan input (spend as entered)",
-       "level": "verified",
-       "metric": "advertising",
-       "note": ""
-      },
-      {
        "evidence": "rule unverified",
        "formula": "amount needed to bring cash to zero",
        "level": "placeholder",
@@ -193,7 +193,7 @@
      ],
      "level": "placeholder",
      "mark": "P",
-     "source": "((((((((cash at quarter start (carried state)) + (sum(units_sold x price))) + (sum(shares x price) (view identity))) + (withdraw - deposit)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)) - (capacity option cost (EXP-02))) - (max(pretax,0) x taxRate (placeholder: tax rule unverified))) + (covers negative cash (placeholder: emergency-loan rule unverified))",
+     "source": "((((((((cash at quarter start (carried state)) + (sum(units_sold x price))) + (sum(shares x price) (view identity))) + (withdraw - deposit)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)) - (capacity option cost (EXP-02))) - (max(pretax,0) x taxRate (placeholder: tax rule unverified))) + (no emergency loan: cash not negative (captured Q1 statement: no loan at positive cash; a minimum-cash threshold, if any, is unverified))",
      "uncalibrated": true,
      "value": 2916004.8937087697
     },
@@ -262,10 +262,10 @@
        "note": ""
       }
      ],
-     "level": "placeholder",
-     "mark": "P",
-     "source": "designCost per new brand (placeholder)",
-     "uncalibrated": true,
+     "level": "verified",
+     "mark": "V",
+     "source": "no new brand designed: no design cost (structural zero)",
+     "uncalibrated": false,
      "value": 0.0
     },
     "emergency_loan": {
@@ -304,6 +304,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       },
       {
        "evidence": "docs/calculate-screen-triage.md (Stock, view identity)",
@@ -388,18 +395,11 @@
        "level": "placeholder",
        "metric": "unit_cost[brand]",
        "note": "The real production cost function is not yet measured."
-      },
-      {
-       "evidence": "plan file",
-       "formula": "plan input (spend as entered)",
-       "level": "verified",
-       "metric": "advertising",
-       "note": ""
       }
      ],
      "level": "placeholder",
      "mark": "P",
-     "source": "covers negative cash (placeholder: emergency-loan rule unverified)",
+     "source": "no emergency loan: cash not negative (captured Q1 statement: no loan at positive cash; a minimum-cash threshold, if any, is unverified)",
      "uncalibrated": true,
      "value": 0.0
     },
@@ -464,6 +464,13 @@
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
       },
       {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      },
+      {
        "evidence": "docs/experiments/EXP-01.md",
        "formula": "cd_balance x annual rate / 4 / 100",
        "level": "verified",
@@ -518,13 +525,6 @@
        "level": "placeholder",
        "metric": "unit_cost[brand]",
        "note": "The real production cost function is not yet measured."
-      },
-      {
-       "evidence": "plan file",
-       "formula": "plan input (spend as entered)",
-       "level": "verified",
-       "metric": "advertising",
-       "note": ""
       }
      ],
      "level": "placeholder",
@@ -555,6 +555,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       },
       {
        "evidence": "docs/demand-model-spec.md",
@@ -592,6 +599,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       }
      ],
      "level": "literature",
@@ -638,6 +652,13 @@
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
       },
       {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      },
+      {
        "evidence": "docs/experiments/EXP-01.md",
        "formula": "cd_balance x annual rate / 4 / 100",
        "level": "verified",
@@ -694,13 +715,6 @@
        "note": "The real production cost function is not yet measured."
       },
       {
-       "evidence": "plan file",
-       "formula": "plan input (spend as entered)",
-       "level": "verified",
-       "metric": "advertising",
-       "note": ""
-      },
-      {
        "evidence": "rate from pack; rule unverified",
        "formula": "max(pretax, 0) x tax rate",
        "level": "placeholder",
@@ -710,7 +724,7 @@
      ],
      "level": "placeholder",
      "mark": "P",
-     "source": "(((sum(units_sold x price)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)) - (max(pretax,0) x taxRate (placeholder: tax rule unverified))",
+     "source": "(((sum(units_sold x price)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)) - (max(pretax,0) x taxRate (placeholder: tax rule unverified)) [cash-basis profit; the game's income statement is accrual (COGS, depreciation): structure differs]",
      "uncalibrated": true,
      "value": 70699.332
     },
@@ -745,6 +759,13 @@
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
       },
       {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      },
+      {
        "evidence": "docs/experiments/EXP-01.md",
        "formula": "cd_balance x annual rate / 4 / 100",
        "level": "verified",
@@ -799,18 +820,11 @@
        "level": "placeholder",
        "metric": "unit_cost[brand]",
        "note": "The real production cost function is not yet measured."
-      },
-      {
-       "evidence": "plan file",
-       "formula": "plan input (spend as entered)",
-       "level": "verified",
-       "metric": "advertising",
-       "note": ""
       }
      ],
      "level": "placeholder",
      "mark": "P",
-     "source": "((sum(units_sold x price)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)",
+     "source": "((sum(units_sold x price)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses) [cash-basis profit; the game's income statement is accrual (COGS, depreciation): structure differs]",
      "uncalibrated": true,
      "value": 105996.0
     },
@@ -875,6 +889,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       }
      ],
      "level": "literature",
@@ -919,6 +940,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       }
      ],
      "level": "literature",
@@ -963,6 +991,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       }
      ],
      "level": "literature",
@@ -1059,6 +1094,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       }
      ],
      "level": "literature",
@@ -1082,6 +1124,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       }
      ],
      "level": "literature",
@@ -1199,6 +1248,13 @@
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
       },
       {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      },
+      {
        "evidence": "docs/calculate-screen-triage.md (Stock, view identity)",
        "formula": "sum(shares x price)",
        "level": "derived",
@@ -1283,13 +1339,6 @@
        "note": "The real production cost function is not yet measured."
       },
       {
-       "evidence": "plan file",
-       "formula": "plan input (spend as entered)",
-       "level": "verified",
-       "metric": "advertising",
-       "note": ""
-      },
-      {
        "evidence": "rule unverified",
        "formula": "amount needed to bring cash to zero",
        "level": "placeholder",
@@ -1299,7 +1348,7 @@
      ],
      "level": "placeholder",
      "mark": "P",
-     "source": "((((((((cash at quarter start (carried state)) + (sum(units_sold x price))) + (sum(shares x price) (view identity))) + (withdraw - deposit)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)) - (capacity option cost (EXP-02))) - (max(pretax,0) x taxRate (placeholder: tax rule unverified))) + (covers negative cash (placeholder: emergency-loan rule unverified))",
+     "source": "((((((((cash at quarter start (carried state)) + (sum(units_sold x price))) + (sum(shares x price) (view identity))) + (withdraw - deposit)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)) - (capacity option cost (EXP-02))) - (max(pretax,0) x taxRate (placeholder: tax rule unverified))) + (no emergency loan: cash not negative (captured Q1 statement: no loan at positive cash; a minimum-cash threshold, if any, is unverified))",
      "uncalibrated": true,
      "value": 3060411.0607087696
     },
@@ -1368,10 +1417,10 @@
        "note": ""
       }
      ],
-     "level": "placeholder",
-     "mark": "P",
-     "source": "designCost per new brand (placeholder)",
-     "uncalibrated": true,
+     "level": "verified",
+     "mark": "V",
+     "source": "no new brand designed: no design cost (structural zero)",
+     "uncalibrated": false,
      "value": 0.0
     },
     "emergency_loan": {
@@ -1410,6 +1459,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       },
       {
        "evidence": "docs/calculate-screen-triage.md (Stock, view identity)",
@@ -1494,18 +1550,11 @@
        "level": "placeholder",
        "metric": "unit_cost[brand]",
        "note": "The real production cost function is not yet measured."
-      },
-      {
-       "evidence": "plan file",
-       "formula": "plan input (spend as entered)",
-       "level": "verified",
-       "metric": "advertising",
-       "note": ""
       }
      ],
      "level": "placeholder",
      "mark": "P",
-     "source": "covers negative cash (placeholder: emergency-loan rule unverified)",
+     "source": "no emergency loan: cash not negative (captured Q1 statement: no loan at positive cash; a minimum-cash threshold, if any, is unverified)",
      "uncalibrated": true,
      "value": 0.0
     },
@@ -1570,6 +1619,13 @@
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
       },
       {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      },
+      {
        "evidence": "docs/experiments/EXP-01.md",
        "formula": "cd_balance x annual rate / 4 / 100",
        "level": "verified",
@@ -1624,13 +1680,6 @@
        "level": "placeholder",
        "metric": "unit_cost[brand]",
        "note": "The real production cost function is not yet measured."
-      },
-      {
-       "evidence": "plan file",
-       "formula": "plan input (spend as entered)",
-       "level": "verified",
-       "metric": "advertising",
-       "note": ""
       }
      ],
      "level": "placeholder",
@@ -1661,6 +1710,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       },
       {
        "evidence": "docs/demand-model-spec.md",
@@ -1698,6 +1754,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       }
      ],
      "level": "literature",
@@ -1744,6 +1807,13 @@
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
       },
       {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      },
+      {
        "evidence": "docs/experiments/EXP-01.md",
        "formula": "cd_balance x annual rate / 4 / 100",
        "level": "verified",
@@ -1800,13 +1870,6 @@
        "note": "The real production cost function is not yet measured."
       },
       {
-       "evidence": "plan file",
-       "formula": "plan input (spend as entered)",
-       "level": "verified",
-       "metric": "advertising",
-       "note": ""
-      },
-      {
        "evidence": "rate from pack; rule unverified",
        "formula": "max(pretax, 0) x tax rate",
        "level": "placeholder",
@@ -1816,7 +1879,7 @@
      ],
      "level": "placeholder",
      "mark": "P",
-     "source": "(((sum(units_sold x price)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)) - (max(pretax,0) x taxRate (placeholder: tax rule unverified))",
+     "source": "(((sum(units_sold x price)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)) - (max(pretax,0) x taxRate (placeholder: tax rule unverified)) [cash-basis profit; the game's income statement is accrual (COGS, depreciation): structure differs]",
      "uncalibrated": true,
      "value": 215105.499
     },
@@ -1851,6 +1914,13 @@
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
       },
       {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      },
+      {
        "evidence": "docs/experiments/EXP-01.md",
        "formula": "cd_balance x annual rate / 4 / 100",
        "level": "verified",
@@ -1905,18 +1975,11 @@
        "level": "placeholder",
        "metric": "unit_cost[brand]",
        "note": "The real production cost function is not yet measured."
-      },
-      {
-       "evidence": "plan file",
-       "formula": "plan input (spend as entered)",
-       "level": "verified",
-       "metric": "advertising",
-       "note": ""
       }
      ],
      "level": "placeholder",
      "mark": "P",
-     "source": "((sum(units_sold x price)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)",
+     "source": "((sum(units_sold x price)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses) [cash-basis profit; the game's income statement is accrual (COGS, depreciation): structure differs]",
      "uncalibrated": true,
      "value": 322497.0
     },
@@ -1981,6 +2044,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       }
      ],
      "level": "literature",
@@ -2025,6 +2095,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       }
      ],
      "level": "literature",
@@ -2069,6 +2146,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       }
      ],
      "level": "literature",
@@ -2181,6 +2265,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       }
      ],
      "level": "literature",
@@ -2197,6 +2288,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       }
      ],
      "level": "literature",
@@ -2220,6 +2318,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       }
      ],
      "level": "literature",
@@ -2243,6 +2348,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       }
      ],
      "level": "literature",
@@ -2360,6 +2472,13 @@
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
       },
       {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      },
+      {
        "evidence": "docs/calculate-screen-triage.md (Stock, view identity)",
        "formula": "sum(shares x price)",
        "level": "derived",
@@ -2444,13 +2563,6 @@
        "note": "The real production cost function is not yet measured."
       },
       {
-       "evidence": "plan file",
-       "formula": "plan input (spend as entered)",
-       "level": "verified",
-       "metric": "advertising",
-       "note": ""
-      },
-      {
        "evidence": "rule unverified",
        "formula": "amount needed to bring cash to zero",
        "level": "placeholder",
@@ -2460,7 +2572,7 @@
      ],
      "level": "placeholder",
      "mark": "P",
-     "source": "((((((((cash at quarter start (carried state)) + (sum(units_sold x price))) + (sum(shares x price) (view identity))) + (withdraw - deposit)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)) - (capacity option cost (EXP-02))) - (max(pretax,0) x taxRate (placeholder: tax rule unverified))) + (covers negative cash (placeholder: emergency-loan rule unverified))",
+     "source": "((((((((cash at quarter start (carried state)) + (sum(units_sold x price))) + (sum(shares x price) (view identity))) + (withdraw - deposit)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)) - (capacity option cost (EXP-02))) - (max(pretax,0) x taxRate (placeholder: tax rule unverified))) + (no emergency loan: cash not negative (captured Q1 statement: no loan at positive cash; a minimum-cash threshold, if any, is unverified))",
      "uncalibrated": true,
      "value": 1864952.0627087697
     },
@@ -2531,7 +2643,7 @@
      ],
      "level": "placeholder",
      "mark": "P",
-     "source": "designCost per new brand (placeholder)",
+     "source": "designCost per new brand (placeholder: when and how the game charges it is unverified)",
      "uncalibrated": true,
      "value": 27777.0
     },
@@ -2571,6 +2683,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       },
       {
        "evidence": "docs/calculate-screen-triage.md (Stock, view identity)",
@@ -2655,18 +2774,11 @@
        "level": "placeholder",
        "metric": "unit_cost[brand]",
        "note": "The real production cost function is not yet measured."
-      },
-      {
-       "evidence": "plan file",
-       "formula": "plan input (spend as entered)",
-       "level": "verified",
-       "metric": "advertising",
-       "note": ""
       }
      ],
      "level": "placeholder",
      "mark": "P",
-     "source": "covers negative cash (placeholder: emergency-loan rule unverified)",
+     "source": "no emergency loan: cash not negative (captured Q1 statement: no loan at positive cash; a minimum-cash threshold, if any, is unverified)",
      "uncalibrated": true,
      "value": 0.0
     },
@@ -2731,6 +2843,13 @@
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
       },
       {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      },
+      {
        "evidence": "docs/experiments/EXP-01.md",
        "formula": "cd_balance x annual rate / 4 / 100",
        "level": "verified",
@@ -2785,13 +2904,6 @@
        "level": "placeholder",
        "metric": "unit_cost[brand]",
        "note": "The real production cost function is not yet measured."
-      },
-      {
-       "evidence": "plan file",
-       "formula": "plan input (spend as entered)",
-       "level": "verified",
-       "metric": "advertising",
-       "note": ""
       }
      ],
      "level": "placeholder",
@@ -2822,6 +2934,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       },
       {
        "evidence": "docs/demand-model-spec.md",
@@ -2859,6 +2978,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       }
      ],
      "level": "literature",
@@ -2905,6 +3031,13 @@
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
       },
       {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      },
+      {
        "evidence": "docs/experiments/EXP-01.md",
        "formula": "cd_balance x annual rate / 4 / 100",
        "level": "verified",
@@ -2961,13 +3094,6 @@
        "note": "The real production cost function is not yet measured."
       },
       {
-       "evidence": "plan file",
-       "formula": "plan input (spend as entered)",
-       "level": "verified",
-       "metric": "advertising",
-       "note": ""
-      },
-      {
        "evidence": "rate from pack; rule unverified",
        "formula": "max(pretax, 0) x tax rate",
        "level": "placeholder",
@@ -2977,7 +3103,7 @@
      ],
      "level": "placeholder",
      "mark": "P",
-     "source": "(((sum(units_sold x price)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)) - (max(pretax,0) x taxRate (placeholder: tax rule unverified))",
+     "source": "(((sum(units_sold x price)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)) - (max(pretax,0) x taxRate (placeholder: tax rule unverified)) [cash-basis profit; the game's income statement is accrual (COGS, depreciation): structure differs]",
      "uncalibrated": true,
      "value": 85711.501
     },
@@ -3012,6 +3138,13 @@
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
       },
       {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
+      },
+      {
        "evidence": "docs/experiments/EXP-01.md",
        "formula": "cd_balance x annual rate / 4 / 100",
        "level": "verified",
@@ -3066,18 +3199,11 @@
        "level": "placeholder",
        "metric": "unit_cost[brand]",
        "note": "The real production cost function is not yet measured."
-      },
-      {
-       "evidence": "plan file",
-       "formula": "plan input (spend as entered)",
-       "level": "verified",
-       "metric": "advertising",
-       "note": ""
       }
      ],
      "level": "placeholder",
      "mark": "P",
-     "source": "((sum(units_sold x price)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses)",
+     "source": "((sum(units_sold x price)) + (interest = cd x rate/4/100 (EXP-01))) - (operating expenses) [cash-basis profit; the game's income statement is accrual (COGS, depreciation): structure differs]",
      "uncalibrated": true,
      "value": 128503.0
     },
@@ -3142,6 +3268,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       }
      ],
      "level": "literature",
@@ -3186,6 +3319,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       }
      ],
      "level": "literature",
@@ -3230,6 +3370,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       }
      ],
      "level": "literature",
@@ -3342,6 +3489,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       }
      ],
      "level": "literature",
@@ -3358,6 +3512,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       }
      ],
      "level": "literature",
@@ -3381,6 +3542,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       }
      ],
      "level": "literature",
@@ -3404,6 +3572,13 @@
        "level": "literature",
        "metric": "units_demanded[brand]",
        "note": "Literature form, uncalibrated coefficients. Becomes ESTIMATED once FittedDemand passes validation."
+      },
+      {
+       "evidence": "plan file",
+       "formula": "plan input (spend as entered)",
+       "level": "verified",
+       "metric": "advertising",
+       "note": ""
       }
      ],
      "level": "literature",

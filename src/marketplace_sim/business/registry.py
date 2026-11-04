@@ -16,15 +16,18 @@ from pathlib import Path
 from typing import Any
 
 from marketplace_sim.business.base import (
-    LEVEL_OF,
+    BrandInput,
     BusinessModule,
     Maturity,
+    MediaSplit,
     ModuleDecisionError,
     ModuleInput,
     ModuleResult,
 )
-from marketplace_sim.business.marketing import MediaMixHeuristic
-from marketplace_sim.business.sales_force import SalesForceHeuristic
+from marketplace_sim.business.inventory import InventoryModule
+from marketplace_sim.business.marketing import MediaMixLiterature
+from marketplace_sim.business.purchasing import PurchasingHeuristic
+from marketplace_sim.business.sales_force import SalesForceModule
 from marketplace_sim.pack import ParamPack
 from marketplace_sim.provenance import Level, Tagged
 
@@ -35,8 +38,10 @@ LEDGER_SCHEMA = "marketplace-sim/modeling-ledger@1"
 DEFAULTS_SCHEMA = "marketplace-sim/module-defaults@1"
 
 IMPLEMENTATIONS: dict[str, type[Any]] = {
-    MediaMixHeuristic.spec.key: MediaMixHeuristic,
-    SalesForceHeuristic.spec.key: SalesForceHeuristic,
+    MediaMixLiterature.spec.key: MediaMixLiterature,
+    SalesForceModule.spec.key: SalesForceModule,
+    InventoryModule.spec.key: InventoryModule,
+    PurchasingHeuristic.spec.key: PurchasingHeuristic,
 }
 
 
@@ -70,23 +75,35 @@ def coefficients(pack: ParamPack, key: str) -> dict[str, Any]:
 
 
 def build(pack: ParamPack, key: str) -> BusinessModule:
-    module: BusinessModule = IMPLEMENTATIONS[key](coefficients(pack, key))
+    module: BusinessModule = IMPLEMENTATIONS[key](coefficients(pack, key), pack)
     return module
+
+
+def _times(a: Tagged | None, b: Tagged) -> Tagged:
+    return b if a is None else Tagged(a.value * b.value, min(a.level, b.level), f"({a.source}) x ({b.source})")
 
 
 @dataclass
 class ModuleEffects:
-    """All active modules of one quarter, merged. ``level`` is None when no module is active."""
+    """All active modules of one quarter, merged. A level is None when no effect touches that family."""
 
-    level: Level | None = None
     active: list[str] = field(default_factory=list)
+    demand_level: Level | None = None  # weakest level of the demand couplings actually used
     lines: dict[str, Tagged] = field(default_factory=dict)
     expenses: dict[str, Tagged] = field(default_factory=dict)
+    income: dict[str, Tagged] = field(default_factory=dict)
     revenue_rates: dict[str, Tagged] = field(default_factory=dict)
-    ad_efficiency: dict[str, Tagged] = field(default_factory=dict)
+    media_split: dict[str, MediaSplit] = field(default_factory=dict)
     selling_effort: Tagged | None = None
+    material_cost_factor: Tagged | None = None
+    inventory_release: dict[str, Tagged] = field(default_factory=dict)
+    holding_rate: Tagged | None = None
+    salvage_fraction: Tagged | None = None
     state: dict[str, dict[str, float]] = field(default_factory=dict)
     notes: list[str] = field(default_factory=list)
+
+    def _demand(self, level: Level) -> None:
+        self.demand_level = level if self.demand_level is None else min(self.demand_level, level)
 
 
 def ledger_rows_for(module_key: str) -> list[dict[str, Any]]:
@@ -106,8 +123,8 @@ def _refusal(key: str) -> str:
 
 
 def run_modules(pack: ParamPack, *, quarter: int, decisions: Mapping[str, Any],
-                carried: Mapping[str, Mapping[str, float]], brands: Sequence[tuple[str, float]],
-                markets_reached: int) -> ModuleEffects:
+                carried: Mapping[str, Mapping[str, float]], brands: Sequence[BrandInput],
+                markets_reached: int, inventory: Mapping[str, float] | None = None) -> ModuleEffects:
     """Run every module the plan decides on (``plan.modules``) or that carries state (a sales force stays employed),
     in key order, and merge their effects."""
     effects = ModuleEffects()
@@ -119,25 +136,33 @@ def run_modules(pack: ParamPack, *, quarter: int, decisions: Mapping[str, Any],
             raise ModuleDecisionError(f"plan.modules['{key}'] must be a mapping of decisions")
         module = build(pack, key)
         result: ModuleResult = module.run(ModuleInput(pack, quarter, block, dict(carried.get(key, {})), brands,
-                                                      markets_reached))
-        level = LEVEL_OF[module.spec.maturity]
-        effects.level = level if effects.level is None else min(effects.level, level)
+                                                      markets_reached, dict(inventory or {})))
         effects.active.append(key)
         effects.lines.update(result.lines)
         effects.expenses.update(result.expenses)
+        effects.income.update(result.income)
         effects.revenue_rates.update(result.revenue_rates)
-        for brand, eff in result.ad_efficiency.items():
-            prior = effects.ad_efficiency.get(brand)
-            effects.ad_efficiency[brand] = eff if prior is None else Tagged(
-                prior.value * eff.value, min(prior.level, eff.level), f"({prior.source}) x ({eff.source})")
+        for brand, split in result.media_split.items():
+            if brand in effects.media_split:
+                raise ModuleDecisionError(f"two modules split the advertising of {brand}")
+            effects.media_split[brand] = split
+            effects._demand(split.level)
         if result.selling_effort is not None:
-            prior_effort = effects.selling_effort
-            effects.selling_effort = result.selling_effort if prior_effort is None else Tagged(
-                prior_effort.value * result.selling_effort.value, min(prior_effort.level, result.selling_effort.level),
-                f"({prior_effort.source}) x ({result.selling_effort.source})")
+            effects.selling_effort = _times(effects.selling_effort, result.selling_effort)
+            effects._demand(result.selling_effort.level)
+        if result.material_cost_factor is not None:
+            effects.material_cost_factor = _times(effects.material_cost_factor, result.material_cost_factor)
+        for brand, units in result.inventory_release.items():
+            prior = effects.inventory_release.get(brand)
+            effects.inventory_release[brand] = units if prior is None else prior + units
+        if result.holding_rate is not None:
+            prior_rate = effects.holding_rate
+            effects.holding_rate = result.holding_rate if prior_rate is None else prior_rate + result.holding_rate
+        if result.salvage_fraction is not None:
+            effects.salvage_fraction = result.salvage_fraction
         if result.state:
             effects.state[key] = dict(result.state)
-        effects.notes.extend(f"{key}: {n}" if not n.startswith(key) else n for n in result.notes)
+        effects.notes.extend(f"{key}: {n}" for n in result.notes)
     return effects
 
 
@@ -148,11 +173,15 @@ def catalog() -> dict[str, Any]:
     rows = []
     for row in data["modules"]:
         impl = IMPLEMENTATIONS.get(row.get("module", ""))
+        entry = base_defaults.get(row.get("module", ""), {}) if impl else {}
         rows.append({**row, "module": row.get("module"), "decidable": impl is not None,
                      "implementation": impl.__name__ if impl else None,
                      "decisions": list(impl.spec.decisions) if impl else [],
-                     "coefficients": base_defaults.get(row["module"], {}).get("coefficients") if impl else None})
+                     "coefficients": entry.get("coefficients") if impl else None,
+                     "ranges": entry.get("ranges") if impl else None})
     counts: dict[str, int] = {m.value: 0 for m in Maturity}
     for row in rows:
         counts[row["maturity"]] += 1
-    return {**{k: v for k, v in data.items() if k != "modules"}, "modules": rows, "counts": counts}
+    history = list(data.get("history", []))
+    return {**{k: v for k, v in data.items() if k not in {"modules", "history"}}, "modules": rows, "counts": counts,
+            "history": history}

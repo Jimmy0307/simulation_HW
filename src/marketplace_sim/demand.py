@@ -105,9 +105,14 @@ class LiteratureDemand:
             return max(offer.ad_stock, 0.0)
         return max(offer.advertising, 0.0) / (1.0 - self.carryover)
 
-    def _ad_response(self, stock: float, reference: float) -> float:
+    def _ad_response(self, stock: float, reference: float,
+                     media: tuple[tuple[str, float, float], ...] = ()) -> float:
         c = self.coefficients
         ratio = stock / reference if reference > 0 else 0.0
+        if media:  # per-medium MCI terms (business module marketing.media_mix); see business/marketing.py
+            from marketplace_sim.business.marketing import effective_ratio
+
+            ratio = effective_ratio(ratio, media)
         if c["ad_shape"] == "adbudg":
             power = ratio ** float(c["adbudg_c"])
             return float(1.0 + (float(c["adbudg_max"]) - 1.0) * power / (1.0 + power))
@@ -139,7 +144,7 @@ class LiteratureDemand:
                     relative_price = min(offer.price / cell.wtp, _MAX_RELATIVE_PRICE)
                     utility = float(c["fit_weight"]) * (fit - 1.0) - float(c["price_sensitivity"]) * (relative_price - 1.0)
                     utility = max(-_UTILITY_CLAMP, min(_UTILITY_CLAMP, utility))
-                    attraction = (math.exp(utility) * self._ad_response(self.goodwill(offer), reference.get(sid, 0.0))
+                    attraction = (math.exp(utility) * self._ad_response(self.goodwill(offer), reference.get(sid, 0.0), offer.media)
                                   * coverage ** float(c["distribution_elasticity"])) * offer.effort
                     attractions.append((offer, attraction))
                 if not attractions:

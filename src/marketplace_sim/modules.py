@@ -37,13 +37,28 @@ def stock_raise(issues: Iterable[tuple[float, float]], stock_prior: float, share
             Tagged(result.shares_increase, D, "sum(shares) (view identity)"))
 
 
-def income_tax(pack: ParamPack, pretax: Tagged) -> Tagged:
+def income_tax(pack: ParamPack, pretax: Tagged, *, inventory_free: bool = False) -> Tagged:
+    """Placeholder tax on our cash-basis profit. The game taxes accrual income after a loss carry-forward and also
+    has an inventory tax (captured Q1 statement structure), so the positive branch is unverified and known to be
+    incomplete. Structural zero: a cash-basis loss with no production and no inventory means accrual income is not
+    higher than ours (no cost of goods held back, depreciation only lowers it), so taxable income <= 0 and no
+    inventory can be taxed. That zero is as certain as the sign of pretax."""
     rate = pack.finance.get("tax_rate_percent", 0.0)
-    return Tagged(max(pretax.value, 0.0) * rate / 100, P, "max(pretax,0) x taxRate (placeholder: tax rule unverified)")
+    value = max(pretax.value, 0.0) * rate / 100
+    if pretax.value <= 0 and inventory_free:
+        return Tagged(value, min(pretax.level, V), "no tax: pre-tax loss, nothing produced or held (structural zero; "
+                      "the loss row of the captured statement can only lower taxable income)")
+    return Tagged(value, P, "max(pretax,0) x taxRate (placeholder: tax rule unverified)")
 
 
 def emergency_loan(cash_before: Tagged) -> Tagged:
-    return Tagged(max(-cash_before.value, 0.0), P, "covers negative cash (placeholder: emergency-loan rule unverified)")
+    """Covers negative cash (placeholder; the game charges emergency-loan interest, not modelled). Zero branch:
+    with non-negative cash no loan is taken (the captured Q1 statement shows no emergency loan at positive cash)."""
+    value = max(-cash_before.value, 0.0)
+    if cash_before.value >= 0:
+        return Tagged(value, min(cash_before.level, V), "no emergency loan: cash not negative (captured Q1 statement: "
+                      "no loan at positive cash; a minimum-cash threshold, if any, is unverified)")
+    return Tagged(value, P, "covers negative cash (placeholder: emergency-loan rule unverified)")
 
 
 # --- capacity ------------------------------------------------------------------------------------------------------
@@ -67,8 +82,12 @@ def opening_cost(outlets: Sequence[OutletSpec], open_now: Iterable[str], already
 
 
 def recurring_lease(outlets: Sequence[OutletSpec], open_keys: set[str]) -> Tagged:
-    return Tagged(sum(o.lease_cost for o in outlets if o.key in open_keys), P,
-                  "leaseCost of outlets open at quarter start (placeholder: lease timing unverified)")
+    value = sum(o.lease_cost for o in outlets if o.key in open_keys)
+    if not any(o.key in open_keys for o in outlets):
+        # Nothing open at quarter start: an outlet opened this quarter pays no lease (EXP-11/12 measured totalLease 0
+        # in the opening quarter), so no timing rule can make this non-zero.
+        return Tagged(value, V, "no outlet open at quarter start: no lease (EXP-11/12: none in the opening quarter)")
+    return Tagged(value, P, "leaseCost of outlets open at quarter start (placeholder: lease timing unverified)")
 
 
 # --- product and production ------------------------------------------------------------------------------------------
@@ -89,16 +108,23 @@ def default_components(pack: ParamPack, brand_type: BrandType) -> list[Component
     return chosen
 
 
-def unit_cost(pack: ParamPack, brand_type: BrandType, components: Sequence[Component]) -> Tagged:
+def unit_cost(pack: ParamPack, brand_type: BrandType, components: Sequence[Component],
+              material_factor: Tagged | None = None) -> Tagged:
     material = sum(c.price for c in components) * brand_type.cost_adj
     labor = pack.production.get("min_direct_labor", 0.0)
     overhead = pack.production.get("min_overhead_cpu", 0.0)
-    return Tagged(material + labor + overhead, P,
-                  "sum(component price) x costAdj + minDirectLabor + minOverheadCPU (placeholder: cost function unverified)")
+    rule = "sum(component price) x costAdj + minDirectLabor + minOverheadCPU (placeholder: cost function unverified)"
+    if material_factor is None:
+        return Tagged(material + labor + overhead, P, rule)
+    return Tagged(material * material_factor.value + labor + overhead, min(P, material_factor.level),
+                  f"{rule}; material x ({material_factor.source})")
 
 
 def design_cost(pack: ParamPack, new_brands: int) -> Tagged:
-    return Tagged(new_brands * pack.production.get("design_cost", 0.0), P, "designCost per new brand (placeholder)")
+    value = new_brands * pack.production.get("design_cost", 0.0)
+    if new_brands == 0:
+        return Tagged(value, V, "no new brand designed: no design cost (structural zero)")
+    return Tagged(value, P, "designCost per new brand (placeholder: when and how the game charges it is unverified)")
 
 
 # --- demand --------------------------------------------------------------------------------------------------------
@@ -117,6 +143,7 @@ class Offer:
     ad_stock: float | None = None  # goodwill stock; None = steady state of `advertising`
     coverage: tuple[tuple[str, float], ...] = ()  # (market, distribution intensity 0..1); empty = 1 in `markets`
     effort: float = 1.0  # selling-effort multiplier on attraction (business module sales_force; 1 = no module)
+    media: tuple[tuple[str, float, float], ...] = ()  # (medium, spend share, elasticity weight); empty = one response
 
     def coverage_in(self, market: str) -> float:
         if self.coverage:
@@ -148,7 +175,8 @@ class PlaceholderDemand:
                 if not present or cell.wtp <= 0:
                     continue
                 weights = [o.fit * math.exp(3 * (cell.wtp - o.price) / cell.wtp)
-                           * (1 + 0.1 * math.log1p(max(o.advertising, 0) / 1000)) * o.effort for o in present]
+                           * (1 + 0.1 * math.log1p(_media_ratio(max(o.advertising, 0) / 1000, o.media))) * o.effort
+                           for o in present]
                 denominator = 1 + sum(weights)
                 for offer, weight in zip(present, weights, strict=True):
                     key = (offer.firm, offer.brand)
@@ -191,6 +219,15 @@ class FittedDemand:
     def units(self, pack: ParamPack, offers: Sequence[Offer]) -> dict[tuple[str, str], Tagged]:
         result: dict[tuple[str, str], Tagged] = self._model().units(pack, offers)
         return result
+
+
+def _media_ratio(ratio: float, media: tuple[tuple[str, float, float], ...]) -> float:
+    """Advertising ratio after a media split (business module marketing.media_mix); unchanged without a split."""
+    if not media:
+        return ratio
+    from marketplace_sim.business.marketing import effective_ratio
+
+    return effective_ratio(ratio, media)
 
 
 def segment_fit(brand_type: BrandType, segment_id: str) -> float:

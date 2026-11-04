@@ -1,24 +1,26 @@
-"""Sales force: headcount, pay, commission and training. HEURISTIC (practice rule).
+"""Sales force: headcount, pay, commission and training. Mixed maturity, each output tagged by the part behind it.
 
-Rules from general business sense only; no literature fit and no calibration on any game. Directions:
+LITERATURE part (``sales_force.staffing``): selling effort responds to the size of the force with a constant
+elasticity, the form used in the personal-selling literature (Lodish 1971 call-response curves; the meta-analysis of
+Albers, Mantrala & Sridhar 2010 reports these elasticities):
 
-* more salespeople, or better trained ones, raise selling effort, with diminishing returns and a ceiling:
-      effort = 1 + max_lift x (1 - exp(-force_per_market / force_scale))
-      force  = headcount x (1 + skill_bonus x skill)
-* training builds a skill stock in [0, 1] that decays:
-      skill' = skill x (1 - skill_decay) + (1 - skill x (1 - skill_decay)) x (1 - exp(-training / training_scale))
-* pay relative to a reference keeps people: the quarterly quit rate falls as relative pay rises, bounded:
-      pay_index = (1 - commission_weight) x salary / reference_salary
-                  + commission_weight x commission_pct / reference_commission_pct
-      quit = clamp(base_quit x exp(-pay_sensitivity x (pay_index - 1)), min_quit, max_quit)
-  the headcount carried to the next quarter is headcount x (1 - quit).
-* costs: salaries (headcount x salary), hiring and severance per person, training (headcount x training),
-  and commission (commission_pct % of revenue, charged by the engine after demand).
+    effort = (1 + force_per_market / force_reference) ^ selling_elasticity
 
-Selling effort multiplies the attraction of every offer of ours in every market it reaches (a company-wide force;
-store and web sales staff are not separated yet). Coefficients: ``data/module_defaults.json`` (labelled defaults),
-overridable per pack under ``modules.sales_force``. Next step to literature: docs/upgrade-protocol.md, ledger rows
-``sales_force.*``.
+  concave in headcount (diminishing returns), 1 with no salespeople. ``selling_elasticity`` must lie in the
+  meta-analytic range (data/module_defaults.json ``ranges``); ``force_reference`` is a labelled scale default.
+  Effort multiplies the attraction of our offers; for a small market share the sales elasticity is close to the
+  attraction elasticity.
+
+HEURISTIC parts (no published quantified relation found; practice rules, labelled):
+
+* ``sales_force.training``: training builds a decaying skill stock in [0, 1] that raises effective force:
+      force = headcount x (1 + skill_bonus x skill)
+  Any skill (trained this quarter or carried) makes effort, and everything downstream of demand, heuristic.
+* ``sales_force.compensation``: the quarterly quit rate falls as pay rises against a reference, bounded. Only
+  the direction has published support (pay satisfaction and turnover, Griffeth, Hom & Gaertner 2000); no elasticity.
+  The carried headcount after quits is heuristic, so a quarter that runs on carried headcount is heuristic.
+* costs: salaries, hiring and severance, training, commission. The game's sales-force cost rules were not observed,
+  so every cost line is heuristic (and so is cash once a sales force is paid).
 """
 
 from __future__ import annotations
@@ -27,25 +29,43 @@ import math
 from collections.abc import Mapping
 from typing import Any
 
-from marketplace_sim.business.base import Maturity, ModuleInput, ModuleResult, ModuleSpec, number
+from marketplace_sim.business.base import (
+    Maturity,
+    ModuleInput,
+    ModuleResult,
+    ModuleSpec,
+    in_range,
+    number,
+)
+from marketplace_sim.pack import ParamPack
 from marketplace_sim.provenance import Level, Tagged
 
-H = Level.HEURISTIC
-NOTE = "heuristic: no literature, no calibration"
+H, L = Level.HEURISTIC, Level.LITERATURE
+NOTE = "heuristic: no published quantified relation, no calibration"
+LIT = "constant-elasticity selling response (Lodish 1971; elasticity range: Albers, Mantrala & Sridhar 2010)"
 
 
-class SalesForceHeuristic:
+class SalesForceModule:
     spec = ModuleSpec(
-        key="sales_force", title="業務人力與薪酬", maturity=Maturity.HEURISTIC,
+        key="sales_force", title="業務人力與薪酬",
+        rows={"sales_force.staffing": Maturity.LITERATURE, "sales_force.training": Maturity.HEURISTIC,
+              "sales_force.compensation": Maturity.HEURISTIC},
         decisions=("headcount", "salary", "commission_pct", "training"),
         outputs=("sales_force_headcount", "sales_force_hires", "sales_force_departures", "sales_force_quit_rate",
                  "sales_force_skill", "selling_effort", "sales_force_salaries", "sales_force_hiring",
                  "sales_force_training", "sales_force_commission"),
         couplings=("selling_effort", "expenses", "revenue_rates", "state"),
-        evidence="src/marketplace_sim/business/sales_force.py (practice rule)")
+        evidence="src/marketplace_sim/business/sales_force.py; data/module_defaults.json (ranges)")
 
-    def __init__(self, coefficients: Mapping[str, Any]) -> None:
+    def __init__(self, coefficients: Mapping[str, Any], pack: ParamPack | None = None,
+                 ranges: Mapping[str, Any] | None = None) -> None:
         self.c = {k: float(v) for k, v in coefficients.items()}
+        if ranges is None:
+            from marketplace_sim.business.registry import defaults
+
+            ranges = defaults().get("sales_force", {}).get("ranges", {})
+        for name, (low, high) in (ranges or {}).items():
+            in_range(name, self.c[name], float(low), float(high))
 
     # --- rules (pure functions, tested for direction and bounds) ---------------------------------------------------
 
@@ -65,7 +85,7 @@ class SalesForceHeuristic:
         c = self.c
         force = headcount * (1 + c["skill_bonus"] * skill)
         per_market = force / max(markets, 1)
-        return 1 + c["max_lift"] * (1 - math.exp(-per_market / c["force_scale"]))
+        return float((1 + per_market / c["force_reference"]) ** c["selling_elasticity"])
 
     # --- one quarter ------------------------------------------------------------------------------------------------
 
@@ -73,28 +93,35 @@ class SalesForceHeuristic:
         d, c = inp.decisions, self.c
         start = float(inp.state.get("headcount", c.get("initial_headcount", 0.0)))
         skill_prior = float(inp.state.get("skill", 0.0))
+        decided = "headcount" in d
         # A quarter without a sales_force block keeps last quarter's pay and the carried headcount (people stay on).
         headcount = number(d, "headcount", start, high=c["max_headcount"])
         salary = number(d, "salary", float(inp.state.get("salary", c["reference_salary"])), high=100 * c["reference_salary"])
         commission = number(d, "commission_pct", float(inp.state.get("commission_pct", c["reference_commission_pct"])),
                             high=50.0)
         training = number(d, "training", 0.0, high=100 * c["reference_salary"])
-        hires, departures_now = max(headcount - start, 0.0), max(start - headcount, 0.0)
+        hires, layoffs = max(headcount - start, 0.0), max(start - headcount, 0.0)
         skill_start = skill_prior * start / headcount if headcount > 0 and headcount > start else skill_prior
         skill = self.skill_after(skill_start, training) if headcount > 0 else 0.0
         effort = self.effort(headcount, skill, inp.markets_reached)
         quit_rate = self.quit_rate(salary, commission)
+        # Literature only when the force this quarter is the decided headcount and no (heuristic) skill is in play.
+        clean = decided and skill == 0.0
+        effort_level = L if clean else H
+        why = LIT if clean else f"{LIT}; with heuristic parts ({'skill from training' if skill else 'carried headcount after quits'})"
 
         out = ModuleResult()
-        out.selling_effort = Tagged(effort, H, f"1 + max_lift x (1 - exp(-force per market / scale)) ({NOTE})")
-        out.lines["sales_force_headcount"] = Tagged(headcount, H, f"plan input; hiring assumed instant ({NOTE})")
-        out.lines["sales_force_hires"] = Tagged(hires, H, f"max(headcount - carried headcount, 0) ({NOTE})")
-        out.lines["sales_force_skill"] = Tagged(skill, H, f"training stock with decay ({NOTE})")
+        out.selling_effort = Tagged(effort, effort_level, why)
         out.lines["selling_effort"] = out.selling_effort
+        out.lines["sales_force_headcount"] = Tagged(headcount, L if decided else H,
+                                                    "plan input (hiring assumed at quarter start)" if decided
+                                                    else f"carried headcount after quits ({NOTE})")
+        out.lines["sales_force_hires"] = Tagged(hires, L if decided else H, "max(headcount - carried headcount, 0)")
+        out.lines["sales_force_skill"] = Tagged(skill, H, f"training stock with decay ({NOTE})")
         out.lines["sales_force_quit_rate"] = Tagged(quit_rate, H, f"base quit x exp(-sensitivity x (pay index - 1)) ({NOTE})")
         out.lines["sales_force_departures"] = Tagged(headcount * quit_rate, H, f"headcount x quit rate ({NOTE})")
-        out.expenses["sales_force_salaries"] = Tagged(headcount * salary, H, f"headcount x salary ({NOTE}: pay rule)")
-        out.expenses["sales_force_hiring"] = Tagged(hires * c["hire_cost"] + departures_now * c["severance_cost"], H,
+        out.expenses["sales_force_salaries"] = Tagged(headcount * salary, H, f"headcount x salary ({NOTE}: game cost rule unobserved)")
+        out.expenses["sales_force_hiring"] = Tagged(hires * c["hire_cost"] + layoffs * c["severance_cost"], H,
                                                     f"hires x hire cost + layoffs x severance ({NOTE})")
         out.expenses["sales_force_training"] = Tagged(headcount * training, H, f"headcount x training per person ({NOTE})")
         out.revenue_rates["sales_force_commission"] = Tagged(commission / 100, H, f"commission % of revenue ({NOTE})")
@@ -102,5 +129,5 @@ class SalesForceHeuristic:
         out.state = {} if headcount <= 0 else {"headcount": headcount * (1 - quit_rate), "skill": skill,
                                                "salary": salary, "commission_pct": commission}
         if headcount > 0 and inp.markets_reached == 0:
-            out.notes.append("sales force: no open outlet at quarter start, so salespeople have no market to work")
+            out.notes.append("no open outlet at quarter start, so salespeople have no market to work")
         return out

@@ -8,15 +8,21 @@
 
 ## 0. 先懂框架（不要改框架）
 
-* 介面：`src/marketplace_sim/business/base.py`。一個模組 = 一個類別，帶 `spec`（key、成熟度、決策欄位、輸出、耦合點）
-  和 `run(ModuleInput) -> ModuleResult`。
-* 模組只能透過固定的**耦合點**影響一季：`ad_efficiency[brand]`、`selling_effort`、`expenses`、`revenue_rates`、
-  `state`、`lines`。引擎（`engine.advance`）負責套用，並把所有啟用模組中**最弱的等級**套到需求下游的每個數字。
+* 介面：`src/marketplace_sim/business/base.py`。一個模組 = 一個類別，帶 `spec`（key、**每個 ledger 列各自的成熟度** `rows`、
+  決策欄位、輸出、耦合點）和 `run(ModuleInput) -> ModuleResult`。一個實作可以同時有文獻部分和練習部分，
+  每條輸出用「它背後那部分」的等級標示。
+* 模組只能透過固定的**耦合點**影響一季（`base.py` 開頭有完整說明）：
+  * 需求：`media_split[brand]`（各媒體的花費比例與彈性權重）、`selling_effort`；用到的需求耦合點中最弱的等級，
+    套到需求下游的每個數字（銷量、市佔、營收、利潤、現金）。
+  * 生產：`material_cost_factor`（乘在單位成本的材料部分）。
+  * 供應：`inventory_release[brand]`（季初出清的件數，搭配 `salvage_fraction` 計收入）、`holding_rate`（季末庫存價值 × 費率）。
+  * 現金：`expenses`、`income`、`revenue_rates`。
+  * 其他：`state`、`lines`。
 * 登記：`src/marketplace_sim/business/registry.py` 的 `IMPLEMENTATIONS`（key → 類別）。
   決策從 `plan.modules[key]` 進來；沒有實作的 key 會被拒絕，並回覆 ledger 裡的「升級下一步」。
 * 係數：`data/module_defaults.json`（heuristic 的標示預設值）；pack 可以在 `modules.<key>` 覆寫。
 * 總表：`data/modeling_ledger.json` 是唯一來源；`docs/modeling-ledger.md` 由 `scripts/render_ledger.py` 產生。
-* 如果新模組需要的耦合點不在上面六個裡：**停下來**，先在 `docs/decisions-log.md` 寫明為什麼需要、會影響哪些下游，
+* 如果新模組需要的耦合點不在上面這些裡：**停下來**，先在 `docs/decisions-log.md` 寫明為什麼需要、會影響哪些下游，
   再在 `base.py` 加一個耦合點（加，不改舊的），並補一個「沒啟用時逐位元不變」的測試。
 
 ## 1. not-modeled → heuristic（建一個練習規則）
@@ -74,6 +80,16 @@
 6. decisions-log 記一條（只寫結果是否通過與門檻，不寫數值）。
 
 ## 4. 會計類：heuristic（佔位）→ verified（受控實驗）
+
+先分清楚是哪一種：
+
+* **恆等式**（例如現金流量：期初 + 各列帶號加總 = 期末）：規則本身不依賴遊戲參數。用擷取到的報表**結構**（列、正負號）
+  對照，再在每次執行驗證殘差為 0（`tests/test_accounting.py`）即可升 verified。每一列仍保留自己的等級。
+* **規則**（稅、租金、設計費、緊急貸款、單位成本）：恆等式成立不能證明遊戲用同一條規則，**一定要遊戲端數值**。
+  不要只靠內部一致性硬升；能做的是「結構性零」分支：輸入為空時答案在任何規則下都是 0（例如沒開店就沒有租金），
+  那個分支可標 verified，其餘維持原級並在 ledger 寫明缺什麼。
+
+規則類的步驟：
 
 1. 照 `docs/experiment-runbook.md` 設計一次只改一個輸入的實驗；只用遊戲本身的試算或結算，不得送出不必要的決策。
 2. 在 `marketplace_sysid.cost_model` 實作規則，用實測值重現且殘差為 0；引擎模組改呼叫它，等級 `VERIFIED`。
