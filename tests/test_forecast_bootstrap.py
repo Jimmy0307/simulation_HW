@@ -1,8 +1,9 @@
 """Q2 bootstrap tests use synthetic brands, prices, and estimates only."""
 from __future__ import annotations
 
-import numpy as np
 import pytest
+
+np = pytest.importorskip("numpy")
 
 from marketplace_sim.forecast_bootstrap import bootstrap_plan, quote_cost
 
