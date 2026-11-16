@@ -90,6 +90,12 @@ def reconcile_quarters(views: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]
     simulated = _number(accounting["cash"])
     proforma = _calculated_item(q2, "cash")
     net_income = accounting.get("netIncome")
+    operating_receipts = RECEIPTS - {"inc_comm", "inc_short_l", "inc_emer_l", "rep_cd"}
+    operating_payments = PAYMENTS - {"fixed_cap", "rep_bank_l", "rep_emer_l", "inc_cd"}
+    visible_operating_cash = (
+        sum(inputs.get(k, 0) for k in operating_receipts)
+        - sum(inputs.get(k, 0) for k in operating_payments)
+    )
     return {
         "status": "RECONCILED" if not unknown and abs(bridged - simulated) < 0.01 else "NEEDS_REVIEW",
         "source": "USER_CAPTURED_HAR_Q1_ACTUAL_PLUS_Q2_CURRENT_VIEW",
@@ -104,6 +110,11 @@ def reconcile_quarters(views: Mapping[str, Mapping[str, Any]]) -> dict[str, Any]
         "q2_proforma_calculated_cash": proforma,
         "factory_minus_proforma": round(simulated - proforma, 2),
         "q2_factory_simulated_net_income": _number(net_income) if net_income is not None else None,
+        "q2_visible_operating_cash_before_financing": round(visible_operating_cash, 2),
+        "q2_net_income_minus_visible_operating_cash_unexplained": (
+            round(_number(net_income) - visible_operating_cash, 2)
+            if net_income is not None else None
+        ),
         "unknown_nonzero_finance_fields": unknown,
         "caution": "Not finalized Q2 cash. CD is not bank cash until withdrawn. Pro Forma may be stale.",
     }
