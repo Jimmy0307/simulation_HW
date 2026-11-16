@@ -110,9 +110,17 @@ def default_components(pack: ParamPack, brand_type: BrandType) -> list[Component
 
 def unit_cost(pack: ParamPack, brand_type: BrandType, components: Sequence[Component],
               material_factor: Tagged | None = None, *, labor_factor: Tagged | None = None,
-              conversion_factor: Tagged | None = None, add: Tagged | None = None) -> Tagged:
-    """Placeholder unit cost; business modules may scale its parts (material, direct labour, labour + overhead) or
-    add to it. Each factor brings its own level (the result is never above placeholder)."""
+              conversion_factor: Tagged | None = None, add: Tagged | None = None,
+              volume: float | None = None) -> Tagged:
+    """Unit cost of one brand. With the game's cost-of-production table in the pack and a production volume, the
+    ESTIMATED curve (``marketplace_sim.cost_curve``); otherwise the placeholder rule below. Business modules may scale
+    its parts (material; labour and overhead) or add to it, each factor bringing its own level."""
+    if volume is not None and volume > 0 and pack.cost_estimates:
+        from marketplace_sim.cost_curve import curve_cost
+
+        curve = curve_cost(pack, brand_type, components, volume)
+        if curve is not None:
+            return _curve_tagged(curve, volume, material_factor, labor_factor, conversion_factor, add)
     material = sum(c.price for c in components) * brand_type.cost_adj
     labor = pack.production.get("min_direct_labor", 0.0)
     overhead = pack.production.get("min_overhead_cpu", 0.0)
@@ -133,6 +141,25 @@ def unit_cost(pack: ParamPack, brand_type: BrandType, components: Sequence[Compo
     if conversion_factor is not None:
         conversion, level = conversion * conversion_factor.value, min(level, conversion_factor.level)
         why.append(f"labour + overhead x ({conversion_factor.source})")
+    value = material + conversion
+    if add is not None:
+        value, level = value + add.value, min(level, add.level)
+        why.append(f"+ ({add.source})")
+    return Tagged(value, level, "; ".join(why))
+
+
+def _curve_tagged(curve: Any, volume: float, material_factor: Tagged | None, labor_factor: Tagged | None,
+                  conversion_factor: Tagged | None, add: Tagged | None) -> Tagged:
+    level, why = E, [(f"{curve.rule} at {volume:.0f} units (estimated: game's pre-settlement estimate, not yet "
+                      "compared with a settled statement)")]
+    material, conversion = curve.material_part, curve.conversion_part
+    if material_factor is not None:
+        material, level = material * material_factor.value, min(level, material_factor.level)
+        why.append(f"material part x ({material_factor.source})")
+    for factor, label in ((labor_factor, "labour"), (conversion_factor, "labour + overhead")):
+        if factor is not None:  # the game's table does not separate labour from overhead: scales the whole rest
+            conversion, level = conversion * factor.value, min(level, factor.level)
+            why.append(f"conversion part x ({factor.source}; {label} factor applied to labour + overhead together)")
     value = material + conversion
     if add is not None:
         value, level = value + add.value, min(level, add.level)

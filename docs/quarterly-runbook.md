@@ -45,3 +45,19 @@ but its main value is decision support.
 
 Use `mpsim compare` on the private save to compare candidate plans, and always read the source-level marks: only `[V]`
 and `[D]` numbers are measured or exact.
+
+## Fallback: a quarter saved with the browser (plain HAR)
+
+When the team saved the screens with the browser's DevTools instead of an REA run:
+
+```powershell
+# keep the HAR under evidence/private/ (git-ignored)
+.\.venv\Scripts\mpsim.exe build-pack --out evidence/private/model --har evidence/private/har/qN.har --base evidence/private/model --quarter-label QN
+.\.venv\Scripts\mpsim.exe cost-curve --params evidence/private/model          # leave-one-out check of the cost table
+.\.venv\Scripts\mpsim.exe reconcile --params evidence/private/model --har evidence/private/har/qN.har `
+    --quarter N-1 --plan evidence/private/plans/qN-1-actual.yaml [--save evidence/private/saves/start-qN-1.json] `
+    --out evidence/private/reconcile/qN-1-values.json                              # statuses on screen, values private
+```
+
+Open at least: the three statements (last quarter), CostOfProduction, ModifyBrand, OpenSalesOffice, OpenWebcenter,
+HireSalesPeople, HireWebSalesPeople, RegionalMedia, CD, Stock, FixedCapacity, ProFormaCashFlow.

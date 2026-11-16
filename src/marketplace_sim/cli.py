@@ -8,7 +8,9 @@
   mpsim what-if SAVE.json --set PATH=VALUE --event TYPE:TARGET:MAGNITUDE
   mpsim sweep run SWEEP.yaml --out DIR | mpsim sweep worst RESULTS.json --top N   (agent harness)
   mpsim params diff OLD_DIR NEW_DIR [--values --out PRIVATE_FILE]
-  mpsim build-pack --out evidence/private/model     (private; reads your own REA Evidence)
+  mpsim build-pack --out evidence/private/model [--har FILE.har ...] [--base OLD_PACK_DIR]   (private)
+  mpsim reconcile --params DIR --har FILE.har --quarter N --plan PLAN.yaml [--save SAVE.json] --out PRIVATE.json
+  mpsim cost-curve --params DIR [--brand-type T --components ID,ID,... --units N ...]   (private pack)
 """
 
 from __future__ import annotations
@@ -261,7 +263,8 @@ def cmd_params(args: argparse.Namespace) -> None:
 def cmd_build_pack(args: argparse.Namespace) -> None:
     from marketplace_sim.pack_builder import build_private_pack
 
-    print(build_private_pack(Path(args.out), Path(args.evidence)))
+    print(build_private_pack(Path(args.out), Path(args.evidence), [Path(h) for h in args.har or []],
+                             Path(args.base) if args.base else None))
     if args.quarter_label:
         from marketplace_sim.control.diff import quarterly_snapshot, red_flags, render
 
@@ -273,6 +276,67 @@ def cmd_build_pack(args: argparse.Namespace) -> None:
         for flag in red_flags(changes):
             print(flag)
         print(render(changes, include_values=False))
+
+
+def cmd_reconcile(args: argparse.Namespace) -> None:
+    """Replay one quarter's submitted plan and compare the engine with that quarter's settled statements.
+
+    Values go to ``--out`` (must be under a private directory); the screen shows statuses only.
+    """
+    from marketplace_sim import reconcile as rc
+    from marketplace_sim.pack_builder import _latest_views
+    from marketplace_sysid.parameters import collect
+
+    out = Path(args.out)
+    if "private" not in out.resolve().as_posix().split("/"):
+        raise SystemExit("--out must be inside a 'private' directory (the report holds game values)")
+    pack = load_pack(Path(args.params))
+    if args.save:
+        _, _, state = _load_save(Path(args.save))
+    elif args.quarter == 1:
+        state = CompanyState(quarter=1, cash=0.0, cd=0.0, fixed_capacity_units=0.0)  # game start: nothing owned
+    else:
+        raise SystemExit("--save is needed for a quarter after the first (state at that quarter's start)")
+    views = _latest_views(collect([], [], [Path(h) for h in args.har]))
+    actuals = rc.actuals_from_views(views, args.quarter)
+    if not actuals:
+        raise SystemExit(f"no settled statements of quarter {args.quarter} in the capture")
+    plan = _read_plan(Path(args.plan))
+    plan.modules = {"accounting.accrual": {}, **plan.modules}
+    _, report = advance(state, plan, pack, seed=args.seed)
+    mappings = {"income": rc.INCOME_ROWS, "cash": rc.CASH_ROWS, "balance": rc.BALANCE_ROWS}
+    result = {name: [vars(r) | {"lines": list(r.lines)} for r in rc.compare_values(report.lines, rows, mappings[name])]
+              for name, rows in actuals.items()}
+    levels = {k: v.level.label for k, v in report.lines.items()}
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps({"quarter": args.quarter, "plan": plan.name, "statements": result, "line_levels": levels},
+                              indent=1, ensure_ascii=False), encoding="utf-8")
+    for name, rows in result.items():
+        counts: dict[str, int] = {}
+        for row in rows:
+            counts[row["status"]] = counts.get(row["status"], 0) + 1
+        print(f"{name}: " + ", ".join(f"{k} {v}" for k, v in sorted(counts.items())))
+        print("  differs: " + (", ".join(r["row"] for r in rows if r["status"] == "differs") or "-"))
+    print(f"values written (private): {out}")
+
+
+def cmd_cost_curve(args: argparse.Namespace) -> None:
+    """Unit cost from the pack's cost table: leave-one-out check, or a what-if design at given volumes."""
+    from marketplace_sim.cost_curve import curve_cost, validate
+
+    pack = load_pack(Path(args.params))
+    if not pack.cost_estimates:
+        raise SystemExit("this pack has no cost_estimates (capture the CostOfProduction screen and rebuild)")
+    check = validate(pack)
+    print(f"cost table: {check['brands']:.0f} designs; leave-one-brand-out max |err| "
+          f"{check['leave_one_brand_out_max_abs_pct']:.2f}%, leave-one-volume-out max |err| "
+          f"{check['leave_one_volume_out_max_abs_pct']:.2f}%")
+    if args.components:
+        bt = pack.brand_type(args.brand_type)
+        comps = [pack.component(c.strip()) for c in args.components.split(",")]
+        for units in args.units or [100.0, 250.0, 500.0, 1000.0]:
+            got = curve_cost(pack, bt, comps, units)
+            print(f"{units:>8.0f} units: " + ("-" if got is None else f"{got.cost:,.2f} [E] {got.rule}"))
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -331,7 +395,24 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--out", required=True)
     p.add_argument("--evidence", default="evidence/private")
     p.add_argument("--quarter-label", help="e.g. Q2: snapshot the pack and diff it against the previous quarter")
+    p.add_argument("--har", action="append", help="plain browser HAR export (private), repeatable")
+    p.add_argument("--base", help="previous private pack dir: keeps what this capture does not show")
     p.set_defaults(func=cmd_build_pack)
+    p = sub.add_parser("reconcile", help="replay a submitted quarter and compare with its settled statements (private)")
+    p.add_argument("--params", required=True)
+    p.add_argument("--har", action="append", required=True, help="capture holding the quarter's statements")
+    p.add_argument("--quarter", type=int, required=True)
+    p.add_argument("--plan", required=True, help="the plan actually submitted that quarter")
+    p.add_argument("--save", help="save at that quarter's start (not needed for quarter 1)")
+    p.add_argument("--out", required=True)
+    p.add_argument("--seed", type=int, default=0)
+    p.set_defaults(func=cmd_reconcile)
+    p = sub.add_parser("cost-curve", help="unit cost from the pack's cost-of-production table (private pack)")
+    p.add_argument("--params", required=True)
+    p.add_argument("--brand-type")
+    p.add_argument("--components", help="comma-separated component ids of a design")
+    p.add_argument("--units", type=float, action="append")
+    p.set_defaults(func=cmd_cost_curve)
     args = parser.parse_args(argv)
     args.func(args)
 

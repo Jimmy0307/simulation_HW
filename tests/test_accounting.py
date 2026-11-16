@@ -27,8 +27,8 @@ STATEMENT = (ROOT / "evidence" / "private" / "extracted" / "nested" / "marketpla
              / "services" / "ProFormaCashFlow.json")
 
 # Engine line -> (game cash-flow row, effective sign): src/marketplace_sim/reconcile.py (one source).
-# design_cost has no confirmed row (R&D or production): one reason it stays heuristic. Mapped as an outflow.
-UNCONFIRMED = {"design_cost": -1}
+# design_cost is mapped to rd there (a captured Q1 statement shows it; one quarter = candidate, docs/upgrade-protocol.md).
+UNCONFIRMED: dict[str, int] = {}
 
 
 def identity_residual(plan: Plan, report: Report) -> float:

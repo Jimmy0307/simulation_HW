@@ -65,7 +65,7 @@
    "cd": 0.0,
    "fixed_capacity_units": 45.0,
    "inventory": {
-    "Alpha-1": 79.72596172218698,
+    "Alpha-1": 79.72596172218687,
     "Gamma-1": 94.71452025045568
    },
    "module_state": {},
@@ -3938,7 +3938,7 @@
       "mark": "L",
       "source": "our units sold / market_units_total",
       "uncalibrated": true,
-      "value": 0.15697275042356598
+      "value": 0.156972750423566
      },
      "market_units_total": {
       "chain": [
@@ -3975,7 +3975,7 @@
       "mark": "L",
       "source": "our units sold + rival units demanded (rivals unconstrained)",
       "uncalibrated": true,
-      "value": 5073.423590052463
+      "value": 5073.423590052462
      },
      "net_income": {
       "chain": [
@@ -4316,7 +4316,7 @@
       "mark": "L",
       "source": "rival units / market_units_total",
       "uncalibrated": true,
-      "value": 0.3240632942266743
+      "value": 0.32406329422667435
      },
      "rival_share[rival-2]": {
       "chain": [
@@ -4367,7 +4367,7 @@
       "mark": "L",
       "source": "rival units / market_units_total",
       "uncalibrated": true,
-      "value": 0.40865642326679685
+      "value": 0.40865642326679696
      },
      "rival_share[rival-3]": {
       "chain": [
@@ -4418,7 +4418,7 @@
       "mark": "L",
       "source": "rival units / market_units_total",
       "uncalibrated": true,
-      "value": 0.11030753208296269
+      "value": 0.11030753208296272
      },
      "rival_units[rival-1]": {
       "chain": [
@@ -4576,7 +4576,7 @@
       "mark": "L",
       "source": "LiteratureDemand: potential x attraction / (outside + sum attraction) (docs/demand-model-spec.md)",
       "uncalibrated": true,
-      "value": 183.3892549943374
+      "value": 183.38925499433742
      },
      "units_sold[Alpha-1]": {
       "chain": [
@@ -4636,7 +4636,7 @@
       "mark": "L",
       "source": "min(demand, inventory)",
       "uncalibrated": true,
-      "value": 183.3892549943374
+      "value": 183.38925499433742
      },
      "web_center_setup": {
       "chain": [
@@ -5230,7 +5230,7 @@
       "mark": "L",
       "source": "our units sold / market_units_total",
       "uncalibrated": true,
-      "value": 0.15697275042356598
+      "value": 0.156972750423566
      },
      "market_units_total": {
       "chain": [
@@ -5267,7 +5267,7 @@
       "mark": "L",
       "source": "our units sold + rival units demanded (rivals unconstrained)",
       "uncalibrated": true,
-      "value": 5073.423590052463
+      "value": 5073.423590052462
      },
      "net_income": {
       "chain": [
@@ -5608,7 +5608,7 @@
       "mark": "L",
       "source": "rival units / market_units_total",
       "uncalibrated": true,
-      "value": 0.3240632942266743
+      "value": 0.32406329422667435
      },
      "rival_share[rival-2]": {
       "chain": [
@@ -5659,7 +5659,7 @@
       "mark": "L",
       "source": "rival units / market_units_total",
       "uncalibrated": true,
-      "value": 0.40865642326679685
+      "value": 0.40865642326679696
      },
      "rival_share[rival-3]": {
       "chain": [
@@ -5710,7 +5710,7 @@
       "mark": "L",
       "source": "rival units / market_units_total",
       "uncalibrated": true,
-      "value": 0.11030753208296269
+      "value": 0.11030753208296272
      },
      "rival_units[rival-1]": {
       "chain": [
@@ -5868,7 +5868,7 @@
       "mark": "L",
       "source": "LiteratureDemand: potential x attraction / (outside + sum attraction) (docs/demand-model-spec.md)",
       "uncalibrated": true,
-      "value": 183.3892549943374
+      "value": 183.38925499433742
      },
      "units_sold[Alpha-1]": {
       "chain": [
@@ -5928,7 +5928,7 @@
       "mark": "L",
       "source": "min(demand, inventory)",
       "uncalibrated": true,
-      "value": 183.3892549943374
+      "value": 183.38925499433742
      },
      "web_center_setup": {
       "chain": [
@@ -6005,7 +6005,7 @@
      "fixed_capacity_units": 18.0,
      "inventory": {
       "Alpha-1": 0.0,
-      "Gamma-1": 73.61074500566261
+      "Gamma-1": 73.61074500566258
      },
      "module_state": {},
      "pending_capacity_units": 0.0,
@@ -6615,7 +6615,7 @@
       "mark": "L",
       "source": "our units sold / market_units_total",
       "uncalibrated": true,
-      "value": 0.15222574396771973
+      "value": 0.1522257439677198
      },
      "market_units_total": {
       "chain": [
@@ -6652,7 +6652,7 @@
       "mark": "L",
       "source": "our units sold + rival units demanded (rivals unconstrained)",
       "uncalibrated": true,
-      "value": 5381.285988043713
+      "value": 5381.285988043712
      },
      "net_income": {
       "chain": [
@@ -6993,7 +6993,7 @@
       "mark": "L",
       "source": "rival units / market_units_total",
       "uncalibrated": true,
-      "value": 0.22438074547795955
+      "value": 0.22438074547795958
      },
      "rival_share[rival-2]": {
       "chain": [
@@ -7044,7 +7044,7 @@
       "mark": "L",
       "source": "rival units / market_units_total",
       "uncalibrated": true,
-      "value": 0.28295224284341935
+      "value": 0.2829522428434194
      },
      "rival_share[rival-3]": {
       "chain": [
@@ -7143,7 +7143,7 @@
       "mark": "L",
       "source": "sum of the rival's units demanded (rivals unconstrained)",
       "uncalibrated": true,
-      "value": 1832.0118236845112
+      "value": 1832.011823684511
      },
      "stock_raised": {
       "chain": [
@@ -7230,7 +7230,7 @@
       "mark": "L",
       "source": "LiteratureDemand: potential x attraction / (outside + sum attraction) (docs/demand-model-spec.md)",
       "uncalibrated": true,
-      "value": 629.274038277813
+      "value": 629.2740382778131
      },
      "units_demanded[Gamma-1]": {
       "chain": [
@@ -7283,7 +7283,7 @@
       "mark": "L",
       "source": "min(demand, inventory)",
       "uncalibrated": true,
-      "value": 629.274038277813
+      "value": 629.2740382778131
      },
      "units_sold[Gamma-1]": {
       "chain": [
@@ -7907,7 +7907,7 @@
       "mark": "L",
       "source": "our units sold / market_units_total",
       "uncalibrated": true,
-      "value": 0.15222574396771973
+      "value": 0.1522257439677198
      },
      "market_units_total": {
       "chain": [
@@ -7944,7 +7944,7 @@
       "mark": "L",
       "source": "our units sold + rival units demanded (rivals unconstrained)",
       "uncalibrated": true,
-      "value": 5381.285988043713
+      "value": 5381.285988043712
      },
      "net_income": {
       "chain": [
@@ -8285,7 +8285,7 @@
       "mark": "L",
       "source": "rival units / market_units_total",
       "uncalibrated": true,
-      "value": 0.22438074547795955
+      "value": 0.22438074547795958
      },
      "rival_share[rival-2]": {
       "chain": [
@@ -8336,7 +8336,7 @@
       "mark": "L",
       "source": "rival units / market_units_total",
       "uncalibrated": true,
-      "value": 0.28295224284341935
+      "value": 0.2829522428434194
      },
      "rival_share[rival-3]": {
       "chain": [
@@ -8435,7 +8435,7 @@
       "mark": "L",
       "source": "sum of the rival's units demanded (rivals unconstrained)",
       "uncalibrated": true,
-      "value": 1832.0118236845112
+      "value": 1832.011823684511
      },
      "stock_raised": {
       "chain": [
@@ -8522,7 +8522,7 @@
       "mark": "L",
       "source": "LiteratureDemand: potential x attraction / (outside + sum attraction) (docs/demand-model-spec.md)",
       "uncalibrated": true,
-      "value": 629.274038277813
+      "value": 629.2740382778131
      },
      "units_demanded[Gamma-1]": {
       "chain": [
@@ -8575,7 +8575,7 @@
       "mark": "L",
       "source": "min(demand, inventory)",
       "uncalibrated": true,
-      "value": 629.274038277813
+      "value": 629.2740382778131
      },
      "units_sold[Gamma-1]": {
       "chain": [

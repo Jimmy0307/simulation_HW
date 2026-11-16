@@ -19,11 +19,11 @@
       "demand_q2": -0.3,
       "rivals": "calm"
      },
-     "fingerprint": "98e5100aa9653502",
+     "fingerprint": "2e787c9ba4371242",
      "id": "demo-stress-000",
      "objective": 2506697.209808358,
      "summary": {
-      "cumulative_net_income": -188053.2951260347,
+      "cumulative_net_income": -188053.29512603485,
       "emergency_loans": 0.0,
       "final_cash": 2618756.939873966,
       "min_cash": 2506697.209808358,
@@ -50,11 +50,11 @@
       "demand_q2": -0.3,
       "rivals": "aggressive"
      },
-     "fingerprint": "45e62066589d3a4a",
+     "fingerprint": "ee4bd78d63102963",
      "id": "demo-stress-001",
      "objective": 2528957.738779867,
      "summary": {
-      "cumulative_net_income": -183732.0086214899,
+      "cumulative_net_income": -183732.00862148995,
       "emergency_loans": 0.0,
       "final_cash": 2623078.2263785102,
       "min_cash": 2528957.738779867,
@@ -81,7 +81,7 @@
       "demand_q2": 0.0,
       "rivals": "calm"
      },
-     "fingerprint": "ea5538b4e8785fdd",
+     "fingerprint": "721a058b4dd8dd9d",
      "id": "demo-stress-002",
      "objective": 2841471.38711521,
      "summary": {
@@ -112,7 +112,7 @@
       "demand_q2": 0.0,
       "rivals": "aggressive"
      },
-     "fingerprint": "495e7c1598f696da",
+     "fingerprint": "66922e8a194bc72f",
      "id": "demo-stress-003",
      "objective": 2826832.339755422,
      "summary": {
@@ -143,11 +143,11 @@
       "demand_q2": 0.1,
       "rivals": "calm"
      },
-     "fingerprint": "c1d24448b8d390de",
+     "fingerprint": "8ae410247bde6f3c",
      "id": "demo-stress-004",
      "objective": 2863681.210366374,
      "summary": {
-      "cumulative_net_income": 271976.47436637327,
+      "cumulative_net_income": 271976.4743663732,
       "emergency_loans": 0.0,
       "final_cash": 3078786.7093663737,
       "min_cash": 2863681.210366374,
@@ -174,11 +174,11 @@
       "demand_q2": 0.1,
       "rivals": "aggressive"
      },
-     "fingerprint": "a46e6a0353950d64",
+     "fingerprint": "b77265a403c4d9a2",
      "id": "demo-stress-005",
      "objective": 2863068.8838030514,
      "summary": {
-      "cumulative_net_income": 268987.8429594366,
+      "cumulative_net_income": 268987.84295943665,
       "emergency_loans": 0.0,
       "final_cash": 3075798.077959437,
       "min_cash": 2863068.8838030514,
@@ -205,14 +205,14 @@
       "demand_q2": -0.3,
       "rivals": "calm"
      },
-     "fingerprint": "ecd4f1cf9988f139",
+     "fingerprint": "039cb1ba9ae03736",
      "id": "demo-stress-006",
-     "objective": 2390496.1248083576,
+     "objective": 2390496.124808357,
      "summary": {
-      "cumulative_net_income": -188053.2951260347,
+      "cumulative_net_income": -188053.29512603485,
       "emergency_loans": 0.0,
-      "final_cash": 2502555.8548739655,
-      "min_cash": 2390496.1248083576,
+      "final_cash": 2502555.854873965,
+      "min_cash": 2390496.124808357,
       "quarters_with_events": [
        2,
        3,
@@ -236,11 +236,11 @@
       "demand_q2": -0.3,
       "rivals": "aggressive"
      },
-     "fingerprint": "d7d265c13ac08e80",
+     "fingerprint": "8e31dfc7a1bca6ce",
      "id": "demo-stress-007",
      "objective": 2412756.6537798666,
      "summary": {
-      "cumulative_net_income": -183732.0086214899,
+      "cumulative_net_income": -183732.00862148995,
       "emergency_loans": 0.0,
       "final_cash": 2506877.1413785093,
       "min_cash": 2412756.6537798666,
@@ -267,7 +267,7 @@
       "demand_q2": 0.0,
       "rivals": "calm"
      },
-     "fingerprint": "3efe1ecd7586e5be",
+     "fingerprint": "aae3a11fac15b91c",
      "id": "demo-stress-008",
      "objective": 2725270.3021152094,
      "summary": {
@@ -298,7 +298,7 @@
       "demand_q2": 0.0,
       "rivals": "aggressive"
      },
-     "fingerprint": "ac1e8b79dea8c483",
+     "fingerprint": "78bd68c4f72436c6",
      "id": "demo-stress-009",
      "objective": 2710631.2547554215,
      "summary": {
@@ -329,11 +329,11 @@
       "demand_q2": 0.1,
       "rivals": "calm"
      },
-     "fingerprint": "2fdbfe62e0f4b063",
+     "fingerprint": "625580be81e457a6",
      "id": "demo-stress-010",
      "objective": 2747480.125366373,
      "summary": {
-      "cumulative_net_income": 271976.47436637327,
+      "cumulative_net_income": 271976.4743663732,
       "emergency_loans": 0.0,
       "final_cash": 2962585.624366373,
       "min_cash": 2747480.125366373,
@@ -360,14 +360,14 @@
       "demand_q2": 0.1,
       "rivals": "aggressive"
      },
-     "fingerprint": "db60ceec6c8109cd",
+     "fingerprint": "69f5edda68486778",
      "id": "demo-stress-011",
-     "objective": 2746867.798803051,
+     "objective": 2746867.7988030515,
      "summary": {
-      "cumulative_net_income": 268987.8429594366,
+      "cumulative_net_income": 268987.84295943665,
       "emergency_loans": 0.0,
-      "final_cash": 2959596.992959436,
-      "min_cash": 2746867.798803051,
+      "final_cash": 2959596.992959437,
+      "min_cash": 2746867.7988030515,
       "quarters_with_events": [
        2,
        3,
@@ -391,14 +391,14 @@
       "demand_q2": -0.3,
       "rivals": "calm"
      },
-     "fingerprint": "713f61ed95c8ce9d",
+     "fingerprint": "673b808be8470fc6",
      "id": "demo-stress-012",
-     "objective": 2099993.4123083577,
+     "objective": 2099993.412308357,
      "summary": {
-      "cumulative_net_income": -188053.2951260347,
+      "cumulative_net_income": -188053.29512603485,
       "emergency_loans": 0.0,
-      "final_cash": 2212053.1423739656,
-      "min_cash": 2099993.4123083577,
+      "final_cash": 2212053.142373965,
+      "min_cash": 2099993.412308357,
       "quarters_with_events": [
        2,
        3,
@@ -422,11 +422,11 @@
       "demand_q2": -0.3,
       "rivals": "aggressive"
      },
-     "fingerprint": "ecd81bd097a42050",
+     "fingerprint": "d77a7c3c9b646c63",
      "id": "demo-stress-013",
      "objective": 2122253.9412798667,
      "summary": {
-      "cumulative_net_income": -183732.0086214899,
+      "cumulative_net_income": -183732.00862148995,
       "emergency_loans": 0.0,
       "final_cash": 2216374.42887851,
       "min_cash": 2122253.9412798667,
@@ -453,7 +453,7 @@
       "demand_q2": 0.0,
       "rivals": "calm"
      },
-     "fingerprint": "2b6dccf0ffa65f6c",
+     "fingerprint": "d793f39b7bfb6c53",
      "id": "demo-stress-014",
      "objective": 2434767.5896152095,
      "summary": {
@@ -484,7 +484,7 @@
       "demand_q2": 0.0,
       "rivals": "aggressive"
      },
-     "fingerprint": "d0aba8982d4fb9e9",
+     "fingerprint": "7d33e2e4dd48821d",
      "id": "demo-stress-015",
      "objective": 2420128.5422554216,
      "summary": {
@@ -515,11 +515,11 @@
       "demand_q2": 0.1,
       "rivals": "calm"
      },
-     "fingerprint": "b04ee8f45ac92628",
+     "fingerprint": "5bf99286acae1ebc",
      "id": "demo-stress-016",
      "objective": 2456977.412866373,
      "summary": {
-      "cumulative_net_income": 271976.47436637327,
+      "cumulative_net_income": 271976.4743663732,
       "emergency_loans": 0.0,
       "final_cash": 2672082.911866373,
       "min_cash": 2456977.412866373,
@@ -546,14 +546,14 @@
       "demand_q2": 0.1,
       "rivals": "aggressive"
      },
-     "fingerprint": "312c3a77265441ef",
+     "fingerprint": "88abea5199ae0688",
      "id": "demo-stress-017",
-     "objective": 2456365.086303051,
+     "objective": 2456365.0863030516,
      "summary": {
-      "cumulative_net_income": 268987.8429594366,
+      "cumulative_net_income": 268987.84295943665,
       "emergency_loans": 0.0,
       "final_cash": 2669094.2804594366,
-      "min_cash": 2456365.086303051,
+      "min_cash": 2456365.0863030516,
       "quarters_with_events": [
        2,
        3,
@@ -576,31 +576,31 @@
    "sensitivity": [
     {
      "kind": "override",
-     "local_slope": -1162010.8499999996,
-     "main_effect_range": 406703.79749999987,
+     "local_slope": -1162010.8500000024,
+     "main_effect_range": 406703.7975000008,
      "mean_objective_by_value": {
-      "0.9": 2738451.4616047135,
-      "1.0": 2622250.3766047135,
-      "1.25": 2331747.6641047136
+      "0.9": 2738451.461604714,
+      "1.0": 2622250.376604713,
+      "1.25": 2331747.664104713
      },
      "variable": "capacity_cost"
     },
     {
      "kind": "event",
-     "local_slope": 863868.9319764997,
-     "main_effect_range": 345547.5727905999,
+     "local_slope": 863868.9319765009,
+     "main_effect_range": 345547.57279060036,
      "mean_objective_by_value": {
       "-0.3": 2343525.846794112,
       "0.0": 2659850.2359353155,
-      "0.1": 2689073.419584712
+      "0.1": 2689073.4195847125
      },
      "variable": "demand_q2"
     },
     {
      "kind": "competitors",
-     "main_effect_range": 2336.385016132146,
+     "main_effect_range": 2336.3850161330774,
      "mean_objective_by_value": {
-      "aggressive": 2565318.026612779,
+      "aggressive": 2565318.02661278,
       "calm": 2562981.641596647
      },
      "variable": "rivals"
@@ -613,14 +613,14 @@
       "demand_q2": -0.3,
       "rivals": "calm"
      },
-     "fingerprint": "713f61ed95c8ce9d",
+     "fingerprint": "673b808be8470fc6",
      "id": "demo-stress-012",
-     "objective": 2099993.4123083577,
+     "objective": 2099993.412308357,
      "summary": {
-      "cumulative_net_income": -188053.2951260347,
+      "cumulative_net_income": -188053.29512603485,
       "emergency_loans": 0.0,
-      "final_cash": 2212053.1423739656,
-      "min_cash": 2099993.4123083577,
+      "final_cash": 2212053.142373965,
+      "min_cash": 2099993.412308357,
       "quarters_with_events": [
        2,
        3,
@@ -644,11 +644,11 @@
       "demand_q2": -0.3,
       "rivals": "aggressive"
      },
-     "fingerprint": "ecd81bd097a42050",
+     "fingerprint": "d77a7c3c9b646c63",
      "id": "demo-stress-013",
      "objective": 2122253.9412798667,
      "summary": {
-      "cumulative_net_income": -183732.0086214899,
+      "cumulative_net_income": -183732.00862148995,
       "emergency_loans": 0.0,
       "final_cash": 2216374.42887851,
       "min_cash": 2122253.9412798667,
@@ -675,14 +675,14 @@
       "demand_q2": -0.3,
       "rivals": "calm"
      },
-     "fingerprint": "ecd4f1cf9988f139",
+     "fingerprint": "039cb1ba9ae03736",
      "id": "demo-stress-006",
-     "objective": 2390496.1248083576,
+     "objective": 2390496.124808357,
      "summary": {
-      "cumulative_net_income": -188053.2951260347,
+      "cumulative_net_income": -188053.29512603485,
       "emergency_loans": 0.0,
-      "final_cash": 2502555.8548739655,
-      "min_cash": 2390496.1248083576,
+      "final_cash": 2502555.854873965,
+      "min_cash": 2390496.124808357,
       "quarters_with_events": [
        2,
        3,
@@ -706,11 +706,11 @@
       "demand_q2": -0.3,
       "rivals": "aggressive"
      },
-     "fingerprint": "d7d265c13ac08e80",
+     "fingerprint": "8e31dfc7a1bca6ce",
      "id": "demo-stress-007",
      "objective": 2412756.6537798666,
      "summary": {
-      "cumulative_net_income": -183732.0086214899,
+      "cumulative_net_income": -183732.00862148995,
       "emergency_loans": 0.0,
       "final_cash": 2506877.1413785093,
       "min_cash": 2412756.6537798666,
@@ -737,7 +737,7 @@
       "demand_q2": 0.0,
       "rivals": "aggressive"
      },
-     "fingerprint": "d0aba8982d4fb9e9",
+     "fingerprint": "7d33e2e4dd48821d",
      "id": "demo-stress-015",
      "objective": 2420128.5422554216,
      "summary": {
@@ -778,7 +778,7 @@
       "demand_q2": -0.3,
       "price_sensitivity": 1.5
      },
-     "fingerprint": "07a317610a299997",
+     "fingerprint": "d03a60db5704ef03",
      "id": "demo-demand-assumptions-000",
      "objective": -183312.34591225756,
      "summary": {
@@ -809,14 +809,14 @@
       "demand_q2": 0.0,
       "price_sensitivity": 1.5
      },
-     "fingerprint": "85483863cb824331",
+     "fingerprint": "9fa6d2e5a6d11f61",
      "id": "demo-demand-assumptions-001",
-     "objective": 262111.83573059767,
+     "objective": 262111.8357305975,
      "summary": {
-      "cumulative_net_income": 262111.83573059767,
+      "cumulative_net_income": 262111.8357305975,
       "emergency_loans": 0.0,
-      "final_cash": 2952720.9857305977,
-      "min_cash": 2704768.7088789865,
+      "final_cash": 2952720.9857305973,
+      "min_cash": 2704768.708878986,
       "quarters_with_events": [
        2,
        3,
@@ -840,7 +840,7 @@
       "demand_q2": -0.3,
       "price_sensitivity": 1.5
      },
-     "fingerprint": "dbf9ce59213730d9",
+     "fingerprint": "a0f15246cbadfd70",
      "id": "demo-demand-assumptions-002",
      "objective": -158630.8228370947,
      "summary": {
@@ -871,11 +871,11 @@
       "demand_q2": 0.0,
       "price_sensitivity": 1.5
      },
-     "fingerprint": "e22e13ecaa77b36c",
+     "fingerprint": "9dd38f716cfbef3b",
      "id": "demo-demand-assumptions-003",
-     "objective": 271956.5139680924,
+     "objective": 271956.51396809233,
      "summary": {
-      "cumulative_net_income": 271956.5139680924,
+      "cumulative_net_income": 271956.51396809233,
       "emergency_loans": 0.0,
       "final_cash": 2962565.6639680923,
       "min_cash": 2724519.4821392843,
@@ -902,11 +902,11 @@
       "demand_q2": -0.3,
       "price_sensitivity": 2.6
      },
-     "fingerprint": "ac0bb40642b16df2",
+     "fingerprint": "eb5c1c5df435f760",
      "id": "demo-demand-assumptions-004",
-     "objective": -198975.2375937444,
+     "objective": -198975.23759374436,
      "summary": {
-      "cumulative_net_income": -198975.2375937444,
+      "cumulative_net_income": -198975.23759374436,
       "emergency_loans": 0.0,
       "final_cash": 2491633.9124062555,
       "min_cash": 2388665.893186821,
@@ -933,7 +933,7 @@
       "demand_q2": 0.0,
       "price_sensitivity": 2.6
      },
-     "fingerprint": "32c562fd1461c0ff",
+     "fingerprint": "a326434a3274b589",
      "id": "demo-demand-assumptions-005",
      "objective": 254263.21006892907,
      "summary": {
@@ -964,11 +964,11 @@
       "demand_q2": -0.3,
       "price_sensitivity": 2.6
      },
-     "fingerprint": "3e46ba2a36e07971",
+     "fingerprint": "08ca85c9d1cecc1b",
      "id": "demo-demand-assumptions-006",
-     "objective": -178215.4099141722,
+     "objective": -178215.40991417205,
      "summary": {
-      "cumulative_net_income": -178215.4099141722,
+      "cumulative_net_income": -178215.40991417205,
       "emergency_loans": 0.0,
       "final_cash": 2512393.7400858277,
       "min_cash": 2389203.713380533,
@@ -995,7 +995,7 @@
       "demand_q2": 0.0,
       "price_sensitivity": 2.6
      },
-     "fingerprint": "4471c88f5edeea05",
+     "fingerprint": "f714544ad9908ccb",
      "id": "demo-demand-assumptions-007",
      "objective": 239757.82404045152,
      "summary": {
@@ -1026,11 +1026,11 @@
       "demand_q2": -0.3,
       "price_sensitivity": 4.0
      },
-     "fingerprint": "aa3efb831850c141",
+     "fingerprint": "8b1e81ff13aca33b",
      "id": "demo-demand-assumptions-008",
-     "objective": -212939.26400955045,
+     "objective": -212939.26400955048,
      "summary": {
-      "cumulative_net_income": -212939.26400955045,
+      "cumulative_net_income": -212939.26400955048,
       "emergency_loans": 0.0,
       "final_cash": 2477669.885990449,
       "min_cash": 2380403.7304123007,
@@ -1057,11 +1057,11 @@
       "demand_q2": 0.0,
       "price_sensitivity": 4.0
      },
-     "fingerprint": "f8894493c3e9ee7f",
+     "fingerprint": "83370ae01c193d6d",
      "id": "demo-demand-assumptions-009",
-     "objective": 174967.5081054895,
+     "objective": 174967.50810548943,
      "summary": {
-      "cumulative_net_income": 174967.5081054895,
+      "cumulative_net_income": 174967.50810548943,
       "emergency_loans": 0.0,
       "final_cash": 2865576.658105489,
       "min_cash": 2685759.5554438904,
@@ -1088,11 +1088,11 @@
       "demand_q2": -0.3,
       "price_sensitivity": 4.0
      },
-     "fingerprint": "1d2e0c8457088828",
+     "fingerprint": "58c8ad91e3a9415d",
      "id": "demo-demand-assumptions-010",
-     "objective": -197095.16985338836,
+     "objective": -197095.16985338833,
      "summary": {
-      "cumulative_net_income": -197095.16985338836,
+      "cumulative_net_income": -197095.16985338833,
       "emergency_loans": 0.0,
       "final_cash": 2493513.980146611,
       "min_cash": 2377853.111663385,
@@ -1119,7 +1119,7 @@
       "demand_q2": 0.0,
       "price_sensitivity": 4.0
      },
-     "fingerprint": "7ac8d5864a7eb6b6",
+     "fingerprint": "f92f7b31c79dc115",
      "id": "demo-demand-assumptions-011",
      "objective": 157594.381135943,
      "summary": {
@@ -1149,32 +1149,32 @@
    "sensitivity": [
     {
      "kind": "event",
-     "local_slope": 1383233.0684276172,
-     "main_effect_range": 414969.92052828515,
+     "local_slope": 1383233.0684276167,
+     "main_effect_range": 414969.92052828503,
      "mean_objective_by_value": {
-      "-0.3": -188194.70835336795,
-      "0.0": 226775.2121749172
+      "-0.3": -188194.7083533679,
+      "0.0": 226775.21217491713
      },
      "variable": "demand_q2"
     },
     {
      "kind": "override",
-     "local_slope": -26959.772557084412,
-     "main_effect_range": 67399.43139271103,
+     "local_slope": -26959.772557084398,
+     "main_effect_range": 67399.43139271099,
      "mean_objective_by_value": {
-      "1.5": 48031.29523733445,
-      "2.6": 29207.596650366002,
-      "4.0": -19368.136155376575
+      "1.5": 48031.295237334394,
+      "2.6": 29207.596650366046,
+      "4.0": -19368.136155376596
      },
      "variable": "price_sensitivity"
     },
     {
      "kind": "override",
-     "local_slope": 22558.396638142418,
-     "main_effect_range": 6541.935025061301,
+     "local_slope": 22558.396638142643,
+     "main_effect_range": 6541.935025061366,
      "mean_objective_by_value": {
-      "0.12": 16019.284398243975,
-      "0.41": 22561.219423305276
+      "0.12": 16019.284398243932,
+      "0.41": 22561.219423305298
      },
      "variable": "ad_elasticity"
     }
@@ -1186,11 +1186,11 @@
       "demand_q2": -0.3,
       "price_sensitivity": 4.0
      },
-     "fingerprint": "aa3efb831850c141",
+     "fingerprint": "8b1e81ff13aca33b",
      "id": "demo-demand-assumptions-008",
-     "objective": -212939.26400955045,
+     "objective": -212939.26400955048,
      "summary": {
-      "cumulative_net_income": -212939.26400955045,
+      "cumulative_net_income": -212939.26400955048,
       "emergency_loans": 0.0,
       "final_cash": 2477669.885990449,
       "min_cash": 2380403.7304123007,
@@ -1217,11 +1217,11 @@
       "demand_q2": -0.3,
       "price_sensitivity": 2.6
      },
-     "fingerprint": "ac0bb40642b16df2",
+     "fingerprint": "eb5c1c5df435f760",
      "id": "demo-demand-assumptions-004",
-     "objective": -198975.2375937444,
+     "objective": -198975.23759374436,
      "summary": {
-      "cumulative_net_income": -198975.2375937444,
+      "cumulative_net_income": -198975.23759374436,
       "emergency_loans": 0.0,
       "final_cash": 2491633.9124062555,
       "min_cash": 2388665.893186821,
@@ -1248,11 +1248,11 @@
       "demand_q2": -0.3,
       "price_sensitivity": 4.0
      },
-     "fingerprint": "1d2e0c8457088828",
+     "fingerprint": "58c8ad91e3a9415d",
      "id": "demo-demand-assumptions-010",
-     "objective": -197095.16985338836,
+     "objective": -197095.16985338833,
      "summary": {
-      "cumulative_net_income": -197095.16985338836,
+      "cumulative_net_income": -197095.16985338833,
       "emergency_loans": 0.0,
       "final_cash": 2493513.980146611,
       "min_cash": 2377853.111663385,
@@ -1279,7 +1279,7 @@
       "demand_q2": -0.3,
       "price_sensitivity": 1.5
      },
-     "fingerprint": "07a317610a299997",
+     "fingerprint": "d03a60db5704ef03",
      "id": "demo-demand-assumptions-000",
      "objective": -183312.34591225756,
      "summary": {
@@ -1310,11 +1310,11 @@
       "demand_q2": -0.3,
       "price_sensitivity": 2.6
      },
-     "fingerprint": "3e46ba2a36e07971",
+     "fingerprint": "08ca85c9d1cecc1b",
      "id": "demo-demand-assumptions-006",
-     "objective": -178215.4099141722,
+     "objective": -178215.40991417205,
      "summary": {
-      "cumulative_net_income": -178215.4099141722,
+      "cumulative_net_income": -178215.40991417205,
       "emergency_loans": 0.0,
       "final_cash": 2512393.7400858277,
       "min_cash": 2389203.713380533,
@@ -1351,11 +1351,11 @@
       "demand": -0.3,
       "plan": "cautious"
      },
-     "fingerprint": "088c28cab60ee930",
+     "fingerprint": "08f412159fd9a6f2",
      "id": "demo-plan-robustness-000",
      "objective": 3078116.903,
      "summary": {
-      "cumulative_net_income": -79671.7686574214,
+      "cumulative_net_income": -79671.76865742143,
       "emergency_loans": 0.0,
       "final_cash": 3247349.2313425783,
       "min_cash": 3078116.903,
@@ -1382,11 +1382,11 @@
       "demand": -0.3,
       "plan": "cautious"
      },
-     "fingerprint": "333dc7dc78e28e7b",
+     "fingerprint": "6e8f3d5afe9862ac",
      "id": "demo-plan-robustness-001",
      "objective": 2971510.403,
      "summary": {
-      "cumulative_net_income": -79671.7686574214,
+      "cumulative_net_income": -79671.76865742143,
       "emergency_loans": 0.0,
       "final_cash": 3140742.7313425783,
       "min_cash": 2971510.403,
@@ -1413,11 +1413,11 @@
       "demand": 0.0,
       "plan": "cautious"
      },
-     "fingerprint": "5d897a1615396feb",
+     "fingerprint": "853f77a39862aa17",
      "id": "demo-plan-robustness-002",
      "objective": 3078116.903,
      "summary": {
-      "cumulative_net_income": 28034.108902999986,
+      "cumulative_net_income": 28034.10890299997,
       "emergency_loans": 0.0,
       "final_cash": 3355055.108903,
       "min_cash": 3078116.903,
@@ -1444,11 +1444,11 @@
       "demand": 0.0,
       "plan": "cautious"
      },
-     "fingerprint": "2e31a8ffa311d477",
+     "fingerprint": "1399e949ecafdb06",
      "id": "demo-plan-robustness-003",
      "objective": 2971510.403,
      "summary": {
-      "cumulative_net_income": 28034.108902999986,
+      "cumulative_net_income": 28034.10890299997,
       "emergency_loans": 0.0,
       "final_cash": 3248448.608903,
       "min_cash": 2971510.403,
@@ -1475,11 +1475,11 @@
       "demand": 0.1,
       "plan": "cautious"
      },
-     "fingerprint": "9bbe35fb1ca47811",
+     "fingerprint": "0fa8d352b88ad14f",
      "id": "demo-plan-robustness-004",
      "objective": 3078116.903,
      "summary": {
-      "cumulative_net_income": 28034.108902999986,
+      "cumulative_net_income": 28034.10890299997,
       "emergency_loans": 0.0,
       "final_cash": 3355055.108903,
       "min_cash": 3078116.903,
@@ -1506,11 +1506,11 @@
       "demand": 0.1,
       "plan": "cautious"
      },
-     "fingerprint": "61f5b3ada63198a3",
+     "fingerprint": "551e3a4b49074175",
      "id": "demo-plan-robustness-005",
      "objective": 2971510.403,
      "summary": {
-      "cumulative_net_income": 28034.108902999986,
+      "cumulative_net_income": 28034.10890299997,
       "emergency_loans": 0.0,
       "final_cash": 3248448.608903,
       "min_cash": 2971510.403,
@@ -1537,14 +1537,14 @@
       "demand": -0.3,
       "plan": "balanced"
      },
-     "fingerprint": "8a773eb564f3b42e",
+     "fingerprint": "c546115e2660e7c1",
      "id": "demo-plan-robustness-006",
-     "objective": 2925318.9661734267,
+     "objective": 2925318.9661734262,
      "summary": {
-      "cumulative_net_income": -190444.85398729893,
+      "cumulative_net_income": -190444.85398729908,
       "emergency_loans": 0.0,
-      "final_cash": 3136576.146012701,
-      "min_cash": 2925318.9661734267,
+      "final_cash": 3136576.1460127,
+      "min_cash": 2925318.9661734262,
       "quarters_with_events": [
        2,
        3,
@@ -1568,14 +1568,14 @@
       "demand": -0.3,
       "plan": "balanced"
      },
-     "fingerprint": "a4c3b7f13b11210a",
+     "fingerprint": "7251710fa4be477e",
      "id": "demo-plan-robustness-007",
-     "objective": 2818712.4661734267,
+     "objective": 2818712.4661734262,
      "summary": {
-      "cumulative_net_income": -190444.85398729893,
+      "cumulative_net_income": -190444.85398729908,
       "emergency_loans": 0.0,
-      "final_cash": 3029969.646012701,
-      "min_cash": 2818712.4661734267,
+      "final_cash": 3029969.6460127,
+      "min_cash": 2818712.4661734262,
       "quarters_with_events": [
        2,
        3,
@@ -1599,7 +1599,7 @@
       "demand": 0.0,
       "plan": "balanced"
      },
-     "fingerprint": "e484554ce25adfa8",
+     "fingerprint": "8cef5aa47fc39a6d",
      "id": "demo-plan-robustness-008",
      "objective": 3078116.903,
      "summary": {
@@ -1630,7 +1630,7 @@
       "demand": 0.0,
       "plan": "balanced"
      },
-     "fingerprint": "adfe1840363474a0",
+     "fingerprint": "1c7b0f0ef2b5d17d",
      "id": "demo-plan-robustness-009",
      "objective": 2971510.403,
      "summary": {
@@ -1661,11 +1661,11 @@
       "demand": 0.1,
       "plan": "balanced"
      },
-     "fingerprint": "ae81d07656919860",
+     "fingerprint": "e84a33a1ef7e3832",
      "id": "demo-plan-robustness-010",
      "objective": 3078116.903,
      "summary": {
-      "cumulative_net_income": 256723.61157929242,
+      "cumulative_net_income": 256723.6115792924,
       "emergency_loans": 0.0,
       "final_cash": 3583744.611579292,
       "min_cash": 3078116.903,
@@ -1692,11 +1692,11 @@
       "demand": 0.1,
       "plan": "balanced"
      },
-     "fingerprint": "c5a62af21603d68c",
+     "fingerprint": "564c16eec5021d51",
      "id": "demo-plan-robustness-011",
      "objective": 2971510.403,
      "summary": {
-      "cumulative_net_income": 256723.61157929242,
+      "cumulative_net_income": 256723.6115792924,
       "emergency_loans": 0.0,
       "final_cash": 3477138.111579292,
       "min_cash": 2971510.403,
@@ -1723,11 +1723,11 @@
       "demand": -0.3,
       "plan": "aggressive"
      },
-     "fingerprint": "1d6eec5c789be1b8",
+     "fingerprint": "5c53b32a0cb9c009",
      "id": "demo-plan-robustness-012",
      "objective": 0.0,
      "summary": {
-      "cumulative_net_income": -308846.0515630323,
+      "cumulative_net_income": -308846.05156303226,
       "emergency_loans": 339929.8015630324,
       "final_cash": 0.0,
       "min_cash": 0.0,
@@ -1754,11 +1754,11 @@
       "demand": -0.3,
       "plan": "aggressive"
      },
-     "fingerprint": "a9e1e3508e4d64c4",
+     "fingerprint": "1445a56f8e2e2258",
      "id": "demo-plan-robustness-013",
      "objective": 0.0,
      "summary": {
-      "cumulative_net_income": -308846.0515630323,
+      "cumulative_net_income": -308846.05156303226,
       "emergency_loans": 1286062.4890630322,
       "final_cash": 0.0,
       "min_cash": 0.0,
@@ -1785,7 +1785,7 @@
       "demand": 0.0,
       "plan": "aggressive"
      },
-     "fingerprint": "7590c95a4b6b751e",
+     "fingerprint": "5ed3caac5824afd2",
      "id": "demo-plan-robustness-014",
      "objective": 25368.684518006165,
      "summary": {
@@ -1816,7 +1816,7 @@
       "demand": 0.0,
       "plan": "aggressive"
      },
-     "fingerprint": "87f96e7c4644a61e",
+     "fingerprint": "55a1eea62b9520e0",
      "id": "demo-plan-robustness-015",
      "objective": 0.0,
      "summary": {
@@ -1847,7 +1847,7 @@
       "demand": 0.1,
       "plan": "aggressive"
      },
-     "fingerprint": "b59c02b2aadf25ef",
+     "fingerprint": "4471ce6ddd6ecaad",
      "id": "demo-plan-robustness-016",
      "objective": 40252.59527861362,
      "summary": {
@@ -1878,7 +1878,7 @@
       "demand": 0.1,
       "plan": "aggressive"
      },
-     "fingerprint": "f91f857a7466304c",
+     "fingerprint": "127db73570aee461",
      "id": "demo-plan-robustness-017",
      "objective": 0.0,
      "summary": {
@@ -1908,11 +1908,11 @@
    "sensitivity": [
     {
      "kind": "policy",
-     "main_effect_range": 3013876.773033897,
+     "main_effect_range": 3013876.773033896,
      "mean_objective_by_value": {
       "aggressive": 10936.879966103297,
       "balanced": 2973881.007391142,
-      "cautious": 3024813.6530000004
+      "cautious": 3024813.6529999995
      },
      "variable": "plan"
     },
@@ -1928,10 +1928,10 @@
     },
     {
      "kind": "event",
-     "local_slope": 144103.52872156596,
-     "main_effect_range": 57641.411488626385,
+     "local_slope": 144103.52872156654,
+     "main_effect_range": 57641.41148862662,
      "mean_objective_by_value": {
-      "-0.3": 1965609.7897244757,
+      "-0.3": 1965609.7897244755,
       "0.0": 2020770.5494196676,
       "0.1": 2023251.201213102
      },
@@ -1945,11 +1945,11 @@
       "demand": -0.3,
       "plan": "aggressive"
      },
-     "fingerprint": "1d6eec5c789be1b8",
+     "fingerprint": "5c53b32a0cb9c009",
      "id": "demo-plan-robustness-012",
      "objective": 0.0,
      "summary": {
-      "cumulative_net_income": -308846.0515630323,
+      "cumulative_net_income": -308846.05156303226,
       "emergency_loans": 339929.8015630324,
       "final_cash": 0.0,
       "min_cash": 0.0,
@@ -1976,11 +1976,11 @@
       "demand": -0.3,
       "plan": "aggressive"
      },
-     "fingerprint": "a9e1e3508e4d64c4",
+     "fingerprint": "1445a56f8e2e2258",
      "id": "demo-plan-robustness-013",
      "objective": 0.0,
      "summary": {
-      "cumulative_net_income": -308846.0515630323,
+      "cumulative_net_income": -308846.05156303226,
       "emergency_loans": 1286062.4890630322,
       "final_cash": 0.0,
       "min_cash": 0.0,
@@ -2007,7 +2007,7 @@
       "demand": 0.0,
       "plan": "aggressive"
      },
-     "fingerprint": "87f96e7c4644a61e",
+     "fingerprint": "55a1eea62b9520e0",
      "id": "demo-plan-robustness-015",
      "objective": 0.0,
      "summary": {
@@ -2038,7 +2038,7 @@
       "demand": 0.1,
       "plan": "aggressive"
      },
-     "fingerprint": "f91f857a7466304c",
+     "fingerprint": "127db73570aee461",
      "id": "demo-plan-robustness-017",
      "objective": 0.0,
      "summary": {
@@ -2069,7 +2069,7 @@
       "demand": 0.0,
       "plan": "aggressive"
      },
-     "fingerprint": "7590c95a4b6b751e",
+     "fingerprint": "5ed3caac5824afd2",
      "id": "demo-plan-robustness-014",
      "objective": 25368.684518006165,
      "summary": {

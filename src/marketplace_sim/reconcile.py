@@ -23,7 +23,7 @@ from marketplace_sim.provenance import Tagged
 # Engine line -> (statement row, sign the engine value takes in that row). Several lines can feed one row.
 CASH_ROWS: dict[str, tuple[str, int]] = {
     "revenue": ("sales", +1), "production_cost": ("production", -1), "advertising": ("advertising", -1),
-    "store_setup": ("so", -1), "web_center_setup": ("so", -1), "outlet_lease": ("so", -1),
+    "store_setup": ("so", -1), "web_center_setup": ("so", -1), "outlet_lease": ("so", -1), "design_cost": ("rd", -1),
     "sales_force_salaries": ("sf", -1), "sales_force_hiring": ("sf", -1), "sales_force_training": ("sf", -1),
     "sales_force_commission": ("sf", -1), "income_tax": ("income_taxes", -1), "cd_interest": ("interest_income", +1),
     "inventory_selloff_proceeds": ("other_income", +1), "inventory_holding_cost": ("other_exp", -1),
@@ -34,18 +34,22 @@ CASH_ROWS: dict[str, tuple[str, int]] = {
 # Accrual income statement (needs the accounting.accrual option for COGS and depreciation).
 INCOME_ROWS: dict[str, tuple[str, int]] = {
     "revenue": ("sales", +1), "promotion_rebates": ("rebates", -1), "accrual_cogs": ("cogs", -1),
-    "rnd_spending": ("rd", -1), "advertising": ("advertising", -1), "internet_marketing": ("inet_exp", -1),
+    "rnd_spending": ("rd", -1), "design_cost": ("rd", -1), "advertising": ("advertising", -1), "internet_marketing": ("inet_exp", -1),
     "sales_force_salaries": ("sf", -1), "sales_force_hiring": ("sf", -1), "sales_force_training": ("sf", -1),
     "sales_force_commission": ("sf", -1), "store_setup": ("so", -1), "outlet_lease": ("so", -1),
-    "web_sales_salaries": ("wsc_exp", -1), "web_center_setup": ("wsc_exp", -1), "market_research": ("mr", -1),
+    "web_sales_salaries": ("wsc_exp", -1), "web_center_setup": ("so", -1), "market_research": ("mr", -1),
     "excess_capacity_cost": ("excess_capacity", -1), "accrual_depreciation": ("depreciation", -1),
     "inventory_selloff_proceeds": ("other_income", +1), "inventory_holding_cost": ("other_exp", -1),
     "purchasing_shortfall_fee": ("other_exp", -1), "inventory_tax": ("other_exp", -1),
     "cd_interest": ("interest_income", +1), "loan_interest": ("interest", -1), "accrual_loss_used": ("loss", -1),
     "income_tax": ("income_taxes", -1), "accrual_net_income": ("net_income", +1),
 }
-# Candidate mappings that are guesses from row names (unverified): web center costs to wsc_exp, store costs to so.
-INCOME_CANDIDATES = {"web_center_setup", "web_sales_salaries", "store_setup", "outlet_lease"}
+# Candidate mappings (one quarter of evidence or a guess from row names; docs/upgrade-protocol.md):
+# * design_cost -> rd: the Q1 statement shows the design charge of the brands designed that quarter in rd.
+# * web_center_setup -> so: in the Q1 statement a web center was opened while wsc_exp stayed 0, so its setup is not in
+#   wsc_exp; so carries store and web-center setup together (row label "Store and Web Sales Center Expenses").
+# * web_sales_salaries -> wsc_exp, outlet_lease -> so: guesses from row names (no quarter with the item yet).
+INCOME_CANDIDATES = {"design_cost", "web_center_setup", "web_sales_salaries", "store_setup", "outlet_lease"}
 # Rows of the captured income statement this engine does not produce at all.
 INCOME_NOT_MODELED = {"lic_income", "lic_fee", "shipping"}
 
@@ -56,6 +60,59 @@ BALANCE_ROWS: dict[str, tuple[str, int]] = {
 }
 # The captured balance sheet has no inventory row and no long-term loan row; our books carry both (labelled).
 BALANCE_EXTRA = {"bs_inventory", "bs_long_loans"}
+
+
+STATEMENT_SCREENS = {"income": "IncomeStatement", "cash": "CashFlow", "balance": "BalanceSheet"}
+
+
+def actuals_from_views(views: Mapping[str, Mapping[str, Any]], quarter: int) -> dict[str, dict[str, float]]:
+    """Settled statement rows of ``quarter`` (signed like ``compare`` expects), from captured report views.
+
+    Report screens list one column per quarter so far; the column of ``quarter`` is read. A view captured for that
+    quarter (``IncomeStatement@Q1``) is preferred over the current one. Total rows (sign 0) keep their raw value.
+    Private data: the caller must keep the result under ``evidence/private``.
+    """
+    out: dict[str, dict[str, float]] = {}
+    for name, screen in STATEMENT_SCREENS.items():
+        view = views.get(f"{screen}@Q{quarter}") or views.get(screen)
+        static = (view or {}).get("staticData") or {}
+        if not static.get("sections"):
+            continue
+        signs = statement_signs(static)
+        rows: dict[str, float] = {}
+        for section in static["sections"]:
+            for item in section["items"]:
+                values = item.get("quarters") or []
+                if len(values) < quarter:
+                    continue
+                raw = float(values[quarter - 1])
+                sign = signs[item["id"]]
+                rows[item["id"]] = raw * sign if sign else raw
+        out[name] = rows
+    return out
+
+
+@dataclass(frozen=True)
+class RowValue:
+    row: str
+    status: str
+    engine: float | None
+    actual: float | None
+    lines: tuple[str, ...]
+
+
+def compare_values(lines: Mapping[str, Tagged | float], captured: Mapping[str, float],
+                   mapping: Mapping[str, tuple[str, int]], *, rel_tol: float = 0.005,
+                   abs_tol: float = 1.0) -> list[RowValue]:
+    """Like ``compare`` but keeps both numbers, for the private reconciliation report only."""
+    folded: dict[str, float] = {}
+    for line, (row, sign) in mapping.items():
+        if line in lines:
+            raw = lines[line]
+            folded[row] = folded.get(row, 0.0) + sign * (raw.value if isinstance(raw, Tagged) else float(raw))
+    checks = compare(lines, captured, mapping, rel_tol=rel_tol, abs_tol=abs_tol)
+    return [RowValue(c.row, c.status, folded.get(c.row), None if c.row not in captured else float(captured[c.row]),
+                     c.lines) for c in checks]
 
 
 def statement_signs(static_data: Mapping[str, Any]) -> dict[str, int]:

@@ -220,14 +220,15 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
             new.brands[bp.name] = Brand(bp.name, bt.code, [c.id for c in comps], bp.segment or bt.segment_id)
             new_brand_count += 1
         brand = new.brands[bp.name]
-        cost = _unit_cost(pack, new, bp.name, effects)
-        lines[f"unit_cost[{bp.name}]"] = cost
-        unit_costs[bp.name] = cost
         rule = effects.production_units.get(bp.name)
         wanted = rule.value if rule is not None else bp.production
         if rule is not None:
             units_level[bp.name] = rule.level
         units = min(wanted, capacity_left)
+        # The game's cost table is per quarter volume: cost the units actually made (planned units if none).
+        cost = _unit_cost(pack, new, bp.name, effects, volume=units if units > 0 else bp.production)
+        lines[f"unit_cost[{bp.name}]"] = cost
+        unit_costs[bp.name] = cost
         if units < wanted:
             notes.append(f"{bp.name}: production capped by capacity ({units:.0f} of {wanted:.0f})")
             if effects.capacity_level is not None:
@@ -301,6 +302,10 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
         lines[key] = Tagged(lines["revenue"].value * rate.value, min(lines["revenue"].level, rate.level),
                             f"revenue x {rate.source}")
     module_income: list[str] = []
+
+    def _held_cost(brand_name: str) -> Tagged:  # this quarter's production cost when made now, else the rule
+        return unit_costs.get(brand_name) or _unit_cost(pack, new, brand_name, effects)
+
     sold_units = {o.brand: lines[f"units_sold[{o.brand}]"].value for o in own_offers}
 
     def outcome(expense_lines: tuple[str, ...] = (), income_lines: tuple[str, ...] = ()) -> Outcome:
@@ -323,14 +328,14 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
     if released and effects.salvage_fraction is not None:
         frac = effects.salvage_fraction
         parts = [u.scaled(frac.value, frac.source).with_level(frac.level) for u in released.values()]
-        value = [Tagged(p.value * _unit_cost(pack, new, b, effects).value, min(p.level, _unit_cost(pack, new, b, effects).level),
+        value = [Tagged(p.value * _held_cost(b).value, min(p.level, _held_cost(b).level),
                         f"{p.source} x unit cost") for p, b in zip(parts, released, strict=True)]
         lines["inventory_selloff_proceeds"] = total(value, "sold-off units x salvage fraction x unit cost")
         module_income.append("inventory_selloff_proceeds")
     if effects.holding_rate is not None:
         rate = effects.holding_rate
-        held = [Tagged(left * _unit_cost(pack, new, b, effects).value * rate.value,
-                       min(rate.level, _unit_cost(pack, new, b, effects).level), f"units x unit cost x {rate.source}")
+        held = [Tagged(left * _held_cost(b).value * rate.value,
+                       min(rate.level, _held_cost(b).level), f"units x unit cost x {rate.source}")
                 for b, left in sorted(new.inventory.items()) if left > 0]
         lines["inventory_holding_cost"] = total(held, "ending units x unit cost x quarterly carrying rate",
                                                 empty_level=rate.level)
@@ -393,11 +398,12 @@ def _segment(pack: ParamPack, state: CompanyState, bp: BrandPlan) -> str | None:
     return bp.segment or pack.brand_type(bp.brand_type).segment_id
 
 
-def _unit_cost(pack: ParamPack, state: CompanyState, brand_name: str, effects: Any) -> Tagged:
+def _unit_cost(pack: ParamPack, state: CompanyState, brand_name: str, effects: Any,
+               volume: float | None = None) -> Tagged:
     """Unit cost of a brand this quarter (produced, held or sold off), with the business modules' cost effects."""
     brand = state.brands[brand_name]
     bt = pack.brand_type(brand.brand_type)
     return m.unit_cost(pack, bt, [pack.component(c) for c in brand.components],
                        material_factor=effects.material_cost_factor, labor_factor=effects.labor_cost_factor,
                        conversion_factor=effects.conversion_factor.get(brand_name),
-                       add=effects.unit_cost_add.get(brand_name))
+                       add=effects.unit_cost_add.get(brand_name), volume=volume)
