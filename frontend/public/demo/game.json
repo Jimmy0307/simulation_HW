@@ -949,7 +949,7 @@
      "mark": "L",
      "source": "rival units / market_units_total",
      "uncalibrated": true,
-     "value": 0.8257434528280287
+     "value": 0.8257434528280289
     },
     "rival_share[bot-b]": {
      "chain": [
@@ -1000,7 +1000,7 @@
      "mark": "L",
      "source": "rival units / market_units_total",
      "uncalibrated": true,
-     "value": 0.17425654717197117
+     "value": 0.17425654717197112
     },
     "rival_units[bot-a]": {
      "chain": [
@@ -1016,7 +1016,7 @@
      "mark": "L",
      "source": "sum of the rival's units demanded (rivals unconstrained)",
      "uncalibrated": true,
-     "value": 3530.5790064340968
+     "value": 3530.579006434097
     },
     "rival_units[bot-b]": {
      "chain": [
@@ -1032,7 +1032,7 @@
      "mark": "L",
      "source": "sum of the rival's units demanded (rivals unconstrained)",
      "uncalibrated": true,
-     "value": 745.0576871932919
+     "value": 745.0576871932917
     },
     "stock_raised": {
      "chain": [
@@ -2899,7 +2899,7 @@
      "mark": "L",
      "source": "our units sold / market_units_total",
      "uncalibrated": true,
-     "value": 0.1896646631894562
+     "value": 0.18966466318945624
     },
     "market_units_total": {
      "chain": [
@@ -2936,7 +2936,7 @@
      "mark": "L",
      "source": "our units sold + rival units demanded (rivals unconstrained)",
      "uncalibrated": true,
-     "value": 4882.133860539914
+     "value": 4882.133860539913
     },
     "net_income": {
      "chain": [
@@ -3277,7 +3277,7 @@
      "mark": "L",
      "source": "rival units / market_units_total",
      "uncalibrated": true,
-     "value": 0.43079667409205286
+     "value": 0.4307966740920529
     },
     "rival_share[bot-b]": {
      "chain": [
@@ -3360,7 +3360,7 @@
      "mark": "L",
      "source": "sum of the rival's units demanded (rivals unconstrained)",
      "uncalibrated": true,
-     "value": 1852.9585566419823
+     "value": 1852.958556641982
     },
     "stock_raised": {
      "chain": [

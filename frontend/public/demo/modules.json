@@ -1229,7 +1229,7 @@
   },
   {
    "area": "production",
-   "capture": "Q2 settlement (unverified · awaiting Q2 capture)",
+   "capture": "Q2-open estimate table captured; Q2 settlement awaited",
    "coefficients": null,
    "decidable": false,
    "decisions": [],
@@ -1240,11 +1240,11 @@
    "maturity": "heuristic",
    "module": null,
    "name": "單位生產成本",
-   "next_step": "Cannot be verified by arithmetic alone: needs the game's cost of production for a known brand and volume (Q2 cost-of-production report or the FactorySimulation calculate).",
-   "ours": "Placeholder: sum(component price) x cost adjustment + minimum labour + minimum overhead (ignores learning curve, scale and variable terms). Verified branch: nothing produced costs nothing. Material part can be scaled by the purchasing module.",
+   "next_step": "To verified: compare the Q2 settled production cost and COGS with the table estimate at the volume actually produced; hold out on Q3.",
+   "ours": "With a private pack holding the estimate table: the game's estimate at the produced volume (cost linear in material at each listed volume, natural cubic spline in log-log over volume; estimated level, src/marketplace_sim/cost_curve.py). Without it: placeholder sum(component price) x cost adjustment + minimum labour + minimum overhead. Verified branch: nothing produced costs nothing. Module factors scale the material part or the rest.",
    "primary": false,
    "ranges": null,
-   "real_note": "The captured Q1 brand screen lists component prices and cost adjustment, but also learning-curve, scale-threshold, variable labour and overhead, and inefficiency parameters; the combination is unobserved.",
+   "real_note": "The Q2-open capture shows the game's CostOfProduction estimate table (cost per unit of each designed brand at several quarterly volumes). Across designs, at each listed volume the estimate is linear in material cost (leave-one-design-out error well under 1 %, private check). The formula behind the table (learning curve, scale thresholds, labour and overhead terms) is still unobserved.",
    "real_status": "measured",
    "screens": [
     "ModifyBrand",
@@ -1258,7 +1258,7 @@
   },
   {
    "area": "production",
-   "capture": "Q2 settlement (unverified · awaiting Q2 capture)",
+   "capture": "Q1 settlement reproduced (candidate · hold-out pending)",
    "coefficients": null,
    "decidable": false,
    "decisions": [],
@@ -1269,11 +1269,11 @@
    "maturity": "heuristic",
    "module": null,
    "name": "設計與開線費",
-   "next_step": "Cannot be verified by arithmetic alone: when and where the game charges design cost (R&D row or production) is unobserved. Match the Q2 statements after designing one brand in Q1.",
-   "ours": "Placeholder: design cost per new brand. Verified branch: no new brand designed means no design cost (structural zero).",
+   "next_step": "Hold-out: reproduce the rd row of a later quarter with a new design (or a brand modification, whose charge is still unobserved).",
+   "ours": "Design cost per new brand, charged in the design quarter, mapped to the rd row. Verified branch: no new brand means no design cost.",
    "primary": false,
    "ranges": null,
-   "real_note": "Design and setup cost are Q1 brand-screen parameters; when they are charged is unverified.",
+   "real_note": "Design cost is a brand-screen parameter. The settled Q1 statements show the brands designed in Q1 charged in the quarter of design, in the R&D row (income statement and cash flow); reproduced with zero residual (one quarter).",
    "real_status": "measured",
    "screens": [
     "ModifyBrand"
@@ -2748,7 +2748,7 @@
   },
   {
    "area": "accounting",
-   "capture": "Q2 settlement (unverified · awaiting Q2 capture)",
+   "capture": "Q1 reproduced (candidate); Q2 settlement awaited",
    "coefficients": {
     "depreciation_quarters": 40,
     "inventory_tax_annual": 0.02
@@ -2762,11 +2762,11 @@
    "maturity": "heuristic",
    "module": "accounting.accrual",
    "name": "損益表（應計基礎）",
-   "next_step": "To verified (accounting): reproduce a Q2 income statement row by row with the accrual option.",
+   "next_step": "To verified (accounting): reproduce the Q2 statements (first quarter with sales, COGS and depreciation) as the hold-out.",
    "ours": "Engine default: cash-basis profit (never above placeholder). With the AccrualAccounting option: COGS at moving-average cost, depreciation, inventory tax, tax after a loss carry-forward (heuristic rules).",
    "primary": false,
    "ranges": {},
-   "real_note": "The captured Q1 income statement is accrual: cost of goods sold, depreciation, a loss carry-forward row before taxable income, and an inventory tax parameter (structure only; Q1 values are all zero).",
+   "real_note": "The captured Q1 income statement is accrual: cost of goods sold, depreciation, a loss carry-forward row before taxable income, and an inventory tax parameter. The settled Q1 statements (read from the Q2-open capture) are reproduced row by row with the accrual option: capacity bought in a quarter is not depreciated in that quarter, and web-center setup sits in the store and web sales center row, not in the web-sales row.",
    "real_status": "measured",
    "screens": [
     "ProFormaIncomeStatement",

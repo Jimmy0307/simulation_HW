@@ -6,7 +6,8 @@ engine's cash-basis numbers:
 
 * inventory at book value (moving average of unit cost); production is capitalised, cost of goods sold = units sold
   x average cost; units sold off leave at book value;
-* plant (capacity bought while the option is on) depreciated straight-line over ``depreciation_quarters``; capacity
+* plant (capacity bought while the option is on) depreciated straight-line over ``depreciation_quarters``, starting
+  the quarter after the purchase (a captured Q1 statement shows no depreciation in the purchase quarter); capacity
   owned before the option was switched on is not on the books (labelled);
 * inventory tax = annual rate / 4 x inventory book value at quarter end (a settle expense);
 * income tax on accrual pre-tax income after a loss carry-forward (replaces the engine's cash-basis tax);
@@ -132,7 +133,9 @@ class AccrualAccounting:
                                     for b in o.inventory_start)
         plant_start = float(s.get("plant", 0.0))
         capex = _v(o.lines, "capex_capacity")
-        q["depreciation"] = (plant_start + capex) / self.c["depreciation_quarters"]
+        # Capacity bought this quarter is not depreciated in its purchase quarter: the Q1 statement (capacity bought,
+        # depreciation row 0) shows it; it is usable from next quarter on, and depreciates from then.
+        q["depreciation"] = plant_start / self.c["depreciation_quarters"]
         q["plant_end"] = plant_start + capex - q["depreciation"]
         q["plant_start"] = plant_start
         return q

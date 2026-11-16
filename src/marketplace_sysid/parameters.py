@@ -1,9 +1,13 @@
 """Extract model parameters from REA Evidence of ``view``/``calculate`` responses.
 
-Reads two REA Evidence kinds (no HAR or JavaScript parsing here):
+Reads two REA Evidence kinds (no JavaScript parsing here):
 
 * ``inspect_web_network_capture`` records (HAR), via their retained request/response bodies;
 * ``capture_browser_scenario`` records, via their ``network-content`` events.
+
+Fallback input (``responses_from_har``): a plain browser DevTools HAR export, for a quarter where the team saved the
+screens with the browser instead of an REA run. Only ``backend-json.php`` request and response bodies are read;
+headers, cookies and tokens are never touched. The HAR file itself stays under ``evidence/private`` (git-ignored).
 
 Every numeric or boolean leaf of a response ``result`` is generalized over array indices (``a[*].b``) and
 classified as ``parameter_table``, ``parameter``, ``state_value``, ``result_value``, ``decision``,
@@ -14,6 +18,7 @@ written separately and must stay under ``evidence/private``.
 from __future__ import annotations
 
 import argparse
+import base64
 import json
 import re
 from collections import defaultdict
@@ -48,6 +53,7 @@ class Response:
     method: str | None
     result: Any
     source: str
+    quarter: int | None = None  # quarter the request asked for (plain HAR input only)
 
 
 def _service(url: str) -> str:
@@ -68,6 +74,37 @@ def responses_from_capture(record: JSON, source: str = "har") -> Iterator[Respon
         if isinstance(payload, dict):
             yield Response(_service(url), body.get("method") if isinstance(body, dict) else None,
                            payload.get("result"), source)
+
+
+def responses_from_har(har: JSON, source: str = "devtools-har") -> Iterator[Response]:
+    """Responses of a plain browser HAR export (``log.entries``), in capture order.
+
+    The request's ``parameters[0].student.quarter`` is kept in ``Response.quarter`` so a report screen captured for an
+    earlier quarter (e.g. last quarter's income statement) is not mistaken for the current quarter's screen.
+    """
+    for entry in har.get("log", {}).get("entries", []):
+        request = entry.get("request", {})
+        url = str(request.get("url", ""))
+        if "backend-json.php" not in url:
+            continue
+        content = entry.get("response", {}).get("content", {})
+        text = content.get("text") or ""
+        if content.get("encoding") == "base64":
+            text = base64.b64decode(text).decode("utf-8", "replace")
+        try:
+            body = json.loads(request.get("postData", {}).get("text") or "{}")
+            payload = json.loads(text or "{}")
+        except ValueError:
+            continue
+        if not isinstance(payload, dict):
+            continue
+        quarter = None
+        if isinstance(body, dict):
+            params = body.get("parameters") or [{}]
+            first = params[0] if isinstance(params, list) and params and isinstance(params[0], dict) else {}
+            quarter = (first.get("student") or {}).get("quarter")
+        yield Response(_service(url), body.get("method") if isinstance(body, dict) else None, payload.get("result"),
+                       source, quarter=int(quarter) if isinstance(quarter, int) else None)
 
 
 def responses_from_scenario(record: JSON, source: str = "scenario") -> Iterator[Response]:
@@ -175,7 +212,8 @@ def build_catalog(responses: Iterable[Response]) -> tuple[JSON, JSON]:
     return catalog, values
 
 
-def collect(capture_bundles: Iterable[Path], scenario_files: Iterable[Path]) -> list[Response]:
+def collect(capture_bundles: Iterable[Path], scenario_files: Iterable[Path],
+            har_files: Iterable[Path] = ()) -> list[Response]:
     found: list[Response] = []
     for bundle_path in capture_bundles:
         record = find_record(load_bundle(bundle_path), "inspect_web_network_capture")
@@ -188,6 +226,8 @@ def collect(capture_bundles: Iterable[Path], scenario_files: Iterable[Path]) -> 
         result = data.get("normalized_result") if isinstance(data, dict) else None
         if isinstance(result, dict) and "events" in result and "steps" in result:
             found.extend(responses_from_scenario(data, scenario_path.name))
+    for har_path in har_files:
+        found.extend(responses_from_har(json.loads(Path(har_path).read_text(encoding="utf-8")), Path(har_path).name))
     return found
 
 

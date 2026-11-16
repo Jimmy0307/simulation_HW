@@ -34,7 +34,16 @@ SOURCE_MAP: dict[str, str] = {
     "component_groups[*]": "ModifyBrand:staticData.componentGroups[*].{groupID,required,multiSelect}",
     "components[*]": "ModifyBrand:staticData.componentGroups[*].brandFeatures[*].{featureID,featurePrice,featureTypes,quarterToAppear,projectCost}",
     "brand_types[*]": "ModifyBrand:staticData.brandTypes[*].{brandType,featureType,priceAdj,costAdj}",
-    "production.*": "ModifyBrand:staticData.{designCost,manufacturingSetupCost,minDirectLabor,minOverheadCPU}",
+    "production.*": "ModifyBrand:staticData.{designCost,manufacturingSetupCost,minDirectLabor,varDirectLabor,"
+                    "minOverheadCPU,varOverheadCPU,learnCurve,learnCurveFloor,scaleThreshold,componentThresholdNumber,"
+                    "factoryCostIndex,workersProductivity} + dynamicData.workersDailyCompensation",
+    "cost_estimates[*]": "CostOfProduction:dynamicData.brands[*].{brandType,brandFeatures,cogsEstimates[*].{units,cost}}",
+    "finance.loan_rates": "ProFormaCashFlow:staticData.{slRateMin,slRateMax,elRateInc,ltRate5yr,inventoryTax}",
+    "extras.sales_force": "HireSalesPeople:staticData.regions[*].{hireCost,layOffCost,supportTrainCost,segments[*].trainCost,"
+                          "cities[*].annualCompensation} + HireWebSalesPeople:staticData.regions[*].{hireCost,layOffCost}",
+    "extras.media": "RegionalMedia:staticData.{media[*].mediaName,regions[*].media[*].mediaCost,maxInserts}",
+    "extras.web_productivity": "WebProductivity:staticData.webProductivities[*].{setupCost,quarterlyBudget,improvement}",
+    "extras.equity_schedule": "FinancialResources:staticData.futureInvestments[*].{quarter,investment}",
 }
 
 
@@ -107,6 +116,15 @@ class BrandType:
 
 
 @dataclass(frozen=True)
+class CostEstimate:
+    """The game's own pre-settlement unit-cost estimate of one brand design at several production volumes."""
+
+    brand_type: str
+    components: tuple[str, ...]
+    points: tuple[tuple[float, float], ...]  # (units produced in the quarter, cost per unit), ascending units
+
+
+@dataclass(frozen=True)
 class ParamPack:
     name: str
     provenance: str
@@ -125,6 +143,8 @@ class ParamPack:
     path: Path | None = None
     demand: dict[str, Any] = field(default_factory=dict)  # demand model choice and coefficient overrides
     modules: dict[str, Any] = field(default_factory=dict)  # business-module coefficient overrides (marketplace_sim.business)
+    cost_estimates: list[CostEstimate] = field(default_factory=list)  # game's unit-cost estimate table (optional)
+    extras: dict[str, Any] = field(default_factory=dict)  # captured screen parameters not yet used by the engine
 
     def segment(self, segment_id: str) -> Segment:
         return next(s for s in self.segments if s.id == segment_id)
@@ -169,6 +189,10 @@ def pack_from_dict(data: dict[str, Any], path: Path | None = None) -> ParamPack:
         path=path,
         demand=dict(data.get("demand") or {}),
         modules=dict(data.get("modules") or {}),
+        cost_estimates=[CostEstimate(str(c["brand_type"]), tuple(str(x) for x in c["components"]),
+                                     tuple(sorted((float(u), float(v)) for u, v in c["points"])))
+                        for c in data.get("cost_estimates") or []],
+        extras=dict(data.get("extras") or {}),
     )
 
 
