@@ -53,17 +53,17 @@ Install NumPy without making it a dependency of the regular REA/MCP tools:
     python -m pip install -e ".[bootstrap,dev]"
 
 Prepare private operator inputs at
-\`evidence/private/q2_bootstrap_inputs.json\` with these fields:
+`evidence/private/q2_bootstrap_inputs.json` with these fields:
 
-- \`plans\`: array; each plan has \`name\`, \`store_staff\`,
-  \`web_staff\`, and \`brands\`.
-- Each brand in a plan has \`name\`, \`type\` (\`M\` or \`S\`), and
-  \`price\`. Each segment must contain one or two offered brands.
-- \`cost_quotes\`: mapping each offered brand name to server-estimate points
-  \`[[units, unit_cost], ...]\` in ascending quantity order.
-- \`segment_mountain_weight\`: value strictly between 0 and 1.
-- \`q1_bank_cash\`, \`q2_draft_equity\`, \`q2_interest_income\`,
-  \`q2_fixed_cash_by_plan\`: model inputs (not protected game state).
+- `plans`: array; each plan has `name`, `store_staff`,
+  `web_staff`, and `brands`.
+- Each brand in a plan has `name`, `type` (`M` or `S`), and
+  `price`. Each segment must contain one or two offered brands.
+- `cost_quotes`: mapping each offered brand name to server-estimate points
+  `[[units, unit_cost], ...]` in ascending quantity order.
+- `segment_mountain_weight`: value strictly between 0 and 1.
+- `q1_bank_cash`, `q2_draft_equity`, `q2_interest_income`,
+  `q2_fixed_cash_by_plan`: model inputs (not protected game state).
 - Keep the raw game captures and values out of Git.
 
     python scripts/q2_bootstrap_forecast.py --inputs evidence/private/q2_bootstrap_inputs.json --output evidence/private/q2_bootstrap_results.json
