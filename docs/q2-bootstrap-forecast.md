@@ -32,8 +32,7 @@ is **not** available, and Q2 actual sales observations are not yet available.
   salesperson with Uniform(0,30) output. **The base case excludes online
   throughput** because there are no observed game sales for this channel.
 - Costs: interpolate the server's own CostOfProduction **estimates** between
-  observed quantity breakpoints on a log-volume scale. When fewer units per
-  brand are forecast than the first observed break, extrapolate explicitly
+  observed quantity breakpoints on a log-volume scale. The observed quote-table volume refers to **all bicycle units produced by the firm**, not the units for an individual brand. When total quarterly output is below the first observed break, extrapolate explicitly
   and apply a larger hypothetical lognormal model-risk multiplier (log-SD
   0.18 vs 0.08 at known-quote levels). Do not present extrapolated costs as
   verified Marketplace costs.
@@ -77,12 +76,35 @@ Marketplace website, edits decisions, or advances the simulation.
 - Generated values: assumed bootstrap model, not independently observed demand.
 - Missing evidence: brand-by-brand demand, price elasticity, ad effects, online
   productivity, quantity below the first server quote, and Q2 settlement.
-- Check production feasibility at the **brand** level: splitting the same
-  forecast across four brands can move each below quote support even if total
-  quarterly factory volume appears sufficient.
+- **Corrected quote basis:** use total company production volume for every
+  brand's unit-cost quote, including stress scenarios. Splitting the same total
+  volume into more brands does not, by itself, move cost lookup below 100 units.
+  Product mix still changes material cost and margin, and additional brands
+  can alter marketing or operations through **unverified** mechanisms.
 - Compare the two-vs-four brand strategy at the **same sales staff and
   advertising levels**, otherwise volume differences are confounded.
 - Full pytest, publication gate, and the actual post-Sales factory/pro forma
   refresh are required before recommending a merge or Q2 submission.
 
 No private user-specific values or captured secrets are present in this file.
+
+## Q2 manual/source audit (public method only)
+
+The instructor's Q2 Operating Capacity guidance supplies 65 production days,
+requires the Sales forecast before sizing shifts, and recommends a 30% upward
+allowance for a 70% productive workforce. The lecture's `1 + 0.30` is a
+planning approximation, distinct from the algebraically exact `1 / 0.70`.
+Neither is a substitute for the game's factory simulation. Overtime is
+conditional on realized shortage and can carry a fatigue and overtime-pay cost.
+
+A team worksheet can contain multiple provisional demand/headcount/price
+versions. Never silently mix them. Version each candidate as a separate
+scenario. If a reported headcount includes service or web-support staff,
+run a **service-included vs sales-only** sensitivity until the game confirms
+who counts for demand projection. A 12-month potential figure is never a
+Q2 unit-sales observation.
+
+Do not count certificates of deposit towards a bank-cash target without an
+observed withdrawal. A model-calculated bank balance is not the official
+Pro Forma Cash Flow; rerun the game's three demand scenarios after decisions
+are updated.
