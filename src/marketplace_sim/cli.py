@@ -12,7 +12,7 @@
   mpsim reconcile --params DIR --har FILE.har --quarter N --plan PLAN.yaml [--save SAVE.json] --out PRIVATE.json
   mpsim cost-curve --params DIR [--brand-type T --components ID,ID,... --units N ...]   (private pack)
   mpsim intake --har FILE.har --out PRIVATE_ORDERS.yaml          (the team's entered decisions -> factory orders)
-  mpsim factory --params DIR --orders ORDERS.yaml [--oc 12,14,16] [--ot 0,2] [--demand 0.5,1,1.5] [--reading factory|brand|both]
+  mpsim factory --params DIR --orders ORDERS.yaml [--oc A,B,...] [--ot 0,2] [--demand 0.5,1,1.5] [--reading factory|brand|both]
 """
 
 from __future__ import annotations
@@ -388,6 +388,9 @@ def cmd_factory(args: argparse.Namespace) -> None:
     print(f"forecast {forecast:,.0f} units; productivity {productivity:g} %; help-text operating capacity "
           f"{need:.1f}/day (+25 % buffer: {required_operating_capacity(forecast, productivity, 0.25):.1f})")
     readings = ["factory", "brand"] if args.reading == "both" else [args.reading]
+    if not args.oc:
+        fixed = float(pack.initial_state.get("fixed_capacity_units", 0.0)) or 10.0
+        args.oc = ",".join(str(round(fixed * share)) for share in (0.6, 0.75, 0.9, 1.0))
     rows = []
     for reading in readings:
         rows += sweep(pack, orders, _floats(args.oc), _floats(args.ot), _floats(args.demand), productivity=productivity,
@@ -489,7 +492,7 @@ def main(argv: list[str] | None = None) -> None:
     p = sub.add_parser("factory", help="production scheduler: operating capacity x overtime x demand sweep (private)")
     p.add_argument("--params", required=True)
     p.add_argument("--orders", required=True)
-    p.add_argument("--oc", default="10,12,14,16", help="operating capacities to try (units/day)")
+    p.add_argument("--oc", help="operating capacities to try (units/day); default: 60/75/90/100 %% of fixed capacity")
     p.add_argument("--ot", default="0,2", help="maximum overtime hours to try")
     p.add_argument("--demand", default="0.5,0.75,1,1.25,1.5", help="demand outcomes as multiples of the forecast")
     p.add_argument("--reading", default="both", choices=["factory", "brand", "both"])

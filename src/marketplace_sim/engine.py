@@ -455,7 +455,7 @@ def _jit_production(pack: ParamPack, state: CompanyState, plan: Plan, new: Compa
                                        "overtime units x conversion x (labour share x pay change + 1), fatigue-adjusted")
     lines["capacity_change_cost"] = Tagged(r.change_cost, H if r.change_cost else D,
                                            "min increase cost + var increase x added units (screen parameters; formula unverified)")
-    production = r.material_cost + r.conversion_per_unit * regular_paid + r.overtime_premium + r.change_cost
+    production = r.production_cost - r.conversion_per_unit * r.idle_units  # the idle part is the excess-capacity line
     prod_level = min(E, demand_level, *([H] if r.overtime_premium or r.change_cost else []))
     lines["production_cost"] = Tagged(production, prod_level, "just-in-time factory: material + labour/overhead used + "
                                       "overtime premium + capacity change cost")
