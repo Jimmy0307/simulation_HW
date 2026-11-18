@@ -51,7 +51,7 @@ def bootstrap_plan(
     Shared mean-one lognormal demand shock: log SD 0.20.
     Optional speculative web output per worker: 70% active, Uniform(0,30).
     Segment split: Beta(24*p, 24*(1-p)); within-segment beta(6,6).
-    Quoted cost uncertainty is synthetic, with greater risk below 100 units.
+    Quoted cost uncertainty is synthetic, with greater risk when total company production is below 100 units.
     """
     if draws < 1000:
         raise ValueError("At least 1000 bootstrap replicates required")
@@ -102,13 +102,16 @@ def bootstrap_plan(
     for brand in brands:
         name = brand["name"]
         n = by_brand[name]
-        quoted = quote_cost(n, costs[name])
-        sigma = np.where(n < 100, 0.18, 0.08)
+        # The CostOfProduction table uses TOTAL company units across all brands.
+        # Looking up brand-specific units incorrectly extrapolates when each
+        # brand sells fewer than 100 units but total production exceeds 100.
+        quoted = quote_cost(total, costs[name])
+        sigma = np.where(total < 100, 0.18, 0.08)
         multiplier = np.exp(rng.normal(size=draws) * sigma - sigma**2 / 2)
         unit_cost = np.where(n > 0, quoted * multiplier, 0)
         cost_total += n * unit_cost
         revenue += n * float(brand["price"])
-        outside_quotes += np.where((n > 0) & (n < 100), n, 0)
+        outside_quotes += np.where((n > 0) & (total < 100), n, 0)
         brand_data[name] = {
             "units": n,
             "unit_cost": unit_cost,
@@ -137,6 +140,7 @@ def bootstrap_plan(
     result: dict[str, Any] = {
         "plan": plan["name"],
         "web_model": web_mode,
+        "cost_quote_volume_basis": "TOTAL_PRODUCTION_ACROSS_ALL_BRANDS",
         "draws": draws,
         "seed": seed,
         "forecast_status": "PARAMETRIC_ASSUMPTION_BOOTSTRAP_NOT_EMPIRICAL_CI",
@@ -170,7 +174,8 @@ def bootstrap_plan(
         for brand in brands:
             name = brand["name"]
             n = np.rint(by_brand[name] * ratio).astype(int)
-            quoted = quote_cost(n, costs[name])
+            stressed_total = np.rint(total * ratio).astype(int)
+            quoted = quote_cost(stressed_total, costs[name])
             stress_cost += n * quoted * brand_data[name]["cost_multiplier"]
             stress_revenue += n * float(brand["price"])
         stressed_cash = (
@@ -192,7 +197,7 @@ def bootstrap_plan(
     result["limitations"] = [
         "No observed Q2 sales sample. Assumption-based, not empirical bootstrap.",
         "Price and advertising elasticities cannot yet be estimated.",
-        "Per-brand volume below 100 extrapolates beyond server quote table.",
+        "Total company production below 100 extrapolates beyond server quote table.",
         "Financing is draft and cash is not official Pro Forma Cash Flow.",
         "Teacher cash-gate probabilities are model-conditional only.",
     ]
