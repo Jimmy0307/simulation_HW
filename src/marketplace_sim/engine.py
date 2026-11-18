@@ -440,7 +440,7 @@ def _jit_production(pack: ParamPack, state: CompanyState, plan: Plan, new: Compa
     if not orders or not pack.cost_estimates:
         raise ValueError("the factory block needs a brand and a pack with the game's cost table (cost_estimates)")
     reading = str(pack.extras.get("cost_reading", "factory"))
-    r = run(pack, orders, schedule, 1.0, reading=reading)
+    r = run(pack, orders, schedule, 1.0, reading=reading, fixed_capacity=state.fixed_capacity_units)
     demand_level = min(levels) if levels else Level.VERIFIED
     E, H, D = Level.ESTIMATED, Level.HEURISTIC, Level.DERIVED
     regular_paid = min(r.produced, r.regular_capacity)

@@ -54,7 +54,7 @@ class BrandOrder:
 class Schedule:
     operating_capacity: float  # units per day
     max_overtime_hours: float = 0.0  # 0..4
-    productivity: float = 70.0  # percent, from HR
+    productivity: float = DEFAULT_PRODUCTIVITY  # percent, from HR
     previous_operating_capacity: float = 0.0
 
 
@@ -105,11 +105,15 @@ def _capacity(oc: float, hours: float, productivity_pct: float) -> float:
 
 
 def run(pack: ParamPack, orders: Sequence[BrandOrder], schedule: Schedule, demand_factor: float = 1.0, *,
-        reading: str = "factory", labour_share: float = 0.6, overtime_pay_change: float | None = None) -> FactoryResult:
-    """One quarter of the factory for the given orders, schedule and demand outcome (multiple of the forecast)."""
+        reading: str = "factory", labour_share: float = 0.6, overtime_pay_change: float | None = None,
+        fixed_capacity: float | None = None) -> FactoryResult:
+    """One quarter of the factory for the given orders, schedule and demand outcome (multiple of the forecast).
+
+    ``fixed_capacity`` (units/day) is the capacity owned this quarter; default: the pack's starting capacity.
+    """
     if reading not in ("factory", "brand"):
         raise ValueError("reading is 'factory' or 'brand'")
-    fixed = float(pack.initial_state.get("fixed_capacity_units", 0.0))
+    fixed = float(pack.initial_state.get("fixed_capacity_units", 0.0) if fixed_capacity is None else fixed_capacity)
     notes: list[str] = []
     oc = min(schedule.operating_capacity, fixed) if fixed else schedule.operating_capacity
     if oc < schedule.operating_capacity:
@@ -190,13 +194,15 @@ def required_operating_capacity(forecast_units: float, productivity: float, buff
 
 
 def sweep(pack: ParamPack, orders: Sequence[BrandOrder], operating_capacities: Sequence[float],
-          overtime_hours: Sequence[float], demand_factors: Sequence[float], *, productivity: float = 70.0,
-          reading: str = "factory", previous_operating_capacity: float = 0.0) -> list[dict[str, float | str]]:
+          overtime_hours: Sequence[float], demand_factors: Sequence[float], *, productivity: float = DEFAULT_PRODUCTIVITY,
+          reading: str = "factory", previous_operating_capacity: float = 0.0,
+          fixed_capacity: float | None = None) -> list[dict[str, float | str]]:
     rows: list[dict[str, float | str]] = []
     for oc in operating_capacities:
         for ot in overtime_hours:
             for f in demand_factors:
-                r = run(pack, orders, Schedule(oc, ot, productivity, previous_operating_capacity), f, reading=reading)
+                r = run(pack, orders, Schedule(oc, ot, productivity, previous_operating_capacity), f, reading=reading,
+                        fixed_capacity=fixed_capacity)
                 rows.append({"operating_capacity": oc, "max_overtime_hours": ot, "demand_factor": f, "reading": reading,
                              "demand": r.demand, "produced": r.produced, "lost": r.lost, "idle_units": r.idle_units,
                              "overtime_hours_used": r.overtime_hours_used, "unit_cost": r.unit_cost,
@@ -205,4 +211,27 @@ def sweep(pack: ParamPack, orders: Sequence[BrandOrder], operating_capacities: S
     return rows
 
 
-__all__ = ["BrandOrder", "FactoryResult", "Schedule", "interpolate", "required_operating_capacity", "run", "sweep"]
+def expected_values(rows: Sequence[dict[str, float | str]], weights: dict[float, float], lost_share_value: float
+                    ) -> list[dict[str, float]]:
+    """Per schedule: probability-weighted contribution minus the value of next quarter's demand cut.
+
+    ``weights`` maps demand factor -> probability (normalised here); ``lost_share_value`` = what one full share of
+    next quarter's demand is worth (e.g. next quarter's forecast x margin per unit). Assumptions are the caller's.
+    """
+    total = sum(weights.values()) or 1.0
+    out: dict[tuple[float, float], dict[str, float]] = {}
+    for r in rows:
+        f = float(r["demand_factor"])
+        if f not in weights:
+            continue
+        key = (float(r["operating_capacity"]), float(r["max_overtime_hours"]))
+        item = out.setdefault(key, {"operating_capacity": key[0], "max_overtime_hours": key[1], "expected_value": 0.0,
+                                    "worst_contribution": math.inf, "max_lost": 0.0})
+        value = float(r["contribution"]) - float(r["next_quarter_demand_cut"]) * lost_share_value
+        item["expected_value"] += weights[f] / total * value
+        item["worst_contribution"] = min(item["worst_contribution"], float(r["contribution"]))
+        item["max_lost"] = max(item["max_lost"], float(r["lost"]))
+    return sorted(out.values(), key=lambda x: -x["expected_value"])
+
+
+__all__ = ["DEFAULT_PRODUCTIVITY", "BrandOrder", "FactoryResult", "Schedule", "expected_values", "interpolate", "required_operating_capacity", "run", "sweep"]

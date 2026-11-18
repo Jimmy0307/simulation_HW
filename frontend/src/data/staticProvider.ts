@@ -1,5 +1,5 @@
 import type {
-  CompareDoc, DiffDoc, EventType, GameDoc, GameScript, GameSetupDoc, GameStartConfig, LevelsDoc, ModulesDoc, PackInfo, PlanDoc,
+  CompareDoc, DiffDoc, EventType, FactoryRequest, FactoryResult, FactorySetup, GameDoc, GameScript, GameSetupDoc, GameStartConfig, LevelsDoc, ModulesDoc, PackInfo, PlanDoc,
   PlansDoc, Report, ScenarioResult, ScenarioRun, ScenarioSpecDoc, SweepResult,
 } from "../types";
 import { ReadOnlyError } from "./errors";
@@ -155,5 +155,19 @@ export class StaticProvider implements DataProvider {
     const step = await this.scriptStep(plan, "用預錄劇本以外的決策推進");
     this.gameStep += 1;
     return step.report;
+  }
+
+  async factorySetup(): Promise<FactorySetup> {
+    return (await this.load<{ setup: FactorySetup }>("factory")).setup;
+  }
+
+  /** Only the precomputed default sweep of the invented demo orders; anything else needs the live engine. */
+  async factoryRun(request: FactoryRequest): Promise<FactoryResult> {
+    const doc = await this.load<{ setup: FactorySetup; result: FactoryResult; orders_id: string }>("factory");
+    const orders = doc.setup.orders_files.find((f) => f.id === doc.orders_id)?.orders ?? [];
+    const keys: (keyof FactoryRequest)[] = ["operating_capacities", "overtime_hours", "demand_factors", "weights", "reading"];
+    const sameConfig = keys.every((k) => request[k] === undefined || same(request[k], doc.result.config[k as keyof FactoryResult["config"]]));
+    if (!same(request.orders, orders) || !sameConfig) throw new ReadOnlyError("執行修改過的工廠排程");
+    return doc.result;
   }
 }

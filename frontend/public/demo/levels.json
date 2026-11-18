@@ -90,12 +90,12 @@
    "note": ""
   },
   {
-   "evidence": "docs/cost-model.md (not covered)",
+   "evidence": "docs/decisions-log.md #151",
    "formula": "lease_cost of outlets open at quarter start",
    "inputs": [],
    "level": "placeholder",
    "metric": "outlet_lease",
-   "note": "Lease timing after opening is unverified."
+   "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
   },
   {
    "evidence": "docs/experiments/EXP-01.md",
@@ -124,8 +124,8 @@
    "note": ""
   },
   {
-   "evidence": "docs/cost-model.md (not covered)",
-   "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+   "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+   "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
    "inputs": [
     "material_cost_factor",
     "labor_cost_factor",
@@ -135,15 +135,15 @@
    ],
    "level": "placeholder",
    "metric": "unit_cost[brand]",
-   "note": "The real production cost function is not yet measured."
+   "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
   },
   {
-   "evidence": "pack parameter; charging rule unverified",
+   "evidence": "docs/decisions-log.md #148",
    "formula": "design_cost x new brands",
    "inputs": [],
    "level": "placeholder",
    "metric": "design_cost",
-   "note": ""
+   "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
   },
   {
    "evidence": "see unit_cost",
@@ -590,6 +590,94 @@
    "level": "heuristic",
    "metric": "purchasing_shortfall_fee",
    "note": ""
+  },
+  {
+   "evidence": "plan file",
+   "formula": "plan input (units/day)",
+   "inputs": [],
+   "level": "verified",
+   "metric": "operating_capacity",
+   "note": ""
+  },
+  {
+   "evidence": "game help text (Overtime); Overtime screen curve",
+   "formula": "operating capacity x 65 x (1 + overtime/8) x fatigue-adjusted productivity, at most 1.5 x fixed",
+   "inputs": [],
+   "level": "derived",
+   "metric": "max_capacity_with_overtime",
+   "note": ""
+  },
+  {
+   "evidence": "game help text (Rules for Overtime Use)",
+   "formula": "smallest daily overtime that covers demand",
+   "inputs": [],
+   "level": "literature",
+   "metric": "overtime_hours_used",
+   "note": "Takes the demand level."
+  },
+  {
+   "evidence": "src/marketplace_sim/cost_curve.py",
+   "formula": "units made x material part of the game's cost table",
+   "inputs": [],
+   "level": "estimated",
+   "metric": "factory_material_cost",
+   "note": ""
+  },
+  {
+   "evidence": "src/marketplace_sim/factory.py",
+   "formula": "labour + overhead per unit of scheduled capacity x units made",
+   "inputs": [],
+   "level": "estimated",
+   "metric": "factory_conversion_used",
+   "note": ""
+  },
+  {
+   "evidence": "src/marketplace_sim/factory.py",
+   "formula": "overtime units x conversion x (labour share x pay change + 1)",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "factory_overtime_premium",
+   "note": "Labour share is a labelled reading of the screen graph."
+  },
+  {
+   "evidence": "OperatingCapacity screen parameters",
+   "formula": "min increase cost + var increase x added units per quarter",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "capacity_change_cost",
+   "note": "Formula unverified; the screen shows the figure."
+  },
+  {
+   "evidence": "game help text (idle workers are paid); src/marketplace_sim/factory.py",
+   "formula": "idle scheduled capacity x labour + overhead per unit",
+   "inputs": [],
+   "level": "estimated",
+   "metric": "factory_excess_capacity_cost",
+   "note": ""
+  },
+  {
+   "evidence": "src/marketplace_sim/factory.py",
+   "formula": "regular capacity - units made",
+   "inputs": [],
+   "level": "literature",
+   "metric": "factory_idle_units",
+   "note": ""
+  },
+  {
+   "evidence": "src/marketplace_sim/factory.py",
+   "formula": "demand beyond capacity with authorised overtime",
+   "inputs": [],
+   "level": "literature",
+   "metric": "units_lost_total",
+   "note": ""
+  },
+  {
+   "evidence": "team's reading of the game help file (stock-outs)",
+   "formula": "half the unmet share of demand",
+   "inputs": [],
+   "level": "heuristic",
+   "metric": "demand_cut_next_quarter",
+   "note": "Applied to our demand next quarter."
   },
   {
    "evidence": "src/marketplace_sim/business/marketing_more.py",

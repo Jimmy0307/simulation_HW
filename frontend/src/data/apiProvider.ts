@@ -1,5 +1,5 @@
 import type {
-  CompareDoc, DiffDoc, EventType, GameDoc, GameScript, GameSetupDoc, GameStartConfig, LevelsDoc, ModulesDoc, PackInfo, PlanDoc,
+  CompareDoc, DiffDoc, EventType, FactoryRequest, FactoryResult, FactorySetup, GameDoc, GameScript, GameSetupDoc, GameStartConfig, LevelsDoc, ModulesDoc, PackInfo, PlanDoc,
   PlansDoc, Report, ScenarioRun, ScenarioSpecDoc, SweepResult,
 } from "../types";
 import type { DataProvider } from "./provider";
@@ -119,5 +119,13 @@ export class ApiProvider implements DataProvider {
 
   async gameScript(): Promise<GameScript | null> {
     return null;
+  }
+
+  factorySetup(): Promise<FactorySetup> {
+    return this.call<FactorySetup>("/factory");
+  }
+
+  factoryRun(request: FactoryRequest): Promise<FactoryResult> {
+    return this.call<FactoryResult>("/factory/run", request);
   }
 }

@@ -146,3 +146,19 @@ def test_accrual_books_balance_with_the_factory() -> None:
         s, r = advance(s, jit_plan(oc, 2, modules={"accounting.accrual": {}}), p, demand=FixedDemand(d), competitors=[])
         assert r.lines["balance_check"].value == pytest.approx(0, abs=1e-5)
         assert r.lines["accrual_cogs"].value == pytest.approx(r.lines["production_cost"].value)  # nothing left in stock
+
+
+def test_factory_api_on_the_synthetic_factory_pack() -> None:
+    from marketplace_sim.api import service as svc
+    session = svc.Session()
+    with pytest.raises(svc.ApiError, match="cost-of-production table"):
+        svc.factory_run(session, {"orders": [{"name": "x", "brand_type": "A", "components": ["c1"], "price": 1, "forecast": 1}]})
+    svc.load_pack_into(session, "synthetic", str(svc.SYNTHETIC_FACTORY_PACK))
+    setup = svc.factory_setup(session)
+    assert setup["has_cost_table"] and setup["orders_files"] and setup["is_private"] is False
+    result = svc.factory_run(session, {"orders": setup["orders_files"][0]["orders"], "operating_capacities": [12, 18],
+                                       "overtime_hours": [0, 4]})
+    assert len(result["rows"]) == 2 * 2 * 5 and len(result["ranking"]) == 4
+    assert result["ranking"][0]["expected_value"] >= result["ranking"][-1]["expected_value"]
+    with pytest.raises(svc.ApiError, match="one weight"):
+        svc.factory_run(session, {"orders": setup["orders_files"][0]["orders"], "weights": [1]})

@@ -368,7 +368,12 @@ def _floats(text: str) -> list[float]:
 
 def cmd_factory(args: argparse.Namespace) -> None:
     """Production scheduler's sweep: operating capacity x overtime x demand outcome, for the orders the team entered."""
-    from marketplace_sim.factory import BrandOrder, required_operating_capacity, sweep
+    from marketplace_sim.factory import (
+        DEFAULT_PRODUCTIVITY,
+        BrandOrder,
+        required_operating_capacity,
+        sweep,
+    )
 
     pack = load_pack(Path(args.params))
     spec = yaml.safe_load(Path(args.orders).read_text(encoding="utf-8")) or {}
@@ -377,7 +382,7 @@ def cmd_factory(args: argparse.Namespace) -> None:
     if not orders:
         raise SystemExit("no orders (no brand on sale)")
     entered = spec.get("schedule") or {}
-    productivity = args.productivity or float(entered.get("productivity") or 0) or 70.0
+    productivity = args.productivity or float(entered.get("productivity") or 0) or DEFAULT_PRODUCTIVITY
     forecast = sum(o.forecast for o in orders)
     need = required_operating_capacity(forecast, productivity)
     print(f"forecast {forecast:,.0f} units; productivity {productivity:g} %; help-text operating capacity "
