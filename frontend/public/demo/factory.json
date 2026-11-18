@@ -40,123 +40,123 @@
    "material and labour/overhead": "estimated (the game's cost table)",
    "overtime premium, capacity change cost, next-quarter demand cut": "heuristic"
   },
-  "margin_per_unit": 721.9128736009475,
+  "margin_per_unit": 702.066045435972,
   "name": "synthetic-factory-demo",
   "productivity": 81.5,
   "provenance": "synthetic",
   "quarter": null,
   "ranking": [
    {
-    "expected_value": 605890.0103135166,
+    "expected_value": 585932.7078248935,
     "max_lost": 17.625,
     "max_overtime_hours": 4.0,
     "operating_capacity": 18.0,
-    "worst_contribution": 258645.77966190322
+    "worst_contribution": 240455.12686458835
    },
    {
-    "expected_value": 594451.0702598915,
+    "expected_value": 575040.3287128854,
     "max_lost": 143.4000000000001,
     "max_overtime_hours": 2.0,
     "operating_capacity": 18.0,
-    "worst_contribution": 258645.77966190322
+    "worst_contribution": 240455.12686458835
    },
    {
-    "expected_value": 592942.3477652363,
+    "expected_value": 573490.4174517487,
     "max_lost": 159.0,
     "max_overtime_hours": 4.0,
     "operating_capacity": 16.0,
-    "worst_contribution": 264642.12315094256
+    "worst_contribution": 247724.07593089427
    },
    {
-    "expected_value": 572173.7440196056,
+    "expected_value": 553725.8131601049,
     "max_lost": 270.8000000000002,
     "max_overtime_hours": 2.0,
     "operating_capacity": 16.0,
-    "worst_contribution": 264642.12315094256
+    "worst_contribution": 247724.07593089427
    },
    {
-    "expected_value": 557536.7938078694,
+    "expected_value": 537966.8941605053,
     "max_lost": 300.375,
     "max_overtime_hours": 4.0,
     "operating_capacity": 14.0,
-    "worst_contribution": 270751.2902588412
+    "worst_contribution": 255131.45888537116
    },
    {
-    "expected_value": 552363.080333801,
+    "expected_value": 534587.8414968072,
     "max_lost": 336.45000000000005,
     "max_overtime_hours": 0.0,
     "operating_capacity": 18.0,
-    "worst_contribution": 258645.77966190322
+    "worst_contribution": 240455.12686458835
    },
    {
-    "expected_value": 530412.2704415772,
+    "expected_value": 512256.0163820231,
     "max_lost": 398.20000000000016,
     "max_overtime_hours": 2.0,
     "operating_capacity": 14.0,
-    "worst_contribution": 270751.2902588412
+    "worst_contribution": 255131.45888537116
    },
    {
-    "expected_value": 517379.5209377161,
+    "expected_value": 501164.4219088338,
     "max_lost": 442.4,
     "max_overtime_hours": 0.0,
     "operating_capacity": 16.0,
-    "worst_contribution": 264642.12315094256
+    "worst_contribution": 247724.07593089427
    },
    {
-    "expected_value": 504462.5740034559,
+    "expected_value": 485015.15627477015,
     "max_lost": 441.75,
     "max_overtime_hours": 4.0,
     "operating_capacity": 12.0,
-    "worst_contribution": 276993.9812469799
+    "worst_contribution": 262702.6748217377
    },
    {
-    "expected_value": 447978.8391752064,
+    "expected_value": 431601.05869897845,
     "max_lost": 525.6000000000001,
     "max_overtime_hours": 2.0,
     "operating_capacity": 12.0,
-    "worst_contribution": 276993.9812469799
+    "worst_contribution": 262702.6748217377
    },
    {
-    "expected_value": 437935.04640891525,
+    "expected_value": 423677.03161242255,
     "max_lost": 548.35,
     "max_overtime_hours": 0.0,
     "operating_capacity": 14.0,
-    "worst_contribution": 270751.2902588412
+    "worst_contribution": 255131.45888537116
    },
    {
-    "expected_value": 395460.467046388,
+    "expected_value": 377973.4087673417,
     "max_lost": 583.125,
     "max_overtime_hours": 4.0,
     "operating_capacity": 10.0,
-    "worst_contribution": 283409.6307190445
+    "worst_contribution": 270486.1097567862
    },
    {
-    "expected_value": 356203.3008253407,
+    "expected_value": 343957.2894298118,
     "max_lost": 654.3,
     "max_overtime_hours": 0.0,
     "operating_capacity": 12.0,
-    "worst_contribution": 276993.9812469799
+    "worst_contribution": 262702.6748217377
    },
    {
-    "expected_value": 347402.0277917534,
+    "expected_value": 332742.53255839524,
     "max_lost": 653.0000000000001,
     "max_overtime_hours": 2.0,
     "operating_capacity": 10.0,
-    "worst_contribution": 283409.6307190445
+    "worst_contribution": 270486.1097567862
    },
    {
-    "expected_value": 249321.66186551473,
+    "expected_value": 239382.67384465848,
     "max_lost": 760.25,
     "max_overtime_hours": 0.0,
     "operating_capacity": 10.0,
-    "worst_contribution": 283409.6307190445
+    "worst_contribution": 270486.1097567862
    }
   ],
   "required_operating_capacity": 16.23407267579047,
   "required_with_buffer": 20.292590844738086,
   "rows": [
    {
-    "contribution": 283409.6307190445,
+    "contribution": 270486.1097567862,
     "demand": 430.0,
     "demand_factor": 0.5,
     "idle_units": 99.75,
@@ -166,13 +166,13 @@
     "operating_capacity": 10.0,
     "overtime_hours_used": 0.0,
     "produced": 430.0,
-    "production_cost": 125190.36928095555,
+    "production_cost": 138113.8902432138,
     "reading": "factory",
     "revenue": 408600.0,
-    "unit_cost": 291.1403936766408
+    "unit_cost": 321.1950935888693
    },
    {
-    "contribution": 366156.3928195534,
+    "contribution": 353232.8718572951,
     "demand": 645.0,
     "demand_factor": 0.75,
     "idle_units": 0.0,
@@ -182,13 +182,13 @@
     "operating_capacity": 10.0,
     "overtime_hours_used": 0.0,
     "produced": 529.75,
-    "production_cost": 137229.3048548652,
+    "production_cost": 150152.82581712346,
     "reading": "factory",
     "revenue": 503385.69767441857,
-    "unit_cost": 259.04540793745196
+    "unit_cost": 283.4409170686616
    },
    {
-    "contribution": 366156.3928195534,
+    "contribution": 353232.8718572951,
     "demand": 860.0,
     "demand_factor": 1.0,
     "idle_units": 0.0,
@@ -198,13 +198,13 @@
     "operating_capacity": 10.0,
     "overtime_hours_used": 0.0,
     "produced": 529.75,
-    "production_cost": 137229.3048548652,
+    "production_cost": 150152.82581712346,
     "reading": "factory",
     "revenue": 503385.69767441857,
-    "unit_cost": 259.04540793745196
+    "unit_cost": 283.4409170686616
    },
    {
-    "contribution": 366156.39281955344,
+    "contribution": 353232.87185729516,
     "demand": 1075.0,
     "demand_factor": 1.25,
     "idle_units": 0.0,
@@ -214,13 +214,13 @@
     "operating_capacity": 10.0,
     "overtime_hours_used": 0.0,
     "produced": 529.75,
-    "production_cost": 137229.3048548652,
+    "production_cost": 150152.82581712346,
     "reading": "factory",
     "revenue": 503385.6976744186,
-    "unit_cost": 259.04540793745196
+    "unit_cost": 283.4409170686616
    },
    {
-    "contribution": 366156.3928195534,
+    "contribution": 353232.8718572951,
     "demand": 1290.0,
     "demand_factor": 1.5,
     "idle_units": 0.0,
@@ -230,13 +230,13 @@
     "operating_capacity": 10.0,
     "overtime_hours_used": 0.0,
     "produced": 529.75,
-    "production_cost": 137229.3048548652,
+    "production_cost": 150152.82581712346,
     "reading": "factory",
     "revenue": 503385.69767441857,
-    "unit_cost": 259.04540793745196
+    "unit_cost": 283.4409170686616
    },
    {
-    "contribution": 283409.6307190445,
+    "contribution": 270486.1097567862,
     "demand": 430.0,
     "demand_factor": 0.5,
     "idle_units": 99.75,
@@ -246,13 +246,13 @@
     "operating_capacity": 10.0,
     "overtime_hours_used": 0.0,
     "produced": 430.0,
-    "production_cost": 125190.36928095555,
+    "production_cost": 138113.8902432138,
     "reading": "factory",
     "revenue": 408600.0,
-    "unit_cost": 291.1403936766408
+    "unit_cost": 321.1950935888693
    },
    {
-    "contribution": 436708.7591710926,
+    "contribution": 419596.63275410235,
     "demand": 645.0,
     "demand_factor": 0.75,
     "idle_units": 0.0,
@@ -262,13 +262,13 @@
     "operating_capacity": 10.0,
     "overtime_hours_used": 2.0,
     "produced": 636.9999999999999,
-    "production_cost": 168589.38036379096,
+    "production_cost": 185701.50678078117,
     "reading": "factory",
     "revenue": 605298.1395348836,
-    "unit_cost": 264.66150763546466
+    "unit_cost": 291.5251283842719
    },
    {
-    "contribution": 436708.7591710927,
+    "contribution": 419596.63275410247,
     "demand": 860.0,
     "demand_factor": 1.0,
     "idle_units": 0.0,
@@ -278,13 +278,13 @@
     "operating_capacity": 10.0,
     "overtime_hours_used": 2.0,
     "produced": 636.9999999999999,
-    "production_cost": 168589.38036379096,
+    "production_cost": 185701.50678078117,
     "reading": "factory",
     "revenue": 605298.1395348837,
-    "unit_cost": 264.66150763546466
+    "unit_cost": 291.5251283842719
    },
    {
-    "contribution": 436708.7591710926,
+    "contribution": 419596.63275410235,
     "demand": 1075.0,
     "demand_factor": 1.25,
     "idle_units": 0.0,
@@ -294,13 +294,13 @@
     "operating_capacity": 10.0,
     "overtime_hours_used": 2.0,
     "produced": 636.9999999999999,
-    "production_cost": 168589.38036379096,
+    "production_cost": 185701.50678078117,
     "reading": "factory",
     "revenue": 605298.1395348836,
-    "unit_cost": 264.66150763546466
+    "unit_cost": 291.5251283842719
    },
    {
-    "contribution": 436708.7591710926,
+    "contribution": 419596.63275410235,
     "demand": 1290.0,
     "demand_factor": 1.5,
     "idle_units": 0.0,
@@ -310,13 +310,13 @@
     "operating_capacity": 10.0,
     "overtime_hours_used": 2.0,
     "produced": 636.9999999999999,
-    "production_cost": 168589.38036379096,
+    "production_cost": 185701.50678078117,
     "reading": "factory",
     "revenue": 605298.1395348836,
-    "unit_cost": 264.66150763546466
+    "unit_cost": 291.5251283842719
    },
    {
-    "contribution": 283409.6307190445,
+    "contribution": 270486.1097567862,
     "demand": 430.0,
     "demand_factor": 0.5,
     "idle_units": 99.75,
@@ -326,13 +326,13 @@
     "operating_capacity": 10.0,
     "overtime_hours_used": 0.0,
     "produced": 430.0,
-    "production_cost": 125190.36928095555,
+    "production_cost": 138113.8902432138,
     "reading": "factory",
     "revenue": 408600.0,
-    "unit_cost": 291.1403936766408
+    "unit_cost": 321.1950935888693
    },
    {
-    "contribution": 441861.35254729097,
+    "contribution": 424411.506932328,
     "demand": 645.0,
     "demand_factor": 0.75,
     "idle_units": 0.0,
@@ -342,13 +342,13 @@
     "operating_capacity": 10.0,
     "overtime_hours_used": 2.182464293575322,
     "produced": 645.0,
-    "production_cost": 171038.64745270906,
+    "production_cost": 188488.49306767198,
     "reading": "factory",
     "revenue": 612900.0,
-    "unit_cost": 265.1761976010993
+    "unit_cost": 292.2302218103442
    },
    {
-    "contribution": 480211.90118174383,
+    "contribution": 459807.8897756074,
     "demand": 860.0,
     "demand_factor": 1.0,
     "idle_units": 0.0,
@@ -358,13 +358,13 @@
     "operating_capacity": 10.0,
     "overtime_hours_used": 4.0,
     "produced": 706.875,
-    "production_cost": 191483.73835313984,
+    "production_cost": 211887.7497592763,
     "reading": "factory",
     "revenue": 671695.6395348837,
-    "unit_cost": 270.88769351460985
+    "unit_cost": 299.7527848053423
    },
    {
-    "contribution": 480211.90118174383,
+    "contribution": 459807.8897756074,
     "demand": 1075.0,
     "demand_factor": 1.25,
     "idle_units": 0.0,
@@ -374,13 +374,13 @@
     "operating_capacity": 10.0,
     "overtime_hours_used": 4.0,
     "produced": 706.875,
-    "production_cost": 191483.73835313984,
+    "production_cost": 211887.7497592763,
     "reading": "factory",
     "revenue": 671695.6395348837,
-    "unit_cost": 270.88769351460985
+    "unit_cost": 299.7527848053423
    },
    {
-    "contribution": 480211.90118174383,
+    "contribution": 459807.8897756074,
     "demand": 1290.0,
     "demand_factor": 1.5,
     "idle_units": 0.0,
@@ -390,13 +390,13 @@
     "operating_capacity": 10.0,
     "overtime_hours_used": 4.0,
     "produced": 706.875,
-    "production_cost": 191483.73835313984,
+    "production_cost": 211887.7497592763,
     "reading": "factory",
     "revenue": 671695.6395348837,
-    "unit_cost": 270.88769351460985
+    "unit_cost": 299.7527848053423
    },
    {
-    "contribution": 276993.9812469799,
+    "contribution": 262702.6748217377,
     "demand": 430.0,
     "demand_factor": 0.5,
     "idle_units": 205.70000000000005,
@@ -406,13 +406,13 @@
     "operating_capacity": 12.0,
     "overtime_hours_used": 0.0,
     "produced": 430.0,
-    "production_cost": 131606.01875302006,
+    "production_cost": 145897.3251782623,
     "reading": "factory",
     "revenue": 408600.0,
-    "unit_cost": 306.0605087279536
+    "unit_cost": 339.2961050657263
    },
    {
-    "contribution": 447666.56886301626,
+    "contribution": 433375.26243777404,
     "demand": 645.0,
     "demand_factor": 0.75,
     "idle_units": 0.0,
@@ -422,13 +422,13 @@
     "operating_capacity": 12.0,
     "overtime_hours_used": 0.0,
     "produced": 635.7,
-    "production_cost": 156396.2683462861,
+    "production_cost": 170687.5747715283,
     "reading": "factory",
     "revenue": 604062.8372093023,
-    "unit_cost": 246.0221304802361
+    "unit_cost": 268.5033424123459
    },
    {
-    "contribution": 447666.56886301626,
+    "contribution": 433375.26243777404,
     "demand": 860.0,
     "demand_factor": 1.0,
     "idle_units": 0.0,
@@ -438,13 +438,13 @@
     "operating_capacity": 12.0,
     "overtime_hours_used": 0.0,
     "produced": 635.7,
-    "production_cost": 156396.2683462861,
+    "production_cost": 170687.5747715283,
     "reading": "factory",
     "revenue": 604062.8372093023,
-    "unit_cost": 246.0221304802361
+    "unit_cost": 268.5033424123459
    },
    {
-    "contribution": 447666.56886301626,
+    "contribution": 433375.26243777404,
     "demand": 1075.0,
     "demand_factor": 1.25,
     "idle_units": 0.0,
@@ -454,13 +454,13 @@
     "operating_capacity": 12.0,
     "overtime_hours_used": 0.0,
     "produced": 635.7,
-    "production_cost": 156396.2683462861,
+    "production_cost": 170687.5747715283,
     "reading": "factory",
     "revenue": 604062.8372093023,
-    "unit_cost": 246.0221304802361
+    "unit_cost": 268.5033424123459
    },
    {
-    "contribution": 447666.56886301626,
+    "contribution": 433375.26243777404,
     "demand": 1290.0,
     "demand_factor": 1.5,
     "idle_units": 0.0,
@@ -470,13 +470,13 @@
     "operating_capacity": 12.0,
     "overtime_hours_used": 0.0,
     "produced": 635.7,
-    "production_cost": 156396.2683462861,
+    "production_cost": 170687.5747715283,
     "reading": "factory",
     "revenue": 604062.8372093023,
-    "unit_cost": 246.0221304802361
+    "unit_cost": 268.5033424123459
    },
    {
-    "contribution": 276993.9812469799,
+    "contribution": 262702.6748217377,
     "demand": 430.0,
     "demand_factor": 0.5,
     "idle_units": 205.70000000000005,
@@ -486,13 +486,13 @@
     "operating_capacity": 12.0,
     "overtime_hours_used": 0.0,
     "produced": 430.0,
-    "production_cost": 131606.01875302006,
+    "production_cost": 145897.3251782623,
     "reading": "factory",
     "revenue": 408600.0,
-    "unit_cost": 306.0605087279536
+    "unit_cost": 339.2961050657263
    },
    {
-    "contribution": 453965.79070976446,
+    "contribution": 439352.1059046882,
     "demand": 645.0,
     "demand_factor": 0.75,
     "idle_units": 0.0,
@@ -502,13 +502,13 @@
     "operating_capacity": 12.0,
     "overtime_hours_used": 0.127182447917221,
     "produced": 645.0,
-    "production_cost": 158934.20929023554,
+    "production_cost": 173547.8940953118,
     "reading": "factory",
     "revenue": 612900.0,
-    "unit_cost": 246.40962680656673
+    "unit_cost": 269.06650247335165
    },
    {
-    "contribution": 534107.5166864722,
+    "contribution": 515184.2957680488,
     "demand": 860.0,
     "demand_factor": 1.0,
     "idle_units": 0.0,
@@ -518,13 +518,13 @@
     "operating_capacity": 12.0,
     "overtime_hours_used": 2.0,
     "produced": 764.3999999999999,
-    "production_cost": 192250.2507553882,
+    "production_cost": 211173.4716738116,
     "reading": "factory",
     "revenue": 726357.7674418604,
-    "unit_cost": 251.50477597512852
+    "unit_cost": 276.26042866799014
    },
    {
-    "contribution": 534107.5166864722,
+    "contribution": 515184.2957680488,
     "demand": 1075.0,
     "demand_factor": 1.25,
     "idle_units": 0.0,
@@ -534,13 +534,13 @@
     "operating_capacity": 12.0,
     "overtime_hours_used": 2.0,
     "produced": 764.3999999999999,
-    "production_cost": 192250.2507553882,
+    "production_cost": 211173.4716738116,
     "reading": "factory",
     "revenue": 726357.7674418604,
-    "unit_cost": 251.50477597512852
+    "unit_cost": 276.26042866799014
    },
    {
-    "contribution": 534107.5166864721,
+    "contribution": 515184.2957680487,
     "demand": 1290.0,
     "demand_factor": 1.5,
     "idle_units": 0.0,
@@ -550,13 +550,13 @@
     "operating_capacity": 12.0,
     "overtime_hours_used": 2.0,
     "produced": 764.3999999999999,
-    "production_cost": 192250.25075538817,
+    "production_cost": 211173.4716738116,
     "reading": "factory",
     "revenue": 726357.7674418603,
-    "unit_cost": 251.50477597512847
+    "unit_cost": 276.26042866799014
    },
    {
-    "contribution": 276993.9812469799,
+    "contribution": 262702.6748217377,
     "demand": 430.0,
     "demand_factor": 0.5,
     "idle_units": 205.70000000000005,
@@ -566,13 +566,13 @@
     "operating_capacity": 12.0,
     "overtime_hours_used": 0.0,
     "produced": 430.0,
-    "production_cost": 131606.01875302006,
+    "production_cost": 145897.3251782623,
     "reading": "factory",
     "revenue": 408600.0,
-    "unit_cost": 306.0605087279536
+    "unit_cost": 339.2961050657263
    },
    {
-    "contribution": 453965.79070976446,
+    "contribution": 439352.1059046881,
     "demand": 645.0,
     "demand_factor": 0.75,
     "idle_units": 0.0,
@@ -582,13 +582,13 @@
     "operating_capacity": 12.0,
     "overtime_hours_used": 0.12718244791904,
     "produced": 645.0,
-    "production_cost": 158934.20929023557,
+    "production_cost": 173547.89409531184,
     "reading": "factory",
     "revenue": 612900.0,
-    "unit_cost": 246.40962680656676
+    "unit_cost": 269.0665024733517
    },
    {
-    "contribution": 587703.1136866605,
+    "contribution": 565139.6048595522,
     "demand": 860.0,
     "demand_factor": 1.0,
     "idle_units": 0.0,
@@ -598,13 +598,13 @@
     "operating_capacity": 12.0,
     "overtime_hours_used": 4.0,
     "produced": 848.25,
-    "production_cost": 218331.6537551998,
+    "production_cost": 240895.16258230814,
     "reading": "factory",
     "revenue": 806034.7674418604,
-    "unit_cost": 257.3906911349246
+    "unit_cost": 283.9907604860691
    },
    {
-    "contribution": 587703.1136866605,
+    "contribution": 565139.6048595522,
     "demand": 1075.0,
     "demand_factor": 1.25,
     "idle_units": 0.0,
@@ -614,13 +614,13 @@
     "operating_capacity": 12.0,
     "overtime_hours_used": 4.0,
     "produced": 848.25,
-    "production_cost": 218331.6537551998,
+    "production_cost": 240895.16258230814,
     "reading": "factory",
     "revenue": 806034.7674418604,
-    "unit_cost": 257.3906911349246
+    "unit_cost": 283.9907604860691
    },
    {
-    "contribution": 587703.1136866605,
+    "contribution": 565139.6048595522,
     "demand": 1290.0,
     "demand_factor": 1.5,
     "idle_units": 0.0,
@@ -630,13 +630,13 @@
     "operating_capacity": 12.0,
     "overtime_hours_used": 4.0,
     "produced": 848.25,
-    "production_cost": 218331.6537551998,
+    "production_cost": 240895.16258230814,
     "reading": "factory",
     "revenue": 806034.7674418604,
-    "unit_cost": 257.3906911349246
+    "unit_cost": 283.9907604860691
    },
    {
-    "contribution": 270751.2902588412,
+    "contribution": 255131.45888537116,
     "demand": 430.0,
     "demand_factor": 0.5,
     "idle_units": 311.65,
@@ -646,13 +646,13 @@
     "operating_capacity": 14.0,
     "overtime_hours_used": 0.0,
     "produced": 430.0,
-    "production_cost": 137848.70974115882,
+    "production_cost": 153468.54111462884,
     "reading": "factory",
     "revenue": 408600.0,
-    "unit_cost": 320.578394746881
+    "unit_cost": 356.9035839875089
    },
    {
-    "contribution": 449143.3071787324,
+    "contribution": 433523.47580526234,
     "demand": 645.0,
     "demand_factor": 0.75,
     "idle_units": 96.64999999999998,
@@ -662,13 +662,13 @@
     "operating_capacity": 14.0,
     "overtime_hours_used": 0.0,
     "produced": 645.0,
-    "production_cost": 163756.69282126758,
+    "production_cost": 179376.52419473763,
     "reading": "factory",
     "revenue": 612900.0,
-    "unit_cost": 253.8863454593296
+    "unit_cost": 278.10313828641495
    },
    {
-    "contribution": 529380.3861713025,
+    "contribution": 513760.5547978325,
     "demand": 860.0,
     "demand_factor": 1.0,
     "idle_units": 0.0,
@@ -678,13 +678,13 @@
     "operating_capacity": 14.0,
     "overtime_hours_used": 0.0,
     "produced": 741.65,
-    "production_cost": 175359.59057288346,
+    "production_cost": 190979.4219463535,
     "reading": "factory",
     "revenue": 704739.976744186,
-    "unit_cost": 236.4452107771637
+    "unit_cost": 257.50613085195647
    },
    {
-    "contribution": 529380.3861713025,
+    "contribution": 513760.5547978325,
     "demand": 1075.0,
     "demand_factor": 1.25,
     "idle_units": 0.0,
@@ -694,13 +694,13 @@
     "operating_capacity": 14.0,
     "overtime_hours_used": 0.0,
     "produced": 741.65,
-    "production_cost": 175359.59057288346,
+    "production_cost": 190979.4219463535,
     "reading": "factory",
     "revenue": 704739.976744186,
-    "unit_cost": 236.4452107771637
+    "unit_cost": 257.50613085195647
    },
    {
-    "contribution": 529380.3861713026,
+    "contribution": 513760.5547978326,
     "demand": 1290.0,
     "demand_factor": 1.5,
     "idle_units": 0.0,
@@ -710,13 +710,13 @@
     "operating_capacity": 14.0,
     "overtime_hours_used": 0.0,
     "produced": 741.65,
-    "production_cost": 175359.5905728835,
+    "production_cost": 190979.4219463535,
     "reading": "factory",
     "revenue": 704739.9767441861,
-    "unit_cost": 236.44521077716377
+    "unit_cost": 257.50613085195647
    },
    {
-    "contribution": 270751.2902588412,
+    "contribution": 255131.45888537116,
     "demand": 430.0,
     "demand_factor": 0.5,
     "idle_units": 311.65,
@@ -726,13 +726,13 @@
     "operating_capacity": 14.0,
     "overtime_hours_used": 0.0,
     "produced": 430.0,
-    "production_cost": 137848.70974115882,
+    "production_cost": 153468.54111462884,
     "reading": "factory",
     "revenue": 408600.0,
-    "unit_cost": 320.578394746881
+    "unit_cost": 356.9035839875089
    },
    {
-    "contribution": 449143.3071787324,
+    "contribution": 433523.47580526234,
     "demand": 645.0,
     "demand_factor": 0.75,
     "idle_units": 96.64999999999998,
@@ -742,13 +742,13 @@
     "operating_capacity": 14.0,
     "overtime_hours_used": 0.0,
     "produced": 645.0,
-    "production_cost": 163756.69282126758,
+    "production_cost": 179376.52419473763,
     "reading": "factory",
     "revenue": 612900.0,
-    "unit_cost": 253.8863454593296
+    "unit_cost": 278.10313828641495
    },
    {
-    "contribution": 610348.643025737,
+    "contribution": 590798.8574272587,
     "demand": 860.0,
     "demand_factor": 1.0,
     "idle_units": 0.0,
@@ -758,13 +758,13 @@
     "operating_capacity": 14.0,
     "overtime_hours_used": 1.4975285105338116,
     "produced": 860.0,
-    "production_cost": 206851.35697426295,
+    "production_cost": 226401.1425727412,
     "reading": "factory",
     "revenue": 817200.0,
-    "unit_cost": 240.52483369100344
+    "unit_cost": 263.25714252644326
    },
    {
-    "contribution": 631771.8935135906,
+    "contribution": 611089.5632217547,
     "demand": 1075.0,
     "demand_factor": 1.25,
     "idle_units": 0.0,
@@ -774,13 +774,13 @@
     "operating_capacity": 14.0,
     "overtime_hours_used": 2.0,
     "produced": 891.7999999999998,
-    "production_cost": 215645.50183524645,
+    "production_cost": 236327.83212708222,
     "reading": "factory",
     "revenue": 847417.395348837,
-    "unit_cost": 241.80926422431767
+    "unit_cost": 265.0009330871073
    },
    {
-    "contribution": 631771.8935135906,
+    "contribution": 611089.5632217547,
     "demand": 1290.0,
     "demand_factor": 1.5,
     "idle_units": 0.0,
@@ -790,13 +790,13 @@
     "operating_capacity": 14.0,
     "overtime_hours_used": 2.0,
     "produced": 891.7999999999998,
-    "production_cost": 215645.50183524645,
+    "production_cost": 236327.83212708222,
     "reading": "factory",
     "revenue": 847417.395348837,
-    "unit_cost": 241.80926422431767
+    "unit_cost": 265.0009330871073
    },
    {
-    "contribution": 270751.2902588412,
+    "contribution": 255131.45888537116,
     "demand": 430.0,
     "demand_factor": 0.5,
     "idle_units": 311.65,
@@ -806,13 +806,13 @@
     "operating_capacity": 14.0,
     "overtime_hours_used": 0.0,
     "produced": 430.0,
-    "production_cost": 137848.70974115882,
+    "production_cost": 153468.54111462884,
     "reading": "factory",
     "revenue": 408600.0,
-    "unit_cost": 320.578394746881
+    "unit_cost": 356.9035839875089
    },
    {
-    "contribution": 449143.3071787324,
+    "contribution": 433523.47580526234,
     "demand": 645.0,
     "demand_factor": 0.75,
     "idle_units": 96.64999999999998,
@@ -822,13 +822,13 @@
     "operating_capacity": 14.0,
     "overtime_hours_used": 0.0,
     "produced": 645.0,
-    "production_cost": 163756.69282126758,
+    "production_cost": 179376.52419473763,
     "reading": "factory",
     "revenue": 612900.0,
-    "unit_cost": 253.8863454593296
+    "unit_cost": 278.10313828641495
    },
    {
-    "contribution": 610348.6430257363,
+    "contribution": 590798.857427258,
     "demand": 860.0,
     "demand_factor": 1.0,
     "idle_units": 0.0,
@@ -838,13 +838,13 @@
     "operating_capacity": 14.0,
     "overtime_hours_used": 1.4975285105356306,
     "produced": 860.0,
-    "production_cost": 206851.35697426362,
+    "production_cost": 226401.142572742,
     "reading": "factory",
     "revenue": 817200.0,
-    "unit_cost": 240.5248336910042
+    "unit_cost": 263.2571425264442
    },
    {
-    "contribution": 695507.879031894,
+    "contribution": 670846.8583675595,
     "demand": 1075.0,
     "demand_factor": 1.25,
     "idle_units": 0.0,
@@ -854,13 +854,13 @@
     "operating_capacity": 14.0,
     "overtime_hours_used": 4.0,
     "produced": 989.625,
-    "production_cost": 244866.01631694313,
+    "production_cost": 269527.0369812776,
     "reading": "factory",
     "revenue": 940373.8953488371,
-    "unit_cost": 247.4331350935386
+    "unit_cost": 272.3526962043982
    },
    {
-    "contribution": 695507.8790318943,
+    "contribution": 670846.8583675597,
     "demand": 1290.0,
     "demand_factor": 1.5,
     "idle_units": 0.0,
@@ -870,13 +870,13 @@
     "operating_capacity": 14.0,
     "overtime_hours_used": 4.0,
     "produced": 989.625,
-    "production_cost": 244866.01631694313,
+    "production_cost": 269527.03698127763,
     "reading": "factory",
     "revenue": 940373.8953488374,
-    "unit_cost": 247.4331350935386
+    "unit_cost": 272.3526962043983
    },
    {
-    "contribution": 264642.12315094256,
+    "contribution": 247724.07593089427,
     "demand": 430.0,
     "demand_factor": 0.5,
     "idle_units": 417.6,
@@ -886,13 +886,13 @@
     "operating_capacity": 16.0,
     "overtime_hours_used": 0.0,
     "produced": 430.0,
-    "production_cost": 143957.87684905744,
+    "production_cost": 160875.92406910573,
     "reading": "factory",
     "revenue": 408600.0,
-    "unit_cost": 334.78576011408705
+    "unit_cost": 374.1300559746645
    },
    {
-    "contribution": 443034.14007083373,
+    "contribution": 426116.09285078547,
     "demand": 645.0,
     "demand_factor": 0.75,
     "idle_units": 202.60000000000002,
@@ -902,13 +902,13 @@
     "operating_capacity": 16.0,
     "overtime_hours_used": 0.0,
     "produced": 645.0,
-    "production_cost": 169865.85992916624,
+    "production_cost": 186783.90714921453,
     "reading": "factory",
     "revenue": 612900.0,
-    "unit_cost": 263.3579223708004
+    "unit_cost": 289.58745294451865
    },
    {
-    "contribution": 611253.8172012893,
+    "contribution": 594335.7699812411,
     "demand": 860.0,
     "demand_factor": 1.0,
     "idle_units": 0.0,
@@ -918,13 +918,13 @@
     "operating_capacity": 16.0,
     "overtime_hours_used": 0.0,
     "produced": 847.6,
-    "production_cost": 194163.29907778042,
+    "production_cost": 211081.3462978287,
     "reading": "factory",
     "revenue": 805417.1162790698,
-    "unit_cost": 229.07420844476218
+    "unit_cost": 249.03415089408767
    },
    {
-    "contribution": 611253.8172012893,
+    "contribution": 594335.7699812411,
     "demand": 1075.0,
     "demand_factor": 1.25,
     "idle_units": 0.0,
@@ -934,13 +934,13 @@
     "operating_capacity": 16.0,
     "overtime_hours_used": 0.0,
     "produced": 847.6,
-    "production_cost": 194163.2990777804,
+    "production_cost": 211081.34629782866,
     "reading": "factory",
     "revenue": 805417.1162790698,
-    "unit_cost": 229.07420844476215
+    "unit_cost": 249.0341508940876
    },
    {
-    "contribution": 611253.8172012893,
+    "contribution": 594335.7699812411,
     "demand": 1290.0,
     "demand_factor": 1.5,
     "idle_units": 0.0,
@@ -950,13 +950,13 @@
     "operating_capacity": 16.0,
     "overtime_hours_used": 0.0,
     "produced": 847.6,
-    "production_cost": 194163.2990777804,
+    "production_cost": 211081.34629782866,
     "reading": "factory",
     "revenue": 805417.1162790698,
-    "unit_cost": 229.07420844476215
+    "unit_cost": 249.0341508940876
    },
    {
-    "contribution": 264642.12315094256,
+    "contribution": 247724.07593089427,
     "demand": 430.0,
     "demand_factor": 0.5,
     "idle_units": 417.6,
@@ -966,13 +966,13 @@
     "operating_capacity": 16.0,
     "overtime_hours_used": 0.0,
     "produced": 430.0,
-    "production_cost": 143957.87684905744,
+    "production_cost": 160875.92406910573,
     "reading": "factory",
     "revenue": 408600.0,
-    "unit_cost": 334.78576011408705
+    "unit_cost": 374.1300559746645
    },
    {
-    "contribution": 443034.14007083373,
+    "contribution": 426116.09285078547,
     "demand": 645.0,
     "demand_factor": 0.75,
     "idle_units": 202.60000000000002,
@@ -982,13 +982,13 @@
     "operating_capacity": 16.0,
     "overtime_hours_used": 0.0,
     "produced": 645.0,
-    "production_cost": 169865.85992916624,
+    "production_cost": 186783.90714921453,
     "reading": "factory",
     "revenue": 612900.0,
-    "unit_cost": 263.3579223708004
+    "unit_cost": 289.58745294451865
    },
    {
-    "contribution": 619871.2760477497,
+    "contribution": 602571.5973315688,
     "demand": 860.0,
     "demand_factor": 1.0,
     "idle_units": 0.0,
@@ -998,13 +998,13 @@
     "operating_capacity": 16.0,
     "overtime_hours_used": 0.127182447917221,
     "produced": 860.0,
-    "production_cost": 197328.72395225026,
+    "production_cost": 214628.40266843114,
     "reading": "factory",
     "revenue": 817200.0,
-    "unit_cost": 229.45200459563983
+    "unit_cost": 249.56791007957108
    },
    {
-    "contribution": 729644.2640379017,
+    "contribution": 707242.9568706413,
     "demand": 1075.0,
     "demand_factor": 1.25,
     "idle_units": 0.0,
@@ -1014,13 +1014,13 @@
     "operating_capacity": 16.0,
     "overtime_hours_used": 2.0,
     "produced": 1019.1999999999998,
-    "production_cost": 238832.75921791221,
+    "production_cost": 261234.06638517254,
     "reading": "factory",
     "revenue": 968477.0232558139,
-    "unit_cost": 234.33355496262976
+    "unit_cost": 256.3128594830971
    },
    {
-    "contribution": 729644.2640379017,
+    "contribution": 707242.9568706413,
     "demand": 1290.0,
     "demand_factor": 1.5,
     "idle_units": 0.0,
@@ -1030,13 +1030,13 @@
     "operating_capacity": 16.0,
     "overtime_hours_used": 2.0,
     "produced": 1019.1999999999998,
-    "production_cost": 238832.75921791221,
+    "production_cost": 261234.06638517254,
     "reading": "factory",
     "revenue": 968477.0232558139,
-    "unit_cost": 234.33355496262976
+    "unit_cost": 256.3128594830971
    },
    {
-    "contribution": 264642.12315094256,
+    "contribution": 247724.07593089427,
     "demand": 430.0,
     "demand_factor": 0.5,
     "idle_units": 417.6,
@@ -1046,13 +1046,13 @@
     "operating_capacity": 16.0,
     "overtime_hours_used": 0.0,
     "produced": 430.0,
-    "production_cost": 143957.87684905744,
+    "production_cost": 160875.92406910573,
     "reading": "factory",
     "revenue": 408600.0,
-    "unit_cost": 334.78576011408705
+    "unit_cost": 374.1300559746645
    },
    {
-    "contribution": 443034.14007083373,
+    "contribution": 426116.09285078547,
     "demand": 645.0,
     "demand_factor": 0.75,
     "idle_units": 202.60000000000002,
@@ -1062,13 +1062,13 @@
     "operating_capacity": 16.0,
     "overtime_hours_used": 0.0,
     "produced": 645.0,
-    "production_cost": 169865.85992916624,
+    "production_cost": 186783.90714921453,
     "reading": "factory",
     "revenue": 612900.0,
-    "unit_cost": 263.3579223708004
+    "unit_cost": 289.58745294451865
    },
    {
-    "contribution": 619871.2760477497,
+    "contribution": 602571.5973315688,
     "demand": 860.0,
     "demand_factor": 1.0,
     "idle_units": 0.0,
@@ -1078,13 +1078,13 @@
     "operating_capacity": 16.0,
     "overtime_hours_used": 0.12718244791904,
     "produced": 860.0,
-    "production_cost": 197328.7239522503,
+    "production_cost": 214628.4026684312,
     "reading": "factory",
     "revenue": 817200.0,
-    "unit_cost": 229.45200459563986
+    "unit_cost": 249.56791007957116
    },
    {
-    "contribution": 766965.6670650862,
+    "contribution": 742511.8426415921,
     "demand": 1075.0,
     "demand_factor": 1.25,
     "idle_units": 0.0,
@@ -1094,13 +1094,13 @@
     "operating_capacity": 16.0,
     "overtime_hours_used": 2.9386842712119687,
     "produced": 1075.0,
-    "production_cost": 254534.3329349138,
+    "production_cost": 278988.15735840786,
     "reading": "factory",
     "revenue": 1021500.0,
-    "unit_cost": 236.77612366038494
+    "unit_cost": 259.52386731014684
    },
    {
-    "contribution": 803558.0183394314,
+    "contribution": 776847.3386836683,
     "demand": 1290.0,
     "demand_factor": 1.5,
     "idle_units": 0.0,
@@ -1110,13 +1110,13 @@
     "operating_capacity": 16.0,
     "overtime_hours_used": 4.0,
     "produced": 1131.0,
-    "production_cost": 271155.00491638243,
+    "production_cost": 297865.6845721456,
     "reading": "factory",
     "revenue": 1074713.0232558139,
-    "unit_cost": 239.74801495701365
+    "unit_cost": 263.3648846791738
    },
    {
-    "contribution": 258645.77966190322,
+    "contribution": 240455.12686458835,
     "demand": 430.0,
     "demand_factor": 0.5,
     "idle_units": 523.55,
@@ -1126,13 +1126,13 @@
     "operating_capacity": 18.0,
     "overtime_hours_used": 0.0,
     "produced": 430.0,
-    "production_cost": 149954.22033809678,
+    "production_cost": 168144.87313541165,
     "reading": "factory",
     "revenue": 408600.0,
-    "unit_cost": 348.7307449723181
+    "unit_cost": 391.0345886870038
    },
    {
-    "contribution": 437037.7965817944,
+    "contribution": 418847.1437844796,
     "demand": 645.0,
     "demand_factor": 0.75,
     "idle_units": 308.54999999999995,
@@ -1142,13 +1142,13 @@
     "operating_capacity": 18.0,
     "overtime_hours_used": 0.0,
     "produced": 645.0,
-    "production_cost": 175862.20341820558,
+    "production_cost": 194052.85621552044,
     "reading": "factory",
     "revenue": 612900.0,
-    "unit_cost": 272.6545789429544
+    "unit_cost": 300.85714141941156
    },
    {
-    "contribution": 615556.174014646,
+    "contribution": 597365.521217331,
     "demand": 860.0,
     "demand_factor": 1.0,
     "idle_units": 93.54999999999995,
@@ -1158,13 +1158,13 @@
     "operating_capacity": 18.0,
     "overtime_hours_used": 0.0,
     "produced": 860.0,
-    "production_cost": 201643.82598535402,
+    "production_cost": 219834.47878266888,
     "reading": "factory",
     "revenue": 817200.0,
-    "unit_cost": 234.46956509924885
+    "unit_cost": 255.62148695659172
    },
    {
-    "contribution": 693262.7726757827,
+    "contribution": 675072.1198784678,
     "demand": 1075.0,
     "demand_factor": 1.25,
     "idle_units": 0.0,
@@ -1174,13 +1174,13 @@
     "operating_capacity": 18.0,
     "overtime_hours_used": 0.0,
     "produced": 953.55,
-    "production_cost": 212831.48313817085,
+    "production_cost": 231022.1359354857,
     "reading": "factory",
     "revenue": 906094.2558139535,
-    "unit_cost": 223.19908042385913
+    "unit_cost": 242.27584912745607
    },
    {
-    "contribution": 693262.7726757827,
+    "contribution": 675072.1198784678,
     "demand": 1290.0,
     "demand_factor": 1.5,
     "idle_units": 0.0,
@@ -1190,13 +1190,13 @@
     "operating_capacity": 18.0,
     "overtime_hours_used": 0.0,
     "produced": 953.55,
-    "production_cost": 212831.48313817085,
+    "production_cost": 231022.1359354857,
     "reading": "factory",
     "revenue": 906094.2558139535,
-    "unit_cost": 223.19908042385913
+    "unit_cost": 242.27584912745607
    },
    {
-    "contribution": 258645.77966190322,
+    "contribution": 240455.12686458835,
     "demand": 430.0,
     "demand_factor": 0.5,
     "idle_units": 523.55,
@@ -1206,13 +1206,13 @@
     "operating_capacity": 18.0,
     "overtime_hours_used": 0.0,
     "produced": 430.0,
-    "production_cost": 149954.22033809678,
+    "production_cost": 168144.87313541165,
     "reading": "factory",
     "revenue": 408600.0,
-    "unit_cost": 348.7307449723181
+    "unit_cost": 391.0345886870038
    },
    {
-    "contribution": 437037.7965817944,
+    "contribution": 418847.1437844796,
     "demand": 645.0,
     "demand_factor": 0.75,
     "idle_units": 308.54999999999995,
@@ -1222,13 +1222,13 @@
     "operating_capacity": 18.0,
     "overtime_hours_used": 0.0,
     "produced": 645.0,
-    "production_cost": 175862.20341820558,
+    "production_cost": 194052.85621552044,
     "reading": "factory",
     "revenue": 612900.0,
-    "unit_cost": 272.6545789429544
+    "unit_cost": 300.85714141941156
    },
    {
-    "contribution": 615556.174014646,
+    "contribution": 597365.521217331,
     "demand": 860.0,
     "demand_factor": 1.0,
     "idle_units": 93.54999999999995,
@@ -1238,13 +1238,13 @@
     "operating_capacity": 18.0,
     "overtime_hours_used": 0.0,
     "produced": 860.0,
-    "production_cost": 201643.82598535402,
+    "production_cost": 219834.47878266888,
     "reading": "factory",
     "revenue": 817200.0,
-    "unit_cost": 234.46956509924885
+    "unit_cost": 255.62148695659172
    },
    {
-    "contribution": 778189.4123821487,
+    "contribution": 756371.8368956565,
     "demand": 1075.0,
     "demand_factor": 1.25,
     "idle_units": 0.0,
@@ -1254,13 +1254,13 @@
     "operating_capacity": 18.0,
     "overtime_hours_used": 1.167907545925118,
     "produced": 1075.0,
-    "production_cost": 243310.58761785136,
+    "production_cost": 265128.16310434346,
     "reading": "factory",
     "revenue": 1021500.0,
-    "unit_cost": 226.33543034218732
+    "unit_cost": 246.63084939938926
    },
    {
-    "contribution": 827693.2443086666,
+    "contribution": 803606.8710065077,
     "demand": 1290.0,
     "demand_factor": 1.5,
     "idle_units": 0.0,
@@ -1270,13 +1270,13 @@
     "operating_capacity": 18.0,
     "overtime_hours_used": 2.0,
     "produced": 1146.6,
-    "production_cost": 261843.40685412407,
+    "production_cost": 285929.78015628294,
     "reading": "factory",
     "revenue": 1089536.6511627906,
-    "unit_cost": 228.3650853428607
+    "unit_cost": 249.37186477959443
    },
    {
-    "contribution": 258645.77966190322,
+    "contribution": 240455.12686458835,
     "demand": 430.0,
     "demand_factor": 0.5,
     "idle_units": 523.55,
@@ -1286,13 +1286,13 @@
     "operating_capacity": 18.0,
     "overtime_hours_used": 0.0,
     "produced": 430.0,
-    "production_cost": 149954.22033809678,
+    "production_cost": 168144.87313541165,
     "reading": "factory",
     "revenue": 408600.0,
-    "unit_cost": 348.7307449723181
+    "unit_cost": 391.0345886870038
    },
    {
-    "contribution": 437037.7965817944,
+    "contribution": 418847.1437844796,
     "demand": 645.0,
     "demand_factor": 0.75,
     "idle_units": 308.54999999999995,
@@ -1302,13 +1302,13 @@
     "operating_capacity": 18.0,
     "overtime_hours_used": 0.0,
     "produced": 645.0,
-    "production_cost": 175862.20341820558,
+    "production_cost": 194052.85621552044,
     "reading": "factory",
     "revenue": 612900.0,
-    "unit_cost": 272.6545789429544
+    "unit_cost": 300.85714141941156
    },
    {
-    "contribution": 615556.174014646,
+    "contribution": 597365.521217331,
     "demand": 860.0,
     "demand_factor": 1.0,
     "idle_units": 93.54999999999995,
@@ -1318,13 +1318,13 @@
     "operating_capacity": 18.0,
     "overtime_hours_used": 0.0,
     "produced": 860.0,
-    "production_cost": 201643.82598535402,
+    "production_cost": 219834.47878266888,
     "reading": "factory",
     "revenue": 817200.0,
-    "unit_cost": 234.46956509924885
+    "unit_cost": 255.62148695659172
    },
    {
-    "contribution": 778189.4123821487,
+    "contribution": 756371.8368956565,
     "demand": 1075.0,
     "demand_factor": 1.25,
     "idle_units": 0.0,
@@ -1334,13 +1334,13 @@
     "operating_capacity": 18.0,
     "overtime_hours_used": 1.167907545925118,
     "produced": 1075.0,
-    "production_cost": 243310.58761785136,
+    "production_cost": 265128.16310434346,
     "reading": "factory",
     "revenue": 1021500.0,
-    "unit_cost": 226.33543034218732
+    "unit_cost": 246.63084939938926
    },
    {
-    "contribution": 911816.4476191981,
+    "contribution": 883096.5431716858,
     "demand": 1290.0,
     "demand_factor": 1.5,
     "idle_units": 0.0,
@@ -1350,10 +1350,10 @@
     "operating_capacity": 18.0,
     "overtime_hours_used": 4.0,
     "produced": 1272.375,
-    "production_cost": 297235.7035435925,
+    "production_cost": 325955.60799110483,
     "reading": "factory",
     "revenue": 1209052.1511627906,
-    "unit_cost": 233.60699757822377
+    "unit_cost": 256.1788843627899
    }
   ],
   "source": "synthetic"

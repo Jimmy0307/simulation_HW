@@ -162,3 +162,43 @@ def test_factory_api_on_the_synthetic_factory_pack() -> None:
     assert result["ranking"][0]["expected_value"] >= result["ranking"][-1]["expected_value"]
     with pytest.raises(svc.ApiError, match="one weight"):
         svc.factory_run(session, {"orders": setup["orders_files"][0]["orders"], "weights": [1]})
+
+
+def test_idle_labour_is_paid_on_planned_capacity() -> None:
+    """At zero demand the excess-capacity charge = table rate at the effective volume x planned units."""
+    from marketplace_sim.cost_curve import curve_cost
+    p = pack()
+    r = run(p, ORDERS, Schedule(10, 0, 81.0), 0.0)
+    effective = 10 * 65 * 0.81
+    rates = [curve_cost(p, p.brand_type(o.brand_type), [p.component(c) for c in o.components], effective).conversion_part
+             for o in ORDERS]
+    rate = (rates[0] * 300 + rates[1] * 200) / 500  # forecast-weighted, as the factory reading does
+    assert r.produced == 0 and r.idle_units == pytest.approx(effective)
+    assert r.conversion_per_unit * r.idle_units == pytest.approx(rate * 10 * 65)
+
+
+def test_screen_calibrated_costs_follow_the_game_screens() -> None:
+    """With the factory screens in the pack: labour on effective capacity (+ overtime at the pay change), overhead per
+    unit made or idle, change cost spread over effective capacity, material = component sum x volume factor."""
+    from marketplace_sim.pack import pack_from_dict
+    from tests.test_har_and_cost_curve import synthetic_pack_with_table
+    data = synthetic_pack_with_table()
+    data["initial_state"]["fixed_capacity_units"] = 12
+    data["production"].update({"min_increase_cost": 900.0})
+    data["extras"] = {"overtime_productivity": [[0, 81.0], [2, 77.0], [4, 69.0]],
+                      "overtime_labor_change": [{"overtime": 1, "change": 90}],
+                      "factory_screen": {"oc": 12, "labour_per_unit": 33.0, "overhead_per_unit": 11.0, "change_cost": 1300.0,
+                                         "material_factor": [[100, 0.99], [1000, 0.97]]}}
+    p = pack_from_dict(data)
+    eff = 12 * 65 * 0.81
+    low = run(p, ORDERS, Schedule(12, 4, 81.0), 0.5)  # 250 units, below capacity
+    material = 300 * 0.5 * 78 * low.material_by_brand["Alpha-1"] / 78 + 200 * 0.5 * low.material_by_brand["Gamma-1"]
+    assert low.material_cost == pytest.approx(material)
+    assert low.production_cost == pytest.approx(material + 33 * eff + 11 * eff + 1300)
+    assert low.conversion_per_unit == pytest.approx(33 + 11 + 1300 / eff)
+    assert low.conversion_per_unit * low.idle_units == pytest.approx((33 + 11 + 1300 / eff) * (eff - 250))
+    high = run(p, ORDERS, Schedule(12, 4, 81.0), 1.5)  # 750 units: overtime
+    assert high.overtime_hours_used > 0
+    assert high.overtime_premium == pytest.approx(33 * eff * 1.9 * high.overtime_hours_used / 8)
+    assert high.production_cost == pytest.approx(high.material_cost + 33 * eff + high.overtime_premium
+                                                 + (11 + 1300 / eff) * high.produced)

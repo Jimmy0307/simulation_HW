@@ -1,7 +1,7 @@
 """Unit cost from the game's own cost-of-production estimate table (ESTIMATED level).
 
 The game's CostOfProduction screen lists, for every designed brand, its estimated cost per unit at several production
-volumes. That table is the only cost evidence before a settlement, so this module turns it into a cost function:
+volumes; the volumes are the total units produced across all brands (the screen's own column header). That table is the only cost evidence before a settlement, so this module turns it into a cost function:
 
 1. **Across brands (same volume).** At each listed volume the unit cost is linear in the brand's material cost
    (sum of component prices x costAdj): ``cost(n, m) = k(n) + s(n) x m``. Fitted per volume by least squares over
