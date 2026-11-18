@@ -44,6 +44,8 @@ SOURCE_MAP: dict[str, str] = {
     "extras.media": "RegionalMedia:staticData.{media[*].mediaName,regions[*].media[*].mediaCost,maxInserts}",
     "extras.web_productivity": "WebProductivity:staticData.webProductivities[*].{setupCost,quarterlyBudget,improvement}",
     "extras.equity_schedule": "FinancialResources:staticData.futureInvestments[*].{quarter,investment}",
+    "extras.overtime_productivity": "Overtime:dynamicData.graphs.productReduct.data[0].{x,y} (whole hours)",
+    "extras.overtime_labor_change": "Overtime:staticData.overtimeLaborChange[*].{overtime,change}",
 }
 
 

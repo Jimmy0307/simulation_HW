@@ -11,6 +11,8 @@
   mpsim build-pack --out evidence/private/model [--har FILE.har ...] [--base OLD_PACK_DIR]   (private)
   mpsim reconcile --params DIR --har FILE.har --quarter N --plan PLAN.yaml [--save SAVE.json] --out PRIVATE.json
   mpsim cost-curve --params DIR [--brand-type T --components ID,ID,... --units N ...]   (private pack)
+  mpsim intake --har FILE.har --out PRIVATE_ORDERS.yaml          (the team's entered decisions -> factory orders)
+  mpsim factory --params DIR --orders ORDERS.yaml [--oc 12,14,16] [--ot 0,2] [--demand 0.5,1,1.5] [--reading factory|brand|both]
 """
 
 from __future__ import annotations
@@ -339,6 +341,68 @@ def cmd_cost_curve(args: argparse.Namespace) -> None:
             print(f"{units:>8.0f} units: " + ("-" if got is None else f"{got.cost:,.2f} [E] {got.rule}"))
 
 
+def _private_out(path: Path) -> None:
+    if "private" not in path.resolve().as_posix().split("/"):
+        raise SystemExit("output must be inside a 'private' directory (it holds game data)")
+
+
+def cmd_intake(args: argparse.Namespace) -> None:
+    from marketplace_sim.intake import orders_from_views
+    from marketplace_sim.pack_builder import _latest_views
+    from marketplace_sysid.parameters import collect
+
+    out = Path(args.out)
+    _private_out(out)
+    data = orders_from_views(_latest_views(collect([], [], [Path(h) for h in args.har])))
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(yaml.safe_dump(data, allow_unicode=True, sort_keys=False), encoding="utf-8")
+    print(f"{len(data['orders'])} brand(s) on sale; schedule entered: {data['schedule']}")
+    for warning in data["warnings"]:
+        print(f"warning: {warning}")
+    print(f"orders written (private): {out}")
+
+
+def _floats(text: str) -> list[float]:
+    return [float(x) for x in text.split(",") if x.strip()]
+
+
+def cmd_factory(args: argparse.Namespace) -> None:
+    """Production scheduler's sweep: operating capacity x overtime x demand outcome, for the orders the team entered."""
+    from marketplace_sim.factory import BrandOrder, required_operating_capacity, sweep
+
+    pack = load_pack(Path(args.params))
+    spec = yaml.safe_load(Path(args.orders).read_text(encoding="utf-8")) or {}
+    orders = [BrandOrder(str(o["name"]), str(o["brand_type"]), tuple(str(c) for c in o["components"]), float(o["price"]),
+                         float(o["forecast"])) for o in spec.get("orders", [])]
+    if not orders:
+        raise SystemExit("no orders (no brand on sale)")
+    entered = spec.get("schedule") or {}
+    productivity = args.productivity or float(entered.get("productivity") or 0) or 70.0
+    forecast = sum(o.forecast for o in orders)
+    need = required_operating_capacity(forecast, productivity)
+    print(f"forecast {forecast:,.0f} units; productivity {productivity:g} %; help-text operating capacity "
+          f"{need:.1f}/day (+25 % buffer: {required_operating_capacity(forecast, productivity, 0.25):.1f})")
+    readings = ["factory", "brand"] if args.reading == "both" else [args.reading]
+    rows = []
+    for reading in readings:
+        rows += sweep(pack, orders, _floats(args.oc), _floats(args.ot), _floats(args.demand), productivity=productivity,
+                      reading=reading, previous_operating_capacity=args.previous_oc)
+    header = f"{'reading':8} {'OC':>4} {'OT':>3} {'dem%':>5} {'demand':>7} {'made':>6} {'lost':>5} {'idle':>5} {'OTh':>4} " \
+             f"{'cost/u':>7} {'prod.cost':>10} {'contrib.':>10} {'next-q cut':>10}"
+    print(header)
+    for r in rows:
+        print(f"{r['reading']:8} {r['operating_capacity']:>4.0f} {r['max_overtime_hours']:>3.0f} {100 * float(r['demand_factor']):>5.0f} "
+              f"{r['demand']:>7,.0f} {r['produced']:>6,.0f} {r['lost']:>5,.0f} {r['idle_units']:>5,.0f} "
+              f"{r['overtime_hours_used']:>4.1f} {r['unit_cost']:>7,.0f} {r['production_cost']:>10,.0f} "
+              f"{r['contribution']:>10,.0f} {100 * float(r['next_quarter_demand_cut']):>9.1f}%")
+    if args.out:
+        out = Path(args.out)
+        _private_out(out)
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(json.dumps(rows, indent=1), encoding="utf-8")
+        print(f"rows written (private): {out}")
+
+
 def main(argv: list[str] | None = None) -> None:
     for stream in (sys.stdout, sys.stderr):
         reconfigure = getattr(stream, "reconfigure", None)
@@ -413,6 +477,21 @@ def main(argv: list[str] | None = None) -> None:
     p.add_argument("--components", help="comma-separated component ids of a design")
     p.add_argument("--units", type=float, action="append")
     p.set_defaults(func=cmd_cost_curve)
+    p = sub.add_parser("intake", help="the team's entered decisions (Summary of Decisions capture) -> factory orders")
+    p.add_argument("--har", action="append", required=True)
+    p.add_argument("--out", required=True)
+    p.set_defaults(func=cmd_intake)
+    p = sub.add_parser("factory", help="production scheduler: operating capacity x overtime x demand sweep (private)")
+    p.add_argument("--params", required=True)
+    p.add_argument("--orders", required=True)
+    p.add_argument("--oc", default="10,12,14,16", help="operating capacities to try (units/day)")
+    p.add_argument("--ot", default="0,2", help="maximum overtime hours to try")
+    p.add_argument("--demand", default="0.5,0.75,1,1.25,1.5", help="demand outcomes as multiples of the forecast")
+    p.add_argument("--reading", default="both", choices=["factory", "brand", "both"])
+    p.add_argument("--productivity", type=float, help="override HR's projected productivity (percent)")
+    p.add_argument("--previous-oc", type=float, default=0.0)
+    p.add_argument("--out")
+    p.set_defaults(func=cmd_factory)
     args = parser.parse_args(argv)
     args.func(args)
 
