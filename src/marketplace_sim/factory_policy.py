@@ -96,13 +96,13 @@ class PolicyAssumptions:
     overtime_cost_weight: float = 1.
     future_stockout_margin_weight: float = .5
     reference_daily: int = 14
-    starting_cash: float = 318500.
-    financing_cash: float = 500000.
-    interest_cash: float = 4500.
-    fixed_other_expenses: float = 329900.
+    starting_cash: float = 0.
+    financing_cash: float = 0.
+    interest_cash: float = 0.
+    fixed_other_expenses: float = 0.
     planned_capex: float = 0.
-    startup_cost: float = 20000.
-    startup_cost_per_daily_quarter_unit: float = 5.
+    startup_cost: float = 0.
+    startup_cost_per_daily_quarter_unit: float = 0.
 
 
 def simulate(
