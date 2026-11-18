@@ -1,5 +1,5 @@
 import type {
-  CompareDoc, DiffDoc, EventType, GameDoc, GameScript, GameSetupDoc, GameStartConfig, LevelsDoc, ModulesDoc, PackInfo, PlanDoc,
+  CompareDoc, DiffDoc, EventType, FactoryRequest, FactoryResult, FactorySetup, GameDoc, GameScript, GameSetupDoc, GameStartConfig, LevelsDoc, ModulesDoc, PackInfo, PlanDoc,
   PlansDoc, Report, ScenarioRun, ScenarioSpecDoc, SweepResult,
 } from "../types";
 import { ApiProvider } from "./apiProvider";
@@ -37,6 +37,9 @@ export interface DataProvider {
   gamePlay(plan: PlanDoc): Promise<Report>;
   /** The pre-recorded demo game (static provider only); null when the engine is live. */
   gameScript(): Promise<GameScript | null>;
+  // production scheduler: the team's orders -> operating capacity x overtime x demand outcome
+  factorySetup(): Promise<FactorySetup>;
+  factoryRun(request: FactoryRequest): Promise<FactoryResult>;
 }
 
 export { ReadOnlyError } from "./errors";

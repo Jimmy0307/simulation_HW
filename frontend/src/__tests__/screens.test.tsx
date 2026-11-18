@@ -21,10 +21,24 @@ async function open(route: string) {
 
 describe("all seven screens with the synthetic demo bundle", () => {
   it("keeps the seven analysis routes, then game mode, then the module maturity overview", () => {
-    expect(ROUTES).toHaveLength(9);
+    expect(ROUTES).toHaveLength(10);
     expect(ROUTES.slice(0, 7).map((r) => r.id)).toEqual(["overview", "decisions", "compare", "scenario", "stress", "diff", "levels"]);
     expect(ROUTES[7]).toEqual({ id: "game", title: "遊戲模式" });
     expect(ROUTES[8]).toEqual({ id: "modules", title: "模組成熟度" });
+    expect(ROUTES[9]).toEqual({ id: "factory", title: "工廠排程" });
+  });
+
+  it("factory: the demo orders, a precomputed sweep, the recommended schedule", async () => {
+    await open("factory");
+    const button = await screen.findByText("讀取預算結果");
+    await act(async () => fireEvent.click(button));
+    const text = (await screen.findByTestId("factory-recommendation")).textContent ?? "";
+    expect(text).toContain("說明檔公式");
+    expect(screen.getByText(/建議排程：/)).toBeTruthy();
+    // an edited order needs the live engine
+    fireEvent.change(screen.getByLabelText("Alpha-1 預測"), { target: { value: "999" } });
+    await act(async () => fireEvent.click(screen.getByText("讀取預算結果")));
+    await screen.findByText(/執行修改過的工廠排程/);
   });
 
   it("overview: synthetic badge, state, trend and uncalibrated marks", async () => {

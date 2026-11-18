@@ -122,7 +122,9 @@ def build_pack_dict(views: dict[str, dict[str, Any]]) -> dict[str, Any]:
 _PRODUCTION_EXTRAS = (("var_direct_labor", "varDirectLabor"), ("var_overhead_cpu", "varOverheadCPU"),
                       ("learn_curve", "learnCurve"), ("learn_curve_floor", "learnCurveFloor"),
                       ("scale_threshold", "scaleThreshold"), ("component_threshold", "componentThresholdNumber"),
-                      ("factory_cost_index", "factoryCostIndex"), ("workers_productivity", "workersProductivity"))
+                      ("factory_cost_index", "factoryCostIndex"), ("workers_productivity", "workersProductivity"),
+                      ("min_increase_cost", "minIncreaseCost"), ("var_increase_cpu", "varIncreaseCPU"),
+                      ("min_decrease_cost", "minDecreaseCost"), ("var_decrease_cpu", "varDecreaseCPU"))
 _FINANCE_EXTRAS = (("short_loan_rate_min_percent", "slRateMin"), ("short_loan_rate_max_percent", "slRateMax"),
                    ("emergency_rate_increment_percent", "elRateInc"), ("long_loan_rate_5yr_percent", "ltRate5yr"),
                    ("inventory_tax_percent", "inventoryTax"))
@@ -180,6 +182,15 @@ def _add_capture_extras(data: dict[str, Any], views: dict[str, dict[str, Any]]) 
                                        "quarterly_budget": float(w["quarterlyBudget"]),
                                        "improvement_percent": float(w["improvement"])}
                                       for w in web_prod["webProductivities"]]
+    overtime = views.get("Overtime", {})
+    curve = (((overtime.get("dynamicData") or {}).get("graphs") or {}).get("productReduct") or {}).get("data") or []
+    if curve:
+        xs, ys = curve[0].get("x", []), curve[0].get("y", [])
+        extras["overtime_productivity"] = [[float(x), float(y)] for x, y in zip(xs, ys, strict=False)
+                                           if abs(float(x) - round(float(x))) < 1e-6]
+    if (overtime.get("staticData") or {}).get("overtimeLaborChange"):
+        extras["overtime_labor_change"] = [{"overtime": int(o["overtime"]), "change": float(o["change"])}
+                                           for o in overtime["staticData"]["overtimeLaborChange"]]
     resources = views.get("FinancialResources", {}).get("staticData") or {}
     if resources.get("futureInvestments") is not None:
         extras["equity_schedule"] = [{"quarter": int(f["quarter"]), "investment": float(f["investment"])}

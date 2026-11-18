@@ -26,6 +26,7 @@ from marketplace_sim.control.sweep import run_sweep as _run_sweep
 from marketplace_sim.control.sweep import sweep_from_dict
 from marketplace_sim.control.sweep import worst as _worst
 from marketplace_sim.engine import CompanyState, Plan, Report, advance
+from marketplace_sim.factory import DEFAULT_PRODUCTIVITY
 from marketplace_sim.metrics import METRICS, MODULE_METRICS, chain, lookup
 from marketplace_sim.pack import ParamPack, load_pack
 from marketplace_sim.provenance import Level
@@ -351,3 +352,78 @@ def params_diff(old: str, new: str) -> dict[str, Any]:
              **({"old": c.old, "new": c.new} if synthetic else {})} for c in changes]
     return {"is_private": not synthetic, "values_included": synthetic, "old": old_pack.name, "new": new_pack.name,
             "red_flags": red_flags(changes), "changes": rows}
+
+
+# --- factory (production scheduler) ------------------------------------------------------------------------------
+
+SYNTHETIC_FACTORY_PACK = ROOT / "examples" / "synthetic-factory"
+FACTORY_DEFAULTS = {"operating_capacities": [10, 12, 14, 16, 18], "overtime_hours": [0, 2, 4],
+                    "demand_factors": [0.5, 0.75, 1.0, 1.25, 1.5], "weights": [0.1, 0.2, 0.4, 0.2, 0.1],
+                    "reading": "factory"}
+FACTORY_LEVELS = {"material and labour/overhead": "estimated (the game's cost table)",
+                  "overtime premium, capacity change cost, next-quarter demand cut": "heuristic",
+                  "demand outcomes": "scenario set by you (not a forecast)"}
+
+
+def _orders_files(session: Session) -> list[dict[str, Any]]:
+    folder = PRIVATE_ROOT / "plans" if session.is_private else SYNTHETIC_FACTORY_PACK
+    items = []
+    for path in sorted(folder.glob("*.yaml")):
+        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+        if isinstance(data, dict) and data.get("orders"):
+            items.append({"id": path.stem, "orders": data["orders"], "schedule": data.get("schedule") or {}})
+    return items
+
+
+def factory_setup(session: Session) -> dict[str, Any]:
+    """What the factory screen starts from: orders files (from `mpsim intake` or hand-written) and the pack's limits."""
+    pack = session.pack
+    fixed = session.state.fixed_capacity_units if session.state else pack.initial_state.get("fixed_capacity_units", 0.0)
+    brands = [{"name": b.name, "brand_type": b.brand_type, "components": b.components}
+              for b in (session.state.brands.values() if session.state else [])]
+    return {**pack_info(session), "has_cost_table": bool(pack.cost_estimates), "fixed_capacity": fixed,
+            "productivity": pack.production.get("workers_productivity", DEFAULT_PRODUCTIVITY), "orders_files": _orders_files(session),
+            "brands": brands, "defaults": FACTORY_DEFAULTS, "levels": FACTORY_LEVELS}
+
+
+def factory_run(session: Session, body: dict[str, Any]) -> dict[str, Any]:
+    """Sweep operating capacity x overtime x demand outcome for the given orders; rank schedules by expected value."""
+    from marketplace_sim.factory import (
+        BrandOrder,
+        Schedule,
+        expected_values,
+        required_operating_capacity,
+        run,
+        sweep,
+    )
+
+    pack = session.pack
+    if not pack.cost_estimates:
+        raise ApiError("this pack has no cost-of-production table: rebuild it from a capture of the CostOfProduction "
+                       "screen, or use the synthetic factory demo pack")
+    orders = [BrandOrder(str(o["name"]), str(o["brand_type"]), tuple(str(c) for c in o["components"]), float(o["price"]),
+                         float(o["forecast"])) for o in body.get("orders", []) if float(o.get("forecast", 0)) > 0]
+    if not orders:
+        raise ApiError("no orders with a forecast above 0")
+    cfg = {**FACTORY_DEFAULTS, **{k: v for k, v in body.items() if k in FACTORY_DEFAULTS}}
+    factors = [float(f) for f in cfg["demand_factors"]]
+    weights = [float(w) for w in cfg["weights"]]
+    if len(weights) != len(factors):
+        raise ApiError("one weight per demand outcome")
+    productivity = float(body.get("productivity") or pack.production.get("workers_productivity") or DEFAULT_PRODUCTIVITY)
+    fixed = body.get("fixed_capacity")
+    fixed = float(fixed) if fixed is not None else (session.state.fixed_capacity_units if session.state else None)
+    previous = session.state.operating_capacity if session.state else 0.0
+    rows = sweep(pack, orders, [float(x) for x in cfg["operating_capacities"]], [float(x) for x in cfg["overtime_hours"]],
+                 factors, productivity=productivity, reading=str(cfg["reading"]), previous_operating_capacity=previous,
+                 fixed_capacity=fixed)
+    forecast = sum(o.forecast for o in orders)
+    base = run(pack, orders, Schedule(required_operating_capacity(forecast, productivity), 0.0, productivity, previous), 1.0,
+        reading=str(cfg["reading"]), fixed_capacity=fixed)
+    margin = (base.contribution / base.produced) if base.produced else 0.0
+    ranked = expected_values(rows, dict(zip(factors, weights, strict=True)), lost_share_value=forecast * max(margin, 0.0))
+    return {**pack_info(session), "forecast": forecast, "productivity": productivity, "fixed_capacity": fixed,
+            "required_operating_capacity": required_operating_capacity(forecast, productivity),
+            "required_with_buffer": required_operating_capacity(forecast, productivity, 0.25),
+            "margin_per_unit": margin, "rows": rows, "ranking": ranked, "levels": FACTORY_LEVELS,
+            "config": {**cfg, "productivity": productivity}}

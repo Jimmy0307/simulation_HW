@@ -57,6 +57,15 @@ def build_game_script() -> dict[str, Any]:
     return {"config": DEMO_GAME, "start": start, "steps": steps, "final": gm.state_view(session)}
 
 
+def build_factory_demo() -> dict[str, Any]:
+    """The factory screen's demo: the invented synthetic-factory pack and its invented orders, default sweep."""
+    session = svc.Session()
+    svc.load_pack_into(session, "synthetic", str(svc.SYNTHETIC_FACTORY_PACK))
+    setup = svc.factory_setup(session)
+    first = setup["orders_files"][0]
+    return {"setup": setup, "result": svc.factory_run(session, {"orders": first["orders"]}), "orders_id": first["id"]}
+
+
 def build_bundle() -> dict[str, Any]:
     session = svc.Session()
     if session.is_private:
@@ -80,6 +89,7 @@ def build_bundle() -> dict[str, Any]:
     bundle["diff"] = {"packs": [{"id": "synthetic"}, {"id": "synthetic-v2"}],
                       "result": svc.params_diff(str(svc.SYNTHETIC_PACK), str(svc.ROOT / "examples" / "demo-control" / "pack-v2"))}
     bundle["gamemode"] = build_game_script()
+    bundle["factory"] = build_factory_demo()
     for key, value in bundle.items():
         _assert_synthetic(value, key)
     return bundle

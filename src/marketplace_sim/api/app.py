@@ -116,6 +116,14 @@ def create_app(session: svc.Session | None = None) -> FastAPI:
     def get_worst(top: int = 10) -> dict[str, Any]:
         return dict(guarded(svc.sweep_worst, state, top))
 
+    @app.get("/api/factory")
+    def get_factory() -> dict[str, Any]:
+        return dict(guarded(svc.factory_setup, state))
+
+    @app.post("/api/factory/run")
+    def post_factory(body: dict[str, Any] = Body(...)) -> dict[str, Any]:  # noqa: B008
+        return dict(guarded(svc.factory_run, state, body))
+
     @app.get("/api/packs")
     def get_packs() -> dict[str, Any]:
         return dict(guarded(svc.pack_snapshots, state))

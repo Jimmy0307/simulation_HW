@@ -1,0 +1,6 @@
+# Invented orders for the factory demo (synthetic-factory pack): what Marketing and Sales would hand the factory.
+orders:
+  - {name: Alpha-1, brand_type: A, components: [c1, c2], price: 780, forecast: 420}
+  - {name: Beta-1, brand_type: B, components: [c1, c3], price: 990, forecast: 260}
+  - {name: Gamma-1, brand_type: C, components: [c1, c4], price: 1290, forecast: 180}
+schedule: {operating_capacity: 0, productivity: 80, max_overtime_hours: 0}

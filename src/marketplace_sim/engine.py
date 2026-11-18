@@ -36,6 +36,8 @@ class CompanyState:
     cash_level: str = "verified"  # level of the cash balance carried from the previous quarter
     ad_stock: dict[str, float] = field(default_factory=dict)  # advertising goodwill per brand (literature demand)
     module_state: dict[str, dict[str, float]] = field(default_factory=dict)  # business-module state (sales force ...)
+    operating_capacity: float = 0.0  # units/day scheduled last quarter (just-in-time factory)
+    demand_cut: float = 0.0  # share of our demand lost this quarter because of last quarter's stock-outs
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
@@ -78,6 +80,7 @@ class Plan:
     stock_issue: list[tuple[float, float]] = field(default_factory=list)
     brands: list[BrandPlan] = field(default_factory=list)
     modules: dict[str, Any] = field(default_factory=dict)  # business-module decisions, keyed like the ledger
+    factory: dict[str, float] | None = None  # just-in-time factory: operating_capacity, max_overtime_hours, productivity
 
     @classmethod
     def from_dict(cls, data: dict[str, Any], name: str = "plan") -> Plan:
@@ -95,6 +98,7 @@ class Plan:
                               segment=None if b.get("segment") is None else str(b["segment"]))
                     for b in data.get("brands", [])],
             modules=dict(data.get("modules") or {}),
+            factory={k: float(v) for k, v in data["factory"].items()} if data.get("factory") else None,
         )
 
 
@@ -148,6 +152,9 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
     lines["cash_start"] = start_cash
 
     # Capacity bought now becomes usable next quarter (screen semantics "next quarter capacity": derived).
+    jit = plan.factory is not None
+    if jit and ("production.operating_capacity" in plan.modules or "production.excess_capacity" in plan.modules):
+        raise ValueError("the factory block replaces the operating-capacity and excess-capacity modules: use one")
     lines["capex_capacity"] = m.capacity_purchase(pack, plan.capacity_increase)
     lines["capacity_units_per_quarter"] = m.quarterly_capacity(pack, state.fixed_capacity_units)
     if adjust.capacity_factor != 1.0:
@@ -210,6 +217,7 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
     unit_costs: dict[str, Tagged] = {}
     produced_units: dict[str, float] = {}
     ordered = plan.brands
+    planned_total = min(sum(max(bp.production, 0.0) for bp in plan.brands), capacity_left)
     if effects.production_order is not None:
         rank = {name: i for i, name in enumerate(effects.production_order)}
         ordered = sorted(plan.brands, key=lambda b: rank.get(b.name, len(rank)))
@@ -222,11 +230,18 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
         brand = new.brands[bp.name]
         rule = effects.production_units.get(bp.name)
         wanted = rule.value if rule is not None else bp.production
+        if jit:  # just-in-time: production follows demand, set after demand below
+            if bp.production:
+                notes.append(f"{bp.name}: planned production ignored (just-in-time factory builds what is demanded)")
+            wanted, rule = 0.0, None
         if rule is not None:
             units_level[bp.name] = rule.level
         units = min(wanted, capacity_left)
-        # The game's cost table is per quarter volume: cost the units actually made (planned units if none).
-        cost = _unit_cost(pack, new, bp.name, effects, volume=units if units > 0 else bp.production)
+        # The game's cost table is per quarter volume. Default reading: the factory's total volume (help text: labour
+        # and overhead per unit follow operating capacity); a private pack may set extras.cost_reading = "brand".
+        own = units if units > 0 else bp.production
+        cost = _unit_cost(pack, new, bp.name, effects,
+                          volume=own if pack.extras.get("cost_reading") == "brand" else max(planned_total, own))
         lines[f"unit_cost[{bp.name}]"] = cost
         unit_costs[bp.name] = cost
         if units < wanted:
@@ -236,7 +251,7 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
         capacity_left -= units
         produced_units[bp.name] = units
         new.inventory[bp.name] = new.inventory.get(bp.name, 0.0) + units
-        if units > 0:  # nothing produced costs nothing, whatever the (unverified) unit-cost rule says
+        if units > 0 and not jit:  # nothing produced costs nothing, whatever the (unverified) unit-cost rule says
             batch = cost.scaled(units, f"{units:.0f} units")
             if bp.name in units_level:
                 batch = batch.with_level(units_level[bp.name], f"{batch.source} (units set by a module rule)")
@@ -268,6 +283,14 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
     if effects.demand_level is not None:
         why = f" · with business modules {', '.join(effects.active)} ({effects.demand_level.label})"
         demanded = {k: v.with_level(effects.demand_level, v.source + why) for k, v in demanded.items()}
+    if state.demand_cut > 0:  # last quarter's stock-outs (heuristic: half the unmet share, team's reading of the help file)
+        demanded = {k: (Tagged(v.value * (1 - state.demand_cut), min(v.level, Level.HEURISTIC),
+                               f"{v.source} x (1 - {state.demand_cut:.3f} stock-out carry-over)") if k[0] == "us" else v)
+                    for k, v in demanded.items()}
+        notes.append(f"our demand cut by {100 * state.demand_cut:.1f} % for last quarter's stock-outs (heuristic)")
+    new.demand_cut = 0.0
+    if jit:
+        _jit_production(pack, state, plan, new, own_offers, demanded, lines, unit_costs, produced_units, notes)
     revenue: list[Tagged] = []
     sold_total = 0.0
     for offer in own_offers:
@@ -341,6 +364,7 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
                                                 empty_level=rate.level)
 
     expense_keys = ("store_setup", "web_center_setup", "outlet_lease", "design_cost", "production_cost", "advertising",
+                    *(("factory_excess_capacity_cost",) if jit else ()),
                     *effects.expenses, *effects.revenue_rates,
                     *(("inventory_holding_cost",) if "inventory_holding_cost" in lines else ()))
     expenses = total([lines[k] for k in expense_keys], "operating expenses")
@@ -384,11 +408,76 @@ def advance(state: CompanyState, plan: Plan, pack: ParamPack, *, demand: m.Deman
     new.module_state = {**{k: v for k, v in state.module_state.items()
                            if k not in effects.active and k not in effects.stopped}, **effects.state}
     new.fixed_capacity_units = state.fixed_capacity_units + plan.capacity_increase
+    new.operating_capacity = float(plan.factory.get("operating_capacity", 0.0)) if jit and plan.factory else 0.0
     new.pending_capacity_units = 0.0
     new.quarter = state.quarter + 1
     lines["fixed_capacity_next_quarter"] = Tagged(state.fixed_capacity_units + plan.capacity_increase, Level.DERIVED,
                                                    "current + increase (screen 'next quarter' row)")
     return new, Report(state.quarter, plan.name, lines, notes)
+
+
+def _jit_production(pack: ParamPack, state: CompanyState, plan: Plan, new: CompanyState, own_offers: list[m.Offer],
+                    demanded: dict[tuple[str, str], Tagged], lines: dict[str, Tagged], unit_costs: dict[str, Tagged],
+                    produced_units: dict[str, float], notes: list[str]) -> None:
+    """Just-in-time factory (``marketplace_sim.factory``): build what is demanded beyond stock, within operating
+    capacity plus authorised overtime; labour and overhead are paid on the scheduled capacity (idle part =
+    excess capacity cost); lost sales cut next quarter's demand."""
+    from marketplace_sim.factory import DEFAULT_PRODUCTIVITY, BrandOrder, Schedule, run
+
+    spec = plan.factory or {}
+    productivity = float(spec.get("productivity") or pack.production.get("workers_productivity") or DEFAULT_PRODUCTIVITY)
+    schedule = Schedule(float(spec.get("operating_capacity", 0.0)), float(spec.get("max_overtime_hours", 0.0)),
+                        productivity, state.operating_capacity)
+    orders, levels = [], []
+    for offer in own_offers:
+        brand = new.brands[offer.brand]
+        want = demanded.get(("us", offer.brand), Tagged(0.0, Level.LITERATURE, "no demand"))
+        levels.append(want.level)
+        need = max(want.value - new.inventory.get(offer.brand, 0.0), 0.0)
+        orders.append(BrandOrder(offer.brand, brand.brand_type, tuple(brand.components), offer.price, need))
+    if not orders:
+        orders = [BrandOrder(b.name, b.brand_type, tuple(b.components), 0.0, 0.0) for b in new.brands.values()][:1]
+    if not orders or not pack.cost_estimates:
+        raise ValueError("the factory block needs a brand and a pack with the game's cost table (cost_estimates)")
+    reading = str(pack.extras.get("cost_reading", "factory"))
+    r = run(pack, orders, schedule, 1.0, reading=reading, fixed_capacity=state.fixed_capacity_units)
+    demand_level = min(levels) if levels else Level.VERIFIED
+    E, H, D = Level.ESTIMATED, Level.HEURISTIC, Level.DERIVED
+    regular_paid = min(r.produced, r.regular_capacity)
+    lines["operating_capacity"] = Tagged(schedule.operating_capacity, Level.VERIFIED, "plan input (units/day)")
+    lines["capacity_units_per_quarter"] = Tagged(r.regular_capacity, D, "operating capacity x 65 days x productivity")
+    lines["max_capacity_with_overtime"] = Tagged(r.max_capacity, D, "with authorised overtime and its fatigue curve")
+    lines["overtime_hours_used"] = Tagged(r.overtime_hours_used, demand_level, "smallest overtime that covers demand")
+    lines["factory_material_cost"] = Tagged(r.material_cost, min(E, demand_level), "units made x material part of the cost table")
+    lines["factory_conversion_used"] = Tagged(r.conversion_per_unit * regular_paid, min(E, demand_level),
+                                              "labour + overhead per unit of scheduled capacity x units made in regular time")
+    lines["factory_overtime_premium"] = Tagged(r.overtime_premium, min(H, demand_level) if r.overtime_premium else D,
+                                       "overtime units x conversion x (labour share x pay change + 1), fatigue-adjusted")
+    lines["capacity_change_cost"] = Tagged(r.change_cost, H if r.change_cost else D,
+                                           "min increase cost + var increase x added units (screen parameters; formula unverified)")
+    production = r.material_cost + r.conversion_per_unit * regular_paid + r.overtime_premium + r.change_cost
+    prod_level = min(E, demand_level, *([H] if r.overtime_premium or r.change_cost else []))
+    lines["production_cost"] = Tagged(production, prod_level, "just-in-time factory: material + labour/overhead used + "
+                                      "overtime premium + capacity change cost")
+    lines["factory_excess_capacity_cost"] = Tagged(r.conversion_per_unit * r.idle_units, min(E, demand_level),
+                                           "idle scheduled capacity x labour + overhead per unit (help text: idle workers are paid)")
+    lines["factory_idle_units"] = Tagged(r.idle_units, demand_level, "regular capacity - units made")
+    lines["units_lost_total"] = Tagged(r.lost, demand_level, "demand beyond capacity with authorised overtime")
+    shared = (production - r.material_cost) / r.produced if r.produced else 0.0
+    for o in orders:
+        made = r.made.get(o.name, 0.0)
+        produced_units[o.name] = made
+        new.inventory[o.name] = new.inventory.get(o.name, 0.0) + made
+        cost = Tagged(r.material_by_brand.get(o.name, 0.0) + shared, prod_level,
+                      "material part + (labour/overhead used + overtime premium + change cost) / units made")
+        lines[f"unit_cost[{o.name}]"] = cost
+        unit_costs[o.name] = cost
+    new.demand_cut = r.next_quarter_demand_cut
+    lines["demand_cut_next_quarter"] = Tagged(r.next_quarter_demand_cut, min(H, demand_level),
+                                              "half the unmet share of demand (team's reading of the help file)")
+    notes.extend(r.notes)
+    if r.lost > 0:
+        notes.append(f"stock-out: {r.lost:.0f} units not built; next quarter's demand cut {100 * r.next_quarter_demand_cut:.1f} %")
 
 
 def _segment(pack: ParamPack, state: CompanyState, bp: BrandPlan) -> str | None:

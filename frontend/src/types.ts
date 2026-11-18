@@ -340,3 +340,74 @@ export interface GameScript {
   steps: GameScriptStep[];
   final: GameStateView;
 }
+
+// --- factory (production scheduler) ---------------------------------------------------------------------------------
+
+export interface FactoryOrder {
+  name: string;
+  brand_type: string;
+  components: string[];
+  price: number;
+  forecast: number;
+}
+
+export interface FactoryConfig {
+  operating_capacities: number[];
+  overtime_hours: number[];
+  demand_factors: number[];
+  weights: number[];
+  reading: "factory" | "brand";
+}
+
+export interface FactorySetup extends PackInfo {
+  has_cost_table: boolean;
+  fixed_capacity: number;
+  productivity: number;
+  orders_files: { id: string; orders: FactoryOrder[]; schedule: Record<string, number> }[];
+  brands: { name: string; brand_type: string; components: string[] }[];
+  defaults: FactoryConfig;
+  levels: Record<string, string>;
+}
+
+export interface FactoryRow {
+  operating_capacity: number;
+  max_overtime_hours: number;
+  demand_factor: number;
+  reading: string;
+  demand: number;
+  produced: number;
+  lost: number;
+  idle_units: number;
+  overtime_hours_used: number;
+  unit_cost: number;
+  production_cost: number;
+  revenue: number;
+  contribution: number;
+  next_quarter_demand_cut: number;
+}
+
+export interface FactoryRanking {
+  operating_capacity: number;
+  max_overtime_hours: number;
+  expected_value: number;
+  worst_contribution: number;
+  max_lost: number;
+}
+
+export interface FactoryRequest extends Partial<FactoryConfig> {
+  orders: FactoryOrder[];
+  productivity?: number;
+}
+
+export interface FactoryResult extends PackInfo {
+  forecast: number;
+  productivity: number;
+  fixed_capacity: number | null;
+  required_operating_capacity: number;
+  required_with_buffer: number;
+  margin_per_unit: number;
+  rows: FactoryRow[];
+  ranking: FactoryRanking[];
+  levels: Record<string, string>;
+  config: FactoryConfig & { productivity: number };
+}

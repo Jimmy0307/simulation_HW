@@ -20,7 +20,7 @@ from __future__ import annotations
 import math
 import statistics
 from collections.abc import Mapping
-from typing import Any
+from typing import Any, ClassVar
 
 from marketplace_sim.business.base import (
     Field,
@@ -57,7 +57,7 @@ class ProductionPlanningModule:
               Field("z", "安全係數 z", "supply.replenishment", "number", 0, 3, 0.1, 0.0),
               Field("priority", "產能不夠時的優先順序（1 最先）", "production.scheduling", "brand_number", 1, 9, 1, 5))
     stoppable = True
-    ui = {"toggle": "啟用補貨與排程規則", "literature": "「補到目標庫存」用文獻的訂購點形式：平均需求 × 目標季數 + z × 標準差 × √季數，"
+    ui: ClassVar[dict[str, Any]] = {"toggle": "啟用補貨與排程規則", "literature": "「補到目標庫存」用文獻的訂購點形式：平均需求 × 目標季數 + z × 標準差 × √季數，"
           "減掉期初庫存；需求紀錄來自本引擎自己的估計，所以生產量跟需求鏈同等級（≈）。第一季還沒有紀錄時用計畫量。",
           "practice": "產能不夠時按優先順序分配；遊戲的分配規則未觀察到。",
           "results": [["replenishment_target[{brand}]", "目標庫存"], ["replenishment_units[{brand}]", "規則決定的產量"],

@@ -63,12 +63,14 @@
    },
    "cash_level": "placeholder",
    "cd": 0.0,
+   "demand_cut": 0.0,
    "fixed_capacity_units": 45.0,
    "inventory": {
     "Alpha-1": 79.72596172218687,
     "Gamma-1": 94.71452025045568
    },
    "module_state": {},
+   "operating_capacity": 0.0,
    "pending_capacity_units": 0.0,
    "quarter": 4,
    "shares_total": 48611.0,
@@ -545,11 +547,11 @@
        "lease_cost": {
         "chain": [
          {
-          "evidence": "docs/cost-model.md (not covered)",
+          "evidence": "docs/decisions-log.md #151",
           "formula": "lease_cost of outlets open at quarter start",
           "level": "placeholder",
           "metric": "outlet_lease",
-          "note": "Lease timing after opening is unverified."
+          "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
          }
         ],
         "level": "placeholder",
@@ -646,11 +648,11 @@
        "lease_cost": {
         "chain": [
          {
-          "evidence": "docs/cost-model.md (not covered)",
+          "evidence": "docs/decisions-log.md #151",
           "formula": "lease_cost of outlets open at quarter start",
           "level": "placeholder",
           "metric": "outlet_lease",
-          "note": "Lease timing after opening is unverified."
+          "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
          }
         ],
         "level": "placeholder",
@@ -747,11 +749,11 @@
        "lease_cost": {
         "chain": [
          {
-          "evidence": "docs/cost-model.md (not covered)",
+          "evidence": "docs/decisions-log.md #151",
           "formula": "lease_cost of outlets open at quarter start",
           "level": "placeholder",
           "metric": "outlet_lease",
-          "note": "Lease timing after opening is unverified."
+          "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
          }
         ],
         "level": "placeholder",
@@ -786,11 +788,11 @@
      "lease_cost": {
       "chain": [
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        }
       ],
       "level": "placeholder",
@@ -864,9 +866,11 @@
    },
    "cash_level": "verified",
    "cd": 0.0,
+   "demand_cut": 0.0,
    "fixed_capacity_units": 0.0,
    "inventory": {},
    "module_state": {},
+   "operating_capacity": 0.0,
    "pending_capacity_units": 0.0,
    "quarter": 1,
    "shares_total": 0.0,
@@ -909,9 +913,11 @@
      },
      "cash_level": "verified",
      "cd": 0.0,
+     "demand_cut": 0.0,
      "fixed_capacity_units": 0.0,
      "inventory": {},
      "module_state": {},
+     "operating_capacity": 0.0,
      "pending_capacity_units": 0.0,
      "quarter": 1,
      "shares_total": 0.0,
@@ -1097,18 +1103,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -1118,11 +1124,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        },
        {
         "evidence": "rule unverified",
@@ -1196,11 +1202,11 @@
      "design_cost": {
       "chain": [
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        }
       ],
       "level": "placeholder",
@@ -1310,18 +1316,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -1331,11 +1337,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -1440,18 +1446,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -1461,11 +1467,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -1628,18 +1634,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -1649,11 +1655,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        },
        {
         "evidence": "rate from pack; rule unverified",
@@ -1735,18 +1741,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -1756,11 +1762,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -1772,11 +1778,11 @@
      "outlet_lease": {
       "chain": [
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        }
       ],
       "level": "verified",
@@ -1795,11 +1801,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "verified",
@@ -2081,11 +2087,11 @@
      "unit_cost[Alpha-1]": {
       "chain": [
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -2269,18 +2275,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -2290,11 +2296,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        },
        {
         "evidence": "rule unverified",
@@ -2368,11 +2374,11 @@
      "design_cost": {
       "chain": [
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        }
       ],
       "level": "placeholder",
@@ -2482,18 +2488,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -2503,11 +2509,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -2612,18 +2618,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -2633,11 +2639,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -2800,18 +2806,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -2821,11 +2827,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        },
        {
         "evidence": "rate from pack; rule unverified",
@@ -2907,18 +2913,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -2928,11 +2934,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -2944,11 +2950,11 @@
      "outlet_lease": {
       "chain": [
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        }
       ],
       "level": "verified",
@@ -2967,11 +2973,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "verified",
@@ -3253,11 +3259,11 @@
      "unit_cost[Alpha-1]": {
       "chain": [
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -3330,11 +3336,13 @@
      },
      "cash_level": "placeholder",
      "cd": 99173.0,
+     "demand_cut": 0.0,
      "fixed_capacity_units": 18.0,
      "inventory": {
       "Alpha-1": 0.0
      },
      "module_state": {},
+     "operating_capacity": 0.0,
      "pending_capacity_units": 0.0,
      "quarter": 2,
      "shares_total": 48611.0,
@@ -3519,18 +3527,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -3540,11 +3548,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        },
        {
         "evidence": "rule unverified",
@@ -3618,11 +3626,11 @@
      "design_cost": {
       "chain": [
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        }
       ],
       "level": "placeholder",
@@ -3732,18 +3740,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -3753,11 +3761,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -3862,18 +3870,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -3883,11 +3891,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -4050,18 +4058,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -4071,11 +4079,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        },
        {
         "evidence": "rate from pack; rule unverified",
@@ -4157,18 +4165,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -4178,11 +4186,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -4194,11 +4202,11 @@
      "outlet_lease": {
       "chain": [
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        }
       ],
       "level": "placeholder",
@@ -4217,11 +4225,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -4503,11 +4511,11 @@
      "unit_cost[Alpha-1]": {
       "chain": [
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -4519,11 +4527,11 @@
      "unit_cost[Gamma-1]": {
       "chain": [
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -4811,18 +4819,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -4832,11 +4840,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        },
        {
         "evidence": "rule unverified",
@@ -4910,11 +4918,11 @@
      "design_cost": {
       "chain": [
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        }
       ],
       "level": "placeholder",
@@ -5024,18 +5032,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -5045,11 +5053,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -5154,18 +5162,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -5175,11 +5183,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -5342,18 +5350,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -5363,11 +5371,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        },
        {
         "evidence": "rate from pack; rule unverified",
@@ -5449,18 +5457,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -5470,11 +5478,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -5486,11 +5494,11 @@
      "outlet_lease": {
       "chain": [
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        }
       ],
       "level": "placeholder",
@@ -5509,11 +5517,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -5795,11 +5803,11 @@
      "unit_cost[Alpha-1]": {
       "chain": [
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -5811,11 +5819,11 @@
      "unit_cost[Gamma-1]": {
       "chain": [
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -6002,12 +6010,14 @@
      },
      "cash_level": "placeholder",
      "cd": 99173.0,
+     "demand_cut": 0.0,
      "fixed_capacity_units": 18.0,
      "inventory": {
       "Alpha-1": 0.0,
       "Gamma-1": 73.61074500566258
      },
      "module_state": {},
+     "operating_capacity": 0.0,
      "pending_capacity_units": 0.0,
      "quarter": 3,
      "shares_total": 48611.0,
@@ -6196,18 +6206,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -6217,11 +6227,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        },
        {
         "evidence": "rule unverified",
@@ -6295,11 +6305,11 @@
      "design_cost": {
       "chain": [
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        }
       ],
       "level": "verified",
@@ -6409,18 +6419,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -6430,11 +6440,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -6539,18 +6549,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -6560,11 +6570,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -6727,18 +6737,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -6748,11 +6758,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        },
        {
         "evidence": "rate from pack; rule unverified",
@@ -6834,18 +6844,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -6855,11 +6865,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -6871,11 +6881,11 @@
      "outlet_lease": {
       "chain": [
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        }
       ],
       "level": "placeholder",
@@ -6894,11 +6904,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -7180,11 +7190,11 @@
      "unit_cost[Alpha-1]": {
       "chain": [
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -7196,11 +7206,11 @@
      "unit_cost[Gamma-1]": {
       "chain": [
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -7488,18 +7498,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -7509,11 +7519,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        },
        {
         "evidence": "rule unverified",
@@ -7587,11 +7597,11 @@
      "design_cost": {
       "chain": [
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        }
       ],
       "level": "verified",
@@ -7701,18 +7711,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -7722,11 +7732,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -7831,18 +7841,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -7852,11 +7862,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -8019,18 +8029,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -8040,11 +8050,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        },
        {
         "evidence": "rate from pack; rule unverified",
@@ -8126,18 +8136,18 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        },
        {
-        "evidence": "pack parameter; charging rule unverified",
+        "evidence": "docs/decisions-log.md #148",
         "formula": "design_cost x new brands",
         "level": "placeholder",
         "metric": "design_cost",
-        "note": ""
+        "note": "Candidate: charged in the design quarter in the R&D row (Q1 statement reproduced)."
        },
        {
         "evidence": "see unit_cost",
@@ -8147,11 +8157,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -8163,11 +8173,11 @@
      "outlet_lease": {
       "chain": [
        {
-        "evidence": "docs/cost-model.md (not covered)",
+        "evidence": "docs/decisions-log.md #151",
         "formula": "lease_cost of outlets open at quarter start",
         "level": "placeholder",
         "metric": "outlet_lease",
-        "note": "Lease timing after opening is unverified."
+        "note": "Candidate: full lease in the quarter after opening reproduces the game's projected cash (one quarter)."
        }
       ],
       "level": "placeholder",
@@ -8186,11 +8196,11 @@
         "note": ""
        },
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -8472,11 +8482,11 @@
      "unit_cost[Alpha-1]": {
       "chain": [
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",
@@ -8488,11 +8498,11 @@
      "unit_cost[Gamma-1]": {
       "chain": [
        {
-        "evidence": "docs/cost-model.md (not covered)",
-        "formula": "sum(component price) x cost_adj + min direct labor + min overhead",
+        "evidence": "src/marketplace_sim/cost_curve.py; docs/decisions-log.md #147",
+        "formula": "game cost table at the volume (estimated) when the pack has one; else sum(component price) x cost_adj + min direct labor + min overhead (placeholder)",
         "level": "placeholder",
         "metric": "unit_cost[brand]",
-        "note": "The real production cost function is not yet measured."
+        "note": "Just-in-time factory: material part + labour/overhead used + overtime premium + change cost per unit."
        }
       ],
       "level": "placeholder",

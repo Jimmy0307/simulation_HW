@@ -21,7 +21,7 @@ from __future__ import annotations
 
 import math
 from collections.abc import Mapping
-from typing import Any
+from typing import Any, ClassVar
 
 from marketplace_sim.business.base import (
     Field,
@@ -59,7 +59,7 @@ class LearningCurveModule:
         evidence="src/marketplace_sim/business/product.py; data/module_defaults.json (ranges)")
     fields = ()
     stoppable = True
-    ui = {"toggle": "納入學習曲線（模型選項）", "literature": "累積產量每加倍，人工與製造費用降到「進步率」倍（Wright 1936；"
+    ui: ClassVar[dict[str, Any]] = {"toggle": "納入學習曲線（模型選項）", "literature": "累積產量每加倍，人工與製造費用降到「進步率」倍（Wright 1936；"
           "進步率在文獻分布中心 80–82%）。經驗從開啟這個選項的那一季開始累計；單位成本本身仍是佔位規則，所以成本仍標 ≈。",
           "results": [["learning_factor[{brand}]", "人工與製造費用倍數"], ["cumulative_units[{brand}]", "累積產量（期初）"]]}
     metrics = (
@@ -106,7 +106,7 @@ class RnDModule:
         couplings=("attraction", "expenses", "state"),
         evidence="src/marketplace_sim/business/product.py; data/module_defaults.json (ranges)")
     fields = (Field("rnd", "研發投入（每季）", "rnd.feature_development", "brand_number", 0, 500000, 5000, 0),)
-    ui = {"toggle": "投入研發", "literature": "研發累積成「研發存量」（每年折舊 15%，Griliches 慣例），吸引力依文獻範圍內的研發彈性"
+    ui: ClassVar[dict[str, Any]] = {"toggle": "投入研發", "literature": "研發累積成「研發存量」（每年折舊 15%，Griliches 慣例），吸引力依文獻範圍內的研發彈性"
           "（0.01–0.25）報酬遞減地提高；把產出彈性當成吸引力彈性是標明的對應假設。",
           "practice": "研發支出怎麼入帳（遊戲規則）未觀察到，支出列是練習。",
           "results": [["rnd_stock[{brand}]", "研發存量"], ["rnd_factor[{brand}]", "研發吸引力倍數"], ["rnd_spending", "研發支出"]]}
@@ -148,7 +148,7 @@ class QualityModule:
         decisions=("qa_per_unit",), outputs=("defect_rate", "quality_factor", "warranty_cost"),
         couplings=("unit_cost_add", "attraction", "settle: expenses"), evidence="src/marketplace_sim/business/product.py")
     fields = (Field("qa_per_unit", "每件品管投入", "production.quality", "brand_number", 0, 100, 1, 0),)
-    ui = {"toggle": "納入品質與保固", "practice": "每件品管投入降低不良率；不良品降低吸引力並產生保固維修費。只有方向有文獻支持（PIMS），"
+    ui: ClassVar[dict[str, Any]] = {"toggle": "納入品質與保固", "practice": "每件品管投入降低不良率；不良品降低吸引力並產生保固維修費。只有方向有文獻支持（PIMS），"
           "幅度是暫定值。開啟這個模組但不投入時，不良率按基準值計算。",
           "results": [["defect_rate[{brand}]", "不良率", "percent"], ["quality_factor[{brand}]", "品質吸引力倍數"],
                       ["warranty_cost", "保固維修費"]]}

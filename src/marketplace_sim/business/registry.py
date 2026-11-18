@@ -30,7 +30,11 @@ from marketplace_sim.business.base import (
 from marketplace_sim.business.finance import FinancingModule
 from marketplace_sim.business.inventory import InventoryModule
 from marketplace_sim.business.marketing import MediaMixLiterature
-from marketplace_sim.business.marketing_more import AdCopyModule, InternetMarketingModule, PromotionsModule
+from marketplace_sim.business.marketing_more import (
+    AdCopyModule,
+    InternetMarketingModule,
+    PromotionsModule,
+)
 from marketplace_sim.business.operations import (
     CultureModule,
     ExcessCapacityModule,

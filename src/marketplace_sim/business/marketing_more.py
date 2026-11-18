@@ -25,7 +25,7 @@ enters demand through a fixed coupling point and carries its own level: downstre
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any
+from typing import Any, ClassVar
 
 from marketplace_sim.business.base import (
     Field,
@@ -56,7 +56,7 @@ class PromotionsModule:
         decisions=("rebate",), outputs=("promotion_price_factor", "promotion_rebates"),
         couplings=("price_factor", "settle: expenses"), evidence="src/marketplace_sim/business/marketing_more.py")
     fields = (Field("rebate", "每件回饋金額", "marketing.promotions", "brand_number", 0, 500, 5, 0),)
-    ui = {"toggle": "啟用促銷", "practice": "回饋金讓顧客感受到的價格變低（用需求面的價格反應）；只有一部分買家會真的去兌換。"
+    ui: ClassVar[dict[str, Any]] = {"toggle": "啟用促銷", "practice": "回饋金讓顧客感受到的價格變低（用需求面的價格反應）；只有一部分買家會真的去兌換。"
           "兌換率在文獻報告的實地範圍內（7–50%，預設 27%），但顧客把回饋金當幾成的「感受比例」沒有文獻數字，是暫定值，所以整個模組仍是練習。",
           "results": [["promotion_price_factor[{brand}]", "顧客感受價格倍數"], ["promotion_rebates", "回饋金支出"]]}
     metrics = (
@@ -99,7 +99,7 @@ class AdCopyModule:
     fields = (Field("message", "廣告強調", "marketing.ad_copy", "brand_choice", default="none",
                     options=(("none", "不指定"), ("first", "客群最重視的需求"), ("second", "第二重視的需求"),
                              ("third", "第三重視的需求"))),)
-    ui = {"toggle": "指定廣告訊息", "practice": "廣告強調目標客群重視的需求會加分、強調不重視的會扣分（最多 ± 暫定幅度）；只有方向有文獻支持。",
+    ui: ClassVar[dict[str, Any]] = {"toggle": "指定廣告訊息", "practice": "廣告強調目標客群重視的需求會加分、強調不重視的會扣分（最多 ± 暫定幅度）；只有方向有文獻支持。",
           "results": [["ad_copy_factor[{brand}]", "訊息吸引力倍數"]]}
     metrics = (Metric("ad_copy_factor[brand]", H, "1 + lift x (weight of the stressed need / mean need weight - 1), "
                       "bounded", "demand", (), NOTE),)
@@ -132,7 +132,7 @@ class InternetMarketingModule:
         decisions=("web_spend",), outputs=("internet_factor", "internet_marketing"),
         couplings=("attraction", "expenses"), evidence="src/marketplace_sim/business/marketing_more.py")
     fields = (Field("web_spend", "網路行銷預算（每季）", "marketing.internet", "number", 0, 300000, 5000, 0),)
-    ui = {"toggle": "啟用網路行銷", "literature": "固定彈性、報酬遞減；彈性限定在文獻範圍 0.003–0.23（廣告彈性後設分析到網路展示廣告的估計），"
+    ui: ClassVar[dict[str, Any]] = {"toggle": "啟用網路行銷", "literature": "固定彈性、報酬遞減；彈性限定在文獻範圍 0.003–0.23（廣告彈性後設分析到網路展示廣告的估計），"
           "預設 0.05。只對網路中心帶來的那部分市場有效（依網路中心占據點的比例，標明的對應假設）。",
           "practice": "網路行銷支出怎麼入帳（遊戲規則）未觀察到，支出列是練習。",
           "results": [["internet_factor", "網路行銷吸引力倍數"], ["internet_marketing", "網路行銷支出"]]}
