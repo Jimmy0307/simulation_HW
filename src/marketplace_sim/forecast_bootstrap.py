@@ -7,6 +7,7 @@ Install the optional numpy dependency before running this module.
 from __future__ import annotations
 
 from typing import Any
+
 import numpy as np
 
 

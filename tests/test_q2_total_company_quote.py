@@ -1,7 +1,9 @@
 """Synthetic-only regression for total-production volume on game cost quotes."""
 from __future__ import annotations
 
-import numpy as np
+import pytest
+
+np = pytest.importorskip("numpy")
 
 from marketplace_sim import forecast_bootstrap as fb
 
