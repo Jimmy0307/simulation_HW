@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import copy
 import dataclasses
+import itertools
 from pathlib import Path
 from typing import Any
 
@@ -211,7 +212,7 @@ def test_rnd_stock_builds_decays_and_raises_attraction() -> None:
 def test_learning_curve_lowers_conversion_cost_with_experience() -> None:
     lc = LearningCurveModule(coefficients(PACK, "production.learning_curve"), PACK)
     factors = [lc.factor(c, 500) for c in (0, 2000, 8000, 32000)]
-    assert all(b < a for a, b in zip(factors, factors[1:], strict=False)) and factors[0] < 1
+    assert all(b < a for a, b in itertools.pairwise(factors)) and factors[0] < 1
     out = run([{}, {"production.learning_curve": {}}, {}])
     q2, q3 = out[1][1].lines, out[2][1].lines
     assert q3[f"learning_factor[{BRAND}]"].value < q2[f"learning_factor[{BRAND}]"].value

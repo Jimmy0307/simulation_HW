@@ -28,6 +28,7 @@ CASH_ROWS: dict[str, tuple[str, int]] = {
     "sales_force_commission": ("sf", -1), "income_tax": ("income_taxes", -1), "cd_interest": ("interest_income", +1),
     "inventory_selloff_proceeds": ("other_income", +1), "inventory_holding_cost": ("other_exp", -1),
     "purchasing_shortfall_fee": ("other_exp", -1), "capex_capacity": ("fixed_cap", -1), "stock_raised": ("inc_comm", +1),
+    "excess_capacity_cost": ("excess_capacity", -1), "factory_excess_capacity_cost": ("excess_capacity", -1),
     "emergency_loan": ("inc_emer_l", +1),
 }
 
@@ -38,7 +39,8 @@ INCOME_ROWS: dict[str, tuple[str, int]] = {
     "sales_force_salaries": ("sf", -1), "sales_force_hiring": ("sf", -1), "sales_force_training": ("sf", -1),
     "sales_force_commission": ("sf", -1), "store_setup": ("so", -1), "outlet_lease": ("so", -1),
     "web_sales_salaries": ("wsc_exp", -1), "web_center_setup": ("so", -1), "market_research": ("mr", -1),
-    "excess_capacity_cost": ("excess_capacity", -1), "accrual_depreciation": ("depreciation", -1),
+    "excess_capacity_cost": ("excess_capacity", -1), "factory_excess_capacity_cost": ("excess_capacity", -1),
+    "accrual_depreciation": ("depreciation", -1),
     "inventory_selloff_proceeds": ("other_income", +1), "inventory_holding_cost": ("other_exp", -1),
     "purchasing_shortfall_fee": ("other_exp", -1), "inventory_tax": ("other_exp", -1),
     "cd_interest": ("interest_income", +1), "loan_interest": ("interest", -1), "accrual_loss_used": ("loss", -1),

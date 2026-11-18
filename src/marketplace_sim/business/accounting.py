@@ -23,7 +23,7 @@ carry-forward never goes negative) are tested.
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any
+from typing import Any, ClassVar
 
 from marketplace_sim.business.base import (
     Maturity,
@@ -61,7 +61,7 @@ class AccrualAccounting:
         evidence="src/marketplace_sim/business/accounting.py")
     fields = ()
     stoppable = True
-    ui = {"toggle": "用應計基礎記帳（模型選項）", "practice": "照遊戲報表的結構（銷貨成本、折舊、虧損扣抵、庫存稅）另算一份應計損益表和資產負債表，"
+    ui: ClassVar[dict[str, Any]] = {"toggle": "用應計基礎記帳（模型選項）", "practice": "照遊戲報表的結構（銷貨成本、折舊、虧損扣抵、庫存稅）另算一份應計損益表和資產負債表，"
           "所得稅改用應計稅前利潤扣掉虧損扣抵後計算。折舊年限、庫存計價、稅率都是暫定值；資產負債表每季都會平衡（有測試）。",
           "results": [["accrual_cogs", "銷貨成本"], ["accrual_depreciation", "折舊"], ["inventory_tax", "庫存稅"],
                       ["accrual_pretax", "應計稅前利潤"], ["loss_carryforward", "可扣抵虧損（期末）"],
@@ -72,8 +72,8 @@ class AccrualAccounting:
         ("accrual_cogs", "units sold x moving-average unit cost", "report", ("units_sold[brand]", "unit_cost[brand]")),
         ("accrual_depreciation", "plant book value / depreciation quarters", "report", ("capex_capacity",)),
         ("inventory_tax", "annual rate / 4 x inventory book value", "expense", ("unit_cost[brand]",)),
-        ("accrual_pretax", "revenue + interest + other income - expenses (production capitalised) - COGS - "
-                           "depreciation - book value sold off", "report", ("revenue", "accrual_cogs", "accrual_depreciation")),
+        ("accrual_pretax", ("revenue + interest + other income - expenses (production capitalised) - COGS - "
+                            "depreciation - book value sold off"), "report", ("revenue", "accrual_cogs", "accrual_depreciation")),
         ("loss_carryforward", "losses not yet used against taxable income", "report", ("accrual_pretax",)),
         ("accrual_loss_used", "carried-forward loss used against this quarter's income", "report", ("accrual_pretax",)),
         ("accrual_net_income", "accrual pretax - income tax", "report", ("accrual_pretax", "income_tax")),

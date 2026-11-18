@@ -36,6 +36,7 @@ from marketplace_sim.pack import ParamPack
 
 DAYS = 65
 REGULAR_HOURS = 8.0
+DEFAULT_PRODUCTIVITY = 70.0  # percent; help text: first quarter, standard compensation package
 
 
 @dataclass(frozen=True)
@@ -75,6 +76,9 @@ class FactoryResult:
     unit_cost: float
     contribution: float  # revenue - production cost (all lines above)
     next_quarter_demand_cut: float  # fraction: half the unmet share (team's reading of the help file)
+    conversion_per_unit: float = 0.0  # labour + overhead per unit of scheduled regular capacity
+    made: dict[str, float] = field(default_factory=dict)  # units made per brand
+    material_by_brand: dict[str, float] = field(default_factory=dict)  # material cost per unit, per brand
     notes: list[str] = field(default_factory=list)
 
     @property
@@ -140,6 +144,7 @@ def run(pack: ParamPack, orders: Sequence[BrandOrder], schedule: Schedule, deman
     # Labour and overhead are paid for the scheduled regular capacity; material for what is made.
     material = conversion = 0.0
     paid_units = max(regular, 1.0)
+    material_by_brand: dict[str, float] = {}
     for order in orders:
         units = made[order.name]
         basis = paid_units if reading == "factory" else max(regular * (order.forecast / max(sum(o.forecast for o in orders), 1e-9)), 1.0)
@@ -148,7 +153,9 @@ def run(pack: ParamPack, orders: Sequence[BrandOrder], schedule: Schedule, deman
         if c_mat is None or c_conv is None:
             raise ValueError(f"no cost estimate for {order.name}")
         material += units * c_mat.material_part
-        weight = (order.forecast / sum(o.forecast for o in orders)) if reading == "factory" else 1.0
+        material_by_brand[order.name] = c_mat.material_part
+        forecast_sum = sum(o.forecast for o in orders)
+        weight = (order.forecast / forecast_sum if forecast_sum else 1.0 / len(orders)) if reading == "factory" else 1.0
         conversion += c_conv.conversion_part * (paid_units * weight if reading == "factory" else basis)
     conv_per_unit = conversion / paid_units
     ot_units = max(produced_total - regular, 0.0)
@@ -173,7 +180,8 @@ def run(pack: ParamPack, orders: Sequence[BrandOrder], schedule: Schedule, deman
         overtime_hours_used=hours, productivity_used=prod_pct, material_cost=material, conversion_paid=conversion,
         overtime_premium=premium, change_cost=change, revenue=revenue, idle_units=max(regular - produced_total, 0.0),
         unit_cost=cost / produced_total if produced_total else math.inf, contribution=revenue - cost,
-        next_quarter_demand_cut=0.5 * lost / total if total else 0.0, notes=notes)
+        next_quarter_demand_cut=0.5 * lost / total if total else 0.0, conversion_per_unit=conv_per_unit,
+        made=made, material_by_brand=material_by_brand, notes=notes)
 
 
 def required_operating_capacity(forecast_units: float, productivity: float, buffer: float = 0.0) -> float:

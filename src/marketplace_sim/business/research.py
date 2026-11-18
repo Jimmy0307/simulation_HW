@@ -11,7 +11,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any
+from typing import Any, ClassVar
 
 from marketplace_sim.business.base import (
     Field,
@@ -42,7 +42,7 @@ class MarketResearchModule:
         couplings=("expenses", "close: lines"), evidence="src/marketplace_sim/business/research.py")
     fields = (Field("segment_report", "買客群需求報告", "marketing.market_research", "flag", default=False),
               Field("rival_report", "買對手報告", "marketing.market_research", "flag", default=False))
-    ui = {"toggle": "購買市場調查", "practice": "報告內容是本引擎自己的估計（等級跟需求鏈一樣，不會更可信）；報告價格是暫定值。",
+    ui: ClassVar[dict[str, Any]] = {"toggle": "購買市場調查", "practice": "報告內容是本引擎自己的估計（等級跟需求鏈一樣，不會更可信）；報告價格是暫定值。",
           "results": [["market_research", "調查費用"], ["research_segment_units[{segment}]", "客群需求量"],
                       ["research_rival_share[{rival}]", "對手市佔"]]}
     metrics = (
@@ -92,7 +92,7 @@ class ScorecardModule:
                  "scorecard_total"), couplings=("close: lines",), evidence="src/marketplace_sim/business/research.py")
     fields = ()
     stoppable = True
-    ui = {"toggle": "顯示練習版計分卡（模型選項）", "practice": "四個構面（財務、顧客、內部流程、學習成長）來自 Kaplan & Norton（1992）；"
+    ui: ClassVar[dict[str, Any]] = {"toggle": "顯示練習版計分卡（模型選項）", "practice": "四個構面（財務、顧客、內部流程、學習成長）來自 Kaplan & Norton（1992）；"
           "各構面怎麼打分、權重多少都是暫定值，不是遊戲的排名公式。",
           "results": [["scorecard_financial", "財務"], ["scorecard_customer", "顧客"], ["scorecard_internal", "內部流程"],
                       ["scorecard_learning", "學習成長"], ["scorecard_total", "總分（練習）"]]}

@@ -16,7 +16,7 @@ Loan proceeds, repayments and dividends are ``financing`` flows (cash, not profi
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any
+from typing import Any, ClassVar
 
 from marketplace_sim.business.base import (
     Field,
@@ -49,7 +49,7 @@ class FinancingModule:
               Field("long_term", "長期貸款期數", "finance.loans", "choice", default="8", options=TERMS),
               Field("extra_repayment", "長期貸款提前還款", "finance.loans", "number", 0, 10_000_000, 10000, 0),
               Field("dividend", "發放股利（總額）", "finance.dividends", "number", 0, 5_000_000, 10000, 0))
-    ui = {"toggle": "借款或發股利", "practice": "現金的進出是精確的算術，但利率、期數、上限都是暫定值（遊戲的貸款條件未觀察到）。"
+    ui: ClassVar[dict[str, Any]] = {"toggle": "借款或發股利", "practice": "現金的進出是精確的算術，但利率、期數、上限都是暫定值（遊戲的貸款條件未觀察到）。"
           "借款與還本、股利是現金流（不進損益），利息是費用。",
           "results": [["loan_interest", "利息"], ["loan_balance_short", "短期貸款餘額"], ["loan_balance_long", "長期貸款餘額"],
                       ["dividends_paid", "股利（現金流出）"]]}

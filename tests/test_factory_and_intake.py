@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import Any, ClassVar
+
 import pytest
 
 from marketplace_sim.factory import BrandOrder, Schedule, required_operating_capacity, run, sweep
@@ -69,3 +71,78 @@ def test_intake_reads_the_entered_decisions() -> None:
                               "rebate": 0.0, "priority": 2, "forecast": 333.0}]
     assert out["schedule"] == {"operating_capacity": 0.0, "productivity": 81.0, "max_overtime_hours": 2.0}
     assert out["warnings"] == ["operating capacity is 0"]
+
+
+# --- the engine's just-in-time factory (plan 'factory' block) -------------------------------------------------------
+
+class FixedDemand:
+    level = __import__("marketplace_sim.provenance", fromlist=["Level"]).Level.LITERATURE
+    carryover = 0.0
+    coefficients: ClassVar[dict[str, Any]] = {"web_weight": 1.0}
+
+    def __init__(self, units: dict[str, float]) -> None:
+        self.u = units
+
+    def units(self, pack, offers):
+        from marketplace_sim.provenance import Tagged
+        return {(o.firm, o.brand): Tagged(self.u.get(o.brand, 0.0) if o.firm == "us" else 0.0, self.level, "test")
+                for o in offers}
+
+
+def jit_state(p):
+    from marketplace_sim.engine import CompanyState
+    s = CompanyState.initial(p)
+    s.fixed_capacity_units = 21
+    s.stores_open = [p.stores[0].key]
+    return s
+
+
+def jit_plan(oc: float, ot: float = 0, **extra):
+    from marketplace_sim.engine import Plan
+    return Plan.from_dict({"factory": {"operating_capacity": oc, "max_overtime_hours": ot, "productivity": 81},
+                           "brands": [{"name": "Alpha-1", "brand_type": "A", "components": ["c1", "c2"], "price": 700},
+                                      {"name": "Gamma-1", "brand_type": "C", "components": ["c1", "c4"], "price": 1100}],
+                           **extra})
+
+
+def test_engine_builds_what_is_demanded_within_capacity() -> None:
+    from marketplace_sim.engine import advance
+    from marketplace_sim.reconcile import CASH_ROWS
+    p = pack()
+    demand = FixedDemand({"Alpha-1": 300, "Gamma-1": 200})
+    _, low = advance(jit_state(p), jit_plan(16), p, demand=demand, competitors=[])
+    cap = 16 * 65 * 0.81
+    assert low.lines["units_sold[Alpha-1]"].value == pytest.approx(300) and low.lines["units_lost_total"].value == 0
+    assert low.lines["factory_idle_units"].value == pytest.approx(cap - 500)
+    assert low.lines["factory_excess_capacity_cost"].value > 0
+    direct = run(p, [BrandOrder("Alpha-1", "A", ("c1", "c2"), 700, 300), BrandOrder("Gamma-1", "C", ("c1", "c4"), 1100, 200)],
+                 Schedule(16, 0, 81.0), 1.0)
+    assert low.lines["production_cost"].value + low.lines["factory_excess_capacity_cost"].value == pytest.approx(direct.production_cost)
+    # cash identity: every cash line mapped (excess capacity included)
+    flows = sum(sign * low.lines[k].value for k, (_row, sign) in CASH_ROWS.items() if k in low.lines)
+    assert low.lines["cash_start"].value + flows == pytest.approx(low.lines["cash_end"].value)
+    nxt, high = advance(jit_state(p), jit_plan(6, 2), p, demand=FixedDemand({"Alpha-1": 900, "Gamma-1": 600}), competitors=[])
+    assert high.lines["units_lost_total"].value > 0 and high.lines["overtime_hours_used"].value == pytest.approx(2, abs=1e-6)
+    assert nxt.demand_cut == pytest.approx(0.5 * high.lines["units_lost_total"].value / 1500)
+    assert nxt.operating_capacity == 6
+    _, after = advance(nxt, jit_plan(6, 2), p, demand=FixedDemand({"Alpha-1": 100, "Gamma-1": 100}), competitors=[])
+    assert after.lines["units_demanded[Alpha-1]"].value == pytest.approx(100 * (1 - nxt.demand_cut))
+    assert after.lines["capacity_change_cost"].value == 0  # same operating capacity as last quarter
+
+
+def test_factory_block_refuses_the_overlapping_modules() -> None:
+    from marketplace_sim.engine import advance
+    p = pack()
+    with pytest.raises(ValueError, match="replaces"):
+        advance(jit_state(p), jit_plan(10, modules={"production.excess_capacity": {}}), p,
+                demand=FixedDemand({}), competitors=[])
+
+
+def test_accrual_books_balance_with_the_factory() -> None:
+    from marketplace_sim.engine import advance
+    p = pack()
+    s = jit_state(p)
+    for d, oc in (({"Alpha-1": 300, "Gamma-1": 200}, 10), ({"Alpha-1": 900, "Gamma-1": 700}, 10), ({"Alpha-1": 50}, 12)):
+        s, r = advance(s, jit_plan(oc, 2, modules={"accounting.accrual": {}}), p, demand=FixedDemand(d), competitors=[])
+        assert r.lines["balance_check"].value == pytest.approx(0, abs=1e-5)
+        assert r.lines["accrual_cogs"].value == pytest.approx(r.lines["production_cost"].value)  # nothing left in stock

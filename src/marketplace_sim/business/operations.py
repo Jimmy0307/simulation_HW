@@ -25,7 +25,7 @@ from __future__ import annotations
 
 import math
 from collections.abc import Mapping
-from typing import Any
+from typing import Any, ClassVar
 
 from marketplace_sim.business.base import (
     Field,
@@ -54,7 +54,7 @@ class ProductionWorkersModule:
         decisions=("wage_index",), outputs=("worker_productivity", "labor_cost_factor"),
         couplings=("labor_cost_factor", "capacity_factor"), evidence="src/marketplace_sim/business/operations.py")
     fields = (Field("wage_index", "工資水準（1 = 當地行情）", "hr.production_workers", "number", 0.7, 1.5, 0.05, 1.0, " 倍"),)
-    ui = {"toggle": "設定生產工人工資", "practice": "工資高於行情：直接人工成本變高，但留任與努力提高、產能略增（效率工資）；"
+    ui: ClassVar[dict[str, Any]] = {"toggle": "設定生產工人工資", "practice": "工資高於行情：直接人工成本變高，但留任與努力提高、產能略增（效率工資）；"
           "生產力彈性沒有可用的文獻數字，是暫定值。",
           "results": [["worker_productivity", "工人生產力倍數"], ["labor_cost_factor", "直接人工成本倍數"],
                       ["capacity_units_per_quarter", "本季產能"]]}
@@ -89,7 +89,7 @@ class CultureModule:
     fields = (Field("participation", "員工參與方案（每季）", "hr.executive_and_culture", "number", 0, 200000, 5000, 0),
               Field("exec_bonus_pct", "主管獎金池（營收的 %）", "hr.executive_and_culture", "number", 0, 5, 0.1, 0, " %"),
               Field("survey", "做員工調查（顯示士氣）", "hr.executive_and_culture", "flag", default=False))
-    ui = {"toggle": "啟用人資與文化", "practice": "參與方案與主管獎金累積成「士氣」，士氣讓產能略增；士氣只有買員工調查才看得到。"
+    ui: ClassVar[dict[str, Any]] = {"toggle": "啟用人資與文化", "practice": "參與方案與主管獎金累積成「士氣」，士氣讓產能略增；士氣只有買員工調查才看得到。"
           "只有方向有文獻支持（參與與生產力的後設分析），幅度是暫定值。",
           "results": [["hr_morale", "士氣（0–1）"], ["culture_productivity", "士氣生產力倍數"],
                       ["culture_participation", "參與方案費用"], ["executive_bonus", "主管獎金"], ["culture_survey", "調查費用"]]}
@@ -140,7 +140,7 @@ class OperatingCapacityModule:
         evidence="src/marketplace_sim/business/operations.py")
     fields = (Field("shifts", "班別", "production.operating_capacity", "choice", default="1", options=SHIFT_OPTIONS),
               Field("overtime_pct", "加班（正常工時的 %）", "production.overtime", "number", 0, 50, 1, 0, " %"))
-    ui = {"toggle": "設定班別與加班", "literature": "加班的產能反應用文獻的工時–產出關係：每週 49 小時以下產出與工時成正比，"
+    ui: ClassVar[dict[str, Any]] = {"toggle": "設定班別與加班", "literature": "加班的產能反應用文獻的工時–產出關係：每週 49 小時以下產出與工時成正比，"
           "超過後彈性只剩約 0.17（Pencavel 2015）；以每週 40 小時為正常工時（標明的假設）。",
           "practice": "多開一班產能變多但效率較低、每班有固定費用（後班效率沒有文獻數字）；加班工資按 1.5 倍"
           "（美國法定下限，遊戲規則未觀察到），所以成本是練習。",
@@ -219,7 +219,7 @@ class ExcessCapacityModule:
         evidence="src/marketplace_sim/business/operations.py")
     fields = ()
     stoppable = True
-    ui = {"toggle": "計入閒置產能成本（模型選項）", "practice": "遊戲損益表有「閒置產能」費用列（Q1 擷取的結構），但怎麼算沒看到；"
+    ui: ClassVar[dict[str, Any]] = {"toggle": "計入閒置產能成本（模型選項）", "practice": "遊戲損益表有「閒置產能」費用列（Q1 擷取的結構），但怎麼算沒看到；"
           "這裡用「沒用到的產能 × 暫定單位成本」。",
           "results": [["idle_capacity_units", "閒置產能（件）"], ["excess_capacity_cost", "閒置產能成本"]]}
     metrics = (
@@ -256,7 +256,7 @@ class FactoryLocationModule:
         couplings=("labor_cost_factor", "unit_cost_add", "expenses", "state"),
         evidence="src/marketplace_sim/business/operations.py")
     fields = (Field("location", "生產地點", "production.factory_location", "choice", default="home", options=LOCATIONS),)
-    ui = {"toggle": "選擇生產地點", "practice": "低工資地區：直接人工較便宜，但每件要多付運費；搬遷要付一次搬遷費。數字都是暫定值。",
+    ui: ClassVar[dict[str, Any]] = {"toggle": "選擇生產地點", "practice": "低工資地區：直接人工較便宜，但每件要多付運費；搬遷要付一次搬遷費。數字都是暫定值。",
           "results": [["location_labor_factor", "直接人工倍數"], ["location_shipping", "每件運費"], ["relocation_cost", "搬遷費"]]}
     metrics = (
         Metric("location_labor_factor", H, "labour factor of the chosen site", "cost", (), NOTE),
