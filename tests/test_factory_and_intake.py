@@ -202,3 +202,28 @@ def test_screen_calibrated_costs_follow_the_game_screens() -> None:
     assert high.overtime_premium == pytest.approx(33 * eff * 1.9 * high.overtime_hours_used / 8)
     assert high.production_cost == pytest.approx(high.material_cost + 33 * eff + high.overtime_premium
                                                  + (11 + 1300 / eff) * high.produced)
+
+
+def test_screen_points_at_other_capacities_use_their_own_rates() -> None:
+    """An OperatingCapacity screen read at another capacity replaces the curve estimate there; capacities not read
+    scale from the nearest point read."""
+    from marketplace_sim.pack import pack_from_dict
+    from tests.test_har_and_cost_curve import synthetic_pack_with_table
+    data = synthetic_pack_with_table()
+    data["initial_state"]["fixed_capacity_units"] = 12
+    data["production"].update({"min_increase_cost": 900.0})
+    data["extras"] = {"overtime_productivity": [[0, 81.0], [4, 69.0]],
+                      "overtime_labor_change": [{"overtime": 1, "change": 90}],
+                      "factory_screen": {"oc": 12, "labour_per_unit": 33.0, "overhead_per_unit": 11.0, "change_cost": 1300.0,
+                                         "material_factor": [[100, 0.99], [1000, 0.97]],
+                                         "points": [{"oc": 9, "labour_per_unit": 21.0, "overhead_per_unit": 13.0,
+                                                     "change_cost": 1250.0}]}}
+    p = pack_from_dict(data)
+    eff = 9 * 65 * 0.81
+    idle = run(p, ORDERS, Schedule(9, 0, 81.0), 0.0)
+    assert idle.change_cost == pytest.approx(1250.0)
+    assert idle.production_cost == pytest.approx(21 * eff + 13 * eff + 1250)
+    near = run(p, ORDERS, Schedule(10, 0, 81.0), 0.0)
+    assert any("read at 9/day" in n for n in near.notes)
+    at_base = run(p, ORDERS, Schedule(12, 0, 81.0), 0.0)
+    assert at_base.production_cost == pytest.approx((33 + 11) * 12 * 65 * 0.81 + 1300)

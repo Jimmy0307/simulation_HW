@@ -28,7 +28,9 @@ With the game's factory screens in a private pack (``extras.factory_screen``: la
 effective capacity, the capacity change cost and the material volume factor, all read at one operating capacity),
 ``_run_on_screen`` prices the quarter the way the Production Simulation does. At the operating capacity they were read
 at, it reproduces the screen's per-brand Production Average and its excess-capacity charge (Q2: 50 / 100 / 150 % of
-the forecast, within rounding). At other capacities the rates follow the cost table's curve (estimated).
+the forecast, within rounding). ``factory_screen.points`` may add the OperatingCapacity screen read at other
+capacities (labour and overhead per unit, change cost); a capacity that was read uses its own rates. At capacities
+not read, the rates follow the cost table's curve from the nearest capacity read (estimated).
 
 No game values live here: every number comes from the private pack and the caller's inputs.
 """
@@ -233,23 +235,29 @@ def _run_on_screen(pack: ParamPack, orders: Sequence[BrandOrder], schedule: Sche
     """
     oc, p0 = schedule.operating_capacity, schedule.productivity
     base_oc = float(screen["oc"])
-    lr, ob = float(screen["labour_per_unit"]), float(screen["overhead_per_unit"])
-    if oc != base_oc and pack.cost_estimates:
+    read = [screen, *screen.get("points", [])]  # the OperatingCapacity screen, read at one or more capacities
+    point = min(read, key=lambda q: (abs(float(q["oc"]) - oc), float(q["oc"])))
+    lr, ob = float(point["labour_per_unit"]), float(point["overhead_per_unit"])
+    if oc != float(point["oc"]) and pack.cost_estimates:
         o0 = orders[0]
         bt = pack.brand_type(o0.brand_type)
         comps = [pack.component(c) for c in o0.components]
-        ref = curve_cost(pack, bt, comps, base_oc * DAYS * p0 / 100)
+        ref = curve_cost(pack, bt, comps, float(point["oc"]) * DAYS * p0 / 100)
         here = curve_cost(pack, bt, comps, max(oc * DAYS * p0 / 100, 1.0))
         if ref is not None and here is not None and ref.conversion_part > 0:
             scale = here.conversion_part / ref.conversion_part
             lr, ob = lr * scale, ob * scale
-            notes.append(f"labour and overhead rates scaled from the screen point by the cost table's curve (x{scale:.3f})")
+            notes.append(f"labour and overhead rates scaled from the screen read at {float(point['oc']):g}/day by the "
+                         f"cost table's curve (x{scale:.3f}); estimated")
     added = max(oc - schedule.previous_operating_capacity, 0.0)
     min_inc = float(pack.production.get("min_increase_cost", 0.0))
     change = 0.0
     if added > 0:
-        per_unit = (float(screen["change_cost"]) - min_inc) / (base_oc * DAYS) if base_oc else 0.0
-        change = min_inc + per_unit * added * DAYS
+        if oc == float(point["oc"]) and schedule.previous_operating_capacity == 0 and "change_cost" in point:
+            change = float(point["change_cost"])
+        else:
+            per_unit = (float(screen["change_cost"]) - min_inc) / (base_oc * DAYS) if base_oc else 0.0
+            change = min_inc + per_unit * added * DAYS
     eff = max(regular, 1.0)
     pay_change = overtime_pay_change
     if pay_change is None:
